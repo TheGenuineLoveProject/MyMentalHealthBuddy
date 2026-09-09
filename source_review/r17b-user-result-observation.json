@@ -1,0 +1,89 @@
+{
+  "project": "MyMentalHealthBuddy",
+  "source": "USER_SUPPLIED_R17B_TEXT; SELECTED_FIELDS_ONLY",
+  "utc": "2026-09-09T07:14:41.344Z",
+  "report": "/home/runner/workspace/.mmhb-release-evidence/r17b-q6rzGy",
+  "commandSha256": "c39f7e0581d740152ecab4adc8e0f3cdf193199fd6fac9112640882783cb5207",
+  "status": "FRESH_CANDIDATE_FAILED",
+  "releaseReady": false,
+  "failure": {
+    "phase": "FINAL_PRESERVATION",
+    "gate": "WORKTREE_PRESERVATION"
+  },
+  "preservationStatus": "FAILED",
+  "changedFileCount": 42,
+  "server": {
+    "sha256": "d103e3532fe45af0d270c777310334a4672338fc2345660287033e9ecf98d2c7",
+    "inputCount": 1277,
+    "compilerInvocations": 2
+  },
+  "frontend": {
+    "files": 554,
+    "bytes": 33758149,
+    "localReferences": 2968,
+    "externalReferences": 0,
+    "manifestSha256": "1c3777d1fc93595a7e3ec2c93b35692b1ee324e4cffd3a27cd7c7086f49e6f78"
+  },
+  "graph": {
+    "status": "REPORTED_GRAPH_INPUTS_VERIFIED",
+    "issueCount": 0,
+    "moduleIds": 3158,
+    "physicalFiles": 3142,
+    "virtualModuleIds": 13,
+    "viteOptionalPeerModules": 1,
+    "watchCoverage": "API_NOT_AVAILABLE_NO_WATCH_PATH_COVERAGE",
+    "observedOptionalPeer": "__vite-optional-peer-dep:@emotion/is-prop-valid:framer-motion",
+    "consumerRuntime": "UNQUALIFIED"
+  },
+  "candidate": {
+    "files": 625,
+    "bytes": 40486374,
+    "manifestSha256": "cb4c9c57fce1124f453110eb713d86b0f32855436df1030427cc32c2a2df0320"
+  },
+  "nativeStatus": "NATIVE_CANDIDATE_SMOKE_PASS",
+  "promptStatus": "PROMPT_ASSET_LOAD_PASS",
+  "moduleLoads": 18,
+  "processes": [
+    {
+      "name": "server-build",
+      "exitCode": 0,
+      "durationMs": 655
+    },
+    {
+      "name": "frontend-build",
+      "exitCode": 0,
+      "durationMs": 20176
+    },
+    {
+      "name": "server-syntax",
+      "exitCode": 0,
+      "durationMs": 128
+    },
+    {
+      "name": "native-bcrypt",
+      "exitCode": 0,
+      "durationMs": 159
+    },
+    {
+      "name": "prompt-assets",
+      "exitCode": 0,
+      "durationMs": 76
+    }
+  ],
+  "missingCandidateExternalPackages": [
+    "@react-email/render",
+    "bufferutil",
+    "pg-cloudflare",
+    "pg-native",
+    "utf-8-validate"
+  ],
+  "externalRuntimeQualification": "UNQUALIFIED",
+  "buildInputRetention": "REQUIRES_REVALIDATION",
+  "applicationRuntime": "UNPROVEN",
+  "deployedArtifact": "UNPROVEN",
+  "limits": [
+    "Full 42 change records were not included in supplied terminal summary.",
+    "Pasted CSS filenames have formatting artifacts and are not used as exact identifiers.",
+    "This is a selected transcription, not the original Replit evidence file or a new execution."
+  ]
+}

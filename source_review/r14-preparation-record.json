@@ -1,0 +1,19 @@
+{
+  "command": "MMHB-RUNTIME-CONTRACT-R14.txt",
+  "sha256": "ceac8223c082d12e95f1290f0fe790e720af5aa0e77912ea0c67e99f654ddb40",
+  "bytes": 56339,
+  "driverSha256": "2a33a221665b7b8f28779aa8a5f4b22c2b740b74913118b7cd2f9ee9269c204e",
+  "helperSha256": "b91a23319ac5ab34f175312c04e2376cfd80206568cac8e9ac67c0900b91ad7f",
+  "checks": {
+    "nodeSyntax": "PASS",
+    "bashSyntax": "PASS",
+    "embeddedDriverIdentity": "PASS",
+    "embeddedHelperIdentity": "PASS",
+    "unchangedPins": 41,
+    "helperFixtures": 37,
+    "orchestrationFixtures": 29,
+    "independentReview": "PASS"
+  },
+  "actualReplitR14Execution": "PENDING",
+  "scope": "LOCAL_SYNTHETIC_FIXTURES_AND_SOURCE_REVIEW_ONLY_NOT_APPLICATION_RUNTIME_OR_DEPLOYMENT"
+}

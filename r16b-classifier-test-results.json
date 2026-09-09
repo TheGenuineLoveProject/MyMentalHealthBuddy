@@ -1,0 +1,102 @@
+{
+  "scope": "STATIC_URL_CLASSIFICATION_NO_NETWORK",
+  "node": "v24.19.0",
+  "helperSha256": "1ebb49394e86a42357ec0b649bc7c3775826d8e3271cdaf804c39a6e5023e472",
+  "priorPolicySha256": "0d32a375e7f43b58a809f5f902e971d6030512729927b4f4f19668610c0f7404",
+  "archiveFunctionByteIdentical": true,
+  "passed": 23,
+  "cases": [
+    {
+      "case": "ordinary scoped archive",
+      "status": "PASS"
+    },
+    {
+      "case": "HTTP archive",
+      "status": "PASS"
+    },
+    {
+      "case": "different registry",
+      "status": "PASS"
+    },
+    {
+      "case": "unknown secret host",
+      "status": "PASS"
+    },
+    {
+      "case": "percent scoped slash",
+      "status": "PASS"
+    },
+    {
+      "case": "percent at sign",
+      "status": "PASS"
+    },
+    {
+      "case": "URL credentials",
+      "status": "PASS"
+    },
+    {
+      "case": "query",
+      "status": "PASS"
+    },
+    {
+      "case": "fragment",
+      "status": "PASS"
+    },
+    {
+      "case": "explicit default port",
+      "status": "PASS"
+    },
+    {
+      "case": "nondefault port",
+      "status": "PASS"
+    },
+    {
+      "case": "outer whitespace",
+      "status": "PASS"
+    },
+    {
+      "case": "normalizing host uppercase",
+      "status": "PASS"
+    },
+    {
+      "case": "malformed URL",
+      "status": "PASS"
+    },
+    {
+      "case": "missing URL",
+      "status": "PASS"
+    },
+    {
+      "case": "object URL",
+      "status": "PASS"
+    },
+    {
+      "case": "control URL",
+      "status": "PASS"
+    },
+    {
+      "case": "backslash URL",
+      "status": "PASS"
+    },
+    {
+      "case": "path payload",
+      "status": "PASS"
+    },
+    {
+      "case": "very long URL",
+      "status": "PASS"
+    },
+    {
+      "case": "malformed percent",
+      "status": "PASS"
+    },
+    {
+      "case": "integrity reason without payload leak",
+      "status": "PASS"
+    },
+    {
+      "case": "all rejected entries collected without secret values",
+      "status": "PASS"
+    }
+  ]
+}

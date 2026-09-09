@@ -1,0 +1,79 @@
+{
+  "status": "PASS",
+  "checks": 18,
+  "scope": "GRAPH_FILESYSTEM_CLASSIFICATION_AND_NATIVE_RUNNER_PATH_CONTRACT",
+  "results": [
+    {
+      "case": "cwd-relative watch path and resource query",
+      "result": "PASS"
+    },
+    {
+      "case": "relative directory watch within inventoried tree",
+      "result": "PASS"
+    },
+    {
+      "case": "NUL virtual modules remain classified without file identity",
+      "result": "PASS"
+    },
+    {
+      "case": "relative module is unresolved rather than guessed to be a file",
+      "result": "PASS"
+    },
+    {
+      "case": "Vite production browser external is generated, not a missing file",
+      "result": "PASS"
+    },
+    {
+      "case": "Vite scoped optional peer placeholder is explicit and runtime unqualified",
+      "result": "PASS"
+    },
+    {
+      "case": "lookalike generated prefixes and malformed peers are rejected",
+      "result": "PASS"
+    },
+    {
+      "case": "unavailable watch API with nonempty evidence is inconsistent",
+      "result": "PASS"
+    },
+    {
+      "case": "outside-copy paths rejected before file access",
+      "result": "PASS"
+    },
+    {
+      "case": "absolute fake Vite filesystem prefix receives no blanket exemption",
+      "result": "PASS"
+    },
+    {
+      "case": "unknown namespaces and watch patterns collected together",
+      "result": "PASS"
+    },
+    {
+      "case": "secret-bearing URL diagnostics redact values",
+      "result": "PASS"
+    },
+    {
+      "case": "ordinary spaces and hash in physical filenames preserved",
+      "result": "PASS"
+    },
+    {
+      "case": "unknown virtual watch item is not accepted as a physical path",
+      "result": "PASS"
+    },
+    {
+      "case": "duplicate module metadata rejected",
+      "result": "PASS"
+    },
+    {
+      "case": "file byte drift rejected",
+      "result": "PASS"
+    },
+    {
+      "case": "file symlink rejected without following it",
+      "result": "PASS"
+    },
+    {
+      "case": "native runner differs only in new report directory name",
+      "result": "PASS"
+    }
+  ]
+}

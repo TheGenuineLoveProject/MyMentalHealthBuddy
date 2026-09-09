@@ -1,0 +1,41 @@
+{
+  "scope": "ACTUAL_DIAGNOSTIC_DRIVER_IN_DISPOSABLE_FIXTURES_NO_NPM_NETWORK_OR_APPLICATION",
+  "node": "v24.19.0",
+  "driverSha256": "1f1684f93bc8ca821e6e8c436f2ed3f0247d26f5e78363c70746bd85ec92887e",
+  "harnessSha256": "6f857d7378f0bca0a828aa207e52ee41f970d6f88e3732aff6372eb9089317ac",
+  "passed": 8,
+  "cases": [
+    {
+      "case": "canonical current archive collected",
+      "status": "PASS"
+    },
+    {
+      "case": "encoded archive reason collected",
+      "status": "PASS"
+    },
+    {
+      "case": "query payload remains private",
+      "status": "PASS"
+    },
+    {
+      "case": "manifest hash drift refuses inspection",
+      "status": "PASS"
+    },
+    {
+      "case": "manifest symlink refused",
+      "status": "PASS"
+    },
+    {
+      "case": "conflicting evidence ignore refused",
+      "status": "PASS"
+    },
+    {
+      "case": "concurrent package edit preserved and reported",
+      "status": "PASS"
+    },
+    {
+      "case": "evidence write failure cannot claim complete",
+      "status": "PASS"
+    }
+  ]
+}

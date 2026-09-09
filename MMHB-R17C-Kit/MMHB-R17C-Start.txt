@@ -1,0 +1,35 @@
+MyMentalHealthBuddy — R17C next step
+
+R17B passed its builds, graph review, native bcrypt smoke and all 18 prompt loads.
+Its final preservation check failed with 42 different snapshot records.
+Application operation and publication remain unverified.
+
+1. Download MMHB-PRESERVATION-INSPECT-R17C.txt.
+2. Upload it beside package.json in the existing MyMentalHealthBuddy Replit project.
+3. Open Shell and paste the entire block below. Replit AI is not needed.
+
+cd /home/runner/workspace &&
+printf '%s\n' '244214493d285410fbf04c2410a8495b8c961c55634a67b98fc7e3409e2dd214  MMHB-PRESERVATION-INSPECT-R17C.txt' |
+sha256sum -c - &&
+env -u BASH_ENV bash --noprofile --norc MMHB-PRESERVATION-INSPECT-R17C.txt
+
+4. Allow approximately 5–15 operator minutes; hashing time varies.
+5. Return all output from COMMAND_ID through NEXT_ACTION.
+
+Expected completed inspection:
+STATUS=PRESERVATION_DIAGNOSTIC_COMPLETE_REVIEW_REQUIRED
+
+This is diagnostic completion, not release approval. Findings and per-section
+inspection failures remain review items. The command prints all 42 historical
+differences and current file/artifact metadata. It performs no repair, build,
+installation, application/database start or deployment. A new report is saved.
+
+Local qualification: 22 workflow cases pass using synthetic project fixtures
+and the actual diagnostic driver. Real Replit execution is pending.
+
+Ledger fallback: MMHB-Ledger.txt or its copy in MMHB-R17C-Kit.zip.
+The ledger download is optional for running the command.
+
+First-release estimate: 27–61 engineering hours, low confidence, assuming core
+features largely exist. Broader library/calendar/social integrations and
+external review/waiting are additional. Re-estimate after change classification.

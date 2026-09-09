@@ -1,0 +1,72 @@
+{
+  "project": "MyMentalHealthBuddy",
+  "status": "R16B_DIAGNOSTIC_PREPARED_NOT_REPLIT_EXECUTED",
+  "reportedR16AFailure": {
+    "gate": "ARCHIVE_URL_NOT_ALLOWED",
+    "phase": "LOCK_AND_NPM_PREFLIGHT",
+    "file": "node_modules/@alloc/quick-lru",
+    "npmStarted": false,
+    "exactRejectedURL": "UNOBSERVED"
+  },
+  "tests": {
+    "classifier": 23,
+    "driver": 8
+  },
+  "files": [
+    {
+      "file": "MMHB-ARCHIVE-URL-DIAGNOSTIC-R16B.txt",
+      "sha256": "889b7a76319a8ddbd891554a5d77f8c308f808317f45c35ea6cd41fdd3e7fe56",
+      "bytes": 14372
+    },
+    {
+      "file": "source_review/archive-url-diagnostic-r16b-helper.mjs",
+      "sha256": "1ebb49394e86a42357ec0b649bc7c3775826d8e3271cdaf804c39a6e5023e472",
+      "bytes": 5436
+    },
+    {
+      "file": "source_review/archive-url-diagnostic-r16b-body.mjs",
+      "sha256": "cb8867cd13603998f87e079c4e027b61987b7c2acc8bd628dff2f6865459ddec",
+      "bytes": 6687
+    },
+    {
+      "file": "source_review/archive-url-diagnostic-r16b-driver.mjs",
+      "sha256": "1f1684f93bc8ca821e6e8c436f2ed3f0247d26f5e78363c70746bd85ec92887e",
+      "bytes": 14063
+    },
+    {
+      "file": "source_review/build-archive-url-diagnostic-r16b.py",
+      "sha256": "b8d418c5434532b5109050d655c7ea9df3348da73f3b0789cf59f6316c6a19c4",
+      "bytes": 889
+    },
+    {
+      "file": "source_review/test-archive-url-diagnostic-r16b.mjs",
+      "sha256": "3b8c2a3ed80009704274cd6db0125cefe81f13f28875858a1d008046338cdf7f",
+      "bytes": 4344
+    },
+    {
+      "file": "source_review/test-archive-url-diagnostic-r16b.py",
+      "sha256": "6f857d7378f0bca0a828aa207e52ee41f970d6f88e3732aff6372eb9089317ac",
+      "bytes": 5220
+    },
+    {
+      "file": "source_review/r16b-classifier-test-results.json",
+      "sha256": "14e3da7e53cb51759a4ac979d0873bd5e7cccd843c03d9e60cb90275eb1aaaed",
+      "bytes": 1970
+    },
+    {
+      "file": "source_review/r16b-driver-test-results.json",
+      "sha256": "f307acaf533dbdde325bb1ffff0d23097725253257d51b79236896e938a5947b",
+      "bytes": 1037
+    },
+    {
+      "file": "source_review/locked-dependency-policy-r16.mjs",
+      "sha256": "0d32a375e7f43b58a809f5f902e971d6030512729927b4f4f19668610c0f7404",
+      "bytes": 20843
+    },
+    {
+      "file": "source_review/R16B-Verification-README.md",
+      "sha256": "a166c8d1b9c127044ed6fa5b3fc76ab21dbcb893ce0f4f2e6a0ab22cdfad0e38",
+      "bytes": 4719
+    }
+  ]
+}

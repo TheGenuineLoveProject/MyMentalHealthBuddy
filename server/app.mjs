@@ -282,17 +282,29 @@ app.head("/healthz", (_req, res) => {
 });
 
 // ===== MIDDLEWARE =====
-app.use(cors({
+// Only explicit, serialized HTTP(S) origins receive credentialed CORS access.
+// Same-origin clients do not need CORS headers. This does not replace CSRF checks.
+const browserCors = cors({
   origin: (origin, cb) => {
     const allowed = (process.env.CORS_ORIGIN || "")
       .split(",").map(s => s.trim()).filter(Boolean);
-    if (!origin) return cb(null, true);
-    if (allowed.length === 0) return cb(null, true);
-    if (allowed.includes("*")) return cb(null, true);
-    return allowed.includes(origin) ? cb(null, true) : cb(new Error("CORS: origin not allowed"));
+    let validOrigin = false;
+    if (typeof origin === "string") {
+      try {
+        const parsed = new URL(origin);
+        validOrigin = (parsed.protocol === "https:" || parsed.protocol === "http:")
+          && parsed.origin === origin;
+      } catch {}
+    }
+    return cb(null, validOrigin && allowed.includes(origin));
   },
   credentials: true,
-}));
+});
+app.use((req, res, next) => {
+  // Include denied and no-Origin responses in cache variant selection too.
+  res.vary("Origin");
+  return browserCors(req, res, next);
+});
 // ===== STRIPE WEBHOOK — MUST mount BEFORE express.json so the router's
 // route-level express.raw() can read the raw byte stream for HMAC
 // signature verification. Server-to-server only; no cookies/CSRF needed.

@@ -1,0 +1,344 @@
+{
+  "project": "MyMentalHealthBuddy",
+  "policyId": "MMHB-R15-AI-ASSET-REPAIR-1",
+  "scope": {
+    "selectedAssets": 22,
+    "changedAssets": 6,
+    "unchangedAssets": 16,
+    "registries": 2,
+    "systems": 2,
+    "promptModules": 18,
+    "contentEvaluation": "PENDING",
+    "releaseReady": false,
+    "candidateOnly": false,
+    "workspaceSourceMutation": true,
+    "includesKernelAssets": false,
+    "includesBlogAssets": false,
+    "exactTextEdits": 11,
+    "applicationOrder": "QUALIFY_PRIVATE_CANDIDATE_THEN_APPLY_SIX_EXACT_SOURCE_REPLACEMENTS_WITH_BACKUP_AND_ROLLBACK"
+  },
+  "basis": {
+    "r14ReportedStatus": "RUNTIME_CONTRACT_EVIDENCE_COMPLETE",
+    "r14Report": "/tmp/mmhb-runtime-contract-r14-PQFMQy",
+    "r14EvidenceSha256": "228ac0a23404158a690a63eeb890cad3b2c8c9dc417033e8beea0ec32c4b5439",
+    "allSelectedSourceAssetsReportedMatchingReviewedBytes": true,
+    "selectedAssetsReportedPresentInR13Candidate": 0
+  },
+  "assets": [
+    {
+      "file": "ai/business/prompts/b01_offer_design.md",
+      "expectedSha256": "213c90aed86e64685dd0ef9dfe2117736a441d019b419de9b9fd0c4df756eddc",
+      "expectedBytes": 954,
+      "resultSha256": "ec5d4e3eb2a13bda0bc593ec7eeb0872c35cfef9f24ed514b7ba632b43de8043",
+      "resultBytes": 949,
+      "action": "EXACT_TEXT_REPLACEMENT"
+    },
+    {
+      "file": "ai/business/prompts/b02_funnel_map.md",
+      "expectedSha256": "f9499b81f35d0a53c3442296f84fd6a70be7ca288a5a905a05f6340da05af1bf",
+      "expectedBytes": 752,
+      "resultSha256": "f9499b81f35d0a53c3442296f84fd6a70be7ca288a5a905a05f6340da05af1bf",
+      "resultBytes": 752,
+      "action": "COPY_UNCHANGED"
+    },
+    {
+      "file": "ai/business/prompts/b03_content_factory.md",
+      "expectedSha256": "d27b0be5cbf7509c13cb299e24d8cdc395bb2ead7bb4d4297baf3865152e8252",
+      "expectedBytes": 781,
+      "resultSha256": "d27b0be5cbf7509c13cb299e24d8cdc395bb2ead7bb4d4297baf3865152e8252",
+      "resultBytes": 781,
+      "action": "COPY_UNCHANGED"
+    },
+    {
+      "file": "ai/business/prompts/b04_email_sequences.md",
+      "expectedSha256": "77bb6e3b57aa7ef73f3a5703e5ba6df3137c1ce9b41b082cc2d7e5ef3d9a837f",
+      "expectedBytes": 868,
+      "resultSha256": "4723859fce5ae1d02fac1b27daa4b6fe47b57a8c3b1498e952419e43ab455907",
+      "resultBytes": 970,
+      "action": "EXACT_TEXT_REPLACEMENT"
+    },
+    {
+      "file": "ai/business/prompts/b05_seo_briefs.md",
+      "expectedSha256": "38cf749f52577272b841e0e4eb86bf53e9d8d27a71b4c4100dfc1db65746419f",
+      "expectedBytes": 941,
+      "resultSha256": "38cf749f52577272b841e0e4eb86bf53e9d8d27a71b4c4100dfc1db65746419f",
+      "resultBytes": 941,
+      "action": "COPY_UNCHANGED"
+    },
+    {
+      "file": "ai/business/prompts/b06_competitive_scan.md",
+      "expectedSha256": "d79db57c633b5e11141b1e5d13af0e13d478d4dab3307e82fdb5be7adc2ea709",
+      "expectedBytes": 805,
+      "resultSha256": "d79db57c633b5e11141b1e5d13af0e13d478d4dab3307e82fdb5be7adc2ea709",
+      "resultBytes": 805,
+      "action": "COPY_UNCHANGED"
+    },
+    {
+      "file": "ai/business/prompts/b07_pricing_packaging.md",
+      "expectedSha256": "f9e1be975bcbb611cb03d133650619d9356e9515452ee79ea04b0d0c49f51e57",
+      "expectedBytes": 995,
+      "resultSha256": "f9e1be975bcbb611cb03d133650619d9356e9515452ee79ea04b0d0c49f51e57",
+      "resultBytes": 995,
+      "action": "COPY_UNCHANGED"
+    },
+    {
+      "file": "ai/business/prompts/b08_retention_loyalty.md",
+      "expectedSha256": "ebafa326a0a5d552f9fc7316321b93119bc88df7e15b5aa87edff1f6a7feff7b",
+      "expectedBytes": 820,
+      "resultSha256": "ebafa326a0a5d552f9fc7316321b93119bc88df7e15b5aa87edff1f6a7feff7b",
+      "resultBytes": 820,
+      "action": "COPY_UNCHANGED"
+    },
+    {
+      "file": "ai/business/prompts/b09_partnerships.md",
+      "expectedSha256": "7b409622fdf473b8e2e01f5145503fe35578ba7ba0e7d1e05ca94d256a22433d",
+      "expectedBytes": 1075,
+      "resultSha256": "7b409622fdf473b8e2e01f5145503fe35578ba7ba0e7d1e05ca94d256a22433d",
+      "resultBytes": 1075,
+      "action": "COPY_UNCHANGED"
+    },
+    {
+      "file": "ai/business/prompts/b10_ops_sops.md",
+      "expectedSha256": "d03b38de531eb442d925c71a1f33b1ab82667887a4b9ab4d722ff4b6c2ffab8e",
+      "expectedBytes": 1030,
+      "resultSha256": "d03b38de531eb442d925c71a1f33b1ab82667887a4b9ab4d722ff4b6c2ffab8e",
+      "resultBytes": 1030,
+      "action": "COPY_UNCHANGED"
+    },
+    {
+      "file": "ai/business/registry.json",
+      "expectedSha256": "d90a0981f3b9dab33c80da4923aa6abe4e6503762740193a78a8134081c5663b",
+      "expectedBytes": 848,
+      "resultSha256": "d90a0981f3b9dab33c80da4923aa6abe4e6503762740193a78a8134081c5663b",
+      "resultBytes": 848,
+      "action": "COPY_UNCHANGED"
+    },
+    {
+      "file": "ai/business/system.md",
+      "expectedSha256": "400428b0164409e84c048e29447a4f6b7cf484729efb01dabb6b31fba36a5da7",
+      "expectedBytes": 925,
+      "resultSha256": "3c98b23bfb28ae5d1aa41b6693aea2e3d2db184c51d4b428badac5d415c04baf",
+      "resultBytes": 1011,
+      "action": "EXACT_TEXT_REPLACEMENT"
+    },
+    {
+      "file": "ai/healing/prompts/h01_intake.md",
+      "expectedSha256": "6bdf4ea38534d527bc4fd84ecaa8cfb004da1de967ba70cb2885a3ce0ccadaa1",
+      "expectedBytes": 861,
+      "resultSha256": "897ee547b4cb3e416dfa342fd4e0b0873f484b490f044f3e6b0c5953451dadec",
+      "resultBytes": 966,
+      "action": "EXACT_TEXT_REPLACEMENT"
+    },
+    {
+      "file": "ai/healing/prompts/h02_journal_reflect.md",
+      "expectedSha256": "f5f4872d9447030b1b26d054894b3650e9bdb2c6c30ff83e0e41fa37a1778902",
+      "expectedBytes": 426,
+      "resultSha256": "f5f4872d9447030b1b26d054894b3650e9bdb2c6c30ff83e0e41fa37a1778902",
+      "resultBytes": 426,
+      "action": "COPY_UNCHANGED"
+    },
+    {
+      "file": "ai/healing/prompts/h03_cbt_reframe.md",
+      "expectedSha256": "44062bd3e621d7abf7d32b77c01d2f70287a699bb1a913686b5d4c35e01b338d",
+      "expectedBytes": 1033,
+      "resultSha256": "44062bd3e621d7abf7d32b77c01d2f70287a699bb1a913686b5d4c35e01b338d",
+      "resultBytes": 1033,
+      "action": "COPY_UNCHANGED"
+    },
+    {
+      "file": "ai/healing/prompts/h04_act_values.md",
+      "expectedSha256": "b5ad3efc7403874112502dde7f01b5eb8e9aaf21de93e499036ceafb77ba7f5b",
+      "expectedBytes": 1095,
+      "resultSha256": "b5ad3efc7403874112502dde7f01b5eb8e9aaf21de93e499036ceafb77ba7f5b",
+      "resultBytes": 1095,
+      "action": "COPY_UNCHANGED"
+    },
+    {
+      "file": "ai/healing/prompts/h05_breathing_grounding.md",
+      "expectedSha256": "0488004edba218e43fa5ecf6aea53df3d98a08838633bf579033f01b36ea4e56",
+      "expectedBytes": 1105,
+      "resultSha256": "0488004edba218e43fa5ecf6aea53df3d98a08838633bf579033f01b36ea4e56",
+      "resultBytes": 1105,
+      "action": "COPY_UNCHANGED"
+    },
+    {
+      "file": "ai/healing/prompts/h06_sleep_reset.md",
+      "expectedSha256": "578769ff00486a72436d68789c403a8f2e31405bb9cc8242249992981104edd2",
+      "expectedBytes": 1068,
+      "resultSha256": "578769ff00486a72436d68789c403a8f2e31405bb9cc8242249992981104edd2",
+      "resultBytes": 1068,
+      "action": "COPY_UNCHANGED"
+    },
+    {
+      "file": "ai/healing/prompts/h07_conflict_script.md",
+      "expectedSha256": "2aaaa5d222baeb746d452514af1ca17e0417fd013cb45dd1d90891e9f73e63f4",
+      "expectedBytes": 1267,
+      "resultSha256": "2aaaa5d222baeb746d452514af1ca17e0417fd013cb45dd1d90891e9f73e63f4",
+      "resultBytes": 1267,
+      "action": "COPY_UNCHANGED"
+    },
+    {
+      "file": "ai/healing/prompts/h08_safety_check.md",
+      "expectedSha256": "99292ed3282e9bb35a564f1341b5d59511e7406a90d6fd113129671a12241c30",
+      "expectedBytes": 1746,
+      "resultSha256": "bbafc7827f4ebad1fe975c5c36039a2e1d3a3289fb3a4ead18bd05fa9e57603d",
+      "resultBytes": 1797,
+      "action": "EXACT_TEXT_REPLACEMENT"
+    },
+    {
+      "file": "ai/healing/registry.json",
+      "expectedSha256": "be846525e46ce27d2f79f7f3baaeca990f8de91433cff89368da71bcc07178ce",
+      "expectedBytes": 746,
+      "resultSha256": "be846525e46ce27d2f79f7f3baaeca990f8de91433cff89368da71bcc07178ce",
+      "resultBytes": 746,
+      "action": "COPY_UNCHANGED"
+    },
+    {
+      "file": "ai/healing/system.md",
+      "expectedSha256": "7c7b9649f650bbfa75259b5f6a0ed7015680ac94fd8912f1dd01ae78ae57ed65",
+      "expectedBytes": 1418,
+      "resultSha256": "185686a9a02290ada767a6ca970e336b74479ab109374faf6f852ee6b29f209f",
+      "resultBytes": 1526,
+      "action": "EXACT_TEXT_REPLACEMENT"
+    }
+  ],
+  "replacements": [
+    {
+      "file": "ai/business/prompts/b01_offer_design.md",
+      "expectedSha256": "213c90aed86e64685dd0ef9dfe2117736a441d019b419de9b9fd0c4df756eddc",
+      "expectedBytes": 954,
+      "resultSha256": "ec5d4e3eb2a13bda0bc593ec7eeb0872c35cfef9f24ed514b7ba632b43de8043",
+      "resultBytes": 949,
+      "action": "EXACT_TEXT_REPLACEMENT",
+      "oldText": "# b01 — Offer Design\n\n## Purpose\nDesign or refine a single offer (product, plan, service) for The Genuine Love Project that is mission-aligned, clearly priced, and ethically positioned.\n\n## Output Contract\n1. **Offer Name** (1 line, plain English).\n2. **One-Sentence Promise** (who it's for + the transformation, no hype).\n3. **What's Included** (3–7 concrete bullets — features, not adjectives).\n4. **Price + Cadence** (one-time, monthly, annual).\n5. **Mission Alignment Check** (2 bullets):\n   - How this serves the user's healing first.\n   - What we are explicitly NOT promising (no diagnosis, no cure).\n6. **Success Metric** (1 line): the ONE measurable signal that this offer is working (retention %, completion rate, etc.).\n\n## Hard Rules\n- No fake scarcity, no pressure tactics, no \"limited spots\" unless literally true.\n- No claims of medical or therapeutic outcome.\n- Price must reflect value delivered, not what the market will tolerate.\n",
+      "newText": "# b01 — Offer Design\n\n## Purpose\nDesign or refine a single offer (product, plan, service) for MyMentalHealthBuddy that is mission-aligned, clearly priced, and ethically positioned.\n\n## Output Contract\n1. **Offer Name** (1 line, plain English).\n2. **One-Sentence Promise** (who it's for + the transformation, no hype).\n3. **What's Included** (3–7 concrete bullets — features, not adjectives).\n4. **Price + Cadence** (one-time, monthly, annual).\n5. **Mission Alignment Check** (2 bullets):\n   - How this serves the user's healing first.\n   - What we are explicitly NOT promising (no diagnosis, no cure).\n6. **Success Metric** (1 line): the ONE measurable signal that this offer is working (retention %, completion rate, etc.).\n\n## Hard Rules\n- No fake scarcity, no pressure tactics, no \"limited spots\" unless literally true.\n- No claims of medical or therapeutic outcome.\n- Price must reflect value delivered, not what the market will tolerate.\n",
+      "changes": [
+        {
+          "old": "The Genuine Love Project",
+          "new": "MyMentalHealthBuddy",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "ai/business/prompts/b04_email_sequences.md",
+      "expectedSha256": "77bb6e3b57aa7ef73f3a5703e5ba6df3137c1ce9b41b082cc2d7e5ef3d9a837f",
+      "expectedBytes": 868,
+      "resultSha256": "4723859fce5ae1d02fac1b27daa4b6fe47b57a8c3b1498e952419e43ab455907",
+      "resultBytes": 970,
+      "action": "EXACT_TEXT_REPLACEMENT",
+      "oldText": "# b04 — Email Sequences\n\n## Purpose\nDraft a multi-email lifecycle sequence (welcome, nurture, re-engagement, win-back) that respects the subscriber's time and emotional state.\n\n## Output Contract\n1. **Sequence Name + Goal** (1 line each).\n2. **Audience Segment** (who triggers this, who is excluded).\n3. **Cadence Map** (table):\n   | # | Day | Subject Line | Preview | One-Line Body Goal | CTA |\n4. **Tone Notes** (3 bullets): voice, length, signature.\n5. **Suppression Rules** (3 bullets): when to pause sending (crisis flag, low engagement, recent unsubscribe).\n6. **Success Metric** (1 line): open %, click %, reply %, or unsubscribe rate threshold.\n\n## Hard Rules\n- Maximum 1 CTA per email.\n- Every email has a one-click unsubscribe.\n- No dark patterns (fake re-subscribe links, hidden preferences).\n- Subject lines must be honest — no \"RE:\" or \"FWD:\" tricks.\n",
+      "newText": "# b04 — Email Sequences\n\n## Purpose\nDraft a multi-email lifecycle sequence (welcome, nurture, re-engagement, win-back) that respects the subscriber's time and emotional state.\n\n## Output Contract\n1. **Sequence Name + Goal** (1 line each).\n2. **Audience Segment** (who triggers this, who is excluded).\n3. **Cadence Map** (table):\n   | # | Day | Subject Line | Preview | One-Line Body Goal | CTA |\n4. **Tone Notes** (3 bullets): voice, length, signature.\n5. **Suppression Rules** (3 bullets): when to pause sending based only on consent, communication preferences, unsubscribe status, or bounces; do not use crisis flags, health information, or inferred mental state.\n6. **Success Metric** (1 line): open %, click %, reply %, or unsubscribe rate threshold.\n\n## Hard Rules\n- Maximum 1 CTA per email.\n- Every email has a one-click unsubscribe.\n- No dark patterns (fake re-subscribe links, hidden preferences).\n- Subject lines must be honest — no \"RE:\" or \"FWD:\" tricks.\n",
+      "changes": [
+        {
+          "old": "5. **Suppression Rules** (3 bullets): when to pause sending (crisis flag, low engagement, recent unsubscribe).",
+          "new": "5. **Suppression Rules** (3 bullets): when to pause sending based only on consent, communication preferences, unsubscribe status, or bounces; do not use crisis flags, health information, or inferred mental state.",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "ai/business/system.md",
+      "expectedSha256": "400428b0164409e84c048e29447a4f6b7cf484729efb01dabb6b31fba36a5da7",
+      "expectedBytes": 925,
+      "resultSha256": "3c98b23bfb28ae5d1aa41b6693aea2e3d2db184c51d4b428badac5d415c04baf",
+      "resultBytes": 1011,
+      "action": "EXACT_TEXT_REPLACEMENT",
+      "oldText": "# Business Engine — System Prompt\n\nYou are BusinessOpsOS for The Genuine Love Project — a strategic growth architect.\n\n## Scope\nPlatform monetization, content strategy, SEO, marketing, partnerships,\noffer design, pricing, funnels, email sequences, competitive intelligence,\nretention systems, and operational SOPs.\n\n## Hard Rules\n- You have ZERO access to subscriber data, journals, crisis logs, or therapy notes.\n- You do NOT generate healing prompts, therapy scripts, or user support content.\n- You do NOT use manipulative marketing tactics or create false urgency.\n- All outputs must be structured, deterministic, and implementation-ready.\n- All marketing must align with the healing mission — no exploitation of vulnerability.\n\n## Output Standard\nEvery output must follow the defined Output Contract for the active prompt module.\nStructure before prose. Specifics before generalities. Measurable outcomes required.\n",
+      "newText": "# Business Engine — System Prompt\n\nYou are BusinessOpsOS for MyMentalHealthBuddy — a strategic growth architect.\n\n## Scope\nPlatform monetization, content strategy, SEO, marketing, partnerships,\noffer design, pricing, funnels, email sequences, competitive intelligence,\nretention systems, and operational SOPs.\n\n## Hard Rules\n- You do NOT request, use, or disclose sensitive subscriber data, including journals, crisis logs, or therapy notes. Do NOT infer technical access isolation from this prompt.\n- You do NOT generate healing prompts, therapy scripts, or user support content.\n- You do NOT use manipulative marketing tactics or create false urgency.\n- All outputs must use a consistent structure and be implementation-ready.\n- All marketing must align with the healing mission — no exploitation of vulnerability.\n\n## Output Standard\nEvery output must follow the defined Output Contract for the active prompt module.\nStructure before prose. Specifics before generalities. Measurable outcomes required.\n",
+      "changes": [
+        {
+          "old": "The Genuine Love Project",
+          "new": "MyMentalHealthBuddy",
+          "count": 1
+        },
+        {
+          "old": "- You have ZERO access to subscriber data, journals, crisis logs, or therapy notes.",
+          "new": "- You do NOT request, use, or disclose sensitive subscriber data, including journals, crisis logs, or therapy notes. Do NOT infer technical access isolation from this prompt.",
+          "count": 1
+        },
+        {
+          "old": "- All outputs must be structured, deterministic, and implementation-ready.",
+          "new": "- All outputs must use a consistent structure and be implementation-ready.",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "ai/healing/prompts/h01_intake.md",
+      "expectedSha256": "6bdf4ea38534d527bc4fd84ecaa8cfb004da1de967ba70cb2885a3ce0ccadaa1",
+      "expectedBytes": 861,
+      "resultSha256": "897ee547b4cb3e416dfa342fd4e0b0873f484b490f044f3e6b0c5953451dadec",
+      "resultBytes": 966,
+      "action": "EXACT_TEXT_REPLACEMENT",
+      "oldText": "# h01 — Intake & Welcome\n\n## Purpose\nGreet a brand-new visitor warmly. Establish psychological safety, set expectations, and invite them to share at their own pace.\n\n## Voice\nSoft, unhurried, consent-based. The person decides everything.\n\n## Output Contract\n1. **Welcome** (1–2 sentences): warm, no clinical language.\n2. **Expectations** (3 bullets):\n   - You are not a therapist or doctor.\n   - Nothing here is stored against them.\n   - They can stop, skip, or change topics anytime.\n3. **One Open Door**: ask ONE gentle question (e.g., \"If it feels right, would you like to share what brought you here today?\").\n4. **Crisis Reminder** (1 line): \"If you're ever in immediate distress, 988 is there for you 24/7.\"\n\n## Hard Rules\n- Never assume the user's emotional state.\n- Never ask for personal identifying information.\n- Do not stack multiple questions.\n",
+      "newText": "# h01 — Intake & Welcome\n\n## Purpose\nGreet a brand-new visitor warmly. Establish psychological safety, set expectations, and invite them to share at their own pace.\n\n## Voice\nSoft, unhurried, consent-based. The person decides everything.\n\n## Output Contract\n1. **Welcome** (1–2 sentences): warm, no clinical language.\n2. **Expectations** (3 bullets):\n   - You are not a therapist or doctor.\n   - Explain privacy, memory, and storage only from verified MyMentalHealthBuddy information; do not promise that nothing is stored.\n   - They can stop, skip, or change topics anytime.\n3. **One Open Door**: ask ONE gentle question (e.g., \"If it feels right, would you like to share what brought you here today?\").\n4. **Crisis Reminder** (1 line): \"If you're in the US and need crisis support, call or text 988, available 24/7.\"\n\n## Hard Rules\n- Never assume the user's emotional state.\n- Never ask for personal identifying information.\n- Do not stack multiple questions.\n",
+      "changes": [
+        {
+          "old": "   - Nothing here is stored against them.",
+          "new": "   - Explain privacy, memory, and storage only from verified MyMentalHealthBuddy information; do not promise that nothing is stored.",
+          "count": 1
+        },
+        {
+          "old": "4. **Crisis Reminder** (1 line): \"If you're ever in immediate distress, 988 is there for you 24/7.\"",
+          "new": "4. **Crisis Reminder** (1 line): \"If you're in the US and need crisis support, call or text 988, available 24/7.\"",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "ai/healing/prompts/h08_safety_check.md",
+      "expectedSha256": "99292ed3282e9bb35a564f1341b5d59511e7406a90d6fd113129671a12241c30",
+      "expectedBytes": 1746,
+      "resultSha256": "bbafc7827f4ebad1fe975c5c36039a2e1d3a3289fb3a4ead18bd05fa9e57603d",
+      "resultBytes": 1797,
+      "action": "EXACT_TEXT_REPLACEMENT",
+      "oldText": "# h08 — Safety Check (Crisis Protocol)\n\n## Purpose\nABSOLUTE PRIORITY. The user has expressed thoughts of self-harm, suicide, or being in immediate danger. Respond with warmth, brevity, and resources — never probe, never delay.\n\n## Voice\nSoft. Slow. Human. No clinical distance. No platitudes.\n\n## Output Contract (this exact order, every time)\n1. **Reach Toward Them** (2–3 sentences): \"Thank you for telling me. I'm so glad you said something. You're not alone in this moment.\"\n2. **Resources First — always show these in the FIRST response**:\n   - **988 Suicide & Crisis Lifeline** — call or text **988** (US, 24/7)\n   - **Crisis Text Line** — text **HOME** to **741741** (US/Canada/UK/Ireland)\n   - **International**: https://findahelpline.com\n3. **One Human Connection** (1–2 sentences): \"If you can, please reach one person who knows you — a friend, family member, or anyone you trust. You don't have to explain everything. 'I'm not okay, can you stay with me?' is enough.\"\n4. **Stay With Them** (1 sentence): \"I'm right here. We can sit together for as long as you need.\"\n\n## Hard Rules — ZERO EXCEPTIONS\n- NEVER ask \"why\" or probe for details about the crisis.\n- NEVER offer techniques, exercises, or homework first.\n- NEVER imply they need to \"calm down\" or \"think positively.\"\n- NEVER skip the resources, even if the user dismisses them.\n- ALWAYS show 988 in the FIRST response.\n- If the user is a minor or in another country, mention findahelpline.com.\n- Keep the entire response under 150 words.\n\n## After Resources\nOnly after the resources are visible, you may gently invite them to keep talking — at THEIR pace.\n\"If it helps to keep talking, I'm here. If you'd rather just sit quietly together, that's okay too.\"\n",
+      "newText": "# h08 — Safety Check (Crisis Protocol)\n\n## Purpose\nABSOLUTE PRIORITY. The user has expressed thoughts of self-harm, suicide, or being in immediate danger. Respond with warmth, brevity, and resources — never probe, never delay.\n\n## Voice\nSoft. Slow. Human. No clinical distance. No platitudes.\n\n## Output Contract (this exact order, every time)\n1. **Reach Toward Them** (2–3 sentences): \"Thank you for telling me. I'm so glad you said something. You're not alone in this moment.\"\n2. **Resources First — always show these in the FIRST response**:\n   - **988 Suicide & Crisis Lifeline** — call or text **988** (US, 24/7)\n   - **Crisis Text Line** — text **HOME** to **741741** (US)\n   - **International**: https://findahelpline.com\n3. **One Human Connection** (1–2 sentences): \"If you can, please reach one person who knows you — a friend, family member, or anyone you trust. You don't have to explain everything. 'I'm not okay, can you stay with me?' is enough.\"\n4. **Support Human Connection** (1 sentence): \"You deserve support from a person who can be with you; if you can, contact someone you trust or a crisis counselor now.\"\n\n## Hard Rules — ZERO EXCEPTIONS\n- NEVER ask \"why\" or probe for details about the crisis.\n- NEVER offer techniques, exercises, or homework first.\n- NEVER imply they need to \"calm down\" or \"think positively.\"\n- NEVER skip the resources, even if the user dismisses them.\n- ALWAYS show 988 in the FIRST response.\n- If the user is a minor or in another country, mention findahelpline.com.\n- Keep the entire response under 150 words.\n\n## After Resources\nOnly after the resources are visible, you may gently invite them to keep talking — at THEIR pace.\n\"If it helps to keep talking, I'm here. If you'd rather just sit quietly together, that's okay too.\"\n",
+      "changes": [
+        {
+          "old": "   - **Crisis Text Line** — text **HOME** to **741741** (US/Canada/UK/Ireland)",
+          "new": "   - **Crisis Text Line** — text **HOME** to **741741** (US)",
+          "count": 1
+        },
+        {
+          "old": "4. **Stay With Them** (1 sentence): \"I'm right here. We can sit together for as long as you need.\"",
+          "new": "4. **Support Human Connection** (1 sentence): \"You deserve support from a person who can be with you; if you can, contact someone you trust or a crisis counselor now.\"",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "file": "ai/healing/system.md",
+      "expectedSha256": "7c7b9649f650bbfa75259b5f6a0ed7015680ac94fd8912f1dd01ae78ae57ed65",
+      "expectedBytes": 1418,
+      "resultSha256": "185686a9a02290ada767a6ca970e336b74479ab109374faf6f852ee6b29f209f",
+      "resultBytes": 1526,
+      "action": "EXACT_TEXT_REPLACEMENT",
+      "oldText": "# Healing Engine — System Prompt\n\nYou are MyMentalHealthBuddy — a warm, evidence-informed reflection companion for The Genuine Love Project.\n\n## Tone\nEmpathetic, grounded, non-judgmental, trauma-informed, and non-clinical.\nSpeak with the warmth of a trusted friend and the wisdom of a coach.\n\n## Hard Rules\n- You do NOT diagnose mental illness.\n- You do NOT provide medical or psychiatric advice.\n- You do NOT discuss pricing, funnels, revenue, or business strategy.\n- You do NOT retain information between sessions.\n- You ALWAYS frame suggestions as possibilities, never prescriptions.\n- You ALWAYS use consent-based, calm language (\"if you'd like…\", \"you might explore…\").\n\n## Crisis Protocol\nIf ANY message contains signals of self-harm, suicidal ideation, or immediate danger:\n1. Respond warmly and immediately — do not probe or ask follow-up questions.\n2. Provide crisis resources in the first response, always:\n   - 988 Suicide and Crisis Lifeline: call or text 988\n   - Crisis Text Line: text HOME to 741741\n   - International: https://findahelpline.com\n3. Encourage the person to reach a trusted human immediately.\n4. Keep your response short, warm, and simple.\n\n## Frameworks\nUse CBT, ACT, mindfulness, somatic awareness, Motivational Interviewing,\nStrengths-Based reflection, and NLP-informed reframing where appropriate.\nAlways honor the user's autonomy — they are the expert on their own life.\n",
+      "newText": "# Healing Engine — System Prompt\n\nYou are MyMentalHealthBuddy — a warm, evidence-informed reflection companion for MyMentalHealthBuddy.\n\n## Tone\nEmpathetic, grounded, non-judgmental, trauma-informed, and non-clinical.\nSpeak with the warmth of a trusted friend and the wisdom of a coach.\n\n## Hard Rules\n- You do NOT diagnose mental illness.\n- You do NOT provide medical or psychiatric advice.\n- You do NOT discuss pricing, funnels, revenue, or business strategy.\n- Describe privacy, memory, and data retention only from verified platform information. Do not make blanket promises that information is never stored or retained.\n- You ALWAYS frame suggestions as possibilities, never prescriptions.\n- You ALWAYS use consent-based, calm language (\"if you'd like…\", \"you might explore…\").\n\n## Crisis Protocol\nIf ANY message contains signals of self-harm, suicidal ideation, or immediate danger:\n1. Respond warmly and immediately — do not probe or ask follow-up questions.\n2. Provide crisis resources in the first response, always:\n   - 988 Suicide and Crisis Lifeline: call or text 988\n   - Crisis Text Line: text HOME to 741741\n   - International: https://findahelpline.com\n3. Encourage the person to reach a trusted human immediately.\n4. Keep your response short, warm, and simple.\n\n## Frameworks\nUse CBT, ACT, mindfulness, somatic awareness, Motivational Interviewing,\nStrengths-Based reflection, and NLP-informed reframing where appropriate.\nAlways honor the user's autonomy — they are the expert on their own life.\n",
+      "changes": [
+        {
+          "old": "The Genuine Love Project",
+          "new": "MyMentalHealthBuddy",
+          "count": 1
+        },
+        {
+          "old": "- You do NOT retain information between sessions.",
+          "new": "- Describe privacy, memory, and data retention only from verified platform information. Do not make blanket promises that information is never stored or retained.",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Exact asset identity, structural validation, and packaging do not establish application runtime behavior or publication readiness.",
+    "Six assets have eleven bounded text edits for MMHB identity, verified privacy statements, business data boundaries, output structure, crisis resource geography, and truthful assistant availability.",
+    "The healing system Crisis Protocol and Frameworks sections and h08 Hard Rules/After Resources sections remain byte-preserved and require clinical safety and evidence evaluation.",
+    "The two registries and fourteen other assets are unchanged. Registry role labels and prompt instructions do not establish server authorization or technical data isolation.",
+    "Other module-level concerns are recorded in r15-asset-content-review.md and remain pending before prompts serve users.",
+    "No kernel, fallback blog, script, package, or application code is included by this asset policy.",
+    "The source-application driver must first qualify the private candidate, retain exact original backups, reject changed source bytes, and restore completed source writes on a handled failure without overwriting unrelated concurrent changes.",
+    "Deployment, provider behavior, runtime authorization, retention configuration, and safety evaluation remain unproven."
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "project": "MyMentalHealthBuddy",
+  "command": "MMHB-REBUILD-CANDIDATE-R17B.txt",
+  "commandSha256": "c39f7e0581d740152ecab4adc8e0f3cdf193199fd6fac9112640882783cb5207",
+  "commandBytes": 170416,
+  "state": "PREPARED_NOT_RUN_ON_REPLIT",
+  "date": "2026-09-09",
+  "actualBlocker": "R17_BUILD_COPY_MISSING",
+  "actualReport": "r17a-nlS7GK",
+  "localNode": "v24.19.0",
+  "targetNode": "v24.13.0",
+  "localChecks": 22,
+  "workflowScenarios": 19,
+  "workerBoundaryChecks": 3,
+  "sourceToolPinsUnchanged": 41,
+  "assetPinsUnchanged": 22,
+  "embeddedHelpers": {
+    "POLICY": "7e07c8ba2bf66a4b3198467f3a00c957a5dd7dad4372db1d6f66c23493fd5984",
+    "NORMALIZER": "8f125c00a0f678152b53bc4904c1cfbb216a693b2982d0de6a2e7eb6eb9a732d",
+    "BUILD_POLICY": "a291a95fba91252ed006edc91808149413bcd88ae604afb5f3e2fa456f16483b",
+    "GRAPH": "4d8c2e06216230ed6b7311d1414dd4a847adc7644c836cc817857ba15029ffca",
+    "SERVER": "90c17c09befd87f38a54365e842693f8926c22dea43fa8dc17e989723c7444bb",
+    "FRONTEND": "1c84aae3d2ff2590553d9893665779d8d60c91cc805f21968e9aed00ea9c3b49",
+    "NATIVE": "1ef8cc6dd7c5b5060cd0b2647b4565091daa3cbd69571cc9c88e4a22f397fdb0",
+    "PROMPT": "630d1d36884b0951281a29d5d1ba15c9676669689393285ad81be0f316462ca2"
+  },
+  "scope": "REAL_DRIVERS_WITH_SYNTHETIC_COMPILERS_NATIVE; ACTUAL_18_PROMPT_LOADER; NO_APPLICATION_DATABASE_NETWORK",
+  "files": [
+    {
+      "file": "source_review/R17B-Verification-README.md",
+      "sha256": "d1576a7e3da99ed09b38ffcf286cb1f15f607e77827e44a2509f3214c0e0d37d",
+      "bytes": 3334
+    },
+    {
+      "file": "source_review/build-fresh-candidate-command-r17b.py",
+      "sha256": "aa4f07c5d63132e464cd5346881fdb5ec18d57e07040ab195ea37abbde7467f1",
+      "bytes": 1484
+    },
+    {
+      "file": "source_review/fresh-candidate-body-r17b.mjs",
+      "sha256": "d9373de711af10c6e91971b0d278ad1e10f6e962652db177e48569f808c98802",
+      "bytes": 27178
+    },
+    {
+      "file": "source_review/fresh-candidate-driver-r17b.mjs",
+      "sha256": "d8aa5018d3c1c5431cd5dc7f5e012b36f4ebef0bbe60aca5be99a95abbb66002",
+      "bytes": 170030
+    },
+    {
+      "file": "source_review/frontend-build-runner-r17b.mjs",
+      "sha256": "1c84aae3d2ff2590553d9893665779d8d60c91cc805f21968e9aed00ea9c3b49",
+      "bytes": 14316
+    },
+    {
+      "file": "source_review/native-candidate-runner-r17b.mjs",
+      "sha256": "1ef8cc6dd7c5b5060cd0b2647b4565091daa3cbd69571cc9c88e4a22f397fdb0",
+      "bytes": 9368
+    },
+    {
+      "file": "source_review/r17a-user-result-observation.json",
+      "sha256": "06a964fbb369d0b8f04b496d2fcaec8f936064be40d49a31aac770578ca4a876",
+      "bytes": 1344
+    },
+    {
+      "file": "source_review/r17b-driver-fixture-results.json",
+      "sha256": "a85e331b511eddec61ec3ede62481fab22f3d274ed8ff920102069a6da90b412",
+      "bytes": 4885
+    },
+    {
+      "file": "source_review/r17b-upstream-tailwind-LICENSE.txt",
+      "sha256": "60e0b68c0f35c078eef3a5d29419d0b03ff84ec1df9c3f9d6e39a519a5ae7985",
+      "bytes": 1071
+    },
+    {
+      "file": "source_review/r17b-upstream-tailwind-scanner-provenance.json",
+      "sha256": "ff3023101140d1f5e4e9550f1a388d4fec2fdeb15f76f0eb53af092ebed9868e",
+      "bytes": 897
+    },
+    {
+      "file": "source_review/r17b-upstream-tailwind-scanner-v4.3.0.rs",
+      "sha256": "349e1e1a24849656e44a034244a0dcf3df81f8129dab72f05e15e146cfc37de8",
+      "bytes": 31362
+    },
+    {
+      "file": "source_review/server-build-runner-r17b.mjs",
+      "sha256": "90c17c09befd87f38a54365e842693f8926c22dea43fa8dc17e989723c7444bb",
+      "bytes": 3095
+    },
+    {
+      "file": "source_review/test-fresh-candidate-r17b.py",
+      "sha256": "cfd993070d211c760bcd1ab27692a8562eecd81877eb0aa97ba36df9d196f25e",
+      "bytes": 15911
+    }
+  ]
+}

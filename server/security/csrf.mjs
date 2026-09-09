@@ -39,10 +39,63 @@ function timingSafeEq(a, b) {
   }
 }
 
+// Local auth endpoints use browser cookies, including refresh and logout.
+// Fetch Metadata and exact origin checks protect their same-origin web contract.
+export function isSameOriginAuthRequest(req) {
+  const headers = req.headers || {};
+  const site = headers["sec-fetch-site"];
+  if (site !== undefined && site !== "same-origin") return false;
+
+  const origin = headers.origin;
+  if (origin === undefined && site === "same-origin") return true;
+
+  const host = headers.host;
+  if (typeof host !== "string" || !host || /[\s\\/?#@]/.test(host)) return false;
+  if (req.protocol !== "https" && req.protocol !== "http") return false;
+  let target;
+  try {
+    target = new URL(req.protocol + "://" + host).origin;
+  } catch {
+    return false;
+  }
+
+  // A present but invalid Origin must never fall back to another header.
+  if (origin !== undefined) {
+    if (typeof origin !== "string") return false;
+    try {
+      const parsed = new URL(origin);
+      return (parsed.protocol === "https:" || parsed.protocol === "http:")
+        && parsed.origin === origin && parsed.origin === target;
+    } catch {
+      return false;
+    }
+  }
+
+  const referer = headers.referer;
+  if (typeof referer !== "string" || /[\u0000-\u0020\u007f\\]/.test(referer)) return false;
+  try {
+    const parsed = new URL(referer);
+    return (parsed.protocol === "https:" || parsed.protocol === "http:")
+      && !parsed.username && !parsed.password && parsed.origin === target;
+  } catch {
+    return false;
+  }
+}
+
 export function csrfProtection(req, res, next) {
   if (SAFE_METHODS.has(req.method)) return next();
+  // Match Express's case-insensitive auth mount before generic path/header exemptions.
+  if (/^\/api\/auth(?:\/|$)/i.test(req.path)) {
+    if (!isSameOriginAuthRequest(req)) {
+      res.set("Cache-Control", "no-store");
+      return res.status(403).json({
+        error: "Same-origin authentication request required",
+        code: "AUTH_ORIGIN_REQUIRED",
+      });
+    }
+    return next();
+  }
   if (!req.path.startsWith("/api/")) return next();
-  if (req.path.startsWith("/api/auth/")) return next();
   // MMHB Buddy Engine: stateless healing surface (no DB writes, no auth state).
   if (req.path === "/api/buddy") return next();
   // Public/bootstrap entry points that must work without an established session:

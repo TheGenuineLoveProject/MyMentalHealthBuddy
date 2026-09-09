@@ -1,0 +1,119 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PromptSpec",
+  "description": "Prompt-OS v8.0 Canonical Prompt Module Schema",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "domain",
+    "ownerEngine",
+    "purpose",
+    "inputs",
+    "constraints",
+    "process",
+    "outputSchema",
+    "evaluationCriteria",
+    "safetyRules",
+    "dependencies",
+    "version",
+    "status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^PROMPT_[A-Z0-9_]+$",
+      "description": "Unique prompt module identifier"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-readable prompt name"
+    },
+    "domain": {
+      "type": "string",
+      "enum": [
+        "HEALING_DOMAIN",
+        "BUSINESS_DOMAIN",
+        "PLATFORM_DOMAIN",
+        "DESIGN_DOMAIN",
+        "RESEARCH_DOMAIN",
+        "CROSS_DOMAIN"
+      ],
+      "description": "Primary domain classification"
+    },
+    "ownerEngine": {
+      "type": "string",
+      "description": "Engine responsible for this prompt"
+    },
+    "purpose": {
+      "type": "string",
+      "minLength": 10,
+      "description": "Clear statement of what this prompt accomplishes"
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "type", "description"],
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string" },
+          "description": { "type": "string" },
+          "required": { "type": "boolean", "default": true }
+        }
+      },
+      "description": "Required and optional inputs"
+    },
+    "constraints": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Hard constraints and boundary rules"
+    },
+    "process": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Ordered steps the prompt follows"
+    },
+    "outputSchema": {
+      "type": "object",
+      "description": "Shape of the expected output"
+    },
+    "evaluationCriteria": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "How to evaluate prompt output quality"
+    },
+    "safetyRules": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Safety constraints specific to this prompt"
+    },
+    "dependencies": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Other prompt modules or systems this depends on"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["DRAFT", "PROPOSED", "CANONICAL", "DEPRECATED", "ARCHIVED"],
+      "description": "Lifecycle status"
+    },
+    "failureModes": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Known failure modes and mitigations"
+    },
+    "verificationCriteria": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "How to verify the prompt worked correctly"
+    }
+  },
+  "additionalProperties": false
+}

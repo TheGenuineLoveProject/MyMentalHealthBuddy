@@ -1,0 +1,66 @@
+{
+  "reviewedOn": "2026-09-09",
+  "source": "PRIMARY_UPSTREAM_TAGGED_CODE_VIA_GITHUB_CONNECTOR",
+  "snapshots": [
+    {
+      "file": "source_review/r17a-upstream-rolldown-plugin-context-v1.0.3.ts",
+      "sha256": "ecabf416a1d916049d863352050d4564390df217a57cad291f055e4b89517084",
+      "bytes": 16065,
+      "url": "https://github.com/rolldown/rolldown/blob/v1.0.3/packages/rolldown/src/plugin/plugin-context.ts"
+    },
+    {
+      "file": "source_review/r17a-upstream-rolldown-native-context-v1.0.3.rs",
+      "sha256": "57dcd1012175b146b757aa5275b46c0f1b778c449472126027e11d2c3e5dc725",
+      "bytes": 8013,
+      "url": "https://github.com/rolldown/rolldown/blob/v1.0.3/crates/rolldown_plugin/src/plugin_context/native_plugin_context.rs"
+    },
+    {
+      "file": "source_review/r17a-upstream-rolldown-runtime-v1.0.3.rs",
+      "sha256": "97347fda247290b0770b44627cd425e7014bb9e311fad222a452ac2dbf5846c0",
+      "bytes": 2212,
+      "url": "https://github.com/rolldown/rolldown/blob/v1.0.3/crates/rolldown_common/src/module_loader/runtime_module_brief.rs"
+    },
+    {
+      "file": "source_review/r17a-upstream-vite-module-preload-v8.0.16.ts",
+      "sha256": "eaccbf1488007f9dc55d863d837ca55eb7975e45f2607349071d949391b64395",
+      "bytes": 1042,
+      "url": "https://github.com/vitejs/vite/blob/v8.0.16/packages/vite/src/node/plugins/modulePreloadPolyfill.ts"
+    },
+    {
+      "file": "source_review/r17a-upstream-vite-resolve-v8.0.16.ts",
+      "sha256": "7013245413c01b121656158a90652596bd80bf240c382fa2c5071cc2542da46f",
+      "bytes": 37206,
+      "url": "https://github.com/vitejs/vite/blob/v8.0.16/packages/vite/src/node/plugins/resolve.ts"
+    },
+    {
+      "file": "source_review/r17a-upstream-rolldown-vite-resolve-v1.0.3.rs",
+      "sha256": "870eb89ba06cb3d0f0774b68fec1bfc1d28cb5f546a27f7c5b8ff9775002db83",
+      "bytes": 21561,
+      "url": "https://github.com/rolldown/rolldown/blob/v1.0.3/crates/rolldown_plugin_vite_resolve/src/vite_resolve_plugin.rs"
+    },
+    {
+      "file": "source_review/r17a-upstream-rolldown-vite-resolver-v1.0.3.rs",
+      "sha256": "5f9e1b93d4ddb77a658bdc7b3d2e25953a7b8d4fd4ea8a511ae82c9d39cf9d06",
+      "bytes": 17721,
+      "url": "https://github.com/rolldown/rolldown/blob/v1.0.3/crates/rolldown_plugin_vite_resolve/src/resolver.rs"
+    },
+    {
+      "file": "source_review/r17a-upstream-rolldown-vite-utils-v1.0.3.rs",
+      "sha256": "df87c6d67f78ded081331df3088c2a28a3977b6d7acab79b894c773941a6f7b4",
+      "bytes": 2172,
+      "url": "https://github.com/rolldown/rolldown/blob/v1.0.3/crates/rolldown_plugin_vite_resolve/src/utils.rs"
+    },
+    {
+      "file": "source_review/r17a-upstream-vite-LICENSE.txt",
+      "sha256": "e01e8b64570c0ebabbac7792ada3e84a4bd80e4f98b0de4dd60db6d69d1a6227",
+      "bytes": 1102,
+      "url": "https://github.com/vitejs/vite/blob/v8.0.16/LICENSE"
+    },
+    {
+      "file": "source_review/r17a-upstream-rolldown-LICENSE.txt",
+      "sha256": "3b952c73f89b174e0ac02e660437f4ee1f7a9260f3b08922fc75ff8ad26d33b5",
+      "bytes": 1303,
+      "url": "https://github.com/rolldown/rolldown/blob/v1.0.3/LICENSE"
+    }
+  ]
+}

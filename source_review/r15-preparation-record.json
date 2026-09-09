@@ -1,0 +1,29 @@
+{
+  "project": "MyMentalHealthBuddy",
+  "command": "MMHB-PROMPT-ASSETS-R15.txt",
+  "commandSha256": "74d0bd350784c6e1dbdcd02afef746ecd63029a07e097e42466d8b69825ac75f",
+  "commandBytes": 76969,
+  "driverSha256": "c2dc49f8a5e9df138ee913be5d9bdb53e61bc196ebccf2809680b4ae361c566d",
+  "loaderSha256": "630d1d36884b0951281a29d5d1ba15c9676669689393285ad81be0f316462ca2",
+  "policySha256": "517df8a9ce25a31ea5cbe13182a93d8ab32cefc1371654e6cb649a3d3fac4c03",
+  "checks": {
+    "nodeSyntax": "PASS",
+    "bashSyntax": "PASS",
+    "embeddedDriver": "PASS",
+    "embeddedLoader": "PASS",
+    "embeddedPolicy": "PASS",
+    "unchangedBaselinePins": 41,
+    "loaderFixtures": 19,
+    "driverFixtures": 18,
+    "independentReview": "PASS_AFTER_SPECIAL_MODE_PREFLIGHT_FIX"
+  },
+  "expectedReplitOutcome": {
+    "promptAssetsAdded": 22,
+    "sourceContentEdits": 6,
+    "candidateFiles": 625,
+    "candidateBytes": 40501647,
+    "status": "PROMPT_ASSETS_REPAIRED_AND_LOAD_PASS_NOT_RELEASE"
+  },
+  "actualReplitExecution": "PENDING",
+  "scope": "LOCAL_FIXTURES_EXECUTE_EXACT_REVIEWED_PROMPT_MODULE_WITH_TEMPORARY_ASSETS_NOT_APPLICATION_OR_MODEL"
+}

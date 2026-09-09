@@ -1,0 +1,18 @@
+[
+  {
+    "file": "source_review/r14-external-node-postgres-packages-pg-esm-index.mjs",
+    "gitBlobSha": "587d80c1e57bebf7e8f886c510973c325a84de3e",
+    "path": "packages/pg/esm/index.mjs",
+    "ref": "pg@8.21.0",
+    "repository": "brianc/node-postgres",
+    "url": "https://github.com/brianc/node-postgres/blob/pg@8.21.0/packages/pg/esm/index.mjs"
+  },
+  {
+    "file": "source_review/r14-external-node-postgres-packages-pg-lib-native-client.js",
+    "gitBlobSha": "fa17d9f6541cacc41694b099a15bc30cd18c1659",
+    "path": "packages/pg/lib/native/client.js",
+    "ref": "pg@8.21.0",
+    "repository": "brianc/node-postgres",
+    "url": "https://github.com/brianc/node-postgres/blob/pg@8.21.0/packages/pg/lib/native/client.js"
+  }
+]

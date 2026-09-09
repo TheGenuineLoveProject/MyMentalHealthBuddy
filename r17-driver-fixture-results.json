@@ -1,0 +1,115 @@
+{
+  "status": "PASS",
+  "checks": 18,
+  "scope": "SYNTHETIC_PACKAGE_AND_COMPILER_WORKFLOW; ACTUAL_PROMPT_LOADER; NO_APPLICATION_DATABASE_OR_NETWORK",
+  "results": [
+    {
+      "case": "success",
+      "result": "PASS",
+      "expectedGate": null,
+      "actualStatus": "FRESH_CANDIDATE_BUILD_AND_SMOKE_PASS_NOT_RELEASE"
+    },
+    {
+      "case": "missing_prior",
+      "result": "PASS",
+      "expectedGate": "ENOENT",
+      "actualStatus": "FRESH_CANDIDATE_FAILED"
+    },
+    {
+      "case": "prior_failed",
+      "result": "PASS",
+      "expectedGate": "R16E_PASS_REQUIRED",
+      "actualStatus": "FRESH_CANDIDATE_FAILED"
+    },
+    {
+      "case": "lock_drift",
+      "result": "PASS",
+      "expectedGate": "R16E_MANIFEST_DRIFT",
+      "actualStatus": "FRESH_CANDIDATE_FAILED"
+    },
+    {
+      "case": "tree_drift",
+      "result": "PASS",
+      "expectedGate": "R16E_INSTALLED_TREE_DRIFT",
+      "actualStatus": "FRESH_CANDIDATE_FAILED"
+    },
+    {
+      "case": "receipt_mismatch",
+      "result": "PASS",
+      "expectedGate": "R16E_RECEIPT_MISMATCH",
+      "actualStatus": "FRESH_CANDIDATE_FAILED"
+    },
+    {
+      "case": "source_link",
+      "result": "PASS",
+      "expectedGate": "SOURCE_OR_OUTPUT_SYMLINK",
+      "actualStatus": "FRESH_CANDIDATE_FAILED"
+    },
+    {
+      "case": "missing_binary",
+      "result": "PASS",
+      "expectedGate": "CHILD_FAILED",
+      "actualStatus": "FRESH_CANDIDATE_FAILED"
+    },
+    {
+      "case": "server_error",
+      "result": "PASS",
+      "expectedGate": "CHILD_FAILED",
+      "actualStatus": "FRESH_CANDIDATE_FAILED"
+    },
+    {
+      "case": "nondeterministic",
+      "result": "PASS",
+      "expectedGate": "CHILD_FAILED",
+      "actualStatus": "FRESH_CANDIDATE_FAILED"
+    },
+    {
+      "case": "no_css",
+      "result": "PASS",
+      "expectedGate": "CHILD_FAILED",
+      "actualStatus": "FRESH_CANDIDATE_FAILED"
+    },
+    {
+      "case": "missing_ref",
+      "result": "PASS",
+      "expectedGate": "FRONTEND_LOCAL_REFERENCE_MISSING",
+      "actualStatus": "FRESH_CANDIDATE_FAILED"
+    },
+    {
+      "case": "graph_escape",
+      "result": "PASS",
+      "expectedGate": "GRAPH_INPUT_OUTSIDE_COPY",
+      "actualStatus": "FRESH_CANDIDATE_FAILED"
+    },
+    {
+      "case": "native_failure",
+      "result": "PASS",
+      "expectedGate": "CHILD_FAILED",
+      "actualStatus": "FRESH_CANDIDATE_FAILED"
+    },
+    {
+      "case": "workspace_edit",
+      "result": "PASS",
+      "expectedGate": "WORKTREE_PRESERVATION",
+      "actualStatus": "FRESH_CANDIDATE_FAILED"
+    },
+    {
+      "case": "prior_edit",
+      "result": "PASS",
+      "expectedGate": "R16E_DEPENDENCIES_CHANGED",
+      "actualStatus": "FRESH_CANDIDATE_FAILED"
+    },
+    {
+      "case": "copy_edit",
+      "result": "PASS",
+      "expectedGate": "BUILD_DEPENDENCIES_CHANGED",
+      "actualStatus": "FRESH_CANDIDATE_FAILED"
+    },
+    {
+      "case": "timeout",
+      "result": "PASS",
+      "expectedGate": "CHILD_FAILED",
+      "actualStatus": "FRESH_CANDIDATE_FAILED"
+    }
+  ]
+}

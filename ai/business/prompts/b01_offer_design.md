@@ -1,7 +1,7 @@
 # b01 — Offer Design
 
 ## Purpose
-Design or refine a single offer (product, plan, service) for The Genuine Love Project that is mission-aligned, clearly priced, and ethically positioned.
+Design or refine a single offer (product, plan, service) for MyMentalHealthBuddy that is mission-aligned, clearly priced, and ethically positioned.
 
 ## Output Contract
 1. **Offer Name** (1 line, plain English).

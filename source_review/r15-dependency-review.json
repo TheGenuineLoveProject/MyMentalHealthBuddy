@@ -1,0 +1,86 @@
+{
+  "project": "MyMentalHealthBuddy",
+  "scope": "PUBLIC_PRIMARY_SOURCE_REVIEW_NO_PROJECT_OR_DEPENDENCY_EXECUTION",
+  "pgNative": {
+    "currentR14Sha256": "9fe2f45918152531b1e76ff4cf54ff754fcd9651d85cfb997efd450a97d55917",
+    "publicSourceMatched": true,
+    "classification": "PG_NATIVE_REQUIRED_WHEN_NATIVE_CLIENT_MODULE_IS_LOADED",
+    "conditions": [
+      "Top-level pg-native require is wrapped but its error is rethrown.",
+      "Default JavaScript pg use and lazy native behavior are controlled by the separate already-R14-matched lib/index.js.",
+      "No application-wide native getter, force-native flag, or runtime reachability proof is made."
+    ]
+  },
+  "resend": {
+    "installed": "6.24.0",
+    "rootLocked": "6.22.1",
+    "hiddenLocked": "6.24.0",
+    "installedDistributionReview": "OPEN",
+    "publicSourceVersion": "v6.24.0",
+    "upstreamCondition": "Email and batch handlers render only for a truthy react payload; render uses dynamic import of @react-email/render.",
+    "limitation": "Reviewed TypeScript source is not installed distribution byte evidence.",
+    "fetchAttempts": [
+      {
+        "url": "https://github.com/resend/resend-node/blob/v6.24.0/dist/index.mjs",
+        "result": "GITHUB_404"
+      },
+      {
+        "url": "https://unpkg.com/resend@6.24.0/dist/index.mjs",
+        "result": "WEB_SAFE_OPEN_NONRETRYABLE"
+      },
+      {
+        "url": "https://cdn.jsdelivr.net/npm/resend@6.24.0/dist/index.cjs",
+        "result": "WEB_SAFE_OPEN_NONRETRYABLE"
+      }
+    ]
+  },
+  "npmMetadata": {
+    "classification": "DEPENDENCY_OWN_DEVDEPENDENCIES_OMITTED_BY_SHRINKWRAP_FOR_NON_TOP_NODES",
+    "source": "workspaces/arborist/lib/shrinkwrap.js",
+    "condition": "node.isTop && node.package.devDependencies",
+    "impact": "A false package-versus-lock devDependencies equality alone is not evidence of runtime dependency damage or a reason to install upstream development dependencies."
+  },
+  "sourceIndex": [
+    {
+      "localPath": "source_review/r15-pg-8.23.0-native-client.js",
+      "sourceURL": "https://github.com/brianc/node-postgres/blob/pg@8.23.0/packages/pg/lib/native/client.js",
+      "gitBlobSha1": "d305713d64fdc197575ab1811cea7333fa35567b",
+      "workspacePath": "node_modules/pg/lib/native/client.js",
+      "currentSha256": "9fe2f45918152531b1e76ff4cf54ff754fcd9651d85cfb997efd450a97d55917",
+      "currentBytes": 11086,
+      "sha256": "9fe2f45918152531b1e76ff4cf54ff754fcd9651d85cfb997efd450a97d55917",
+      "bytes": 11086
+    },
+    {
+      "localPath": "source_review/r15-resend-6.24.0-render.ts",
+      "sourceURL": "https://github.com/resend/resend-node/blob/v6.24.0/src/render.ts",
+      "gitBlobSha1": "424025e333aae2f04c00b9b1ea2a12a31222b726",
+      "sha256": "9b1f660e960c30c4e7b9ce669fbaa4d5fcb963c429368bc4fd944eca67834655",
+      "bytes": 363
+    },
+    {
+      "localPath": "source_review/r15-resend-6.24.0-emails.ts",
+      "sourceURL": "https://github.com/resend/resend-node/blob/v6.24.0/src/emails/emails.ts",
+      "gitBlobSha1": "ad6141cc08263d45028479d538a6186d1ad2855f",
+      "sha256": "f34e652ed9158d7790d60e4924e9a57b8f1f13707127182763e7fac976e79e53",
+      "bytes": 4324
+    },
+    {
+      "localPath": "source_review/r15-resend-6.24.0-batch.ts",
+      "sourceURL": "https://github.com/resend/resend-node/blob/v6.24.0/src/batch/batch.ts",
+      "gitBlobSha1": "777f328c55f935a8e3e764f9ad18d62fe9efe1f3",
+      "sha256": "917bcd37eb10367fa0b34f392b16211afdef58132a61246e4081d55d38380356",
+      "bytes": 1425
+    },
+    {
+      "localPath": "source_review/r15-npm-shrinkwrap.js",
+      "sourceURL": "https://github.com/npm/cli/blob/latest/workspaces/arborist/lib/shrinkwrap.js",
+      "gitBlobSha1": "19c2c952dc7f7ee94540af8c4149923eaf719433",
+      "sha256": "569835213919b111b06505b4eee8f208dd30b7a4e2eede327d60b71ffcb63b51",
+      "bytes": 42153
+    }
+  ],
+  "runtimeExecuted": false,
+  "networkToMMHB": false,
+  "databaseAccess": false
+}

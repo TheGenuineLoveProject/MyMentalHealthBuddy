@@ -1,0 +1,31 @@
+{
+  "command": {
+    "file": "MMHB-RELEASE-ASSEMBLY-R13.txt",
+    "sha256": "e44470397f4ef416c082fe2a30e5ebc7d6a65084e6b61ed2003def3fd6f89345",
+    "bytes": 40760
+  },
+  "parentSha256": "8942244c8adeccef84a0112e4c2e019729a7fa520abdd7278d156888802917b9",
+  "nativeRunnerSha256": "0b1ff6782fccbd158cb54c3c88267e7d9035222dc0a6547fac862ef130ce8053",
+  "shellSyntax": "PASS",
+  "parentSyntax": "PASS",
+  "nativeRunnerSyntax": "PASS",
+  "embeddedNativeIdentity": "PASS",
+  "actualReplitExecution": "PENDING",
+  "applicationStarted": false,
+  "databaseExecuted": false,
+  "deployed": false,
+  "baselinePins": {
+    "count": 41,
+    "unchangedFromR12A": true
+  },
+  "parentFixtures": {
+    "passed": 42,
+    "scope": "ACTUAL_PARENT_WITH_SYNTHETIC_ARTIFACTS_AND_INERT_NATIVE_CHILD"
+  },
+  "nativeRunnerFixtures": {
+    "passed": 28,
+    "scope": "INERT_CONTROL_FLOW_NOT_NATIVE_ABI"
+  },
+  "independentReview": "PASS; safe native failure phase/code propagation repaired and reviewed",
+  "commandEmbeddedParent": "IDENTICAL"
+}

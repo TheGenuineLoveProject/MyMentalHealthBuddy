@@ -1,0 +1,50 @@
+{
+  "project": "MyMentalHealthBuddy",
+  "package": "resend",
+  "version": "6.22.1",
+  "retrievedAt": "2026-09-09T08:34:09.795452+00:00",
+  "metadataURL": "https://registry.npmjs.org/resend/6.22.1",
+  "archiveURL": "https://registry.npmjs.org/resend/-/resend-6.22.1.tgz",
+  "registryMetadataSha256": "b67b0ed6f2a92fa089c7fa38f9e0731cc40c56302a09072cac0a4e0d0352e83d",
+  "archiveBytes": 50147,
+  "archiveSha256": "74b9554e2d48c913a79647dbd7661cf45fd88d232c37dc220f4b8c91f776e7b7",
+  "archiveSha1": "b72b4b8b7da8030c61e1aaef3e47487c862db398",
+  "archiveIntegrity": "sha512-VqYhB6zqsifujJfZsiTKBVcZaKih0XitdXHCte4x4d7KH4D0QvPx5GvqcypCn2y64tK0C/6OskpQvsaSJaHHBw==",
+  "archiveMatchesRegistryIntegrity": true,
+  "archiveMatchesRegistryShasum": true,
+  "files": [
+    {
+      "archivePath": "package/dist/index.mjs",
+      "localPath": "source_review/r18-resend-6.22.1-index.mjs",
+      "bytes": 41321,
+      "sha256": "3b3514f7301900eb8614b05ef03d563b66e15d0b5b640a179fe8f7879553928c"
+    },
+    {
+      "archivePath": "package/dist/index.cjs",
+      "localPath": "source_review/r18-resend-6.22.1-index.cjs",
+      "bytes": 42455,
+      "sha256": "66659b52d6b3350895d34b8bc290ccf07e4ceb7a0f0625d1a70f3850baf11806"
+    },
+    {
+      "archivePath": "package/package.json",
+      "localPath": "source_review/r18-resend-6.22.1-package.json",
+      "bytes": 2189,
+      "sha256": "fe631b2af35f2ff912c6f45af326a05a7484fc03995c562d04bbc95400ef5304"
+    },
+    {
+      "archivePath": "package/LICENSE",
+      "localPath": "source_review/r18-resend-6.22.1-LICENSE.txt",
+      "bytes": 1076,
+      "sha256": "299819a2f2d6ddefaf47dfd684242dd683f9d17c2d29edce08ba777b4c264a65"
+    }
+  ],
+  "packageInstalled": false,
+  "packageCodeExecuted": false,
+  "scope": "Exact published distribution bytes; equality with Replit retained files remains to be checked. Registry-advertised digest agreement is not an independent publisher provenance or vulnerability audit.",
+  "phase": "DOWNLOAD_AND_EXTRACTION_ONLY",
+  "subsequentSyntheticSdkExecution": {
+    "review": "source_review/r18-resend-6.22.1-review.md",
+    "fixtureResults": "source_review/r18-resend-smoke-fixture-results.json",
+    "scope": "Separate exact CJS synthetic branch test; the packageCodeExecuted=false field describes acquisition only."
+  }
+}

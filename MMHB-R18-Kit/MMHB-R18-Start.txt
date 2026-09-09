@@ -1,0 +1,52 @@
+MyMentalHealthBuddy — R18 next step
+
+R17C result reviewed: all 42 historical source_review additions match the
+previously delivered R17B kit. The 97 later differences also match delivered
+R17C materials. The writer remains unknown; the original R17B failed receipt
+is preserved. All 63 pins, 5,192 recorded source files, 625 candidate files,
+and 82,136 retained input rows matched in your supplied R17C output.
+
+1. Download MMHB-RUNTIME-CONTRACT-R18.txt.
+2. Upload ONLY that TXT into MyMentalHealthBuddy's Replit workspace, beside
+   package.json. Keep the optional source ZIP and ledger on your computer.
+3. Open Replit Shell. Paste this exact command (no Replit AI required):
+
+cd /home/runner/workspace &&
+printf '%s\n' 'c7d1a439e6ffb436877f0081ad376d947d057de25fe515912771667c4110eb7a  MMHB-RUNTIME-CONTRACT-R18.txt' |
+sha256sum -c - &&
+env -u BASH_ENV bash --noprofile --norc MMHB-RUNTIME-CONTRACT-R18.txt
+
+4. Let it finish before editing or uploading more files. Paste the complete
+   output back into this ChatGPT conversation, including STATUS and report path.
+
+What it does: reuses the retained R17B candidate; accounts for the exact42
+review additions; checks current source/pins; joins saved compiler metadata
+to retained bytes; checks selected packages and runtime assets; runs reviewed
+WebSocket/PostgreSQL helpers and Resend SDK branches with synthetic transports.
+Full evidence is saved in a new private r18 report directory.
+
+It does not rebuild, install packages, modify source, start the application,
+connect to a database, send email, call AI, commit, push, or deploy.
+The Node VM flag enables only these reviewed synthetic tests. No unknown
+dependency source is evaluated, and no environment values are printed.
+
+Result meanings:
+RETAINED_RUNTIME_CONTRACT_CHECKS_PASS_NOT_RELEASE = listed checks passed;
+the application and deployed release are still unproven.
+RUNTIME_CONTRACT_REVIEW_REQUIRED = collection finished, but selected bytes or
+package metadata need review. Return output; no blind package installation.
+RUNTIME_CONTRACT_FAILED = a prerequisite/test/preservation check failed.
+Return output so the exact failed gate can be addressed.
+
+Local verification: 11 driver fixtures; 13 graph-policy tests; 8 helper
+tests (11 synthetic behavior cases/116 assertions); 20 Resend branch cases,
+3 source/type refusals and missing-VM-flag refusal. Bash/Node syntax checked.
+Fixtures use a genuine temporary Git repository and synthetic project/build
+records; this is not a run against your live Replit application.
+
+Release state: build and retained-candidate integrity qualified within their
+reported scopes; runtime, user flows and deployment remain unproven.
+Planning range: 27–61 engineering hours for a first working release, low
+confidence and assuming substantial core features already exist. Expansion
+of the library/calendar/social/provider features and external waiting are
+excluded. Allow roughly 5–15 minutes for your upload/run/return step.

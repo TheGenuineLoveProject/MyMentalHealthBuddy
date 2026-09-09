@@ -1,0 +1,38 @@
+PASS valid registry and approved assets
+PASS current reviewed healing and business registry shapes
+PASS malformed JSON never emits raw input
+PASS nonobject registry rejected
+PASS null registry absent
+PASS oversized registry bounded
+PASS engine mismatch
+PASS invalid caller engine redacted
+PASS traversal prompt ID rejected and redacted
+PASS syntactically valid unlisted ID rejected and redacted
+PASS duplicate ID is not silently collapsed
+PASS engine prefix checked before approval
+PASS missing approved prompt asset reported
+PASS empty prompt asset reported
+PASS symlink metadata is not considered an available file
+PASS missing system asset reported
+PASS system path must be caller approved
+PASS malformed approved path cannot enable traversal
+PASS registry version redacts unknown suffix
+PASS audience duplicates invalid
+PASS unknown audience redacted
+PASS missing audience array invalid
+PASS prompt count over bound returns no prompt data
+PASS invalid risk redacted
+PASS version mismatch preserved independently of matching dependency maps
+PASS dependency value changes detected without emitting values
+PASS matching hidden lock recognized
+PASS official registry and sha512 metadata only
+PASS credentialed registry URL never output or considered official
+PASS registry query and lookalike hostname rejected
+PASS unsafe package version omitted
+PASS script commands and unknown script names omitted
+PASS bin path and names omitted
+PASS malformed package and invalid dependency map comparison stays unknown
+PASS null package is absent without invented metadata
+PASS semver prerelease is narrowly accepted
+PASS helper has no imports or IO
+FIXTURES=37 RESULT=PASS

@@ -1,0 +1,340 @@
+{
+  "scope": "SYNTHETIC_LOCK_AND_PRIVATE_FILESYSTEM_FIXTURES_NO_NPM_NETWORK_OR_PACKAGE_EXECUTION",
+  "total": 83,
+  "passed": 83,
+  "failed": 0,
+  "results": [
+    {
+      "name": "R16D rejects published workspace metadata; R16E preserves it",
+      "status": "PASS"
+    },
+    {
+      "name": "nested published dependency workspace metadata is inert",
+      "status": "PASS"
+    },
+    {
+      "name": "unused dependency workspace field is recorded without evaluating patterns",
+      "status": "PASS"
+    },
+    {
+      "name": "dependency workspace metadata never permits manifest workspace",
+      "status": "PASS"
+    },
+    {
+      "name": "dependency workspace metadata never permits lock root workspace",
+      "status": "PASS"
+    },
+    {
+      "name": "dependency workspace metadata never permits actual linked dependency",
+      "status": "PASS"
+    },
+    {
+      "name": "dependency workspace metadata never permits local dependency edge",
+      "status": "PASS"
+    },
+    {
+      "name": "dependency workspace metadata never permits workspace dependency protocol",
+      "status": "PASS"
+    },
+    {
+      "name": "dependency workspace metadata never permits non-node_modules package path",
+      "status": "PASS"
+    },
+    {
+      "name": "dependency workspace metadata never permits missing archive checksum",
+      "status": "PASS"
+    },
+    {
+      "name": "dependency workspace metadata never permits archive credential",
+      "status": "PASS"
+    },
+    {
+      "name": "six bundled members omit independent archive fields and require absent parent",
+      "status": "PASS"
+    },
+    {
+      "name": "bundle exclusion follows parent even when child optional flag is omitted",
+      "status": "PASS"
+    },
+    {
+      "name": "reachable hoisted and nested bundle dependencies remain contained",
+      "status": "PASS"
+    },
+    {
+      "name": "reject bundled exemption: unbundled child",
+      "status": "PASS"
+    },
+    {
+      "name": "reject bundled exemption: independent child URL",
+      "status": "PASS"
+    },
+    {
+      "name": "reject bundled exemption: independent child checksum",
+      "status": "PASS"
+    },
+    {
+      "name": "reject bundled exemption: null child checksum",
+      "status": "PASS"
+    },
+    {
+      "name": "reject bundled exemption: aliased child identity",
+      "status": "PASS"
+    },
+    {
+      "name": "reject bundled exemption: malformed child version",
+      "status": "PASS"
+    },
+    {
+      "name": "reject bundled exemption: invalid child optional flag",
+      "status": "PASS"
+    },
+    {
+      "name": "reject bundled exemption: linked child",
+      "status": "PASS"
+    },
+    {
+      "name": "reject bundled exemption: nested shrinkwrap child",
+      "status": "PASS"
+    },
+    {
+      "name": "reject bundled exemption: nested bundle declaration",
+      "status": "PASS"
+    },
+    {
+      "name": "reject bundled exemption: local child dependency",
+      "status": "PASS"
+    },
+    {
+      "name": "reject bundled exemption: unreachable bundled child",
+      "status": "PASS"
+    },
+    {
+      "name": "reject bundled exemption: missing physical bundle ancestor",
+      "status": "PASS"
+    },
+    {
+      "name": "reject bundled exemption: required parent",
+      "status": "PASS"
+    },
+    {
+      "name": "reject bundled exemption: nonexcluded parent CPU",
+      "status": "PASS"
+    },
+    {
+      "name": "reject bundled exemption: missing parent checksum",
+      "status": "PASS"
+    },
+    {
+      "name": "reject bundled exemption: aliased parent identity",
+      "status": "PASS"
+    },
+    {
+      "name": "reject bundled exemption: bundle flag outside parent",
+      "status": "PASS"
+    },
+    {
+      "name": "reject present excluded parent with bundled child contents",
+      "status": "PASS"
+    },
+    {
+      "name": "reject hidden bundle marker disagreement",
+      "status": "PASS"
+    },
+    {
+      "name": "valid cross-platform v3 lock with selected pinned versions",
+      "status": "PASS"
+    },
+    {
+      "name": "accept registry semver alternatives with insiders peer tag",
+      "status": "PASS"
+    },
+    {
+      "name": "reject general package bundled dependency declaration",
+      "status": "PASS"
+    },
+    {
+      "name": "reject root bundled dependency declaration",
+      "status": "PASS"
+    },
+    {
+      "name": "reject WASI bundle exception with wrong CPU metadata",
+      "status": "PASS"
+    },
+    {
+      "name": "reject lockfile v2",
+      "status": "PASS"
+    },
+    {
+      "name": "reject another project root name",
+      "status": "PASS"
+    },
+    {
+      "name": "reject root dependency-map disagreement",
+      "status": "PASS"
+    },
+    {
+      "name": "reject root version disagreement",
+      "status": "PASS"
+    },
+    {
+      "name": "reject React plugin target drift",
+      "status": "PASS"
+    },
+    {
+      "name": "reject Resend target drift",
+      "status": "PASS"
+    },
+    {
+      "name": "reject package traversal path",
+      "status": "PASS"
+    },
+    {
+      "name": "reject credential-bearing archive URL",
+      "status": "PASS"
+    },
+    {
+      "name": "reject custom registry archive URL",
+      "status": "PASS"
+    },
+    {
+      "name": "reject archive query",
+      "status": "PASS"
+    },
+    {
+      "name": "reject archive fragment",
+      "status": "PASS"
+    },
+    {
+      "name": "reject HTTP archive transport",
+      "status": "PASS"
+    },
+    {
+      "name": "reject noncanonical or short SHA-512 integrity",
+      "status": "PASS"
+    },
+    {
+      "name": "reject missing archive integrity",
+      "status": "PASS"
+    },
+    {
+      "name": "reject local dependency spec",
+      "status": "PASS"
+    },
+    {
+      "name": "reject git dependency spec",
+      "status": "PASS"
+    },
+    {
+      "name": "reject direct archive dependency spec",
+      "status": "PASS"
+    },
+    {
+      "name": "reject nested package local dependency spec",
+      "status": "PASS"
+    },
+    {
+      "name": "reject root workspaces",
+      "status": "PASS"
+    },
+    {
+      "name": "reject lock link entry",
+      "status": "PASS"
+    },
+    {
+      "name": "reject lock bundle entry",
+      "status": "PASS"
+    },
+    {
+      "name": "reject package shrinkwrap flag",
+      "status": "PASS"
+    },
+    {
+      "name": "reject unsafe nested override",
+      "status": "PASS"
+    },
+    {
+      "name": "inspect valid private install and report optional platform omission",
+      "status": "PASS"
+    },
+    {
+      "name": "reject absent devOptional-only package when development dependencies included",
+      "status": "PASS"
+    },
+    {
+      "name": "accept regular es5-ext prototype path containing hash character",
+      "status": "PASS"
+    },
+    {
+      "name": "report optional archive retained in hidden lock but absent on platform",
+      "status": "PASS"
+    },
+    {
+      "name": "accept npm alias with explicit locked actual package identity",
+      "status": "PASS"
+    },
+    {
+      "name": "reject selected package with wrong name and matching version",
+      "status": "PASS"
+    },
+    {
+      "name": "permit exact optional WASI bundle declaration only with directory absent",
+      "status": "PASS"
+    },
+    {
+      "name": "reject platform-excluded WASI package even if directory is empty",
+      "status": "PASS"
+    },
+    {
+      "name": "reject installed version mismatch",
+      "status": "PASS"
+    },
+    {
+      "name": "reject missing required package",
+      "status": "PASS"
+    },
+    {
+      "name": "reject missing selected build dependency",
+      "status": "PASS"
+    },
+    {
+      "name": "reject malformed installed metadata",
+      "status": "PASS"
+    },
+    {
+      "name": "reject missing hidden installation lock",
+      "status": "PASS"
+    },
+    {
+      "name": "reject hidden installed version mismatch",
+      "status": "PASS"
+    },
+    {
+      "name": "reject hidden unknown package",
+      "status": "PASS"
+    },
+    {
+      "name": "reject hidden missing installed entry",
+      "status": "PASS"
+    },
+    {
+      "name": "reject unlisted physical package",
+      "status": "PASS"
+    },
+    {
+      "name": "reject symlink escaping stage",
+      "status": "PASS"
+    },
+    {
+      "name": "reject directory symlink",
+      "status": "PASS"
+    },
+    {
+      "name": "reject dangling bin symlink",
+      "status": "PASS"
+    },
+    {
+      "name": "reject symlinked installed package.json",
+      "status": "PASS"
+    }
+  ]
+}

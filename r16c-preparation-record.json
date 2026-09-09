@@ -1,0 +1,138 @@
+{
+  "project": "MyMentalHealthBuddy",
+  "preparedDate": "2026-09-09",
+  "status": "R16C_PREPARED_LOCAL_FIXTURES_PASS_REPLIT_EXECUTION_PENDING",
+  "commandSha256": "9248295ac4f8adb7b7393497970a19027722c45e92f66a9f0289e047340d183b",
+  "qualification": {
+    "registryHelperCases": 47,
+    "actualDriverCases": 26,
+    "localNode": "v24.19.0",
+    "requiredReplitNode": "v24.13.0",
+    "bashSyntax": "PASS",
+    "nodeSyntax": "PASS",
+    "externalRegistryRequestsHere": 0,
+    "actualNpmInstallHere": false,
+    "applicationStartedHere": false
+  },
+  "userEvidence": {
+    "R16B": "ARCHIVE_URL_DIAGNOSTIC_COMPLETE_NOT_INSTALL",
+    "reportDirectory": "/home/runner/workspace/.mmhb-release-evidence/r16b-gHVOfI",
+    "observedFiles": 5,
+    "aggregateRejectionCount": "NOT_VISIBLE_IN_SUPPLIED_SCREENSHOTS",
+    "basis": "USER_SCREENSHOT_TRANSCRIPTION_NOT_REMOTE_REPORT_READ"
+  },
+  "scope": "PRIVATE_ARCHIVE_URL_RELOCATION_WITH_ORIGINAL_IDENTITY_AND_SHA512_THEN_PRIVATE_NPM_CI",
+  "releaseReady": false,
+  "files": [
+    {
+      "file": "MMHB-REGISTRY-LOCKED-DEPENDENCIES-R16C.txt",
+      "bytes": 104786,
+      "sha256": "9248295ac4f8adb7b7393497970a19027722c45e92f66a9f0289e047340d183b"
+    },
+    {
+      "file": "MMHB-Readiness-Ledger-2026-09-07.md",
+      "bytes": 119252,
+      "sha256": "d1e747e4aeb144075c8224387d7a58d9a28b0551af0ef85ba4e57c99e1dfab91"
+    },
+    {
+      "file": "source_review/R16C-Verification-README.md",
+      "bytes": 6476,
+      "sha256": "ebaa1bbf92931d3bda8ee7fd3c4bfb04f4ca352d05ed234e94f7c905bb954260"
+    },
+    {
+      "file": "source_review/registry-archive-repair-r16c.mjs",
+      "bytes": 14706,
+      "sha256": "f83f5a4974c1949f5aab9e2388bf6a4861abbfc8481c8a93c36e5f41c885f614"
+    },
+    {
+      "file": "source_review/locked-dependencies-prefix-r16c.mjs",
+      "bytes": 16567,
+      "sha256": "c2ccccde9fe82c98836065c19f5035bbf20f3dabdd67e351bc3ceab37901714c"
+    },
+    {
+      "file": "source_review/locked-dependencies-body-r16c.mjs",
+      "bytes": 19682,
+      "sha256": "ce5b9417838e375d0ff38aa1e51ad5c66f1853fa4b83e3d8d29ea283293b1e46"
+    },
+    {
+      "file": "source_review/locked-dependencies-driver-r16c.mjs",
+      "bytes": 104299,
+      "sha256": "8028b20debb8afc73a3dd940dbc1537762d1ff1b8b260c9c4b852f02314e95f5"
+    },
+    {
+      "file": "source_review/build-locked-dependencies-command-r16c.py",
+      "bytes": 9654,
+      "sha256": "ebda28eb167c801008de0e7e83a540f4f75fcb9039c6c3141176be828984e167"
+    },
+    {
+      "file": "source_review/make-r16c-driver-fixtures.py",
+      "bytes": 7231,
+      "sha256": "c8c411514fc0cab5f099e89e503e4ebb81af57a60627f2e4645c00b081c94be3"
+    },
+    {
+      "file": "source_review/test-registry-archive-repair-r16c.mjs",
+      "bytes": 15387,
+      "sha256": "424b017780dbc24ee68f52e7c786f380045e8ffbccd53f72ec7f191ec11f202b"
+    },
+    {
+      "file": "source_review/test-locked-dependencies-r16c.py",
+      "bytes": 25956,
+      "sha256": "e1475c932d18030acaf50054fb4c302ce6ec784496c2bc6ee2f29ffebdca7fbf"
+    },
+    {
+      "file": "source_review/r16c-registry-fixture-results.json",
+      "bytes": 4900,
+      "sha256": "01c6969a916bfbf348f06cbe2114a794e73fd17bc685b249c892c2cf844a87fe"
+    },
+    {
+      "file": "source_review/r16c-driver-fixture-results.json",
+      "bytes": 3541,
+      "sha256": "42d9d22391131d7487d50d052ee466365c9abffd363072c867033be1e67ec70a"
+    },
+    {
+      "file": "source_review/locked-dependencies-prefix-r16a.mjs",
+      "bytes": 16566,
+      "sha256": "f0e45dacd13dfeb9f653c976a6d2ae8298f89737e9412518a6678ab278c2df90"
+    },
+    {
+      "file": "source_review/locked-dependencies-body-r16a.mjs",
+      "bytes": 14947,
+      "sha256": "79f0a573cf4b1f86d8efc7aa279ec80f2924c0337e56826e7167dd66d29a04de"
+    },
+    {
+      "file": "source_review/test-locked-dependencies-r16a.py",
+      "bytes": 20992,
+      "sha256": "dde2ff9b533585e04e22555bd7d6679e80291fe994b423c1e0537779958c972d"
+    },
+    {
+      "file": "source_review/locked-dependency-policy-r16.mjs",
+      "bytes": 20843,
+      "sha256": "0d32a375e7f43b58a809f5f902e971d6030512729927b4f4f19668610c0f7404"
+    },
+    {
+      "file": "source_review/locked-npm-runner-r16.mjs",
+      "bytes": 15234,
+      "sha256": "6f28f812900febfc749e1779e73c23203cee089f1c0c160e61a794f450214c4f"
+    },
+    {
+      "file": "source_review/test-locked-dependency-policy-r16.mjs",
+      "bytes": 19934,
+      "sha256": "884dd40817e4db3e36a117ba512ef392cb1d2ebf8e947ff2e5b7a6d2ca312ad2"
+    },
+    {
+      "file": "source_review/test-locked-npm-runner-r16.mjs",
+      "bytes": 8973,
+      "sha256": "ac0a221e93098a3f91b82206ee39f5eb75959db15cb98f324b4924bcd9f35431"
+    },
+    {
+      "file": "source_review/r16-locked-dependency-policy-fixture-results.json",
+      "bytes": 4733,
+      "sha256": "73ba8daecd380c37d1d4713caa7ad57ed61f04d7d722945f3afe3f6b6ec7e4ad"
+    },
+    {
+      "file": "source_review/r16-npm-runner-fixture-results.json",
+      "bytes": 1702,
+      "sha256": "fde4cc12578faa9b6f3387e71a7f4f2bb2644d4c3b2aa4a8274fa3033308c07c"
+    }
+  ]
+}

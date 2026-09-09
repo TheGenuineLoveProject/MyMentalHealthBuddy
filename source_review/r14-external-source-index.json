@@ -1,0 +1,182 @@
+[
+  {
+    "file": "source_review/r14-external-ws-lib-buffer-util.js",
+    "gitBlobSha": "f7536e28efa570277e30e9ea001200ee11595fee",
+    "path": "lib/buffer-util.js",
+    "ref": "8.21.0",
+    "repository": "websockets/ws",
+    "url": "https://github.com/websockets/ws/blob/8.21.0/lib/buffer-util.js",
+    "sha256": "8b0a45739132f82e25ea13163780abf547ccfe989267f3eb7abb475beec92da3",
+    "bytes": 3056
+  },
+  {
+    "file": "source_review/r14-external-ws-lib-validation.js",
+    "gitBlobSha": "4a2e68d5127279431a74b6961e8d35161d3276e2",
+    "path": "lib/validation.js",
+    "ref": "8.21.0",
+    "repository": "websockets/ws",
+    "url": "https://github.com/websockets/ws/blob/8.21.0/lib/validation.js",
+    "sha256": "41ce8e83d0d434132e1704895fedb91f6703a701b42d91c80954ab29b2845593",
+    "bytes": 3903
+  },
+  {
+    "file": "source_review/r14-external-node-postgres-packages-pg-lib-index.js",
+    "gitBlobSha": "e8b746149ca3480017b6faaa6c934bc5ce1ab2f0",
+    "path": "packages/pg/lib/index.js",
+    "ref": "pg@8.21.0",
+    "repository": "brianc/node-postgres",
+    "url": "https://github.com/brianc/node-postgres/blob/pg@8.21.0/packages/pg/lib/index.js",
+    "sha256": "3fad6e6d3d976edbabe0cbc9e1d39f4340bcb719bbbb186a0d3a24f3dbd4a94c",
+    "bytes": 1810
+  },
+  {
+    "file": "source_review/r14-external-node-postgres-packages-pg-lib-stream.js",
+    "gitBlobSha": "edc3018332d999139e6b6573230e8c0553650bc0",
+    "path": "packages/pg/lib/stream.js",
+    "ref": "pg@8.21.0",
+    "repository": "brianc/node-postgres",
+    "url": "https://github.com/brianc/node-postgres/blob/pg@8.21.0/packages/pg/lib/stream.js",
+    "sha256": "0bd4001775301604ddf7c94152e05f6f30a9354876717bdae2ab636d00eb12ba",
+    "bytes": 2132
+  },
+  {
+    "file": "source_review/r14-external-resend-node-src-render.ts",
+    "gitBlobSha": "424025e333aae2f04c00b9b1ea2a12a31222b726",
+    "path": "src/render.ts",
+    "ref": "v6.12.4",
+    "repository": "resend/resend-node",
+    "url": "https://github.com/resend/resend-node/blob/v6.12.4/src/render.ts",
+    "sha256": "9b1f660e960c30c4e7b9ce669fbaa4d5fcb963c429368bc4fd944eca67834655",
+    "bytes": 363
+  },
+  {
+    "file": "source_review/r14-external-resend-node-src-emails-emails.ts",
+    "gitBlobSha": "a48e9edebcbfdb8fb4ec03134feb644cc6de14c7",
+    "path": "src/emails/emails.ts",
+    "ref": "v6.12.4",
+    "repository": "resend/resend-node",
+    "url": "https://github.com/resend/resend-node/blob/v6.12.4/src/emails/emails.ts",
+    "sha256": "26f408755273cdf914f3882c2e6fb2c9e2323f942da545e1cc00f72b5896c4fb",
+    "bytes": 2772
+  },
+  {
+    "file": "source_review/r14-external-resend-node-src-batch-batch.ts",
+    "gitBlobSha": "777f328c55f935a8e3e764f9ad18d62fe9efe1f3",
+    "path": "src/batch/batch.ts",
+    "ref": "v6.12.4",
+    "repository": "resend/resend-node",
+    "url": "https://github.com/resend/resend-node/blob/v6.12.4/src/batch/batch.ts",
+    "sha256": "917bcd37eb10367fa0b34f392b16211afdef58132a61246e4081d55d38380356",
+    "bytes": 1425
+  },
+  {
+    "file": "source_review/r14-external-mmhb-server-utils-email.mjs",
+    "gitBlobSha": "9df253aefaf623010d94a49c54014c1f62417d67",
+    "path": "server/utils/email.mjs",
+    "ref": "df8137696e4c7b0a7c16a08347e1b92f85b85371",
+    "repository": "TheGenuineLoveProject/MyMentalHealthBuddy",
+    "url": "https://github.com/TheGenuineLoveProject/MyMentalHealthBuddy/blob/df8137696e4c7b0a7c16a08347e1b92f85b85371/server/utils/email.mjs",
+    "sha256": "9a787e04026ec9225fca35420546d744fc78874958739eab76a0c9754fef7113",
+    "bytes": 853
+  },
+  {
+    "file": "source_review/r14-external-mmhb-server-services-email.mjs",
+    "gitBlobSha": "88217e1cd184a9e3a9a801ac7542820c3fd5fc8a",
+    "path": "server/services/email.mjs",
+    "ref": "df8137696e4c7b0a7c16a08347e1b92f85b85371",
+    "repository": "TheGenuineLoveProject/MyMentalHealthBuddy",
+    "url": "https://github.com/TheGenuineLoveProject/MyMentalHealthBuddy/blob/df8137696e4c7b0a7c16a08347e1b92f85b85371/server/services/email.mjs",
+    "sha256": "23fbd9967964b7c65c18ddb2cdbeff44aa69ab33eb6b4d40edce8abfa11ab2c4",
+    "bytes": 18011
+  },
+  {
+    "file": "source_review/r14-external-mmhb-server-services-newsletterSend.mjs",
+    "gitBlobSha": "99b1b30354f71a689532c1f2e9a2a6c9ce0350fa",
+    "path": "server/services/newsletterSend.mjs",
+    "ref": "df8137696e4c7b0a7c16a08347e1b92f85b85371",
+    "repository": "TheGenuineLoveProject/MyMentalHealthBuddy",
+    "url": "https://github.com/TheGenuineLoveProject/MyMentalHealthBuddy/blob/df8137696e4c7b0a7c16a08347e1b92f85b85371/server/services/newsletterSend.mjs",
+    "sha256": "f39a0864816fabc44395c676df8ef6bac4d13b499b6725912257f3b4705c52e1",
+    "bytes": 2748
+  },
+  {
+    "file": "source_review/r14-external-mmhb-server-routes-blog.mjs",
+    "gitBlobSha": "64458c35dfa5179302f6d888604d935e025c58d0",
+    "path": "server/routes/blog.mjs",
+    "ref": "df8137696e4c7b0a7c16a08347e1b92f85b85371",
+    "repository": "TheGenuineLoveProject/MyMentalHealthBuddy",
+    "url": "https://github.com/TheGenuineLoveProject/MyMentalHealthBuddy/blob/df8137696e4c7b0a7c16a08347e1b92f85b85371/server/routes/blog.mjs",
+    "sha256": "ad22034ff650b56c65d1d9dcee916e32d9f22ab04bde0a7d4a738b7188ec12e5",
+    "bytes": 24124
+  },
+  {
+    "file": "source_review/r14-external-mmhb-server-db-connection.mjs",
+    "repository": "TheGenuineLoveProject/MyMentalHealthBuddy",
+    "ref": "df8137696e4c7b0a7c16a08347e1b92f85b85371",
+    "path": "server/db/connection.mjs",
+    "url": "https://github.com/TheGenuineLoveProject/MyMentalHealthBuddy/blob/df8137696e4c7b0a7c16a08347e1b92f85b85371/server/db/connection.mjs",
+    "gitBlobSha": "153868f248177a9f15746466a2814e5ea638d574",
+    "sha256": "6baa2747e839ce79d623564b5ad64067e9a8ca90975dc262383185592e7500fc",
+    "bytes": 2090
+  },
+  {
+    "file": "source_review/r14-external-node-postgres-packages-pg-lib-native-index.js",
+    "repository": "brianc/node-postgres",
+    "ref": "pg@8.21.0",
+    "path": "packages/pg/lib/native/index.js",
+    "url": "https://github.com/brianc/node-postgres/blob/pg@8.21.0/packages/pg/lib/native/index.js",
+    "gitBlobSha": "eead422a3a65d871f6d419293534cdbe1187e908",
+    "sha256": "99fb61cb78a6d78b7a5fc0b9ac264ad58272af48be4bc50bfdb948b1342e3292",
+    "bytes": 50
+  },
+  {
+    "file": "source_review/r14-external-node-postgres-packages-pg-package.json",
+    "repository": "brianc/node-postgres",
+    "ref": "pg@8.21.0",
+    "path": "packages/pg/package.json",
+    "url": "https://github.com/brianc/node-postgres/blob/pg@8.21.0/packages/pg/package.json",
+    "gitBlobSha": "61f9b7ede572dc3f215ebfbafa633ef8b55e69cd",
+    "sha256": "8e412cfad256592ca12f0980683da85d52b935c4535ec9cbe664f929e93ea781",
+    "bytes": 1611
+  },
+  {
+    "file": "source_review/r14-external-ws-package.json",
+    "repository": "websockets/ws",
+    "ref": "8.21.0",
+    "path": "package.json",
+    "url": "https://github.com/websockets/ws/blob/8.21.0/package.json",
+    "gitBlobSha": "9116e663298ebdb1321f29b44463a25d76d4791b",
+    "sha256": "584ce6e7516587ba249dc910b0c04e2753f6b3f451fc3a5bc324f7735bdacc71",
+    "bytes": 1753
+  },
+  {
+    "file": "source_review/r14-external-resend-node-package.json",
+    "repository": "resend/resend-node",
+    "ref": "v6.12.4",
+    "path": "package.json",
+    "url": "https://github.com/resend/resend-node/blob/v6.12.4/package.json",
+    "gitBlobSha": "f719607345944fe41594cf9f82a57f06a8f17db8",
+    "sha256": "0583ca69e2e0f8568ea1c22fbc720a822b17989895339b442336f0fb5124eeb8",
+    "bytes": 2265
+  },
+  {
+    "file": "source_review/r14-external-node-postgres-packages-pg-esm-index.mjs",
+    "gitBlobSha": "587d80c1e57bebf7e8f886c510973c325a84de3e",
+    "path": "packages/pg/esm/index.mjs",
+    "ref": "pg@8.21.0",
+    "repository": "brianc/node-postgres",
+    "url": "https://github.com/brianc/node-postgres/blob/pg@8.21.0/packages/pg/esm/index.mjs",
+    "sha256": "5ef4d06556eeb775987759c2c09229dca2139421ee40e819b566612db2b4a8dc",
+    "bytes": 579
+  },
+  {
+    "file": "source_review/r14-external-node-postgres-packages-pg-lib-native-client.js",
+    "gitBlobSha": "fa17d9f6541cacc41694b099a15bc30cd18c1659",
+    "path": "packages/pg/lib/native/client.js",
+    "ref": "pg@8.21.0",
+    "repository": "brianc/node-postgres",
+    "url": "https://github.com/brianc/node-postgres/blob/pg@8.21.0/packages/pg/lib/native/client.js",
+    "sha256": "d88c124d4835cc9d5b0389e2aaf63a144df8434c1b4b0d5e588691e068f49acf",
+    "bytes": 8699
+  }
+]

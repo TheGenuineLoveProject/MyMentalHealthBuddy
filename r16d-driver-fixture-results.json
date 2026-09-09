@@ -1,0 +1,169 @@
+{
+  "scope": "ACTUAL_R16D_DRIVER_WITH_INERT_NPM_CLI_AND_SYNTHETIC_HTTPS_NO_EXTERNAL_REGISTRY_OR_APPLICATION",
+  "driverSha256": "79cace2013c93aab36b34d94e028e45c1f40b203ba2c07e67329dd3c78a0af2b",
+  "harnessSha256": "55b379b6aee44864ac441c3c83be11bcab35e7acbffe9fecc8f0a2deb48d46d8",
+  "node": "v24.19.0",
+  "passed": 32,
+  "cases": [
+    {
+      "case": "bundled contents preserved while parent archive verified and excluded from private install",
+      "status": "PASS",
+      "childStarted": 1
+    },
+    {
+      "case": "present excluded bundle blocks success after npm",
+      "status": "PASS",
+      "childStarted": 1
+    },
+    {
+      "case": "missing bundled marker stops before npm",
+      "status": "PASS",
+      "childStarted": 0
+    },
+    {
+      "case": "bundle child archive field stops before npm",
+      "status": "PASS",
+      "childStarted": 0
+    },
+    {
+      "case": "missing parent checksum stops before npm",
+      "status": "PASS",
+      "childStarted": 0
+    },
+    {
+      "case": "nonexcluded WASM parent does not exempt bundled checksum",
+      "status": "PASS",
+      "childStarted": 0
+    },
+    {
+      "case": "successful private locked stage preserves workspace and R15",
+      "status": "PASS",
+      "childStarted": 1
+    },
+    {
+      "case": "root lock drift blocks before child",
+      "status": "PASS",
+      "childStarted": 0
+    },
+    {
+      "case": "R15 source asset drift blocks before child",
+      "status": "PASS",
+      "childStarted": 0
+    },
+    {
+      "case": "HTTP mirror URLs repaired and verified before private install",
+      "status": "PASS",
+      "childStarted": 1
+    },
+    {
+      "case": "public registry identity mismatch blocks npm",
+      "status": "PASS",
+      "childStarted": 0
+    },
+    {
+      "case": "public registry integrity mismatch blocks npm",
+      "status": "PASS",
+      "childStarted": 0
+    },
+    {
+      "case": "unpublished package 404 blocks npm",
+      "status": "PASS",
+      "childStarted": 0
+    },
+    {
+      "case": "concurrent source edit during registry requests is preserved",
+      "status": "PASS",
+      "childStarted": 0
+    },
+    {
+      "case": "root lock edit during registry requests is preserved",
+      "status": "PASS",
+      "childStarted": 0
+    },
+    {
+      "case": "credential archive URL cannot be normalized",
+      "status": "PASS",
+      "childStarted": 0
+    },
+    {
+      "case": "npm exit failure exposes only safe code",
+      "status": "PASS",
+      "childStarted": 1
+    },
+    {
+      "case": "staged lock drift fails after child",
+      "status": "PASS",
+      "childStarted": 1
+    },
+    {
+      "case": "installed target version mismatch fails",
+      "status": "PASS",
+      "childStarted": 1
+    },
+    {
+      "case": "concurrent workspace edit preserved and reported",
+      "status": "PASS",
+      "childStarted": 1
+    },
+    {
+      "case": "concurrent R15 asset edit preserved and reported",
+      "status": "PASS",
+      "childStarted": 1
+    },
+    {
+      "case": "retained candidate drift is detected",
+      "status": "PASS",
+      "childStarted": 1
+    },
+    {
+      "case": "retained R15 evidence drift is detected",
+      "status": "PASS",
+      "childStarted": 1
+    },
+    {
+      "case": "final report write failure cannot claim pass",
+      "status": "PASS",
+      "childStarted": 1
+    },
+    {
+      "case": "absent R15 does not block locked dependency preparation",
+      "status": "PASS",
+      "childStarted": 1
+    },
+    {
+      "case": "absent R15 appearing during install fails",
+      "status": "PASS",
+      "childStarted": 1
+    },
+    {
+      "case": "present corrupt R15 manifest still blocks",
+      "status": "PASS",
+      "childStarted": 0
+    },
+    {
+      "case": "tracked evidence root blocked before npm",
+      "status": "PASS",
+      "childStarted": 0
+    },
+    {
+      "case": "conflicting evidence directory blocked",
+      "status": "PASS",
+      "childStarted": 0
+    },
+    {
+      "case": "symlink evidence root blocked",
+      "status": "PASS",
+      "childStarted": 0
+    },
+    {
+      "case": "symlink prior report remains rejected",
+      "status": "PASS",
+      "childStarted": 0
+    },
+    {
+      "case": "existing private evidence root reused without old report changes",
+      "status": "PASS",
+      "childStarted": 1
+    }
+  ]
+}

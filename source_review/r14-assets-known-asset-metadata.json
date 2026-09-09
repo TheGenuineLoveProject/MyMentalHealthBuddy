@@ -1,0 +1,293 @@
+[
+  {
+    "file": "ai/healing/registry.json",
+    "sha256": "be846525e46ce27d2f79f7f3baaeca990f8de91433cff89368da71bcc07178ce",
+    "bytes": 746,
+    "observedBrandNames": [],
+    "classification": "EXISTING_MMHB_HEALING_ENGINE_ASSET",
+    "publicationScopeReview": "NOT_ESTABLISHED_BY_FILENAME_OR_HASH",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "ai/business/registry.json",
+    "sha256": "d90a0981f3b9dab33c80da4923aa6abe4e6503762740193a78a8134081c5663b",
+    "bytes": 848,
+    "observedBrandNames": [],
+    "classification": "EXISTING_MMHB_BUSINESS_ENGINE_ASSET_ROLE_ENFORCEMENT_UNPROVEN",
+    "publicationScopeReview": "NOT_ESTABLISHED_BY_FILENAME_OR_HASH",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "prompt-os-kernel/schemas/promptspec.schema.json",
+    "sha256": "23cfe8419ca3737a39d66ab3a7d04b0ac98198bf265f899e99846187fb9a7839",
+    "bytes": 3154,
+    "observedBrandNames": [],
+    "classification": "EXISTING_MMHB_KERNEL_HEALTH_REFERENCE",
+    "publicationScopeReview": "NOT_ESTABLISHED_BY_FILENAME_OR_HASH",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "content/blog/index.json",
+    "sha256": "8e70857b567fb367d124c97e5b1687d21acea2721cede66cb4f676a316409835",
+    "bytes": 2859,
+    "observedBrandNames": [
+      "GLP"
+    ],
+    "classification": "RSS_FALLBACK_CONTENT_ACTIVE_ROUTE_UNPROVEN",
+    "publicationScopeReview": "REQUIRED_EXISTING_GLP_TEXT",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "ai/healing/system.md",
+    "sha256": "7c7b9649f650bbfa75259b5f6a0ed7015680ac94fd8912f1dd01ae78ae57ed65",
+    "bytes": 1418,
+    "observedBrandNames": [
+      "MMHB",
+      "GLP"
+    ],
+    "classification": "EXISTING_MMHB_HEALING_ENGINE_ASSET",
+    "publicationScopeReview": "REQUIRED_EXISTING_GLP_TEXT",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "ai/business/system.md",
+    "sha256": "400428b0164409e84c048e29447a4f6b7cf484729efb01dabb6b31fba36a5da7",
+    "bytes": 925,
+    "observedBrandNames": [
+      "GLP"
+    ],
+    "classification": "EXISTING_MMHB_BUSINESS_ENGINE_ASSET_ROLE_ENFORCEMENT_UNPROVEN",
+    "publicationScopeReview": "REQUIRED_EXISTING_GLP_TEXT",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "prompt-os-kernel/governance/MASTER_STRATEGY.md",
+    "sha256": "1d17a28700a7c38e26696138dec488811297c7f1e0053f51260cb189d7638d87",
+    "bytes": 1405,
+    "observedBrandNames": [
+      "MMHB",
+      "GLP"
+    ],
+    "classification": "EXISTING_MMHB_KERNEL_HEALTH_REFERENCE",
+    "publicationScopeReview": "REQUIRED_EXISTING_GLP_TEXT",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "prompt-os-kernel/governance/domain-router.md",
+    "sha256": "288c4e11cfd98a77b2120e36e9453172cde260ba9d81830d8638e1123b30a117",
+    "bytes": 2585,
+    "observedBrandNames": [],
+    "classification": "EXISTING_MMHB_KERNEL_HEALTH_REFERENCE",
+    "publicationScopeReview": "NOT_ESTABLISHED_BY_FILENAME_OR_HASH",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "prompt-os-kernel/governance/execution-protocol.md",
+    "sha256": "053caba9bf2c205dca92bf55421329a4ed3abe4f4ad775d6062d4cb919495c02",
+    "bytes": 2107,
+    "observedBrandNames": [],
+    "classification": "EXISTING_MMHB_KERNEL_HEALTH_REFERENCE",
+    "publicationScopeReview": "NOT_ESTABLISHED_BY_FILENAME_OR_HASH",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "prompt-os-kernel/governance/quality-gates.md",
+    "sha256": "f43cf43bff0f744d5601510bf08827014425908270deed066ae7d269372f39f1",
+    "bytes": 1803,
+    "observedBrandNames": [],
+    "classification": "EXISTING_MMHB_KERNEL_HEALTH_REFERENCE",
+    "publicationScopeReview": "NOT_ESTABLISHED_BY_FILENAME_OR_HASH",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "prompt-os-kernel/engines/business-command-engine.md",
+    "sha256": "33b1d426179ef1f4f35e9364272b345a07d8d261e26630d1114571e8f40980c5",
+    "bytes": 1678,
+    "observedBrandNames": [],
+    "classification": "EXISTING_MMHB_KERNEL_HEALTH_REFERENCE",
+    "publicationScopeReview": "NOT_ESTABLISHED_BY_FILENAME_OR_HASH",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "ai/healing/prompts/h01_intake.md",
+    "sha256": "6bdf4ea38534d527bc4fd84ecaa8cfb004da1de967ba70cb2885a3ce0ccadaa1",
+    "bytes": 861,
+    "observedBrandNames": [],
+    "classification": "EXISTING_MMHB_HEALING_ENGINE_ASSET",
+    "publicationScopeReview": "NOT_ESTABLISHED_BY_FILENAME_OR_HASH",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "ai/healing/prompts/h02_journal_reflect.md",
+    "sha256": "f5f4872d9447030b1b26d054894b3650e9bdb2c6c30ff83e0e41fa37a1778902",
+    "bytes": 426,
+    "observedBrandNames": [],
+    "classification": "EXISTING_MMHB_HEALING_ENGINE_ASSET",
+    "publicationScopeReview": "NOT_ESTABLISHED_BY_FILENAME_OR_HASH",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "ai/healing/prompts/h03_cbt_reframe.md",
+    "sha256": "44062bd3e621d7abf7d32b77c01d2f70287a699bb1a913686b5d4c35e01b338d",
+    "bytes": 1033,
+    "observedBrandNames": [],
+    "classification": "EXISTING_MMHB_HEALING_ENGINE_ASSET",
+    "publicationScopeReview": "NOT_ESTABLISHED_BY_FILENAME_OR_HASH",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "ai/healing/prompts/h04_act_values.md",
+    "sha256": "b5ad3efc7403874112502dde7f01b5eb8e9aaf21de93e499036ceafb77ba7f5b",
+    "bytes": 1095,
+    "observedBrandNames": [],
+    "classification": "EXISTING_MMHB_HEALING_ENGINE_ASSET",
+    "publicationScopeReview": "NOT_ESTABLISHED_BY_FILENAME_OR_HASH",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "ai/healing/prompts/h05_breathing_grounding.md",
+    "sha256": "0488004edba218e43fa5ecf6aea53df3d98a08838633bf579033f01b36ea4e56",
+    "bytes": 1105,
+    "observedBrandNames": [],
+    "classification": "EXISTING_MMHB_HEALING_ENGINE_ASSET",
+    "publicationScopeReview": "NOT_ESTABLISHED_BY_FILENAME_OR_HASH",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "ai/healing/prompts/h06_sleep_reset.md",
+    "sha256": "578769ff00486a72436d68789c403a8f2e31405bb9cc8242249992981104edd2",
+    "bytes": 1068,
+    "observedBrandNames": [],
+    "classification": "EXISTING_MMHB_HEALING_ENGINE_ASSET",
+    "publicationScopeReview": "NOT_ESTABLISHED_BY_FILENAME_OR_HASH",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "ai/healing/prompts/h07_conflict_script.md",
+    "sha256": "2aaaa5d222baeb746d452514af1ca17e0417fd013cb45dd1d90891e9f73e63f4",
+    "bytes": 1267,
+    "observedBrandNames": [],
+    "classification": "EXISTING_MMHB_HEALING_ENGINE_ASSET",
+    "publicationScopeReview": "NOT_ESTABLISHED_BY_FILENAME_OR_HASH",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "ai/healing/prompts/h08_safety_check.md",
+    "sha256": "99292ed3282e9bb35a564f1341b5d59511e7406a90d6fd113129671a12241c30",
+    "bytes": 1746,
+    "observedBrandNames": [],
+    "classification": "EXISTING_MMHB_HEALING_ENGINE_ASSET",
+    "publicationScopeReview": "NOT_ESTABLISHED_BY_FILENAME_OR_HASH",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "ai/business/prompts/b01_offer_design.md",
+    "sha256": "213c90aed86e64685dd0ef9dfe2117736a441d019b419de9b9fd0c4df756eddc",
+    "bytes": 954,
+    "observedBrandNames": [
+      "GLP"
+    ],
+    "classification": "EXISTING_MMHB_BUSINESS_ENGINE_ASSET_ROLE_ENFORCEMENT_UNPROVEN",
+    "publicationScopeReview": "REQUIRED_EXISTING_GLP_TEXT",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "ai/business/prompts/b02_funnel_map.md",
+    "sha256": "f9499b81f35d0a53c3442296f84fd6a70be7ca288a5a905a05f6340da05af1bf",
+    "bytes": 752,
+    "observedBrandNames": [],
+    "classification": "EXISTING_MMHB_BUSINESS_ENGINE_ASSET_ROLE_ENFORCEMENT_UNPROVEN",
+    "publicationScopeReview": "NOT_ESTABLISHED_BY_FILENAME_OR_HASH",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "ai/business/prompts/b03_content_factory.md",
+    "sha256": "d27b0be5cbf7509c13cb299e24d8cdc395bb2ead7bb4d4297baf3865152e8252",
+    "bytes": 781,
+    "observedBrandNames": [],
+    "classification": "EXISTING_MMHB_BUSINESS_ENGINE_ASSET_ROLE_ENFORCEMENT_UNPROVEN",
+    "publicationScopeReview": "NOT_ESTABLISHED_BY_FILENAME_OR_HASH",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "ai/business/prompts/b04_email_sequences.md",
+    "sha256": "77bb6e3b57aa7ef73f3a5703e5ba6df3137c1ce9b41b082cc2d7e5ef3d9a837f",
+    "bytes": 868,
+    "observedBrandNames": [],
+    "classification": "EXISTING_MMHB_BUSINESS_ENGINE_ASSET_ROLE_ENFORCEMENT_UNPROVEN",
+    "publicationScopeReview": "NOT_ESTABLISHED_BY_FILENAME_OR_HASH",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "ai/business/prompts/b05_seo_briefs.md",
+    "sha256": "38cf749f52577272b841e0e4eb86bf53e9d8d27a71b4c4100dfc1db65746419f",
+    "bytes": 941,
+    "observedBrandNames": [],
+    "classification": "EXISTING_MMHB_BUSINESS_ENGINE_ASSET_ROLE_ENFORCEMENT_UNPROVEN",
+    "publicationScopeReview": "NOT_ESTABLISHED_BY_FILENAME_OR_HASH",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "ai/business/prompts/b06_competitive_scan.md",
+    "sha256": "d79db57c633b5e11141b1e5d13af0e13d478d4dab3307e82fdb5be7adc2ea709",
+    "bytes": 805,
+    "observedBrandNames": [],
+    "classification": "EXISTING_MMHB_BUSINESS_ENGINE_ASSET_ROLE_ENFORCEMENT_UNPROVEN",
+    "publicationScopeReview": "NOT_ESTABLISHED_BY_FILENAME_OR_HASH",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "ai/business/prompts/b07_pricing_packaging.md",
+    "sha256": "f9e1be975bcbb611cb03d133650619d9356e9515452ee79ea04b0d0c49f51e57",
+    "bytes": 995,
+    "observedBrandNames": [],
+    "classification": "EXISTING_MMHB_BUSINESS_ENGINE_ASSET_ROLE_ENFORCEMENT_UNPROVEN",
+    "publicationScopeReview": "NOT_ESTABLISHED_BY_FILENAME_OR_HASH",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "ai/business/prompts/b08_retention_loyalty.md",
+    "sha256": "ebafa326a0a5d552f9fc7316321b93119bc88df7e15b5aa87edff1f6a7feff7b",
+    "bytes": 820,
+    "observedBrandNames": [],
+    "classification": "EXISTING_MMHB_BUSINESS_ENGINE_ASSET_ROLE_ENFORCEMENT_UNPROVEN",
+    "publicationScopeReview": "NOT_ESTABLISHED_BY_FILENAME_OR_HASH",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "ai/business/prompts/b09_partnerships.md",
+    "sha256": "7b409622fdf473b8e2e01f5145503fe35578ba7ba0e7d1e05ca94d256a22433d",
+    "bytes": 1075,
+    "observedBrandNames": [],
+    "classification": "EXISTING_MMHB_BUSINESS_ENGINE_ASSET_ROLE_ENFORCEMENT_UNPROVEN",
+    "publicationScopeReview": "NOT_ESTABLISHED_BY_FILENAME_OR_HASH",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "ai/business/prompts/b10_ops_sops.md",
+    "sha256": "d03b38de531eb442d925c71a1f33b1ab82667887a4b9ab4d722ff4b6c2ffab8e",
+    "bytes": 1030,
+    "observedBrandNames": [],
+    "classification": "EXISTING_MMHB_BUSINESS_ENGINE_ASSET_ROLE_ENFORCEMENT_UNPROVEN",
+    "publicationScopeReview": "NOT_ESTABLISHED_BY_FILENAME_OR_HASH",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "prompt-os-kernel/scripts/verify-platform-kernel.mjs",
+    "sha256": "7fab57c10f5d122d24b9b597212fe7f4719e1af0603853e82b4249a598839e86",
+    "bytes": 3370,
+    "observedBrandNames": [],
+    "classification": "EXISTING_MMHB_KERNEL_HEALTH_REFERENCE",
+    "publicationScopeReview": "NOT_ESTABLISHED_BY_FILENAME_OR_HASH",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  },
+  {
+    "file": "prompt-os-kernel/install.sh",
+    "sha256": "607a3f0ef38be50008c314afdb61f102cf0c4a4e837f357667f584e15c21af5e",
+    "bytes": 799,
+    "observedBrandNames": [],
+    "classification": "EXISTING_MMHB_KERNEL_HEALTH_REFERENCE",
+    "publicationScopeReview": "NOT_ESTABLISHED_BY_FILENAME_OR_HASH",
+    "reviewQualification": "PUBLIC_REMOTE_BYTES_ONLY_CURRENT_REPLIT_IDENTITY_PENDING"
+  }
+]

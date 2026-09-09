@@ -1,0 +1,158 @@
+{
+  "status": "PASS",
+  "checks": 22,
+  "scope": "REAL_R17B_DRIVER_AND_WORKERS_WITH_SYNTHETIC_COMPILER_NATIVE_PACKAGES; ACTUAL_PROMPT_LOADER; NO_APPLICATION_DATABASE_OR_NETWORK",
+  "results": [
+    {
+      "case": "success",
+      "result": "PASS",
+      "expectedGate": null,
+      "actualStatus": "FRESH_CANDIDATE_BUILD_AND_SMOKE_PASS_NOT_RELEASE",
+      "oldR17ReportOrTemporaryCopyRequired": false
+    },
+    {
+      "case": "relative_watch",
+      "result": "PASS",
+      "expectedGate": null,
+      "actualStatus": "FRESH_CANDIDATE_BUILD_AND_SMOKE_PASS_NOT_RELEASE",
+      "oldR17ReportOrTemporaryCopyRequired": false
+    },
+    {
+      "case": "vite_builtin",
+      "result": "PASS",
+      "expectedGate": null,
+      "actualStatus": "FRESH_CANDIDATE_BUILD_AND_SMOKE_PASS_NOT_RELEASE",
+      "oldR17ReportOrTemporaryCopyRequired": false
+    },
+    {
+      "case": "unknown_ids",
+      "result": "PASS",
+      "expectedGate": "GRAPH_REVIEW_REQUIRED",
+      "actualStatus": "FRESH_CANDIDATE_FAILED",
+      "oldR17ReportOrTemporaryCopyRequired": false
+    },
+    {
+      "case": "graph_ancestor",
+      "result": "PASS",
+      "expectedGate": "GRAPH_REVIEW_REQUIRED",
+      "actualStatus": "FRESH_CANDIDATE_FAILED",
+      "oldR17ReportOrTemporaryCopyRequired": false
+    },
+    {
+      "case": "tree_drift",
+      "result": "PASS",
+      "expectedGate": "R16E_INSTALLED_TREE_DRIFT",
+      "actualStatus": "FRESH_CANDIDATE_FAILED",
+      "oldR17ReportOrTemporaryCopyRequired": false
+    },
+    {
+      "case": "low_space",
+      "result": "PASS",
+      "expectedGate": "INSUFFICIENT_FREE_SPACE",
+      "actualStatus": "FRESH_CANDIDATE_FAILED",
+      "oldR17ReportOrTemporaryCopyRequired": false
+    },
+    {
+      "case": "missing_binary",
+      "result": "PASS",
+      "expectedGate": "CHILD_FAILED",
+      "actualStatus": "FRESH_CANDIDATE_FAILED",
+      "oldR17ReportOrTemporaryCopyRequired": false
+    },
+    {
+      "case": "copied_source_drift",
+      "result": "PASS",
+      "expectedGate": "BUILD_COPIED_INPUT_CHANGED",
+      "actualStatus": "FRESH_CANDIDATE_FAILED",
+      "oldR17ReportOrTemporaryCopyRequired": false
+    },
+    {
+      "case": "copied_dependency_drift",
+      "result": "PASS",
+      "expectedGate": "BUILD_DEPENDENCIES_CHANGED",
+      "actualStatus": "FRESH_CANDIDATE_FAILED",
+      "oldR17ReportOrTemporaryCopyRequired": false
+    },
+    {
+      "case": "copied_package_drift",
+      "result": "PASS",
+      "expectedGate": "BUILD_COPIED_INPUT_CHANGED",
+      "actualStatus": "FRESH_CANDIDATE_FAILED",
+      "oldR17ReportOrTemporaryCopyRequired": false
+    },
+    {
+      "case": "compiler_source_drift",
+      "result": "PASS",
+      "expectedGate": "BUILD_COPIED_INPUT_CHANGED",
+      "actualStatus": "FRESH_CANDIDATE_FAILED",
+      "oldR17ReportOrTemporaryCopyRequired": false
+    },
+    {
+      "case": "compiler_dependency_drift",
+      "result": "PASS",
+      "expectedGate": "BUILD_DEPENDENCIES_CHANGED",
+      "actualStatus": "FRESH_CANDIDATE_FAILED",
+      "oldR17ReportOrTemporaryCopyRequired": false
+    },
+    {
+      "case": "compiler_package_drift",
+      "result": "PASS",
+      "expectedGate": "BUILD_COPIED_INPUT_CHANGED",
+      "actualStatus": "FRESH_CANDIDATE_FAILED",
+      "oldR17ReportOrTemporaryCopyRequired": false
+    },
+    {
+      "case": "frontend_output_drift",
+      "result": "PASS",
+      "expectedGate": "FRONTEND_OUTPUT_CHANGED",
+      "actualStatus": "FRESH_CANDIDATE_FAILED",
+      "oldR17ReportOrTemporaryCopyRequired": false
+    },
+    {
+      "case": "native_failure",
+      "result": "PASS",
+      "expectedGate": "CHILD_FAILED",
+      "actualStatus": "FRESH_CANDIDATE_FAILED",
+      "oldR17ReportOrTemporaryCopyRequired": false
+    },
+    {
+      "case": "workspace_edit",
+      "result": "PASS",
+      "expectedGate": "WORKTREE_PRESERVATION",
+      "actualStatus": "FRESH_CANDIDATE_FAILED",
+      "oldR17ReportOrTemporaryCopyRequired": false
+    },
+    {
+      "case": "timeout",
+      "result": "PASS",
+      "expectedGate": "CHILD_FAILED",
+      "actualStatus": "FRESH_CANDIDATE_FAILED",
+      "oldR17ReportOrTemporaryCopyRequired": false
+    },
+    {
+      "case": "rerun",
+      "result": "PASS",
+      "expectedGate": null,
+      "actualStatus": "FRESH_CANDIDATE_BUILD_AND_SMOKE_PASS_NOT_RELEASE",
+      "oldR17ReportOrTemporaryCopyRequired": false
+    },
+    {
+      "case": "server_sibling_output",
+      "result": "PASS",
+      "expectedGate": "BUILD_ROOT",
+      "scope": "DIRECT_WORKER_BOUNDARY_NO_COMPILER_IMPORT"
+    },
+    {
+      "case": "frontend_sibling_output",
+      "result": "PASS",
+      "expectedGate": "REPORT_DIRECTORY_SCOPE",
+      "scope": "DIRECT_WORKER_BOUNDARY_NO_COMPILER_IMPORT"
+    },
+    {
+      "case": "frontend_tool_outside_copy",
+      "result": "PASS",
+      "expectedGate": "DIRECT_TOOL_OUTSIDE_COPY",
+      "scope": "DIRECT_WORKER_BOUNDARY_NO_COMPILER_IMPORT"
+    }
+  ]
+}

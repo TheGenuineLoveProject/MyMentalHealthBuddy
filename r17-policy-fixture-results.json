@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "checks": 11,
+  "results": [
+    {
+      "name": "legitimate_spaces_and_hash_components",
+      "result": "PASS"
+    },
+    {
+      "name": "source_private_and_generated_exclusions",
+      "result": "PASS"
+    },
+    {
+      "name": "source_symlink_refused",
+      "result": "PASS"
+    },
+    {
+      "name": "copy_preserves_bytes_and_modes",
+      "result": "PASS"
+    },
+    {
+      "name": "existing_destination_not_overwritten",
+      "result": "PASS"
+    },
+    {
+      "name": "manifest_traversal_refused",
+      "result": "PASS"
+    },
+    {
+      "name": "source_drift_refused",
+      "result": "PASS"
+    },
+    {
+      "name": "copied_bin_link_stays_inside_modules",
+      "result": "PASS"
+    },
+    {
+      "name": "escaping_bin_link_refused",
+      "result": "PASS"
+    },
+    {
+      "name": "server_input_outside_copy_refused",
+      "result": "PASS"
+    },
+    {
+      "name": "native_runner_only_report_path_changed",
+      "result": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "project": "MyMentalHealthBuddy",
+  "handoff": "MMHB-FRONTEND-CANDIDATE-R12",
+  "date": "2026-09-08",
+  "localQualification": {
+    "parentFixtures": {
+      "passed": 32,
+      "runner": "inert embedded Node child"
+    },
+    "childFixtures": {
+      "passed": 6,
+      "tools": "inert build API stubs"
+    },
+    "bashSyntax": "PASS",
+    "parentNodeSyntax": "PASS",
+    "childNodeSyntax": "PASS",
+    "embeddedParentIdentity": "PASS",
+    "embeddedChildIdentity": "PASS",
+    "independentReview": "Two demonstrated defects fixed; targeted final review confirms both resolved"
+  },
+  "actualFrontendBuild": "NOT_RUN_HERE_REPLIT_HANDOFF_REQUIRED",
+  "actualApplicationRuntime": "NOT_RUN",
+  "dependencyAlignment": "PENDING_INSTALLED_REACT_6.1.1_LOCKED_6.1.0",
+  "serverBaseline": {
+    "source": "User-supplied second R11D output",
+    "utc": "2026-09-08T03:13:59.491Z",
+    "report": "/tmp/mmhb-server-candidate-r11d-SRSfZ5",
+    "status": "SERVER_CANDIDATE_ONLY_NOT_RELEASE"
+  },
+  "files": {
+    "MMHB-FRONTEND-CANDIDATE-R12.txt": {
+      "sha256": "2618133be4887d532c27405186e4f7784652588d8400eb60816c971ffc4a7673",
+      "bytes": 47966
+    },
+    "frontend-candidate-driver-r12.mjs": {
+      "sha256": "d2ac986ee4c06ffb43b10cd72a2717396b908b994cff5cb825e03504a4a91fff",
+      "bytes": 47515
+    },
+    "frontend-candidate-runner-r12.mjs": {
+      "sha256": "2f10da8de204a93ec87135c367e86c41cd6a706c4246eff1de451c1e2b90b43e",
+      "bytes": 13754
+    },
+    "test-frontend-candidate-r12.py": {
+      "sha256": "8ad161285e7aeb7ed007bfd0122c10e1f9fff4903de514c30017f746e4779664",
+      "bytes": 20331
+    },
+    "test-frontend-runner-r12.py": {
+      "sha256": "619f67486ed07083b4e0e1e32a676aeca897389bc19e7e0f70d84476a36f6fe5",
+      "bytes": 9189
+    }
+  }
+}

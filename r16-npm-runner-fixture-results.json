@@ -1,0 +1,65 @@
+{
+  "scope": "INERT_CLI_FIXTURES_ONLY_NO_NPM_OR_NETWORK",
+  "results": [
+    {
+      "name": "Standard npm symlink and stable discovery identities",
+      "status": "PASS"
+    },
+    {
+      "name": "Unsupported npm major rejected without execution",
+      "status": "PASS"
+    },
+    {
+      "name": "Scoped registry setting rejected without revealing value",
+      "status": "PASS"
+    },
+    {
+      "name": "Only fixed harmless distribution paths accepted",
+      "status": "PASS"
+    },
+    {
+      "name": "Builtin variable expansion rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "Dangling builtin config does not count as absent",
+      "status": "PASS"
+    },
+    {
+      "name": "Unqualified copied wrapper layout rejected without execution",
+      "status": "PASS"
+    },
+    {
+      "name": "Stage with extra file rejected before child starts",
+      "status": "PASS"
+    },
+    {
+      "name": "Success uses explicit fixed flags and credential-free child environment",
+      "status": "PASS"
+    },
+    {
+      "name": "Nonzero npm code reported; raw log text stays in private file",
+      "status": "PASS"
+    },
+    {
+      "name": "SIGTERM closes owned child and returns interrupted evidence",
+      "status": "PASS"
+    },
+    {
+      "name": "Output cap stops child and retains exactly bounded log",
+      "status": "PASS"
+    },
+    {
+      "name": "Tool mutation during child is detected after exit",
+      "status": "PASS"
+    },
+    {
+      "name": "Timeout and forced termination with fixture-accelerated timers",
+      "status": "PASS"
+    },
+    {
+      "name": "Heartbeat EPIPE closes child with fixture-accelerated interval",
+      "status": "PASS"
+    }
+  ]
+}
