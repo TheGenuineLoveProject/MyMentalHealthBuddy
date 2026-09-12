@@ -1,0 +1,77 @@
+{
+  "sources": {
+    "server/app.mjs": "export function keep() { return 1 }; function unused() { try { require(\"./absent.node\") } catch {} }"
+  },
+  "rawMeta": {
+    "inputs": {
+      "server/app.mjs": {
+        "bytes": 100,
+        "imports": [
+          {
+            "path": "./absent.node",
+            "kind": "require-call",
+            "external": true
+          }
+        ],
+        "format": "esm"
+      }
+    },
+    "outputs": {
+      "server.mjs": {
+        "imports": [],
+        "exports": [
+          "keep"
+        ],
+        "entryPoint": "server/app.mjs",
+        "inputs": {
+          "server/app.mjs": {
+            "bytesInOutput": 32
+          }
+        },
+        "bytes": 69
+      }
+    }
+  },
+  "meta": {
+    "inputs": {
+      "server/app.mjs": {
+        "bytes": 100,
+        "imports": [
+          {
+            "path": "./absent.node",
+            "kind": "require-call",
+            "external": true
+          }
+        ],
+        "format": "esm"
+      }
+    },
+    "outputs": {
+      "/home/runner/workspace/.mmhb-release-evidence/r17b-AbC123/server-build/server.mjs": {
+        "imports": [],
+        "exports": [
+          "keep"
+        ],
+        "entryPoint": "server/app.mjs",
+        "inputs": {
+          "server/app.mjs": {
+            "bytesInOutput": 32
+          }
+        },
+        "bytes": 69
+      }
+    }
+  },
+  "options": {
+    "compilerWorkingDirectory": "/tmp/mmhb-build-r17b-AbC123",
+    "reportDirectory": "/home/runner/workspace/.mmhb-release-evidence/r17b-AbC123",
+    "inputRows": [
+      {
+        "file": "server/app.mjs",
+        "type": "file",
+        "bytes": 100
+      }
+    ]
+  },
+  "adapter": "ONLY_OUTPUT_MAP_KEY_REPLACED_WITH_SYNTHETIC_EXPECTED_REPORT_PATH"
+}

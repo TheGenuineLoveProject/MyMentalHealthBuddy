@@ -1,0 +1,57 @@
+MyMentalHealthBuddy — R18C
+
+R18B identified the exact filename that stopped R18A:
+node_modules/es6-symbol/lib/private/generate-name.js
+
+Both saved graphs agree. The published es6-symbol 3.1.4 archive matches
+the reported module hash and package.json hash. The directory name private
+triggered the checker's rule; this demonstrated failure was a filename
+false positive. R18B did not execute or repair the application.
+
+R18C corrects that rule only for three individually reviewed JavaScript
+modules in this exact package version. Their fixed hashes and package
+identity must match the inventory and current retained bytes before any
+graph PASS or helper execution. Other private/sensitive paths remain blocked.
+
+1. Download MMHB-RUNTIME-CONTRACT-R18C.txt.
+2. Upload ONLY that TXT into MyMentalHealthBuddy's Replit workspace beside
+   package.json. Wait until the exact filename appears. Keep the optional
+   ZIP and ledgers on your computer.
+3. Open Replit Shell and paste:
+
+cd /home/runner/workspace &&
+printf '%s\n' '645d7f9d1c39f31308714090d6f728b6208166ad20ec10058eb42116036c6128  MMHB-RUNTIME-CONTRACT-R18C.txt' |
+sha256sum -c - &&
+env -u BASH_ENV bash --noprofile --norc MMHB-RUNTIME-CONTRACT-R18C.txt
+
+4. Let it finish before editing or uploading more files into the workspace.
+5. Return the complete output, including STATUS and REPORT_DIRECTORY.
+
+Allow approximately 5–15 minutes to upload, run, and return. Replit AI is
+not needed. If the checksum reports a missing file, finish uploading the
+TXT with the exact filename before running the command again.
+
+R18C uses the retained build and writes only a new diagnostic report.
+It does not rebuild, install packages, edit application files, start the
+application, send email, connect to a database, make AI requests, or deploy.
+It may execute the existing exact-reviewed ws/pg and Resend synthetic tests
+after all preceding checks pass. Attempt flags report whether they ran.
+
+How to interpret the result:
+- RETAINED_RUNTIME_CONTRACT_CHECKS_PASS_NOT_RELEASE: listed retained checks
+  passed; application and deployment verification are still needed.
+- RUNTIME_CONTRACT_REVIEW_REQUIRED: inspect the reported findings before
+  continuing. Input-only external references are never silently accepted.
+- RUNTIME_CONTRACT_FAILED: return the failed gate and complete output.
+
+Locally verified: 29 graph tests, 22 integration fixtures,
+Node/Bash syntax, and unchanged 63 pins plus five non-graph helpers.
+Integration success paths include 11 helper and 20 Resend synthetic cases.
+Tests used Node v24.19.0; the production command retains its exact
+Replit Node v24.13.0 gate. No actual MMHB runtime was executed locally.
+
+Current release status: publication acceptance remains open. The earlier
+27–61 engineering-hour estimate is a low-confidence planning allowance for
+the first release, assuming substantial existing implementation and no
+major redesign. Expanded library/calendar/social/provider features and
+external waiting are excluded. Reestimate after controlled startup.

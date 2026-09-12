@@ -1,0 +1,184 @@
+TAP version 13
+# Subtest: published private modules match exact source/package hashes across keys, edges, and contributions
+ok 1 - published private modules match exact source/package hashes across keys, edges, and contributions
+  ---
+  duration_ms: 8.181722
+  type: 'test'
+  ...
+# Subtest: reviewed exception normalizes historical absolute and dot-prefix aliases consistently
+ok 2 - reviewed exception normalizes historical absolute and dot-prefix aliases consistently
+  ---
+  duration_ms: 2.311663
+  type: 'test'
+  ...
+# Subtest: changed recorded module identities cannot grant the private exception
+ok 3 - changed recorded module identities cannot grant the private exception
+  ---
+  duration_ms: 2.753526
+  type: 'test'
+  ...
+# Subtest: changed or missing recorded package identities cannot grant the private exception
+ok 4 - changed or missing recorded package identities cannot grant the private exception
+  ---
+  duration_ms: 2.006583
+  type: 'test'
+  ...
+# Subtest: unreviewed private and sensitive paths still fail without filename disclosure
+ok 5 - unreviewed private and sensitive paths still fail without filename disclosure
+  ---
+  duration_ms: 7.094796
+  type: 'test'
+  ...
+# Subtest: published private filenames do not weaken output external or package name validation
+ok 6 - published private filenames do not weaken output external or package name validation
+  ---
+  duration_ms: 1.624529
+  type: 'test'
+  ...
+# Subtest: private exception cannot bypass traversal, root escape, or case-sensitive path identity
+ok 7 - private exception cannot bypass traversal, root escape, or case-sensitive path identity
+  ---
+  duration_ms: 1.524662
+  type: 'test'
+  ...
+# Subtest: an input-only external using a reviewed spelling still requires opaque external review
+ok 8 - an input-only external using a reviewed spelling still requires opaque external review
+  ---
+  duration_ms: 1.852115
+  type: 'test'
+  ...
+# Subtest: links repeated input bytes, contributions, external owners and package importers
+ok 9 - links repeated input bytes, contributions, external owners and package importers
+  ---
+  duration_ms: 1.170138
+  type: 'test'
+  ...
+# Subtest: historical absolute input aliases and relative output normalize without reading former cwd
+ok 10 - historical absolute input aliases and relative output normalize without reading former cwd
+  ---
+  duration_ms: 0.893039
+  type: 'test'
+  ...
+# Subtest: duplicate input aliases and duplicate contribution aliases are rejected
+ok 11 - duplicate input aliases and duplicate contribution aliases are rejected
+  ---
+  duration_ms: 1.281572
+  type: 'test'
+  ...
+# Subtest: traversal, escaped absolute internal input and private input remain rejected without echo
+ok 12 - traversal, escaped absolute internal input and private input remain rejected without echo
+  ---
+  duration_ms: 0.452077
+  type: 'test'
+  ...
+# Subtest: input absent from retained inventory or wrong bytes cannot qualify
+ok 13 - input absent from retained inventory or wrong bytes cannot qualify
+  ---
+  duration_ms: 1.037101
+  type: 'test'
+  ...
+# Subtest: output must be exactly recorded server bundle and recorded entry point
+ok 14 - output must be exactly recorded server bundle and recorded entry point
+  ---
+  duration_ms: 0.867351
+  type: 'test'
+  ...
+# Subtest: malformed import records, unknown kinds and ambiguous external flag are rejected
+ok 15 - malformed import records, unknown kinds and ambiguous external flag are rejected
+  ---
+  duration_ms: 0.685393
+  type: 'test'
+  ...
+# Subtest: internal edge must be represented in the same graph, not merely in inventory
+ok 16 - internal edge must be represented in the same graph, not merely in inventory
+  ---
+  duration_ms: 0.429284
+  type: 'test'
+  ...
+# Subtest: repeat graph changes, including contributions and input set, cannot qualify
+ok 17 - repeat graph changes, including contributions and input set, cannot qualify
+  ---
+  duration_ms: 1.166353
+  type: 'test'
+  ...
+# Subtest: repeat output external sets and kinds must match; static source edges need not survive tree shaking
+ok 18 - repeat output external sets and kinds must match; static source edges need not survive tree shaking
+  ---
+  duration_ms: 0.802254
+  type: 'test'
+  ...
+# Subtest: output contributions and inventory duplicates have strict bounds
+ok 19 - output contributions and inventory duplicates have strict bounds
+  ---
+  duration_ms: 0.461822
+  type: 'test'
+  ...
+# Subtest: context roots are explicit historical R17B roots; module has no fixture-path override
+ok 20 - context roots are explicit historical R17B roots; module has no fixture-path override
+  ---
+  duration_ms: 0.197382
+  type: 'test'
+  ...
+# Subtest: esbuild 0.28.2 input attributes are validated and compared without printing their values
+ok 21 - esbuild 0.28.2 input attributes are validated and compared without printing their values
+  ---
+  duration_ms: 1.554215
+  type: 'test'
+  ...
+# Subtest: input-only relative, absolute and scheme externals retain only opaque identity and require review
+ok 22 - input-only relative, absolute and scheme externals retain only opaque identity and require review
+  ---
+  duration_ms: 2.057969
+  type: 'test'
+  ...
+# Subtest: zero owner contribution does not waive review or classify opaque edge unreachable
+ok 23 - zero owner contribution does not waive review or classify opaque edge unreachable
+  ---
+  duration_ms: 0.407693
+  type: 'test'
+  ...
+# Subtest: input opaque identities take part in repeat comparison, including same shape and byte count
+ok 24 - input opaque identities take part in repeat comparison, including same shape and byte count
+  ---
+  duration_ms: 0.700935
+  type: 'test'
+  ...
+# Subtest: output externals stay strict with bounded hashed diagnostic and metadata side/index
+ok 25 - output externals stay strict with bounded hashed diagnostic and metadata side/index
+  ---
+  duration_ms: 1.993574
+  type: 'test'
+  ...
+# Subtest: malformed input externals still fail with input-side diagnostics without leaking value
+ok 26 - malformed input externals still fail with input-side diagnostics without leaking value
+  ---
+  duration_ms: 0.667516
+  type: 'test'
+  ...
+# Subtest: malformed internal import paths have safe location and hashed-value metadata
+ok 27 - malformed internal import paths have safe location and hashed-value metadata
+  ---
+  duration_ms: 0.183781
+  type: 'test'
+  ...
+# Subtest: inferred invalid package name fails its own gate without echoing package or owner path
+ok 28 - inferred invalid package name fails its own gate without echoing package or owner path
+  ---
+  duration_ms: 0.320964
+  type: 'test'
+  ...
+# Subtest: ordinary input external owners state emitted-specifier membership without claiming callsite mapping
+ok 29 - ordinary input external owners state emitted-specifier membership without claiming callsite mapping
+  ---
+  duration_ms: 0.504865
+  type: 'test'
+  ...
+1..29
+# tests 29
+# suites 0
+# pass 29
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 139.894666

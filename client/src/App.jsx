@@ -317,6 +317,8 @@ import {
   Presence
 } from "./routes/lazyRoutes.jsx";
 
+import MMHBTermsPage from "./pages/Terms";
+
 function ConfigRoute({ route }) {
   const routeKey = routeKeyFromRoute(route);
   return <AutopilotPage route={route} routeKey={routeKey} />;
@@ -1490,8 +1492,8 @@ export default function App() {
               <Route path="/design-dashboard">{() => <ConfigRoute route="/design-dashboard" />}</Route>
 
               {/* Legal Pages - Config Driven */}
-              <Route path="/terms">{() => <ConfigRoute route="/terms" />}</Route>
-              <Route path="/tos">{() => <ConfigRoute route="/tos" />}</Route>
+              <Route path="/terms">{() => <MMHBTermsPage />}</Route>
+              <Route path="/tos">{() => <MMHBTermsPage />}</Route>
               <Route path="/legal">{() => <ConfigRoute route="/legal" />}</Route>
               <Route path="/ethics">{() => <ConfigRoute route="/ethics" />}</Route>
               <Route path="/disclaimer">{() => <ConfigRoute route="/disclaimer" />}</Route>

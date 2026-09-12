@@ -1,0 +1,91 @@
+{
+  "package": "es6-symbol",
+  "version": "3.1.4",
+  "source": "https://registry.npmjs.org/es6-symbol/-/es6-symbol-3.1.4.tgz",
+  "registryIntegrity": "sha512-U9bFFjX8tFiATgtkJ1zg25+KviIXpgRvRHS8sau3GfhVzThRQrOeksPeT0BWW2MNZs1OEWJ1DPXOQMn0KKRkvg==",
+  "integrityMatched": true,
+  "registrySignatureVerified": false,
+  "archiveSha256": "f93d1eb7e5c6c3fbd74d17e7b04c9e0c69b001c92ef1ba0744f079b2da4b9e40",
+  "files": [
+    {
+      "file": ".testignore",
+      "bytes": 13,
+      "sha256": "fdcea6198ec24acb9f4ed268d1b3cc27a83612604bc08e29464e1fbae30ddbea"
+    },
+    {
+      "file": "CHANGES",
+      "bytes": 1937,
+      "sha256": "9230f6e893262a44252a594e57b0c367f7a4618dfc3fe9c0aa2951d26f70a9da"
+    },
+    {
+      "file": "LICENSE",
+      "bytes": 773,
+      "sha256": "77485a12d142fd84ee9f278b42968b2f029c876c8dddca7d0e13fa164ffeed34"
+    },
+    {
+      "file": "lib/private/generate-name.js",
+      "bytes": 789,
+      "sha256": "ac714f2cc6f1595a5b7bc967d411ca41e320e1a599690c383d4a2b492857b8d4"
+    },
+    {
+      "file": "implement.js",
+      "bytes": 215,
+      "sha256": "cd368316f7b7cf4a516867064703a679ae7aa39d946c4f65729d4e89f8f410ec"
+    },
+    {
+      "file": "index.js",
+      "bytes": 125,
+      "sha256": "1b28ec5147eefbb863e2bff0a756236b0cc4cd067141a5aa71b40d929363c9be"
+    },
+    {
+      "file": "is-implemented.js",
+      "bytes": 548,
+      "sha256": "d2afe0dfab4879d7ee91411db1f90f5219b5c6ab4a2243870fe4c0b5a1b316a1"
+    },
+    {
+      "file": "is-native-implemented.js",
+      "bytes": 215,
+      "sha256": "0a8b1a4ae8e47c6f6293a18600ea9b26d4dcbf1be6f09b5635735570d644faa5"
+    },
+    {
+      "file": "is-symbol.js",
+      "bytes": 280,
+      "sha256": "140452ab8d9fd2d7efefe51212f45ecfb31f1c30a9991384dfc3cf67102aa7c2"
+    },
+    {
+      "file": "polyfill.js",
+      "bytes": 3239,
+      "sha256": "fde666a610738ff35c00e1b8b68ae9219b9bcefced9431ea3eabff0372662f99"
+    },
+    {
+      "file": "lib/private/setup/standard-symbols.js",
+      "bytes": 1421,
+      "sha256": "c3d07ccebb99ac65268c51642442988bfd501625491fec4bc1485d5d3b9f606b"
+    },
+    {
+      "file": "lib/private/setup/symbol-registry.js",
+      "bytes": 556,
+      "sha256": "cae9c8c351bd16fe85e380a49d2bee0083863a070b2ada4a1607932eb95d0f08"
+    },
+    {
+      "file": "validate-symbol.js",
+      "bytes": 181,
+      "sha256": "ca976c29577348726fd2babf1f8e73fd8b2db61d01062163a6cb57d808063eae"
+    },
+    {
+      "file": "package.json",
+      "bytes": 2161,
+      "sha256": "a37d9a643a92e8c58675a3e03b2bae12df95215b6a45889e752e0018f60fd525"
+    },
+    {
+      "file": "CHANGELOG.md",
+      "bytes": 920,
+      "sha256": "5c099e3b657031053a0800c7ce5df6f079c39344ac02715c0a4d4fa10899f99a"
+    },
+    {
+      "file": "README.md",
+      "bytes": 3138,
+      "sha256": "538ad32e0b3e7bde47343676b526b79aa4df91d444f28c6b793b6f33af8c202d"
+    }
+  ]
+}

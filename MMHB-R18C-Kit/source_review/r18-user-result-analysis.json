@@ -1,0 +1,58 @@
+{
+  "project": "MyMentalHealthBuddy",
+  "evidenceSource": "USER_PASTED_REPLIT_OUTPUT_NOT_RAW_REPORT_RETRIEVED",
+  "run": {
+    "command": "MMHB-RUNTIME-CONTRACT-R18",
+    "utc": "2026-09-09T08:55:31.234Z",
+    "reportDirectory": "/home/runner/workspace/.mmhb-release-evidence/r18-WfDN1S",
+    "commandSha256": "c7d1a439e6ffb436877f0081ad376d947d057de25fe515912771667c4110eb7a",
+    "checksum": "PASS_ON_SECOND_ATTEMPT",
+    "firstAttempt": "FILE_MISSING_CHECKSUM_FAILED_DRIVER_NOT_RUN",
+    "status": "RUNTIME_CONTRACT_FAILED",
+    "failure": {
+      "phase": "RETAINED_BUILD_LINKAGE",
+      "gate": "RUNTIME_EXTERNAL_SPECIFIER"
+    }
+  },
+  "observed": {
+    "pinsMatch": 63,
+    "historicalAdditionsAccountedFor": 42,
+    "historicalActor": "UNKNOWN",
+    "historicalRunRewritten": false,
+    "candidateFiles": 625,
+    "candidateManifestSha256": "cb4c9c57fce1124f453110eb713d86b0f32855436df1030427cc32c2a2df0320",
+    "serverSha256": "d103e3532fe45af0d270c777310334a4672338fc2345660287033e9ecf98d2c7",
+    "sourceChecked": 5192,
+    "sourceStatus": "RECORDED_WORKSPACE_AND_RETAINED_SOURCE_MATCH",
+    "preservationChanges": 0,
+    "evidenceWrite": "SAVED",
+    "releaseReady": false,
+    "applicationRuntime": "UNPROVEN",
+    "deployedArtifact": "UNPROVEN"
+  },
+  "controlFlowAnalysis": {
+    "helperTestsReached": false,
+    "resendTestsReached": false,
+    "selectedPackageReviewReached": false,
+    "basis": "DELIVERED_R18_DRIVER_SEQUENCE_AND_RETURNED_PHASE_NO_RESULTS",
+    "reportedSyntheticFooter": "SCOPE_LABEL_NOT_PROOF_THAT_TESTS_EXECUTED"
+  },
+  "unknowns": [
+    "Actual rejected specifier",
+    "Whether rejection was input import, output import, or inferred package name",
+    "Whether all remaining R18 checks pass on retained Replit bytes"
+  ],
+  "repairScope": "R18_GRAPH_METADATA_CHECKER_AND_ERROR_DIAGNOSTICS_ONLY",
+  "historicalR17BStatus": "FRESH_CANDIDATE_FAILED",
+  "notPerformed": [
+    "Application source repair",
+    "Build",
+    "Package install",
+    "Application start",
+    "Database request",
+    "Email",
+    "AI request",
+    "Git write",
+    "Deployment"
+  ]
+}

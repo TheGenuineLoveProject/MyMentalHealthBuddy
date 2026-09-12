@@ -1,34 +1,17 @@
 import { Link } from "wouter";
 import { ArrowLeft, FileText, Shield, AlertCircle, User, Heart } from "lucide-react";
 import SEO from "@/components/SEO";
-import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
-import { pickBenefits } from "@/lib/benefits";
+
+
 
 export default function Terms() {
   return (
-  <WellnessPageShell
-    title="Terms"
-    subtitle="Educational reflection tools. Choose what feels safe and supportive."
-    benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
-    clarity={{
-      what: "A self-paced reflection tool you control.",
-      why: "To support clarity, values alignment, and gentle next steps.",
-      who: "For adults (18+) who want educational wellness tools (not medical care).",
-      when: "Anytime you want a small reset or a thoughtful pause.",
-      where: "Anywhere you can breathe and write for 1–5 minutes.",
-      how: "Pick one prompt, answer briefly, stop whenever you want."
-    }}
-    examples={[
-      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
-      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
-      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
-    ]}
-  >
+
 
     <>
       <SEO 
-        title="Terms of Use - The Genuine Love Project"
-        description="Terms of Use for The Genuine Love Project mental wellness platform."
+        title="Terms of Use - MyMentalHealthBuddy"
+        description="Draft Terms of Use summary for MyMentalHealthBuddy."
       />
       <div className="min-h-screen" style={{ background: 'var(--glp-paper)' }}>
         <div className="content-wrapper py-8">
@@ -46,16 +29,17 @@ export default function Terms() {
                   <FileText className="w-7 h-7" />
                 </div>
                 <div>
-                  <h1 className="text-display-lg text-teal">Terms of Use</h1>
-                  <p className="text-lead">Summary for launch</p>
+                  <h1 id="mmhb-terms-title" className="text-display-lg text-teal">Terms of Use</h1>
+                  <p className="text-lead">Draft summary. Full Terms are still required.</p>
+                  <a href="#terms" className="inline-block underline mt-4">Read Terms</a>
                 </div>
               </div>
             </header>
 
-            <div className="space-y-6">
+            <div id="terms" aria-labelledby="mmhb-terms-title" tabIndex={-1} className="space-y-6 scroll-mt-24">
               <section className="card-bordered">
                 <p className="text-body-sm">
-                  By using The Genuine Love Project, you agree to use the app responsibly and lawfully.
+                  By using MyMentalHealthBuddy, you agree to use the app responsibly and lawfully.
                   Do not misuse the platform, attempt unauthorized access, or upload harmful content.
                 </p>
               </section>
@@ -113,6 +97,6 @@ export default function Terms() {
         </div>
       </div>
     </>
-  </WellnessPageShell>
+
   );
 }

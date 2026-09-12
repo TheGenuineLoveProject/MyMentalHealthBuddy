@@ -1,0 +1,3586 @@
+{
+  "MMHB-ARCHIVE-URL-DIAGNOSTIC-R16B.txt": [
+    "8ba26f37cfea2a0f22ec3b534731a0a8014e0208"
+  ],
+  "MMHB-BUNDLE-AWARE-DEPENDENCIES-R16D.txt": [
+    "ca0731188e19cd8be4fddb901b65f95be588c9a8"
+  ],
+  "MMHB-DEPENDENCY-METADATA-R16E.txt": [
+    "b4baa309bd2da52ade6d0c67e7db8999e3630d77"
+  ],
+  "MMHB-FRESH-CANDIDATE-R17.txt": [
+    "84b1befaf3c7a846157ab3134ea57daa1bd4aeea"
+  ],
+  "MMHB-FRONTEND-CANDIDATE-R12.txt": [
+    "eb6131fff60b7a81607e28f0c63a560989be63d9"
+  ],
+  "MMHB-FRONTEND-CANDIDATE-R12A.txt": [
+    "1db8acb0341e0fe3ec0e8db63b3b08c40051fb85"
+  ],
+  "MMHB-INPUT-PATH-INSPECT-R18B.txt": [
+    "d62cd69ff7626ec368b62a41b7634bf136e9451b"
+  ],
+  "MMHB-LOCKED-DEPENDENCIES-R16.txt": [
+    "aa54d391fb33830a0d136c0887363ab2e54aaca3"
+  ],
+  "MMHB-LOCKED-DEPENDENCIES-R16A.txt": [
+    "0aecd1688760b1d574ced190bfd933727239cce0"
+  ],
+  "MMHB-Ledger.txt": [
+    "117c58234a0339f313766f7409e987c9f0d344f1",
+    "17166dbce412686b00d1d48ba4444ef271f2dcff",
+    "3decff327700c6f69c78041fb2c2d4c605ae073a",
+    "84c77370c141425d51f6e51ac00658d3c5c60be2",
+    "9f47ab78ca5954e76e34824edde04b960b200233",
+    "b2cb23c74c35d12cbb1703c220e80becd98ac4a4",
+    "cbe610a6178ffb59a3f0d84d9a4676e9f905d707",
+    "ce26596a85fef5cc6b4e557e11ce1392d256b199"
+  ],
+  "MMHB-PRESERVATION-INSPECT-R17C.txt": [
+    "11a1977545362b3a7395398a59de9c92bdf9499c"
+  ],
+  "MMHB-PROMPT-ASSETS-R15.txt": [
+    "e45d5e3d57f77da16d4614e729fbcb4f7fecc063"
+  ],
+  "MMHB-R11D-Verification.zip": [
+    "58c85ca549352c27015cb82e98f1a20f7f07e971"
+  ],
+  "MMHB-R11D-Verification/MMHB-SERVER-CANDIDATE-R11D.txt": [
+    "7573a5906c74381b499353b5efd73f11b75228fb"
+  ],
+  "MMHB-R11D-Verification/README.md": [
+    "8ccf32baf2672091d6084884d95baea3ad30ed69"
+  ],
+  "MMHB-R11D-Verification/server-candidate-driver-r11d.mjs": [
+    "f7f6becd2e6c02a99f4d3448aafbbbf6a8f0bfb1"
+  ],
+  "MMHB-R11D-Verification/test-server-candidate-r11d.py": [
+    "404c30f7851419e5a7617bc391550cab463a0c92"
+  ],
+  "MMHB-R11D-Verification/verification-record.json": [
+    "7f6f4624ba1e33a5eabc3403178365de49fce3d4"
+  ],
+  "MMHB-R12-Verification.zip": [
+    "4edb8b091e7394ce064cf55aeb50e4d476489a00"
+  ],
+  "MMHB-R12-Verification/MMHB-FRONTEND-CANDIDATE-R12.txt": [
+    "eb6131fff60b7a81607e28f0c63a560989be63d9"
+  ],
+  "MMHB-R12-Verification/source_review/R12-Verification-README.md": [
+    "74ccf02290e147dc988a121c683658cdd660a140"
+  ],
+  "MMHB-R12-Verification/source_review/frontend-candidate-driver-r12.mjs": [
+    "d2e9d401c59d9cb42c89d032ac0382429c5883c0"
+  ],
+  "MMHB-R12-Verification/source_review/frontend-candidate-runner-r12.mjs": [
+    "c7f503e3e39d458c19b33d5a457ab64798cd4570"
+  ],
+  "MMHB-R12-Verification/source_review/r12-verification-record.json": [
+    "ce111d547f95a57696d93fefc521613100427d60"
+  ],
+  "MMHB-R12-Verification/source_review/test-frontend-candidate-r12.py": [
+    "2d28ba09e44c7a77d19dc7852f911cfcde85c784"
+  ],
+  "MMHB-R12-Verification/source_review/test-frontend-runner-r12.py": [
+    "b09182376b59da93300ca0ae5d70ad10fb783301"
+  ],
+  "MMHB-R12A-Verification.zip": [
+    "b6a8cf85c7a2e018fd955ac53a420ad33bcbe561"
+  ],
+  "MMHB-R12A-Verification/MMHB-FRONTEND-CANDIDATE-R12A.txt": [
+    "1db8acb0341e0fe3ec0e8db63b3b08c40051fb85"
+  ],
+  "MMHB-R12A-Verification/source_review/R12A-Verification-README.md": [
+    "52e82d9edb1136180b1ddf4d1e811d931af1036d"
+  ],
+  "MMHB-R12A-Verification/source_review/frontend-candidate-driver-r12a.mjs": [
+    "a98dd99e8e2f4374eb540f27cd7377a09452ffce"
+  ],
+  "MMHB-R12A-Verification/source_review/frontend-candidate-runner-r12.mjs": [
+    "c7f503e3e39d458c19b33d5a457ab64798cd4570"
+  ],
+  "MMHB-R12A-Verification/source_review/r12a-parent-fixture-results.txt": [
+    "2657292322f7f15e5f42621d1e2f27e61d68b4fd"
+  ],
+  "MMHB-R12A-Verification/source_review/r12a-verification-record.json": [
+    "d0bbb1c66dc13b0b6a8b7c24434dc76027547435"
+  ],
+  "MMHB-R12A-Verification/source_review/test-frontend-candidate-r12a.py": [
+    "3e1ada227996e94cd24073a5a9ae0fef7107380e"
+  ],
+  "MMHB-R12A-Verification/source_review/test-frontend-runner-r12.py": [
+    "b09182376b59da93300ca0ae5d70ad10fb783301"
+  ],
+  "MMHB-R13-Verification.zip": [
+    "106b1e8586a3df42a09efbaebe1e620d07181bd5"
+  ],
+  "MMHB-R13-Verification/MMHB-RELEASE-ASSEMBLY-R13.txt": [
+    "0720dffc76f4474dc8fb86a846df82b0797da57f"
+  ],
+  "MMHB-R13-Verification/R13-Verification-README.md": [
+    "e867071d7f6fb50d3ff73518718f5978185dd69a"
+  ],
+  "MMHB-R13-Verification/native-candidate-runner-r13.mjs": [
+    "7e0d11c2c88c8ec2670714a2be168e5ee6c0fa1e"
+  ],
+  "MMHB-R13-Verification/r13-native-runner-fixture-results.txt": [
+    "40e059f0ac6a22581f3e144e5e3142033a67a33b"
+  ],
+  "MMHB-R13-Verification/r13-parent-fixture-results.txt": [
+    "d2e8cffbdfbb225eb0ea303fa4584de41808c17d"
+  ],
+  "MMHB-R13-Verification/r13-preparation-record.json": [
+    "d76b4a8f256c8254de6d3a13034b2e64287d7dca"
+  ],
+  "MMHB-R13-Verification/release-assembly-driver-r13.mjs": [
+    "f53b2b60ca784b727cdd548be301cf176a19a3c4"
+  ],
+  "MMHB-R13-Verification/test-native-candidate-runner-r13.py": [
+    "2b48bbf0ad8997cb6b0d9234973ee8e04f357549"
+  ],
+  "MMHB-R13-Verification/test-release-assembly-r13.py": [
+    "9ade9bf5ba82b04fd427f2dbf98abe6586910da3"
+  ],
+  "MMHB-R14-Verification.zip": [
+    "28b9bf4a3bfd4d444585ded425ad5b6f9817dcf3"
+  ],
+  "MMHB-R14-Verification/MMHB-RUNTIME-CONTRACT-R14.txt": [
+    "d081e3c79d76e4ded3dd2624a28b9fd80d4aab35"
+  ],
+  "MMHB-R14-Verification/MMHB-Readiness-Ledger-2026-09-07.md": [
+    "d0a3a143115dde1fc3633e7406a416141285987a"
+  ],
+  "MMHB-R14-Verification/source_review/R14-Verification-README.md": [
+    "2668c729f60a162b903ecfa42527e68f6c3bc5ed"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-ai-business-prompts-b01_offer_design.md": [
+    "252266768f6b961b4263cf026e4e03a2c3fd2a69"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-ai-business-prompts-b02_funnel_map.md": [
+    "847821fd9b7ee33351318bc2a4578d2af8e3e1f2"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-ai-business-prompts-b03_content_factory.md": [
+    "3d5da014d3dbc34cf207720e9f0d60e723aaebe8"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-ai-business-prompts-b04_email_sequences.md": [
+    "539065de9fec776d715fc1521d28e8f483772cad"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-ai-business-prompts-b05_seo_briefs.md": [
+    "098b75e329a25dc29f5b0f11b68a7c3f9bff56c1"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-ai-business-prompts-b06_competitive_scan.md": [
+    "b874efe29f0572d5de1df5a857474ec5ba6bb281"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-ai-business-prompts-b07_pricing_packaging.md": [
+    "7cf441853ba14f154a1bd8b32def7774dbb95084"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-ai-business-prompts-b08_retention_loyalty.md": [
+    "219ec3a824cb98622e4f0b7baf02e65b02285874"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-ai-business-prompts-b09_partnerships.md": [
+    "644504e2ba12a919af3efa9fbb7b28325437e3f6"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-ai-business-prompts-b10_ops_sops.md": [
+    "471129be193767cae6bd278532cf7ba9dfb34659"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-ai-business-registry.json": [
+    "437205dcfba0dde0ed419693b0d7f51bbb5798a1"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-ai-business-system.md": [
+    "340e8f97cd3f60bc270d6f6085e67430394a1531"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-ai-healing-prompts-h01_intake.md": [
+    "b51037ef1d4866f1c1f00c3858796264d2bb58b0"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-ai-healing-prompts-h02_journal_reflect.md": [
+    "ee92d0f62b25546c0d6fcda98300262db156790d"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-ai-healing-prompts-h03_cbt_reframe.md": [
+    "7c08d9b1ee6a23ce10e8b3f4e436af0591a20c0b"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-ai-healing-prompts-h04_act_values.md": [
+    "a499b49cd2eb95f42154bf7468317c59285f5caf"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-ai-healing-prompts-h05_breathing_grounding.md": [
+    "e0ab88b3254d0794202637265c7be41ab3ad7149"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-ai-healing-prompts-h06_sleep_reset.md": [
+    "b81019c17014b2315a8f93291bd94e8c81b97ed7"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-ai-healing-prompts-h07_conflict_script.md": [
+    "861e1983a269f78e11f707cf12a3b338c7e728c7"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-ai-healing-prompts-h08_safety_check.md": [
+    "3e14b3977e4cb09ec3aa4ad5f48008ddcaee2429"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-ai-healing-registry.json": [
+    "af7432d81889f5004cb69bccd3a668ab760c4faa"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-ai-healing-system.md": [
+    "7b5f28a8f89e1854fdc34138b9865a9ab95688a9"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-content-blog-index.json": [
+    "41fba84771a31afba0b5695fb3eab5bb3244aa5d"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-healScheduler.mjs": [
+    "41ec6cb87390bbf762f688ee933601abf9cc0c9d"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-kernel-bridge.mjs": [
+    "7ec7e66fd8cdf2df9ac8c7f9684d6f3dff4da0b5"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-known-asset-metadata.json": [
+    "10a90b222d54896120bf5529714e4346ec807f99"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-prompt-os-kernel-engines-business-command-engine.md": [
+    "2149e961671af6c671491a214e5b057ea344f5c9"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-prompt-os-kernel-governance-MASTER_STRATEGY.md": [
+    "483cf181de0c8bf2cc0d61cd044370df08987b25"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-prompt-os-kernel-governance-domain-router.md": [
+    "bfc7d46d795f80cd7cf00cddbdd1d5f8ceea2571"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-prompt-os-kernel-governance-execution-protocol.md": [
+    "b3eb5c1fb3cd676dd5236a4298d14b39f3012d56"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-prompt-os-kernel-governance-quality-gates.md": [
+    "5f9b0a91e61962b04bbaee335abb25c525c27b1d"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-prompt-os-kernel-install.sh": [
+    "602f20ffcacf96dece53e6f3d5bb086a409a2bcd"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-prompt-os-kernel-schemas-promptspec.schema.json": [
+    "56186e117129d53c0cabda66e30bbbb6a49ae5b5"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-prompt-os-kernel-scripts-verify-platform-kernel.mjs": [
+    "12ce5110ccc153825d03d87d3b8f3804593573b2"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-promptEngine.mjs": [
+    "c8544c62336cc918ed9bced3b0bc253721a75ea6"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-remote-manifest.json": [
+    "d8691c051a861ed8912874a8aca3c22a6fec05ba"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-remote-sources.json": [
+    "f8349df38a3390521a7b184f22a9753a2b483be5"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-rss.mjs": [
+    "a032b5ce9baf58dba99db7451a283139640fda5e"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-runtime-mapping.json": [
+    "550abd3b353b8d6a04691d6431fafd61f48ce5f2"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-server-engine-prompt-os-kernel-bridge.mjs": [
+    "7ec7e66fd8cdf2df9ac8c7f9684d6f3dff4da0b5"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-server-lib-healScheduler.mjs": [
+    "41ec6cb87390bbf762f688ee933601abf9cc0c9d"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-server-lib-promptEngine.mjs": [
+    "c8544c62336cc918ed9bced3b0bc253721a75ea6"
+  ],
+  "MMHB-R14-Verification/source_review/r14-assets-server-routes-rss.mjs": [
+    "a032b5ce9baf58dba99db7451a283139640fda5e"
+  ],
+  "MMHB-R14-Verification/source_review/r14-driver-fixture-results.txt": [
+    "0143889ebbb216d53c0c722f18e3d1b0cda03f41"
+  ],
+  "MMHB-R14-Verification/source_review/r14-external-extra-index.json": [
+    "f03076f166e9dfdabad4a17ad620ce58c09973a0"
+  ],
+  "MMHB-R14-Verification/source_review/r14-external-mmhb-server-db-connection.mjs": [
+    "153868f248177a9f15746466a2814e5ea638d574"
+  ],
+  "MMHB-R14-Verification/source_review/r14-external-mmhb-server-routes-blog.mjs": [
+    "64458c35dfa5179302f6d888604d935e025c58d0"
+  ],
+  "MMHB-R14-Verification/source_review/r14-external-mmhb-server-services-email.mjs": [
+    "88217e1cd184a9e3a9a801ac7542820c3fd5fc8a"
+  ],
+  "MMHB-R14-Verification/source_review/r14-external-mmhb-server-services-newsletterSend.mjs": [
+    "99b1b30354f71a689532c1f2e9a2a6c9ce0350fa"
+  ],
+  "MMHB-R14-Verification/source_review/r14-external-mmhb-server-utils-email.mjs": [
+    "9df253aefaf623010d94a49c54014c1f62417d67"
+  ],
+  "MMHB-R14-Verification/source_review/r14-external-node-postgres-packages-pg-esm-index.mjs": [
+    "587d80c1e57bebf7e8f886c510973c325a84de3e"
+  ],
+  "MMHB-R14-Verification/source_review/r14-external-node-postgres-packages-pg-lib-index.js": [
+    "e8b746149ca3480017b6faaa6c934bc5ce1ab2f0"
+  ],
+  "MMHB-R14-Verification/source_review/r14-external-node-postgres-packages-pg-lib-native-client.js": [
+    "fa17d9f6541cacc41694b099a15bc30cd18c1659"
+  ],
+  "MMHB-R14-Verification/source_review/r14-external-node-postgres-packages-pg-lib-native-index.js": [
+    "eead422a3a65d871f6d419293534cdbe1187e908"
+  ],
+  "MMHB-R14-Verification/source_review/r14-external-node-postgres-packages-pg-lib-stream.js": [
+    "edc3018332d999139e6b6573230e8c0553650bc0"
+  ],
+  "MMHB-R14-Verification/source_review/r14-external-node-postgres-packages-pg-package.json": [
+    "61f9b7ede572dc3f215ebfbafa633ef8b55e69cd"
+  ],
+  "MMHB-R14-Verification/source_review/r14-external-resend-node-package.json": [
+    "f719607345944fe41594cf9f82a57f06a8f17db8"
+  ],
+  "MMHB-R14-Verification/source_review/r14-external-resend-node-src-batch-batch.ts": [
+    "777f328c55f935a8e3e764f9ad18d62fe9efe1f3"
+  ],
+  "MMHB-R14-Verification/source_review/r14-external-resend-node-src-emails-emails.ts": [
+    "a48e9edebcbfdb8fb4ec03134feb644cc6de14c7"
+  ],
+  "MMHB-R14-Verification/source_review/r14-external-resend-node-src-render.ts": [
+    "424025e333aae2f04c00b9b1ea2a12a31222b726"
+  ],
+  "MMHB-R14-Verification/source_review/r14-external-review.md": [
+    "570673a0a8f2aba9dd97110dd612283da2efb3a4"
+  ],
+  "MMHB-R14-Verification/source_review/r14-external-reviewed-mapping.json": [
+    "0f8cfde2337c0fa8d0714420a12f9d1770a261c7"
+  ],
+  "MMHB-R14-Verification/source_review/r14-external-source-index.json": [
+    "e68285e734abbcb287418cdf7546a3321906ffe7"
+  ],
+  "MMHB-R14-Verification/source_review/r14-external-ws-lib-buffer-util.js": [
+    "f7536e28efa570277e30e9ea001200ee11595fee"
+  ],
+  "MMHB-R14-Verification/source_review/r14-external-ws-lib-validation.js": [
+    "4a2e68d5127279431a74b6961e8d35161d3276e2"
+  ],
+  "MMHB-R14-Verification/source_review/r14-external-ws-package.json": [
+    "9116e663298ebdb1321f29b44463a25d76d4791b"
+  ],
+  "MMHB-R14-Verification/source_review/r14-preparation-record.json": [
+    "497c3d3d7daa2b5b9594dc18de247ec441f9ca65"
+  ],
+  "MMHB-R14-Verification/source_review/runtime-contract-analysis-r14-results.txt": [
+    "dd83949ee20afa6d312d5ae0abba8b0c5b12575e"
+  ],
+  "MMHB-R14-Verification/source_review/runtime-contract-analysis-r14.mjs": [
+    "35fd277d8e6f1134039c39475cf8b1322031220e"
+  ],
+  "MMHB-R14-Verification/source_review/runtime-contract-driver-r14.mjs": [
+    "5559e97d7e72af44fbf4ab1ece105b7d9012e017"
+  ],
+  "MMHB-R14-Verification/source_review/test-runtime-contract-analysis-r14.mjs": [
+    "3df23418ba61e33dfae3abb1c65f14143d2dd8aa"
+  ],
+  "MMHB-R14-Verification/source_review/test-runtime-contract-r14.py": [
+    "f23c7db1f61151a0b89c9b8eec7e20cf6441bd07"
+  ],
+  "MMHB-R15-Verification.zip": [
+    "c3b2fa50445ffd12aaa1e713462ddb8638ae79b8"
+  ],
+  "MMHB-R15-Verification/MMHB-PROMPT-ASSETS-R15.txt": [
+    "e45d5e3d57f77da16d4614e729fbcb4f7fecc063"
+  ],
+  "MMHB-R15-Verification/MMHB-Readiness-Ledger-2026-09-07.md": [
+    "c319b8c8a6013bb97efa81b0e15db90336b5f13d"
+  ],
+  "MMHB-R15-Verification/source_review/R15-Verification-README.md": [
+    "3c1b2fb07eb2229e7695f7bcca44b6bd02b6724c"
+  ],
+  "MMHB-R15-Verification/source_review/prompt-asset-runner-r15-results.json": [
+    "abe3b5aff59e09fba120d65671cbcffe0b366c58"
+  ],
+  "MMHB-R15-Verification/source_review/prompt-asset-runner-r15.mjs": [
+    "2d97df0bf00a53f881a7d069cfb92073503a23d0"
+  ],
+  "MMHB-R15-Verification/source_review/prompt-assets-driver-r15.mjs": [
+    "c09d1c4016b4127226991540885eea2b479e3e34"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-ai-business-prompts-b01_offer_design.md": [
+    "252266768f6b961b4263cf026e4e03a2c3fd2a69"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-ai-business-prompts-b02_funnel_map.md": [
+    "847821fd9b7ee33351318bc2a4578d2af8e3e1f2"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-ai-business-prompts-b03_content_factory.md": [
+    "3d5da014d3dbc34cf207720e9f0d60e723aaebe8"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-ai-business-prompts-b04_email_sequences.md": [
+    "539065de9fec776d715fc1521d28e8f483772cad"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-ai-business-prompts-b05_seo_briefs.md": [
+    "098b75e329a25dc29f5b0f11b68a7c3f9bff56c1"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-ai-business-prompts-b06_competitive_scan.md": [
+    "b874efe29f0572d5de1df5a857474ec5ba6bb281"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-ai-business-prompts-b07_pricing_packaging.md": [
+    "7cf441853ba14f154a1bd8b32def7774dbb95084"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-ai-business-prompts-b08_retention_loyalty.md": [
+    "219ec3a824cb98622e4f0b7baf02e65b02285874"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-ai-business-prompts-b09_partnerships.md": [
+    "644504e2ba12a919af3efa9fbb7b28325437e3f6"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-ai-business-prompts-b10_ops_sops.md": [
+    "471129be193767cae6bd278532cf7ba9dfb34659"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-ai-business-registry.json": [
+    "437205dcfba0dde0ed419693b0d7f51bbb5798a1"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-ai-business-system.md": [
+    "340e8f97cd3f60bc270d6f6085e67430394a1531"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-ai-healing-prompts-h01_intake.md": [
+    "b51037ef1d4866f1c1f00c3858796264d2bb58b0"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-ai-healing-prompts-h02_journal_reflect.md": [
+    "ee92d0f62b25546c0d6fcda98300262db156790d"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-ai-healing-prompts-h03_cbt_reframe.md": [
+    "7c08d9b1ee6a23ce10e8b3f4e436af0591a20c0b"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-ai-healing-prompts-h04_act_values.md": [
+    "a499b49cd2eb95f42154bf7468317c59285f5caf"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-ai-healing-prompts-h05_breathing_grounding.md": [
+    "e0ab88b3254d0794202637265c7be41ab3ad7149"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-ai-healing-prompts-h06_sleep_reset.md": [
+    "b81019c17014b2315a8f93291bd94e8c81b97ed7"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-ai-healing-prompts-h07_conflict_script.md": [
+    "861e1983a269f78e11f707cf12a3b338c7e728c7"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-ai-healing-prompts-h08_safety_check.md": [
+    "3e14b3977e4cb09ec3aa4ad5f48008ddcaee2429"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-ai-healing-registry.json": [
+    "af7432d81889f5004cb69bccd3a668ab760c4faa"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-ai-healing-system.md": [
+    "7b5f28a8f89e1854fdc34138b9865a9ab95688a9"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-content-blog-index.json": [
+    "41fba84771a31afba0b5695fb3eab5bb3244aa5d"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-healScheduler.mjs": [
+    "41ec6cb87390bbf762f688ee933601abf9cc0c9d"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-kernel-bridge.mjs": [
+    "7ec7e66fd8cdf2df9ac8c7f9684d6f3dff4da0b5"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-known-asset-metadata.json": [
+    "10a90b222d54896120bf5529714e4346ec807f99"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-prompt-os-kernel-engines-business-command-engine.md": [
+    "2149e961671af6c671491a214e5b057ea344f5c9"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-prompt-os-kernel-governance-MASTER_STRATEGY.md": [
+    "483cf181de0c8bf2cc0d61cd044370df08987b25"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-prompt-os-kernel-governance-domain-router.md": [
+    "bfc7d46d795f80cd7cf00cddbdd1d5f8ceea2571"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-prompt-os-kernel-governance-execution-protocol.md": [
+    "b3eb5c1fb3cd676dd5236a4298d14b39f3012d56"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-prompt-os-kernel-governance-quality-gates.md": [
+    "5f9b0a91e61962b04bbaee335abb25c525c27b1d"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-prompt-os-kernel-install.sh": [
+    "602f20ffcacf96dece53e6f3d5bb086a409a2bcd"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-prompt-os-kernel-schemas-promptspec.schema.json": [
+    "56186e117129d53c0cabda66e30bbbb6a49ae5b5"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-prompt-os-kernel-scripts-verify-platform-kernel.mjs": [
+    "12ce5110ccc153825d03d87d3b8f3804593573b2"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-promptEngine.mjs": [
+    "c8544c62336cc918ed9bced3b0bc253721a75ea6"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-remote-manifest.json": [
+    "d8691c051a861ed8912874a8aca3c22a6fec05ba"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-remote-sources.json": [
+    "f8349df38a3390521a7b184f22a9753a2b483be5"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-rss.mjs": [
+    "a032b5ce9baf58dba99db7451a283139640fda5e"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-runtime-mapping.json": [
+    "550abd3b353b8d6a04691d6431fafd61f48ce5f2"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-server-engine-prompt-os-kernel-bridge.mjs": [
+    "7ec7e66fd8cdf2df9ac8c7f9684d6f3dff4da0b5"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-server-lib-healScheduler.mjs": [
+    "41ec6cb87390bbf762f688ee933601abf9cc0c9d"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-server-lib-promptEngine.mjs": [
+    "c8544c62336cc918ed9bced3b0bc253721a75ea6"
+  ],
+  "MMHB-R15-Verification/source_review/r14-assets-server-routes-rss.mjs": [
+    "a032b5ce9baf58dba99db7451a283139640fda5e"
+  ],
+  "MMHB-R15-Verification/source_review/r15-asset-content-review.md": [
+    "908ebc167dc99047be02f588f1d12173a612ea0b"
+  ],
+  "MMHB-R15-Verification/source_review/r15-asset-repair-policy.json": [
+    "4cc8c65146766f1368271c208893d62ae996d75a"
+  ],
+  "MMHB-R15-Verification/source_review/r15-dependency-review.json": [
+    "3afe92928d2d1e4b05b4bf5630504f542bf6da9c"
+  ],
+  "MMHB-R15-Verification/source_review/r15-dependency-review.md": [
+    "4a0b9a4d9e780dc1e8be64d3d8d99e0b114f7437"
+  ],
+  "MMHB-R15-Verification/source_review/r15-driver-fixture-results.txt": [
+    "0aedee8c0bb12dc8034e577a48c4956fa2e8bd56"
+  ],
+  "MMHB-R15-Verification/source_review/r15-npm-shrinkwrap.js": [
+    "19c2c952dc7f7ee94540af8c4149923eaf719433"
+  ],
+  "MMHB-R15-Verification/source_review/r15-pg-8.23.0-native-client.js": [
+    "d305713d64fdc197575ab1811cea7333fa35567b"
+  ],
+  "MMHB-R15-Verification/source_review/r15-preparation-record.json": [
+    "071afba3de6849b97fb0a920cd6eede430aef762"
+  ],
+  "MMHB-R15-Verification/source_review/r15-resend-6.24.0-batch.ts": [
+    "777f328c55f935a8e3e764f9ad18d62fe9efe1f3"
+  ],
+  "MMHB-R15-Verification/source_review/r15-resend-6.24.0-emails.ts": [
+    "ad6141cc08263d45028479d538a6186d1ad2855f"
+  ],
+  "MMHB-R15-Verification/source_review/r15-resend-6.24.0-render.ts": [
+    "424025e333aae2f04c00b9b1ea2a12a31222b726"
+  ],
+  "MMHB-R15-Verification/source_review/test-prompt-asset-runner-r15.py": [
+    "d6e35fd4ccf008abbe574ee4c5a255cb0658d8cc"
+  ],
+  "MMHB-R15-Verification/source_review/test-prompt-assets-r15.py": [
+    "8d02881fb6c6a47dd58729284fd2631c30f84121"
+  ],
+  "MMHB-R16-Verification.zip": [
+    "441e7a58d8d811c4d71c6da77629099dab809ff6"
+  ],
+  "MMHB-R16-Verification/MMHB-LOCKED-DEPENDENCIES-R16.txt": [
+    "aa54d391fb33830a0d136c0887363ab2e54aaca3"
+  ],
+  "MMHB-R16-Verification/MMHB-Readiness-Ledger-2026-09-07.md": [
+    "d13068e581e62dadff1f2db18293a51d14e1c6be"
+  ],
+  "MMHB-R16-Verification/source_review/R16-Verification-README.md": [
+    "c29e1b371adef2295d63e588f981e2595fb34e74"
+  ],
+  "MMHB-R16-Verification/source_review/build-locked-dependencies-command-r16.py": [
+    "2c7eb3c3a1ebed304f037fdc27da14126b677c1b"
+  ],
+  "MMHB-R16-Verification/source_review/locked-dependencies-body-r16.mjs": [
+    "033e4cfc65d733be62690c5d1ce46e78fbb24b49"
+  ],
+  "MMHB-R16-Verification/source_review/locked-dependencies-driver-r16.mjs": [
+    "f184499fb1cb25257de393ef26ee8f5717049e88"
+  ],
+  "MMHB-R16-Verification/source_review/locked-dependencies-prefix-r16.mjs": [
+    "eba7e0de8064458525fb5b4b5c4c481650105ca1"
+  ],
+  "MMHB-R16-Verification/source_review/locked-dependency-policy-r16.mjs": [
+    "3ae14ad1c24a60e1cb57f1a5cdbd9cf98c5b61ba"
+  ],
+  "MMHB-R16-Verification/source_review/locked-npm-runner-r16.mjs": [
+    "55b1664eae8807d860d7c7aa02cd1c57fbd1f48a"
+  ],
+  "MMHB-R16-Verification/source_review/r16-driver-fixture-results.json": [
+    "7ee856b7262310615883e5f64f4978a8aac0dee9"
+  ],
+  "MMHB-R16-Verification/source_review/r16-install-contract.md": [
+    "6579d0b2738efbbdf4c6ae8a3521dcbc7d820301"
+  ],
+  "MMHB-R16-Verification/source_review/r16-locked-dependency-policy-fixture-results.json": [
+    "1363094e440c551846b1cb3f5a5910183e8ecd9e"
+  ],
+  "MMHB-R16-Verification/source_review/r16-locked-dependency-policy-fixture-results.txt": [
+    "297fb9935e0ec33d7221c6f6ec34b57a39d27898"
+  ],
+  "MMHB-R16-Verification/source_review/r16-npm-runner-fixture-results.json": [
+    "bf61f3c78e704623b644a83cc624a71ffb3995a0"
+  ],
+  "MMHB-R16-Verification/source_review/r16-preparation-record.json": [
+    "dbb1cb0dacae4dfa10eda7f8ab7e7ab9ae4f375a"
+  ],
+  "MMHB-R16-Verification/source_review/r16-release-review.md": [
+    "9bbb8eb0341e68b2e852a9c8c882f7324605c158"
+  ],
+  "MMHB-R16-Verification/source_review/test-locked-dependencies-r16.py": [
+    "6d385d8cfbf90ee909de020fddb297aef47eab2b"
+  ],
+  "MMHB-R16-Verification/source_review/test-locked-dependency-policy-r16.mjs": [
+    "505462e7592724a2bf7a3118653d81e3d5523d13"
+  ],
+  "MMHB-R16-Verification/source_review/test-locked-npm-runner-r16.mjs": [
+    "02200a0aea63713f88a5edcbb6278ee740eedec9"
+  ],
+  "MMHB-R16A-Verification.zip": [
+    "dafbbc14cd2e0e8770561f03350922f6a63a5ce6"
+  ],
+  "MMHB-R16A-Verification/MMHB-LOCKED-DEPENDENCIES-R16A.txt": [
+    "0aecd1688760b1d574ced190bfd933727239cce0"
+  ],
+  "MMHB-R16A-Verification/source_review/R16A-Verification-README.md": [
+    "f978d0f965f3bf367103be23d85b4f993b5fa4fe"
+  ],
+  "MMHB-R16A-Verification/source_review/build-locked-dependencies-command-r16a.py": [
+    "47fd484f049b723be881fad38188fc57ce26d2a6"
+  ],
+  "MMHB-R16A-Verification/source_review/locked-dependencies-body-r16a.mjs": [
+    "21758215d0c323634a72170480f8e175da786349"
+  ],
+  "MMHB-R16A-Verification/source_review/locked-dependencies-driver-r16a.mjs": [
+    "b0ab171d86612c6314be24a08835a8ff3b030775"
+  ],
+  "MMHB-R16A-Verification/source_review/locked-dependencies-prefix-r16a.mjs": [
+    "eba7e0de8064458525fb5b4b5c4c481650105ca1"
+  ],
+  "MMHB-R16A-Verification/source_review/locked-dependency-policy-r16.mjs": [
+    "3ae14ad1c24a60e1cb57f1a5cdbd9cf98c5b61ba"
+  ],
+  "MMHB-R16A-Verification/source_review/locked-npm-runner-r16.mjs": [
+    "55b1664eae8807d860d7c7aa02cd1c57fbd1f48a"
+  ],
+  "MMHB-R16A-Verification/source_review/r16-locked-dependency-policy-fixture-results.json": [
+    "1363094e440c551846b1cb3f5a5910183e8ecd9e"
+  ],
+  "MMHB-R16A-Verification/source_review/r16-npm-runner-fixture-results.json": [
+    "bf61f3c78e704623b644a83cc624a71ffb3995a0"
+  ],
+  "MMHB-R16A-Verification/source_review/r16a-driver-fixture-results.json": [
+    "4412d1a5c30a1f42bc621aa5628f737f0981ff2f"
+  ],
+  "MMHB-R16A-Verification/source_review/r16a-preparation-record.json": [
+    "ff65582f78fe5152005edfd3fd431bd9aa64faa8"
+  ],
+  "MMHB-R16A-Verification/source_review/test-locked-dependencies-r16a.py": [
+    "a2e782d1413ecd344026ee4d2d5b7c12dce36a25"
+  ],
+  "MMHB-R16A-Verification/source_review/test-locked-dependency-policy-r16.mjs": [
+    "505462e7592724a2bf7a3118653d81e3d5523d13"
+  ],
+  "MMHB-R16A-Verification/source_review/test-locked-npm-runner-r16.mjs": [
+    "02200a0aea63713f88a5edcbb6278ee740eedec9"
+  ],
+  "MMHB-R16B-Verification.zip": [
+    "32b594e97e3ae858c5f60ca80263e97d6c03e8f9"
+  ],
+  "MMHB-R16B-Verification/MMHB-ARCHIVE-URL-DIAGNOSTIC-R16B.txt": [
+    "8ba26f37cfea2a0f22ec3b534731a0a8014e0208"
+  ],
+  "MMHB-R16B-Verification/source_review/R16B-Verification-README.md": [
+    "1e511b00296b16b67dc1cf3ccc0d4cd6584809e5"
+  ],
+  "MMHB-R16B-Verification/source_review/archive-url-diagnostic-r16b-body.mjs": [
+    "707e8d53a9e3b053a087c86d71aeff850d4c0345"
+  ],
+  "MMHB-R16B-Verification/source_review/archive-url-diagnostic-r16b-driver.mjs": [
+    "2af890f3d94b1a9ec4f815710a6a664835ca9503"
+  ],
+  "MMHB-R16B-Verification/source_review/archive-url-diagnostic-r16b-helper.mjs": [
+    "e8b15ce9f1332d94d7af9415e147b500b62c0b36"
+  ],
+  "MMHB-R16B-Verification/source_review/build-archive-url-diagnostic-r16b.py": [
+    "aee53fccfa965bea52be2c47774b836597ec469e"
+  ],
+  "MMHB-R16B-Verification/source_review/locked-dependency-policy-r16.mjs": [
+    "3ae14ad1c24a60e1cb57f1a5cdbd9cf98c5b61ba"
+  ],
+  "MMHB-R16B-Verification/source_review/r16b-classifier-test-results.json": [
+    "97ddc8673745f62e4b97bded732a4c80e4dc460e"
+  ],
+  "MMHB-R16B-Verification/source_review/r16b-driver-test-results.json": [
+    "367a1caeaf3fc59e286ec2b73d182bb10abfdee5"
+  ],
+  "MMHB-R16B-Verification/source_review/r16b-preparation-record.json": [
+    "665d6b640f67b888775a9e55d6a862c82405562d"
+  ],
+  "MMHB-R16B-Verification/source_review/test-archive-url-diagnostic-r16b.mjs": [
+    "021b78234c10576f03dd9cffdde5d6117df2cd9a"
+  ],
+  "MMHB-R16B-Verification/source_review/test-archive-url-diagnostic-r16b.py": [
+    "ca4e3e42a769e4f0667f556567faa77735d509a2"
+  ],
+  "MMHB-R16C-Verification.zip": [
+    "fe7595989a5e6295176e2c01b5b25f2e6dba16f8"
+  ],
+  "MMHB-R16C-Verification/MMHB-REGISTRY-LOCKED-DEPENDENCIES-R16C.txt": [
+    "b4da39a5da0f179fd8e37cdb15d792144a5561b7"
+  ],
+  "MMHB-R16C-Verification/MMHB-Readiness-Ledger-2026-09-07.md": [
+    "cee49b62ed18263f5471af250d2ad97f1ab7b136"
+  ],
+  "MMHB-R16C-Verification/source_review/R16C-Verification-README.md": [
+    "6841c326202ae8da45e58326cc4bcc132d03d990"
+  ],
+  "MMHB-R16C-Verification/source_review/build-locked-dependencies-command-r16c.py": [
+    "a57161377382390571f443b5b2be99e4d842ab8f"
+  ],
+  "MMHB-R16C-Verification/source_review/locked-dependencies-body-r16a.mjs": [
+    "21758215d0c323634a72170480f8e175da786349"
+  ],
+  "MMHB-R16C-Verification/source_review/locked-dependencies-body-r16c.mjs": [
+    "36f5be72eca593b47aee261ead54761794aae400"
+  ],
+  "MMHB-R16C-Verification/source_review/locked-dependencies-driver-r16c.mjs": [
+    "e8119dc3e8eba13a6c8afe59b08bf650f3776e4c"
+  ],
+  "MMHB-R16C-Verification/source_review/locked-dependencies-prefix-r16a.mjs": [
+    "eba7e0de8064458525fb5b4b5c4c481650105ca1"
+  ],
+  "MMHB-R16C-Verification/source_review/locked-dependencies-prefix-r16c.mjs": [
+    "26d57cd05855fc1f4226159949963539b33aed19"
+  ],
+  "MMHB-R16C-Verification/source_review/locked-dependency-policy-r16.mjs": [
+    "3ae14ad1c24a60e1cb57f1a5cdbd9cf98c5b61ba"
+  ],
+  "MMHB-R16C-Verification/source_review/locked-npm-runner-r16.mjs": [
+    "55b1664eae8807d860d7c7aa02cd1c57fbd1f48a"
+  ],
+  "MMHB-R16C-Verification/source_review/make-r16c-driver-fixtures.py": [
+    "016c93831607bcf3e2488e4da3d9dc1fae87db3a"
+  ],
+  "MMHB-R16C-Verification/source_review/r16-locked-dependency-policy-fixture-results.json": [
+    "1363094e440c551846b1cb3f5a5910183e8ecd9e"
+  ],
+  "MMHB-R16C-Verification/source_review/r16-npm-runner-fixture-results.json": [
+    "bf61f3c78e704623b644a83cc624a71ffb3995a0"
+  ],
+  "MMHB-R16C-Verification/source_review/r16c-driver-fixture-results.json": [
+    "09eef8b8a1931da3af3a6f8ccffd5d53f8c11876"
+  ],
+  "MMHB-R16C-Verification/source_review/r16c-preparation-record.json": [
+    "c17ad3d1fccd686933d7aae9979781f69cc3f306"
+  ],
+  "MMHB-R16C-Verification/source_review/r16c-registry-fixture-results.json": [
+    "7f3274bd2cf5df0f5d14bb6951f263f5389700ff"
+  ],
+  "MMHB-R16C-Verification/source_review/registry-archive-repair-r16c.mjs": [
+    "55408c7e690a59a66d0c0ef492d5f03b05b7d355"
+  ],
+  "MMHB-R16C-Verification/source_review/test-locked-dependencies-r16a.py": [
+    "a2e782d1413ecd344026ee4d2d5b7c12dce36a25"
+  ],
+  "MMHB-R16C-Verification/source_review/test-locked-dependencies-r16c.py": [
+    "cd7b4116cdb69046c3c56ad15771d1761a108ac2"
+  ],
+  "MMHB-R16C-Verification/source_review/test-locked-dependency-policy-r16.mjs": [
+    "505462e7592724a2bf7a3118653d81e3d5523d13"
+  ],
+  "MMHB-R16C-Verification/source_review/test-locked-npm-runner-r16.mjs": [
+    "02200a0aea63713f88a5edcbb6278ee740eedec9"
+  ],
+  "MMHB-R16C-Verification/source_review/test-registry-archive-repair-r16c.mjs": [
+    "81a2e5ac5d7aee57872bcd465d7d947ce7934d7a"
+  ],
+  "MMHB-R16D-Verification.zip": [
+    "d0f9d45fdfb462997dc29f787497804b81f4f7e2"
+  ],
+  "MMHB-R16D-Verification/MMHB-BUNDLE-AWARE-DEPENDENCIES-R16D.txt": [
+    "ca0731188e19cd8be4fddb901b65f95be588c9a8"
+  ],
+  "MMHB-R16D-Verification/MMHB-Readiness-Ledger-2026-09-07.md": [
+    "a9a42b1039ab1f160cdc87380c0d0bc20ebf3950"
+  ],
+  "MMHB-R16D-Verification/SHA256SUMS.txt": [
+    "24e8a096a6098df9a247a3eeb005e8fa695baa11"
+  ],
+  "MMHB-R16D-Verification/source_review/R16D-Verification-README.md": [
+    "75f62d2a697d52963d3456cc6b656225a0ae9c4d"
+  ],
+  "MMHB-R16D-Verification/source_review/build-locked-dependencies-command-r16d.py": [
+    "2da546a3d3efe7e481f1bfb6dfc56b4e16a40d59"
+  ],
+  "MMHB-R16D-Verification/source_review/locked-dependencies-body-r16c.mjs": [
+    "36f5be72eca593b47aee261ead54761794aae400"
+  ],
+  "MMHB-R16D-Verification/source_review/locked-dependencies-body-r16d.mjs": [
+    "b678fb37dea4d86be3b937fba11b0dcd373487af"
+  ],
+  "MMHB-R16D-Verification/source_review/locked-dependencies-driver-r16d.mjs": [
+    "9416205162e221ce4a0523149dcf1a248e901b36"
+  ],
+  "MMHB-R16D-Verification/source_review/locked-dependencies-prefix-r16c.mjs": [
+    "26d57cd05855fc1f4226159949963539b33aed19"
+  ],
+  "MMHB-R16D-Verification/source_review/locked-dependencies-prefix-r16d.mjs": [
+    "06e3455e0e6ec2529502a983174ea6ba96b6a5ff"
+  ],
+  "MMHB-R16D-Verification/source_review/locked-dependency-policy-r16.mjs": [
+    "3ae14ad1c24a60e1cb57f1a5cdbd9cf98c5b61ba"
+  ],
+  "MMHB-R16D-Verification/source_review/locked-dependency-policy-r16d.mjs": [
+    "4c4082d5329247de3a964aa7ab888ec72bf8e421"
+  ],
+  "MMHB-R16D-Verification/source_review/locked-npm-runner-r16.mjs": [
+    "55b1664eae8807d860d7c7aa02cd1c57fbd1f48a"
+  ],
+  "MMHB-R16D-Verification/source_review/r16d-driver-fixture-results.json": [
+    "a5c22b4ad53966860ca7b6f767d2e034b528c4db"
+  ],
+  "MMHB-R16D-Verification/source_review/r16d-locked-dependency-policy-fixture-results.json": [
+    "c3f0027fe24bd121661ea4c5c95b187dd883b8b7"
+  ],
+  "MMHB-R16D-Verification/source_review/r16d-locked-dependency-policy-fixture-results.txt": [
+    "db52bd9a89d1236ae5dd31b2040b20a266c705fa"
+  ],
+  "MMHB-R16D-Verification/source_review/r16d-preparation-record.json": [
+    "0a6e3a4ec3a265767ca42b47fe8de573a5f8f7ac"
+  ],
+  "MMHB-R16D-Verification/source_review/r16d-registry-fixture-results.json": [
+    "aebd847cfb5f1394a449699063c375b725ce752b"
+  ],
+  "MMHB-R16D-Verification/source_review/registry-archive-repair-r16c.mjs": [
+    "55408c7e690a59a66d0c0ef492d5f03b05b7d355"
+  ],
+  "MMHB-R16D-Verification/source_review/registry-archive-repair-r16d.mjs": [
+    "b3a42df40435cd9f4591361287f0a69ce24453bb"
+  ],
+  "MMHB-R16D-Verification/source_review/test-locked-dependencies-r16d.py": [
+    "ca7f96725b8beb5e9424ab9b20a22bbce74e040d"
+  ],
+  "MMHB-R16D-Verification/source_review/test-locked-dependency-policy-r16d.mjs": [
+    "984d0f518537d70abcef3c1c412d58108aa2e013"
+  ],
+  "MMHB-R16D-Verification/source_review/test-registry-archive-repair-r16d.mjs": [
+    "2ce6cb87b33802c42456574efcfa27033041d097"
+  ],
+  "MMHB-R16E-Verification.zip": [
+    "fadbc9668f5f224faa5d4ca0f9781c12291eaf2d"
+  ],
+  "MMHB-R16E-Verification/MMHB-DEPENDENCY-METADATA-R16E.txt": [
+    "b4baa309bd2da52ade6d0c67e7db8999e3630d77"
+  ],
+  "MMHB-R16E-Verification/MMHB-Readiness-Ledger-2026-09-07.md": [
+    "d4822c0061bae7522e797d5f67d238ff182d386b"
+  ],
+  "MMHB-R16E-Verification/SHA256SUMS.txt": [
+    "5757292d9dcb1ce966b3d2d9bcb6ff616bca4085"
+  ],
+  "MMHB-R16E-Verification/source_review/R16E-Verification-README.md": [
+    "2d4b0ec013be7ef79ae10caef59de96740c119fb"
+  ],
+  "MMHB-R16E-Verification/source_review/build-locked-dependencies-command-r16e.py": [
+    "be747e02cef773ff0e931c7579567e84ceb1b8cf"
+  ],
+  "MMHB-R16E-Verification/source_review/locked-dependencies-body-r16d.mjs": [
+    "b678fb37dea4d86be3b937fba11b0dcd373487af"
+  ],
+  "MMHB-R16E-Verification/source_review/locked-dependencies-body-r16e.mjs": [
+    "6470dc0547f2f9b635f0ae44318e7d49103d7e79"
+  ],
+  "MMHB-R16E-Verification/source_review/locked-dependencies-driver-r16e.mjs": [
+    "1eb11fcee8b1634539f22104c5c775350f0e53be"
+  ],
+  "MMHB-R16E-Verification/source_review/locked-dependencies-prefix-r16d.mjs": [
+    "06e3455e0e6ec2529502a983174ea6ba96b6a5ff"
+  ],
+  "MMHB-R16E-Verification/source_review/locked-dependencies-prefix-r16e.mjs": [
+    "72d7fe7359e8a3122edf9d5176e68f5d7d5e957d"
+  ],
+  "MMHB-R16E-Verification/source_review/locked-dependency-policy-r16d.mjs": [
+    "4c4082d5329247de3a964aa7ab888ec72bf8e421"
+  ],
+  "MMHB-R16E-Verification/source_review/locked-dependency-policy-r16e.mjs": [
+    "c10c993aff110e1a5b90653837be70e4f426c0ce"
+  ],
+  "MMHB-R16E-Verification/source_review/locked-npm-runner-r16.mjs": [
+    "55b1664eae8807d860d7c7aa02cd1c57fbd1f48a"
+  ],
+  "MMHB-R16E-Verification/source_review/r16e-driver-fixture-results.json": [
+    "93e3738866a8ec087324d8ab93bc50f3ca0ff87c"
+  ],
+  "MMHB-R16E-Verification/source_review/r16e-locked-dependency-policy-fixture-results.json": [
+    "fbc070e78face9c715007f1c885ea9dd5772203f"
+  ],
+  "MMHB-R16E-Verification/source_review/r16e-locked-dependency-policy-fixture-results.txt": [
+    "a23307f5d274828f365330fa0be79047448ebf19"
+  ],
+  "MMHB-R16E-Verification/source_review/r16e-npm-workspace-semantics-results.json": [
+    "d5499ffd9ecd0848a4c14d99cdbe701aee8c854f"
+  ],
+  "MMHB-R16E-Verification/source_review/r16e-preparation-record.json": [
+    "118771dd2bec0065177181ee86aa8d8a7d9bf35a"
+  ],
+  "MMHB-R16E-Verification/source_review/registry-archive-repair-r16d.mjs": [
+    "b3a42df40435cd9f4591361287f0a69ce24453bb"
+  ],
+  "MMHB-R16E-Verification/source_review/test-locked-dependencies-r16e.py": [
+    "63ba7e3e8ab8438956643fdf71e4d1802b598315"
+  ],
+  "MMHB-R16E-Verification/source_review/test-locked-dependency-policy-r16e.mjs": [
+    "6f8f6d7901344483ec4fa8a81643c819e6a2e1b0"
+  ],
+  "MMHB-R16E-Verification/source_review/test-npm-workspace-semantics-r16e.mjs": [
+    "a817934fcf9f05ea3264a3504dd9299df9481c9c"
+  ],
+  "MMHB-R17-Kit.zip": [
+    "c5320f251b16dd219998fc1dd864d3e143f51cf2"
+  ],
+  "MMHB-R17-Kit/MMHB-FRESH-CANDIDATE-R17.txt": [
+    "84b1befaf3c7a846157ab3134ea57daa1bd4aeea"
+  ],
+  "MMHB-R17-Kit/MMHB-Ledger.txt": [
+    "117c58234a0339f313766f7409e987c9f0d344f1"
+  ],
+  "MMHB-R17-Kit/MMHB-R17-Start.txt": [
+    "6de2bd3359ac6779dcd32c8b730cdeb622056a7a"
+  ],
+  "MMHB-R17-Kit/MMHB-Readiness-Ledger-2026-09-07.md": [
+    "117c58234a0339f313766f7409e987c9f0d344f1"
+  ],
+  "MMHB-R17-Kit/source_review/R17-Verification-README.md": [
+    "da5b3d447011285e72c9d270d5b5c04d21500108"
+  ],
+  "MMHB-R17-Kit/source_review/build-fresh-candidate-command-r17.py": [
+    "ca8e6e234dc4d1969a91d50495107fc8d60582a8"
+  ],
+  "MMHB-R17-Kit/source_review/fresh-build-policy-r17.mjs": [
+    "5c7e20ba981f30ff40d8fabe2d84851695adc719"
+  ],
+  "MMHB-R17-Kit/source_review/fresh-candidate-body-r17.mjs": [
+    "9fa268e147ad0d74903b0986726b8c656a64939b"
+  ],
+  "MMHB-R17-Kit/source_review/fresh-candidate-driver-r17.mjs": [
+    "8086099fbe5827db04a472daedb2d2cc04427849"
+  ],
+  "MMHB-R17-Kit/source_review/fresh-candidate-prefix-r17.mjs": [
+    "61af3c501614ed5c219ed78f47b13854b2aef645"
+  ],
+  "MMHB-R17-Kit/source_review/frontend-build-runner-r17.mjs": [
+    "3c9e19f40577cb16b5392eac652f59355453ee43"
+  ],
+  "MMHB-R17-Kit/source_review/frontend-candidate-runner-r12.mjs": [
+    "c7f503e3e39d458c19b33d5a457ab64798cd4570"
+  ],
+  "MMHB-R17-Kit/source_review/locked-dependencies-body-r16e.mjs": [
+    "6470dc0547f2f9b635f0ae44318e7d49103d7e79"
+  ],
+  "MMHB-R17-Kit/source_review/locked-dependencies-prefix-r16e.mjs": [
+    "72d7fe7359e8a3122edf9d5176e68f5d7d5e957d"
+  ],
+  "MMHB-R17-Kit/source_review/locked-dependency-policy-r16e.mjs": [
+    "c10c993aff110e1a5b90653837be70e4f426c0ce"
+  ],
+  "MMHB-R17-Kit/source_review/native-candidate-runner-r13.mjs": [
+    "7e0d11c2c88c8ec2670714a2be168e5ee6c0fa1e"
+  ],
+  "MMHB-R17-Kit/source_review/native-candidate-runner-r17.mjs": [
+    "1d95e4291c713c0b35c9d0391682cf6f0eac8f44"
+  ],
+  "MMHB-R17-Kit/source_review/prompt-asset-runner-r15.mjs": [
+    "2d97df0bf00a53f881a7d069cfb92073503a23d0"
+  ],
+  "MMHB-R17-Kit/source_review/r14-assets-ai-business-prompts-b01_offer_design.md": [
+    "252266768f6b961b4263cf026e4e03a2c3fd2a69"
+  ],
+  "MMHB-R17-Kit/source_review/r14-assets-ai-business-prompts-b02_funnel_map.md": [
+    "847821fd9b7ee33351318bc2a4578d2af8e3e1f2"
+  ],
+  "MMHB-R17-Kit/source_review/r14-assets-ai-business-prompts-b03_content_factory.md": [
+    "3d5da014d3dbc34cf207720e9f0d60e723aaebe8"
+  ],
+  "MMHB-R17-Kit/source_review/r14-assets-ai-business-prompts-b04_email_sequences.md": [
+    "539065de9fec776d715fc1521d28e8f483772cad"
+  ],
+  "MMHB-R17-Kit/source_review/r14-assets-ai-business-prompts-b05_seo_briefs.md": [
+    "098b75e329a25dc29f5b0f11b68a7c3f9bff56c1"
+  ],
+  "MMHB-R17-Kit/source_review/r14-assets-ai-business-prompts-b06_competitive_scan.md": [
+    "b874efe29f0572d5de1df5a857474ec5ba6bb281"
+  ],
+  "MMHB-R17-Kit/source_review/r14-assets-ai-business-prompts-b07_pricing_packaging.md": [
+    "7cf441853ba14f154a1bd8b32def7774dbb95084"
+  ],
+  "MMHB-R17-Kit/source_review/r14-assets-ai-business-prompts-b08_retention_loyalty.md": [
+    "219ec3a824cb98622e4f0b7baf02e65b02285874"
+  ],
+  "MMHB-R17-Kit/source_review/r14-assets-ai-business-prompts-b09_partnerships.md": [
+    "644504e2ba12a919af3efa9fbb7b28325437e3f6"
+  ],
+  "MMHB-R17-Kit/source_review/r14-assets-ai-business-prompts-b10_ops_sops.md": [
+    "471129be193767cae6bd278532cf7ba9dfb34659"
+  ],
+  "MMHB-R17-Kit/source_review/r14-assets-ai-business-registry.json": [
+    "437205dcfba0dde0ed419693b0d7f51bbb5798a1"
+  ],
+  "MMHB-R17-Kit/source_review/r14-assets-ai-business-system.md": [
+    "340e8f97cd3f60bc270d6f6085e67430394a1531"
+  ],
+  "MMHB-R17-Kit/source_review/r14-assets-ai-healing-prompts-h01_intake.md": [
+    "b51037ef1d4866f1c1f00c3858796264d2bb58b0"
+  ],
+  "MMHB-R17-Kit/source_review/r14-assets-ai-healing-prompts-h02_journal_reflect.md": [
+    "ee92d0f62b25546c0d6fcda98300262db156790d"
+  ],
+  "MMHB-R17-Kit/source_review/r14-assets-ai-healing-prompts-h03_cbt_reframe.md": [
+    "7c08d9b1ee6a23ce10e8b3f4e436af0591a20c0b"
+  ],
+  "MMHB-R17-Kit/source_review/r14-assets-ai-healing-prompts-h04_act_values.md": [
+    "a499b49cd2eb95f42154bf7468317c59285f5caf"
+  ],
+  "MMHB-R17-Kit/source_review/r14-assets-ai-healing-prompts-h05_breathing_grounding.md": [
+    "e0ab88b3254d0794202637265c7be41ab3ad7149"
+  ],
+  "MMHB-R17-Kit/source_review/r14-assets-ai-healing-prompts-h06_sleep_reset.md": [
+    "b81019c17014b2315a8f93291bd94e8c81b97ed7"
+  ],
+  "MMHB-R17-Kit/source_review/r14-assets-ai-healing-prompts-h07_conflict_script.md": [
+    "861e1983a269f78e11f707cf12a3b338c7e728c7"
+  ],
+  "MMHB-R17-Kit/source_review/r14-assets-ai-healing-prompts-h08_safety_check.md": [
+    "3e14b3977e4cb09ec3aa4ad5f48008ddcaee2429"
+  ],
+  "MMHB-R17-Kit/source_review/r14-assets-ai-healing-registry.json": [
+    "af7432d81889f5004cb69bccd3a668ab760c4faa"
+  ],
+  "MMHB-R17-Kit/source_review/r14-assets-ai-healing-system.md": [
+    "7b5f28a8f89e1854fdc34138b9865a9ab95688a9"
+  ],
+  "MMHB-R17-Kit/source_review/r14-assets-server-lib-promptEngine.mjs": [
+    "c8544c62336cc918ed9bced3b0bc253721a75ea6"
+  ],
+  "MMHB-R17-Kit/source_review/r15-asset-repair-policy.json": [
+    "4cc8c65146766f1368271c208893d62ae996d75a"
+  ],
+  "MMHB-R17-Kit/source_review/r17-driver-fixture-results.json": [
+    "12c495ed54c2b61ec5b38826364bdb1c8fb9e556"
+  ],
+  "MMHB-R17-Kit/source_review/r17-policy-fixture-results.json": [
+    "ad1ed5703f2f827a2cb4e48b194bf55e8316071a"
+  ],
+  "MMHB-R17-Kit/source_review/r17-preparation-record.json": [
+    "97d70d722b6a760d3913eafda064aed9d7021a55"
+  ],
+  "MMHB-R17-Kit/source_review/registry-archive-repair-r16d.mjs": [
+    "b3a42df40435cd9f4591361287f0a69ce24453bb"
+  ],
+  "MMHB-R17-Kit/source_review/server-build-runner-r17.mjs": [
+    "978c8864a77ef6840bfaf1491d921dbad0e55bf9"
+  ],
+  "MMHB-R17-Kit/source_review/test-fresh-build-policy-r17.mjs": [
+    "93ea26adc125a9754d8a6910b8a50a8d17872165"
+  ],
+  "MMHB-R17-Kit/source_review/test-fresh-candidate-r17.py": [
+    "a85ffa39b55d254c5a7ba8a7c186b9ab144916cd"
+  ],
+  "MMHB-R17-Kit/source_review/test-frontend-runner-r12.py": [
+    "b09182376b59da93300ca0ae5d70ad10fb783301"
+  ],
+  "MMHB-R17-Start.txt": [
+    "6de2bd3359ac6779dcd32c8b730cdeb622056a7a"
+  ],
+  "MMHB-R17A-Kit.zip": [
+    "825694c21510e928a70e4ac9d798bf3038f71e15"
+  ],
+  "MMHB-R17A-Kit/MMHB-Ledger.txt": [
+    "9f47ab78ca5954e76e34824edde04b960b200233"
+  ],
+  "MMHB-R17A-Kit/MMHB-R17A-Start.txt": [
+    "73f18b86a6253548ebb4740d945780568d10849f"
+  ],
+  "MMHB-R17A-Kit/MMHB-RESUME-CANDIDATE-R17A.txt": [
+    "93a5c2becd8fd9fbbf098f812d788848790bfc6b"
+  ],
+  "MMHB-R17A-Kit/MMHB-Readiness-Ledger-2026-09-07.md": [
+    "9f47ab78ca5954e76e34824edde04b960b200233"
+  ],
+  "MMHB-R17A-Kit/source_review/R17A-Verification-README.md": [
+    "9fb15cea90054a5df9c5391677f0bfc28ea6e041"
+  ],
+  "MMHB-R17A-Kit/source_review/build-resumed-candidate-command-r17a.py": [
+    "119c9ad194057e692a08c2cdda2c17d3650eeb0d"
+  ],
+  "MMHB-R17A-Kit/source_review/fresh-build-policy-r17.mjs": [
+    "5c7e20ba981f30ff40d8fabe2d84851695adc719"
+  ],
+  "MMHB-R17A-Kit/source_review/fresh-candidate-body-r17.mjs": [
+    "9fa268e147ad0d74903b0986726b8c656a64939b"
+  ],
+  "MMHB-R17A-Kit/source_review/fresh-candidate-driver-r17.mjs": [
+    "8086099fbe5827db04a472daedb2d2cc04427849"
+  ],
+  "MMHB-R17A-Kit/source_review/fresh-candidate-prefix-r17.mjs": [
+    "61af3c501614ed5c219ed78f47b13854b2aef645"
+  ],
+  "MMHB-R17A-Kit/source_review/frontend-build-runner-r17.mjs": [
+    "3c9e19f40577cb16b5392eac652f59355453ee43"
+  ],
+  "MMHB-R17A-Kit/source_review/frontend-graph-policy-r17a.mjs": [
+    "01bd3fd71bfde409eba623d1196f722ee2af7859"
+  ],
+  "MMHB-R17A-Kit/source_review/locked-dependency-policy-r16e.mjs": [
+    "c10c993aff110e1a5b90653837be70e4f426c0ce"
+  ],
+  "MMHB-R17A-Kit/source_review/native-candidate-runner-r17.mjs": [
+    "1d95e4291c713c0b35c9d0391682cf6f0eac8f44"
+  ],
+  "MMHB-R17A-Kit/source_review/native-candidate-runner-r17a.mjs": [
+    "4a20f5e363f18ac658cf6621875411011110f77f"
+  ],
+  "MMHB-R17A-Kit/source_review/prompt-asset-runner-r15.mjs": [
+    "2d97df0bf00a53f881a7d069cfb92073503a23d0"
+  ],
+  "MMHB-R17A-Kit/source_review/r14-assets-ai-business-prompts-b01_offer_design.md": [
+    "252266768f6b961b4263cf026e4e03a2c3fd2a69"
+  ],
+  "MMHB-R17A-Kit/source_review/r14-assets-ai-business-prompts-b02_funnel_map.md": [
+    "847821fd9b7ee33351318bc2a4578d2af8e3e1f2"
+  ],
+  "MMHB-R17A-Kit/source_review/r14-assets-ai-business-prompts-b03_content_factory.md": [
+    "3d5da014d3dbc34cf207720e9f0d60e723aaebe8"
+  ],
+  "MMHB-R17A-Kit/source_review/r14-assets-ai-business-prompts-b04_email_sequences.md": [
+    "539065de9fec776d715fc1521d28e8f483772cad"
+  ],
+  "MMHB-R17A-Kit/source_review/r14-assets-ai-business-prompts-b05_seo_briefs.md": [
+    "098b75e329a25dc29f5b0f11b68a7c3f9bff56c1"
+  ],
+  "MMHB-R17A-Kit/source_review/r14-assets-ai-business-prompts-b06_competitive_scan.md": [
+    "b874efe29f0572d5de1df5a857474ec5ba6bb281"
+  ],
+  "MMHB-R17A-Kit/source_review/r14-assets-ai-business-prompts-b07_pricing_packaging.md": [
+    "7cf441853ba14f154a1bd8b32def7774dbb95084"
+  ],
+  "MMHB-R17A-Kit/source_review/r14-assets-ai-business-prompts-b08_retention_loyalty.md": [
+    "219ec3a824cb98622e4f0b7baf02e65b02285874"
+  ],
+  "MMHB-R17A-Kit/source_review/r14-assets-ai-business-prompts-b09_partnerships.md": [
+    "644504e2ba12a919af3efa9fbb7b28325437e3f6"
+  ],
+  "MMHB-R17A-Kit/source_review/r14-assets-ai-business-prompts-b10_ops_sops.md": [
+    "471129be193767cae6bd278532cf7ba9dfb34659"
+  ],
+  "MMHB-R17A-Kit/source_review/r14-assets-ai-business-registry.json": [
+    "437205dcfba0dde0ed419693b0d7f51bbb5798a1"
+  ],
+  "MMHB-R17A-Kit/source_review/r14-assets-ai-business-system.md": [
+    "340e8f97cd3f60bc270d6f6085e67430394a1531"
+  ],
+  "MMHB-R17A-Kit/source_review/r14-assets-ai-healing-prompts-h01_intake.md": [
+    "b51037ef1d4866f1c1f00c3858796264d2bb58b0"
+  ],
+  "MMHB-R17A-Kit/source_review/r14-assets-ai-healing-prompts-h02_journal_reflect.md": [
+    "ee92d0f62b25546c0d6fcda98300262db156790d"
+  ],
+  "MMHB-R17A-Kit/source_review/r14-assets-ai-healing-prompts-h03_cbt_reframe.md": [
+    "7c08d9b1ee6a23ce10e8b3f4e436af0591a20c0b"
+  ],
+  "MMHB-R17A-Kit/source_review/r14-assets-ai-healing-prompts-h04_act_values.md": [
+    "a499b49cd2eb95f42154bf7468317c59285f5caf"
+  ],
+  "MMHB-R17A-Kit/source_review/r14-assets-ai-healing-prompts-h05_breathing_grounding.md": [
+    "e0ab88b3254d0794202637265c7be41ab3ad7149"
+  ],
+  "MMHB-R17A-Kit/source_review/r14-assets-ai-healing-prompts-h06_sleep_reset.md": [
+    "b81019c17014b2315a8f93291bd94e8c81b97ed7"
+  ],
+  "MMHB-R17A-Kit/source_review/r14-assets-ai-healing-prompts-h07_conflict_script.md": [
+    "861e1983a269f78e11f707cf12a3b338c7e728c7"
+  ],
+  "MMHB-R17A-Kit/source_review/r14-assets-ai-healing-prompts-h08_safety_check.md": [
+    "3e14b3977e4cb09ec3aa4ad5f48008ddcaee2429"
+  ],
+  "MMHB-R17A-Kit/source_review/r14-assets-ai-healing-registry.json": [
+    "af7432d81889f5004cb69bccd3a668ab760c4faa"
+  ],
+  "MMHB-R17A-Kit/source_review/r14-assets-ai-healing-system.md": [
+    "7b5f28a8f89e1854fdc34138b9865a9ab95688a9"
+  ],
+  "MMHB-R17A-Kit/source_review/r14-assets-server-lib-promptEngine.mjs": [
+    "c8544c62336cc918ed9bced3b0bc253721a75ea6"
+  ],
+  "MMHB-R17A-Kit/source_review/r15-asset-repair-policy.json": [
+    "4cc8c65146766f1368271c208893d62ae996d75a"
+  ],
+  "MMHB-R17A-Kit/source_review/r17a-graph-fixture-results.json": [
+    "d4d37b76a2a67e4a99fe3e89c4a71d8d14201007"
+  ],
+  "MMHB-R17A-Kit/source_review/r17a-preparation-record.json": [
+    "1bbe90d96df90fb9138dd36163749c8bb2701c25"
+  ],
+  "MMHB-R17A-Kit/source_review/r17a-resume-fixture-results.json": [
+    "244e2ba798acfe306564b2577d9846a816237e2c"
+  ],
+  "MMHB-R17A-Kit/source_review/r17a-upstream-rolldown-LICENSE.txt": [
+    "6a9319dd737d0ba07925fda801a3b2de4128dd62"
+  ],
+  "MMHB-R17A-Kit/source_review/r17a-upstream-rolldown-native-context-v1.0.3.rs": [
+    "48f881838533a5795de5c895447c261d2c8ddf55"
+  ],
+  "MMHB-R17A-Kit/source_review/r17a-upstream-rolldown-plugin-context-v1.0.3.ts": [
+    "e3a94bc6973ab88658a980f605ac3f029f6038c7"
+  ],
+  "MMHB-R17A-Kit/source_review/r17a-upstream-rolldown-runtime-v1.0.3.rs": [
+    "318a55871a79e0dab2b228c47579f71cec26b05d"
+  ],
+  "MMHB-R17A-Kit/source_review/r17a-upstream-rolldown-vite-resolve-v1.0.3.rs": [
+    "e936f8999dce1bcabe43f4d6575b7ad094638afb"
+  ],
+  "MMHB-R17A-Kit/source_review/r17a-upstream-rolldown-vite-resolver-v1.0.3.rs": [
+    "a8cf4978ab7b429305980d732871e1e438cb863d"
+  ],
+  "MMHB-R17A-Kit/source_review/r17a-upstream-rolldown-vite-utils-v1.0.3.rs": [
+    "85317dc7d854d4a26558caa1fe5c4d563ab0dedd"
+  ],
+  "MMHB-R17A-Kit/source_review/r17a-upstream-source-manifest.json": [
+    "85560f9bd7bab4f3bdeac25af42528906c68754f"
+  ],
+  "MMHB-R17A-Kit/source_review/r17a-upstream-vite-LICENSE.txt": [
+    "9e532316b6ef09f7fbb7a95af0bc788dbae5d5aa"
+  ],
+  "MMHB-R17A-Kit/source_review/r17a-upstream-vite-module-preload-v8.0.16.ts": [
+    "8a250ee93b2f8fc45e5ff800e8566daeac8e9b62"
+  ],
+  "MMHB-R17A-Kit/source_review/r17a-upstream-vite-resolve-v8.0.16.ts": [
+    "55006ef628bbe1dcdf3e742408a81caaffd25e1d"
+  ],
+  "MMHB-R17A-Kit/source_review/registry-archive-repair-r16d.mjs": [
+    "b3a42df40435cd9f4591361287f0a69ce24453bb"
+  ],
+  "MMHB-R17A-Kit/source_review/resumed-candidate-body-r17a.mjs": [
+    "d7fc13c1819d6b552157fa8be20b886d54889585"
+  ],
+  "MMHB-R17A-Kit/source_review/resumed-candidate-driver-r17a.mjs": [
+    "70c9187076c447e5538441e53e9007f7f06d6090"
+  ],
+  "MMHB-R17A-Kit/source_review/server-build-runner-r17.mjs": [
+    "978c8864a77ef6840bfaf1491d921dbad0e55bf9"
+  ],
+  "MMHB-R17A-Kit/source_review/test-fresh-candidate-r17.py": [
+    "a85ffa39b55d254c5a7ba8a7c186b9ab144916cd"
+  ],
+  "MMHB-R17A-Kit/source_review/test-frontend-graph-r17a.mjs": [
+    "3e6f10574bac56f1c2ab903d6a3bcdc8aec81117"
+  ],
+  "MMHB-R17A-Kit/source_review/test-frontend-runner-r12.py": [
+    "b09182376b59da93300ca0ae5d70ad10fb783301"
+  ],
+  "MMHB-R17A-Kit/source_review/test-resumed-candidate-r17a.py": [
+    "b396ee8f4c16aad6652579dd5ff8d09718316e4e"
+  ],
+  "MMHB-R17A-Start.txt": [
+    "73f18b86a6253548ebb4740d945780568d10849f"
+  ],
+  "MMHB-R17B-Kit.zip": [
+    "30e561017413a51263a7c485d55feb4a9223f2c7"
+  ],
+  "MMHB-R17B-Kit/MMHB-Ledger.txt": [
+    "ce26596a85fef5cc6b4e557e11ce1392d256b199"
+  ],
+  "MMHB-R17B-Kit/MMHB-R17B-Start.txt": [
+    "4ae90f4ddbc4be91c6d19c3ca30ba27d6bfa7254"
+  ],
+  "MMHB-R17B-Kit/MMHB-REBUILD-CANDIDATE-R17B.txt": [
+    "f7b4b48ac02407055849c0d16558bd3c11e513ee"
+  ],
+  "MMHB-R17B-Kit/MMHB-Readiness-Ledger-2026-09-07.md": [
+    "ce26596a85fef5cc6b4e557e11ce1392d256b199"
+  ],
+  "MMHB-R17B-Kit/source_review/R17A-Verification-README.md": [
+    "9fb15cea90054a5df9c5391677f0bfc28ea6e041"
+  ],
+  "MMHB-R17B-Kit/source_review/R17B-Verification-README.md": [
+    "88438848a8bbd44e49c6038546b817b770f0dd3b"
+  ],
+  "MMHB-R17B-Kit/source_review/build-fresh-candidate-command-r17b.py": [
+    "2b469df1f5c68027b2b592dc9992223465abf40e"
+  ],
+  "MMHB-R17B-Kit/source_review/build-resumed-candidate-command-r17a.py": [
+    "119c9ad194057e692a08c2cdda2c17d3650eeb0d"
+  ],
+  "MMHB-R17B-Kit/source_review/fresh-build-policy-r17.mjs": [
+    "5c7e20ba981f30ff40d8fabe2d84851695adc719"
+  ],
+  "MMHB-R17B-Kit/source_review/fresh-candidate-body-r17.mjs": [
+    "9fa268e147ad0d74903b0986726b8c656a64939b"
+  ],
+  "MMHB-R17B-Kit/source_review/fresh-candidate-body-r17b.mjs": [
+    "e87ff8db2850056eeabde0954d56ed62524dc8e9"
+  ],
+  "MMHB-R17B-Kit/source_review/fresh-candidate-driver-r17.mjs": [
+    "8086099fbe5827db04a472daedb2d2cc04427849"
+  ],
+  "MMHB-R17B-Kit/source_review/fresh-candidate-driver-r17b.mjs": [
+    "63ccf46e042c173b5b8af6b9dacb1348b363a467"
+  ],
+  "MMHB-R17B-Kit/source_review/fresh-candidate-prefix-r17.mjs": [
+    "61af3c501614ed5c219ed78f47b13854b2aef645"
+  ],
+  "MMHB-R17B-Kit/source_review/frontend-build-runner-r17.mjs": [
+    "3c9e19f40577cb16b5392eac652f59355453ee43"
+  ],
+  "MMHB-R17B-Kit/source_review/frontend-build-runner-r17b.mjs": [
+    "72fec8daaed3df8096fdf46fc74216aa4d9aceab"
+  ],
+  "MMHB-R17B-Kit/source_review/frontend-graph-policy-r17a.mjs": [
+    "01bd3fd71bfde409eba623d1196f722ee2af7859"
+  ],
+  "MMHB-R17B-Kit/source_review/locked-dependency-policy-r16e.mjs": [
+    "c10c993aff110e1a5b90653837be70e4f426c0ce"
+  ],
+  "MMHB-R17B-Kit/source_review/native-candidate-runner-r17.mjs": [
+    "1d95e4291c713c0b35c9d0391682cf6f0eac8f44"
+  ],
+  "MMHB-R17B-Kit/source_review/native-candidate-runner-r17a.mjs": [
+    "4a20f5e363f18ac658cf6621875411011110f77f"
+  ],
+  "MMHB-R17B-Kit/source_review/native-candidate-runner-r17b.mjs": [
+    "ad35531f5c15ceff585dd8dae85d1e383f10b2a2"
+  ],
+  "MMHB-R17B-Kit/source_review/prompt-asset-runner-r15.mjs": [
+    "2d97df0bf00a53f881a7d069cfb92073503a23d0"
+  ],
+  "MMHB-R17B-Kit/source_review/r14-assets-ai-business-prompts-b01_offer_design.md": [
+    "252266768f6b961b4263cf026e4e03a2c3fd2a69"
+  ],
+  "MMHB-R17B-Kit/source_review/r14-assets-ai-business-prompts-b02_funnel_map.md": [
+    "847821fd9b7ee33351318bc2a4578d2af8e3e1f2"
+  ],
+  "MMHB-R17B-Kit/source_review/r14-assets-ai-business-prompts-b03_content_factory.md": [
+    "3d5da014d3dbc34cf207720e9f0d60e723aaebe8"
+  ],
+  "MMHB-R17B-Kit/source_review/r14-assets-ai-business-prompts-b04_email_sequences.md": [
+    "539065de9fec776d715fc1521d28e8f483772cad"
+  ],
+  "MMHB-R17B-Kit/source_review/r14-assets-ai-business-prompts-b05_seo_briefs.md": [
+    "098b75e329a25dc29f5b0f11b68a7c3f9bff56c1"
+  ],
+  "MMHB-R17B-Kit/source_review/r14-assets-ai-business-prompts-b06_competitive_scan.md": [
+    "b874efe29f0572d5de1df5a857474ec5ba6bb281"
+  ],
+  "MMHB-R17B-Kit/source_review/r14-assets-ai-business-prompts-b07_pricing_packaging.md": [
+    "7cf441853ba14f154a1bd8b32def7774dbb95084"
+  ],
+  "MMHB-R17B-Kit/source_review/r14-assets-ai-business-prompts-b08_retention_loyalty.md": [
+    "219ec3a824cb98622e4f0b7baf02e65b02285874"
+  ],
+  "MMHB-R17B-Kit/source_review/r14-assets-ai-business-prompts-b09_partnerships.md": [
+    "644504e2ba12a919af3efa9fbb7b28325437e3f6"
+  ],
+  "MMHB-R17B-Kit/source_review/r14-assets-ai-business-prompts-b10_ops_sops.md": [
+    "471129be193767cae6bd278532cf7ba9dfb34659"
+  ],
+  "MMHB-R17B-Kit/source_review/r14-assets-ai-business-registry.json": [
+    "437205dcfba0dde0ed419693b0d7f51bbb5798a1"
+  ],
+  "MMHB-R17B-Kit/source_review/r14-assets-ai-business-system.md": [
+    "340e8f97cd3f60bc270d6f6085e67430394a1531"
+  ],
+  "MMHB-R17B-Kit/source_review/r14-assets-ai-healing-prompts-h01_intake.md": [
+    "b51037ef1d4866f1c1f00c3858796264d2bb58b0"
+  ],
+  "MMHB-R17B-Kit/source_review/r14-assets-ai-healing-prompts-h02_journal_reflect.md": [
+    "ee92d0f62b25546c0d6fcda98300262db156790d"
+  ],
+  "MMHB-R17B-Kit/source_review/r14-assets-ai-healing-prompts-h03_cbt_reframe.md": [
+    "7c08d9b1ee6a23ce10e8b3f4e436af0591a20c0b"
+  ],
+  "MMHB-R17B-Kit/source_review/r14-assets-ai-healing-prompts-h04_act_values.md": [
+    "a499b49cd2eb95f42154bf7468317c59285f5caf"
+  ],
+  "MMHB-R17B-Kit/source_review/r14-assets-ai-healing-prompts-h05_breathing_grounding.md": [
+    "e0ab88b3254d0794202637265c7be41ab3ad7149"
+  ],
+  "MMHB-R17B-Kit/source_review/r14-assets-ai-healing-prompts-h06_sleep_reset.md": [
+    "b81019c17014b2315a8f93291bd94e8c81b97ed7"
+  ],
+  "MMHB-R17B-Kit/source_review/r14-assets-ai-healing-prompts-h07_conflict_script.md": [
+    "861e1983a269f78e11f707cf12a3b338c7e728c7"
+  ],
+  "MMHB-R17B-Kit/source_review/r14-assets-ai-healing-prompts-h08_safety_check.md": [
+    "3e14b3977e4cb09ec3aa4ad5f48008ddcaee2429"
+  ],
+  "MMHB-R17B-Kit/source_review/r14-assets-ai-healing-registry.json": [
+    "af7432d81889f5004cb69bccd3a668ab760c4faa"
+  ],
+  "MMHB-R17B-Kit/source_review/r14-assets-ai-healing-system.md": [
+    "7b5f28a8f89e1854fdc34138b9865a9ab95688a9"
+  ],
+  "MMHB-R17B-Kit/source_review/r14-assets-server-lib-promptEngine.mjs": [
+    "c8544c62336cc918ed9bced3b0bc253721a75ea6"
+  ],
+  "MMHB-R17B-Kit/source_review/r15-asset-repair-policy.json": [
+    "4cc8c65146766f1368271c208893d62ae996d75a"
+  ],
+  "MMHB-R17B-Kit/source_review/r17a-graph-fixture-results.json": [
+    "d4d37b76a2a67e4a99fe3e89c4a71d8d14201007"
+  ],
+  "MMHB-R17B-Kit/source_review/r17a-preparation-record.json": [
+    "1bbe90d96df90fb9138dd36163749c8bb2701c25"
+  ],
+  "MMHB-R17B-Kit/source_review/r17a-resume-fixture-results.json": [
+    "244e2ba798acfe306564b2577d9846a816237e2c"
+  ],
+  "MMHB-R17B-Kit/source_review/r17a-upstream-rolldown-LICENSE.txt": [
+    "6a9319dd737d0ba07925fda801a3b2de4128dd62"
+  ],
+  "MMHB-R17B-Kit/source_review/r17a-upstream-rolldown-native-context-v1.0.3.rs": [
+    "48f881838533a5795de5c895447c261d2c8ddf55"
+  ],
+  "MMHB-R17B-Kit/source_review/r17a-upstream-rolldown-plugin-context-v1.0.3.ts": [
+    "e3a94bc6973ab88658a980f605ac3f029f6038c7"
+  ],
+  "MMHB-R17B-Kit/source_review/r17a-upstream-rolldown-runtime-v1.0.3.rs": [
+    "318a55871a79e0dab2b228c47579f71cec26b05d"
+  ],
+  "MMHB-R17B-Kit/source_review/r17a-upstream-rolldown-vite-resolve-v1.0.3.rs": [
+    "e936f8999dce1bcabe43f4d6575b7ad094638afb"
+  ],
+  "MMHB-R17B-Kit/source_review/r17a-upstream-rolldown-vite-resolver-v1.0.3.rs": [
+    "a8cf4978ab7b429305980d732871e1e438cb863d"
+  ],
+  "MMHB-R17B-Kit/source_review/r17a-upstream-rolldown-vite-utils-v1.0.3.rs": [
+    "85317dc7d854d4a26558caa1fe5c4d563ab0dedd"
+  ],
+  "MMHB-R17B-Kit/source_review/r17a-upstream-source-manifest.json": [
+    "85560f9bd7bab4f3bdeac25af42528906c68754f"
+  ],
+  "MMHB-R17B-Kit/source_review/r17a-upstream-vite-LICENSE.txt": [
+    "9e532316b6ef09f7fbb7a95af0bc788dbae5d5aa"
+  ],
+  "MMHB-R17B-Kit/source_review/r17a-upstream-vite-module-preload-v8.0.16.ts": [
+    "8a250ee93b2f8fc45e5ff800e8566daeac8e9b62"
+  ],
+  "MMHB-R17B-Kit/source_review/r17a-upstream-vite-resolve-v8.0.16.ts": [
+    "55006ef628bbe1dcdf3e742408a81caaffd25e1d"
+  ],
+  "MMHB-R17B-Kit/source_review/r17a-user-result-observation.json": [
+    "863edebef81b040008435be733a2629afde102ff"
+  ],
+  "MMHB-R17B-Kit/source_review/r17b-driver-fixture-results.json": [
+    "d56764aa89d5499019abb7a304daf0762aa547f2"
+  ],
+  "MMHB-R17B-Kit/source_review/r17b-preparation-record.json": [
+    "7c33da5e391fe1584c46b16fa9b5a4f7049d2882"
+  ],
+  "MMHB-R17B-Kit/source_review/r17b-upstream-tailwind-LICENSE.txt": [
+    "d6a82290738a9f78946cbcb4594535d6984086dd"
+  ],
+  "MMHB-R17B-Kit/source_review/r17b-upstream-tailwind-scanner-provenance.json": [
+    "09e96e6a91c78ebc4ca044d2c10910a1d214ffc8"
+  ],
+  "MMHB-R17B-Kit/source_review/r17b-upstream-tailwind-scanner-v4.3.0.rs": [
+    "30724f1621886859ed1a3249ed63843fca70d818"
+  ],
+  "MMHB-R17B-Kit/source_review/registry-archive-repair-r16d.mjs": [
+    "b3a42df40435cd9f4591361287f0a69ce24453bb"
+  ],
+  "MMHB-R17B-Kit/source_review/resumed-candidate-body-r17a.mjs": [
+    "d7fc13c1819d6b552157fa8be20b886d54889585"
+  ],
+  "MMHB-R17B-Kit/source_review/resumed-candidate-driver-r17a.mjs": [
+    "70c9187076c447e5538441e53e9007f7f06d6090"
+  ],
+  "MMHB-R17B-Kit/source_review/server-build-runner-r17.mjs": [
+    "978c8864a77ef6840bfaf1491d921dbad0e55bf9"
+  ],
+  "MMHB-R17B-Kit/source_review/server-build-runner-r17b.mjs": [
+    "bda42a207747bbc1b2c672ca55d1c4621d90419b"
+  ],
+  "MMHB-R17B-Kit/source_review/test-fresh-candidate-r17.py": [
+    "a85ffa39b55d254c5a7ba8a7c186b9ab144916cd"
+  ],
+  "MMHB-R17B-Kit/source_review/test-fresh-candidate-r17b.py": [
+    "87f3f5a821f4132792383ce4661c6741d300e659"
+  ],
+  "MMHB-R17B-Kit/source_review/test-frontend-graph-r17a.mjs": [
+    "3e6f10574bac56f1c2ab903d6a3bcdc8aec81117"
+  ],
+  "MMHB-R17B-Kit/source_review/test-frontend-runner-r12.py": [
+    "b09182376b59da93300ca0ae5d70ad10fb783301"
+  ],
+  "MMHB-R17B-Kit/source_review/test-resumed-candidate-r17a.py": [
+    "b396ee8f4c16aad6652579dd5ff8d09718316e4e"
+  ],
+  "MMHB-R17B-Start.txt": [
+    "4ae90f4ddbc4be91c6d19c3ca30ba27d6bfa7254"
+  ],
+  "MMHB-R17C-Kit.zip": [
+    "d6b60127447ee30eaa9b3b4566bd7a2020481645"
+  ],
+  "MMHB-R17C-Kit/MMHB-Ledger.txt": [
+    "17166dbce412686b00d1d48ba4444ef271f2dcff"
+  ],
+  "MMHB-R17C-Kit/MMHB-PRESERVATION-INSPECT-R17C.txt": [
+    "11a1977545362b3a7395398a59de9c92bdf9499c"
+  ],
+  "MMHB-R17C-Kit/MMHB-R17C-Start.txt": [
+    "e948e11806fa5a124a0debb3780a95e8824f1f73"
+  ],
+  "MMHB-R17C-Kit/MMHB-Readiness-Ledger-2026-09-07.md": [
+    "17166dbce412686b00d1d48ba4444ef271f2dcff"
+  ],
+  "MMHB-R17C-Kit/source_review/R17A-Verification-README.md": [
+    "9fb15cea90054a5df9c5391677f0bfc28ea6e041"
+  ],
+  "MMHB-R17C-Kit/source_review/R17B-Verification-README.md": [
+    "88438848a8bbd44e49c6038546b817b770f0dd3b"
+  ],
+  "MMHB-R17C-Kit/source_review/R17C-Verification-README.md": [
+    "08d4346387295b831b15af1c53c519d7185ddf2e"
+  ],
+  "MMHB-R17C-Kit/source_review/build-fresh-candidate-command-r17b.py": [
+    "2b469df1f5c68027b2b592dc9992223465abf40e"
+  ],
+  "MMHB-R17C-Kit/source_review/build-preservation-diagnostic-r17c.py": [
+    "23840036a6ce853e6e2648abbd30e05c26630d81"
+  ],
+  "MMHB-R17C-Kit/source_review/build-resumed-candidate-command-r17a.py": [
+    "119c9ad194057e692a08c2cdda2c17d3650eeb0d"
+  ],
+  "MMHB-R17C-Kit/source_review/fresh-build-policy-r17.mjs": [
+    "5c7e20ba981f30ff40d8fabe2d84851695adc719"
+  ],
+  "MMHB-R17C-Kit/source_review/fresh-candidate-body-r17.mjs": [
+    "9fa268e147ad0d74903b0986726b8c656a64939b"
+  ],
+  "MMHB-R17C-Kit/source_review/fresh-candidate-body-r17b.mjs": [
+    "e87ff8db2850056eeabde0954d56ed62524dc8e9"
+  ],
+  "MMHB-R17C-Kit/source_review/fresh-candidate-driver-r17.mjs": [
+    "8086099fbe5827db04a472daedb2d2cc04427849"
+  ],
+  "MMHB-R17C-Kit/source_review/fresh-candidate-driver-r17b.mjs": [
+    "63ccf46e042c173b5b8af6b9dacb1348b363a467"
+  ],
+  "MMHB-R17C-Kit/source_review/fresh-candidate-prefix-r17.mjs": [
+    "61af3c501614ed5c219ed78f47b13854b2aef645"
+  ],
+  "MMHB-R17C-Kit/source_review/frontend-build-runner-r17.mjs": [
+    "3c9e19f40577cb16b5392eac652f59355453ee43"
+  ],
+  "MMHB-R17C-Kit/source_review/frontend-build-runner-r17b.mjs": [
+    "72fec8daaed3df8096fdf46fc74216aa4d9aceab"
+  ],
+  "MMHB-R17C-Kit/source_review/frontend-graph-policy-r17a.mjs": [
+    "01bd3fd71bfde409eba623d1196f722ee2af7859"
+  ],
+  "MMHB-R17C-Kit/source_review/locked-dependency-policy-r16e.mjs": [
+    "c10c993aff110e1a5b90653837be70e4f426c0ce"
+  ],
+  "MMHB-R17C-Kit/source_review/native-candidate-runner-r17.mjs": [
+    "1d95e4291c713c0b35c9d0391682cf6f0eac8f44"
+  ],
+  "MMHB-R17C-Kit/source_review/native-candidate-runner-r17a.mjs": [
+    "4a20f5e363f18ac658cf6621875411011110f77f"
+  ],
+  "MMHB-R17C-Kit/source_review/native-candidate-runner-r17b.mjs": [
+    "ad35531f5c15ceff585dd8dae85d1e383f10b2a2"
+  ],
+  "MMHB-R17C-Kit/source_review/prepare-r17c-deliverables.py": [
+    "55394353de4cf9bdc114efa5cbfb857053528f09"
+  ],
+  "MMHB-R17C-Kit/source_review/preservation-diagnostic-body-r17c.mjs": [
+    "cfe8fe4a97523f797ff2b70864463dd47f446ca6"
+  ],
+  "MMHB-R17C-Kit/source_review/preservation-diagnostic-driver-r17c.mjs": [
+    "ae401c45e1869bd56f81e548f91b1396d0666b7e"
+  ],
+  "MMHB-R17C-Kit/source_review/preservation-snapshot-policy-r17c.mjs": [
+    "7f8fe9f600b72107f91d8a97710250735e54b698"
+  ],
+  "MMHB-R17C-Kit/source_review/prompt-asset-runner-r15.mjs": [
+    "2d97df0bf00a53f881a7d069cfb92073503a23d0"
+  ],
+  "MMHB-R17C-Kit/source_review/r14-assets-ai-business-prompts-b01_offer_design.md": [
+    "252266768f6b961b4263cf026e4e03a2c3fd2a69"
+  ],
+  "MMHB-R17C-Kit/source_review/r14-assets-ai-business-prompts-b02_funnel_map.md": [
+    "847821fd9b7ee33351318bc2a4578d2af8e3e1f2"
+  ],
+  "MMHB-R17C-Kit/source_review/r14-assets-ai-business-prompts-b03_content_factory.md": [
+    "3d5da014d3dbc34cf207720e9f0d60e723aaebe8"
+  ],
+  "MMHB-R17C-Kit/source_review/r14-assets-ai-business-prompts-b04_email_sequences.md": [
+    "539065de9fec776d715fc1521d28e8f483772cad"
+  ],
+  "MMHB-R17C-Kit/source_review/r14-assets-ai-business-prompts-b05_seo_briefs.md": [
+    "098b75e329a25dc29f5b0f11b68a7c3f9bff56c1"
+  ],
+  "MMHB-R17C-Kit/source_review/r14-assets-ai-business-prompts-b06_competitive_scan.md": [
+    "b874efe29f0572d5de1df5a857474ec5ba6bb281"
+  ],
+  "MMHB-R17C-Kit/source_review/r14-assets-ai-business-prompts-b07_pricing_packaging.md": [
+    "7cf441853ba14f154a1bd8b32def7774dbb95084"
+  ],
+  "MMHB-R17C-Kit/source_review/r14-assets-ai-business-prompts-b08_retention_loyalty.md": [
+    "219ec3a824cb98622e4f0b7baf02e65b02285874"
+  ],
+  "MMHB-R17C-Kit/source_review/r14-assets-ai-business-prompts-b09_partnerships.md": [
+    "644504e2ba12a919af3efa9fbb7b28325437e3f6"
+  ],
+  "MMHB-R17C-Kit/source_review/r14-assets-ai-business-prompts-b10_ops_sops.md": [
+    "471129be193767cae6bd278532cf7ba9dfb34659"
+  ],
+  "MMHB-R17C-Kit/source_review/r14-assets-ai-business-registry.json": [
+    "437205dcfba0dde0ed419693b0d7f51bbb5798a1"
+  ],
+  "MMHB-R17C-Kit/source_review/r14-assets-ai-business-system.md": [
+    "340e8f97cd3f60bc270d6f6085e67430394a1531"
+  ],
+  "MMHB-R17C-Kit/source_review/r14-assets-ai-healing-prompts-h01_intake.md": [
+    "b51037ef1d4866f1c1f00c3858796264d2bb58b0"
+  ],
+  "MMHB-R17C-Kit/source_review/r14-assets-ai-healing-prompts-h02_journal_reflect.md": [
+    "ee92d0f62b25546c0d6fcda98300262db156790d"
+  ],
+  "MMHB-R17C-Kit/source_review/r14-assets-ai-healing-prompts-h03_cbt_reframe.md": [
+    "7c08d9b1ee6a23ce10e8b3f4e436af0591a20c0b"
+  ],
+  "MMHB-R17C-Kit/source_review/r14-assets-ai-healing-prompts-h04_act_values.md": [
+    "a499b49cd2eb95f42154bf7468317c59285f5caf"
+  ],
+  "MMHB-R17C-Kit/source_review/r14-assets-ai-healing-prompts-h05_breathing_grounding.md": [
+    "e0ab88b3254d0794202637265c7be41ab3ad7149"
+  ],
+  "MMHB-R17C-Kit/source_review/r14-assets-ai-healing-prompts-h06_sleep_reset.md": [
+    "b81019c17014b2315a8f93291bd94e8c81b97ed7"
+  ],
+  "MMHB-R17C-Kit/source_review/r14-assets-ai-healing-prompts-h07_conflict_script.md": [
+    "861e1983a269f78e11f707cf12a3b338c7e728c7"
+  ],
+  "MMHB-R17C-Kit/source_review/r14-assets-ai-healing-prompts-h08_safety_check.md": [
+    "3e14b3977e4cb09ec3aa4ad5f48008ddcaee2429"
+  ],
+  "MMHB-R17C-Kit/source_review/r14-assets-ai-healing-registry.json": [
+    "af7432d81889f5004cb69bccd3a668ab760c4faa"
+  ],
+  "MMHB-R17C-Kit/source_review/r14-assets-ai-healing-system.md": [
+    "7b5f28a8f89e1854fdc34138b9865a9ab95688a9"
+  ],
+  "MMHB-R17C-Kit/source_review/r14-assets-server-lib-promptEngine.mjs": [
+    "c8544c62336cc918ed9bced3b0bc253721a75ea6"
+  ],
+  "MMHB-R17C-Kit/source_review/r15-asset-repair-policy.json": [
+    "4cc8c65146766f1368271c208893d62ae996d75a"
+  ],
+  "MMHB-R17C-Kit/source_review/r17a-graph-fixture-results.json": [
+    "d4d37b76a2a67e4a99fe3e89c4a71d8d14201007"
+  ],
+  "MMHB-R17C-Kit/source_review/r17a-preparation-record.json": [
+    "1bbe90d96df90fb9138dd36163749c8bb2701c25"
+  ],
+  "MMHB-R17C-Kit/source_review/r17a-resume-fixture-results.json": [
+    "244e2ba798acfe306564b2577d9846a816237e2c"
+  ],
+  "MMHB-R17C-Kit/source_review/r17a-upstream-rolldown-LICENSE.txt": [
+    "6a9319dd737d0ba07925fda801a3b2de4128dd62"
+  ],
+  "MMHB-R17C-Kit/source_review/r17a-upstream-rolldown-native-context-v1.0.3.rs": [
+    "48f881838533a5795de5c895447c261d2c8ddf55"
+  ],
+  "MMHB-R17C-Kit/source_review/r17a-upstream-rolldown-plugin-context-v1.0.3.ts": [
+    "e3a94bc6973ab88658a980f605ac3f029f6038c7"
+  ],
+  "MMHB-R17C-Kit/source_review/r17a-upstream-rolldown-runtime-v1.0.3.rs": [
+    "318a55871a79e0dab2b228c47579f71cec26b05d"
+  ],
+  "MMHB-R17C-Kit/source_review/r17a-upstream-rolldown-vite-resolve-v1.0.3.rs": [
+    "e936f8999dce1bcabe43f4d6575b7ad094638afb"
+  ],
+  "MMHB-R17C-Kit/source_review/r17a-upstream-rolldown-vite-resolver-v1.0.3.rs": [
+    "a8cf4978ab7b429305980d732871e1e438cb863d"
+  ],
+  "MMHB-R17C-Kit/source_review/r17a-upstream-rolldown-vite-utils-v1.0.3.rs": [
+    "85317dc7d854d4a26558caa1fe5c4d563ab0dedd"
+  ],
+  "MMHB-R17C-Kit/source_review/r17a-upstream-source-manifest.json": [
+    "85560f9bd7bab4f3bdeac25af42528906c68754f"
+  ],
+  "MMHB-R17C-Kit/source_review/r17a-upstream-vite-LICENSE.txt": [
+    "9e532316b6ef09f7fbb7a95af0bc788dbae5d5aa"
+  ],
+  "MMHB-R17C-Kit/source_review/r17a-upstream-vite-module-preload-v8.0.16.ts": [
+    "8a250ee93b2f8fc45e5ff800e8566daeac8e9b62"
+  ],
+  "MMHB-R17C-Kit/source_review/r17a-upstream-vite-resolve-v8.0.16.ts": [
+    "55006ef628bbe1dcdf3e742408a81caaffd25e1d"
+  ],
+  "MMHB-R17C-Kit/source_review/r17a-user-result-observation.json": [
+    "863edebef81b040008435be733a2629afde102ff"
+  ],
+  "MMHB-R17C-Kit/source_review/r17b-driver-fixture-results.json": [
+    "d56764aa89d5499019abb7a304daf0762aa547f2"
+  ],
+  "MMHB-R17C-Kit/source_review/r17b-preparation-record.json": [
+    "7c33da5e391fe1584c46b16fa9b5a4f7049d2882"
+  ],
+  "MMHB-R17C-Kit/source_review/r17b-upstream-tailwind-LICENSE.txt": [
+    "d6a82290738a9f78946cbcb4594535d6984086dd"
+  ],
+  "MMHB-R17C-Kit/source_review/r17b-upstream-tailwind-scanner-provenance.json": [
+    "09e96e6a91c78ebc4ca044d2c10910a1d214ffc8"
+  ],
+  "MMHB-R17C-Kit/source_review/r17b-upstream-tailwind-scanner-v4.3.0.rs": [
+    "30724f1621886859ed1a3249ed63843fca70d818"
+  ],
+  "MMHB-R17C-Kit/source_review/r17b-user-result-observation.json": [
+    "a95e931d2e80c9786a34901f4b5501e18824ccec"
+  ],
+  "MMHB-R17C-Kit/source_review/r17c-diagnostic-fixture-results.json": [
+    "c6f1231a52d029e43ae14037d8cd73338858dece"
+  ],
+  "MMHB-R17C-Kit/source_review/r17c-preparation-record.json": [
+    "28158548036c6c92e71a817010cbb3c4af2369c0"
+  ],
+  "MMHB-R17C-Kit/source_review/registry-archive-repair-r16d.mjs": [
+    "b3a42df40435cd9f4591361287f0a69ce24453bb"
+  ],
+  "MMHB-R17C-Kit/source_review/resumed-candidate-body-r17a.mjs": [
+    "d7fc13c1819d6b552157fa8be20b886d54889585"
+  ],
+  "MMHB-R17C-Kit/source_review/resumed-candidate-driver-r17a.mjs": [
+    "70c9187076c447e5538441e53e9007f7f06d6090"
+  ],
+  "MMHB-R17C-Kit/source_review/server-build-runner-r17.mjs": [
+    "978c8864a77ef6840bfaf1491d921dbad0e55bf9"
+  ],
+  "MMHB-R17C-Kit/source_review/server-build-runner-r17b.mjs": [
+    "bda42a207747bbc1b2c672ca55d1c4621d90419b"
+  ],
+  "MMHB-R17C-Kit/source_review/test-fresh-candidate-r17.py": [
+    "a85ffa39b55d254c5a7ba8a7c186b9ab144916cd"
+  ],
+  "MMHB-R17C-Kit/source_review/test-fresh-candidate-r17b.py": [
+    "87f3f5a821f4132792383ce4661c6741d300e659"
+  ],
+  "MMHB-R17C-Kit/source_review/test-frontend-graph-r17a.mjs": [
+    "3e6f10574bac56f1c2ab903d6a3bcdc8aec81117"
+  ],
+  "MMHB-R17C-Kit/source_review/test-frontend-runner-r12.py": [
+    "b09182376b59da93300ca0ae5d70ad10fb783301"
+  ],
+  "MMHB-R17C-Kit/source_review/test-r17c.py": [
+    "47587cb0b2aae918d12aaf5853a5bea0660ba8a2"
+  ],
+  "MMHB-R17C-Kit/source_review/test-resumed-candidate-r17a.py": [
+    "b396ee8f4c16aad6652579dd5ff8d09718316e4e"
+  ],
+  "MMHB-R17C-Start.txt": [
+    "e948e11806fa5a124a0debb3780a95e8824f1f73"
+  ],
+  "MMHB-R18-Kit.zip": [
+    "856bc67a2301b2d8b1a08d7dc5dbdd2806232d82"
+  ],
+  "MMHB-R18-Kit/MMHB-Ledger.txt": [
+    "3decff327700c6f69c78041fb2c2d4c605ae073a"
+  ],
+  "MMHB-R18-Kit/MMHB-R18-Start.txt": [
+    "2d14b8f24eb40bb3933cbb41cbf45c67cf768066"
+  ],
+  "MMHB-R18-Kit/MMHB-RUNTIME-CONTRACT-R18.txt": [
+    "8dbd61ae12e3a96e10d6125cffa413c82828fd7e"
+  ],
+  "MMHB-R18-Kit/MMHB-Readiness-Ledger-2026-09-07.md": [
+    "3decff327700c6f69c78041fb2c2d4c605ae073a"
+  ],
+  "MMHB-R18-Kit/source_review/R18-Verification-README.md": [
+    "910c13a182761a7e9a40163a443fda7ee20f2908"
+  ],
+  "MMHB-R18-Kit/source_review/build-runtime-contract-r18.py": [
+    "0ff8314394ab487e59a394ed8d7b5c5b3c527810"
+  ],
+  "MMHB-R18-Kit/source_review/fresh-build-policy-r17.mjs": [
+    "5c7e20ba981f30ff40d8fabe2d84851695adc719"
+  ],
+  "MMHB-R18-Kit/source_review/fresh-candidate-prefix-r17.mjs": [
+    "61af3c501614ed5c219ed78f47b13854b2aef645"
+  ],
+  "MMHB-R18-Kit/source_review/prepare-r18-deliverables.py": [
+    "c48847f6272e8c607a601264250b06ad18c80339"
+  ],
+  "MMHB-R18-Kit/source_review/preservation-snapshot-policy-r17c.mjs": [
+    "7f8fe9f600b72107f91d8a97710250735e54b698"
+  ],
+  "MMHB-R18-Kit/source_review/r14-assets-healScheduler.mjs": [
+    "41ec6cb87390bbf762f688ee933601abf9cc0c9d"
+  ],
+  "MMHB-R18-Kit/source_review/r14-assets-kernel-bridge.mjs": [
+    "7ec7e66fd8cdf2df9ac8c7f9684d6f3dff4da0b5"
+  ],
+  "MMHB-R18-Kit/source_review/r14-assets-promptEngine.mjs": [
+    "c8544c62336cc918ed9bced3b0bc253721a75ea6"
+  ],
+  "MMHB-R18-Kit/source_review/r14-assets-rss.mjs": [
+    "a032b5ce9baf58dba99db7451a283139640fda5e"
+  ],
+  "MMHB-R18-Kit/source_review/r14-assets-runtime-mapping.json": [
+    "550abd3b353b8d6a04691d6431fafd61f48ce5f2"
+  ],
+  "MMHB-R18-Kit/source_review/r14-external-mmhb-server-db-connection.mjs": [
+    "153868f248177a9f15746466a2814e5ea638d574"
+  ],
+  "MMHB-R18-Kit/source_review/r14-external-mmhb-server-routes-blog.mjs": [
+    "64458c35dfa5179302f6d888604d935e025c58d0"
+  ],
+  "MMHB-R18-Kit/source_review/r14-external-mmhb-server-services-email.mjs": [
+    "88217e1cd184a9e3a9a801ac7542820c3fd5fc8a"
+  ],
+  "MMHB-R18-Kit/source_review/r14-external-mmhb-server-services-newsletterSend.mjs": [
+    "99b1b30354f71a689532c1f2e9a2a6c9ce0350fa"
+  ],
+  "MMHB-R18-Kit/source_review/r14-external-mmhb-server-utils-email.mjs": [
+    "9df253aefaf623010d94a49c54014c1f62417d67"
+  ],
+  "MMHB-R18-Kit/source_review/r14-external-node-postgres-packages-pg-esm-index.mjs": [
+    "587d80c1e57bebf7e8f886c510973c325a84de3e"
+  ],
+  "MMHB-R18-Kit/source_review/r14-external-node-postgres-packages-pg-lib-index.js": [
+    "e8b746149ca3480017b6faaa6c934bc5ce1ab2f0"
+  ],
+  "MMHB-R18-Kit/source_review/r14-external-node-postgres-packages-pg-lib-native-client.js": [
+    "fa17d9f6541cacc41694b099a15bc30cd18c1659"
+  ],
+  "MMHB-R18-Kit/source_review/r14-external-node-postgres-packages-pg-lib-stream.js": [
+    "edc3018332d999139e6b6573230e8c0553650bc0"
+  ],
+  "MMHB-R18-Kit/source_review/r14-external-review.md": [
+    "570673a0a8f2aba9dd97110dd612283da2efb3a4"
+  ],
+  "MMHB-R18-Kit/source_review/r14-external-reviewed-mapping.json": [
+    "0f8cfde2337c0fa8d0714420a12f9d1770a261c7"
+  ],
+  "MMHB-R18-Kit/source_review/r14-external-ws-lib-buffer-util.js": [
+    "f7536e28efa570277e30e9ea001200ee11595fee"
+  ],
+  "MMHB-R18-Kit/source_review/r14-external-ws-lib-validation.js": [
+    "4a2e68d5127279431a74b6961e8d35161d3276e2"
+  ],
+  "MMHB-R18-Kit/source_review/r15-dependency-review.json": [
+    "3afe92928d2d1e4b05b4bf5630504f542bf6da9c"
+  ],
+  "MMHB-R18-Kit/source_review/r15-pg-8.23.0-native-client.js": [
+    "d305713d64fdc197575ab1811cea7333fa35567b"
+  ],
+  "MMHB-R18-Kit/source_review/r17c-ledger-handoff-archive.md": [
+    "8a8f851560623bdf0a074d800a7a7dd525374b26"
+  ],
+  "MMHB-R18-Kit/source_review/r17c-user-result-analysis.json": [
+    "1a4fb263e561a511b852296f6c192a6278fa08c9"
+  ],
+  "MMHB-R18-Kit/source_review/r18-driver-fixture-results.json": [
+    "dfa76314a6fec1b4633b841f33ef16f508111935"
+  ],
+  "MMHB-R18-Kit/source_review/r18-ledger-retained-history.md": [
+    "0067726d62b004d0c2944efdb09f7dfc22d553d2"
+  ],
+  "MMHB-R18-Kit/source_review/r18-preparation-record.json": [
+    "8b1b2286b2372378b1422e7f8e46f31c17ca4a78"
+  ],
+  "MMHB-R18-Kit/source_review/r18-resend-6.22.1-LICENSE.txt": [
+    "203d69812af1576f85acf52d5176cd263e48fa45"
+  ],
+  "MMHB-R18-Kit/source_review/r18-resend-6.22.1-index.cjs": [
+    "f4a402218a75bebcefb713863f0dc0375f37cf72"
+  ],
+  "MMHB-R18-Kit/source_review/r18-resend-6.22.1-index.mjs": [
+    "8335a93f95da9f40e7f4e050d86a40e293e1b395"
+  ],
+  "MMHB-R18-Kit/source_review/r18-resend-6.22.1-package.json": [
+    "4ff1636e0b1bbd3a71d9bbfd3e33da5f572a995d"
+  ],
+  "MMHB-R18-Kit/source_review/r18-resend-6.22.1-provenance.json": [
+    "b38682998504f5a4c191517860afb61199d4741e"
+  ],
+  "MMHB-R18-Kit/source_review/r18-resend-6.22.1-registry-metadata.json": [
+    "08351e650fc510f19e787a881893b7cefae101fd"
+  ],
+  "MMHB-R18-Kit/source_review/r18-resend-6.22.1-render-regions.json": [
+    "c1ed9c0ac08e5a882becd69628d00358d8708c9b"
+  ],
+  "MMHB-R18-Kit/source_review/r18-resend-6.22.1-review.md": [
+    "fca4b598ed4972db7a1f4de14b1376f02f2fcf5a"
+  ],
+  "MMHB-R18-Kit/source_review/r18-resend-smoke-fixture-results.json": [
+    "a950cd9f3ca26b27953e0567a6010adc266132be"
+  ],
+  "MMHB-R18-Kit/source_review/r18-resend-smoke.mjs": [
+    "2b52e1a7d441a7c80e1df75301cc646c89566bbe"
+  ],
+  "MMHB-R18-Kit/source_review/r18-runtime-helper-smoke.mjs": [
+    "e0257a9a6a43105665c0bcdab4d3cd37a6b75c18"
+  ],
+  "MMHB-R18-Kit/source_review/r18-upstream-license-provenance.json": [
+    "d4d51a18a0e0c9bd9c972fee179304f5e6de08b4"
+  ],
+  "MMHB-R18-Kit/source_review/r18-upstream-pg-LICENSE.txt": [
+    "5c1405646fa9dfc49a4638bfc5c8ca908d912505"
+  ],
+  "MMHB-R18-Kit/source_review/r18-upstream-ws-LICENSE.txt": [
+    "1da5b96a11ac2c83160e3085188f04eba7e3dd7d"
+  ],
+  "MMHB-R18-Kit/source_review/runtime-contract-analysis-r14.mjs": [
+    "35fd277d8e6f1134039c39475cf8b1322031220e"
+  ],
+  "MMHB-R18-Kit/source_review/runtime-contract-body-r18.mjs": [
+    "ac9c1f1c290ebdf83d53215d141117c5d5480759"
+  ],
+  "MMHB-R18-Kit/source_review/runtime-contract-driver-r18.mjs": [
+    "ac02c09ca57b537786f1ee7358110a30f08f8804"
+  ],
+  "MMHB-R18-Kit/source_review/runtime-graph-policy-r18.mjs": [
+    "5f22aa7593bee754f0e62d5cc9fbfa0b4a8205fc"
+  ],
+  "MMHB-R18-Kit/source_review/test-r18-driver.py": [
+    "9b83ed8379e2cd2ad9b7ee6e1b503ad888725bec"
+  ],
+  "MMHB-R18-Kit/source_review/test-r18-resend-smoke.mjs": [
+    "f46bf53cd7b6e8f953ec1d6ad2e2abb6c728858b"
+  ],
+  "MMHB-R18-Kit/source_review/test-r18-runtime-helper-smoke.mjs": [
+    "4f6d6441dae702fb45c91c7460178a8cd80b13fe"
+  ],
+  "MMHB-R18-Kit/source_review/test-runtime-graph-policy-r18.mjs": [
+    "5911086320dbeb6f528a4652b59e3ff53a39ddf3"
+  ],
+  "MMHB-R18-Start.txt": [
+    "2d14b8f24eb40bb3933cbb41cbf45c67cf768066"
+  ],
+  "MMHB-R18A-Kit.zip": [
+    "48bb956bb84753aef773bc82028f9673f9f04a0b"
+  ],
+  "MMHB-R18A-Kit/MMHB-Ledger.txt": [
+    "84c77370c141425d51f6e51ac00658d3c5c60be2"
+  ],
+  "MMHB-R18A-Kit/MMHB-R18A-Start.txt": [
+    "36098903a3c596f16527a8588212fa9726adad9d"
+  ],
+  "MMHB-R18A-Kit/MMHB-RUNTIME-CONTRACT-R18A.txt": [
+    "84e83efb4947dcc5db0ba9ab8a51517bddf7b2b5"
+  ],
+  "MMHB-R18A-Kit/MMHB-Readiness-Ledger-2026-09-07.md": [
+    "84c77370c141425d51f6e51ac00658d3c5c60be2"
+  ],
+  "MMHB-R18A-Kit/source_review/R18-Verification-README.md": [
+    "910c13a182761a7e9a40163a443fda7ee20f2908"
+  ],
+  "MMHB-R18A-Kit/source_review/R18A-Verification-README.md": [
+    "27c334ef647ed1ff19c665963ef9adc0f9a5c6a3"
+  ],
+  "MMHB-R18A-Kit/source_review/build-runtime-contract-r18.py": [
+    "0ff8314394ab487e59a394ed8d7b5c5b3c527810"
+  ],
+  "MMHB-R18A-Kit/source_review/build-runtime-contract-r18a.py": [
+    "f596ef67f3fc82e522f7d44c4700ac96659b5296"
+  ],
+  "MMHB-R18A-Kit/source_review/fresh-build-policy-r17.mjs": [
+    "5c7e20ba981f30ff40d8fabe2d84851695adc719"
+  ],
+  "MMHB-R18A-Kit/source_review/fresh-candidate-prefix-r17.mjs": [
+    "61af3c501614ed5c219ed78f47b13854b2aef645"
+  ],
+  "MMHB-R18A-Kit/source_review/prepare-r18-deliverables.py": [
+    "c48847f6272e8c607a601264250b06ad18c80339"
+  ],
+  "MMHB-R18A-Kit/source_review/prepare-r18a-deliverables.py": [
+    "1fed2b7a2c241ada6c7393f62a0d7b797a113aae"
+  ],
+  "MMHB-R18A-Kit/source_review/preservation-snapshot-policy-r17c.mjs": [
+    "7f8fe9f600b72107f91d8a97710250735e54b698"
+  ],
+  "MMHB-R18A-Kit/source_review/r14-assets-healScheduler.mjs": [
+    "41ec6cb87390bbf762f688ee933601abf9cc0c9d"
+  ],
+  "MMHB-R18A-Kit/source_review/r14-assets-kernel-bridge.mjs": [
+    "7ec7e66fd8cdf2df9ac8c7f9684d6f3dff4da0b5"
+  ],
+  "MMHB-R18A-Kit/source_review/r14-assets-promptEngine.mjs": [
+    "c8544c62336cc918ed9bced3b0bc253721a75ea6"
+  ],
+  "MMHB-R18A-Kit/source_review/r14-assets-rss.mjs": [
+    "a032b5ce9baf58dba99db7451a283139640fda5e"
+  ],
+  "MMHB-R18A-Kit/source_review/r14-assets-runtime-mapping.json": [
+    "550abd3b353b8d6a04691d6431fafd61f48ce5f2"
+  ],
+  "MMHB-R18A-Kit/source_review/r14-external-mmhb-server-db-connection.mjs": [
+    "153868f248177a9f15746466a2814e5ea638d574"
+  ],
+  "MMHB-R18A-Kit/source_review/r14-external-mmhb-server-routes-blog.mjs": [
+    "64458c35dfa5179302f6d888604d935e025c58d0"
+  ],
+  "MMHB-R18A-Kit/source_review/r14-external-mmhb-server-services-email.mjs": [
+    "88217e1cd184a9e3a9a801ac7542820c3fd5fc8a"
+  ],
+  "MMHB-R18A-Kit/source_review/r14-external-mmhb-server-services-newsletterSend.mjs": [
+    "99b1b30354f71a689532c1f2e9a2a6c9ce0350fa"
+  ],
+  "MMHB-R18A-Kit/source_review/r14-external-mmhb-server-utils-email.mjs": [
+    "9df253aefaf623010d94a49c54014c1f62417d67"
+  ],
+  "MMHB-R18A-Kit/source_review/r14-external-node-postgres-packages-pg-esm-index.mjs": [
+    "587d80c1e57bebf7e8f886c510973c325a84de3e"
+  ],
+  "MMHB-R18A-Kit/source_review/r14-external-node-postgres-packages-pg-lib-index.js": [
+    "e8b746149ca3480017b6faaa6c934bc5ce1ab2f0"
+  ],
+  "MMHB-R18A-Kit/source_review/r14-external-node-postgres-packages-pg-lib-native-client.js": [
+    "fa17d9f6541cacc41694b099a15bc30cd18c1659"
+  ],
+  "MMHB-R18A-Kit/source_review/r14-external-node-postgres-packages-pg-lib-stream.js": [
+    "edc3018332d999139e6b6573230e8c0553650bc0"
+  ],
+  "MMHB-R18A-Kit/source_review/r14-external-review.md": [
+    "570673a0a8f2aba9dd97110dd612283da2efb3a4"
+  ],
+  "MMHB-R18A-Kit/source_review/r14-external-reviewed-mapping.json": [
+    "0f8cfde2337c0fa8d0714420a12f9d1770a261c7"
+  ],
+  "MMHB-R18A-Kit/source_review/r14-external-ws-lib-buffer-util.js": [
+    "f7536e28efa570277e30e9ea001200ee11595fee"
+  ],
+  "MMHB-R18A-Kit/source_review/r14-external-ws-lib-validation.js": [
+    "4a2e68d5127279431a74b6961e8d35161d3276e2"
+  ],
+  "MMHB-R18A-Kit/source_review/r15-dependency-review.json": [
+    "3afe92928d2d1e4b05b4bf5630504f542bf6da9c"
+  ],
+  "MMHB-R18A-Kit/source_review/r15-pg-8.23.0-native-client.js": [
+    "d305713d64fdc197575ab1811cea7333fa35567b"
+  ],
+  "MMHB-R18A-Kit/source_review/r17c-ledger-handoff-archive.md": [
+    "8a8f851560623bdf0a074d800a7a7dd525374b26"
+  ],
+  "MMHB-R18A-Kit/source_review/r17c-user-result-analysis.json": [
+    "1a4fb263e561a511b852296f6c192a6278fa08c9"
+  ],
+  "MMHB-R18A-Kit/source_review/r18-driver-fixture-results.json": [
+    "dfa76314a6fec1b4633b841f33ef16f508111935"
+  ],
+  "MMHB-R18A-Kit/source_review/r18-ledger-handoff-archive.md": [
+    "3decff327700c6f69c78041fb2c2d4c605ae073a"
+  ],
+  "MMHB-R18A-Kit/source_review/r18-ledger-retained-history.md": [
+    "0067726d62b004d0c2944efdb09f7dfc22d553d2"
+  ],
+  "MMHB-R18A-Kit/source_review/r18-preparation-record.json": [
+    "8b1b2286b2372378b1422e7f8e46f31c17ca4a78"
+  ],
+  "MMHB-R18A-Kit/source_review/r18-resend-6.22.1-LICENSE.txt": [
+    "203d69812af1576f85acf52d5176cd263e48fa45"
+  ],
+  "MMHB-R18A-Kit/source_review/r18-resend-6.22.1-index.cjs": [
+    "f4a402218a75bebcefb713863f0dc0375f37cf72"
+  ],
+  "MMHB-R18A-Kit/source_review/r18-resend-6.22.1-index.mjs": [
+    "8335a93f95da9f40e7f4e050d86a40e293e1b395"
+  ],
+  "MMHB-R18A-Kit/source_review/r18-resend-6.22.1-package.json": [
+    "4ff1636e0b1bbd3a71d9bbfd3e33da5f572a995d"
+  ],
+  "MMHB-R18A-Kit/source_review/r18-resend-6.22.1-provenance.json": [
+    "b38682998504f5a4c191517860afb61199d4741e"
+  ],
+  "MMHB-R18A-Kit/source_review/r18-resend-6.22.1-registry-metadata.json": [
+    "08351e650fc510f19e787a881893b7cefae101fd"
+  ],
+  "MMHB-R18A-Kit/source_review/r18-resend-6.22.1-render-regions.json": [
+    "c1ed9c0ac08e5a882becd69628d00358d8708c9b"
+  ],
+  "MMHB-R18A-Kit/source_review/r18-resend-6.22.1-review.md": [
+    "fca4b598ed4972db7a1f4de14b1376f02f2fcf5a"
+  ],
+  "MMHB-R18A-Kit/source_review/r18-resend-smoke-fixture-results.json": [
+    "a950cd9f3ca26b27953e0567a6010adc266132be"
+  ],
+  "MMHB-R18A-Kit/source_review/r18-resend-smoke.mjs": [
+    "2b52e1a7d441a7c80e1df75301cc646c89566bbe"
+  ],
+  "MMHB-R18A-Kit/source_review/r18-runtime-helper-smoke.mjs": [
+    "e0257a9a6a43105665c0bcdab4d3cd37a6b75c18"
+  ],
+  "MMHB-R18A-Kit/source_review/r18-upstream-license-provenance.json": [
+    "d4d51a18a0e0c9bd9c972fee179304f5e6de08b4"
+  ],
+  "MMHB-R18A-Kit/source_review/r18-upstream-pg-LICENSE.txt": [
+    "5c1405646fa9dfc49a4638bfc5c8ca908d912505"
+  ],
+  "MMHB-R18A-Kit/source_review/r18-upstream-ws-LICENSE.txt": [
+    "1da5b96a11ac2c83160e3085188f04eba7e3dd7d"
+  ],
+  "MMHB-R18A-Kit/source_review/r18-user-result-analysis.json": [
+    "0e9d169c45d63ad76afa8ed05eea8d922cffa1dd"
+  ],
+  "MMHB-R18A-Kit/source_review/r18a-driver-fixture-results.json": [
+    "1f717fe78805d25c2a3a1317e07c5492518dc103"
+  ],
+  "MMHB-R18A-Kit/source_review/r18a-esbuild-package_unused-fixture.json": [
+    "2a04bdf1cb7478d0eed1d00dde2855befa5c5cd7"
+  ],
+  "MMHB-R18A-Kit/source_review/r18a-esbuild-relative_live-fixture.json": [
+    "3723efd7c4b7816424287dfcb5cafc0200f75f3e"
+  ],
+  "MMHB-R18A-Kit/source_review/r18a-esbuild-relative_unused-fixture.json": [
+    "680d2c4858a9b232fd59a6e128611fa8bbdce30f"
+  ],
+  "MMHB-R18A-Kit/source_review/r18a-esbuild-relative_unused_export-fixture.json": [
+    "a69657fa04bb84e26bdef6ee1cc762deecba5446"
+  ],
+  "MMHB-R18A-Kit/source_review/r18a-esbuild-reproduction-provenance.json": [
+    "fc7739c0b05f6b8c865787d770b1aea95dbd6d2e"
+  ],
+  "MMHB-R18A-Kit/source_review/r18a-esbuild-reproduction-results.json": [
+    "1f75ada616b1375459a731dd144a0ca3a0184ad1"
+  ],
+  "MMHB-R18A-Kit/source_review/r18a-esbuild-reproduction.py": [
+    "f18eb2cf0fc678632d93b2759a3d59bcb65fe47f"
+  ],
+  "MMHB-R18A-Kit/source_review/r18a-independent-analysis.md": [
+    "8cf3a48f914154199b740362f907284349f829b5"
+  ],
+  "MMHB-R18A-Kit/source_review/r18a-preparation-record.json": [
+    "4366de90d02c8910f089bfa43c48b4842b721eb3"
+  ],
+  "MMHB-R18A-Kit/source_review/runtime-contract-analysis-r14.mjs": [
+    "35fd277d8e6f1134039c39475cf8b1322031220e"
+  ],
+  "MMHB-R18A-Kit/source_review/runtime-contract-body-r18.mjs": [
+    "ac9c1f1c290ebdf83d53215d141117c5d5480759"
+  ],
+  "MMHB-R18A-Kit/source_review/runtime-contract-body-r18a.mjs": [
+    "42448ae636fa88580f30cfb13d90f10d76141485"
+  ],
+  "MMHB-R18A-Kit/source_review/runtime-contract-driver-r18.mjs": [
+    "ac02c09ca57b537786f1ee7358110a30f08f8804"
+  ],
+  "MMHB-R18A-Kit/source_review/runtime-contract-driver-r18a.mjs": [
+    "170db895b3671ccdc22f4e20364ae452a613eb32"
+  ],
+  "MMHB-R18A-Kit/source_review/runtime-graph-policy-r18.mjs": [
+    "5f22aa7593bee754f0e62d5cc9fbfa0b4a8205fc"
+  ],
+  "MMHB-R18A-Kit/source_review/runtime-graph-policy-r18a.mjs": [
+    "40ea2796de2b627f013b1ed128495a42536cc2d3"
+  ],
+  "MMHB-R18A-Kit/source_review/test-r18-driver.py": [
+    "9b83ed8379e2cd2ad9b7ee6e1b503ad888725bec"
+  ],
+  "MMHB-R18A-Kit/source_review/test-r18-resend-smoke.mjs": [
+    "f46bf53cd7b6e8f953ec1d6ad2e2abb6c728858b"
+  ],
+  "MMHB-R18A-Kit/source_review/test-r18-runtime-helper-smoke.mjs": [
+    "4f6d6441dae702fb45c91c7460178a8cd80b13fe"
+  ],
+  "MMHB-R18A-Kit/source_review/test-r18a-driver.py": [
+    "efd3ea1c6ae768286c39f9202924e25a3c0c53df"
+  ],
+  "MMHB-R18A-Kit/source_review/test-runtime-graph-policy-r18.mjs": [
+    "5911086320dbeb6f528a4652b59e3ff53a39ddf3"
+  ],
+  "MMHB-R18A-Kit/source_review/test-runtime-graph-policy-r18a.mjs": [
+    "9b98b49b3c69d32d750736144205bb2b342c7ad5"
+  ],
+  "MMHB-R18A-Start.txt": [
+    "36098903a3c596f16527a8588212fa9726adad9d"
+  ],
+  "MMHB-R18B-Kit.zip": [
+    "b8d50ff991f1d8c9b9dad44be6d1778cd9c668d7"
+  ],
+  "MMHB-R18B-Kit/MMHB-INPUT-PATH-INSPECT-R18B.txt": [
+    "d62cd69ff7626ec368b62a41b7634bf136e9451b"
+  ],
+  "MMHB-R18B-Kit/MMHB-Ledger.txt": [
+    "cbe610a6178ffb59a3f0d84d9a4676e9f905d707"
+  ],
+  "MMHB-R18B-Kit/MMHB-R18B-Start.txt": [
+    "3a79d4aca8c979b8e25890d1c80dd23d107efcd9"
+  ],
+  "MMHB-R18B-Kit/MMHB-Readiness-Ledger-2026-09-07.md": [
+    "cbe610a6178ffb59a3f0d84d9a4676e9f905d707"
+  ],
+  "MMHB-R18B-Kit/source_review/inspect-input-path-r18b.mjs": [
+    "d18a707eeba4e40f2a021062671412f066b50513"
+  ],
+  "MMHB-R18B-Kit/source_review/r18a-ledger-handoff-archive.md": [
+    "84c77370c141425d51f6e51ac00658d3c5c60be2"
+  ],
+  "MMHB-R18B-Kit/source_review/r18a-user-result-analysis.json": [
+    "32a517d070a6b9b2490d6101fcb01b056c62c17d"
+  ],
+  "MMHB-R18B-Kit/source_review/r18b-inspection-test-results.json": [
+    "a6f886e9f8e833696e9a0822ea38479432cae247"
+  ],
+  "MMHB-R18B-Kit/source_review/r18b-preparation-record.json": [
+    "1593cc52e57a4b3f6e41a07a357eecec37ccb8f8"
+  ],
+  "MMHB-R18B-Kit/source_review/test-input-path-r18b.py": [
+    "6c932f4b45a5ef3e967691fb392853ac26b3ee92"
+  ],
+  "MMHB-R18B-Start.txt": [
+    "3a79d4aca8c979b8e25890d1c80dd23d107efcd9"
+  ],
+  "MMHB-R18C-Kit.zip": [
+    "0b110b6f08204559a13cbe2e97ce9f9f8f34b4fe"
+  ],
+  "MMHB-R18C-Kit/MMHB-Ledger.txt": [
+    "b2cb23c74c35d12cbb1703c220e80becd98ac4a4"
+  ],
+  "MMHB-R18C-Kit/MMHB-R18C-Start.txt": [
+    "02018f06a1782a5952193b145414020504a69143"
+  ],
+  "MMHB-R18C-Kit/MMHB-RUNTIME-CONTRACT-R18C.txt": [
+    "eb805933173b8b86aa2c3aec71582873a8a5bd0d"
+  ],
+  "MMHB-R18C-Kit/MMHB-Readiness-Ledger-2026-09-07.md": [
+    "b2cb23c74c35d12cbb1703c220e80becd98ac4a4"
+  ],
+  "MMHB-R18C-Kit/source_review/R18-Verification-README.md": [
+    "910c13a182761a7e9a40163a443fda7ee20f2908"
+  ],
+  "MMHB-R18C-Kit/source_review/R18A-Verification-README.md": [
+    "27c334ef647ed1ff19c665963ef9adc0f9a5c6a3"
+  ],
+  "MMHB-R18C-Kit/source_review/R18C-Verification-README.md": [
+    "13337cbd4eef90d0e741e7c73c3af15fdf7e8107"
+  ],
+  "MMHB-R18C-Kit/source_review/build-runtime-contract-r18.py": [
+    "0ff8314394ab487e59a394ed8d7b5c5b3c527810"
+  ],
+  "MMHB-R18C-Kit/source_review/build-runtime-contract-r18a.py": [
+    "f596ef67f3fc82e522f7d44c4700ac96659b5296"
+  ],
+  "MMHB-R18C-Kit/source_review/build-runtime-contract-r18c.py": [
+    "364946c1e0ddd700d41bc4e4c1e1f6186422deda"
+  ],
+  "MMHB-R18C-Kit/source_review/fresh-build-policy-r17.mjs": [
+    "5c7e20ba981f30ff40d8fabe2d84851695adc719"
+  ],
+  "MMHB-R18C-Kit/source_review/fresh-candidate-prefix-r17.mjs": [
+    "61af3c501614ed5c219ed78f47b13854b2aef645"
+  ],
+  "MMHB-R18C-Kit/source_review/prepare-r18-deliverables.py": [
+    "c48847f6272e8c607a601264250b06ad18c80339"
+  ],
+  "MMHB-R18C-Kit/source_review/prepare-r18a-deliverables.py": [
+    "1fed2b7a2c241ada6c7393f62a0d7b797a113aae"
+  ],
+  "MMHB-R18C-Kit/source_review/prepare-r18c-deliverables.py": [
+    "a24828721f72eb1898c617406f9b98c1d65ef996"
+  ],
+  "MMHB-R18C-Kit/source_review/preservation-snapshot-policy-r17c.mjs": [
+    "7f8fe9f600b72107f91d8a97710250735e54b698"
+  ],
+  "MMHB-R18C-Kit/source_review/r14-assets-healScheduler.mjs": [
+    "41ec6cb87390bbf762f688ee933601abf9cc0c9d"
+  ],
+  "MMHB-R18C-Kit/source_review/r14-assets-kernel-bridge.mjs": [
+    "7ec7e66fd8cdf2df9ac8c7f9684d6f3dff4da0b5"
+  ],
+  "MMHB-R18C-Kit/source_review/r14-assets-promptEngine.mjs": [
+    "c8544c62336cc918ed9bced3b0bc253721a75ea6"
+  ],
+  "MMHB-R18C-Kit/source_review/r14-assets-rss.mjs": [
+    "a032b5ce9baf58dba99db7451a283139640fda5e"
+  ],
+  "MMHB-R18C-Kit/source_review/r14-assets-runtime-mapping.json": [
+    "550abd3b353b8d6a04691d6431fafd61f48ce5f2"
+  ],
+  "MMHB-R18C-Kit/source_review/r14-external-mmhb-server-db-connection.mjs": [
+    "153868f248177a9f15746466a2814e5ea638d574"
+  ],
+  "MMHB-R18C-Kit/source_review/r14-external-mmhb-server-routes-blog.mjs": [
+    "64458c35dfa5179302f6d888604d935e025c58d0"
+  ],
+  "MMHB-R18C-Kit/source_review/r14-external-mmhb-server-services-email.mjs": [
+    "88217e1cd184a9e3a9a801ac7542820c3fd5fc8a"
+  ],
+  "MMHB-R18C-Kit/source_review/r14-external-mmhb-server-services-newsletterSend.mjs": [
+    "99b1b30354f71a689532c1f2e9a2a6c9ce0350fa"
+  ],
+  "MMHB-R18C-Kit/source_review/r14-external-mmhb-server-utils-email.mjs": [
+    "9df253aefaf623010d94a49c54014c1f62417d67"
+  ],
+  "MMHB-R18C-Kit/source_review/r14-external-node-postgres-packages-pg-esm-index.mjs": [
+    "587d80c1e57bebf7e8f886c510973c325a84de3e"
+  ],
+  "MMHB-R18C-Kit/source_review/r14-external-node-postgres-packages-pg-lib-index.js": [
+    "e8b746149ca3480017b6faaa6c934bc5ce1ab2f0"
+  ],
+  "MMHB-R18C-Kit/source_review/r14-external-node-postgres-packages-pg-lib-native-client.js": [
+    "fa17d9f6541cacc41694b099a15bc30cd18c1659"
+  ],
+  "MMHB-R18C-Kit/source_review/r14-external-node-postgres-packages-pg-lib-stream.js": [
+    "edc3018332d999139e6b6573230e8c0553650bc0"
+  ],
+  "MMHB-R18C-Kit/source_review/r14-external-review.md": [
+    "570673a0a8f2aba9dd97110dd612283da2efb3a4"
+  ],
+  "MMHB-R18C-Kit/source_review/r14-external-reviewed-mapping.json": [
+    "0f8cfde2337c0fa8d0714420a12f9d1770a261c7"
+  ],
+  "MMHB-R18C-Kit/source_review/r14-external-ws-lib-buffer-util.js": [
+    "f7536e28efa570277e30e9ea001200ee11595fee"
+  ],
+  "MMHB-R18C-Kit/source_review/r14-external-ws-lib-validation.js": [
+    "4a2e68d5127279431a74b6961e8d35161d3276e2"
+  ],
+  "MMHB-R18C-Kit/source_review/r15-dependency-review.json": [
+    "3afe92928d2d1e4b05b4bf5630504f542bf6da9c"
+  ],
+  "MMHB-R18C-Kit/source_review/r15-pg-8.23.0-native-client.js": [
+    "d305713d64fdc197575ab1811cea7333fa35567b"
+  ],
+  "MMHB-R18C-Kit/source_review/r17c-ledger-handoff-archive.md": [
+    "8a8f851560623bdf0a074d800a7a7dd525374b26"
+  ],
+  "MMHB-R18C-Kit/source_review/r17c-user-result-analysis.json": [
+    "1a4fb263e561a511b852296f6c192a6278fa08c9"
+  ],
+  "MMHB-R18C-Kit/source_review/r18-driver-fixture-results.json": [
+    "dfa76314a6fec1b4633b841f33ef16f508111935"
+  ],
+  "MMHB-R18C-Kit/source_review/r18-ledger-handoff-archive.md": [
+    "3decff327700c6f69c78041fb2c2d4c605ae073a"
+  ],
+  "MMHB-R18C-Kit/source_review/r18-ledger-retained-history.md": [
+    "0067726d62b004d0c2944efdb09f7dfc22d553d2"
+  ],
+  "MMHB-R18C-Kit/source_review/r18-preparation-record.json": [
+    "8b1b2286b2372378b1422e7f8e46f31c17ca4a78"
+  ],
+  "MMHB-R18C-Kit/source_review/r18-resend-6.22.1-LICENSE.txt": [
+    "203d69812af1576f85acf52d5176cd263e48fa45"
+  ],
+  "MMHB-R18C-Kit/source_review/r18-resend-6.22.1-index.cjs": [
+    "f4a402218a75bebcefb713863f0dc0375f37cf72"
+  ],
+  "MMHB-R18C-Kit/source_review/r18-resend-6.22.1-index.mjs": [
+    "8335a93f95da9f40e7f4e050d86a40e293e1b395"
+  ],
+  "MMHB-R18C-Kit/source_review/r18-resend-6.22.1-package.json": [
+    "4ff1636e0b1bbd3a71d9bbfd3e33da5f572a995d"
+  ],
+  "MMHB-R18C-Kit/source_review/r18-resend-6.22.1-provenance.json": [
+    "b38682998504f5a4c191517860afb61199d4741e"
+  ],
+  "MMHB-R18C-Kit/source_review/r18-resend-6.22.1-registry-metadata.json": [
+    "08351e650fc510f19e787a881893b7cefae101fd"
+  ],
+  "MMHB-R18C-Kit/source_review/r18-resend-6.22.1-render-regions.json": [
+    "c1ed9c0ac08e5a882becd69628d00358d8708c9b"
+  ],
+  "MMHB-R18C-Kit/source_review/r18-resend-6.22.1-review.md": [
+    "fca4b598ed4972db7a1f4de14b1376f02f2fcf5a"
+  ],
+  "MMHB-R18C-Kit/source_review/r18-resend-smoke-fixture-results.json": [
+    "a950cd9f3ca26b27953e0567a6010adc266132be"
+  ],
+  "MMHB-R18C-Kit/source_review/r18-resend-smoke.mjs": [
+    "2b52e1a7d441a7c80e1df75301cc646c89566bbe"
+  ],
+  "MMHB-R18C-Kit/source_review/r18-runtime-helper-smoke.mjs": [
+    "e0257a9a6a43105665c0bcdab4d3cd37a6b75c18"
+  ],
+  "MMHB-R18C-Kit/source_review/r18-upstream-license-provenance.json": [
+    "d4d51a18a0e0c9bd9c972fee179304f5e6de08b4"
+  ],
+  "MMHB-R18C-Kit/source_review/r18-upstream-pg-LICENSE.txt": [
+    "5c1405646fa9dfc49a4638bfc5c8ca908d912505"
+  ],
+  "MMHB-R18C-Kit/source_review/r18-upstream-ws-LICENSE.txt": [
+    "1da5b96a11ac2c83160e3085188f04eba7e3dd7d"
+  ],
+  "MMHB-R18C-Kit/source_review/r18-user-result-analysis.json": [
+    "0e9d169c45d63ad76afa8ed05eea8d922cffa1dd"
+  ],
+  "MMHB-R18C-Kit/source_review/r18a-driver-fixture-results.json": [
+    "1f717fe78805d25c2a3a1317e07c5492518dc103"
+  ],
+  "MMHB-R18C-Kit/source_review/r18a-esbuild-package_unused-fixture.json": [
+    "2a04bdf1cb7478d0eed1d00dde2855befa5c5cd7"
+  ],
+  "MMHB-R18C-Kit/source_review/r18a-esbuild-relative_live-fixture.json": [
+    "3723efd7c4b7816424287dfcb5cafc0200f75f3e"
+  ],
+  "MMHB-R18C-Kit/source_review/r18a-esbuild-relative_unused-fixture.json": [
+    "680d2c4858a9b232fd59a6e128611fa8bbdce30f"
+  ],
+  "MMHB-R18C-Kit/source_review/r18a-esbuild-relative_unused_export-fixture.json": [
+    "a69657fa04bb84e26bdef6ee1cc762deecba5446"
+  ],
+  "MMHB-R18C-Kit/source_review/r18a-esbuild-reproduction-provenance.json": [
+    "fc7739c0b05f6b8c865787d770b1aea95dbd6d2e"
+  ],
+  "MMHB-R18C-Kit/source_review/r18a-esbuild-reproduction-results.json": [
+    "1f75ada616b1375459a731dd144a0ca3a0184ad1"
+  ],
+  "MMHB-R18C-Kit/source_review/r18a-esbuild-reproduction.py": [
+    "f18eb2cf0fc678632d93b2759a3d59bcb65fe47f"
+  ],
+  "MMHB-R18C-Kit/source_review/r18a-independent-analysis.md": [
+    "8cf3a48f914154199b740362f907284349f829b5"
+  ],
+  "MMHB-R18C-Kit/source_review/r18a-preparation-record.json": [
+    "4366de90d02c8910f089bfa43c48b4842b721eb3"
+  ],
+  "MMHB-R18C-Kit/source_review/r18b-ledger-handoff-archive.md": [
+    "cbe610a6178ffb59a3f0d84d9a4676e9f905d707"
+  ],
+  "MMHB-R18C-Kit/source_review/r18b-user-result-analysis.json": [
+    "0fb876e7bf1af61413a928e846e1903e337da908"
+  ],
+  "MMHB-R18C-Kit/source_review/r18c-driver-fixture-results.json": [
+    "762a4046b94fb89085ce4da8eb51650bcb351472"
+  ],
+  "MMHB-R18C-Kit/source_review/r18c-es6-symbol-3.1.4.tgz": [
+    "125044996b1a4d54731ea02bfdc8b43389cc8d3a"
+  ],
+  "MMHB-R18C-Kit/source_review/r18c-es6-symbol-3.1.4/.testignore": [
+    "b5b5cd18a66841e655da388cac04459434e076f2"
+  ],
+  "MMHB-R18C-Kit/source_review/r18c-es6-symbol-3.1.4/CHANGELOG.md": [
+    "ff78d44ad22adbd408b9d6100d08a5c6343211df"
+  ],
+  "MMHB-R18C-Kit/source_review/r18c-es6-symbol-3.1.4/CHANGES": [
+    "ef0cbdaf771cda5454af7df29a5b09f7bc0535bc"
+  ],
+  "MMHB-R18C-Kit/source_review/r18c-es6-symbol-3.1.4/LICENSE": [
+    "38d8a7563a3787093c3d5bc05dee3f91a24a7d25"
+  ],
+  "MMHB-R18C-Kit/source_review/r18c-es6-symbol-3.1.4/README.md": [
+    "e19f1168db3ebedc7e73c39acb0338a5b2844c9b"
+  ],
+  "MMHB-R18C-Kit/source_review/r18c-es6-symbol-3.1.4/implement.js": [
+    "d62803bd7c047700236358d9a9e52e5f37af9521"
+  ],
+  "MMHB-R18C-Kit/source_review/r18c-es6-symbol-3.1.4/index.js": [
+    "fcd8a6300875e18f0381c24299114a1c0ba11287"
+  ],
+  "MMHB-R18C-Kit/source_review/r18c-es6-symbol-3.1.4/is-implemented.js": [
+    "b85ec6946d1e5f12f75f51e5cdcfacc418442d23"
+  ],
+  "MMHB-R18C-Kit/source_review/r18c-es6-symbol-3.1.4/is-native-implemented.js": [
+    "254774a609a78f3b3d53d955202efc99403d6a42"
+  ],
+  "MMHB-R18C-Kit/source_review/r18c-es6-symbol-3.1.4/is-symbol.js": [
+    "66edd46b22feea7a84d029423488cbb9117a376d"
+  ],
+  "MMHB-R18C-Kit/source_review/r18c-es6-symbol-3.1.4/lib/private/generate-name.js": [
+    "880f25e274fc19d762740dc7e2ba75a3ac07ba53"
+  ],
+  "MMHB-R18C-Kit/source_review/r18c-es6-symbol-3.1.4/lib/private/setup/standard-symbols.js": [
+    "b25b1712a42118b210710b90db8427e124e4a162"
+  ],
+  "MMHB-R18C-Kit/source_review/r18c-es6-symbol-3.1.4/lib/private/setup/symbol-registry.js": [
+    "29d198ffb29913f7b8ba22e940ee7251fa0838af"
+  ],
+  "MMHB-R18C-Kit/source_review/r18c-es6-symbol-3.1.4/package.json": [
+    "a2cb8d0622dc1bd1d7f1eec63409dc1838430391"
+  ],
+  "MMHB-R18C-Kit/source_review/r18c-es6-symbol-3.1.4/polyfill.js": [
+    "01a9e61a956c97ae6b0dd5e708b025f477a61156"
+  ],
+  "MMHB-R18C-Kit/source_review/r18c-es6-symbol-3.1.4/validate-symbol.js": [
+    "bac6f540738d123c947f2c03e3c0b51cb5823cf7"
+  ],
+  "MMHB-R18C-Kit/source_review/r18c-es6-symbol-provenance.json": [
+    "0dcf3a89c17049281299f69909fd19dec0e80161"
+  ],
+  "MMHB-R18C-Kit/source_review/r18c-es6-symbol-registry-metadata.json": [
+    "92e81bce45ff4e18d97ca9ffd75b54fa8f4f5cb8"
+  ],
+  "MMHB-R18C-Kit/source_review/r18c-es6-symbol-review.md": [
+    "ff16e018f97e109ecff568bc5f8caf2d10d1e793"
+  ],
+  "MMHB-R18C-Kit/source_review/r18c-graph-fixture-results.json": [
+    "cec2ff5668883253af613c4c6a1dfadea8176c51"
+  ],
+  "MMHB-R18C-Kit/source_review/r18c-graph-tests.tap": [
+    "787bdaecf342ecc9991fc556ec9742ce5bd47f87"
+  ],
+  "MMHB-R18C-Kit/source_review/r18c-preparation-record.json": [
+    "d154a3d6ec2d33d019c873b8a8c0ccc011743313"
+  ],
+  "MMHB-R18C-Kit/source_review/r18c-scope-comparison.json": [
+    "5eb26a8646410a35aab5110b7e7d0867053311bc"
+  ],
+  "MMHB-R18C-Kit/source_review/runtime-contract-analysis-r14.mjs": [
+    "35fd277d8e6f1134039c39475cf8b1322031220e"
+  ],
+  "MMHB-R18C-Kit/source_review/runtime-contract-body-r18.mjs": [
+    "ac9c1f1c290ebdf83d53215d141117c5d5480759"
+  ],
+  "MMHB-R18C-Kit/source_review/runtime-contract-body-r18a.mjs": [
+    "42448ae636fa88580f30cfb13d90f10d76141485"
+  ],
+  "MMHB-R18C-Kit/source_review/runtime-contract-body-r18c.mjs": [
+    "775fd7f9621c2bbee0b7f21b7333a6e9e5114486"
+  ],
+  "MMHB-R18C-Kit/source_review/runtime-contract-driver-r18.mjs": [
+    "ac02c09ca57b537786f1ee7358110a30f08f8804"
+  ],
+  "MMHB-R18C-Kit/source_review/runtime-contract-driver-r18a.mjs": [
+    "170db895b3671ccdc22f4e20364ae452a613eb32"
+  ],
+  "MMHB-R18C-Kit/source_review/runtime-contract-driver-r18c.mjs": [
+    "64f85931cdfbbb3624357c284aeda53c1f7781f3"
+  ],
+  "MMHB-R18C-Kit/source_review/runtime-graph-policy-r18.mjs": [
+    "5f22aa7593bee754f0e62d5cc9fbfa0b4a8205fc"
+  ],
+  "MMHB-R18C-Kit/source_review/runtime-graph-policy-r18a.mjs": [
+    "40ea2796de2b627f013b1ed128495a42536cc2d3"
+  ],
+  "MMHB-R18C-Kit/source_review/runtime-graph-policy-r18c.mjs": [
+    "5790576ab11acdff71d8cb0550d46df4975793ef"
+  ],
+  "MMHB-R18C-Kit/source_review/test-r18-driver.py": [
+    "9b83ed8379e2cd2ad9b7ee6e1b503ad888725bec"
+  ],
+  "MMHB-R18C-Kit/source_review/test-r18-resend-smoke.mjs": [
+    "f46bf53cd7b6e8f953ec1d6ad2e2abb6c728858b"
+  ],
+  "MMHB-R18C-Kit/source_review/test-r18-runtime-helper-smoke.mjs": [
+    "4f6d6441dae702fb45c91c7460178a8cd80b13fe"
+  ],
+  "MMHB-R18C-Kit/source_review/test-r18a-driver.py": [
+    "efd3ea1c6ae768286c39f9202924e25a3c0c53df"
+  ],
+  "MMHB-R18C-Kit/source_review/test-r18c-driver.py": [
+    "e471f26ad311378f35d92b0126525cd00e8544f1"
+  ],
+  "MMHB-R18C-Kit/source_review/test-runtime-graph-policy-r18.mjs": [
+    "5911086320dbeb6f528a4652b59e3ff53a39ddf3"
+  ],
+  "MMHB-R18C-Kit/source_review/test-runtime-graph-policy-r18a.mjs": [
+    "9b98b49b3c69d32d750736144205bb2b342c7ad5"
+  ],
+  "MMHB-R18C-Kit/source_review/test-runtime-graph-policy-r18c.mjs": [
+    "0f0d01e6d75778f8c927dd52ecba20fa2038cf63"
+  ],
+  "MMHB-R18C-Start.txt": [
+    "02018f06a1782a5952193b145414020504a69143"
+  ],
+  "MMHB-REBUILD-CANDIDATE-R17B.txt": [
+    "f7b4b48ac02407055849c0d16558bd3c11e513ee"
+  ],
+  "MMHB-REGISTRY-LOCKED-DEPENDENCIES-R16C.txt": [
+    "b4da39a5da0f179fd8e37cdb15d792144a5561b7"
+  ],
+  "MMHB-RELEASE-ASSEMBLY-R13.txt": [
+    "0720dffc76f4474dc8fb86a846df82b0797da57f"
+  ],
+  "MMHB-RESUME-CANDIDATE-R17A.txt": [
+    "93a5c2becd8fd9fbbf098f812d788848790bfc6b"
+  ],
+  "MMHB-RUNTIME-CONTRACT-R14.txt": [
+    "d081e3c79d76e4ded3dd2624a28b9fd80d4aab35"
+  ],
+  "MMHB-RUNTIME-CONTRACT-R18.txt": [
+    "8dbd61ae12e3a96e10d6125cffa413c82828fd7e"
+  ],
+  "MMHB-RUNTIME-CONTRACT-R18A.txt": [
+    "84e83efb4947dcc5db0ba9ab8a51517bddf7b2b5"
+  ],
+  "MMHB-RUNTIME-CONTRACT-R18C.txt": [
+    "eb805933173b8b86aa2c3aec71582873a8a5bd0d"
+  ],
+  "MMHB-Readiness-Ledger-2026-09-07.md": [
+    "117c58234a0339f313766f7409e987c9f0d344f1",
+    "17166dbce412686b00d1d48ba4444ef271f2dcff",
+    "3decff327700c6f69c78041fb2c2d4c605ae073a",
+    "84c77370c141425d51f6e51ac00658d3c5c60be2",
+    "9f47ab78ca5954e76e34824edde04b960b200233",
+    "a9a42b1039ab1f160cdc87380c0d0bc20ebf3950",
+    "b2cb23c74c35d12cbb1703c220e80becd98ac4a4",
+    "c319b8c8a6013bb97efa81b0e15db90336b5f13d",
+    "cbe610a6178ffb59a3f0d84d9a4676e9f905d707",
+    "ce26596a85fef5cc6b4e557e11ce1392d256b199",
+    "cee49b62ed18263f5471af250d2ad97f1ab7b136",
+    "d0a3a143115dde1fc3633e7406a416141285987a",
+    "d13068e581e62dadff1f2db18293a51d14e1c6be",
+    "d4822c0061bae7522e797d5f67d238ff182d386b"
+  ],
+  "MMHB-SERVER-CANDIDATE-R11D.txt": [
+    "7573a5906c74381b499353b5efd73f11b75228fb"
+  ],
+  "source_review/R12-Verification-README.md": [
+    "74ccf02290e147dc988a121c683658cdd660a140"
+  ],
+  "source_review/R12A-Verification-README.md": [
+    "52e82d9edb1136180b1ddf4d1e811d931af1036d"
+  ],
+  "source_review/R14-Verification-README.md": [
+    "2668c729f60a162b903ecfa42527e68f6c3bc5ed"
+  ],
+  "source_review/R15-Verification-README.md": [
+    "3c1b2fb07eb2229e7695f7bcca44b6bd02b6724c"
+  ],
+  "source_review/R16-Verification-README.md": [
+    "c29e1b371adef2295d63e588f981e2595fb34e74"
+  ],
+  "source_review/R16A-Verification-README.md": [
+    "f978d0f965f3bf367103be23d85b4f993b5fa4fe"
+  ],
+  "source_review/R16B-Verification-README.md": [
+    "1e511b00296b16b67dc1cf3ccc0d4cd6584809e5"
+  ],
+  "source_review/R16C-Verification-README.md": [
+    "6841c326202ae8da45e58326cc4bcc132d03d990"
+  ],
+  "source_review/R16D-Verification-README.md": [
+    "75f62d2a697d52963d3456cc6b656225a0ae9c4d"
+  ],
+  "source_review/R16E-Verification-README.md": [
+    "2d4b0ec013be7ef79ae10caef59de96740c119fb"
+  ],
+  "source_review/R17-Verification-README.md": [
+    "da5b3d447011285e72c9d270d5b5c04d21500108"
+  ],
+  "source_review/R17A-Verification-README.md": [
+    "9fb15cea90054a5df9c5391677f0bfc28ea6e041"
+  ],
+  "source_review/R17B-Verification-README.md": [
+    "88438848a8bbd44e49c6038546b817b770f0dd3b"
+  ],
+  "source_review/R17C-Verification-README.md": [
+    "08d4346387295b831b15af1c53c519d7185ddf2e"
+  ],
+  "source_review/R18-Verification-README.md": [
+    "910c13a182761a7e9a40163a443fda7ee20f2908"
+  ],
+  "source_review/R18A-Verification-README.md": [
+    "27c334ef647ed1ff19c665963ef9adc0f9a5c6a3"
+  ],
+  "source_review/R18C-Verification-README.md": [
+    "13337cbd4eef90d0e741e7c73c3af15fdf7e8107"
+  ],
+  "source_review/archive-url-diagnostic-r16b-body.mjs": [
+    "707e8d53a9e3b053a087c86d71aeff850d4c0345"
+  ],
+  "source_review/archive-url-diagnostic-r16b-driver.mjs": [
+    "2af890f3d94b1a9ec4f815710a6a664835ca9503"
+  ],
+  "source_review/archive-url-diagnostic-r16b-helper.mjs": [
+    "e8b15ce9f1332d94d7af9415e147b500b62c0b36"
+  ],
+  "source_review/build-archive-url-diagnostic-r16b.py": [
+    "aee53fccfa965bea52be2c47774b836597ec469e"
+  ],
+  "source_review/build-fresh-candidate-command-r17.py": [
+    "ca8e6e234dc4d1969a91d50495107fc8d60582a8"
+  ],
+  "source_review/build-fresh-candidate-command-r17b.py": [
+    "2b469df1f5c68027b2b592dc9992223465abf40e"
+  ],
+  "source_review/build-locked-dependencies-command-r16.py": [
+    "2c7eb3c3a1ebed304f037fdc27da14126b677c1b"
+  ],
+  "source_review/build-locked-dependencies-command-r16a.py": [
+    "47fd484f049b723be881fad38188fc57ce26d2a6"
+  ],
+  "source_review/build-locked-dependencies-command-r16c.py": [
+    "a57161377382390571f443b5b2be99e4d842ab8f"
+  ],
+  "source_review/build-locked-dependencies-command-r16d.py": [
+    "2da546a3d3efe7e481f1bfb6dfc56b4e16a40d59"
+  ],
+  "source_review/build-locked-dependencies-command-r16e.py": [
+    "be747e02cef773ff0e931c7579567e84ceb1b8cf"
+  ],
+  "source_review/build-preservation-diagnostic-r17c.py": [
+    "23840036a6ce853e6e2648abbd30e05c26630d81"
+  ],
+  "source_review/build-resumed-candidate-command-r17a.py": [
+    "119c9ad194057e692a08c2cdda2c17d3650eeb0d"
+  ],
+  "source_review/build-runtime-contract-r18.py": [
+    "0ff8314394ab487e59a394ed8d7b5c5b3c527810"
+  ],
+  "source_review/build-runtime-contract-r18a.py": [
+    "f596ef67f3fc82e522f7d44c4700ac96659b5296"
+  ],
+  "source_review/build-runtime-contract-r18c.py": [
+    "364946c1e0ddd700d41bc4e4c1e1f6186422deda"
+  ],
+  "source_review/fresh-build-policy-r17.mjs": [
+    "5c7e20ba981f30ff40d8fabe2d84851695adc719"
+  ],
+  "source_review/fresh-candidate-body-r17.mjs": [
+    "9fa268e147ad0d74903b0986726b8c656a64939b"
+  ],
+  "source_review/fresh-candidate-body-r17b.mjs": [
+    "e87ff8db2850056eeabde0954d56ed62524dc8e9"
+  ],
+  "source_review/fresh-candidate-driver-r17.mjs": [
+    "8086099fbe5827db04a472daedb2d2cc04427849"
+  ],
+  "source_review/fresh-candidate-driver-r17b.mjs": [
+    "63ccf46e042c173b5b8af6b9dacb1348b363a467"
+  ],
+  "source_review/fresh-candidate-prefix-r17.mjs": [
+    "61af3c501614ed5c219ed78f47b13854b2aef645"
+  ],
+  "source_review/frontend-build-runner-r17.mjs": [
+    "3c9e19f40577cb16b5392eac652f59355453ee43"
+  ],
+  "source_review/frontend-build-runner-r17b.mjs": [
+    "72fec8daaed3df8096fdf46fc74216aa4d9aceab"
+  ],
+  "source_review/frontend-candidate-driver-r12.mjs": [
+    "d2e9d401c59d9cb42c89d032ac0382429c5883c0"
+  ],
+  "source_review/frontend-candidate-driver-r12a.mjs": [
+    "a98dd99e8e2f4374eb540f27cd7377a09452ffce"
+  ],
+  "source_review/frontend-candidate-runner-r12.mjs": [
+    "c7f503e3e39d458c19b33d5a457ab64798cd4570"
+  ],
+  "source_review/frontend-graph-policy-r17a.mjs": [
+    "01bd3fd71bfde409eba623d1196f722ee2af7859"
+  ],
+  "source_review/inspect-input-path-r18b.mjs": [
+    "d18a707eeba4e40f2a021062671412f066b50513"
+  ],
+  "source_review/locked-dependencies-body-r16.mjs": [
+    "033e4cfc65d733be62690c5d1ce46e78fbb24b49"
+  ],
+  "source_review/locked-dependencies-body-r16a.mjs": [
+    "21758215d0c323634a72170480f8e175da786349"
+  ],
+  "source_review/locked-dependencies-body-r16c.mjs": [
+    "36f5be72eca593b47aee261ead54761794aae400"
+  ],
+  "source_review/locked-dependencies-body-r16d.mjs": [
+    "b678fb37dea4d86be3b937fba11b0dcd373487af"
+  ],
+  "source_review/locked-dependencies-body-r16e.mjs": [
+    "6470dc0547f2f9b635f0ae44318e7d49103d7e79"
+  ],
+  "source_review/locked-dependencies-driver-r16.mjs": [
+    "f184499fb1cb25257de393ef26ee8f5717049e88"
+  ],
+  "source_review/locked-dependencies-driver-r16a.mjs": [
+    "b0ab171d86612c6314be24a08835a8ff3b030775"
+  ],
+  "source_review/locked-dependencies-driver-r16c.mjs": [
+    "e8119dc3e8eba13a6c8afe59b08bf650f3776e4c"
+  ],
+  "source_review/locked-dependencies-driver-r16d.mjs": [
+    "9416205162e221ce4a0523149dcf1a248e901b36"
+  ],
+  "source_review/locked-dependencies-driver-r16e.mjs": [
+    "1eb11fcee8b1634539f22104c5c775350f0e53be"
+  ],
+  "source_review/locked-dependencies-prefix-r16.mjs": [
+    "eba7e0de8064458525fb5b4b5c4c481650105ca1"
+  ],
+  "source_review/locked-dependencies-prefix-r16a.mjs": [
+    "eba7e0de8064458525fb5b4b5c4c481650105ca1"
+  ],
+  "source_review/locked-dependencies-prefix-r16c.mjs": [
+    "26d57cd05855fc1f4226159949963539b33aed19"
+  ],
+  "source_review/locked-dependencies-prefix-r16d.mjs": [
+    "06e3455e0e6ec2529502a983174ea6ba96b6a5ff"
+  ],
+  "source_review/locked-dependencies-prefix-r16e.mjs": [
+    "72d7fe7359e8a3122edf9d5176e68f5d7d5e957d"
+  ],
+  "source_review/locked-dependency-policy-r16.mjs": [
+    "3ae14ad1c24a60e1cb57f1a5cdbd9cf98c5b61ba"
+  ],
+  "source_review/locked-dependency-policy-r16d.mjs": [
+    "4c4082d5329247de3a964aa7ab888ec72bf8e421"
+  ],
+  "source_review/locked-dependency-policy-r16e.mjs": [
+    "c10c993aff110e1a5b90653837be70e4f426c0ce"
+  ],
+  "source_review/locked-npm-runner-r16.mjs": [
+    "55b1664eae8807d860d7c7aa02cd1c57fbd1f48a"
+  ],
+  "source_review/make-r16c-driver-fixtures.py": [
+    "016c93831607bcf3e2488e4da3d9dc1fae87db3a"
+  ],
+  "source_review/native-candidate-runner-r13.mjs": [
+    "7e0d11c2c88c8ec2670714a2be168e5ee6c0fa1e"
+  ],
+  "source_review/native-candidate-runner-r17.mjs": [
+    "1d95e4291c713c0b35c9d0391682cf6f0eac8f44"
+  ],
+  "source_review/native-candidate-runner-r17a.mjs": [
+    "4a20f5e363f18ac658cf6621875411011110f77f"
+  ],
+  "source_review/native-candidate-runner-r17b.mjs": [
+    "ad35531f5c15ceff585dd8dae85d1e383f10b2a2"
+  ],
+  "source_review/prepare-r17c-deliverables.py": [
+    "55394353de4cf9bdc114efa5cbfb857053528f09"
+  ],
+  "source_review/prepare-r18-deliverables.py": [
+    "c48847f6272e8c607a601264250b06ad18c80339"
+  ],
+  "source_review/prepare-r18a-deliverables.py": [
+    "1fed2b7a2c241ada6c7393f62a0d7b797a113aae"
+  ],
+  "source_review/prepare-r18c-deliverables.py": [
+    "a24828721f72eb1898c617406f9b98c1d65ef996"
+  ],
+  "source_review/preservation-diagnostic-body-r17c.mjs": [
+    "cfe8fe4a97523f797ff2b70864463dd47f446ca6"
+  ],
+  "source_review/preservation-diagnostic-driver-r17c.mjs": [
+    "ae401c45e1869bd56f81e548f91b1396d0666b7e"
+  ],
+  "source_review/preservation-snapshot-policy-r17c.mjs": [
+    "7f8fe9f600b72107f91d8a97710250735e54b698"
+  ],
+  "source_review/prompt-asset-runner-r15-results.json": [
+    "abe3b5aff59e09fba120d65671cbcffe0b366c58"
+  ],
+  "source_review/prompt-asset-runner-r15.mjs": [
+    "2d97df0bf00a53f881a7d069cfb92073503a23d0"
+  ],
+  "source_review/prompt-assets-driver-r15.mjs": [
+    "c09d1c4016b4127226991540885eea2b479e3e34"
+  ],
+  "source_review/r12-verification-record.json": [
+    "ce111d547f95a57696d93fefc521613100427d60"
+  ],
+  "source_review/r12a-parent-fixture-results.txt": [
+    "2657292322f7f15e5f42621d1e2f27e61d68b4fd"
+  ],
+  "source_review/r12a-verification-record.json": [
+    "d0bbb1c66dc13b0b6a8b7c24434dc76027547435"
+  ],
+  "source_review/r14-assets-ai-business-prompts-b01_offer_design.md": [
+    "252266768f6b961b4263cf026e4e03a2c3fd2a69"
+  ],
+  "source_review/r14-assets-ai-business-prompts-b02_funnel_map.md": [
+    "847821fd9b7ee33351318bc2a4578d2af8e3e1f2"
+  ],
+  "source_review/r14-assets-ai-business-prompts-b03_content_factory.md": [
+    "3d5da014d3dbc34cf207720e9f0d60e723aaebe8"
+  ],
+  "source_review/r14-assets-ai-business-prompts-b04_email_sequences.md": [
+    "539065de9fec776d715fc1521d28e8f483772cad"
+  ],
+  "source_review/r14-assets-ai-business-prompts-b05_seo_briefs.md": [
+    "098b75e329a25dc29f5b0f11b68a7c3f9bff56c1"
+  ],
+  "source_review/r14-assets-ai-business-prompts-b06_competitive_scan.md": [
+    "b874efe29f0572d5de1df5a857474ec5ba6bb281"
+  ],
+  "source_review/r14-assets-ai-business-prompts-b07_pricing_packaging.md": [
+    "7cf441853ba14f154a1bd8b32def7774dbb95084"
+  ],
+  "source_review/r14-assets-ai-business-prompts-b08_retention_loyalty.md": [
+    "219ec3a824cb98622e4f0b7baf02e65b02285874"
+  ],
+  "source_review/r14-assets-ai-business-prompts-b09_partnerships.md": [
+    "644504e2ba12a919af3efa9fbb7b28325437e3f6"
+  ],
+  "source_review/r14-assets-ai-business-prompts-b10_ops_sops.md": [
+    "471129be193767cae6bd278532cf7ba9dfb34659"
+  ],
+  "source_review/r14-assets-ai-business-registry.json": [
+    "437205dcfba0dde0ed419693b0d7f51bbb5798a1"
+  ],
+  "source_review/r14-assets-ai-business-system.md": [
+    "340e8f97cd3f60bc270d6f6085e67430394a1531"
+  ],
+  "source_review/r14-assets-ai-healing-prompts-h01_intake.md": [
+    "b51037ef1d4866f1c1f00c3858796264d2bb58b0"
+  ],
+  "source_review/r14-assets-ai-healing-prompts-h02_journal_reflect.md": [
+    "ee92d0f62b25546c0d6fcda98300262db156790d"
+  ],
+  "source_review/r14-assets-ai-healing-prompts-h03_cbt_reframe.md": [
+    "7c08d9b1ee6a23ce10e8b3f4e436af0591a20c0b"
+  ],
+  "source_review/r14-assets-ai-healing-prompts-h04_act_values.md": [
+    "a499b49cd2eb95f42154bf7468317c59285f5caf"
+  ],
+  "source_review/r14-assets-ai-healing-prompts-h05_breathing_grounding.md": [
+    "e0ab88b3254d0794202637265c7be41ab3ad7149"
+  ],
+  "source_review/r14-assets-ai-healing-prompts-h06_sleep_reset.md": [
+    "b81019c17014b2315a8f93291bd94e8c81b97ed7"
+  ],
+  "source_review/r14-assets-ai-healing-prompts-h07_conflict_script.md": [
+    "861e1983a269f78e11f707cf12a3b338c7e728c7"
+  ],
+  "source_review/r14-assets-ai-healing-prompts-h08_safety_check.md": [
+    "3e14b3977e4cb09ec3aa4ad5f48008ddcaee2429"
+  ],
+  "source_review/r14-assets-ai-healing-registry.json": [
+    "af7432d81889f5004cb69bccd3a668ab760c4faa"
+  ],
+  "source_review/r14-assets-ai-healing-system.md": [
+    "7b5f28a8f89e1854fdc34138b9865a9ab95688a9"
+  ],
+  "source_review/r14-assets-content-blog-index.json": [
+    "41fba84771a31afba0b5695fb3eab5bb3244aa5d"
+  ],
+  "source_review/r14-assets-healScheduler.mjs": [
+    "41ec6cb87390bbf762f688ee933601abf9cc0c9d"
+  ],
+  "source_review/r14-assets-kernel-bridge.mjs": [
+    "7ec7e66fd8cdf2df9ac8c7f9684d6f3dff4da0b5"
+  ],
+  "source_review/r14-assets-known-asset-metadata.json": [
+    "10a90b222d54896120bf5529714e4346ec807f99"
+  ],
+  "source_review/r14-assets-prompt-os-kernel-engines-business-command-engine.md": [
+    "2149e961671af6c671491a214e5b057ea344f5c9"
+  ],
+  "source_review/r14-assets-prompt-os-kernel-governance-MASTER_STRATEGY.md": [
+    "483cf181de0c8bf2cc0d61cd044370df08987b25"
+  ],
+  "source_review/r14-assets-prompt-os-kernel-governance-domain-router.md": [
+    "bfc7d46d795f80cd7cf00cddbdd1d5f8ceea2571"
+  ],
+  "source_review/r14-assets-prompt-os-kernel-governance-execution-protocol.md": [
+    "b3eb5c1fb3cd676dd5236a4298d14b39f3012d56"
+  ],
+  "source_review/r14-assets-prompt-os-kernel-governance-quality-gates.md": [
+    "5f9b0a91e61962b04bbaee335abb25c525c27b1d"
+  ],
+  "source_review/r14-assets-prompt-os-kernel-install.sh": [
+    "602f20ffcacf96dece53e6f3d5bb086a409a2bcd"
+  ],
+  "source_review/r14-assets-prompt-os-kernel-schemas-promptspec.schema.json": [
+    "56186e117129d53c0cabda66e30bbbb6a49ae5b5"
+  ],
+  "source_review/r14-assets-prompt-os-kernel-scripts-verify-platform-kernel.mjs": [
+    "12ce5110ccc153825d03d87d3b8f3804593573b2"
+  ],
+  "source_review/r14-assets-promptEngine.mjs": [
+    "c8544c62336cc918ed9bced3b0bc253721a75ea6"
+  ],
+  "source_review/r14-assets-remote-manifest.json": [
+    "d8691c051a861ed8912874a8aca3c22a6fec05ba"
+  ],
+  "source_review/r14-assets-remote-sources.json": [
+    "f8349df38a3390521a7b184f22a9753a2b483be5"
+  ],
+  "source_review/r14-assets-rss.mjs": [
+    "a032b5ce9baf58dba99db7451a283139640fda5e"
+  ],
+  "source_review/r14-assets-runtime-mapping.json": [
+    "550abd3b353b8d6a04691d6431fafd61f48ce5f2"
+  ],
+  "source_review/r14-assets-server-engine-prompt-os-kernel-bridge.mjs": [
+    "7ec7e66fd8cdf2df9ac8c7f9684d6f3dff4da0b5"
+  ],
+  "source_review/r14-assets-server-lib-healScheduler.mjs": [
+    "41ec6cb87390bbf762f688ee933601abf9cc0c9d"
+  ],
+  "source_review/r14-assets-server-lib-promptEngine.mjs": [
+    "c8544c62336cc918ed9bced3b0bc253721a75ea6"
+  ],
+  "source_review/r14-assets-server-routes-rss.mjs": [
+    "a032b5ce9baf58dba99db7451a283139640fda5e"
+  ],
+  "source_review/r14-driver-fixture-results.txt": [
+    "0143889ebbb216d53c0c722f18e3d1b0cda03f41"
+  ],
+  "source_review/r14-external-extra-index.json": [
+    "f03076f166e9dfdabad4a17ad620ce58c09973a0"
+  ],
+  "source_review/r14-external-mmhb-server-db-connection.mjs": [
+    "153868f248177a9f15746466a2814e5ea638d574"
+  ],
+  "source_review/r14-external-mmhb-server-routes-blog.mjs": [
+    "64458c35dfa5179302f6d888604d935e025c58d0"
+  ],
+  "source_review/r14-external-mmhb-server-services-email.mjs": [
+    "88217e1cd184a9e3a9a801ac7542820c3fd5fc8a"
+  ],
+  "source_review/r14-external-mmhb-server-services-newsletterSend.mjs": [
+    "99b1b30354f71a689532c1f2e9a2a6c9ce0350fa"
+  ],
+  "source_review/r14-external-mmhb-server-utils-email.mjs": [
+    "9df253aefaf623010d94a49c54014c1f62417d67"
+  ],
+  "source_review/r14-external-node-postgres-packages-pg-esm-index.mjs": [
+    "587d80c1e57bebf7e8f886c510973c325a84de3e"
+  ],
+  "source_review/r14-external-node-postgres-packages-pg-lib-index.js": [
+    "e8b746149ca3480017b6faaa6c934bc5ce1ab2f0"
+  ],
+  "source_review/r14-external-node-postgres-packages-pg-lib-native-client.js": [
+    "fa17d9f6541cacc41694b099a15bc30cd18c1659"
+  ],
+  "source_review/r14-external-node-postgres-packages-pg-lib-native-index.js": [
+    "eead422a3a65d871f6d419293534cdbe1187e908"
+  ],
+  "source_review/r14-external-node-postgres-packages-pg-lib-stream.js": [
+    "edc3018332d999139e6b6573230e8c0553650bc0"
+  ],
+  "source_review/r14-external-node-postgres-packages-pg-package.json": [
+    "61f9b7ede572dc3f215ebfbafa633ef8b55e69cd"
+  ],
+  "source_review/r14-external-resend-node-package.json": [
+    "f719607345944fe41594cf9f82a57f06a8f17db8"
+  ],
+  "source_review/r14-external-resend-node-src-batch-batch.ts": [
+    "777f328c55f935a8e3e764f9ad18d62fe9efe1f3"
+  ],
+  "source_review/r14-external-resend-node-src-emails-emails.ts": [
+    "a48e9edebcbfdb8fb4ec03134feb644cc6de14c7"
+  ],
+  "source_review/r14-external-resend-node-src-render.ts": [
+    "424025e333aae2f04c00b9b1ea2a12a31222b726"
+  ],
+  "source_review/r14-external-review.md": [
+    "570673a0a8f2aba9dd97110dd612283da2efb3a4"
+  ],
+  "source_review/r14-external-reviewed-mapping.json": [
+    "0f8cfde2337c0fa8d0714420a12f9d1770a261c7"
+  ],
+  "source_review/r14-external-source-index.json": [
+    "e68285e734abbcb287418cdf7546a3321906ffe7"
+  ],
+  "source_review/r14-external-ws-lib-buffer-util.js": [
+    "f7536e28efa570277e30e9ea001200ee11595fee"
+  ],
+  "source_review/r14-external-ws-lib-validation.js": [
+    "4a2e68d5127279431a74b6961e8d35161d3276e2"
+  ],
+  "source_review/r14-external-ws-package.json": [
+    "9116e663298ebdb1321f29b44463a25d76d4791b"
+  ],
+  "source_review/r14-preparation-record.json": [
+    "497c3d3d7daa2b5b9594dc18de247ec441f9ca65"
+  ],
+  "source_review/r15-asset-content-review.md": [
+    "908ebc167dc99047be02f588f1d12173a612ea0b"
+  ],
+  "source_review/r15-asset-repair-policy.json": [
+    "4cc8c65146766f1368271c208893d62ae996d75a"
+  ],
+  "source_review/r15-dependency-review.json": [
+    "3afe92928d2d1e4b05b4bf5630504f542bf6da9c"
+  ],
+  "source_review/r15-dependency-review.md": [
+    "4a0b9a4d9e780dc1e8be64d3d8d99e0b114f7437"
+  ],
+  "source_review/r15-driver-fixture-results.txt": [
+    "0aedee8c0bb12dc8034e577a48c4956fa2e8bd56"
+  ],
+  "source_review/r15-npm-shrinkwrap.js": [
+    "19c2c952dc7f7ee94540af8c4149923eaf719433"
+  ],
+  "source_review/r15-pg-8.23.0-native-client.js": [
+    "d305713d64fdc197575ab1811cea7333fa35567b"
+  ],
+  "source_review/r15-preparation-record.json": [
+    "071afba3de6849b97fb0a920cd6eede430aef762"
+  ],
+  "source_review/r15-resend-6.24.0-batch.ts": [
+    "777f328c55f935a8e3e764f9ad18d62fe9efe1f3"
+  ],
+  "source_review/r15-resend-6.24.0-emails.ts": [
+    "ad6141cc08263d45028479d538a6186d1ad2855f"
+  ],
+  "source_review/r15-resend-6.24.0-render.ts": [
+    "424025e333aae2f04c00b9b1ea2a12a31222b726"
+  ],
+  "source_review/r16-driver-fixture-results.json": [
+    "7ee856b7262310615883e5f64f4978a8aac0dee9"
+  ],
+  "source_review/r16-install-contract.md": [
+    "6579d0b2738efbbdf4c6ae8a3521dcbc7d820301"
+  ],
+  "source_review/r16-locked-dependency-policy-fixture-results.json": [
+    "1363094e440c551846b1cb3f5a5910183e8ecd9e"
+  ],
+  "source_review/r16-locked-dependency-policy-fixture-results.txt": [
+    "297fb9935e0ec33d7221c6f6ec34b57a39d27898"
+  ],
+  "source_review/r16-npm-runner-fixture-results.json": [
+    "bf61f3c78e704623b644a83cc624a71ffb3995a0"
+  ],
+  "source_review/r16-preparation-record.json": [
+    "dbb1cb0dacae4dfa10eda7f8ab7e7ab9ae4f375a"
+  ],
+  "source_review/r16-release-review.md": [
+    "9bbb8eb0341e68b2e852a9c8c882f7324605c158"
+  ],
+  "source_review/r16a-driver-fixture-results.json": [
+    "4412d1a5c30a1f42bc621aa5628f737f0981ff2f"
+  ],
+  "source_review/r16a-preparation-record.json": [
+    "ff65582f78fe5152005edfd3fd431bd9aa64faa8"
+  ],
+  "source_review/r16b-classifier-test-results.json": [
+    "97ddc8673745f62e4b97bded732a4c80e4dc460e"
+  ],
+  "source_review/r16b-driver-test-results.json": [
+    "367a1caeaf3fc59e286ec2b73d182bb10abfdee5"
+  ],
+  "source_review/r16b-preparation-record.json": [
+    "665d6b640f67b888775a9e55d6a862c82405562d"
+  ],
+  "source_review/r16c-driver-fixture-results.json": [
+    "09eef8b8a1931da3af3a6f8ccffd5d53f8c11876"
+  ],
+  "source_review/r16c-preparation-record.json": [
+    "c17ad3d1fccd686933d7aae9979781f69cc3f306"
+  ],
+  "source_review/r16c-registry-fixture-results.json": [
+    "7f3274bd2cf5df0f5d14bb6951f263f5389700ff"
+  ],
+  "source_review/r16d-driver-fixture-results.json": [
+    "a5c22b4ad53966860ca7b6f767d2e034b528c4db"
+  ],
+  "source_review/r16d-locked-dependency-policy-fixture-results.json": [
+    "c3f0027fe24bd121661ea4c5c95b187dd883b8b7"
+  ],
+  "source_review/r16d-locked-dependency-policy-fixture-results.txt": [
+    "db52bd9a89d1236ae5dd31b2040b20a266c705fa"
+  ],
+  "source_review/r16d-preparation-record.json": [
+    "0a6e3a4ec3a265767ca42b47fe8de573a5f8f7ac"
+  ],
+  "source_review/r16d-registry-fixture-results.json": [
+    "aebd847cfb5f1394a449699063c375b725ce752b"
+  ],
+  "source_review/r16e-driver-fixture-results.json": [
+    "93e3738866a8ec087324d8ab93bc50f3ca0ff87c"
+  ],
+  "source_review/r16e-locked-dependency-policy-fixture-results.json": [
+    "fbc070e78face9c715007f1c885ea9dd5772203f"
+  ],
+  "source_review/r16e-locked-dependency-policy-fixture-results.txt": [
+    "a23307f5d274828f365330fa0be79047448ebf19"
+  ],
+  "source_review/r16e-npm-workspace-semantics-results.json": [
+    "d5499ffd9ecd0848a4c14d99cdbe701aee8c854f"
+  ],
+  "source_review/r16e-preparation-record.json": [
+    "118771dd2bec0065177181ee86aa8d8a7d9bf35a"
+  ],
+  "source_review/r17-driver-fixture-results.json": [
+    "12c495ed54c2b61ec5b38826364bdb1c8fb9e556"
+  ],
+  "source_review/r17-policy-fixture-results.json": [
+    "ad1ed5703f2f827a2cb4e48b194bf55e8316071a"
+  ],
+  "source_review/r17-preparation-record.json": [
+    "97d70d722b6a760d3913eafda064aed9d7021a55"
+  ],
+  "source_review/r17a-graph-fixture-results.json": [
+    "d4d37b76a2a67e4a99fe3e89c4a71d8d14201007"
+  ],
+  "source_review/r17a-preparation-record.json": [
+    "1bbe90d96df90fb9138dd36163749c8bb2701c25"
+  ],
+  "source_review/r17a-resume-fixture-results.json": [
+    "244e2ba798acfe306564b2577d9846a816237e2c"
+  ],
+  "source_review/r17a-upstream-rolldown-LICENSE.txt": [
+    "6a9319dd737d0ba07925fda801a3b2de4128dd62"
+  ],
+  "source_review/r17a-upstream-rolldown-native-context-v1.0.3.rs": [
+    "48f881838533a5795de5c895447c261d2c8ddf55"
+  ],
+  "source_review/r17a-upstream-rolldown-plugin-context-v1.0.3.ts": [
+    "e3a94bc6973ab88658a980f605ac3f029f6038c7"
+  ],
+  "source_review/r17a-upstream-rolldown-runtime-v1.0.3.rs": [
+    "318a55871a79e0dab2b228c47579f71cec26b05d"
+  ],
+  "source_review/r17a-upstream-rolldown-vite-resolve-v1.0.3.rs": [
+    "e936f8999dce1bcabe43f4d6575b7ad094638afb"
+  ],
+  "source_review/r17a-upstream-rolldown-vite-resolver-v1.0.3.rs": [
+    "a8cf4978ab7b429305980d732871e1e438cb863d"
+  ],
+  "source_review/r17a-upstream-rolldown-vite-utils-v1.0.3.rs": [
+    "85317dc7d854d4a26558caa1fe5c4d563ab0dedd"
+  ],
+  "source_review/r17a-upstream-source-manifest.json": [
+    "85560f9bd7bab4f3bdeac25af42528906c68754f"
+  ],
+  "source_review/r17a-upstream-vite-LICENSE.txt": [
+    "9e532316b6ef09f7fbb7a95af0bc788dbae5d5aa"
+  ],
+  "source_review/r17a-upstream-vite-module-preload-v8.0.16.ts": [
+    "8a250ee93b2f8fc45e5ff800e8566daeac8e9b62"
+  ],
+  "source_review/r17a-upstream-vite-resolve-v8.0.16.ts": [
+    "55006ef628bbe1dcdf3e742408a81caaffd25e1d"
+  ],
+  "source_review/r17a-user-result-observation.json": [
+    "863edebef81b040008435be733a2629afde102ff"
+  ],
+  "source_review/r17b-driver-fixture-results.json": [
+    "d56764aa89d5499019abb7a304daf0762aa547f2"
+  ],
+  "source_review/r17b-preparation-record.json": [
+    "7c33da5e391fe1584c46b16fa9b5a4f7049d2882"
+  ],
+  "source_review/r17b-upstream-tailwind-LICENSE.txt": [
+    "d6a82290738a9f78946cbcb4594535d6984086dd"
+  ],
+  "source_review/r17b-upstream-tailwind-scanner-provenance.json": [
+    "09e96e6a91c78ebc4ca044d2c10910a1d214ffc8"
+  ],
+  "source_review/r17b-upstream-tailwind-scanner-v4.3.0.rs": [
+    "30724f1621886859ed1a3249ed63843fca70d818"
+  ],
+  "source_review/r17b-user-result-observation.json": [
+    "a95e931d2e80c9786a34901f4b5501e18824ccec"
+  ],
+  "source_review/r17c-diagnostic-fixture-results.json": [
+    "c6f1231a52d029e43ae14037d8cd73338858dece"
+  ],
+  "source_review/r17c-ledger-handoff-archive.md": [
+    "8a8f851560623bdf0a074d800a7a7dd525374b26"
+  ],
+  "source_review/r17c-preparation-record.json": [
+    "28158548036c6c92e71a817010cbb3c4af2369c0"
+  ],
+  "source_review/r17c-user-result-analysis.json": [
+    "1a4fb263e561a511b852296f6c192a6278fa08c9"
+  ],
+  "source_review/r18-driver-fixture-results.json": [
+    "dfa76314a6fec1b4633b841f33ef16f508111935"
+  ],
+  "source_review/r18-ledger-handoff-archive.md": [
+    "3decff327700c6f69c78041fb2c2d4c605ae073a"
+  ],
+  "source_review/r18-ledger-retained-history.md": [
+    "0067726d62b004d0c2944efdb09f7dfc22d553d2"
+  ],
+  "source_review/r18-preparation-record.json": [
+    "8b1b2286b2372378b1422e7f8e46f31c17ca4a78"
+  ],
+  "source_review/r18-resend-6.22.1-LICENSE.txt": [
+    "203d69812af1576f85acf52d5176cd263e48fa45"
+  ],
+  "source_review/r18-resend-6.22.1-index.cjs": [
+    "f4a402218a75bebcefb713863f0dc0375f37cf72"
+  ],
+  "source_review/r18-resend-6.22.1-index.mjs": [
+    "8335a93f95da9f40e7f4e050d86a40e293e1b395"
+  ],
+  "source_review/r18-resend-6.22.1-package.json": [
+    "4ff1636e0b1bbd3a71d9bbfd3e33da5f572a995d"
+  ],
+  "source_review/r18-resend-6.22.1-provenance.json": [
+    "b38682998504f5a4c191517860afb61199d4741e"
+  ],
+  "source_review/r18-resend-6.22.1-registry-metadata.json": [
+    "08351e650fc510f19e787a881893b7cefae101fd"
+  ],
+  "source_review/r18-resend-6.22.1-render-regions.json": [
+    "c1ed9c0ac08e5a882becd69628d00358d8708c9b"
+  ],
+  "source_review/r18-resend-6.22.1-review.md": [
+    "fca4b598ed4972db7a1f4de14b1376f02f2fcf5a"
+  ],
+  "source_review/r18-resend-smoke-fixture-results.json": [
+    "a950cd9f3ca26b27953e0567a6010adc266132be"
+  ],
+  "source_review/r18-resend-smoke.mjs": [
+    "2b52e1a7d441a7c80e1df75301cc646c89566bbe"
+  ],
+  "source_review/r18-runtime-helper-smoke.mjs": [
+    "e0257a9a6a43105665c0bcdab4d3cd37a6b75c18"
+  ],
+  "source_review/r18-upstream-license-provenance.json": [
+    "d4d51a18a0e0c9bd9c972fee179304f5e6de08b4"
+  ],
+  "source_review/r18-upstream-pg-LICENSE.txt": [
+    "5c1405646fa9dfc49a4638bfc5c8ca908d912505"
+  ],
+  "source_review/r18-upstream-ws-LICENSE.txt": [
+    "1da5b96a11ac2c83160e3085188f04eba7e3dd7d"
+  ],
+  "source_review/r18-user-result-analysis.json": [
+    "0e9d169c45d63ad76afa8ed05eea8d922cffa1dd"
+  ],
+  "source_review/r18a-driver-fixture-results.json": [
+    "1f717fe78805d25c2a3a1317e07c5492518dc103"
+  ],
+  "source_review/r18a-esbuild-package_unused-fixture.json": [
+    "2a04bdf1cb7478d0eed1d00dde2855befa5c5cd7"
+  ],
+  "source_review/r18a-esbuild-relative_live-fixture.json": [
+    "3723efd7c4b7816424287dfcb5cafc0200f75f3e"
+  ],
+  "source_review/r18a-esbuild-relative_unused-fixture.json": [
+    "680d2c4858a9b232fd59a6e128611fa8bbdce30f"
+  ],
+  "source_review/r18a-esbuild-relative_unused_export-fixture.json": [
+    "a69657fa04bb84e26bdef6ee1cc762deecba5446"
+  ],
+  "source_review/r18a-esbuild-reproduction-provenance.json": [
+    "fc7739c0b05f6b8c865787d770b1aea95dbd6d2e"
+  ],
+  "source_review/r18a-esbuild-reproduction-results.json": [
+    "1f75ada616b1375459a731dd144a0ca3a0184ad1"
+  ],
+  "source_review/r18a-esbuild-reproduction.py": [
+    "f18eb2cf0fc678632d93b2759a3d59bcb65fe47f"
+  ],
+  "source_review/r18a-independent-analysis.md": [
+    "8cf3a48f914154199b740362f907284349f829b5"
+  ],
+  "source_review/r18a-ledger-handoff-archive.md": [
+    "84c77370c141425d51f6e51ac00658d3c5c60be2"
+  ],
+  "source_review/r18a-preparation-record.json": [
+    "4366de90d02c8910f089bfa43c48b4842b721eb3"
+  ],
+  "source_review/r18a-user-result-analysis.json": [
+    "32a517d070a6b9b2490d6101fcb01b056c62c17d"
+  ],
+  "source_review/r18b-inspection-test-results.json": [
+    "a6f886e9f8e833696e9a0822ea38479432cae247"
+  ],
+  "source_review/r18b-ledger-handoff-archive.md": [
+    "cbe610a6178ffb59a3f0d84d9a4676e9f905d707"
+  ],
+  "source_review/r18b-preparation-record.json": [
+    "1593cc52e57a4b3f6e41a07a357eecec37ccb8f8"
+  ],
+  "source_review/r18b-user-result-analysis.json": [
+    "0fb876e7bf1af61413a928e846e1903e337da908"
+  ],
+  "source_review/r18c-driver-fixture-results.json": [
+    "762a4046b94fb89085ce4da8eb51650bcb351472"
+  ],
+  "source_review/r18c-es6-symbol-3.1.4.tgz": [
+    "125044996b1a4d54731ea02bfdc8b43389cc8d3a"
+  ],
+  "source_review/r18c-es6-symbol-3.1.4/.testignore": [
+    "b5b5cd18a66841e655da388cac04459434e076f2"
+  ],
+  "source_review/r18c-es6-symbol-3.1.4/CHANGELOG.md": [
+    "ff78d44ad22adbd408b9d6100d08a5c6343211df"
+  ],
+  "source_review/r18c-es6-symbol-3.1.4/CHANGES": [
+    "ef0cbdaf771cda5454af7df29a5b09f7bc0535bc"
+  ],
+  "source_review/r18c-es6-symbol-3.1.4/LICENSE": [
+    "38d8a7563a3787093c3d5bc05dee3f91a24a7d25"
+  ],
+  "source_review/r18c-es6-symbol-3.1.4/README.md": [
+    "e19f1168db3ebedc7e73c39acb0338a5b2844c9b"
+  ],
+  "source_review/r18c-es6-symbol-3.1.4/implement.js": [
+    "d62803bd7c047700236358d9a9e52e5f37af9521"
+  ],
+  "source_review/r18c-es6-symbol-3.1.4/index.js": [
+    "fcd8a6300875e18f0381c24299114a1c0ba11287"
+  ],
+  "source_review/r18c-es6-symbol-3.1.4/is-implemented.js": [
+    "b85ec6946d1e5f12f75f51e5cdcfacc418442d23"
+  ],
+  "source_review/r18c-es6-symbol-3.1.4/is-native-implemented.js": [
+    "254774a609a78f3b3d53d955202efc99403d6a42"
+  ],
+  "source_review/r18c-es6-symbol-3.1.4/is-symbol.js": [
+    "66edd46b22feea7a84d029423488cbb9117a376d"
+  ],
+  "source_review/r18c-es6-symbol-3.1.4/lib/private/generate-name.js": [
+    "880f25e274fc19d762740dc7e2ba75a3ac07ba53"
+  ],
+  "source_review/r18c-es6-symbol-3.1.4/lib/private/setup/standard-symbols.js": [
+    "b25b1712a42118b210710b90db8427e124e4a162"
+  ],
+  "source_review/r18c-es6-symbol-3.1.4/lib/private/setup/symbol-registry.js": [
+    "29d198ffb29913f7b8ba22e940ee7251fa0838af"
+  ],
+  "source_review/r18c-es6-symbol-3.1.4/package.json": [
+    "a2cb8d0622dc1bd1d7f1eec63409dc1838430391"
+  ],
+  "source_review/r18c-es6-symbol-3.1.4/polyfill.js": [
+    "01a9e61a956c97ae6b0dd5e708b025f477a61156"
+  ],
+  "source_review/r18c-es6-symbol-3.1.4/validate-symbol.js": [
+    "bac6f540738d123c947f2c03e3c0b51cb5823cf7"
+  ],
+  "source_review/r18c-es6-symbol-provenance.json": [
+    "0dcf3a89c17049281299f69909fd19dec0e80161"
+  ],
+  "source_review/r18c-es6-symbol-registry-metadata.json": [
+    "92e81bce45ff4e18d97ca9ffd75b54fa8f4f5cb8"
+  ],
+  "source_review/r18c-es6-symbol-review.md": [
+    "ff16e018f97e109ecff568bc5f8caf2d10d1e793"
+  ],
+  "source_review/r18c-graph-fixture-results.json": [
+    "cec2ff5668883253af613c4c6a1dfadea8176c51"
+  ],
+  "source_review/r18c-graph-tests.tap": [
+    "787bdaecf342ecc9991fc556ec9742ce5bd47f87"
+  ],
+  "source_review/r18c-preparation-record.json": [
+    "d154a3d6ec2d33d019c873b8a8c0ccc011743313"
+  ],
+  "source_review/r18c-scope-comparison.json": [
+    "5eb26a8646410a35aab5110b7e7d0867053311bc"
+  ],
+  "source_review/registry-archive-repair-r16c.mjs": [
+    "55408c7e690a59a66d0c0ef492d5f03b05b7d355"
+  ],
+  "source_review/registry-archive-repair-r16d.mjs": [
+    "b3a42df40435cd9f4591361287f0a69ce24453bb"
+  ],
+  "source_review/resumed-candidate-body-r17a.mjs": [
+    "d7fc13c1819d6b552157fa8be20b886d54889585"
+  ],
+  "source_review/resumed-candidate-driver-r17a.mjs": [
+    "70c9187076c447e5538441e53e9007f7f06d6090"
+  ],
+  "source_review/runtime-contract-analysis-r14-results.txt": [
+    "dd83949ee20afa6d312d5ae0abba8b0c5b12575e"
+  ],
+  "source_review/runtime-contract-analysis-r14.mjs": [
+    "35fd277d8e6f1134039c39475cf8b1322031220e"
+  ],
+  "source_review/runtime-contract-body-r18.mjs": [
+    "ac9c1f1c290ebdf83d53215d141117c5d5480759"
+  ],
+  "source_review/runtime-contract-body-r18a.mjs": [
+    "42448ae636fa88580f30cfb13d90f10d76141485"
+  ],
+  "source_review/runtime-contract-body-r18c.mjs": [
+    "775fd7f9621c2bbee0b7f21b7333a6e9e5114486"
+  ],
+  "source_review/runtime-contract-driver-r14.mjs": [
+    "5559e97d7e72af44fbf4ab1ece105b7d9012e017"
+  ],
+  "source_review/runtime-contract-driver-r18.mjs": [
+    "ac02c09ca57b537786f1ee7358110a30f08f8804"
+  ],
+  "source_review/runtime-contract-driver-r18a.mjs": [
+    "170db895b3671ccdc22f4e20364ae452a613eb32"
+  ],
+  "source_review/runtime-contract-driver-r18c.mjs": [
+    "64f85931cdfbbb3624357c284aeda53c1f7781f3"
+  ],
+  "source_review/runtime-graph-policy-r18.mjs": [
+    "5f22aa7593bee754f0e62d5cc9fbfa0b4a8205fc"
+  ],
+  "source_review/runtime-graph-policy-r18a.mjs": [
+    "40ea2796de2b627f013b1ed128495a42536cc2d3"
+  ],
+  "source_review/runtime-graph-policy-r18c.mjs": [
+    "5790576ab11acdff71d8cb0550d46df4975793ef"
+  ],
+  "source_review/server-build-runner-r17.mjs": [
+    "978c8864a77ef6840bfaf1491d921dbad0e55bf9"
+  ],
+  "source_review/server-build-runner-r17b.mjs": [
+    "bda42a207747bbc1b2c672ca55d1c4621d90419b"
+  ],
+  "source_review/test-archive-url-diagnostic-r16b.mjs": [
+    "021b78234c10576f03dd9cffdde5d6117df2cd9a"
+  ],
+  "source_review/test-archive-url-diagnostic-r16b.py": [
+    "ca4e3e42a769e4f0667f556567faa77735d509a2"
+  ],
+  "source_review/test-fresh-build-policy-r17.mjs": [
+    "93ea26adc125a9754d8a6910b8a50a8d17872165"
+  ],
+  "source_review/test-fresh-candidate-r17.py": [
+    "a85ffa39b55d254c5a7ba8a7c186b9ab144916cd"
+  ],
+  "source_review/test-fresh-candidate-r17b.py": [
+    "87f3f5a821f4132792383ce4661c6741d300e659"
+  ],
+  "source_review/test-frontend-candidate-r12.py": [
+    "2d28ba09e44c7a77d19dc7852f911cfcde85c784"
+  ],
+  "source_review/test-frontend-candidate-r12a.py": [
+    "3e1ada227996e94cd24073a5a9ae0fef7107380e"
+  ],
+  "source_review/test-frontend-graph-r17a.mjs": [
+    "3e6f10574bac56f1c2ab903d6a3bcdc8aec81117"
+  ],
+  "source_review/test-frontend-runner-r12.py": [
+    "b09182376b59da93300ca0ae5d70ad10fb783301"
+  ],
+  "source_review/test-input-path-r18b.py": [
+    "6c932f4b45a5ef3e967691fb392853ac26b3ee92"
+  ],
+  "source_review/test-locked-dependencies-r16.py": [
+    "6d385d8cfbf90ee909de020fddb297aef47eab2b"
+  ],
+  "source_review/test-locked-dependencies-r16a.py": [
+    "a2e782d1413ecd344026ee4d2d5b7c12dce36a25"
+  ],
+  "source_review/test-locked-dependencies-r16c.py": [
+    "cd7b4116cdb69046c3c56ad15771d1761a108ac2"
+  ],
+  "source_review/test-locked-dependencies-r16d.py": [
+    "ca7f96725b8beb5e9424ab9b20a22bbce74e040d"
+  ],
+  "source_review/test-locked-dependencies-r16e.py": [
+    "63ba7e3e8ab8438956643fdf71e4d1802b598315"
+  ],
+  "source_review/test-locked-dependency-policy-r16.mjs": [
+    "505462e7592724a2bf7a3118653d81e3d5523d13"
+  ],
+  "source_review/test-locked-dependency-policy-r16d.mjs": [
+    "984d0f518537d70abcef3c1c412d58108aa2e013"
+  ],
+  "source_review/test-locked-dependency-policy-r16e.mjs": [
+    "6f8f6d7901344483ec4fa8a81643c819e6a2e1b0"
+  ],
+  "source_review/test-locked-npm-runner-r16.mjs": [
+    "02200a0aea63713f88a5edcbb6278ee740eedec9"
+  ],
+  "source_review/test-npm-workspace-semantics-r16e.mjs": [
+    "a817934fcf9f05ea3264a3504dd9299df9481c9c"
+  ],
+  "source_review/test-prompt-asset-runner-r15.py": [
+    "d6e35fd4ccf008abbe574ee4c5a255cb0658d8cc"
+  ],
+  "source_review/test-prompt-assets-r15.py": [
+    "8d02881fb6c6a47dd58729284fd2631c30f84121"
+  ],
+  "source_review/test-r17c.py": [
+    "47587cb0b2aae918d12aaf5853a5bea0660ba8a2"
+  ],
+  "source_review/test-r18-driver.py": [
+    "9b83ed8379e2cd2ad9b7ee6e1b503ad888725bec"
+  ],
+  "source_review/test-r18-resend-smoke.mjs": [
+    "f46bf53cd7b6e8f953ec1d6ad2e2abb6c728858b"
+  ],
+  "source_review/test-r18-runtime-helper-smoke.mjs": [
+    "4f6d6441dae702fb45c91c7460178a8cd80b13fe"
+  ],
+  "source_review/test-r18a-driver.py": [
+    "efd3ea1c6ae768286c39f9202924e25a3c0c53df"
+  ],
+  "source_review/test-r18c-driver.py": [
+    "e471f26ad311378f35d92b0126525cd00e8544f1"
+  ],
+  "source_review/test-registry-archive-repair-r16c.mjs": [
+    "81a2e5ac5d7aee57872bcd465d7d947ce7934d7a"
+  ],
+  "source_review/test-registry-archive-repair-r16d.mjs": [
+    "2ce6cb87b33802c42456574efcfa27033041d097"
+  ],
+  "source_review/test-resumed-candidate-r17a.py": [
+    "b396ee8f4c16aad6652579dd5ff8d09718316e4e"
+  ],
+  "source_review/test-runtime-contract-analysis-r14.mjs": [
+    "3df23418ba61e33dfae3abb1c65f14143d2dd8aa"
+  ],
+  "source_review/test-runtime-contract-r14.py": [
+    "f23c7db1f61151a0b89c9b8eec7e20cf6441bd07"
+  ],
+  "source_review/test-runtime-graph-policy-r18.mjs": [
+    "5911086320dbeb6f528a4652b59e3ff53a39ddf3"
+  ],
+  "source_review/test-runtime-graph-policy-r18a.mjs": [
+    "9b98b49b3c69d32d750736144205bb2b342c7ad5"
+  ],
+  "source_review/test-runtime-graph-policy-r18c.mjs": [
+    "0f0d01e6d75778f8c927dd52ecba20fa2038cf63"
+  ]
+}

@@ -1,0 +1,28 @@
+MyMentalHealthBuddy R18F — instructions and scope
+
+1. Download MMHB-RUNTIME-CONTRACT-R18F.txt.
+2. Upload that single TXT to /home/runner/workspace in the MMHB Replit project, beside package.json. Wait until its exact filename is visible in Files. Do not extract the review ZIP into the Replit workspace for this run.
+3. Run the checksum-and-execute command below. Leave Files and the editor unchanged until the command ends. Return the complete terminal output.
+
+cd /home/runner/workspace &&
+printf '%s\n' 'c2bcf0376b8478cce51d3b7d4dc3fec056ef1a48716a017e9163a3807dfa405f  MMHB-RUNTIME-CONTRACT-R18F.txt' |
+sha256sum -c - &&
+env -u BASH_ENV bash --noprofile --norc MMHB-RUNTIME-CONTRACT-R18F.txt
+
+What this does: the R18E result establishes a direct child commit and 508 changed paths, but displayed only the first 80. R18F compares the complete committed delta with a finite catalog of exact Git blob identities computed from 20 previous local delivery archives. Every accepted path must be an addition of a regular, non-executable file and match an exact known review-artifact path and blob. Filenames alone never grant acceptance. Unknown paths, changed known bytes, modifications, deletions, symlinks, executable additions, wrong parent, wrong HEAD/branch, or a count other than 508 stop continuation.
+
+The comparison uses Git's content-addressed blob identities; it does not independently authenticate who made the commit or rehash all committed blob bodies with SHA256. Archive SHA256s and the finite catalog are included in the review kit. Original Git expectation is retained for ancestry; this successor conditionally accepts only the one observed child commit for the retained-runtime check. It does not rewrite any failed receipt or modify a Git reference or repository configuration.
+
+If every change matches, the same command continues R18C's existing 63-pin, current-source, retained candidate/input, es6-symbol, graph and reviewed synthetic helper checks. A match of committed review artifacts is not a current-worktree pass: original source/candidate checks remain required and can still fail. Scope comparison confirms all original pins, six embedded helpers, source review constants and prefix are unchanged. Success remains a retained-contract result, not application startup or deployment.
+
+The command writes only a new .mmhb-release-evidence/r18f-* report through the existing report workflow. It does not install packages, compile, change source or Git state, start the app, connect to the database, send email, call an AI service, or deploy. Reviewed helper code can run with synthetic dependencies and transports only after its existing gates pass. VM contexts and before/after observations are not OS isolation or a concurrent-editor lock. Original snapshots do not inventory every ignored file. No network request is intentionally added by the commit inspector; Git lazy fetch is disabled for its metadata queries.
+
+The terminal includes grouped counts covering all committed paths and every unmatched row. Git's pager is disabled for the new comparison, eliminating the R18E 'Press RETURN' interruption. No commit messages, author emails, source bodies or environment values are printed by that comparison.
+
+Local qualification: 10 real-Git integration fixtures on Node v24.19.0; 508 actual catalog additions continue to the 11 helper and 20 Resend synthetic cases. Negative fixtures cover known-byte mismatch, unknown application addition, tracked source modification/deletion, executable/symlink addition, count mismatch, wrong parent and uncommitted source drift. Existing fixture files were preserved; operation guards reported no app module loads or real transports. Actual Replit execution is pending; its expected Node remains v24.13.0.
+
+The command TXT is self-contained. The review ZIP is incremental: reproducing its build/tests also requires the earlier delivery archives and R18C source-review fixture assets referenced by the included scripts.
+
+Time: allow 5–15 operator minutes for download/upload/run/output. This is an estimate. The previous 27–61 engineering-hour first-release estimate remains provisional and excludes expanded content/integrations and external waiting. Actual runtime and core user-flow evidence is required to improve it.
+
+References: https://git-scm.com/docs/git-diff (raw format, -z); https://git-scm.com/docs/git (--no-pager, object and environment controls). These document tool behavior; user screenshots supply the MMHB observations.

@@ -1,0 +1,566 @@
+{
+  "project": "MyMentalHealthBuddy",
+  "status": "PREPARED_AND_LOCALLY_TESTED_REPLIT_PENDING",
+  "releaseReady": false,
+  "applicationRuntime": "UNPROVEN",
+  "commandSha256": "645d7f9d1c39f31308714090d6f728b6208166ad20ec10058eb42116036c6128",
+  "graphTests": 29,
+  "driverFixtures": 22,
+  "files": [
+    {
+      "file": "MMHB-Ledger.txt",
+      "bytes": 176873,
+      "sha256": "b358e0c0efe09dc876f5bf872b0708173e2f5a89c96863613758ecb94f5d48ab"
+    },
+    {
+      "file": "MMHB-R18C-Start.txt",
+      "bytes": 3034,
+      "sha256": "99f828fb4564ca4dbc31d408036138046294da7f1c4fb7ec12a827c578409999"
+    },
+    {
+      "file": "MMHB-RUNTIME-CONTRACT-R18C.txt",
+      "bytes": 129150,
+      "sha256": "645d7f9d1c39f31308714090d6f728b6208166ad20ec10058eb42116036c6128"
+    },
+    {
+      "file": "MMHB-Readiness-Ledger-2026-09-07.md",
+      "bytes": 176873,
+      "sha256": "b358e0c0efe09dc876f5bf872b0708173e2f5a89c96863613758ecb94f5d48ab"
+    },
+    {
+      "file": "source_review/R18-Verification-README.md",
+      "bytes": 1340,
+      "sha256": "2f93ba4b1aae48e0c4d2a80e0e9d5f56c7ce608e3665284b973c7b09bd3e4288"
+    },
+    {
+      "file": "source_review/R18A-Verification-README.md",
+      "bytes": 1393,
+      "sha256": "f0471b079b190b208ff1aecd99c5cce2f520dc6f4e9b8ae294f28660668e7df3"
+    },
+    {
+      "file": "source_review/R18C-Verification-README.md",
+      "bytes": 1645,
+      "sha256": "966d43afa075632e9592adcb662480b06829abe4806fe17034f49373fe44a55a"
+    },
+    {
+      "file": "source_review/build-runtime-contract-r18.py",
+      "bytes": 3120,
+      "sha256": "e0a6173784569709a65ac803b8b7344df11b4fc10161204740e4ac6c851e0ada"
+    },
+    {
+      "file": "source_review/build-runtime-contract-r18a.py",
+      "bytes": 3127,
+      "sha256": "e58752c1f0c1e29b69c3022dc45f38bb833e2db1bd96cad2bc0831d2a4730c77"
+    },
+    {
+      "file": "source_review/build-runtime-contract-r18c.py",
+      "bytes": 3127,
+      "sha256": "5832c3401d90d1fd4ae63c65dadbe2f043eaf5cafeb0dafc60521be8e5f96aab"
+    },
+    {
+      "file": "source_review/fresh-build-policy-r17.mjs",
+      "bytes": 6648,
+      "sha256": "a291a95fba91252ed006edc91808149413bcd88ae604afb5f3e2fa456f16483b"
+    },
+    {
+      "file": "source_review/fresh-candidate-prefix-r17.mjs",
+      "bytes": 18261,
+      "sha256": "44cab075512a6681941f2be8b154909369e78345c191deb6323ef30f480a2a56"
+    },
+    {
+      "file": "source_review/prepare-r18-deliverables.py",
+      "bytes": 17629,
+      "sha256": "4f14f4d4d73fb2c0e9bd03adcd9a258f02726e5801e3d1d1775ca11967ac0e85"
+    },
+    {
+      "file": "source_review/prepare-r18a-deliverables.py",
+      "bytes": 15479,
+      "sha256": "b37e218a95dec0ee37151f05ed3af741c22018b00b86a45733423d62ac77fc33"
+    },
+    {
+      "file": "source_review/prepare-r18c-deliverables.py",
+      "bytes": 14282,
+      "sha256": "b43cc1d72c01981de802370ef3e93e7488dc1ec25efe801fbdc16aa2bb02c9ef"
+    },
+    {
+      "file": "source_review/preservation-snapshot-policy-r17c.mjs",
+      "bytes": 3525,
+      "sha256": "6cb281aece331b0801b598e26c56ed061d13dccd94f5a1500640b034e0725906"
+    },
+    {
+      "file": "source_review/r14-assets-healScheduler.mjs",
+      "bytes": 7790,
+      "sha256": "d68159a5ef62eac98f6d5325cfd1e5df2a4c7cce2cebdf1f4fa097efb081de0f"
+    },
+    {
+      "file": "source_review/r14-assets-kernel-bridge.mjs",
+      "bytes": 4357,
+      "sha256": "79bcf958b3d336839f8aac2f072e6566bfefd1276d5d9af22cb53389cfc811c8"
+    },
+    {
+      "file": "source_review/r14-assets-promptEngine.mjs",
+      "bytes": 7669,
+      "sha256": "fbbd43eaab399b029b5d976508da8f1e055e25d69fd2ee65551e23d102363170"
+    },
+    {
+      "file": "source_review/r14-assets-rss.mjs",
+      "bytes": 3306,
+      "sha256": "164d2d1e12c0e63b568fdcc077a12ce801f512a74385f63e8c45e999d81b6430"
+    },
+    {
+      "file": "source_review/r14-assets-runtime-mapping.json",
+      "bytes": 9170,
+      "sha256": "cfa28b90bd13ffb349bc68488efeeebdbbd8b2a8832346dfbe6ff8b7facc0380"
+    },
+    {
+      "file": "source_review/r14-external-mmhb-server-db-connection.mjs",
+      "bytes": 2090,
+      "sha256": "6baa2747e839ce79d623564b5ad64067e9a8ca90975dc262383185592e7500fc"
+    },
+    {
+      "file": "source_review/r14-external-mmhb-server-routes-blog.mjs",
+      "bytes": 24124,
+      "sha256": "ad22034ff650b56c65d1d9dcee916e32d9f22ab04bde0a7d4a738b7188ec12e5"
+    },
+    {
+      "file": "source_review/r14-external-mmhb-server-services-email.mjs",
+      "bytes": 18011,
+      "sha256": "23fbd9967964b7c65c18ddb2cdbeff44aa69ab33eb6b4d40edce8abfa11ab2c4"
+    },
+    {
+      "file": "source_review/r14-external-mmhb-server-services-newsletterSend.mjs",
+      "bytes": 2748,
+      "sha256": "f39a0864816fabc44395c676df8ef6bac4d13b499b6725912257f3b4705c52e1"
+    },
+    {
+      "file": "source_review/r14-external-mmhb-server-utils-email.mjs",
+      "bytes": 853,
+      "sha256": "9a787e04026ec9225fca35420546d744fc78874958739eab76a0c9754fef7113"
+    },
+    {
+      "file": "source_review/r14-external-node-postgres-packages-pg-esm-index.mjs",
+      "bytes": 579,
+      "sha256": "5ef4d06556eeb775987759c2c09229dca2139421ee40e819b566612db2b4a8dc"
+    },
+    {
+      "file": "source_review/r14-external-node-postgres-packages-pg-lib-index.js",
+      "bytes": 1810,
+      "sha256": "3fad6e6d3d976edbabe0cbc9e1d39f4340bcb719bbbb186a0d3a24f3dbd4a94c"
+    },
+    {
+      "file": "source_review/r14-external-node-postgres-packages-pg-lib-native-client.js",
+      "bytes": 8699,
+      "sha256": "d88c124d4835cc9d5b0389e2aaf63a144df8434c1b4b0d5e588691e068f49acf"
+    },
+    {
+      "file": "source_review/r14-external-node-postgres-packages-pg-lib-stream.js",
+      "bytes": 2132,
+      "sha256": "0bd4001775301604ddf7c94152e05f6f30a9354876717bdae2ab636d00eb12ba"
+    },
+    {
+      "file": "source_review/r14-external-review.md",
+      "bytes": 5061,
+      "sha256": "58cbbe10cf05e7416b79c010032436e4ac5b524798a550f5000db44677bce313"
+    },
+    {
+      "file": "source_review/r14-external-reviewed-mapping.json",
+      "bytes": 10360,
+      "sha256": "dfea788991104b8e09be23a7207ac42c12a1064f99f9051e9bdb444f9e1d8304"
+    },
+    {
+      "file": "source_review/r14-external-ws-lib-buffer-util.js",
+      "bytes": 3056,
+      "sha256": "8b0a45739132f82e25ea13163780abf547ccfe989267f3eb7abb475beec92da3"
+    },
+    {
+      "file": "source_review/r14-external-ws-lib-validation.js",
+      "bytes": 3903,
+      "sha256": "41ce8e83d0d434132e1704895fedb91f6703a701b42d91c80954ab29b2845593"
+    },
+    {
+      "file": "source_review/r15-dependency-review.json",
+      "bytes": 3933,
+      "sha256": "65920b4d8c06beb7b372527a94d9782590be9d18221058df9f371d7aae02b8b4"
+    },
+    {
+      "file": "source_review/r15-pg-8.23.0-native-client.js",
+      "bytes": 11086,
+      "sha256": "9fe2f45918152531b1e76ff4cf54ff754fcd9651d85cfb997efd450a97d55917"
+    },
+    {
+      "file": "source_review/r17c-ledger-handoff-archive.md",
+      "bytes": 8760,
+      "sha256": "31025fc98bbe473766ca2104f10617057a6afc90c641f0efafa4e84141ce237e"
+    },
+    {
+      "file": "source_review/r17c-user-result-analysis.json",
+      "bytes": 32132,
+      "sha256": "ec9bc6b184fc4adbb4f94a854357245459dc8a0bd6c6356fdcfa9aa200a7d78b"
+    },
+    {
+      "file": "source_review/r18-driver-fixture-results.json",
+      "bytes": 4405,
+      "sha256": "b6c751492cc3e96b0692584dbaf9f33775860022f8f28fa4a67e13b5af54f77e"
+    },
+    {
+      "file": "source_review/r18-ledger-handoff-archive.md",
+      "bytes": 180255,
+      "sha256": "f0b161d3b1cb9bdf8d2bcdae9e396d92e5b0a7985dcc892ae70b7dedd4a70f1b"
+    },
+    {
+      "file": "source_review/r18-ledger-retained-history.md",
+      "bytes": 161220,
+      "sha256": "a339b71b696b444ebba235ba44e41e47bc46134932f2ee8567dd4f631743c5c9"
+    },
+    {
+      "file": "source_review/r18-preparation-record.json",
+      "bytes": 10379,
+      "sha256": "0e933c247c5bc7ba6424c810882911dfbb6dab81a325cba9871277a7c42aa39e"
+    },
+    {
+      "file": "source_review/r18-resend-6.22.1-LICENSE.txt",
+      "bytes": 1076,
+      "sha256": "299819a2f2d6ddefaf47dfd684242dd683f9d17c2d29edce08ba777b4c264a65"
+    },
+    {
+      "file": "source_review/r18-resend-6.22.1-index.cjs",
+      "bytes": 42455,
+      "sha256": "66659b52d6b3350895d34b8bc290ccf07e4ceb7a0f0625d1a70f3850baf11806"
+    },
+    {
+      "file": "source_review/r18-resend-6.22.1-index.mjs",
+      "bytes": 41321,
+      "sha256": "3b3514f7301900eb8614b05ef03d563b66e15d0b5b640a179fe8f7879553928c"
+    },
+    {
+      "file": "source_review/r18-resend-6.22.1-package.json",
+      "bytes": 2189,
+      "sha256": "fe631b2af35f2ff912c6f45af326a05a7484fc03995c562d04bbc95400ef5304"
+    },
+    {
+      "file": "source_review/r18-resend-6.22.1-provenance.json",
+      "bytes": 2290,
+      "sha256": "73a870814de0e56b9c474b18403e5c385c3f4478621d70e4e80886969d7da53a"
+    },
+    {
+      "file": "source_review/r18-resend-6.22.1-registry-metadata.json",
+      "bytes": 3425,
+      "sha256": "b67b0ed6f2a92fa089c7fa38f9e0731cc40c56302a09072cac0a4e0d0352e83d"
+    },
+    {
+      "file": "source_review/r18-resend-6.22.1-render-regions.json",
+      "bytes": 1386,
+      "sha256": "57f199fc6b9496da4c28078914715dfb3d046fc22a4788f8abacb0bfa4dd7320"
+    },
+    {
+      "file": "source_review/r18-resend-6.22.1-review.md",
+      "bytes": 8316,
+      "sha256": "e6149387145c794fabef216e39c85f00446a6a638be3ded4fa52abfc9c79ad36"
+    },
+    {
+      "file": "source_review/r18-resend-smoke-fixture-results.json",
+      "bytes": 5849,
+      "sha256": "bf6d6bfb57c86de8589b249998a38ea932e2e8b2568944668fdff192c1f2e082"
+    },
+    {
+      "file": "source_review/r18-resend-smoke.mjs",
+      "bytes": 7466,
+      "sha256": "37e721474f9564af9baf492bd3f32c7ba55f8d8d5d90e3da2df07f5065d13416"
+    },
+    {
+      "file": "source_review/r18-runtime-helper-smoke.mjs",
+      "bytes": 11446,
+      "sha256": "ed5eaf63b823f80d9548d7affb47e44167911775c5435ed43a9ecc64287c4ec7"
+    },
+    {
+      "file": "source_review/r18-upstream-license-provenance.json",
+      "bytes": 1019,
+      "sha256": "b81642657c77247b5d9a57e1d192bc19a622e4dc5ec31f0d4b171d6cee25d789"
+    },
+    {
+      "file": "source_review/r18-upstream-pg-LICENSE.txt",
+      "bytes": 1077,
+      "sha256": "192b8f5c96900f04a1271dec39688655d7416c1c6ea84a508e18b50d2b6751f3"
+    },
+    {
+      "file": "source_review/r18-upstream-ws-LICENSE.txt",
+      "bytes": 1183,
+      "sha256": "2b29dcfe0d6471f7e8c92c5fb38c9f93edee10330937055440192f1832b1ecef"
+    },
+    {
+      "file": "source_review/r18-user-result-analysis.json",
+      "bytes": 2098,
+      "sha256": "94bfe61b2b8255f8986c55130e18de4dc64faa6dfa37ff656e43a91d1833f386"
+    },
+    {
+      "file": "source_review/r18a-driver-fixture-results.json",
+      "bytes": 5626,
+      "sha256": "c247c3deb6697f4a6de3c6c3939d683cf88794c284366990a3bf21da0aafa361"
+    },
+    {
+      "file": "source_review/r18a-esbuild-package_unused-fixture.json",
+      "bytes": 1734,
+      "sha256": "bf238101cce038bf3602d7830bff812e961361947eca013257c5774e5a3f008e"
+    },
+    {
+      "file": "source_review/r18a-esbuild-relative_live-fixture.json",
+      "bytes": 1921,
+      "sha256": "552bd8bbc62b884b11ccc80a3642140b3c3a33ac78b5eedef3c931559ec0cfd3"
+    },
+    {
+      "file": "source_review/r18a-esbuild-relative_unused-fixture.json",
+      "bytes": 1728,
+      "sha256": "86940fc019a9985cfbe1de26990d83d5c71c0dc0f7487adcd3ae3803294ccf0b"
+    },
+    {
+      "file": "source_review/r18a-esbuild-relative_unused_export-fixture.json",
+      "bytes": 2565,
+      "sha256": "433a3221d44faa9d3d9f829a43e338cbf187b26acd58c2c9d999fa8f2a24d7c8"
+    },
+    {
+      "file": "source_review/r18a-esbuild-reproduction-provenance.json",
+      "bytes": 875,
+      "sha256": "2a18acc29b2c98203172800897dc347bd5431fd4e660fa3100a7b2a8e0611825"
+    },
+    {
+      "file": "source_review/r18a-esbuild-reproduction-results.json",
+      "bytes": 10827,
+      "sha256": "6bef3d88eaa77d9041d52c772f4ff7061fa0d81943b8aa44c0ae9b79be98f484"
+    },
+    {
+      "file": "source_review/r18a-esbuild-reproduction.py",
+      "bytes": 7200,
+      "sha256": "f30063e99372b6cbf49d7ebf71c03c0c5cd3c6f405bd76524d98dd91741cda52"
+    },
+    {
+      "file": "source_review/r18a-independent-analysis.md",
+      "bytes": 5260,
+      "sha256": "6afd92e61e319416eadab42461cf6140670eab6463b6f92a73fc9dd66a3e594f"
+    },
+    {
+      "file": "source_review/r18a-preparation-record.json",
+      "bytes": 14115,
+      "sha256": "4d89fa1e42c21f57d6bd0fbab7dc88be45c0a2fa41401a7353cf4ccb3c0e72ac"
+    },
+    {
+      "file": "source_review/r18b-ledger-handoff-archive.md",
+      "bytes": 175362,
+      "sha256": "683cb43c8419fbceba7d1bf5a03c5a27838d863ca39c45af7f5cef5e7725c8b6"
+    },
+    {
+      "file": "source_review/r18b-user-result-analysis.json",
+      "bytes": 1243,
+      "sha256": "8302469ac3ad57a67aaed86fc2cf0b3e996b02e127ddde5e22bac459cd98e716"
+    },
+    {
+      "file": "source_review/r18c-driver-fixture-results.json",
+      "bytes": 17725,
+      "sha256": "48460ab16f6bd4d094bf9c644e67096a61c1bdba451075f2f5e1c91e4856ac8d"
+    },
+    {
+      "file": "source_review/r18c-es6-symbol-3.1.4/.testignore",
+      "bytes": 13,
+      "sha256": "fdcea6198ec24acb9f4ed268d1b3cc27a83612604bc08e29464e1fbae30ddbea"
+    },
+    {
+      "file": "source_review/r18c-es6-symbol-3.1.4/CHANGELOG.md",
+      "bytes": 920,
+      "sha256": "5c099e3b657031053a0800c7ce5df6f079c39344ac02715c0a4d4fa10899f99a"
+    },
+    {
+      "file": "source_review/r18c-es6-symbol-3.1.4/CHANGES",
+      "bytes": 1937,
+      "sha256": "9230f6e893262a44252a594e57b0c367f7a4618dfc3fe9c0aa2951d26f70a9da"
+    },
+    {
+      "file": "source_review/r18c-es6-symbol-3.1.4/LICENSE",
+      "bytes": 773,
+      "sha256": "77485a12d142fd84ee9f278b42968b2f029c876c8dddca7d0e13fa164ffeed34"
+    },
+    {
+      "file": "source_review/r18c-es6-symbol-3.1.4/README.md",
+      "bytes": 3138,
+      "sha256": "538ad32e0b3e7bde47343676b526b79aa4df91d444f28c6b793b6f33af8c202d"
+    },
+    {
+      "file": "source_review/r18c-es6-symbol-3.1.4/implement.js",
+      "bytes": 215,
+      "sha256": "cd368316f7b7cf4a516867064703a679ae7aa39d946c4f65729d4e89f8f410ec"
+    },
+    {
+      "file": "source_review/r18c-es6-symbol-3.1.4/index.js",
+      "bytes": 125,
+      "sha256": "1b28ec5147eefbb863e2bff0a756236b0cc4cd067141a5aa71b40d929363c9be"
+    },
+    {
+      "file": "source_review/r18c-es6-symbol-3.1.4/is-implemented.js",
+      "bytes": 548,
+      "sha256": "d2afe0dfab4879d7ee91411db1f90f5219b5c6ab4a2243870fe4c0b5a1b316a1"
+    },
+    {
+      "file": "source_review/r18c-es6-symbol-3.1.4/is-native-implemented.js",
+      "bytes": 215,
+      "sha256": "0a8b1a4ae8e47c6f6293a18600ea9b26d4dcbf1be6f09b5635735570d644faa5"
+    },
+    {
+      "file": "source_review/r18c-es6-symbol-3.1.4/is-symbol.js",
+      "bytes": 280,
+      "sha256": "140452ab8d9fd2d7efefe51212f45ecfb31f1c30a9991384dfc3cf67102aa7c2"
+    },
+    {
+      "file": "source_review/r18c-es6-symbol-3.1.4/lib/private/generate-name.js",
+      "bytes": 789,
+      "sha256": "ac714f2cc6f1595a5b7bc967d411ca41e320e1a599690c383d4a2b492857b8d4"
+    },
+    {
+      "file": "source_review/r18c-es6-symbol-3.1.4/lib/private/setup/standard-symbols.js",
+      "bytes": 1421,
+      "sha256": "c3d07ccebb99ac65268c51642442988bfd501625491fec4bc1485d5d3b9f606b"
+    },
+    {
+      "file": "source_review/r18c-es6-symbol-3.1.4/lib/private/setup/symbol-registry.js",
+      "bytes": 556,
+      "sha256": "cae9c8c351bd16fe85e380a49d2bee0083863a070b2ada4a1607932eb95d0f08"
+    },
+    {
+      "file": "source_review/r18c-es6-symbol-3.1.4/package.json",
+      "bytes": 2161,
+      "sha256": "a37d9a643a92e8c58675a3e03b2bae12df95215b6a45889e752e0018f60fd525"
+    },
+    {
+      "file": "source_review/r18c-es6-symbol-3.1.4/polyfill.js",
+      "bytes": 3239,
+      "sha256": "fde666a610738ff35c00e1b8b68ae9219b9bcefced9431ea3eabff0372662f99"
+    },
+    {
+      "file": "source_review/r18c-es6-symbol-3.1.4/validate-symbol.js",
+      "bytes": 181,
+      "sha256": "ca976c29577348726fd2babf1f8e73fd8b2db61d01062163a6cb57d808063eae"
+    },
+    {
+      "file": "source_review/r18c-es6-symbol-3.1.4.tgz",
+      "bytes": 6450,
+      "sha256": "f93d1eb7e5c6c3fbd74d17e7b04c9e0c69b001c92ef1ba0744f079b2da4b9e40"
+    },
+    {
+      "file": "source_review/r18c-es6-symbol-provenance.json",
+      "bytes": 2829,
+      "sha256": "f30378dc40da27eb59aef97a00955811f7ad0e70145e4d45fe84807990fa4335"
+    },
+    {
+      "file": "source_review/r18c-es6-symbol-registry-metadata.json",
+      "bytes": 2814,
+      "sha256": "613167a4c4a6f8cb6399373b53e4b5ba25e1811f36888198134bfe3bcf0b8846"
+    },
+    {
+      "file": "source_review/r18c-es6-symbol-review.md",
+      "bytes": 3254,
+      "sha256": "2f6046f3bc69476c42934dd6dd752451b62c8c5f771787f439fecb33fe2a35f6"
+    },
+    {
+      "file": "source_review/r18c-graph-fixture-results.json",
+      "bytes": 218,
+      "sha256": "0bfc6a14bec4df70feacef555c274791f55fea2159c6689eb5ead20b037da601"
+    },
+    {
+      "file": "source_review/r18c-graph-tests.tap",
+      "bytes": 6997,
+      "sha256": "6a7e295e1a4757ab86490dfeb267c564802e6f6930aa1803960ecc3bef665570"
+    },
+    {
+      "file": "source_review/r18c-scope-comparison.json",
+      "bytes": 296,
+      "sha256": "fdab821f6cb92eb60bb2a5cf92fc85f61aa9538b855884cf7f8e4ff2f4e60079"
+    },
+    {
+      "file": "source_review/runtime-contract-analysis-r14.mjs",
+      "bytes": 10006,
+      "sha256": "b91a23319ac5ab34f175312c04e2376cfd80206568cac8e9ac67c0900b91ad7f"
+    },
+    {
+      "file": "source_review/runtime-contract-body-r18.mjs",
+      "bytes": 19828,
+      "sha256": "10e09afa486cb864af7bc386824ebbd005759e0134f88a2bf42ebedf089d89c2"
+    },
+    {
+      "file": "source_review/runtime-contract-body-r18a.mjs",
+      "bytes": 21777,
+      "sha256": "34f88746b6374a4a60276f1514c17432017eaea570a81ab06eb77b5ba85c2481"
+    },
+    {
+      "file": "source_review/runtime-contract-body-r18c.mjs",
+      "bytes": 23234,
+      "sha256": "c365cc220d1d18d0ba194b6a24c60361ec92c81e45effe151ce3378d9b6b849a"
+    },
+    {
+      "file": "source_review/runtime-contract-driver-r18.mjs",
+      "bytes": 117832,
+      "sha256": "2fe666c9214d417f0770d82a3370ac7494a3f0af148ac8807b19c69b9dbf193c"
+    },
+    {
+      "file": "source_review/runtime-contract-driver-r18a.mjs",
+      "bytes": 124205,
+      "sha256": "c357ffefec604c71d4d56b9272fbfd92147f98745753fbf8aaeda3d32faf4dff"
+    },
+    {
+      "file": "source_review/runtime-contract-driver-r18c.mjs",
+      "bytes": 128738,
+      "sha256": "69bd9782413f52ba436db4e72e0b5a3e4faf4637f1324828ba0edae247dd6baf"
+    },
+    {
+      "file": "source_review/runtime-graph-policy-r18.mjs",
+      "bytes": 10079,
+      "sha256": "ae526f214031105c70ddccecb0c31036fc94d8e97067eeb01a73d4e64b3984bf"
+    },
+    {
+      "file": "source_review/runtime-graph-policy-r18a.mjs",
+      "bytes": 13396,
+      "sha256": "d39692c0d37004a921a8496c7b835ed6b31d8997ef875fb2830703412e45c94d"
+    },
+    {
+      "file": "source_review/runtime-graph-policy-r18c.mjs",
+      "bytes": 15705,
+      "sha256": "7a077f7d5ad40dec1301823242a0f3eea18fab045bc7c3843460216a2789b1ef"
+    },
+    {
+      "file": "source_review/test-r18-driver.py",
+      "bytes": 19201,
+      "sha256": "d0362237cf9734dd4f351e03e0d0a37d125c6c79bffe98b2ed2db211a2e1d844"
+    },
+    {
+      "file": "source_review/test-r18-resend-smoke.mjs",
+      "bytes": 1279,
+      "sha256": "49cb610867619fd0c5d6aa62077c90903eb6355903c9315799084296e7c6c118"
+    },
+    {
+      "file": "source_review/test-r18-runtime-helper-smoke.mjs",
+      "bytes": 6410,
+      "sha256": "41403dbf66997a8024a5ca10a41e95de1b280cb79c7b2a4c6642d650c3b20d89"
+    },
+    {
+      "file": "source_review/test-r18a-driver.py",
+      "bytes": 23787,
+      "sha256": "4b672bb239f434b46d761ca99479dbbe49ed00d35232fece011247159e5c7148"
+    },
+    {
+      "file": "source_review/test-r18c-driver.py",
+      "bytes": 30046,
+      "sha256": "c29289301ef1a1d09a3c958979a3367773d583578d4549fd2a11ac7114177bbf"
+    },
+    {
+      "file": "source_review/test-runtime-graph-policy-r18.mjs",
+      "bytes": 8433,
+      "sha256": "46964bc091d44bad60ae3272d4b241330f84dca7b3c876893a21dae6ade5d35b"
+    },
+    {
+      "file": "source_review/test-runtime-graph-policy-r18a.mjs",
+      "bytes": 15602,
+      "sha256": "91654cda0ca525c63bc4aeeb98d8bc38b774c194015324a9a477e7612cba82b3"
+    },
+    {
+      "file": "source_review/test-runtime-graph-policy-r18c.mjs",
+      "bytes": 21906,
+      "sha256": "2901832be6251860d11363aa92559d043ad6290bd9e8846c63b92421c75a6fb0"
+    }
+  ]
+}

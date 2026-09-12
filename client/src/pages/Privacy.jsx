@@ -110,7 +110,7 @@ export default function Privacy() {
               <div className="space-y-4" style={{ color: "var(--glp-ink)" }}>
                 <p>Your wellness data deserves the highest protection:</p>
                 <ul className="list-disc list-inside space-y-2 ml-4">
-                  <li>End-to-end encryption for all sensitive data transmission</li>
+                  <li>Share only information you are comfortable providing to the service.</li>
                   <li>Secure cloud infrastructure with industry-standard protections</li>
                   <li>Regular security audits and vulnerability assessments</li>
                   <li>Strict access controls limiting who can view your information</li>
@@ -152,7 +152,7 @@ export default function Privacy() {
                 </p>
                 <ul className="list-disc list-inside space-y-2 ml-4">
                   <li>Conversations are processed securely and not used for advertising</li>
-                  <li>AI responses are generated in real-time and not permanently stored by third parties</li>
+                  <li>AI processing may involve third-party providers. Data retention depends on the provider and the settings used by this service.</li>
                   <li>You can delete your conversation history at any time</li>
                   <li>Crisis detection features are designed to protect, not surveil</li>
                 </ul>

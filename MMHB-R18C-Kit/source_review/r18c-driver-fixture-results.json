@@ -1,0 +1,512 @@
+{
+  "status": "PASS",
+  "fixtureCount": 22,
+  "node": "v24.19.0",
+  "generatedDriverSha256": "69bd9782413f52ba436db4e72e0b5a3e4faf4637f1324828ba0edae247dd6baf",
+  "embeddedGraphSha256": "7a077f7d5ad40dec1301823242a0f3eea18fab045bc7c3843460216a2789b1ef",
+  "testSourceSha256": "c29289301ef1a1d09a3c958979a3367773d583578d4549fd2a11ac7114177bbf",
+  "fixtures": [
+    {
+      "case": "success_absent_tmp",
+      "status": "PASS",
+      "observedStatus": "RETAINED_RUNTIME_CONTRACT_CHECKS_PASS_NOT_RELEASE",
+      "observedFailure": null,
+      "observedExecution": {
+        "helperTestsAttempted": true,
+        "resendTestsAttempted": true
+      },
+      "existingFilesChecked": 104,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false,
+      "reviewedPrivateModuleFixtureCount": 3,
+      "productionPrivateIdentitiesUnchanged": true
+    },
+    {
+      "case": "candidate_tamper",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "observedFailure": {
+        "phase": "RETAINED_CANDIDATE",
+        "gate": "CANDIDATE_DRIFT"
+      },
+      "observedExecution": {
+        "helperTestsAttempted": false,
+        "resendTestsAttempted": false
+      },
+      "existingFilesChecked": 104,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false,
+      "reviewedPrivateModuleFixtureCount": 3,
+      "productionPrivateIdentitiesUnchanged": true
+    },
+    {
+      "case": "source_tamper",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "observedFailure": {
+        "phase": "RETAINED_BUILD_LINKAGE",
+        "gate": "RETAINED_INPUT_CHANGED",
+        "file": "server/app.mjs"
+      },
+      "observedExecution": {
+        "helperTestsAttempted": false,
+        "resendTestsAttempted": false
+      },
+      "existingFilesChecked": 104,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false,
+      "reviewedPrivateModuleFixtureCount": 3,
+      "productionPrivateIdentitiesUnchanged": true
+    },
+    {
+      "case": "pin_tamper",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "observedFailure": {
+        "phase": "CURRENT_PINS",
+        "gate": "PIN_DRIFT",
+        "file": "server/routes/auth.mjs"
+      },
+      "observedExecution": {
+        "helperTestsAttempted": false,
+        "resendTestsAttempted": false
+      },
+      "existingFilesChecked": 104,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false,
+      "reviewedPrivateModuleFixtureCount": 3,
+      "productionPrivateIdentitiesUnchanged": true
+    },
+    {
+      "case": "dependency_tamper",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "observedFailure": {
+        "phase": "RETAINED_BUILD_LINKAGE",
+        "gate": "RETAINED_INPUT_CHANGED",
+        "file": "node_modules/ws/lib/buffer-util.js"
+      },
+      "observedExecution": {
+        "helperTestsAttempted": false,
+        "resendTestsAttempted": false
+      },
+      "existingFilesChecked": 104,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false,
+      "reviewedPrivateModuleFixtureCount": 3,
+      "productionPrivateIdentitiesUnchanged": true
+    },
+    {
+      "case": "unknown_source_hash",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_REVIEW_REQUIRED",
+      "observedFailure": null,
+      "observedExecution": {
+        "helperTestsAttempted": false,
+        "resendTestsAttempted": true
+      },
+      "existingFilesChecked": 104,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false,
+      "reviewedPrivateModuleFixtureCount": 3,
+      "productionPrivateIdentitiesUnchanged": true
+    },
+    {
+      "case": "unknown_resend_hash",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_REVIEW_REQUIRED",
+      "observedFailure": null,
+      "observedExecution": {
+        "helperTestsAttempted": true,
+        "resendTestsAttempted": false
+      },
+      "existingFilesChecked": 104,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false,
+      "reviewedPrivateModuleFixtureCount": 3,
+      "productionPrivateIdentitiesUnchanged": true
+    },
+    {
+      "case": "malformed_output",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "observedFailure": {
+        "phase": "RETAINED_BUILD_LINKAGE",
+        "gate": "RUNTIME_EXTERNAL_SPECIFIER",
+        "graphDetails": {
+          "metadataIndex": 2,
+          "graphSide": "OUTPUT",
+          "owner": "server-build/server.mjs",
+          "importIndex": 7,
+          "kind": "dynamic-import",
+          "specifierSha256": "9170981927b9a76a2c52b4385e8bb39bc3b77586373b6b1bd9c6a3a03a3e5586",
+          "specifierBytes": 66,
+          "specifierClass": "SCHEME_REFERENCE"
+        }
+      },
+      "observedExecution": {
+        "helperTestsAttempted": false,
+        "resendTestsAttempted": false
+      },
+      "existingFilesChecked": 104,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false,
+      "reviewedPrivateModuleFixtureCount": 3,
+      "productionPrivateIdentitiesUnchanged": true
+    },
+    {
+      "case": "history_mismatch",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "observedFailure": {
+        "phase": "REVIEWED_PRESERVATION_DIFFERENCES",
+        "gate": "R17C_CHANGE_REVIEW_MISMATCH"
+      },
+      "observedExecution": {
+        "helperTestsAttempted": false,
+        "resendTestsAttempted": false
+      },
+      "existingFilesChecked": 104,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false,
+      "reviewedPrivateModuleFixtureCount": 3,
+      "productionPrivateIdentitiesUnchanged": true
+    },
+    {
+      "case": "concurrent_change",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "observedFailure": {
+        "phase": "FINAL_WORKSPACE",
+        "gate": "WORKTREE_CHANGED"
+      },
+      "observedExecution": {
+        "helperTestsAttempted": true,
+        "resendTestsAttempted": true
+      },
+      "existingFilesChecked": 104,
+      "expectedTestHookChanges": [
+        "user-work.txt"
+      ],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false,
+      "reviewedPrivateModuleFixtureCount": 3,
+      "productionPrivateIdentitiesUnchanged": true
+    },
+    {
+      "case": "evidence_write_failure",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "observedFailure": {
+        "phase": "FINAL_WORKSPACE",
+        "gate": "EACCES"
+      },
+      "observedExecution": {
+        "helperTestsAttempted": true,
+        "resendTestsAttempted": true
+      },
+      "existingFilesChecked": 104,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false,
+      "reviewedPrivateModuleFixtureCount": 3,
+      "productionPrivateIdentitiesUnchanged": true
+    },
+    {
+      "case": "opaque_input_only",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_REVIEW_REQUIRED",
+      "observedFailure": null,
+      "observedExecution": {
+        "helperTestsAttempted": true,
+        "resendTestsAttempted": true
+      },
+      "existingFilesChecked": 104,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false,
+      "reviewedPrivateModuleFixtureCount": 3,
+      "productionPrivateIdentitiesUnchanged": true
+    },
+    {
+      "case": "opaque_input_repeat_mismatch",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "observedFailure": {
+        "phase": "RETAINED_BUILD_LINKAGE",
+        "gate": "RUNTIME_REPEAT_GRAPH_MISMATCH"
+      },
+      "observedExecution": {
+        "helperTestsAttempted": false,
+        "resendTestsAttempted": false
+      },
+      "existingFilesChecked": 104,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false,
+      "reviewedPrivateModuleFixtureCount": 3,
+      "productionPrivateIdentitiesUnchanged": true
+    },
+    {
+      "case": "invalid_inferred_package",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "observedFailure": {
+        "phase": "RETAINED_BUILD_LINKAGE",
+        "gate": "RUNTIME_PACKAGE_NAME",
+        "graphDetails": {
+          "metadataIndex": 1,
+          "graphSide": "PACKAGE",
+          "ownerSha256": "f7f3d56702d7c95314d3935406f83b2454d2122b022246d823755bc3dd942807",
+          "ownerBytes": 68,
+          "specifierSha256": "c6ad270859eb27eecc5b7fa455fae8a3967734bd86a9e28708eaf812830a4eb5",
+          "specifierBytes": 46,
+          "specifierClass": "SCHEME_REFERENCE"
+        }
+      },
+      "observedExecution": {
+        "helperTestsAttempted": false,
+        "resendTestsAttempted": false
+      },
+      "existingFilesChecked": 105,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false,
+      "reviewedPrivateModuleFixtureCount": 3,
+      "productionPrivateIdentitiesUnchanged": true
+    },
+    {
+      "case": "private_module_refreshed_manifest",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "observedFailure": {
+        "phase": "RETAINED_BUILD_LINKAGE",
+        "gate": "RUNTIME_REVIEWED_PRIVATE_INPUT_IDENTITY",
+        "graphDetails": {
+          "metadataIndex": 1,
+          "graphSide": "INPUT",
+          "specifierSha256": "c4c8b0e9f50a3e6490cdce714f0cfe8b89563962cc4a3709a00a11e80704258b",
+          "specifierBytes": 52,
+          "specifierClass": "OPAQUE"
+        }
+      },
+      "observedExecution": {
+        "helperTestsAttempted": false,
+        "resendTestsAttempted": false
+      },
+      "existingFilesChecked": 104,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false,
+      "reviewedPrivateModuleFixtureCount": 3,
+      "productionPrivateIdentitiesUnchanged": true
+    },
+    {
+      "case": "private_package_refreshed_manifest",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "observedFailure": {
+        "phase": "RETAINED_BUILD_LINKAGE",
+        "gate": "RUNTIME_REVIEWED_PRIVATE_PACKAGE_IDENTITY",
+        "graphDetails": {
+          "metadataIndex": 1,
+          "graphSide": "INPUT",
+          "specifierSha256": "c4c8b0e9f50a3e6490cdce714f0cfe8b89563962cc4a3709a00a11e80704258b",
+          "specifierBytes": 52,
+          "specifierClass": "OPAQUE"
+        }
+      },
+      "observedExecution": {
+        "helperTestsAttempted": false,
+        "resendTestsAttempted": false
+      },
+      "existingFilesChecked": 104,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false,
+      "reviewedPrivateModuleFixtureCount": 3,
+      "productionPrivateIdentitiesUnchanged": true
+    },
+    {
+      "case": "private_lock_version_mismatch",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "observedFailure": {
+        "phase": "RETAINED_BUILD_LINKAGE",
+        "gate": "REVIEWED_PRIVATE_PACKAGE_VERSION"
+      },
+      "observedExecution": {
+        "helperTestsAttempted": false,
+        "resendTestsAttempted": false
+      },
+      "existingFilesChecked": 104,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false,
+      "reviewedPrivateModuleFixtureCount": 3,
+      "productionPrivateIdentitiesUnchanged": true
+    },
+    {
+      "case": "private_module_symlink",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "observedFailure": {
+        "phase": "RETAINED_BUILD_LINKAGE",
+        "gate": "FILE_SYMLINK",
+        "file": "node_modules/es6-symbol/lib/private/generate-name.js"
+      },
+      "observedExecution": {
+        "helperTestsAttempted": false,
+        "resendTestsAttempted": false
+      },
+      "existingFilesChecked": 105,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false,
+      "reviewedPrivateModuleFixtureCount": 3,
+      "productionPrivateIdentitiesUnchanged": true
+    },
+    {
+      "case": "private_module_changed",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "observedFailure": {
+        "phase": "RETAINED_BUILD_LINKAGE",
+        "gate": "RETAINED_INPUT_CHANGED",
+        "file": "node_modules/es6-symbol/lib/private/generate-name.js"
+      },
+      "observedExecution": {
+        "helperTestsAttempted": false,
+        "resendTestsAttempted": false
+      },
+      "existingFilesChecked": 104,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false,
+      "reviewedPrivateModuleFixtureCount": 3,
+      "productionPrivateIdentitiesUnchanged": true
+    },
+    {
+      "case": "private_package_changed",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "observedFailure": {
+        "phase": "RETAINED_BUILD_LINKAGE",
+        "gate": "RETAINED_INPUT_CHANGED",
+        "file": "node_modules/es6-symbol/package.json"
+      },
+      "observedExecution": {
+        "helperTestsAttempted": false,
+        "resendTestsAttempted": false
+      },
+      "existingFilesChecked": 104,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false,
+      "reviewedPrivateModuleFixtureCount": 3,
+      "productionPrivateIdentitiesUnchanged": true
+    },
+    {
+      "case": "private_unreviewed_path",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "observedFailure": {
+        "phase": "RETAINED_BUILD_LINKAGE",
+        "gate": "RUNTIME_INPUT_PRIVATE_OR_INVALID",
+        "graphDetails": {
+          "metadataIndex": 1,
+          "graphSide": "INPUT",
+          "owner": "server/app.mjs",
+          "importIndex": 20,
+          "specifierSha256": "28edfa0139b4fb4d5826cbef79f631024e6a0cb54b5f112a3a2237d765c82c6d",
+          "specifierBytes": 49,
+          "specifierClass": "OPAQUE"
+        }
+      },
+      "observedExecution": {
+        "helperTestsAttempted": false,
+        "resendTestsAttempted": false
+      },
+      "existingFilesChecked": 105,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false,
+      "reviewedPrivateModuleFixtureCount": 3,
+      "productionPrivateIdentitiesUnchanged": true
+    },
+    {
+      "case": "private_directory_symlink",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "observedFailure": {
+        "phase": "RETAINED_BUILD_LINKAGE",
+        "gate": "FILE_SYMLINK",
+        "file": "node_modules/es6-symbol/lib/private/generate-name.js"
+      },
+      "observedExecution": {
+        "helperTestsAttempted": false,
+        "resendTestsAttempted": false
+      },
+      "existingFilesChecked": 105,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false,
+      "reviewedPrivateModuleFixtureCount": 3,
+      "productionPrivateIdentitiesUnchanged": true
+    }
+  ],
+  "scope": "GENUINE_GIT_HANDWRITTEN_RETAINED_EVIDENCE_AND_ACTUAL_REVIEWED_HELPERS_NOT_REAL_MMHB_BUILD_OR_RUNTIME"
+}

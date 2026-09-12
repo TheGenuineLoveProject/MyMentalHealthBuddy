@@ -70,9 +70,11 @@ export default function GratitudePrompt({ onSave }) {
   );
   const [response, setResponse] = useState("");
   const [isSaved, setIsSaved] = useState(false);
+  const [saveError, setSaveError] = useState("");
   const [isAnimating, setIsAnimating] = useState(false);
 
   const getNewPrompt = () => {
+    setSaveError("");
     setIsAnimating(true);
     setTimeout(() => {
       let newPrompt;
@@ -87,28 +89,29 @@ export default function GratitudePrompt({ onSave }) {
   };
 
   const handleSave = () => {
-    if (!response.trim()) return;
-    
-    if (onSave) {
-      onSave({
-        prompt: currentPrompt,
-        response: response.trim(),
-        timestamp: new Date().toISOString(),
-      });
+    if (!response.trim() || isSaved || isAnimating) return;
+    setSaveError("");
+    const entry = {
+      prompt: currentPrompt,
+      response: response.trim(),
+      timestamp: new Date().toISOString(),
+    };
+    try {
+      const raw = localStorage.getItem("gratitudeEntries");
+      const existing = raw === null ? [] : JSON.parse(raw);
+      if (!Array.isArray(existing)) throw new Error("INVALID_SAVED_REFLECTIONS");
+      localStorage.setItem("gratitudeEntries", JSON.stringify([entry, ...existing].slice(0, 100)));
+    } catch {
+      setSaveError("Could not save on this device. Your text is still here. Copy it somewhere safe, or select Save Reflection to try again. Existing saved reflections have not been replaced.");
+      return;
     }
-
-    const existing = ((()=>{try{return JSON.parse(localStorage.getItem("gratitudeEntries") || "[]");}catch(err){console.warn("[storage-safe-read]",err);return JSON.parse("[]");}})());
-    const updated = [
-      {
-        prompt: currentPrompt,
-        response: response.trim(),
-        timestamp: new Date().toISOString(),
-      },
-      ...existing,
-    ].slice(0, 100);
-    try { localStorage.setItem("gratitudeEntries", JSON.stringify(updated)); } catch (err) { console.warn("[storage-safe-write]", err); }
-
     setIsSaved(true);
+    // This optional notification is separate from the completed local save.
+    if (onSave) {
+      const notificationFailed = () => setSaveError("Saved on this device, but the additional save action did not complete.");
+      try { Promise.resolve(onSave(entry)).catch(notificationFailed); }
+      catch { notificationFailed(); }
+    }
   };
 
   if (isLoading || !isAuthenticated()) return null;
@@ -138,21 +141,25 @@ export default function GratitudePrompt({ onSave }) {
           </div>
 
           <textarea
+            aria-label="Your gratitude reflection"
             value={response}
             onChange={(e) => {
               setResponse(e.target.value);
+              setSaveError("");
               setIsSaved(false);
             }}
             placeholder="Take a moment to reflect and write your thoughts..."
             rows={4}
             className="w-full p-4 rounded-xl border-2 border-[var(--border)] bg-[var(--surface)] text-[var(--text)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/20 resize-none transition-all"
-            disabled={isSaved}
+            disabled={isSaved || isAnimating}
             data-testid="textarea-gratitude"
           />
         </div>
 
         <div className="flex items-center justify-between">
           <button
+            type="button"
+            disabled={isAnimating}
             onClick={getNewPrompt}
             className="flex items-center gap-2 px-4 py-2 rounded-xl text-[var(--text-secondary)] hover:text-[var(--primary)] hover:bg-[var(--surface)] transition-all"
             data-testid="button-new-prompt"
@@ -162,14 +169,15 @@ export default function GratitudePrompt({ onSave }) {
           </button>
 
           {isSaved ? (
-            <div className="flex items-center gap-2 px-5 py-3 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+            <div role="status" data-testid="gratitude-save-success" className="flex items-center gap-2 px-5 py-3 rounded-xl" style={{ color: "#293329", backgroundColor: "#EAF0E6" }}>
               <Sparkles className="w-5 h-5" aria-hidden="true" />
-              <span className="font-medium">Saved!</span>
+              <span className="font-medium">Saved on this device</span>
             </div>
           ) : (
             <button
+              type="button"
               onClick={handleSave}
-              disabled={!response.trim()}
+              disabled={!response.trim() || isAnimating}
               className={`flex items-center gap-2 px-5 py-3 rounded-xl font-semibold transition-all ${
                 response.trim()
                   ? "btn-gradient shadow-lg hover:shadow-xl"
@@ -183,6 +191,14 @@ export default function GratitudePrompt({ onSave }) {
           )}
         </div>
 
+        <p className="mt-4 text-sm" style={{ color: "#293329", backgroundColor: "#FFFDF8", padding: "12px", borderRadius: "8px" }}>
+          Saved in this browser only, separately from your journal. Reflections do not sync across devices. People using this browser may be able to access them. Clearing browser data can remove them.
+        </p>
+        {saveError && (
+          <p role="alert" data-testid="gratitude-save-error" style={{ color: "#293329", backgroundColor: "#FFFDF8", padding: "12px", border: "1px solid #3F6249", borderRadius: "8px" }}>
+            {saveError}
+          </p>
+        )}
         <div className="mt-6 pt-6 border-t border-[var(--border)]">
           <p className="text-sm text-[var(--text-muted)] text-center">
             💡 Regular gratitude practice can boost happiness and reduce stress

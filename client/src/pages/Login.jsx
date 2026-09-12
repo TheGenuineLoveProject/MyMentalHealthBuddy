@@ -620,11 +620,11 @@ export default function Login() {
             <div style={{ marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <div className="flex items-center text-sm" style={{ color: 'var(--glp-sage)', gap: '0.75rem' }}>
                 <Shield className="w-4 h-4 flex-shrink-0" style={{ color: 'var(--glp-sage-deep)' }} />
-                <span>Encrypted in transit. Private by default.</span>
+                <span>Choose what you share.</span>
               </div>
               <div className="flex items-center text-sm" style={{ color: 'var(--glp-sage)', gap: '0.75rem' }}>
                 <Heart className="w-4 h-4 flex-shrink-0" style={{ color: 'var(--glp-sage-deep)' }} />
-                <span>Your data stays private and secure.</span>
+                <span>Review the Privacy Policy before sharing personal information.</span>
               </div>
             </div>
 

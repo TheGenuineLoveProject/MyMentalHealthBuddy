@@ -1,0 +1,8 @@
+{
+  "scope": "running-replit-frontend",
+  "status": "PASS",
+  "routesVerified": 6,
+  "scriptAndStyleUrlsVerified": 432,
+  "activeIndexSha256": "33e6aa5d4ebd419f62c02f47714d846d9a51c19735a284e75855bff793ed61d0",
+  "workerExpectedSha256": "29626dfdb7ba6401bf903aed6a8ba71a6cefa83b700f48b2f3f0b94cbf359781"
+}

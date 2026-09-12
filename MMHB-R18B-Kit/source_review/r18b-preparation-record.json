@@ -1,0 +1,42 @@
+{
+  "commandSha256": "8363179cf0a25f7f3af8bcb910caecf3c707f83c610a873558d4520ed64546ec",
+  "scriptSha256": "3180f72a7dcf531a14f94514e35f2e039e099d663e16490b7397e6cd288391c0",
+  "files": [
+    {
+      "file": "MMHB-INPUT-PATH-INSPECT-R18B.txt",
+      "sha256": "8363179cf0a25f7f3af8bcb910caecf3c707f83c610a873558d4520ed64546ec"
+    },
+    {
+      "file": "MMHB-R18B-Start.txt",
+      "sha256": "a44175bbcee0b0a126cf81cbc464c7a3b85d9de9035c6baebf23478276844acc"
+    },
+    {
+      "file": "MMHB-Readiness-Ledger-2026-09-07.md",
+      "sha256": "683cb43c8419fbceba7d1bf5a03c5a27838d863ca39c45af7f5cef5e7725c8b6"
+    },
+    {
+      "file": "MMHB-Ledger.txt",
+      "sha256": "683cb43c8419fbceba7d1bf5a03c5a27838d863ca39c45af7f5cef5e7725c8b6"
+    },
+    {
+      "file": "source_review/inspect-input-path-r18b.mjs",
+      "sha256": "3180f72a7dcf531a14f94514e35f2e039e099d663e16490b7397e6cd288391c0"
+    },
+    {
+      "file": "source_review/test-input-path-r18b.py",
+      "sha256": "073a467ddc33ab5b8126b11bff2c85d9b36b2ab5d5c88a9879548856292428e2"
+    },
+    {
+      "file": "source_review/r18b-inspection-test-results.json",
+      "sha256": "1c81991eff1af4d1d7e2672d89ae7fe71ab6cb19878b2b005728964cc45967e4"
+    },
+    {
+      "file": "source_review/r18a-user-result-analysis.json",
+      "sha256": "f4f8e5d3b2bf54ca61f9807d838a416ef9783d0ee49742f9c79756c065359b1c"
+    },
+    {
+      "file": "source_review/r18a-ledger-handoff-archive.md",
+      "sha256": "c41631a2ef9f57b62793e1419129e154c2f4032462e734e7c13a816054cbd09f"
+    }
+  ]
+}

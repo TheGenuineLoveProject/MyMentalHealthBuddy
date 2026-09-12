@@ -1,0 +1,14 @@
+[
+  {
+    "file": "server/routes/journal.mjs",
+    "beforeSha256": "92e261e8721500cc52a04c5033da47e26d687b553bdbbfe25835de16d802d2af",
+    "afterSha256": "74ed3305f7265a83e2d6ac95c0cf9f3dbbdd4f46f3b6bba828390d875815493a",
+    "mode": 420
+  },
+  {
+    "file": "server/routes/journals.mjs",
+    "beforeSha256": "d5c6da31c5fd3b209317da5492fbcb0d754eb3ae457c201a6b3d5fdd9859331d",
+    "afterSha256": "1e3f026aa4bb583c778f33c746f6a043e76c055100817a13afb76e3913657e7e",
+    "mode": 420
+  }
+]

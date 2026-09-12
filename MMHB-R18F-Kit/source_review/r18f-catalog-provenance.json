@@ -1,0 +1,86 @@
+{
+  "archives": [
+    {
+      "file": "MMHB-R11D-Verification.zip",
+      "sha256": "2122e2e07ecaed4c151c8d5a4bc5c8902011b0dfd7fae327e271e391f9211055"
+    },
+    {
+      "file": "MMHB-R12-Verification.zip",
+      "sha256": "226e115512635ad5aae81939d926e0d1c4556c957c37cbe2701037ace522356d"
+    },
+    {
+      "file": "MMHB-R12A-Verification.zip",
+      "sha256": "a2cdb4d9afaa0b2df10e0036a75f067ef91ca37b77aef1c0c63637c2a68f3abd"
+    },
+    {
+      "file": "MMHB-R13-Verification.zip",
+      "sha256": "dcb007d07b13fed9b0a0ca9d5be90031550d95dfb07cecdb329895ee8abf1da5"
+    },
+    {
+      "file": "MMHB-R14-Verification.zip",
+      "sha256": "a2a3796de48c41bc3f1677333925131325e8b8fb9b5a896aa65268b133bed474"
+    },
+    {
+      "file": "MMHB-R15-Verification.zip",
+      "sha256": "4ea358fbddbdc6b5359254349231243c40da817dd5264b88a8e35a68535ed357"
+    },
+    {
+      "file": "MMHB-R16-Verification.zip",
+      "sha256": "16985a2b4d4e31a5d5eec0e832dd0b3949236445ca66f4f9321961fe9af63f51"
+    },
+    {
+      "file": "MMHB-R16A-Verification.zip",
+      "sha256": "92fc3d1479f63b3eb16b3b6921990ff09181b73cdfd6bda4f2e62116fab0af5a"
+    },
+    {
+      "file": "MMHB-R16B-Verification.zip",
+      "sha256": "b2cd19f378dc2422647f374a596a86765f2955580e19a00a1e14454164126302"
+    },
+    {
+      "file": "MMHB-R16C-Verification.zip",
+      "sha256": "22fe740a1b732794b2af3f781f471b755d2345535b0673169e0f2db7a4b16de3"
+    },
+    {
+      "file": "MMHB-R16D-Verification.zip",
+      "sha256": "70a72139eb79ff766b386cda4dc0358deb32e4b031d6ad6e6e92fd0a15c9f0b4"
+    },
+    {
+      "file": "MMHB-R16E-Verification.zip",
+      "sha256": "1e7e1a09dd74ac1f1821b3dc51e981178877428978475c6de70af7628e828d2f"
+    },
+    {
+      "file": "MMHB-R17-Kit.zip",
+      "sha256": "2f815020082304c4a14806f63a7e9acb1d3edf4703ead5c31cca03093910884d"
+    },
+    {
+      "file": "MMHB-R17A-Kit.zip",
+      "sha256": "9a605b54b751780c17aef96bedb1df4c08fe561db7d804d75524c80917f1b5b7"
+    },
+    {
+      "file": "MMHB-R17B-Kit.zip",
+      "sha256": "00120833f02490e03d600865b4282f952c74da7e0e1a7d145c18d3eb14561f72"
+    },
+    {
+      "file": "MMHB-R17C-Kit.zip",
+      "sha256": "a68751d7fd6dcca9e8bc1aedaee96d9c4b4ec08090141fd50475c65cdddcc82d"
+    },
+    {
+      "file": "MMHB-R18-Kit.zip",
+      "sha256": "11959b944ce426a36ed7a5689c9fd4478571e1b9708948edfe43caef81248674"
+    },
+    {
+      "file": "MMHB-R18A-Kit.zip",
+      "sha256": "976ce380d5dad82b3f9c3eb6b603b8b0d67db734b981f12a372b801f31c106c6"
+    },
+    {
+      "file": "MMHB-R18B-Kit.zip",
+      "sha256": "8f196a011ff3b7a465d662b6597721ba892fa0a5dbad03122ec88f9a0b5ffa43"
+    },
+    {
+      "file": "MMHB-R18C-Kit.zip",
+      "sha256": "a0b1039d712ecf15252f10a733d4419b1c28af280a8481f7e73df0a5ecedb28a"
+    }
+  ],
+  "paths": 1188,
+  "scope": "Exact Git blob IDs computed from prior local delivery archive bytes. No application path prefix is authorized."
+}

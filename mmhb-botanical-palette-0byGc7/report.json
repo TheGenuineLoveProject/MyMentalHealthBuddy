@@ -1,0 +1,435 @@
+{
+  "id": "MMHB_BOTANICAL_PALETTE_20260912_V2",
+  "scope": "REPLIT_WORKSPACE_PREVIEW",
+  "status": "RUNNING_PREVIEW_UI_UPDATE_PASS",
+  "sourceChanges": [
+    {
+      "file": "client/src/styles/meet-lumi-page.css",
+      "beforeSha256": "55a3f425c5c1ded723d32414f3019db8f4842c8086e76fec034190dcef451ad4",
+      "afterSha256": "b0bb05575a23e3ca6d950f78986dd37ded1dd3a8a88efb787dc7c200029dc020",
+      "mode": 420
+    },
+    {
+      "file": "client/src/styles/mmhb-ui-controls.css",
+      "beforeSha256": "31f044c612accbcedb3b0c9bd9d8f36b8e53de0276e1300f4fb969925a3516aa",
+      "afterSha256": "cb5afae24da15728b51106c204f44e9bb4fbda7fdb3f3d40aa28df5274232f19",
+      "mode": 420
+    }
+  ],
+  "publicDeployment": "NOT_RUN",
+  "authenticatedWorkflows": "UNPROVEN",
+  "fullTerms": "PENDING",
+  "lumiRoute": {
+    "status": "VERIFIED",
+    "from": "/lumi",
+    "to": "/lumi/",
+    "indexSha256": "3c6b8baa1baef80825a55c34852848a96bb9c9e59ed389d5bd0b912f59fb2d67"
+  },
+  "backupDirectory": "/home/runner/workspace/mmhb-botanical-palette-0byGc7",
+  "uiQualification": {
+    "status": "CANDIDATE_UI_QUALIFICATION_PASS",
+    "results": [
+      {
+        "width": 320,
+        "theme": "light",
+        "result": "CONTROL_FIXTURE_PASS",
+        "controls": 3,
+        "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+        "blockedRequests": 0
+      },
+      {
+        "width": 320,
+        "theme": "dark",
+        "result": "CONTROL_FIXTURE_PASS",
+        "controls": 3,
+        "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+        "blockedRequests": 0
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "result": "CONTROL_FIXTURE_PASS",
+        "controls": 3,
+        "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+        "blockedRequests": 0
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "result": "CONTROL_FIXTURE_PASS",
+        "controls": 3,
+        "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+        "blockedRequests": 0
+      },
+      {
+        "width": 768,
+        "theme": "light",
+        "result": "CONTROL_FIXTURE_PASS",
+        "controls": 10,
+        "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+        "blockedRequests": 0
+      },
+      {
+        "width": 768,
+        "theme": "dark",
+        "result": "CONTROL_FIXTURE_PASS",
+        "controls": 10,
+        "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+        "blockedRequests": 0
+      },
+      {
+        "width": 1365,
+        "theme": "light",
+        "result": "CONTROL_FIXTURE_PASS",
+        "controls": 10,
+        "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+        "blockedRequests": 0
+      },
+      {
+        "width": 1365,
+        "theme": "dark",
+        "result": "CONTROL_FIXTURE_PASS",
+        "controls": 10,
+        "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+        "blockedRequests": 0
+      },
+      {
+        "result": "LOGOUT_REJECTION_DISPLAY_PASS"
+      },
+      {
+        "result": "LOCAL_SESSION_FULL_NAVIGATION_PASS",
+        "authentication": "SIMULATED"
+      },
+      {
+        "route": "/login",
+        "result": "CANDIDATE_APP_NAV_MOUNT_PASS",
+        "authenticatedAPIs": "BLOCKED"
+      },
+      {
+        "route": "/journal",
+        "width": 320,
+        "theme": "light",
+        "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+        "contrastRatios": {
+          "signout": 12.36,
+          "dashboard": 12.36,
+          "title": 12.36,
+          "date": 12.36,
+          "share": 12.36,
+          "save": 6.76,
+          "insights": 6.76,
+          "input": 12.91
+        }
+      },
+      {
+        "route": "/dashboard",
+        "width": 320,
+        "theme": "light",
+        "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+        "contrastRatios": {
+          "signout": 12.36,
+          "dashboard": 12.36
+        }
+      },
+      {
+        "route": "/journal",
+        "width": 320,
+        "theme": "dark",
+        "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+        "contrastRatios": {
+          "signout": 14.42,
+          "dashboard": 14.42,
+          "title": 12.36,
+          "date": 12.36,
+          "share": 12.36,
+          "save": 6.76,
+          "insights": 6.76,
+          "input": 12.91
+        }
+      },
+      {
+        "route": "/dashboard",
+        "width": 320,
+        "theme": "dark",
+        "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+        "contrastRatios": {
+          "signout": 14.42,
+          "dashboard": 14.42
+        }
+      },
+      {
+        "route": "/journal",
+        "width": 768,
+        "theme": "light",
+        "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+        "contrastRatios": {
+          "signout": 12.36,
+          "dashboard": 12.36,
+          "title": 12.36,
+          "date": 12.36,
+          "share": 12.36,
+          "save": 6.76,
+          "insights": 6.76,
+          "input": 12.91
+        }
+      },
+      {
+        "route": "/dashboard",
+        "width": 768,
+        "theme": "light",
+        "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+        "contrastRatios": {
+          "signout": 12.36,
+          "dashboard": 12.36
+        }
+      },
+      {
+        "route": "/journal",
+        "width": 768,
+        "theme": "dark",
+        "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+        "contrastRatios": {
+          "signout": 14.42,
+          "dashboard": 14.42,
+          "title": 12.36,
+          "date": 12.36,
+          "share": 12.36,
+          "save": 6.76,
+          "insights": 6.76,
+          "input": 12.91
+        }
+      },
+      {
+        "route": "/dashboard",
+        "width": 768,
+        "theme": "dark",
+        "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+        "contrastRatios": {
+          "signout": 14.42,
+          "dashboard": 14.42
+        }
+      },
+      {
+        "route": "/journal",
+        "width": 1365,
+        "theme": "light",
+        "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+        "contrastRatios": {
+          "signout": 12.36,
+          "dashboard": 12.36,
+          "title": 12.36,
+          "date": 12.36,
+          "share": 12.36,
+          "save": 6.76,
+          "insights": 6.76,
+          "input": 12.91
+        }
+      },
+      {
+        "route": "/dashboard",
+        "width": 1365,
+        "theme": "light",
+        "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+        "contrastRatios": {
+          "signout": 12.36,
+          "dashboard": 12.36
+        }
+      },
+      {
+        "route": "/journal",
+        "width": 1365,
+        "theme": "dark",
+        "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+        "contrastRatios": {
+          "signout": 14.42,
+          "dashboard": 14.42,
+          "title": 12.36,
+          "date": 12.36,
+          "share": 12.36,
+          "save": 6.76,
+          "insights": 6.76,
+          "input": 12.91
+        }
+      },
+      {
+        "route": "/dashboard",
+        "width": 1365,
+        "theme": "dark",
+        "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+        "contrastRatios": {
+          "signout": 14.42,
+          "dashboard": 14.42
+        }
+      },
+      {
+        "route": "/",
+        "width": 320,
+        "theme": "light",
+        "result": "PUBLIC_PAGE_FIXTURE_PASS",
+        "contrastRatios": {
+          "h1": 12.36,
+          ".mp-lead": 12.36,
+          ".mp-primary": 6.76,
+          ".mp-text-link": 6.76
+        }
+      },
+      {
+        "route": "/lumi",
+        "width": 320,
+        "theme": "light",
+        "result": "PUBLIC_PAGE_FIXTURE_PASS",
+        "contrastRatios": {
+          "h1": 12.36,
+          ".mp-lead": 12.36,
+          ".mp-primary": 6.76,
+          ".mp-text-link": 6.47
+        }
+      },
+      {
+        "route": "/",
+        "width": 320,
+        "theme": "dark",
+        "result": "PUBLIC_PAGE_FIXTURE_PASS",
+        "contrastRatios": {
+          "h1": 14.42,
+          ".mp-lead": 13.2,
+          ".mp-primary": 8.25,
+          ".mp-text-link": 8.13
+        }
+      },
+      {
+        "route": "/lumi",
+        "width": 320,
+        "theme": "dark",
+        "result": "PUBLIC_PAGE_FIXTURE_PASS",
+        "contrastRatios": {
+          "h1": 14.42,
+          ".mp-lead": 13.2,
+          ".mp-primary": 8.25,
+          ".mp-text-link": 9.62
+        }
+      },
+      {
+        "route": "/",
+        "width": 768,
+        "theme": "light",
+        "result": "PUBLIC_PAGE_FIXTURE_PASS",
+        "contrastRatios": {
+          "h1": 12.36,
+          ".mp-lead": 12.36,
+          ".mp-primary": 6.76,
+          ".mp-text-link": 6.76
+        }
+      },
+      {
+        "route": "/lumi",
+        "width": 768,
+        "theme": "light",
+        "result": "PUBLIC_PAGE_FIXTURE_PASS",
+        "contrastRatios": {
+          "h1": 12.36,
+          ".mp-lead": 12.36,
+          ".mp-primary": 6.76,
+          ".mp-text-link": 6.47
+        }
+      },
+      {
+        "route": "/",
+        "width": 768,
+        "theme": "dark",
+        "result": "PUBLIC_PAGE_FIXTURE_PASS",
+        "contrastRatios": {
+          "h1": 14.42,
+          ".mp-lead": 13.2,
+          ".mp-primary": 8.25,
+          ".mp-text-link": 8.13
+        }
+      },
+      {
+        "route": "/lumi",
+        "width": 768,
+        "theme": "dark",
+        "result": "PUBLIC_PAGE_FIXTURE_PASS",
+        "contrastRatios": {
+          "h1": 14.42,
+          ".mp-lead": 13.2,
+          ".mp-primary": 8.25,
+          ".mp-text-link": 9.62
+        }
+      },
+      {
+        "route": "/",
+        "width": 1365,
+        "theme": "light",
+        "result": "PUBLIC_PAGE_FIXTURE_PASS",
+        "contrastRatios": {
+          "h1": 12.36,
+          ".mp-lead": 12.36,
+          ".mp-primary": 6.76,
+          ".mp-text-link": 6.76
+        }
+      },
+      {
+        "route": "/lumi",
+        "width": 1365,
+        "theme": "light",
+        "result": "PUBLIC_PAGE_FIXTURE_PASS",
+        "contrastRatios": {
+          "h1": 12.36,
+          ".mp-lead": 12.36,
+          ".mp-primary": 6.76,
+          ".mp-text-link": 6.47
+        }
+      },
+      {
+        "route": "/",
+        "width": 1365,
+        "theme": "dark",
+        "result": "PUBLIC_PAGE_FIXTURE_PASS",
+        "contrastRatios": {
+          "h1": 14.42,
+          ".mp-lead": 13.2,
+          ".mp-primary": 8.25,
+          ".mp-text-link": 8.13
+        }
+      },
+      {
+        "route": "/lumi",
+        "width": 1365,
+        "theme": "dark",
+        "result": "PUBLIC_PAGE_FIXTURE_PASS",
+        "contrastRatios": {
+          "h1": 14.42,
+          ".mp-lead": 13.2,
+          ".mp-primary": 8.25,
+          ".mp-text-link": 9.62
+        }
+      },
+      {
+        "route": "/",
+        "result": "PUBLIC_CANDIDATE_APP_MOUNT_PASS",
+        "apis": "BLOCKED"
+      },
+      {
+        "route": "/lumi",
+        "result": "PUBLIC_CANDIDATE_APP_MOUNT_PASS",
+        "apis": "BLOCKED"
+      },
+      {
+        "route": "/lumi/",
+        "result": "PUBLIC_CANDIDATE_APP_MOUNT_PASS",
+        "apis": "BLOCKED"
+      }
+    ],
+    "limitations": [
+      "Authentication and API data are simulated in component and page-composition fixtures.",
+      "No real login, token revocation, journal write, or community posting was tested.",
+      "Candidate login route mounts the changed navigation with API requests blocked."
+    ]
+  },
+  "indexSha256": "3c6b8baa1baef80825a55c34852848a96bb9c9e59ed389d5bd0b912f59fb2d67",
+  "candidateFiles": 551,
+  "servedScriptAndStyleFiles": 428,
+  "copiedFiles": 277,
+  "sourceFilesChanged": 2
+}
