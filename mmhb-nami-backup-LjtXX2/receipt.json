@@ -1,0 +1,9 @@
+{
+  "issue": "MMHB-NAMI-20260915",
+  "root": "/home/runner/workspace",
+  "target": "client/src/pages/CrisisResources.jsx",
+  "fileMode": 420,
+  "beforeSha256": "9f34e1fb1c290d5ab98783de3e43e00482afc54e013145aba21f3cd6211e83af",
+  "afterSha256": "1f4ca929d604e72e2383a2c9f4b7eec3be4a4fbf52c3f6d079e125cf8d6414f1",
+  "createdAt": "2026-09-16T03:12:41.150Z"
+}

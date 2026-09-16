@@ -1,0 +1,392 @@
+{
+  "schema": "MMHB_CLIENT_AUTH_GUARD_REVIEW_RESULTS_V1",
+  "application_status": "PREPARED_NOT_APPLIED_IN_REPLIT",
+  "helper_sha256": "6123e5c44769ee5287558431beb65a654f57618608fb3d6b0619bfab018f47d9",
+  "required_parent": "19ee9fc6c588e80a890bb64395208bb515b493ae",
+  "source_hashes": {
+    "before": {
+      "client/src/context/AuthContext.jsx": "ab68888ba5ebdc783ef77260c33546a1d4638b3950205e71c4210862f927c61d",
+      "client/src/api/fetchWithAuth.js": "b7500ed8e9a9ae07a6d252e544d2af090502d07d0462e36599b8e695c91dbe89",
+      "server/services/refreshTokens.service.mjs": "5a9756caa3c772ac8c70f4a7860372dd42895e7df47c4e0956e42fa041528e8e",
+      "scripts/security/verify-auth-session-contracts.mjs": "71d2009a0c2b13001dc0e0606b72973527f6646ea091540dd3f4bd3311f4905f"
+    },
+    "after": {
+      "client/src/context/AuthContext.jsx": "b63819acaacde6767da9df8c4901e1958131ec9d82d4b073cd66f35dbddcd046",
+      "client/src/api/fetchWithAuth.js": "7dc437f7f008d48a3dbd4cb3b597821be67701de7d7d7b9b9505d5d0d8482660",
+      "client/src/api/authGeneration.js": "7a47bd16d66b2db4cbed1047d79a5a2a7f1001be365e7c4003512c04bb8754ef"
+    }
+  },
+  "behavior": {
+    "schema": "MMHB_CLIENT_AUTH_REVIEW_V1",
+    "runtime": "v22.16.0",
+    "scope": "Original module bodies with import substitution and provider JSX value extraction. React hooks, query client, browser fetch/storage and Drizzle transaction execution are controlled doubles; no real browser, PostgreSQL, network or application startup. Known unresolved behavior assertions are NOT security passes.",
+    "total": 53,
+    "passed": 53,
+    "results": [
+      {
+        "name": "Original browser ignores a 503 logout response",
+        "kind": "baseline_defect_reproduced",
+        "pass": true
+      },
+      {
+        "name": "Original late periodic refresh restores cleared token",
+        "kind": "baseline_defect_reproduced",
+        "pass": true
+      },
+      {
+        "name": "Original fetch helper refreshes after logout cleared token",
+        "kind": "baseline_defect_reproduced",
+        "pass": true
+      },
+      {
+        "name": "Logout HTTP 401 exposes incomplete state",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Logout HTTP 403 exposes incomplete state",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Logout HTTP 500 exposes incomplete state",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Logout HTTP 503 exposes incomplete state",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Logout network error exposes incomplete state",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Logout timeout is incomplete, not success",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "HTTP 200 without explicit success rejected: {\"ok\":false}",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "HTTP 200 without explicit success rejected: {}",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "HTTP 200 without explicit success rejected: null",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Malformed logout JSON is incomplete",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Successful local logout clears error and returns success",
+        "kind": "preserved_behavior",
+        "pass": true
+      },
+      {
+        "name": "Retry contacts local logout after original token was removed",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Repeated clicks reuse one pending logout request",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "OIDC confirmation navigation preserved",
+        "kind": "preserved_behavior",
+        "pass": true
+      },
+      {
+        "name": "Late periodic refresh cannot overwrite logout",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Late periodic refresh cannot overwrite login",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Generation rejects logout-login ABA using identical JWT bytes",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Late refresh JSON cannot restore credentials after logout",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Late bootstrap recovery cannot repopulate storage",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Current bootstrap recovery still succeeds",
+        "kind": "preserved_behavior",
+        "pass": true
+      },
+      {
+        "name": "Bootstrap does not refresh without an original token",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Late profile response discarded after logout",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Late profile 401 does not initiate new refresh after logout",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Refresh 409 preserves current credentials",
+        "kind": "preserved_behavior",
+        "pass": true
+      },
+      {
+        "name": "Late refresh 401 does not sign out a newer login",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "API helper does not refresh after initial 401 arrives post-logout",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "API helper rejects late refresh without retrying original",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "API helper checks again after parsing refresh JSON",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "API helper retry response is discarded after logout",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Current helper refresh and retry still work",
+        "kind": "preserved_behavior",
+        "pass": true
+      },
+      {
+        "name": "Anonymous 401 is not silently upgraded via refresh",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Cross-document logout observed before storage event delivery",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Generation change detected even when JWT value repeats across documents",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Storage-disabled generation retains same-document stale detection",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Stale storage events do not overwrite current token/user",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Late failed logout does not show error on a newer login",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "New login can be logged out while an older logout is pending",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Old successful logout result is marked stale after new login",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Old completion cannot erase retry state of a newer failed logout",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Retry alert is rendered and has a real callback",
+        "kind": "static_wiring",
+        "pass": true
+      },
+      {
+        "name": "Revocation deletes only presented token, preserving other sessions",
+        "kind": "service_model",
+        "pass": true
+      },
+      {
+        "name": "Expired presented token is also removed by logout",
+        "kind": "service_model",
+        "pass": true
+      },
+      {
+        "name": "Duplicate matching hashes are all revoked",
+        "kind": "service_model",
+        "pass": true
+      },
+      {
+        "name": "Sequential refresh replay cannot rotate predecessor twice",
+        "kind": "service_model",
+        "pass": true
+      },
+      {
+        "name": "Insertion failure leaves predecessor in transactional test model",
+        "kind": "service_model",
+        "pass": true
+      },
+      {
+        "name": "Rotation winning before old-token logout leaves successor valid",
+        "kind": "unresolved_server_race_reproduced",
+        "pass": true
+      },
+      {
+        "name": "Frozen verifier still expects the pre-HTTP-patch auth hash",
+        "kind": "known_pending_verifier_update",
+        "pass": true
+      },
+      {
+        "name": "Mutation restoring ignored HTTP status is caught",
+        "kind": "mutation_detection",
+        "pass": true
+      },
+      {
+        "name": "Mutation removing periodic post-JSON fence is caught",
+        "kind": "mutation_detection",
+        "pass": true
+      },
+      {
+        "name": "Mutation removing helper JSON fence is caught",
+        "kind": "mutation_detection",
+        "pass": true
+      }
+    ]
+  },
+  "helper_tests": {
+    "scope": "Disposable Git repositories; actual Git and Node, no MMHB app or database. Production pin values are supplied only by internal fixture calls, not CLI overrides.",
+    "total": 17,
+    "passed": 17,
+    "results": [
+      {
+        "name": "Apply chains checkpoint and preserves prior guards, HEAD/index/config",
+        "pass": true
+      },
+      {
+        "name": "Repeated apply does not rewrite source or references",
+        "pass": true
+      },
+      {
+        "name": "Dry run has no source or checkpoint writes",
+        "pass": true
+      },
+      {
+        "name": "Wrong report checksum refused",
+        "pass": true
+      },
+      {
+        "name": "Unreviewed client edits refused",
+        "pass": true
+      },
+      {
+        "name": "Prior HTTP fix drift refused",
+        "pass": true
+      },
+      {
+        "name": "Unrelated tracked edits preserved and refused",
+        "pass": true
+      },
+      {
+        "name": "Changed staging index preserved and refused",
+        "pass": true
+      },
+      {
+        "name": "Known partial application resumes",
+        "pass": true
+      },
+      {
+        "name": "Conflicting checkpoint reference preserved and refused",
+        "pass": true
+      },
+      {
+        "name": "Symlink substitution refused",
+        "pass": true
+      },
+      {
+        "name": "Hardlink substitution refused",
+        "pass": true
+      },
+      {
+        "name": "Unrelated new module refuses overwrite",
+        "pass": true
+      },
+      {
+        "name": "Split index supported without altering it",
+        "pass": true
+      },
+      {
+        "name": "Detached linked worktree supported",
+        "pass": true
+      },
+      {
+        "name": "Inherited Git and Node injection variables not used",
+        "pass": true
+      },
+      {
+        "name": "Wrong prior checkpoint refused",
+        "pass": true
+      }
+    ]
+  },
+  "rejection_index_preservation_stress": {
+    "scope": "20 repeat hardlink rejection fixtures; original index bytes and refs preserved, including stat-time boundaries. No source patch application in these negative cases.",
+    "total": 20,
+    "passed": 20
+  },
+  "syntax": {
+    "scope": "Syntax parse only; not project typecheck, React render, bundler or browser.",
+    "parser": "TypeScript 5.8.3",
+    "runtime": "v22.16.0",
+    "results": [
+      {
+        "path": "client/src/context/AuthContext.jsx",
+        "parseErrors": 0
+      },
+      {
+        "path": "client/src/api/fetchWithAuth.js",
+        "parseErrors": 0
+      },
+      {
+        "path": "client/src/api/authGeneration.js",
+        "parseErrors": 0
+      }
+    ]
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "schema": "MMHB_STORAGE_GUARD_TEST_V1",
+  "runtime": "v22.16.0",
+  "scope": "Provided storage method bodies, mocked Drizzle API and database; no real SQL, OIDC, HTTP or browser",
+  "total": 25,
+  "passed": 25,
+  "results": [
+    {
+      "name": "Original: no administrator causes new account admin",
+      "kind": "baseline_unsafe_behavior_reproduced",
+      "pass": true
+    },
+    {
+      "name": "Original: test-named administrators allow another admin",
+      "kind": "baseline_unsafe_behavior_reproduced",
+      "pass": true
+    },
+    {
+      "name": "Original: same email overwrites a different linked subject",
+      "kind": "baseline_unsafe_behavior_reproduced",
+      "pass": true
+    },
+    {
+      "name": "Empty account table: new account is ordinary",
+      "kind": "patched_behavior",
+      "pass": true
+    },
+    {
+      "name": "No admin but ordinary users: new account is ordinary",
+      "kind": "patched_behavior",
+      "pass": true
+    },
+    {
+      "name": "Only test-named admin: new account is ordinary",
+      "kind": "patched_behavior",
+      "pass": true
+    },
+    {
+      "name": "Only fixture-named admin: new account is ordinary",
+      "kind": "patched_behavior",
+      "pass": true
+    },
+    {
+      "name": "Normal existing admin: new account is ordinary",
+      "kind": "patched_behavior",
+      "pass": true
+    },
+    {
+      "name": "Mixed admin emails: new account is ordinary",
+      "kind": "patched_behavior",
+      "pass": true
+    },
+    {
+      "name": "Incidental substring in real-looking admin email: new account is ordinary",
+      "kind": "patched_behavior",
+      "pass": true
+    },
+    {
+      "name": "Input role cannot promote new account",
+      "kind": "patched_behavior",
+      "pass": true
+    },
+    {
+      "name": "Email omitted: legacy placeholder preserved, role ordinary",
+      "kind": "patched_behavior",
+      "pass": true
+    },
+    {
+      "name": "Existing linked administrator retains role and identity",
+      "kind": "patched_behavior",
+      "pass": true
+    },
+    {
+      "name": "Existing linked ordinary user cannot request promotion",
+      "kind": "patched_behavior",
+      "pass": true
+    },
+    {
+      "name": "Existing linked account keeps absent profile fields",
+      "kind": "patched_behavior",
+      "pass": true
+    },
+    {
+      "name": "Unlinked matching email is not linked automatically",
+      "kind": "patched_behavior",
+      "pass": true
+    },
+    {
+      "name": "Different subject on ordinary account is not replaced",
+      "kind": "patched_behavior",
+      "pass": true
+    },
+    {
+      "name": "Different subject on admin account is not replaced",
+      "kind": "patched_behavior",
+      "pass": true
+    },
+    {
+      "name": "Arbitrary verification/link flags cannot bypass explicit-link requirement",
+      "kind": "patched_behavior",
+      "pass": true
+    },
+    {
+      "name": "Multiple matching-email rows cause zero writes",
+      "kind": "patched_behavior",
+      "pass": true
+    },
+    {
+      "name": "Database read failure propagates without writes",
+      "kind": "patched_behavior",
+      "pass": true
+    },
+    {
+      "name": "Existing getters preserve return shape (privacy filtering not addressed)",
+      "kind": "unresolved_behavior_retained",
+      "pass": true
+    },
+    {
+      "name": "Mutation: automatic admin grant is detected",
+      "kind": "mutation_detection",
+      "pass": true
+    },
+    {
+      "name": "Mutation: email-only linking is detected",
+      "kind": "mutation_detection",
+      "pass": true
+    },
+    {
+      "name": "Mutation: existing administrator demotion is detected",
+      "kind": "mutation_detection",
+      "pass": true
+    }
+  ]
+}

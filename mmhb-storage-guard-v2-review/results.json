@@ -1,0 +1,277 @@
+{
+  "project": "MyMentalHealthBuddy",
+  "schema": "MMHB_STORAGE_GUARD_V2_VERIFICATION",
+  "scope": "Helper repair and storage-only hardening; no Replit/SQL/OIDC/browser execution",
+  "root_cause": {
+    "v1_expected_literal": "user_${userData.id}@Replit.auth",
+    "reviewed_git_literal": "user_${userData.id}@replit.auth",
+    "immutable_baseline_commit": "df8137696e4c7b0a7c16a08347e1b92f85b85371",
+    "github_blob_id": "dc3ff519e39f3f0c33e9fbe42ffeff7656e7191e",
+    "reviewed_storage_sha256": "2e7c6e0ec6fc269abc26bac6270e571e2ebdc4839e49b649c68a7806aaf38127",
+    "evidence": "GitHub connector returned exact base64 content and blob identifier; reviewed baseline matches that object identifier. Original helper stops on this baseline after successful fixture report/commit checks."
+  },
+  "guardrails": {
+    "exact_candidate_commit_required": "63ff8372d07368a5434c11ff58bdf87bb468449d",
+    "exact_full_report_sha256_required": "fb64b3f51065d46c4b953ae4d5fe49c6c601df2c3b443d13045a0ceecda9ffb9",
+    "report_entry_commit_and_raw_baseline_must_match": true,
+    "no_case_or_whitespace_normalization_for_acceptance": true,
+    "checkpoint_created_before_application_file_replacement": true,
+    "existing_candidate_head_and_index_not_moved": true
+  },
+  "storage_assertions": {
+    "schema": "MMHB_STORAGE_GUARD_TEST_V1",
+    "runtime": "v22.16.0",
+    "scope": "Provided storage method bodies, mocked Drizzle API and database; no real SQL, OIDC, HTTP or browser",
+    "total": 25,
+    "passed": 25,
+    "results": [
+      {
+        "name": "Original: no administrator causes new account admin",
+        "kind": "baseline_unsafe_behavior_reproduced",
+        "pass": true
+      },
+      {
+        "name": "Original: test-named administrators allow another admin",
+        "kind": "baseline_unsafe_behavior_reproduced",
+        "pass": true
+      },
+      {
+        "name": "Original: same email overwrites a different linked subject",
+        "kind": "baseline_unsafe_behavior_reproduced",
+        "pass": true
+      },
+      {
+        "name": "Empty account table: new account is ordinary",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "No admin but ordinary users: new account is ordinary",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Only test-named admin: new account is ordinary",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Only fixture-named admin: new account is ordinary",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Normal existing admin: new account is ordinary",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Mixed admin emails: new account is ordinary",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Incidental substring in real-looking admin email: new account is ordinary",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Input role cannot promote new account",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Email omitted: legacy placeholder preserved, role ordinary",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Existing linked administrator retains role and identity",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Existing linked ordinary user cannot request promotion",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Existing linked account keeps absent profile fields",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Unlinked matching email is not linked automatically",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Different subject on ordinary account is not replaced",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Different subject on admin account is not replaced",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Arbitrary verification/link flags cannot bypass explicit-link requirement",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Multiple matching-email rows cause zero writes",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Database read failure propagates without writes",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Existing getters preserve return shape (privacy filtering not addressed)",
+        "kind": "unresolved_behavior_retained",
+        "pass": true
+      },
+      {
+        "name": "Mutation: automatic admin grant is detected",
+        "kind": "mutation_detection",
+        "pass": true
+      },
+      {
+        "name": "Mutation: email-only linking is detected",
+        "kind": "mutation_detection",
+        "pass": true
+      },
+      {
+        "name": "Mutation: existing administrator demotion is detected",
+        "kind": "mutation_detection",
+        "pass": true
+      }
+    ]
+  },
+  "patch_helper_checks": {
+    "schema": "MMHB_STORAGE_PATCH_HELPER_TESTS_V1",
+    "tests": [
+      {
+        "name": "Apply one file, preserve HEAD/index/other source, create exact local checkpoint",
+        "pass": true
+      },
+      {
+        "name": "Repeat execution reuses identical source and checkpoint",
+        "pass": true
+      },
+      {
+        "name": "Default dry run does not write source/checkpoint/index",
+        "pass": true
+      },
+      {
+        "name": "Report drift is refused",
+        "pass": true
+      },
+      {
+        "name": "Working source drift is refused",
+        "pass": true
+      },
+      {
+        "name": "Unrelated tracked edits are refused",
+        "pass": true
+      },
+      {
+        "name": "Staged edits are refused",
+        "pass": true
+      },
+      {
+        "name": "Unexpected candidate commit is refused",
+        "pass": true
+      },
+      {
+        "name": "Source symlink is refused",
+        "pass": true
+      },
+      {
+        "name": "Source hardlink is refused",
+        "pass": true
+      },
+      {
+        "name": "Inherited Git routing/Node options and reference hook are suppressed",
+        "pass": true
+      },
+      {
+        "name": "Conflicting safety reference prevents source edit",
+        "pass": true
+      }
+    ],
+    "total": 12,
+    "passed": 12,
+    "scope": "Disposable Git repositories using supplied storage body; no Replit or production database execution"
+  },
+  "v2_regression_checks": {
+    "schema": "MMHB_STORAGE_V2_REGRESSION_TESTS",
+    "tests": [
+      {
+        "name": "Immutable GitHub blob identity and one-character fixture mismatch",
+        "pass": true,
+        "bytes": 2793,
+        "github_blob_id": "dc3ff519e39f3f0c33e9fbe42ffeff7656e7191e",
+        "source_sha256": "2e7c6e0ec6fc269abc26bac6270e571e2ebdc4839e49b649c68a7806aaf38127",
+        "difference": "one R/r character in fallback-email string"
+      },
+      {
+        "name": "Reproduce original reported stop after valid report/commit checks, before writes",
+        "pass": true,
+        "observed_stop": "UNREVIEWED_STORAGE_BODY",
+        "source_head_index_refs_config": "unchanged"
+      },
+      {
+        "name": "V2 rejects uppercase reference even with internally consistent fixture report/commit",
+        "pass": true
+      },
+      {
+        "name": "V2 rejects even whitespace drift rather than normalizing the JavaScript source",
+        "pass": true
+      },
+      {
+        "name": "V2 rejects semantic code change rather than updating its expected fingerprint",
+        "pass": true
+      },
+      {
+        "name": "Apply and repeat in restored detached-worktree layout; exact one-file checkpoint",
+        "pass": true,
+        "mode": "detached worktree attached to independent bare repository",
+        "new_checkpoint_files": 1
+      },
+      {
+        "name": "Split-index detached worktree preserves existing index",
+        "pass": true
+      }
+    ],
+    "total": 7,
+    "passed": 7
+  },
+  "runtime": {
+    "node": "v22.16.0",
+    "git": "git version 2.47.3"
+  },
+  "counts": {
+    "storage_assertions": 25,
+    "helper_checks": 12,
+    "additional_regression_checks": 7,
+    "total_assertions": 44,
+    "completed_without_assertion_failure": 44
+  },
+  "count_interpretation": "Some storage assertions intentionally reproduce baseline unsafe behavior; passing assertions do not mean baseline security passed.",
+  "not_tested": [
+    "Real recovered report bytes in Replit (helper checks before applying)",
+    "Real Drizzle/PostgreSQL constraints, concurrency and transactions",
+    "OIDC callback error handling and account-linking UX",
+    "Production roles and existing account links",
+    "Profile-response filtering",
+    "Mounted routing, session/refresh-token revocation, full builds and CI"
+  ],
+  "replit_applied": false,
+  "helper_sha256": "ddcb28b2f540c18049f5a2b910c70840f91f4c725aa87868bdf1012f875a6e67",
+  "helper_target_relative_path": "server/replit_integrations/auth/storage.mjs"
+}

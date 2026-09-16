@@ -1,0 +1,46 @@
+{
+  "checks": 10,
+  "passed": 10,
+  "results": [
+    {
+      "name": "create verified report",
+      "result": "PASS"
+    },
+    {
+      "name": "repeat identical export",
+      "result": "PASS"
+    },
+    {
+      "name": "head index config preserved",
+      "result": "PASS"
+    },
+    {
+      "name": "uncommitted source edits stop collection",
+      "result": "PASS"
+    },
+    {
+      "name": "wrong expected commit stops",
+      "result": "PASS"
+    },
+    {
+      "name": "wrong repository root stops",
+      "result": "PASS"
+    },
+    {
+      "name": "report symlink refused",
+      "result": "PASS"
+    },
+    {
+      "name": "source symlink refused",
+      "result": "PASS"
+    },
+    {
+      "name": "synthetic credential stops before report creation",
+      "result": "PASS"
+    },
+    {
+      "name": "inherited git routing ignored",
+      "result": "PASS"
+    }
+  ]
+}

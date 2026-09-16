@@ -1,0 +1,125 @@
+{
+  "schema": "MMHB_UPLOADED_AUTH_SOURCE_REVIEW_V1",
+  "source": "Source lines 1-309 reconstructed from Pasted text (4).txt; terminal numbering removed; line endings normalized. This is not a byte-attestation of the remote filesystem.",
+  "source_sha256": "6235fd16449ca0974cc9d5103c1c3ae42e5ace1b7bbcdb6d3351aa7fbae7f9f2",
+  "runtime": "v22.16.0",
+  "scope": "Mocked source-handler tests in ChatGPT container. No real Express, Passport, PostgreSQL, OIDC, email, HTTP or browser integration.",
+  "mocks": [
+    "all imported dependencies",
+    "isSameOriginAuthRequest return value",
+    "request/response/session callbacks",
+    "OIDC discovery and token refresh"
+  ],
+  "application_source_edits_in_replit": 0,
+  "app_started": false,
+  "actual_external_api_requests": 0,
+  "result": "MOCKED_HANDLER_CHECKS_PASS",
+  "cases": [
+    {
+      "name": "session_options_are_secure_and_ignore_COOKIE_SECURE_false",
+      "result": "PASS"
+    },
+    {
+      "name": "setup_invokes_mocked_OIDC_discovery",
+      "result": "PASS"
+    },
+    {
+      "name": "GET_confirmation_does_not_call_logout_or_destroy",
+      "result": "PASS"
+    },
+    {
+      "name": "POST_rejected_when_guard_double_returns_false",
+      "result": "PASS"
+    },
+    {
+      "name": "POST_success_callback_order_and_cookie_options",
+      "result": "PASS"
+    },
+    {
+      "name": "POST_waits_for_both_async_callbacks",
+      "result": "PASS"
+    },
+    {
+      "name": "POST_destroys_session_that_exists_after_passport_logout",
+      "result": "PASS"
+    },
+    {
+      "name": "POST_passport_error_does_not_redirect_success",
+      "result": "PASS"
+    },
+    {
+      "name": "POST_missing_session_returns_500",
+      "result": "PASS"
+    },
+    {
+      "name": "POST_destroy_error_returns_500_without_cookie_clear",
+      "result": "PASS"
+    },
+    {
+      "name": "POST_provider_url_failure_happens_before_session_mutation",
+      "result": "PASS"
+    },
+    {
+      "name": "POST_cookie_clear_throw_returns_500",
+      "result": "PASS"
+    },
+    {
+      "name": "POST_logout_synchronous_throw_returns_500",
+      "result": "PASS"
+    },
+    {
+      "name": "isAuthenticated_missing_user_returns_401",
+      "result": "PASS"
+    },
+    {
+      "name": "isAuthenticated_valid_cached_session_calls_next",
+      "result": "PASS"
+    },
+    {
+      "name": "isAuthenticated_backup_userData_path_calls_next",
+      "result": "PASS"
+    },
+    {
+      "name": "isAuthenticated_unknown_db_identity_returns_401",
+      "result": "PASS"
+    },
+    {
+      "name": "isAuthenticated_expired_without_refresh_returns_401",
+      "result": "PASS"
+    },
+    {
+      "name": "isAuthenticated_failed_mock_refresh_returns_401",
+      "result": "PASS"
+    },
+    {
+      "name": "isAuthenticated_successful_mock_refresh_calls_next",
+      "result": "PASS"
+    }
+  ],
+  "mutations": [
+    {
+      "name": "origin_guard_bypassed",
+      "result": "DETECTED"
+    },
+    {
+      "name": "session_destroy_omitted",
+      "result": "DETECTED"
+    },
+    {
+      "name": "destroy_error_ignored",
+      "result": "DETECTED"
+    },
+    {
+      "name": "cookie_secure_disabled",
+      "result": "DETECTED"
+    }
+  ],
+  "not_proven": [
+    "Actual CSRF helper validation and proxy-origin behavior",
+    "Real session-store destruction or credential replay",
+    "Production cookies or browser acceptance",
+    "Deployed route ordering",
+    "Provider logout or token revocation",
+    "No source drift in Replit since upload"
+  ]
+}

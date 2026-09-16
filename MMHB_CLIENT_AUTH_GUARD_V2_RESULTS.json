@@ -1,0 +1,501 @@
+{
+  "schema": "MMHB_CLIENT_AUTH_GUARD_V2_VERIFICATION",
+  "executed_at_utc": "2026-09-14T15:35:08.610082+00:00",
+  "helper": {
+    "filename": "MMHB_CLIENT_AUTH_GUARD_V2.py",
+    "sha256": "c74bf932efdf1ed8782c3d2483ee573afb8fae6e75c460b177bb31853cb472b3",
+    "bytes": 60189
+  },
+  "diagnosis": {
+    "path": "client/src/api/fetchWithAuth.js",
+    "v1_reference_bytes": 1452,
+    "v1_reference_sha256": "b7500ed8e9a9ae07a6d252e544d2af090502d07d0462e36599b8e695c91dbe89",
+    "reviewed_bytes": 1451,
+    "reviewed_sha256": "6c1ac4bca06cee87b46194521b3162cd82f31e364ee7862172b49abb168c6ef9",
+    "difference": "V1 fixture incorrectly included one trailing LF. Reviewed bytes end at the closing brace, with no final LF.",
+    "reproduces_user_logged_mismatch": true,
+    "v1_stop_before_application_checkpoint_or_audit_writes": true,
+    "remote_replit_filesystem_inspected": false
+  },
+  "changes_from_v1": {
+    "application_output_payloads": "IDENTICAL_FOR_ALL_THREE_FILES",
+    "helper_source_fingerprint": "Exact reviewed SHA256 replaces mistaken final-newline fingerprint; no stripping or normalizing source.",
+    "audit_patch": "Explicit no-newline-at-end-of-file marker so reversible patch preserves exact bytes.",
+    "helper_identity_and_own_ref_prefix": "V2; required upstream source/checkpoint/report pins unchanged."
+  },
+  "required_upstream": {
+    "base_commit": "63ff8372d07368a5434c11ff58bdf87bb468449d",
+    "parent_commit": "19ee9fc6c588e80a890bb64395208bb515b493ae",
+    "parent_ref": "refs/mmhb-fixes/http-guard-v1-ec85f33395542bf5",
+    "report_sha256": "fb64b3f51065d46c4b953ae4d5fe49c6c601df2c3b443d13045a0ceecda9ffb9"
+  },
+  "proposed_application_files": [
+    {
+      "path": "client/src/context/AuthContext.jsx",
+      "sha256": "b63819acaacde6767da9df8c4901e1958131ec9d82d4b073cd66f35dbddcd046",
+      "bytes": 14405
+    },
+    {
+      "path": "client/src/api/fetchWithAuth.js",
+      "sha256": "7dc437f7f008d48a3dbd4cb3b597821be67701de7d7d7b9b9505d5d0d8482660",
+      "bytes": 2058
+    },
+    {
+      "path": "client/src/api/authGeneration.js",
+      "sha256": "7a47bd16d66b2db4cbed1047d79a5a2a7f1001be365e7c4003512c04bb8754ef",
+      "bytes": 1499
+    }
+  ],
+  "behavior_assertions": {
+    "schema": "MMHB_CLIENT_AUTH_REVIEW_V1",
+    "runtime": "v22.16.0",
+    "scope": "Original module bodies with import substitution and provider JSX value extraction. React hooks, query client, browser fetch/storage and Drizzle transaction execution are controlled doubles; no real browser, PostgreSQL, network or application startup. Known unresolved behavior assertions are NOT security passes.",
+    "total": 53,
+    "passed": 53,
+    "results": [
+      {
+        "name": "Original browser ignores a 503 logout response",
+        "kind": "baseline_defect_reproduced",
+        "pass": true
+      },
+      {
+        "name": "Original late periodic refresh restores cleared token",
+        "kind": "baseline_defect_reproduced",
+        "pass": true
+      },
+      {
+        "name": "Original fetch helper refreshes after logout cleared token",
+        "kind": "baseline_defect_reproduced",
+        "pass": true
+      },
+      {
+        "name": "Logout HTTP 401 exposes incomplete state",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Logout HTTP 403 exposes incomplete state",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Logout HTTP 500 exposes incomplete state",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Logout HTTP 503 exposes incomplete state",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Logout network error exposes incomplete state",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Logout timeout is incomplete, not success",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "HTTP 200 without explicit success rejected: {\"ok\":false}",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "HTTP 200 without explicit success rejected: {}",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "HTTP 200 without explicit success rejected: null",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Malformed logout JSON is incomplete",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Successful local logout clears error and returns success",
+        "kind": "preserved_behavior",
+        "pass": true
+      },
+      {
+        "name": "Retry contacts local logout after original token was removed",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Repeated clicks reuse one pending logout request",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "OIDC confirmation navigation preserved",
+        "kind": "preserved_behavior",
+        "pass": true
+      },
+      {
+        "name": "Late periodic refresh cannot overwrite logout",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Late periodic refresh cannot overwrite login",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Generation rejects logout-login ABA using identical JWT bytes",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Late refresh JSON cannot restore credentials after logout",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Late bootstrap recovery cannot repopulate storage",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Current bootstrap recovery still succeeds",
+        "kind": "preserved_behavior",
+        "pass": true
+      },
+      {
+        "name": "Bootstrap does not refresh without an original token",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Late profile response discarded after logout",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Late profile 401 does not initiate new refresh after logout",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Refresh 409 preserves current credentials",
+        "kind": "preserved_behavior",
+        "pass": true
+      },
+      {
+        "name": "Late refresh 401 does not sign out a newer login",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "API helper does not refresh after initial 401 arrives post-logout",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "API helper rejects late refresh without retrying original",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "API helper checks again after parsing refresh JSON",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "API helper retry response is discarded after logout",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Current helper refresh and retry still work",
+        "kind": "preserved_behavior",
+        "pass": true
+      },
+      {
+        "name": "Anonymous 401 is not silently upgraded via refresh",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Cross-document logout observed before storage event delivery",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Generation change detected even when JWT value repeats across documents",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Storage-disabled generation retains same-document stale detection",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Stale storage events do not overwrite current token/user",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Late failed logout does not show error on a newer login",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "New login can be logged out while an older logout is pending",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Old successful logout result is marked stale after new login",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Old completion cannot erase retry state of a newer failed logout",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Retry alert is rendered and has a real callback",
+        "kind": "static_wiring",
+        "pass": true
+      },
+      {
+        "name": "Revocation deletes only presented token, preserving other sessions",
+        "kind": "service_model",
+        "pass": true
+      },
+      {
+        "name": "Expired presented token is also removed by logout",
+        "kind": "service_model",
+        "pass": true
+      },
+      {
+        "name": "Duplicate matching hashes are all revoked",
+        "kind": "service_model",
+        "pass": true
+      },
+      {
+        "name": "Sequential refresh replay cannot rotate predecessor twice",
+        "kind": "service_model",
+        "pass": true
+      },
+      {
+        "name": "Insertion failure leaves predecessor in transactional test model",
+        "kind": "service_model",
+        "pass": true
+      },
+      {
+        "name": "Rotation winning before old-token logout leaves successor valid",
+        "kind": "unresolved_server_race_reproduced",
+        "pass": true
+      },
+      {
+        "name": "Frozen verifier still expects the pre-HTTP-patch auth hash",
+        "kind": "known_pending_verifier_update",
+        "pass": true
+      },
+      {
+        "name": "Mutation restoring ignored HTTP status is caught",
+        "kind": "mutation_detection",
+        "pass": true
+      },
+      {
+        "name": "Mutation removing periodic post-JSON fence is caught",
+        "kind": "mutation_detection",
+        "pass": true
+      },
+      {
+        "name": "Mutation removing helper JSON fence is caught",
+        "kind": "mutation_detection",
+        "pass": true
+      }
+    ]
+  },
+  "existing_helper_tests": {
+    "scope": "Disposable Git repositories; actual Git and Node, no MMHB app or database. Production pin values are supplied only by internal fixture calls, not CLI overrides.",
+    "total": 17,
+    "passed": 17,
+    "results": [
+      {
+        "name": "Apply chains checkpoint and preserves prior guards, HEAD/index/config",
+        "pass": true
+      },
+      {
+        "name": "Repeated apply does not rewrite source or references",
+        "pass": true
+      },
+      {
+        "name": "Dry run has no source or checkpoint writes",
+        "pass": true
+      },
+      {
+        "name": "Wrong report checksum refused",
+        "pass": true
+      },
+      {
+        "name": "Unreviewed client edits refused",
+        "pass": true
+      },
+      {
+        "name": "Prior HTTP fix drift refused",
+        "pass": true
+      },
+      {
+        "name": "Unrelated tracked edits preserved and refused",
+        "pass": true
+      },
+      {
+        "name": "Changed staging index preserved and refused",
+        "pass": true
+      },
+      {
+        "name": "Known partial application resumes",
+        "pass": true
+      },
+      {
+        "name": "Conflicting checkpoint reference preserved and refused",
+        "pass": true
+      },
+      {
+        "name": "Symlink substitution refused",
+        "pass": true
+      },
+      {
+        "name": "Hardlink substitution refused",
+        "pass": true
+      },
+      {
+        "name": "Unrelated new module refuses overwrite",
+        "pass": true
+      },
+      {
+        "name": "Split index supported without altering it",
+        "pass": true
+      },
+      {
+        "name": "Detached linked worktree supported",
+        "pass": true
+      },
+      {
+        "name": "Inherited Git and Node injection variables not used",
+        "pass": true
+      },
+      {
+        "name": "Wrong prior checkpoint refused",
+        "pass": true
+      }
+    ]
+  },
+  "exact_byte_regression_tests": {
+    "scope": "Byte-reference and safety regression tests in local fixtures; no live application/browser/database. Commit pins are supplied only via internal fixture calls.",
+    "total": 12,
+    "passed": 12,
+    "results": [
+      {
+        "name": "V1 reproduces exact reported stop with no source, checkpoint or audit writes",
+        "pass": true,
+        "source_checkpoint_audit_writes": "none",
+        "captured_output": [
+          "EXPECTED_SOURCE_SHA256=b7500ed8e9a9ae07a6d252e544d2af090502d07d0462e36599b8e695c91dbe89",
+          "ACTUAL_SOURCE_SHA256=6c1ac4bca06cee87b46194521b3162cd82f31e364ee7862172b49abb168c6ef9"
+        ]
+      },
+      {
+        "name": "V2 uses manifest byte lengths and preserves each file ending",
+        "pass": true,
+        "fetch_exact_bytes": 1451,
+        "fetch_final_lf": false,
+        "other_file_endings": "unchanged"
+      },
+      {
+        "name": "Three proposed output files and upstream checkpoint pins unchanged",
+        "pass": true,
+        "application_after_bytes": "identical_for_all_three_files",
+        "upstream_pins_and_prior_guards": "unchanged"
+      },
+      {
+        "name": "V2 rejects old fixture extra final LF even with valid report metadata",
+        "pass": true
+      },
+      {
+        "name": "V2 rejects CRLF conversion even with valid report metadata",
+        "pass": true
+      },
+      {
+        "name": "V2 rejects UTF-8 BOM insertion even with valid report metadata",
+        "pass": true
+      },
+      {
+        "name": "V2 rejects executable source change even with valid report metadata",
+        "pass": true
+      },
+      {
+        "name": "V2 does not ignore a newline change in the verifier",
+        "pass": true
+      },
+      {
+        "name": "V2 requires report and pinned Git blob agreement",
+        "pass": true
+      },
+      {
+        "name": "Audit patch roundtrips the exact no-final-newline source",
+        "pass": true,
+        "audit_patch": "applies_and_reverses_exactly_in_fixture"
+      },
+      {
+        "name": "Detached worktree with independent bare object store preserves original repository",
+        "pass": true,
+        "original_source_repo": "untouched",
+        "target": "detached_worktree_of_separate_bare_repo"
+      },
+      {
+        "name": "Known two-file partial application resumes with one write",
+        "pass": true
+      }
+    ]
+  },
+  "syntax_parse": {
+    "scope": "Syntax parse only; not project typecheck, React render, bundler or browser.",
+    "parser": "TypeScript 5.8.3",
+    "runtime": "v22.16.0",
+    "results": [
+      {
+        "path": "client/src/context/AuthContext.jsx",
+        "parseErrors": 0
+      },
+      {
+        "path": "client/src/api/fetchWithAuth.js",
+        "parseErrors": 0
+      },
+      {
+        "path": "client/src/api/authGeneration.js",
+        "parseErrors": 0
+      }
+    ]
+  },
+  "runtime": {
+    "node": "v22.16.0",
+    "python": "3.13.5",
+    "git": "git version 2.47.3"
+  },
+  "limits": [
+    "No patch executed in Replit by this assistant.",
+    "No real browser/React rendering or HTTP cookie integration.",
+    "No PostgreSQL or identity-provider integration.",
+    "No project build, complete typecheck, production test or network request by helper/tests.",
+    "Behavior tests use controlled doubles and include baseline-defect and unresolved-race reproductions. Successful assertions are not all security passes.",
+    "Node 24 project qualification remains pending.",
+    "Server-side refresh-token rotation/logout successor race remains unresolved.",
+    "Frozen-source verifier requires a reviewed update; not bypassed.",
+    "Existing off-machine baseline bundle does not yet establish backup of all newer fix checkpoints."
+  ]
+}

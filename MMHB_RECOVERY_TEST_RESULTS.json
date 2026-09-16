@@ -1,0 +1,85 @@
+{
+  "scope": "Disposable fixture repositories only; not the user Replit repository",
+  "git_version": "git version 2.47.3",
+  "passed": 13,
+  "tests": [
+    {
+      "test": "recover missing directory from normal index",
+      "result": "PASS",
+      "exit_code": 0,
+      "output": "COMMAND=MMHB_RECOVER_A4\nRECOVERY_DIR=/tmp/mmhb-test-nzeer9sv/workspace/.git/mmhb-recovery-K3IybJ\nPATCH_SHA256=53233765269300d05334607b9bbfeb72de944324cd3d7f3cc00c35c9084b5543\nCANDIDATE_PATHS=3\nRECOVERED_PATCH_MATCHES_A4=YES\nLOCAL_RECOVERY_REF=refs/mmhb-recovery/a4-259b8b63f4b38adb\nLOCAL_RECOVERY_COMMIT=d2ada8d9fd1a4c34d3c258d5b4a350b49ad80441\nORIGINAL_HEAD_AND_INDEX=UNCHANGED\nAPPLICATION_SOURCE_EDITS=NO\nNETWORK_REQUESTS=NO\nPUSH=NO\nBUILD=NO\nDEPLOY=NO\nSTATUS=LOCAL_RECOVERY_CHECKPOINT_READY"
+    },
+    {
+      "test": "already locked missing worktree",
+      "result": "PASS",
+      "exit_code": 0,
+      "output": "COMMAND=MMHB_RECOVER_A4\nRECOVERY_DIR=/tmp/mmhb-test-7a966pbz/workspace/.git/mmhb-recovery-ELp8af\nPATCH_SHA256=53233765269300d05334607b9bbfeb72de944324cd3d7f3cc00c35c9084b5543\nCANDIDATE_PATHS=3\nRECOVERED_PATCH_MATCHES_A4=YES\nLOCAL_RECOVERY_REF=refs/mmhb-recovery/a4-259b8b63f4b38adb\nLOCAL_RECOVERY_COMMIT=d2ada8d9fd1a4c34d3c258d5b4a350b49ad80441\nORIGINAL_HEAD_AND_INDEX=UNCHANGED\nAPPLICATION_SOURCE_EDITS=NO\nNETWORK_REQUESTS=NO\nPUSH=NO\nBUILD=NO\nDEPLOY=NO\nSTATUS=LOCAL_RECOVERY_CHECKPOINT_READY"
+    },
+    {
+      "test": "split index recovery",
+      "result": "PASS",
+      "exit_code": 0,
+      "output": "COMMAND=MMHB_RECOVER_A4\nRECOVERY_DIR=/tmp/mmhb-test-kb96kvtn/workspace/.git/mmhb-recovery-AQ2Qeh\nPATCH_SHA256=53233765269300d05334607b9bbfeb72de944324cd3d7f3cc00c35c9084b5543\nCANDIDATE_PATHS=3\nRECOVERED_PATCH_MATCHES_A4=YES\nLOCAL_RECOVERY_REF=refs/mmhb-recovery/a4-259b8b63f4b38adb\nLOCAL_RECOVERY_COMMIT=d2ada8d9fd1a4c34d3c258d5b4a350b49ad80441\nORIGINAL_HEAD_AND_INDEX=UNCHANGED\nAPPLICATION_SOURCE_EDITS=NO\nNETWORK_REQUESTS=NO\nPUSH=NO\nBUILD=NO\nDEPLOY=NO\nSTATUS=LOCAL_RECOVERY_CHECKPOINT_READY"
+    },
+    {
+      "test": "matching local checkpoint is reused",
+      "result": "PASS",
+      "exit_code": 0,
+      "output": "COMMAND=MMHB_RECOVER_A4\nRECOVERY_DIR=/tmp/mmhb-test-saa2nghb/workspace/.git/mmhb-recovery-WdYOqp\nPATCH_SHA256=53233765269300d05334607b9bbfeb72de944324cd3d7f3cc00c35c9084b5543\nCANDIDATE_PATHS=3\nRECOVERED_PATCH_MATCHES_A4=YES\nLOCAL_RECOVERY_REF=refs/mmhb-recovery/a4-259b8b63f4b38adb\nLOCAL_RECOVERY_COMMIT=d2ada8d9fd1a4c34d3c258d5b4a350b49ad80441\nORIGINAL_HEAD_AND_INDEX=UNCHANGED\nAPPLICATION_SOURCE_EDITS=NO\nNETWORK_REQUESTS=NO\nPUSH=NO\nBUILD=NO\nDEPLOY=NO\nSTATUS=LOCAL_RECOVERY_CHECKPOINT_READY"
+    },
+    {
+      "test": "checkpoint survives later missing metadata",
+      "result": "PASS",
+      "exit_code": 0,
+      "output": "COMMAND=MMHB_RECOVER_A4\nRECOVERY_DIR=/tmp/mmhb-test-ypbz7emd/workspace/.git/mmhb-recovery-5ztMGR\nPATCH_SHA256=53233765269300d05334607b9bbfeb72de944324cd3d7f3cc00c35c9084b5543\nCANDIDATE_PATHS=3\nRECOVERED_PATCH_MATCHES_A4=YES\nLOCAL_RECOVERY_REF=refs/mmhb-recovery/a4-259b8b63f4b38adb\nLOCAL_RECOVERY_COMMIT=3bba3e3033d32763e64d49d8a4c3a745b7e5834c\nORIGINAL_HEAD_AND_INDEX=UNCHANGED\nAPPLICATION_SOURCE_EDITS=NO\nNETWORK_REQUESTS=NO\nPUSH=NO\nBUILD=NO\nDEPLOY=NO\nSTATUS=LOCAL_RECOVERY_CHECKPOINT_READY"
+    },
+    {
+      "test": "missing index stops without publishing checkpoint",
+      "result": "PASS",
+      "exit_code": 1,
+      "output": "COMMAND=MMHB_RECOVER_A4\nRECOVERY_DIR=/tmp/mmhb-test-_5caf8_6/workspace/.git/mmhb-recovery-MRUiTY\nSTOP=INDEX_MISSING\nSTATUS=RECOVERY_STOPPED\nSTEP=PRESERVE_METADATA\nEXIT_CODE=1"
+    },
+    {
+      "test": "missing metadata stops",
+      "result": "PASS",
+      "exit_code": 1,
+      "output": "COMMAND=MMHB_RECOVER_A4\nSTOP=WORKTREE_METADATA_NOT_FOUND\nSTATUS=RECOVERY_STOPPED\nSTEP=LOCATE_LINKED_INDEX\nEXIT_CODE=1"
+    },
+    {
+      "test": "duplicate metadata stops",
+      "result": "PASS",
+      "exit_code": 1,
+      "output": "COMMAND=MMHB_RECOVER_A4\nSTOP=AMBIGUOUS_WORKTREE_METADATA\nSTATUS=RECOVERY_STOPPED\nSTEP=LOCATE_LINKED_INDEX\nEXIT_CODE=1"
+    },
+    {
+      "test": "corrupt index stops",
+      "result": "PASS",
+      "exit_code": 128,
+      "output": "COMMAND=MMHB_RECOVER_A4\nRECOVERY_DIR=/tmp/mmhb-test-miz09l4m/workspace/.git/mmhb-recovery-W9tMgu\nSTATUS=RECOVERY_STOPPED\nSTEP=EXPORT_AND_VERIFY\nEXIT_CODE=128"
+    },
+    {
+      "test": "wrong expected hash stops",
+      "result": "PASS",
+      "exit_code": 1,
+      "output": "COMMAND=MMHB_RECOVER_A4\nRECOVERY_DIR=/tmp/mmhb-test-v7xd8sgk/workspace/.git/mmhb-recovery-91MH9S\nPATCH_SHA256=53233765269300d05334607b9bbfeb72de944324cd3d7f3cc00c35c9084b5543\nSTOP=PATCH_HASH_DIFFERS\nSTATUS=RECOVERY_STOPPED\nSTEP=EXPORT_AND_VERIFY\nEXIT_CODE=1"
+    },
+    {
+      "test": "missing blob stops",
+      "result": "PASS",
+      "exit_code": 128,
+      "output": "COMMAND=MMHB_RECOVER_A4\nRECOVERY_DIR=/tmp/mmhb-test-svhy_git/workspace/.git/mmhb-recovery-zeu4Zi\nSTATUS=RECOVERY_STOPPED\nSTEP=EXPORT_AND_VERIFY\nEXIT_CODE=128"
+    },
+    {
+      "test": "existing conflicting ref is not overwritten",
+      "result": "PASS",
+      "exit_code": 1,
+      "output": "COMMAND=MMHB_RECOVER_A4\nSTOP=CHECKPOINT_HASH_DIFFERS\nSTATUS=RECOVERY_STOPPED\nSTEP=EXISTING_CHECKPOINT\nEXIT_CODE=1"
+    },
+    {
+      "test": "unexpected original HEAD stops",
+      "result": "PASS",
+      "exit_code": 1,
+      "output": "COMMAND=MMHB_RECOVER_A4\nSTOP=ORIGINAL_HEAD_CHANGED\nSTATUS=RECOVERY_STOPPED\nSTEP=IDENTITY\nEXIT_CODE=1"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+--- a/server/replit_integrations/auth/storage.mjs
++++ b/server/replit_integrations/auth/storage.mjs
+@@ -46,24 +46,13 @@
+         : [];
+       
+       if (existingByEmail.length > 0) {
+-        const [user] = await db
+-          .update(users)
+-          .set({
+-            replitId: userData.id,
+-            name: fullName !== 'Replit User' ? fullName : existingByEmail[0].name,
+-            profileImageUrl: userData.profileImageUrl,
+-            updatedAt: new Date(),
+-          })
+-          .where(eq(users.email, userData.email))
+-          .returning();
+-        return user;
++        // Matching email is not proof of ownership of an existing account.
++        const error = new Error("Account linking requires explicit verification");
++        error.code = "AUTH_ACCOUNT_LINK_REQUIRED";
++        throw error;
+       }
+-      
+-      // Check if there are any existing admins - if not, make this user admin
+-      const existingAdmins = await db.select().from(users).where(eq(users.role, 'admin'));
+-      const shouldBeAdmin = existingAdmins.length === 0 || 
+-        existingAdmins.every(u => u.email?.includes('test') || u.email?.includes('fixture'));
+-      
++
++      // Public sign-in never grants administrator privileges.
+       const [user] = await db
+         .insert(users)
+         .values({
+@@ -71,7 +60,7 @@
+           email: email,
+           name: fullName,
+           profileImageUrl: userData.profileImageUrl,
+-          role: shouldBeAdmin ? 'admin' : 'user',
++          role: 'user',
+           createdAt: new Date(),
+           updatedAt: new Date(),
+         })

@@ -1,0 +1,199 @@
+{
+  "scope": "Disposable local Git fixture repositories only; NOT the user Replit repository. Test copies substitute ROOT and pinned commit, bundle and content identity constants only.",
+  "script": "MMHB_RESTORE_A4_WORKTREE.py",
+  "script_sha256": "0befbc77bb3c764b9718697d51cfdf0298eabda6ea0f7a5c0f85d1fbaab2456d",
+  "git_version": "git version 2.47.3",
+  "passed": 21,
+  "failed": 0,
+  "tests": [
+    {
+      "test": "Fresh checkout from existing verified objects; binary, text and executable modes match",
+      "expected_success": true,
+      "actual_exit": 0,
+      "result": "PASS",
+      "original_head_index_refs_config_workfiles_preserved": true,
+      "stop": null,
+      "final_status": "STATUS=A4_SOURCE_WORKTREE_RESTORED"
+    },
+    {
+      "test": "Second execution reuses clean checkout without overwriting files",
+      "expected_success": true,
+      "actual_exit": 0,
+      "result": "PASS",
+      "original_head_index_refs_config_workfiles_preserved": true,
+      "stop": null,
+      "final_status": "STATUS=A4_SOURCE_WORKTREE_RESTORED"
+    },
+    {
+      "test": "Existing unstaged candidate edit is preserved and stops restore",
+      "expected_success": false,
+      "actual_exit": 1,
+      "result": "PASS",
+      "original_head_index_refs_config_workfiles_preserved": true,
+      "stop": "STOP=EXISTING_DESTINATION_HAS_CHANGES",
+      "final_status": "STATUS=RESTORE_STOPPED"
+    },
+    {
+      "test": "Create second fixture for staged-change refusal",
+      "expected_success": true,
+      "actual_exit": 0,
+      "result": "PASS",
+      "original_head_index_refs_config_workfiles_preserved": true,
+      "stop": null,
+      "final_status": "STATUS=A4_SOURCE_WORKTREE_RESTORED"
+    },
+    {
+      "test": "Existing staged candidate edit is preserved and stops restore",
+      "expected_success": false,
+      "actual_exit": 1,
+      "result": "PASS",
+      "original_head_index_refs_config_workfiles_preserved": true,
+      "stop": "STOP=EXISTING_DESTINATION_HAS_CHANGES",
+      "final_status": "STATUS=RESTORE_STOPPED"
+    },
+    {
+      "test": "Unrelated existing destination is not overwritten",
+      "expected_success": false,
+      "actual_exit": 1,
+      "result": "PASS",
+      "original_head_index_refs_config_workfiles_preserved": true,
+      "stop": "STOP=PATH_MISSING:.git",
+      "final_status": "STATUS=RESTORE_STOPPED"
+    },
+    {
+      "test": "Symlink destination is refused",
+      "expected_success": false,
+      "actual_exit": 1,
+      "result": "PASS",
+      "original_head_index_refs_config_workfiles_preserved": true,
+      "stop": "STOP=SYMLINK_PATH:a4-63ff8372",
+      "final_status": "STATUS=RESTORE_STOPPED"
+    },
+    {
+      "test": "Changed bundle is rejected before checkout",
+      "expected_success": false,
+      "actual_exit": 1,
+      "result": "PASS",
+      "original_head_index_refs_config_workfiles_preserved": true,
+      "stop": "STOP=BUNDLE_CHECKSUM_DIFFERS",
+      "final_status": "STATUS=RESTORE_STOPPED"
+    },
+    {
+      "test": "Changed checksum sidecar is rejected",
+      "expected_success": false,
+      "actual_exit": 1,
+      "result": "PASS",
+      "original_head_index_refs_config_workfiles_preserved": true,
+      "stop": "STOP=CHECKSUM_FILE_DIFFERS",
+      "final_status": "STATUS=RESTORE_STOPPED"
+    },
+    {
+      "test": "Missing independent object store stops without fresh network clone",
+      "expected_success": false,
+      "actual_exit": 1,
+      "result": "PASS",
+      "original_head_index_refs_config_workfiles_preserved": true,
+      "stop": "STOP=PATH_MISSING:restore.git",
+      "final_status": "STATUS=RESTORE_STOPPED"
+    },
+    {
+      "test": "Changed original HEAD stops before restore",
+      "expected_success": false,
+      "actual_exit": 1,
+      "result": "PASS",
+      "original_head_index_refs_config_workfiles_preserved": true,
+      "stop": "STOP=ORIGINAL_HEAD_CHANGED",
+      "final_status": "STATUS=RESTORE_STOPPED"
+    },
+    {
+      "test": "Changed recovery reference stops restore",
+      "expected_success": false,
+      "actual_exit": 1,
+      "result": "PASS",
+      "original_head_index_refs_config_workfiles_preserved": true,
+      "stop": "STOP=RECOVERY_REFERENCE_DIFFERS",
+      "final_status": "STATUS=RESTORE_STOPPED"
+    },
+    {
+      "test": "Inherited Git routing/config and installed checkout hook cannot execute",
+      "expected_success": true,
+      "actual_exit": 0,
+      "result": "PASS",
+      "original_head_index_refs_config_workfiles_preserved": true,
+      "stop": null,
+      "final_status": "STATUS=A4_SOURCE_WORKTREE_RESTORED"
+    },
+    {
+      "test": "Locally configured checkout filter requires review rather than execution",
+      "expected_success": false,
+      "actual_exit": 1,
+      "result": "PASS",
+      "original_head_index_refs_config_workfiles_preserved": true,
+      "stop": "STOP=VERIFIED_REPOSITORY_CONFIG_REQUIRES_REVIEW",
+      "final_status": "STATUS=RESTORE_STOPPED"
+    },
+    {
+      "test": "Tracked external symlink stops before checkout",
+      "expected_success": false,
+      "actual_exit": 1,
+      "result": "PASS",
+      "original_head_index_refs_config_workfiles_preserved": true,
+      "stop": "STOP=EXTERNAL_SYMLINK_REQUIRES_REVIEW:example-link",
+      "final_status": "STATUS=RESTORE_STOPPED"
+    },
+    {
+      "test": "Tracked internal symlink is preserved and verified",
+      "expected_success": true,
+      "actual_exit": 0,
+      "result": "PASS",
+      "original_head_index_refs_config_workfiles_preserved": true,
+      "stop": null,
+      "final_status": "STATUS=A4_SOURCE_WORKTREE_RESTORED"
+    },
+    {
+      "test": "Destination must be ignored by original workspace",
+      "expected_success": false,
+      "actual_exit": 1,
+      "result": "PASS",
+      "original_head_index_refs_config_workfiles_preserved": true,
+      "stop": "STOP=DESTINATION_NOT_IGNORED_IN_ORIGINAL",
+      "final_status": "STATUS=RESTORE_STOPPED"
+    },
+    {
+      "test": "Missing verified Git objects are rejected",
+      "expected_success": false,
+      "actual_exit": 1,
+      "result": "PASS",
+      "original_head_index_refs_config_workfiles_preserved": true,
+      "stop": "STOP=GIT_FAILED:rev-list:EXIT_128",
+      "final_status": "STATUS=RESTORE_STOPPED"
+    },
+    {
+      "test": "Git LFS pointer reported without claiming external payload downloaded",
+      "expected_success": true,
+      "actual_exit": 0,
+      "result": "PASS",
+      "original_head_index_refs_config_workfiles_preserved": true,
+      "stop": null,
+      "final_status": "STATUS=A4_SOURCE_WORKTREE_RESTORED"
+    },
+    {
+      "test": "Create fixture for deleted working-directory behavior",
+      "expected_success": true,
+      "actual_exit": 0,
+      "result": "PASS",
+      "original_head_index_refs_config_workfiles_preserved": true,
+      "stop": null,
+      "final_status": "STATUS=A4_SOURCE_WORKTREE_RESTORED"
+    },
+    {
+      "test": "Missing locked working directory metadata is retained, not forcibly overwritten",
+      "expected_success": false,
+      "actual_exit": 1,
+      "result": "PASS",
+      "original_head_index_refs_config_workfiles_preserved": true,
+      "stop": "STOP=GIT_FAILED:worktree:EXIT_128",
+      "final_status": "STATUS=RESTORE_STOPPED"
+    }
+  ]
+}
