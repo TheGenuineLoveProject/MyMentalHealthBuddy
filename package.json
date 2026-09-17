@@ -182,7 +182,7 @@
     "playwright": "^1.60.0",
     "prettier": "^3.8.3",
     "rollup-plugin-visualizer": "^6.0.11",
-    "sharp": "^0.35.3",
+    "sharp": "^0.35.4",
     "supertest": "^7.2.2",
     "typescript": "^6.0.3",
     "vite-bundle-visualizer": "^1.2.1",
@@ -195,7 +195,9 @@
     "teeny-request": "10.1.3",
     "uuid": "14.0.0",
     "protobufjs": "8.6.6",
-    "shell-quote": "1.10.0"
+    "shell-quote": "1.10.0",
+    "qs": "6.16.0",
+    "esbuild": "$esbuild"
   },
   "x_replit_deploy_marker": {
     "phase": "PHASE116Z24_PACKAGE_METADATA_DEPLOYMENT_PICKUP_MARKER",
