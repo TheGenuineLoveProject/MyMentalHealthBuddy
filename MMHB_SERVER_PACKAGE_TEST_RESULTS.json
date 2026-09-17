@@ -1,0 +1,117 @@
+{
+  "scope": "Real Python/Git and Node orchestration with synthetic esbuild/bcrypt/native-loader; native cache entries are test doubles, NOT actual binaries. No real MMHB server build.",
+  "node": "v22.16.0",
+  "total": 27,
+  "passed": 27,
+  "results": [
+    {
+      "test": "private_package_reuses_exact_frontend_preserves_old_dist_and_never_runs_app",
+      "pass": true
+    },
+    {
+      "test": "build_failure_keeps_logs",
+      "pass": true
+    },
+    {
+      "test": "empty_bundle_refused",
+      "pass": true
+    },
+    {
+      "test": "adapter_missing_from_bundle_refused",
+      "pass": true
+    },
+    {
+      "test": "unknown_external_refused",
+      "pass": true
+    },
+    {
+      "test": "syntax_error_detected_without_startup",
+      "pass": true
+    },
+    {
+      "test": "native_probe_failure_not_published_as_pass",
+      "pass": true
+    },
+    {
+      "test": "native_copied_tree_mutation_detected",
+      "pass": true
+    },
+    {
+      "test": "working_source_mutation_detected",
+      "pass": true
+    },
+    {
+      "test": "existing_dist_mutation_detected",
+      "pass": true
+    },
+    {
+      "test": "source_drift_refused",
+      "pass": true
+    },
+    {
+      "test": "missing_worktree_marker_refused",
+      "pass": true
+    },
+    {
+      "test": "wrong_packager_pin_refused",
+      "pass": true
+    },
+    {
+      "test": "wrong_deployment_pin_refused",
+      "pass": true
+    },
+    {
+      "test": "changed_frontend_bytes_refused",
+      "pass": true
+    },
+    {
+      "test": "failed_frontend_report_refused",
+      "pass": true
+    },
+    {
+      "test": "frontend_for_wrong_checkpoint_refused",
+      "pass": true
+    },
+    {
+      "test": "redirected_frontend_directory_refused",
+      "pass": true
+    },
+    {
+      "test": "changed_esbuild_version_refused",
+      "pass": true
+    },
+    {
+      "test": "missing_bcrypt_refused",
+      "pass": true
+    },
+    {
+      "test": "wrong_node_major_refused",
+      "pass": true
+    },
+    {
+      "test": "frontend_symlink_refused",
+      "pass": true
+    },
+    {
+      "test": "repeated_packaging_creates_separate_outputs_without_rebuilding_frontend",
+      "pass": true
+    },
+    {
+      "test": "restricted_child_environment_excludes_runtime_values_and_preloads",
+      "pass": true
+    },
+    {
+      "test": "build_warnings_recorded_not_claimed_as_zero",
+      "pass": true
+    },
+    {
+      "test": "copy_never_replaces_existing_destination",
+      "pass": true
+    },
+    {
+      "test": "embedded_node_scripts_parse",
+      "pass": true
+    }
+  ],
+  "helperSha256": "3145b3150e59a382785e81ec74a2fe045a99349da8362f733552d0677421850e"
+}

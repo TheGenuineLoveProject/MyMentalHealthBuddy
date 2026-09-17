@@ -1,0 +1,270 @@
+{
+  "schema": "MMHB_REFRESH_ADAPTER_LOCAL_DEVELOPMENT_RESULTS_V1",
+  "localNodeVersion": "v22.16.0",
+  "sourceBoundaryTests": {
+    "total": 33,
+    "passed": 33,
+    "scope": "Real adapter and Node SHA-256; synthetic SQL tag and execute responses, no PostgreSQL",
+    "results": [
+      {
+        "test": "rejects_invalid_dependencies",
+        "pass": true
+      },
+      {
+        "test": "issuance_preserves_date_contract",
+        "pass": true
+      },
+      {
+        "test": "find_valid_maps_expected_identity",
+        "pass": true
+      },
+      {
+        "test": "verification_checks_user_identity",
+        "pass": true
+      },
+      {
+        "test": "null_find_is_legitimate_absence",
+        "pass": true
+      },
+      {
+        "test": "null_rotation_is_legitimate_conflict",
+        "pass": true
+      },
+      {
+        "test": "rejects_empty_rows",
+        "pass": true
+      },
+      {
+        "test": "rejects_missing_result",
+        "pass": true
+      },
+      {
+        "test": "rejects_undefined_result",
+        "pass": true
+      },
+      {
+        "test": "rejects_multiple_rows",
+        "pass": true
+      },
+      {
+        "test": "rejects_missing_rows",
+        "pass": true
+      },
+      {
+        "test": "issuance_cannot_silently_accept_null",
+        "pass": true
+      },
+      {
+        "test": "valid_revocation_maps_logical_count",
+        "pass": true
+      },
+      {
+        "test": "rejects_revocation_null",
+        "pass": true
+      },
+      {
+        "test": "rejects_revocation_missing_count",
+        "pass": true
+      },
+      {
+        "test": "rejects_revocation_string_count",
+        "pass": true
+      },
+      {
+        "test": "rejects_revocation_inconsistent",
+        "pass": true
+      },
+      {
+        "test": "rejects_revocation_multiple_families",
+        "pass": true
+      },
+      {
+        "test": "empty_revocation_does_not_query",
+        "pass": true
+      },
+      {
+        "test": "long_token_does_not_query",
+        "pass": true
+      },
+      {
+        "test": "invalid_user_cannot_become_unscoped_revocation",
+        "pass": true
+      },
+      {
+        "test": "bad_uuid_rejected_before_database",
+        "pass": true
+      },
+      {
+        "test": "identical_replacement_refused",
+        "pass": true
+      },
+      {
+        "test": "raw_token_never_sent_to_executor",
+        "pass": true
+      },
+      {
+        "test": "rejects_wrong_hash",
+        "pass": true
+      },
+      {
+        "test": "rejects_bad_expiry",
+        "pass": true
+      },
+      {
+        "test": "rejects_timezone_missing",
+        "pass": true
+      },
+      {
+        "test": "rejects_bad_family",
+        "pass": true
+      },
+      {
+        "test": "caller_executor_receives_revocation",
+        "pass": true
+      },
+      {
+        "test": "account_revoke_uses_tx_and_preserves_return",
+        "pass": true
+      },
+      {
+        "test": "account_revoke_rejects_missing_count",
+        "pass": true
+      },
+      {
+        "test": "database_error_is_not_silently_swallowed",
+        "pass": true
+      },
+      {
+        "test": "invalid_digest_implementation_refused",
+        "pass": true
+      }
+    ]
+  },
+  "harnessChecks": {
+    "schema": "MMHB_REFRESH_ADAPTER_HARNESS_LOCAL_V1",
+    "scope": "Python control flow, actual Node 22 module resolution and adapter unit tests; PostgreSQL process/database is a test double in full-run fixtures",
+    "realPostgreSQLExecutedHere": false,
+    "realDrizzleDriverExecutedHere": false,
+    "total": 26,
+    "passed": 26,
+    "results": [
+      {
+        "test": "python_compiles",
+        "pass": true
+      },
+      {
+        "test": "syntax_refreshFamilyAdapter.mjs",
+        "pass": true
+      },
+      {
+        "test": "syntax_adapter-unit-tests.mjs",
+        "pass": true
+      },
+      {
+        "test": "syntax_adapter-postgres-tests.mjs",
+        "pass": true
+      },
+      {
+        "test": "no_argument_never_starts_test",
+        "pass": true
+      },
+      {
+        "test": "root_test_run_refused",
+        "pass": true
+      },
+      {
+        "test": "prior_helper_and_qualified_sql_exact",
+        "pass": true
+      },
+      {
+        "test": "modified_prior_helper_rejected",
+        "pass": true
+      },
+      {
+        "test": "prior_success_report_accepted",
+        "pass": true
+      },
+      {
+        "test": "rejects_evidence_wrong_checkpoint",
+        "pass": true
+      },
+      {
+        "test": "rejects_evidence_wrong_sql",
+        "pass": true
+      },
+      {
+        "test": "rejects_evidence_incomplete_tests",
+        "pass": true
+      },
+      {
+        "test": "rejects_evidence_cluster_running",
+        "pass": true
+      },
+      {
+        "test": "rejects_evidence_source_changes",
+        "pass": true
+      },
+      {
+        "test": "rejects_evidence_live_connections",
+        "pass": true
+      },
+      {
+        "test": "rejects_evidence_hidden_error",
+        "pass": true
+      },
+      {
+        "test": "dependency_preflight_resolves_without_importing_modules",
+        "pass": true
+      },
+      {
+        "test": "dependency_preflight_falls_back_only_to_matching_version",
+        "pass": true
+      },
+      {
+        "test": "unmatched_dependencies_stop_no_install",
+        "pass": true
+      },
+      {
+        "test": "full_control_flow_stops_only_its_private_cluster",
+        "pass": true
+      },
+      {
+        "test": "qualified_sql_is_used_byte_for_byte",
+        "pass": true
+      },
+      {
+        "test": "node_child_receives_no_production_connection_settings",
+        "pass": true
+      },
+      {
+        "test": "test_roles_do_not_receive_migration_execute",
+        "pass": true
+      },
+      {
+        "test": "no_candidate_source_is_written_by_control_flow",
+        "pass": true
+      },
+      {
+        "test": "failed_driver_suite_stops_and_does_not_report_success",
+        "pass": true
+      },
+      {
+        "test": "failed_driver_suite_still_stops_its_cluster",
+        "pass": true
+      }
+    ]
+  },
+  "realPgDrizzlePostgresTestsPrepared": 24,
+  "realPgDrizzlePostgresTestsExecutedHere": false,
+  "priorUserReportedSQLQualification": {
+    "postgres": "16.10",
+    "passed": 31,
+    "total": 31,
+    "basis": "User-supplied Replit output; not a database run in this container"
+  },
+  "productionMigrationApproved": false,
+  "applicationIntegrationApplied": false,
+  "helperSha256": "9af9ca14e16434d429b4c045ea9e0650fee98d76b0a48ab5fd57e4109db0e0b6",
+  "qualifiedSqlSha256": "1feb46d6f7f142c34403032ca1a87e3f8a6f1e493e91a5b63cdf075624d4f340",
+  "adapterSha256": "8cb12cc57ca893d2b399ca8ebf61ca52378d5c2bc3c777d87190904b1999b2df"
+}

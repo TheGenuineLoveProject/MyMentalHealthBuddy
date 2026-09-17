@@ -1,0 +1,50 @@
+{
+  "schema": "MMHB_TYPECHECK_HELPER_FIXTURE_RESULTS_V1",
+  "node": "v22.16.0",
+  "typescript": "5.8.3",
+  "scope": "Two real compilations of tiny fixture projects plus preflight/preservation checks. NOT the MMHB project or Node 24 qualification.",
+  "total": 10,
+  "passed": 10,
+  "results": [
+    {
+      "test": "actual_compiler_success_and_buildinfo_outside_source",
+      "pass": true
+    },
+    {
+      "test": "actual_compiler_failure_retains_diagnostics_and_source",
+      "pass": true
+    },
+    {
+      "test": "source_drift_refused",
+      "pass": true
+    },
+    {
+      "test": "missing_git_marker_refused",
+      "pass": true
+    },
+    {
+      "test": "checkpoint_ref_drift_refused",
+      "pass": true
+    },
+    {
+      "test": "wrong_node_major_refused",
+      "pass": true
+    },
+    {
+      "test": "missing_source_file_refused",
+      "pass": true
+    },
+    {
+      "test": "wrong_checkpoint_parent_refused",
+      "pass": true
+    },
+    {
+      "test": "installed_compiler_version_mismatch_refused",
+      "pass": true
+    },
+    {
+      "test": "runtime_secrets_and_preloads_not_forwarded",
+      "pass": true
+    }
+  ]
+}

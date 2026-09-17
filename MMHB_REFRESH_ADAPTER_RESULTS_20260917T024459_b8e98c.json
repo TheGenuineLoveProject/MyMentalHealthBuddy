@@ -1,0 +1,273 @@
+{
+  "schema": "MMHB_REFRESH_ADAPTER_QUALIFICATION_V1",
+  "checkpoint": "cb2e164a8fc19e7fab3a539a9facb4b4b562eaca",
+  "previousSqlEvidenceSha256": "f2664d0d7d6625ca2fd62ebeeafbe9fdf8f28163f648e5c5de554d0ce54b2fc4",
+  "sqlSha256": "1feb46d6f7f142c34403032ca1a87e3f8a6f1e493e91a5b63cdf075624d4f340",
+  "candidateLockfileSha256": "648b869facffba16150769018ee062210691bd4ff10819ca379f501bfdb8d287",
+  "adapterSha256": "8cb12cc57ca893d2b399ca8ebf61ca52378d5c2bc3c777d87190904b1999b2df",
+  "node": "v24.13.0",
+  "postgres": "(PostgreSQL) 16.10",
+  "dependencyVersions": {
+    "pg": "8.23.0",
+    "drizzle-orm": "0.45.2"
+  },
+  "dependencyBase": "/home/runner/workspace",
+  "dependencyVerificationScope": "Installed direct-package versions and entry locations; not a full dependency-integrity audit",
+  "boundary": {
+    "schema": "MMHB_ADAPTER_BOUNDARY_UNIT_V1",
+    "scope": "Real adapter and Node SHA-256; synthetic SQL tag and execute responses, no PostgreSQL",
+    "node": "v24.13.0",
+    "total": 33,
+    "passed": 33,
+    "results": [
+      {
+        "test": "rejects_invalid_dependencies",
+        "pass": true
+      },
+      {
+        "test": "issuance_preserves_date_contract",
+        "pass": true
+      },
+      {
+        "test": "find_valid_maps_expected_identity",
+        "pass": true
+      },
+      {
+        "test": "verification_checks_user_identity",
+        "pass": true
+      },
+      {
+        "test": "null_find_is_legitimate_absence",
+        "pass": true
+      },
+      {
+        "test": "null_rotation_is_legitimate_conflict",
+        "pass": true
+      },
+      {
+        "test": "rejects_empty_rows",
+        "pass": true
+      },
+      {
+        "test": "rejects_missing_result",
+        "pass": true
+      },
+      {
+        "test": "rejects_undefined_result",
+        "pass": true
+      },
+      {
+        "test": "rejects_multiple_rows",
+        "pass": true
+      },
+      {
+        "test": "rejects_missing_rows",
+        "pass": true
+      },
+      {
+        "test": "issuance_cannot_silently_accept_null",
+        "pass": true
+      },
+      {
+        "test": "valid_revocation_maps_logical_count",
+        "pass": true
+      },
+      {
+        "test": "rejects_revocation_null",
+        "pass": true
+      },
+      {
+        "test": "rejects_revocation_missing_count",
+        "pass": true
+      },
+      {
+        "test": "rejects_revocation_string_count",
+        "pass": true
+      },
+      {
+        "test": "rejects_revocation_inconsistent",
+        "pass": true
+      },
+      {
+        "test": "rejects_revocation_multiple_families",
+        "pass": true
+      },
+      {
+        "test": "empty_revocation_does_not_query",
+        "pass": true
+      },
+      {
+        "test": "long_token_does_not_query",
+        "pass": true
+      },
+      {
+        "test": "invalid_user_cannot_become_unscoped_revocation",
+        "pass": true
+      },
+      {
+        "test": "bad_uuid_rejected_before_database",
+        "pass": true
+      },
+      {
+        "test": "identical_replacement_refused",
+        "pass": true
+      },
+      {
+        "test": "raw_token_never_sent_to_executor",
+        "pass": true
+      },
+      {
+        "test": "rejects_wrong_hash",
+        "pass": true
+      },
+      {
+        "test": "rejects_bad_expiry",
+        "pass": true
+      },
+      {
+        "test": "rejects_timezone_missing",
+        "pass": true
+      },
+      {
+        "test": "rejects_bad_family",
+        "pass": true
+      },
+      {
+        "test": "caller_executor_receives_revocation",
+        "pass": true
+      },
+      {
+        "test": "account_revoke_uses_tx_and_preserves_return",
+        "pass": true
+      },
+      {
+        "test": "account_revoke_rejects_missing_count",
+        "pass": true
+      },
+      {
+        "test": "database_error_is_not_silently_swallowed",
+        "pass": true
+      },
+      {
+        "test": "invalid_digest_implementation_refused",
+        "pass": true
+      }
+    ]
+  },
+  "integration": {
+    "schema": "MMHB_NODE_PG_DRIZZLE_ADAPTER_V1",
+    "node": "v24.13.0",
+    "scope": "Real pg, Drizzle and PostgreSQL in a private synthetic cluster; no application startup",
+    "planned": 24,
+    "total": 24,
+    "passed": 24,
+    "poolsClosed": true,
+    "results": [
+      {
+        "test": "runtime_is_non_superuser_non_owner_on_private_socket",
+        "pass": true
+      },
+      {
+        "test": "runtime_cannot_run_migration_function",
+        "pass": true
+      },
+      {
+        "test": "runtime_cannot_mark_migration_complete",
+        "pass": true
+      },
+      {
+        "test": "runtime_cannot_create_family_schema_objects",
+        "pass": true
+      },
+      {
+        "test": "missing_marker_blocks_adapter_issuance",
+        "pass": true
+      },
+      {
+        "test": "admin_adopts_empty_synthetic_legacy_table",
+        "pass": true
+      },
+      {
+        "test": "issue_and_lookup_preserve_js_date_and_user",
+        "pass": true
+      },
+      {
+        "test": "drizzle_binds_hash_and_user_not_raw_token",
+        "pass": true
+      },
+      {
+        "test": "rotation_consumes_predecessor_without_losing_family",
+        "pass": true
+      },
+      {
+        "test": "ordinary_logout_preserves_another_device",
+        "pass": true
+      },
+      {
+        "test": "repeated_logout_returns_logical_zero",
+        "pass": true
+      },
+      {
+        "test": "wrong_account_scoped_revoke_preserves_session",
+        "pass": true
+      },
+      {
+        "test": "explicit_executor_revocation_rolls_back_with_caller",
+        "pass": true
+      },
+      {
+        "test": "account_revocation_uses_supplied_transaction",
+        "pass": true
+      },
+      {
+        "test": "account_revocation_spares_other_accounts",
+        "pass": true
+      },
+      {
+        "test": "insertion_collision_rolls_back_consumption_through_adapter",
+        "pass": true
+      },
+      {
+        "test": "concurrent_adapter_rotations_have_one_winner",
+        "pass": true
+      },
+      {
+        "test": "rotation_then_delayed_logout_revokes_successor_through_adapter",
+        "pass": true
+      },
+      {
+        "test": "logout_then_rotation_blocks_successor_through_adapter",
+        "pass": true
+      },
+      {
+        "test": "runtime_cannot_delete_predecessor_history",
+        "pass": true
+      },
+      {
+        "test": "runtime_cannot_call_maintenance_prune",
+        "pass": true
+      },
+      {
+        "test": "insufficient_table_privilege_is_not_silently_accepted",
+        "pass": true
+      },
+      {
+        "test": "null_or_malformed_response_is_not_success",
+        "pass": true
+      },
+      {
+        "test": "all_legacy_rows_untouched_by_runtime_adapter",
+        "pass": true
+      }
+    ]
+  },
+  "testDirectory": "/tmp/mmhb-refresh-test-47e84kht",
+  "testClusterStopped": true,
+  "existingSourceAndMetadataUnchanged": true,
+  "sourceEdits": 0,
+  "liveDatabaseConnections": 0,
+  "applicationStart": false,
+  "applicationIntegration": "NOT_APPLIED",
+  "productionMigration": "NOT_APPROVED",
+  "error": null
+}

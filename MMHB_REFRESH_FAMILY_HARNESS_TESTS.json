@@ -1,0 +1,78 @@
+{
+  "schema": "MMHB_REFRESH_FAMILY_HARNESS_FIXTURES_V1",
+  "total": 17,
+  "passed": 17,
+  "scope": "Python and Git fixtures, plus fake PostgreSQL executables for process isolation and cleanup; no SQL execution",
+  "postgresql_sql_tests_executed_here": false,
+  "postgresql_concurrency_tests_executed_here": false,
+  "results": [
+    {
+      "name": "python_compilation",
+      "pass": true
+    },
+    {
+      "name": "embedded_sql_checksum",
+      "pass": true
+    },
+    {
+      "name": "no_argument_performs_no_database_operations",
+      "pass": true
+    },
+    {
+      "name": "root_execution_refused_before_repository_or_database_changes",
+      "pass": true
+    },
+    {
+      "name": "missing_explicit_postgres_directory_does_not_install_or_fallback",
+      "pass": true
+    },
+    {
+      "name": "exact_source_files_match_packaged_prior_fixes",
+      "pass": true
+    },
+    {
+      "name": "source_drift_is_refused",
+      "pass": true
+    },
+    {
+      "name": "missing_worktree_marker_does_not_fall_back_to_outer_repository",
+      "pass": true
+    },
+    {
+      "name": "symlink_substitution_is_refused",
+      "pass": true
+    },
+    {
+      "name": "wrong_checkpoint_is_refused",
+      "pass": true
+    },
+    {
+      "name": "read_only_preflight_preserves_head_index_refs_and_sources",
+      "pass": true
+    },
+    {
+      "name": "existing_matched_toolset_discovery",
+      "pass": true
+    },
+    {
+      "name": "test_subprocesses_do_not_inherit_production_or_node_configuration",
+      "pass": true
+    },
+    {
+      "name": "psql_uses_explicit_private_socket_and_no_user_rc",
+      "pass": true
+    },
+    {
+      "name": "generated_server_configuration_disables_tcp_and_keeps_durability",
+      "pass": true
+    },
+    {
+      "name": "synthetic_test_cluster_is_stopped",
+      "pass": true
+    },
+    {
+      "name": "test_control_flow_leaves_repository_snapshot_unchanged",
+      "pass": true
+    }
+  ]
+}

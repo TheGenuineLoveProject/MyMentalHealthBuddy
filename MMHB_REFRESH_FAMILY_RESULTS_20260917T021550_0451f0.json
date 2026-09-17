@@ -1,0 +1,144 @@
+{
+  "schema": "MMHB_REFRESH_FAMILY_POSTGRES_QUALIFICATION_V1",
+  "checkpoint": "cb2e164a8fc19e7fab3a539a9facb4b4b562eaca",
+  "postgres": "(PostgreSQL) 16.10",
+  "prototypeSqlSha256": "1feb46d6f7f142c34403032ca1a87e3f8a6f1e493e91a5b63cdf075624d4f340",
+  "scope": "Proposed SQL functions and synthetic tables; not MMHB runtime integration",
+  "total": 31,
+  "passed": 31,
+  "results": [
+    {
+      "test": "missing_migration_marker_blocks_issuance",
+      "pass": true
+    },
+    {
+      "test": "migration_adopts_two_legacy_rows",
+      "pass": true
+    },
+    {
+      "test": "legacy_source_rows_retained",
+      "pass": true
+    },
+    {
+      "test": "migrated_valid_token_works",
+      "pass": true
+    },
+    {
+      "test": "migrated_expired_token_refused",
+      "pass": true
+    },
+    {
+      "test": "legacy_noop_delete_is_blocked",
+      "pass": true
+    },
+    {
+      "test": "legacy_insert_is_blocked",
+      "pass": true
+    },
+    {
+      "test": "repeat_migration_refuses_reimport",
+      "pass": true
+    },
+    {
+      "test": "rotation_keeps_nonusable_predecessor_history",
+      "pass": true
+    },
+    {
+      "test": "predecessor_logout_revokes_successor",
+      "pass": true
+    },
+    {
+      "test": "other_device_of_same_user_survives",
+      "pass": true
+    },
+    {
+      "test": "logout_is_idempotent",
+      "pass": true
+    },
+    {
+      "test": "insertion_failure_rolls_back_consumption",
+      "pass": true
+    },
+    {
+      "test": "same_token_replacement_refused",
+      "pass": true
+    },
+    {
+      "test": "duplicate_refresh_does_not_issue_again",
+      "pass": true
+    },
+    {
+      "test": "invalid_hash_refused",
+      "pass": true
+    },
+    {
+      "test": "wrong_account_cannot_revoke_family",
+      "pass": true
+    },
+    {
+      "test": "outer_transaction_rollback_preserves_session",
+      "pass": true
+    },
+    {
+      "test": "account_revocation_spares_other_users",
+      "pass": true
+    },
+    {
+      "test": "concurrent_rotations_have_one_winner",
+      "pass": true
+    },
+    {
+      "test": "concurrent_rotation_then_logout_revokes_successor",
+      "pass": true
+    },
+    {
+      "test": "concurrent_logout_then_rotation_blocks_successor",
+      "pass": true
+    },
+    {
+      "test": "expired_predecessor_cannot_rotate",
+      "pass": true
+    },
+    {
+      "test": "database_enforces_one_unconsumed_token",
+      "pass": true
+    },
+    {
+      "test": "cleanup_retains_live_family_predecessors",
+      "pass": true
+    },
+    {
+      "test": "user_delete_cascades_new_credential_history",
+      "pass": true
+    },
+    {
+      "test": "functions_do_not_elevate_database_privileges",
+      "pass": true
+    },
+    {
+      "test": "cleanup_batch_size_is_bounded",
+      "pass": true
+    },
+    {
+      "test": "duplicate_legacy_hashes_stop_migration_without_deletion",
+      "pass": true
+    },
+    {
+      "test": "orphan_legacy_rows_stop_migration_without_deletion",
+      "pass": true
+    },
+    {
+      "test": "invalid_legacy_hashes_stop_migration_without_deletion",
+      "pass": true
+    }
+  ],
+  "testDirectory": "/tmp/mmhb-refresh-test-tavbel06",
+  "testClusterStopped": true,
+  "existingSourceAndCandidateMetadataUnchanged": true,
+  "applicationSourceEdits": 0,
+  "liveDatabaseConnections": 0,
+  "tcpListenersEnabled": false,
+  "applicationIntegration": "NOT_APPLIED",
+  "migrationApproval": "NOT_APPROVED_FOR_PRODUCTION",
+  "error": null
+}

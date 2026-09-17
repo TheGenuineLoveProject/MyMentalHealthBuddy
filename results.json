@@ -1,0 +1,48 @@
+{
+  "scope": "Real Node/Git filesystem and module-resolution diagnostics with synthetic package metadata; packages throw if executed. No MMHB build or Replit access.",
+  "node": "v22.16.0",
+  "total": 8,
+  "passed": 8,
+  "results": [
+    {
+      "case": "match",
+      "passed": true,
+      "fixture_contents_unchanged": true
+    },
+    {
+      "case": "wrong_version",
+      "passed": true,
+      "fixture_contents_unchanged": true
+    },
+    {
+      "case": "missing_lock_entry",
+      "passed": true,
+      "fixture_contents_unchanged": true
+    },
+    {
+      "case": "candidate_shadow",
+      "passed": true,
+      "fixture_contents_unchanged": true
+    },
+    {
+      "case": "nested_manifest",
+      "passed": true,
+      "fixture_contents_unchanged": true
+    },
+    {
+      "case": "missing_package",
+      "passed": true,
+      "fixture_contents_unchanged": true
+    },
+    {
+      "case": "working_drift",
+      "passed": true,
+      "fixture_contents_unchanged": true
+    },
+    {
+      "case": "missing_checkpoint",
+      "passed": true,
+      "fixture_contents_unchanged": true
+    }
+  ]
+}

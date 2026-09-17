@@ -1,0 +1,812 @@
+--- a/server/services/refreshTokens.service.mjs
++++ b/server/services/refreshTokens.service.mjs
+@@ -1,161 +1,18 @@
++// Refresh-family service facade. Uses the existing application database client.
++// Requires an approved mmhb_refresh_v1 database cutover before application startup.
++// Deliberately no legacy fallback, schema installation, or alternate connection.
++import { sql } from "drizzle-orm";
+ import { db } from "../db/client.mjs";
+-import { refreshTokens } from "../db/schema/index.mjs";
+-import { and, eq, gt } from "drizzle-orm";
+-import { hashToken, refreshExpiryDate } from "../auth/tokens.mjs";
++import { hashToken } from "../auth/tokens.mjs";
++import { createRefreshFamilyService } from "./refreshFamilyAdapter.mjs";
+ 
+-export async function storeRefreshToken({ userId, token }) {
+-  const tokenHash = hashToken(token);
+-  const expiresAt = refreshExpiryDate();
+-  await db.insert(refreshTokens).values({ userId, tokenHash, expiresAt });
+-  return { tokenHash, expiresAt };
+-}
+-
+-export async function verifyRefreshToken({ userId, token }) {
+-  const tokenHash = hashToken(token);
+-  const rows = await db
+-    .select()
+-    .from(refreshTokens)
+-    .where(and(
+-      eq(refreshTokens.userId, userId),
+-      gt(refreshTokens.expiresAt, new Date())
+-    ));
+-
+-  return rows.some((r) => r.tokenHash === tokenHash);
+-}
+-
+-export async function revokeAllRefreshTokens(
+-  userId,
+-  executor = db
+-) {
+-  await executor
+-    .delete(refreshTokens)
+-    .where(
+-      eq(
+-        refreshTokens.userId,
+-        userId
+-      )
+-    );
+-}
+-
+-export async function revokeRefreshToken({ userId, token }) {
+-  const tokenHash = hashToken(token);
+-  await db.delete(refreshTokens).where(and(
+-    eq(refreshTokens.userId, userId),
+-    eq(refreshTokens.tokenHash, tokenHash)
+-  ));
+-}
+-
+-/**
+- * Atomically revokes only the refresh credential presented by the caller.
+- *
+- * Normal logout must not revoke every session belonging to the account.
+- * Account-wide revocation remains available through revokeAllRefreshTokens()
+- * for explicit security events such as password changes and account deletion.
+- *
+- * The token is hashed before comparison and is never returned or logged.
+- * Expired matching rows are also removed because logout is a cleanup boundary.
+- */
+-export async function revokeRefreshTokenByToken(
+-  token,
+-  executor = db
+-) {
+-  if (!token) {
+-    return {
+-      revoked: false,
+-      revokedCount: 0,
+-    };
+-  }
+-
+-  const tokenHash = hashToken(token);
+-  const revoked = await executor
+-    .delete(refreshTokens)
+-    .where(eq(refreshTokens.tokenHash, tokenHash))
+-    .returning({
+-      id: refreshTokens.id,
+-    });
+-
+-  return {
+-    revoked: revoked.length > 0,
+-    revokedCount: revoked.length,
+-  };
+-}
+-
+-/**
+- * Atomically consumes one valid refresh token and replaces it with a new one.
+- *
+- * Security invariant:
+- *   a given refresh token may successfully rotate at most once.
+- *
+- * The DELETE and INSERT execute in one PostgreSQL transaction. Concurrent
+- * callers racing the same token therefore cannot both obtain a replacement.
+- *
+- * Returns null when the supplied token is absent, expired, or cannot be
+- * consumed exactly once.
+- */
+-export async function rotateRefreshToken({ token, newToken }) {
+-  if (!token || !newToken) return null;
+-
+-  const tokenHash = hashToken(token);
+-  const nextTokenHash = hashToken(newToken);
+-
+-  if (tokenHash === nextTokenHash) {
+-    throw new Error("Refresh token rotation requires a distinct replacement token");
+-  }
+-
+-  const now = new Date();
+-  const expiresAt = refreshExpiryDate();
+-
+-  return db.transaction(async (tx) => {
+-    const consumed = await tx
+-      .delete(refreshTokens)
+-      .where(and(
+-        eq(refreshTokens.tokenHash, tokenHash),
+-        gt(refreshTokens.expiresAt, now)
+-      ))
+-      .returning({
+-        userId: refreshTokens.userId,
+-      });
+-
+-    /*
+-     * Exactly one row is the only successful-consumption state.
+-     *
+-     * If corrupted historical state ever produced duplicate token hashes,
+-     * deleting all matching rows and refusing to issue a replacement is the
+-     * fail-closed result: no duplicate credential survives or rotates.
+-     */
+-    if (consumed.length !== 1) {
+-      return null;
+-    }
+-
+-    const userId = consumed[0].userId;
+-
+-    await tx
+-      .insert(refreshTokens)
+-      .values({
+-        userId,
+-        tokenHash: nextTokenHash,
+-        expiresAt,
+-      });
+-
+-    return {
+-      userId,
+-      tokenHash: nextTokenHash,
+-      expiresAt,
+-    };
+-  });
+-}
+-
+-
+-export async function findValidRefreshToken(token) {
+-  const tokenHash = hashToken(token);
+-  const rows = await db
+-    .select()
+-    .from(refreshTokens)
+-    .where(and(
+-      eq(refreshTokens.tokenHash, tokenHash),
+-      gt(refreshTokens.expiresAt, new Date())
+-    ))
+-    .limit(1);
+-
+-  return rows[0] || null;
+-}
++const service = createRefreshFamilyService({ db, sql, hashToken });
++export const {
++  storeRefreshToken,
++  findValidRefreshToken,
++  verifyRefreshToken,
++  rotateRefreshToken,
++  revokeRefreshTokenByToken,
++  revokeRefreshToken,
++  revokeAllRefreshTokens,
++} = service;
+--- /dev/null
++++ b/server/services/refreshFamilyAdapter.mjs
+@@ -0,0 +1,106 @@
++/**
++ * Candidate adapter boundary for the SQL already qualified by MMHB's private
++ * PostgreSQL runner. No environment reads, pools, migrations, or imports here.
++ * The production wrapper must inject the existing db, Drizzle sql tag and
++ * hashToken; this module does not authorize a live database cutover.
++ */
++export function createRefreshFamilyService({ db, sql, hashToken }) {
++  if (!db || typeof db.execute !== 'function' || typeof sql !== 'function' ||
++      typeof hashToken !== 'function') throw new TypeError('INVALID_ADAPTER_DEPENDENCIES');
++  const uuid = value => {
++    if (typeof value !== 'string' || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(value)) {
++      throw new TypeError('INVALID_REFRESH_USER_ID');
++    }
++    return value.toLowerCase();
++  };
++  const fail = () => { throw new Error('REFRESH_DATABASE_RESPONSE_INVALID'); };
++  const digest = token => {
++    if (typeof token !== 'string' || token.length === 0 || token.length > 4096) return null;
++    const value = hashToken(token);
++    if (typeof value !== 'string' || !/^[0-9a-f]{64}$/.test(value)) throw new TypeError('INVALID_TOKEN_DIGEST');
++    return value;
++  };
++  const object = value => {
++    if (!value || typeof value !== 'object' || Array.isArray(value)) fail();
++    return value;
++  };
++  const responseId = value => {
++    try { return uuid(value); } catch { return fail(); }
++  };
++  const expiry = value => {
++    // PostgreSQL jsonb timestamps are strings, unlike ordinary pg timestamp
++    // columns. Normalize explicitly, preserving the service's Date contract.
++    if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}T.*(?:Z|[+-]\d{2}:\d{2})$/.test(value)) fail();
++    const result = new Date(value);
++    if (!Number.isFinite(result.getTime())) fail();
++    return result;
++  };
++  async function execute(executor, statement) {
++    if (!executor || typeof executor.execute !== 'function') throw new TypeError('INVALID_REFRESH_EXECUTOR');
++    const response = await executor.execute(statement);
++    if (!response || !Array.isArray(response.rows) || response.rows.length !== 1 ||
++        !response.rows[0] || !Object.hasOwn(response.rows[0], 'result') ||
++        response.rows[0].result === undefined) fail();
++    return response.rows[0].result;
++  }
++  function credential(value, expectedHash, kind) {
++    object(value);
++    if (value.tokenHash !== expectedHash) fail();
++    const out = {
++      tokenHash: value.tokenHash,
++      expiresAt: expiry(value.expiresAt),
++      familyId: responseId(value.familyId),
++    };
++    if (kind !== 'issue') out.userId = responseId(value.userId);
++    if (kind === 'find') out.id = responseId(value.id);
++    return out;
++  }
++  function revocation(value) {
++    object(value);
++    if (typeof value.revoked !== 'boolean' || !Number.isInteger(value.revokedCount) ||
++        value.revokedCount < 0 || value.revokedCount > 1 ||
++        value.revoked !== (value.revokedCount === 1)) fail();
++    return { revoked: value.revoked, revokedCount: value.revokedCount };
++  }
++  async function storeRefreshToken({ userId, token }) {
++    const id = uuid(userId), hash = digest(token);
++    if (!hash) throw new TypeError('INVALID_REFRESH_CREDENTIAL');
++    return credential(await execute(db, sql`SELECT mmhb_refresh_v1.issue(${id}::uuid, ${hash}) AS result`), hash, 'issue');
++  }
++  async function findValidRefreshToken(token) {
++    const hash = digest(token);
++    if (!hash) return null;
++    const value = await execute(db, sql`SELECT mmhb_refresh_v1.find_valid(${hash}) AS result`);
++    return value === null ? null : credential(value, hash, 'find');
++  }
++  async function verifyRefreshToken({ userId, token }) {
++    const id = uuid(userId), row = await findValidRefreshToken(token);
++    return Boolean(row && row.userId === id);
++  }
++  async function rotateRefreshToken({ token, newToken }) {
++    const before = digest(token), after = digest(newToken);
++    if (!before || !after) return null;
++    if (before === after) throw new TypeError('REFRESH_REPLACEMENT_MUST_DIFFER');
++    const value = await execute(db, sql`SELECT mmhb_refresh_v1.rotate(${before}, ${after}) AS result`);
++    return value === null ? null : credential(value, after, 'rotate');
++  }
++  async function revokeRefreshTokenByToken(token, executor = db) {
++    const hash = digest(token);
++    if (!hash) return { revoked: false, revokedCount: 0 };
++    return revocation(await execute(executor, sql`SELECT mmhb_refresh_v1.revoke(${hash}) AS result`));
++  }
++  async function revokeRefreshToken({ userId, token }) {
++    const id = uuid(userId), hash = digest(token);
++    if (!hash) return;
++    revocation(await execute(db, sql`SELECT mmhb_refresh_v1.revoke(${hash}, ${id}::uuid) AS result`));
++    // Preserve the previous public service's undefined return contract.
++  }
++  async function revokeAllRefreshTokens(userId, executor = db) {
++    const id = uuid(userId);
++    const count = await execute(executor, sql`SELECT mmhb_refresh_v1.revoke_user(${id}::uuid) AS result`);
++    if (!Number.isSafeInteger(count) || count < 0) fail();
++    // Preserve undefined; importantly, execution used the caller's tx if supplied.
++  }
++  return Object.freeze({ storeRefreshToken, findValidRefreshToken, verifyRefreshToken,
++    rotateRefreshToken, revokeRefreshTokenByToken, revokeRefreshToken, revokeAllRefreshTokens });
++}
+--- /dev/null
++++ b/server/db/refresh-family/refresh-family-v1.sql
+@@ -0,0 +1,212 @@
++-- MMHB refresh-family prototype v1. QUALIFICATION ONLY; not an approved live migration.
++-- The local test runner applies this only inside a newly initialized private cluster.
++-- No raw refresh token is stored. All functions use invoker rights.
++BEGIN;
++CREATE SCHEMA mmhb_refresh_v1;
++CREATE TABLE mmhb_refresh_v1.installation (
++  version integer PRIMARY KEY CHECK (version = 1),
++  installed_at timestamptz NOT NULL DEFAULT clock_timestamp()
++);
++CREATE TABLE mmhb_refresh_v1.families (
++  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
++  user_id uuid NOT NULL REFERENCES public.users(id) ON DELETE CASCADE,
++  created_at timestamptz NOT NULL DEFAULT clock_timestamp(),
++  expires_at timestamptz NOT NULL,
++  revoked_at timestamptz
++);
++CREATE INDEX refresh_family_user_idx ON mmhb_refresh_v1.families(user_id);
++CREATE INDEX refresh_family_expiry_idx ON mmhb_refresh_v1.families(expires_at);
++CREATE TABLE mmhb_refresh_v1.credentials (
++  token_hash text PRIMARY KEY CHECK (token_hash ~ '^[0-9a-f]{64}$'),
++  id uuid NOT NULL UNIQUE DEFAULT gen_random_uuid(),
++  family_id uuid NOT NULL REFERENCES mmhb_refresh_v1.families(id) ON DELETE CASCADE,
++  issued_at timestamptz NOT NULL DEFAULT clock_timestamp(),
++  expires_at timestamptz NOT NULL,
++  consumed_at timestamptz
++);
++CREATE UNIQUE INDEX one_unconsumed_credential_per_family
++  ON mmhb_refresh_v1.credentials(family_id) WHERE consumed_at IS NULL;
++
++CREATE FUNCTION mmhb_refresh_v1.require_ready() RETURNS void
++LANGUAGE plpgsql SET search_path = pg_catalog AS $$
++BEGIN
++  IF NOT EXISTS (SELECT 1 FROM mmhb_refresh_v1.installation WHERE version=1) THEN
++    RAISE EXCEPTION 'REFRESH_FAMILY_MIGRATION_REQUIRED' USING ERRCODE='55000';
++  END IF;
++END $$;
++
++CREATE FUNCTION mmhb_refresh_v1.valid_hash(p_hash text) RETURNS boolean
++LANGUAGE sql IMMUTABLE SET search_path = pg_catalog AS $$
++  SELECT p_hash IS NOT NULL AND p_hash ~ '^[0-9a-f]{64}$'
++$$;
++
++CREATE FUNCTION mmhb_refresh_v1.reject_legacy_write() RETURNS trigger
++LANGUAGE plpgsql SET search_path = pg_catalog AS $$
++BEGIN
++  RAISE EXCEPTION 'LEGACY_REFRESH_WRITES_DISABLED' USING ERRCODE='55000';
++END $$;
++
++-- Deliberate cutover operation. Requires ALL old application writers stopped.
++-- A statement-level trigger rejects even a DELETE that would match zero rows.
++-- Legacy timestamp values are interpreted as UTC; that assumption must be
++-- verified against the real deployment before considering a live migration.
++CREATE FUNCTION mmhb_refresh_v1.adopt_legacy() RETURNS integer
++LANGUAGE plpgsql SET search_path = pg_catalog AS $$
++DECLARE n integer;
++BEGIN
++  PERFORM pg_advisory_xact_lock(1835886690, 1);
++  IF EXISTS (SELECT 1 FROM mmhb_refresh_v1.installation WHERE version=1) THEN
++    RAISE EXCEPTION 'MIGRATION_ALREADY_APPLIED' USING ERRCODE='55000';
++  END IF;
++  LOCK TABLE public.refresh_tokens IN ACCESS EXCLUSIVE MODE;
++  IF current_setting('TimeZone') <> 'UTC' THEN
++    RAISE EXCEPTION 'MIGRATION_REQUIRES_UTC_SESSION' USING ERRCODE='55000';
++  END IF;
++  IF EXISTS (SELECT 1 FROM mmhb_refresh_v1.families) OR
++     EXISTS (SELECT 1 FROM mmhb_refresh_v1.credentials) THEN
++    RAISE EXCEPTION 'MIGRATION_TARGET_NOT_EMPTY' USING ERRCODE='55000';
++  END IF;
++  IF EXISTS (SELECT 1 FROM public.refresh_tokens GROUP BY token_hash HAVING count(*)>1) THEN
++    RAISE EXCEPTION 'LEGACY_DUPLICATE_HASHES' USING ERRCODE='23505';
++  END IF;
++  IF EXISTS (SELECT 1 FROM public.refresh_tokens r
++             WHERE NOT mmhb_refresh_v1.valid_hash(r.token_hash) OR r.expires_at IS NULL) THEN
++    RAISE EXCEPTION 'LEGACY_INVALID_CREDENTIAL_METADATA' USING ERRCODE='23514';
++  END IF;
++  -- Use the same user-before-family lock order as runtime security operations.
++  PERFORM u.id FROM public.users u
++    WHERE EXISTS (SELECT 1 FROM public.refresh_tokens r WHERE r.user_id=u.id)
++    ORDER BY u.id FOR UPDATE;
++  IF EXISTS (SELECT 1 FROM public.refresh_tokens r
++             WHERE NOT EXISTS (SELECT 1 FROM public.users u WHERE u.id=r.user_id)) THEN
++    RAISE EXCEPTION 'LEGACY_ORPHAN_CREDENTIALS' USING ERRCODE='23503';
++  END IF;
++  INSERT INTO mmhb_refresh_v1.families(id,user_id,created_at,expires_at)
++    SELECT id,user_id,coalesce(created_at AT TIME ZONE 'UTC',clock_timestamp()),
++           expires_at AT TIME ZONE 'UTC' FROM public.refresh_tokens;
++  INSERT INTO mmhb_refresh_v1.credentials(id,token_hash,family_id,issued_at,expires_at)
++    SELECT id,token_hash,id,coalesce(created_at AT TIME ZONE 'UTC',clock_timestamp()),
++           expires_at AT TIME ZONE 'UTC' FROM public.refresh_tokens;
++  GET DIAGNOSTICS n = ROW_COUNT;
++  EXECUTE 'CREATE TRIGGER mmhb_legacy_refresh_readonly BEFORE INSERT OR UPDATE OR DELETE OR TRUNCATE ON public.refresh_tokens FOR EACH STATEMENT EXECUTE FUNCTION mmhb_refresh_v1.reject_legacy_write()';
++  INSERT INTO mmhb_refresh_v1.installation(version) VALUES(1);
++  RETURN n;
++END $$;
++
++CREATE FUNCTION mmhb_refresh_v1.issue(p_user uuid,p_hash text) RETURNS jsonb
++LANGUAGE plpgsql SET search_path = pg_catalog AS $$
++DECLARE f uuid; expiry timestamptz;
++BEGIN
++  PERFORM mmhb_refresh_v1.require_ready();
++  IF NOT mmhb_refresh_v1.valid_hash(p_hash) THEN
++    RAISE EXCEPTION 'INVALID_REFRESH_HASH' USING ERRCODE='22023';
++  END IF;
++  PERFORM id FROM public.users WHERE id=p_user FOR UPDATE;
++  IF NOT FOUND THEN RAISE EXCEPTION 'REFRESH_USER_NOT_FOUND' USING ERRCODE='23503'; END IF;
++  expiry := clock_timestamp()+interval '720 hours';
++  INSERT INTO mmhb_refresh_v1.families(user_id,expires_at) VALUES(p_user,expiry) RETURNING id INTO f;
++  INSERT INTO mmhb_refresh_v1.credentials(token_hash,family_id,expires_at) VALUES(p_hash,f,expiry);
++  RETURN jsonb_build_object('familyId',f,'tokenHash',p_hash,'expiresAt',expiry);
++END $$;
++
++CREATE FUNCTION mmhb_refresh_v1.find_valid(p_hash text) RETURNS jsonb
++LANGUAGE plpgsql SET search_path = pg_catalog AS $$
++DECLARE result jsonb;
++BEGIN
++  PERFORM mmhb_refresh_v1.require_ready();
++  IF NOT mmhb_refresh_v1.valid_hash(p_hash) THEN RETURN NULL; END IF;
++  SELECT jsonb_build_object('id',c.id,'userId',f.user_id,'tokenHash',c.token_hash,
++                           'expiresAt',c.expires_at,'familyId',f.id)
++    INTO result
++    FROM mmhb_refresh_v1.credentials c JOIN mmhb_refresh_v1.families f ON f.id=c.family_id
++    WHERE c.token_hash=p_hash AND c.consumed_at IS NULL AND c.expires_at>clock_timestamp()
++      AND f.revoked_at IS NULL AND f.expires_at>clock_timestamp();
++  RETURN result;
++END $$;
++
++-- Concurrent duplicate refresh returns NULL, preserving the existing 409 policy.
++-- This is NOT a claim of strict OAuth replay-triggered family revocation.
++CREATE FUNCTION mmhb_refresh_v1.rotate(p_old text,p_new text) RETURNS jsonb
++LANGUAGE plpgsql SET search_path = pg_catalog AS $$
++DECLARE uid uuid; fid uuid; family mmhb_refresh_v1.families%ROWTYPE;
++        credential mmhb_refresh_v1.credentials%ROWTYPE; now_at timestamptz; expiry timestamptz;
++BEGIN
++  PERFORM mmhb_refresh_v1.require_ready();
++  IF NOT mmhb_refresh_v1.valid_hash(p_old) OR NOT mmhb_refresh_v1.valid_hash(p_new) THEN RETURN NULL; END IF;
++  IF p_old=p_new THEN RAISE EXCEPTION 'REFRESH_REPLACEMENT_MUST_DIFFER' USING ERRCODE='22023'; END IF;
++  SELECT f.user_id,f.id INTO uid,fid FROM mmhb_refresh_v1.credentials c
++    JOIN mmhb_refresh_v1.families f ON f.id=c.family_id WHERE c.token_hash=p_old;
++  IF NOT FOUND THEN RETURN NULL; END IF;
++  PERFORM id FROM public.users WHERE id=uid FOR UPDATE;
++  IF NOT FOUND THEN RETURN NULL; END IF;
++  SELECT * INTO family FROM mmhb_refresh_v1.families WHERE id=fid FOR UPDATE;
++  IF NOT FOUND OR family.revoked_at IS NOT NULL THEN RETURN NULL; END IF;
++  SELECT * INTO credential FROM mmhb_refresh_v1.credentials
++    WHERE token_hash=p_old AND family_id=fid FOR UPDATE;
++  IF NOT FOUND THEN RETURN NULL; END IF;
++  now_at := clock_timestamp();
++  IF credential.consumed_at IS NOT NULL OR credential.expires_at<=now_at OR family.expires_at<=now_at THEN RETURN NULL; END IF;
++  expiry := now_at+interval '720 hours';
++  UPDATE mmhb_refresh_v1.credentials SET consumed_at=now_at WHERE token_hash=p_old;
++  INSERT INTO mmhb_refresh_v1.credentials(token_hash,family_id,issued_at,expires_at)
++    VALUES(p_new,fid,now_at,expiry);
++  UPDATE mmhb_refresh_v1.families SET expires_at=expiry WHERE id=fid;
++  RETURN jsonb_build_object('userId',uid,'familyId',fid,'tokenHash',p_new,'expiresAt',expiry);
++END $$;
++
++-- A consumed predecessor still identifies its family for explicit logout.
++CREATE FUNCTION mmhb_refresh_v1.revoke(p_hash text,p_user uuid DEFAULT NULL) RETURNS jsonb
++LANGUAGE plpgsql SET search_path = pg_catalog AS $$
++DECLARE uid uuid; fid uuid; revoked timestamptz;
++BEGIN
++  PERFORM mmhb_refresh_v1.require_ready();
++  IF NOT mmhb_refresh_v1.valid_hash(p_hash) THEN
++    RETURN jsonb_build_object('revoked',false,'revokedCount',0);
++  END IF;
++  SELECT f.user_id,f.id INTO uid,fid FROM mmhb_refresh_v1.credentials c
++    JOIN mmhb_refresh_v1.families f ON f.id=c.family_id WHERE c.token_hash=p_hash;
++  IF NOT FOUND OR (p_user IS NOT NULL AND p_user<>uid) THEN
++    RETURN jsonb_build_object('revoked',false,'revokedCount',0);
++  END IF;
++  PERFORM id FROM public.users WHERE id=uid FOR UPDATE;
++  IF NOT FOUND THEN RETURN jsonb_build_object('revoked',false,'revokedCount',0); END IF;
++  SELECT revoked_at INTO revoked FROM mmhb_refresh_v1.families WHERE id=fid FOR UPDATE;
++  IF NOT FOUND OR revoked IS NOT NULL THEN RETURN jsonb_build_object('revoked',false,'revokedCount',0); END IF;
++  UPDATE mmhb_refresh_v1.families SET revoked_at=clock_timestamp() WHERE id=fid;
++  -- Count logical sign-ins, not historical credential rows (at most one).
++  RETURN jsonb_build_object('revoked',true,'revokedCount',1);
++END $$;
++
++CREATE FUNCTION mmhb_refresh_v1.revoke_user(p_user uuid) RETURNS integer
++LANGUAGE plpgsql SET search_path = pg_catalog AS $$
++DECLARE n integer;
++BEGIN
++  PERFORM mmhb_refresh_v1.require_ready();
++  PERFORM id FROM public.users WHERE id=p_user FOR UPDATE;
++  IF NOT FOUND THEN RETURN 0; END IF;
++  UPDATE mmhb_refresh_v1.families SET revoked_at=clock_timestamp()
++    WHERE user_id=p_user AND revoked_at IS NULL;
++  GET DIAGNOSTICS n = ROW_COUNT;
++  RETURN n;
++END $$;
++
++-- Bounded cleanup; never discard predecessor links from a live family.
++CREATE FUNCTION mmhb_refresh_v1.prune_expired(p_limit integer DEFAULT 100) RETURNS integer
++LANGUAGE plpgsql SET search_path = pg_catalog AS $$
++DECLARE n integer;
++BEGIN
++  PERFORM mmhb_refresh_v1.require_ready();
++  IF p_limit IS NULL OR p_limit<1 OR p_limit>1000 THEN
++    RAISE EXCEPTION 'INVALID_CLEANUP_LIMIT' USING ERRCODE='22023';
++  END IF;
++  WITH doomed AS (
++    SELECT id FROM mmhb_refresh_v1.families WHERE expires_at<=clock_timestamp()
++    ORDER BY expires_at,id LIMIT p_limit FOR UPDATE SKIP LOCKED
++  ) DELETE FROM mmhb_refresh_v1.families f USING doomed d WHERE f.id=d.id;
++  GET DIAGNOSTICS n = ROW_COUNT;
++  RETURN n;
++END $$;
++REVOKE ALL ON SCHEMA mmhb_refresh_v1 FROM PUBLIC;
++REVOKE ALL ON ALL TABLES IN SCHEMA mmhb_refresh_v1 FROM PUBLIC;
++REVOKE ALL ON ALL FUNCTIONS IN SCHEMA mmhb_refresh_v1 FROM PUBLIC;
++COMMIT;
+--- /dev/null
++++ b/scripts/security/refresh-family/adapter-boundary.test.mjs
+@@ -0,0 +1,54 @@
++import assert from 'node:assert/strict';
++import { createHash } from 'node:crypto';
++import { createRefreshFamilyService } from '../../../server/services/refreshFamilyAdapter.mjs';
++import { writeFileSync } from 'node:fs';
++const U='11111111-1111-4111-8111-111111111111', V='22222222-2222-4222-8222-222222222222';
++const F='33333333-3333-4333-8333-333333333333', I='44444444-4444-4444-8444-444444444444';
++const token='SYNTHETIC_ADAPTER_UNIT_ONLY';
++const hashToken=x=>createHash('sha256').update(x).digest('hex');
++const sql=(strings,...params)=>({text:strings.join('?'),params});
++const valid={tokenHash:hashToken(token),familyId:F,id:I,userId:U,expiresAt:'2030-01-01T00:00:00+00:00'};
++const record=x=>({rows:[{result:x}]});
++let response=record(valid), calls=[];
++const db={execute:async q=>{calls.push(q);return response;}};
++const make=()=>createRefreshFamilyService({db,sql,hashToken});
++let service=make(); const results=[];
++const tests=[]; const test=(name,fn)=>tests.push([name,fn]);
++const invalid=/REFRESH_DATABASE_RESPONSE_INVALID/;
++test('rejects_invalid_dependencies',()=>assert.throws(()=>createRefreshFamilyService({db:{},sql,hashToken}),/INVALID_ADAPTER/));
++test('issuance_preserves_date_contract',async()=>assert.ok((await service.storeRefreshToken({userId:U,token})).expiresAt instanceof Date));
++test('find_valid_maps_expected_identity',async()=>assert.equal((await service.findValidRefreshToken(token)).id,I));
++test('verification_checks_user_identity',async()=>{assert.equal(await service.verifyRefreshToken({userId:U,token}),true);assert.equal(await service.verifyRefreshToken({userId:V,token}),false);});
++test('null_find_is_legitimate_absence',async()=>{response=record(null);assert.equal(await service.findValidRefreshToken(token),null);});
++test('null_rotation_is_legitimate_conflict',async()=>{response=record(null);assert.equal(await service.rotateRefreshToken({token,newToken:'NEXT_TEST_TOKEN'}),null);});
++for(const [name,value] of Object.entries({empty_rows:{rows:[]},missing_result:{rows:[{}]},undefined_result:record(undefined),multiple_rows:{rows:[{result:null},{result:null}]},missing_rows:{}})) {
++ test('rejects_'+name,async()=>{response=value;await assert.rejects(service.findValidRefreshToken(token),invalid);});
++}
++test('issuance_cannot_silently_accept_null',async()=>{response=record(null);await assert.rejects(service.storeRefreshToken({userId:U,token}),invalid);});
++test('valid_revocation_maps_logical_count',async()=>{response=record({revoked:true,revokedCount:1});assert.deepEqual(await service.revokeRefreshTokenByToken(token),{revoked:true,revokedCount:1});});
++for(const [name,val] of Object.entries({null:null,missing_count:{revoked:true},string_count:{revoked:true,revokedCount:'1'},inconsistent:{revoked:false,revokedCount:1},multiple_families:{revoked:true,revokedCount:2}})) {
++ test('rejects_revocation_'+name,async()=>{response=record(val);await assert.rejects(service.revokeRefreshTokenByToken(token),invalid);});
++}
++test('empty_revocation_does_not_query',async()=>{calls=[];assert.deepEqual(await service.revokeRefreshTokenByToken(''),{revoked:false,revokedCount:0});assert.equal(calls.length,0);});
++test('long_token_does_not_query',async()=>{calls=[];assert.equal(await service.findValidRefreshToken('a'.repeat(4097)),null);assert.equal(calls.length,0);});
++test('invalid_user_cannot_become_unscoped_revocation',async()=>{calls=[];await assert.rejects(service.revokeRefreshToken({token,userId:null}),/INVALID_REFRESH_USER_ID/);assert.equal(calls.length,0);});
++test('bad_uuid_rejected_before_database',async()=>{calls=[];await assert.rejects(service.storeRefreshToken({userId:'not-a-uuid',token}),/INVALID_REFRESH_USER_ID/);assert.equal(calls.length,0);});
++test('identical_replacement_refused',async()=>{calls=[];await assert.rejects(service.rotateRefreshToken({token,newToken:token}),/MUST_DIFFER/);assert.equal(calls.length,0);});
++test('raw_token_never_sent_to_executor',async()=>{response=record(valid);calls=[];await service.storeRefreshToken({userId:U,token});assert.deepEqual(calls[0].params,[U,hashToken(token)]);assert.ok(!JSON.stringify(calls).includes(token));});
++for(const [name,changed] of Object.entries({wrong_hash:{tokenHash:'f'.repeat(64)},bad_expiry:{expiresAt:'not-a-date'},timezone_missing:{expiresAt:'2030-01-01T00:00:00'},bad_family:{familyId:'not-a-uuid'}})) {
++ test('rejects_'+name,async()=>{response=record({...valid,...changed});await assert.rejects(service.findValidRefreshToken(token),invalid);});
++}
++test('caller_executor_receives_revocation',async()=>{calls=[];let touched=0;const tx={execute:async()=>{touched++;return record({revoked:false,revokedCount:0});}};await service.revokeRefreshTokenByToken(token,tx);assert.equal(touched,1);assert.equal(calls.length,0);});
++test('account_revoke_uses_tx_and_preserves_return',async()=>{calls=[];let touched=0;const tx={execute:async()=>{touched++;return record(2);}};assert.equal(await service.revokeAllRefreshTokens(U,tx),undefined);assert.equal(touched,1);assert.equal(calls.length,0);});
++test('account_revoke_rejects_missing_count',async()=>{response=record(null);await assert.rejects(service.revokeAllRefreshTokens(U),invalid);});
++test('database_error_is_not_silently_swallowed',async()=>{const err=Object.assign(new Error('synthetic-db-error'),{code:'55000'});const failDb={execute:async()=>{throw err;}};const s=createRefreshFamilyService({db:failDb,sql,hashToken});await assert.rejects(s.storeRefreshToken({userId:U,token}),e=>e===err);});
++test('invalid_digest_implementation_refused',async()=>{const s=createRefreshFamilyService({db,sql,hashToken:()=>''});await assert.rejects(s.findValidRefreshToken(token),/INVALID_TOKEN_DIGEST/);});
++for(const [name,fn] of tests) {
++ try {response=record(valid);calls=[];service=make();await fn();results.push({test:name,pass:true});}
++ catch(e){results.push({test:name,pass:false,error:e.message});}
++}
++const out={schema:'MMHB_ADAPTER_BOUNDARY_UNIT_V1',scope:'Real adapter and Node SHA-256; synthetic SQL tag and execute responses, no PostgreSQL',node:process.version,total:results.length,passed:results.filter(r=>r.pass).length,results};
++if(process.argv[2])writeFileSync(process.argv[2],JSON.stringify(out,null,2)+'\n');
++for (const r of results) if (!r.pass) console.error('BOUNDARY_FAILURE='+r.test+':'+r.error);
++console.log(`ADAPTER_BOUNDARY_ASSERTIONS=${out.passed}_OF_${out.total}`);
++if(out.passed!==out.total)process.exitCode=1;
+--- /dev/null
++++ b/scripts/security/refresh-family/service-wiring.test.mjs
+@@ -0,0 +1,58 @@
++/** Exercises the actual facade and adapter with synthetic dependency modules.
++ * No application imports, environment configuration, network, or PostgreSQL.
++ * Run with node --experimental-vm-modules (test process only).
++ */
++import assert from 'node:assert/strict';
++import vm from 'node:vm';
++import { readFileSync } from 'node:fs';
++import { createHash } from 'node:crypto';
++const base=new URL('../../../',import.meta.url);
++const serviceSource=readFileSync(new URL('server/services/refreshTokens.service.mjs',base),'utf8');
++const adapterSource=readFileSync(new URL('server/services/refreshFamilyAdapter.mjs',base),'utf8');
++const context=vm.createContext({});
++const U='11111111-1111-4111-8111-111111111111';
++const F='22222222-2222-4222-8222-222222222222';
++const I='33333333-3333-4333-8333-333333333333';
++const token='MMHB_SYNTHETIC_WIRING_TOKEN';
++const hashToken=t=>createHash('sha256').update(t).digest('hex');
++const sql=(strings,...params)=>({text:strings.join('?'),params});
++let calls=[], reply=null, failure=null;
++const db={execute:async q=>{calls.push(q);if(failure)throw failure;return {rows:[{result:reply}]};}};
++const make=(exports,id)=>new vm.SyntheticModule(Object.keys(exports),function(){
++ for(const [k,v] of Object.entries(exports))this.setExport(k,v);
++},{context,identifier:id});
++const modules=new Map([
++ ['drizzle-orm',make({sql},'synthetic:drizzle')],
++ ['../db/client.mjs',make({db},'synthetic:db')],
++ ['../auth/tokens.mjs',make({hashToken},'synthetic:tokens')],
++ ['./refreshFamilyAdapter.mjs',new vm.SourceTextModule(adapterSource,{context,identifier:'candidate:adapter'})],
++]);
++const facade=new vm.SourceTextModule(serviceSource,{context,identifier:'candidate:facade'});
++const imports=[];
++await facade.link((name,parent)=>{
++ assert.equal(parent.identifier,'candidate:facade','Adapter must not import application dependencies');
++ assert.ok(modules.has(name),'Unreviewed facade dependency: '+name);imports.push(name);return modules.get(name);
++});
++await facade.evaluate();
++const svc=facade.namespace;
++const expected=['storeRefreshToken','findValidRefreshToken','verifyRefreshToken','rotateRefreshToken',
++ 'revokeRefreshTokenByToken','revokeRefreshToken','revokeAllRefreshTokens'].sort();
++const tests=[];const test=(name,fn)=>tests.push([name,fn]);
++const row=(t=token)=>({id:I,userId:U,familyId:F,tokenHash:hashToken(t),expiresAt:'2030-01-01T00:00:00Z'});
++const plain=x=>JSON.parse(JSON.stringify(x));
++test('public_exports_preserved',()=>assert.deepEqual(Object.keys(svc).sort(),expected));
++test('only_existing_db_sql_hash_and_adapter_imports',()=>assert.deepEqual(imports.sort(),[...modules.keys()].sort()));
++test('import_does_not_query_or_migrate',()=>assert.equal(calls.length,0));
++test('issue_uses_existing_db_and_hash',async()=>{reply=row();const v=await svc.storeRefreshToken({userId:U,token});assert.equal(v.tokenHash,hashToken(token));assert.deepEqual(calls[0].params,[U,hashToken(token)]);assert.match(calls[0].text,/mmhb_refresh_v1.issue/);});
++test('find_and_verify_use_family_lookup',async()=>{reply=row();assert.equal((await svc.findValidRefreshToken(token)).familyId,F);assert.equal(await svc.verifyRefreshToken({userId:U,token}),true);assert.match(calls[0].text,/find_valid/);});
++test('rotate_uses_both_hashes_not_raw_tokens',async()=>{const next=token+'_NEXT';reply=row(next);assert.equal((await svc.rotateRefreshToken({token,newToken:next})).tokenHash,hashToken(next));assert.deepEqual(calls[0].params,[hashToken(token),hashToken(next)]);assert.equal(JSON.stringify(calls).includes(token),false);});
++test('presented_token_logout_uses_family_revoke',async()=>{reply={revoked:true,revokedCount:1};assert.deepEqual(plain(await svc.revokeRefreshTokenByToken(token)),reply);assert.match(calls[0].text,/mmhb_refresh_v1.revoke\(/);});
++test('scoped_logout_retains_undefined_contract',async()=>{reply={revoked:false,revokedCount:0};assert.equal(await svc.revokeRefreshToken({userId:U,token}),undefined);assert.deepEqual(calls[0].params,[hashToken(token),U]);});
++test('logout_honors_caller_transaction',async()=>{let n=0;const tx={execute:async()=>{n++;return {rows:[{result:{revoked:true,revokedCount:1}}]};}};await svc.revokeRefreshTokenByToken(token,tx);assert.equal(n,1);assert.equal(calls.length,0);});
++test('account_revocation_honors_caller_transaction',async()=>{let n=0;const tx={execute:async()=>{n++;return {rows:[{result:2}]};}};assert.equal(await svc.revokeAllRefreshTokens(U,tx),undefined);assert.equal(n,1);assert.equal(calls.length,0);});
++test('missing_migration_error_propagates_without_fallback',async()=>{failure=Object.assign(new Error('REFRESH_FAMILY_MIGRATION_REQUIRED'),{code:'55000'});await assert.rejects(svc.storeRefreshToken({userId:U,token}),e=>e===failure);assert.equal(calls.length,1);assert.ok(!calls[0].text.includes('refresh_tokens'));});
++test('malformed_reply_is_not_success',async()=>{reply=null;await assert.rejects(svc.storeRefreshToken({userId:U,token}),/REFRESH_DATABASE_RESPONSE_INVALID/);});
++let passed=0;
++for(const [name,fn] of tests){calls=[];reply=null;failure=null;try{await fn();passed++;}catch(e){console.error('SERVICE_WIRING_FAILURE='+name+':'+e.message);}}
++console.log(`SERVICE_WIRING_ASSERTIONS=${passed}_OF_${tests.length}`);
++if(passed!==tests.length)process.exitCode=1;
+--- a/scripts/security/verify-auth-session-contracts.mjs
++++ b/scripts/security/verify-auth-session-contracts.mjs
+@@ -1,13 +1,20 @@
+ import fs from "node:fs";
+ import crypto from "node:crypto";
++import { spawnSync } from "node:child_process";
+ 
+ const EXPECTED = Object.freeze({
+-  "server/routes/auth.mjs":
+-    "fd4d9d7cfc75e23fc60dde5df5139ffb1fc826a338acf3c9cc7c2faba4ce362c",
+-  "server/services/refreshTokens.service.mjs":
+-    "5a9756caa3c772ac8c70f4a7860372dd42895e7df47c4e0956e42fa041528e8e",
+-  "server/routes/account.mjs":
+-    "e766374c5bc57032a5ad8573ed1c9bb37ef66dceb703957bf2bba289a5acd331",
++  "server/replit_integrations/auth/storage.mjs": "9eddeef15ea27bac5ecc38da25e61b4487b87b2f7e285e5d718e221a90fae7da",
++  "server/routes/auth.mjs": "32c9aa86bfe2704e7e6872e9ca2cb51de2f37136fd62eab921f40e451ad601a9",
++  "server/security/csrf.mjs": "e700c729408614c4a638365ef47a7b4a5c043112489b8be3f15b93d7178ce8bf",
++  "client/src/context/AuthContext.jsx": "b63819acaacde6767da9df8c4901e1958131ec9d82d4b073cd66f35dbddcd046",
++  "client/src/api/fetchWithAuth.js": "7dc437f7f008d48a3dbd4cb3b597821be67701de7d7d7b9b9505d5d0d8482660",
++  "client/src/api/authGeneration.js": "7a47bd16d66b2db4cbed1047d79a5a2a7f1001be365e7c4003512c04bb8754ef",
++  "server/services/refreshTokens.service.mjs": "57e7b6b9eae46b971a9494a1320cd739f23b036097cd738aaf078861c55e45be",
++  "server/routes/account.mjs": "e766374c5bc57032a5ad8573ed1c9bb37ef66dceb703957bf2bba289a5acd331",
++  "server/services/refreshFamilyAdapter.mjs": "8cb12cc57ca893d2b399ca8ebf61ca52378d5c2bc3c777d87190904b1999b2df",
++  "server/db/refresh-family/refresh-family-v1.sql": "1feb46d6f7f142c34403032ca1a87e3f8a6f1e493e91a5b63cdf075624d4f340",
++  "scripts/security/refresh-family/adapter-boundary.test.mjs": "07986b65d2bb56271c6d3f589f2e9acfe5fbab20604c02807c984736d72e99d8",
++  "scripts/security/refresh-family/service-wiring.test.mjs": "d249bf4c085109cd22ed685589a5296f272858906f86cdca80674582dede3845"
+ });
+ 
+ const VERIFY_COMMAND =
+@@ -59,7 +66,9 @@
+         ? "AUTH_SOURCE_HASH"
+         : file === "server/services/refreshTokens.service.mjs"
+           ? "REFRESH_SERVICE_HASH"
+-          : "ACCOUNT_SECURITY_SOURCE_HASH";
++          : file === "server/routes/account.mjs"
++            ? "ACCOUNT_SECURITY_SOURCE_HASH"
++            : "SOURCE_HASH:" + file;
+ 
+     gate(label, actualHash === expectedHash, `SHA256=${actualHash}`);
+   }
+@@ -193,6 +202,24 @@
+     },
+   ];
+ 
++  for (const file of Object.keys(EXPECTED)) {
++    if (["server/routes/auth.mjs", "server/services/refreshTokens.service.mjs", "server/routes/account.mjs"].includes(file)) continue;
++    cases.push({
++      name: "ADDED_SOURCE_DRIFT:" + file,
++      expectedFailure: "SOURCE_HASH:" + file,
++      mutate: contents => { contents[file] = Buffer.concat([contents[file], Buffer.from("\n")]); return contents; },
++    });
++  }
++  cases.push({
++    name: "INJECTED_POST_HOOK",
++    expectedFailure: "VERIFIER_PRE_POST_HOOKS_ABSENT",
++    mutate: contents => {
++      const pkg = JSON.parse(String(contents["package.json"]));
++      pkg.scripts["postverify:auth-session-contracts"] = "exit 0";
++      contents["package.json"] = Buffer.from(JSON.stringify(pkg)); return contents;
++    },
++  });
++
+   let failed = 0;
+ 
+   for (const testCase of cases) {
+@@ -219,6 +246,25 @@
+   }
+ }
+ 
++function runLocalBehaviorChecks() {
++  // No inherited NODE_OPTIONS, NODE_PATH, DATABASE_URL or dotenv preloads.
++  const env = { PATH: process.env.PATH || "/usr/bin:/bin", LANG: "C", LC_ALL: "C",
++    TZ: "UTC", NODE_DISABLE_COMPILE_CACHE: "1" };
++  const commands = [
++    ["scripts/security/refresh-family/adapter-boundary.test.mjs"],
++    ["--experimental-vm-modules", "scripts/security/refresh-family/service-wiring.test.mjs"],
++  ];
++  for (const args of commands) {
++    const p = spawnSync(process.execPath, args, { cwd: process.cwd(), env,
++      encoding: "utf8", timeout: 15000, maxBuffer: 1024 * 1024 });
++    if (p.stdout) process.stdout.write(p.stdout);
++    if (p.error || p.status !== 0) {
++      if (p.stderr) process.stderr.write(p.stderr);
++      throw new Error("LOCAL_BEHAVIOR_CHECK_FAILED:" + args.at(-1));
++    }
++  }
++}
++
+ try {
+   const contents = loadContents();
+ 
+@@ -233,11 +279,13 @@
+     process.exit(1);
+   }
+ 
++  runLocalBehaviorChecks();
+   console.log("STATUS=AUTH_SESSION_CONTRACTS_PASS");
+   console.log(
+-    "CONTRACT=HASH_FROZEN_AUDITED_SOURCE_AND_EXACT_PIPELINE_WIRING"
++    "CONTRACT=HASH_FROZEN_REVIEWED_SOURCE_EXACT_PIPELINE_AND_LOCAL_BOUNDARY_TESTS"
+   );
+   console.log("RUNTIME_LOGOUT_ISOLATION=UNKNOWN");
++  console.log("LIVE_DATABASE_CUTOVER=NOT_QUALIFIED_BY_THIS_CHECK");
+   console.log("DEPLOYED_ARTIFACT_PROVEN=NO");
+ } catch (error) {
+   console.error("STATUS=AUTH_SESSION_CONTRACTS_FAILED");
+--- /dev/null
++++ b/docs/security/refresh-family-cutover.md
+@@ -0,0 +1,81 @@
++# Refresh-family source integration: NOT A LIVE MIGRATION AUTHORIZATION
++
++## State and scope
++The source facade now calls the qualified adapter through the existing db/sql/hashToken
++imports. No dynamic legacy fallback, alternate pool, or automatic schema installation
++is introduced. The seven exported service names and caller-supplied transaction
++parameters are retained. The SQL and adapter bytes are the previously qualified
++payloads. Route, cookie, JWT, OIDC, MFA, and existing schema-generator behavior is
++not changed by this integration step.
++
++The SQL is deliberately stored under server/db/refresh-family/, NOT the automatic
++Drizzle migrations directory and NOT schema.canonical.sql. Its original qualification
++warning remains. Do not run it on an existing database from a shell paste.
++Applying source alone does not provision mmhb_refresh_v1. Authentication calls fail
++rather than falling back if the schema, grants, or installation marker is absent.
++The existing best-effort bootstrap is not an authorization to run this migration.
++
++## Evidence, not release certification
++The prior private PostgreSQL suite reported 31/31 SQL assertions; the separate
++Node 24/pg/Drizzle suite reported 24/24 database assertions and 33/33 synthetic
++boundary assertions. These counts are distinct scopes, not end-to-end release gates.
++The source verifier now freezes reviewed source hashes and runs the 33 boundary
++checks and 12 facade-wiring checks. It keeps the existing test command/pipeline
++checks, including rejection of bypasses and pre/post verifier hooks.
++Those checks do not load the application database client. The facade wiring test
++uses Node VM modules and synthetic db/sql/hash modules, never a real environment.
++The existing HTTP/client/storage guards are retained and frozen, not retested in a
++real browser by this step. Full npm test, typecheck, build and deployed behavior
++are still pending.
++
++## Required database transition before application activation
++The following are review requirements, not automatic actions by the source helper:
++1. Back up and independently restore-test the actual target database; identify its
++   owner/runtime roles, PostgreSQL version, timezone conventions and existing table
++   constraints. Do not infer production row counts from synthetic tests.
++2. Inventory every writer and reader of legacy refresh_tokens, including startup,
++   jobs, admin code, password/account deletion and all active deployments. Stop and
++   drain legacy writers before adoption. A mixed old/new deployment is not supported.
++3. Approve legacy handling. The adoption function retains legacy rows, copies their
++   available identities as distinct families, refuses duplicate hashes/orphans/bad
++   metadata, and interprets old timestamps as UTC. Already-deleted predecessor
++   relationships cannot be reconstructed; in-flight old requests must be drained.
++   Long-expired deleted links and browser-held old credentials need an explicit
++   transition policy. No automatic sign-out-all or silent data cleanup is authorized.
++4. Review runtime grants, including invoker function execution and required table
++   privileges, separately from migration ownership. Do not give the web role schema
++   ownership, adopt_legacy, installation-marker writes or maintenance permissions
++   merely to make errors disappear. The supplied test-role grants are not a full
++   application-role grant specification.
++5. Apply the versioned DDL, approved grants and explicit adoption only through a
++   reviewed transactional deployment procedure. Its CREATE SCHEMA step is not
++   rerunnable; interrupted installation and concurrent operators need explicit
++   handling. The installation marker is set only by successful adopt_legacy.
++6. Verify schema/function identities, grants, marker and rollback behavior on the
++   target before enabling these service calls. /healthz is not that evidence.
++7. Run actual route/browser tests: sign-in, cookie reception, rotated predecessor
++   logout, cross-origin rejection, incomplete logout/retry, concurrent tabs and
++   password/account-security transactions. Test through the intended proxy/TLS path.
++8. Record the migration and package artifacts in a release manifest; update database
++   disaster-recovery/bootstrap/schema tooling intentionally. The existing generator
++   and its three legacy backfills have not been rewritten to install this schema.
++
++## Rollback and lifetime caveats
++Do not roll back only JavaScript after adoption: the SQL trigger blocks legacy
++writes, including no-op deletes. Returning to old writers or to pre-cutover data
++can resurrect sessions or lose current state; requires an approved rollback plan.
++
++Ordinary logout revokes one logical sign-in family. Account revocation remains a
++separate operation. Consumed predecessor hashes are retained while the family is
++live. Families use the existing sliding 720-hour refresh validity; an actively
++renewed family can retain history indefinitely without a separately approved
++absolute lifetime. Bounded prune_expired limits work per call but does not by
++itself define a complete storage-retention policy. Review volume, cleanup schedule
++and retention explicitly. Existing refresh-cookie lifetime remains seven days.
++
++Duplicate refresh is denied without automatic family revocation, preserving the
++existing conflict policy. This is not strict OAuth replay-triggered revocation.
++Already-issued access JWTs and Replit/OIDC sessions have separate validation and
++logout lifecycles. Refresh-family revocation alone does not instantly revoke them.
++No performance, HIPAA, clinical-safety or production-compliance certification is
++implied by these source/database test results.
