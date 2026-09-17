@@ -63,6 +63,10 @@ waitForPort = 5000
 [workflows.workflow.metadata]
 outputType = "webview"
 
+[postMerge]
+path = "scripts/post-merge.sh"
+timeoutMs = 30000
+
 # PHASE115U8_FORCE_DEPLOYMENT_PICKUP_MARKER
 
 # PHASE116H4_FORCE_LEGACY_LUMI_DEPLOYMENT_PICKUP_MARKER 2026-06-22T01:18:49Z f5cf2c5f8
