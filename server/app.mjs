@@ -74,6 +74,38 @@ if (db) globalThis.db = db;
 // ----------------------------
 const app = express();
 
+// MMHB_SENSITIVE_PATH_GUARD_V1_BEGIN
+// Reject hidden-file probes before any router, static handler or SPA fallback.
+// Root .well-known remains available for public verification documents.
+app.use(function mmhbSensitivePathGuard(req, res, next) {
+  const reject = (status) => {
+    res.setHeader("Cache-Control", "no-store");
+    res.setHeader("X-Content-Type-Options", "nosniff");
+    return res.status(status).type("text/plain").send(
+      status === 404 ? "Not found" : "Bad request"
+    );
+  };
+  let pathname = (req.originalUrl || req.url || "/").split("?")[0];
+  try {
+    pathname = decodeURIComponent(pathname);
+  } catch {
+    return reject(400);
+  }
+  // Inspect repeated encodings without rewriting the URL used by other routes.
+  for (let depth = 0; depth <= 4; depth += 1) {
+    const segments = pathname.split(/[\\/]+/).filter(Boolean);
+    if (segments.some((segment, index) =>
+      segment.startsWith(".") && !(index === 0 && segment === ".well-known")
+    )) return reject(404);
+    const decoded = pathname.replace(/%(25|2e|2f|5c)/gi,
+      (_, hex) => String.fromCharCode(parseInt(hex, 16)));
+    if (decoded === pathname) return next();
+    pathname = decoded;
+  }
+  return reject(400);
+});
+// MMHB_SENSITIVE_PATH_GUARD_V1_END
+
 // PHASE116Z43_INTERNAL_INTELLIGENCE_SERVER_REGISTRATION
 registerInternalIntelligenceServer(app);
 
