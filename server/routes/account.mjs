@@ -194,10 +194,23 @@ router.post("/password-reset/request", authRateLimit, async (req, res) => {
       `
     });
 
-    if (emailResult?.skipped) {
-      logger.warn("Password reset email skipped because email service is not configured", { email });
+    // MMHB_RECOVERY_PROVIDER_ACCEPTANCE_V1: acceptance is not inbox delivery.
+    if (
+      emailResult?.ok === true &&
+      !emailResult?.result?.error &&
+      typeof emailResult?.result?.data?.id === "string" &&
+      emailResult.result.data.id.trim().length > 0
+    ) {
+      logger.info("Password reset email accepted by provider", { requestId: req.requestId });
     } else {
-      logger.info("Password reset email queued", { email });
+      logger.warn("Password reset email not accepted by provider", {
+        requestId: req.requestId,
+        reason: emailResult?.skipped
+          ? "EMAIL_NOT_CONFIGURED"
+          : emailResult?.result?.error
+            ? "EMAIL_PROVIDER_REJECTED"
+            : "EMAIL_ACCEPTANCE_UNCONFIRMED",
+      });
     }
 
     return success(res, null, "If an account exists with this email, a reset link will be sent.");
