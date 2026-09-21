@@ -31,7 +31,16 @@ function hasAgeConsent() {
 async function throwIfResNotOk(res) {
   if (!res.ok) {
     const text = await res.text().catch(() => res.statusText);
-    throw new Error(`${res.status}: ${text}`);
+    const error = new Error(`${res.status}: ${text}`);
+    error.status = res.status;
+    try {
+      const body = JSON.parse(text);
+      if (typeof body.code === "string") error.code = body.code;
+      if (typeof body.requestId === "string") error.requestId = body.requestId;
+    } catch {
+      // Non-JSON upstream errors retain the existing message contract.
+    }
+    throw error;
   }
 }
 

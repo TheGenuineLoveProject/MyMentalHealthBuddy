@@ -116,7 +116,7 @@ const passwordResetRequestSchema = z.object({
 });
 
 const passwordResetConfirmSchema = z.object({
-  token: z.string().min(1, "Reset token required"),
+  token: z.string().regex(/^[a-f0-9]{64}$/, "Invalid reset token"),
   password: z.string().min(8, "Password must be at least 8 characters"),
 });
 
@@ -128,7 +128,10 @@ router.post("/password-reset/request", authRateLimit, async (req, res) => {
   try {
     const parsed = passwordResetRequestSchema.safeParse(req.body);
     if (!parsed.success) {
-      return badRequest(res, parsed.error.errors[0].message);
+      return res.status(400).json({
+        ok: false, code: "RESET_INPUT_INVALID",
+        message: "Valid email required", requestId: req.requestId,
+      });
     }
 
     const { email } = parsed.data;
@@ -215,8 +218,8 @@ router.post("/password-reset/request", authRateLimit, async (req, res) => {
 
     return success(res, null, "If an account exists with this email, a reset link will be sent.");
   } catch (error) {
-    logger.error("Password reset request failed", { error: error.message, requestId: req.requestId });
-    return res.status(500).json({ ok: false, message: "Server error" });
+    logger.error("Password reset request failed", { code: "RESET_REQUEST_FAILED", requestId: req.requestId });
+    return res.status(500).json({ ok: false, code: "RESET_REQUEST_FAILED", message: "Server error", requestId: req.requestId });
   }
 });
 
@@ -224,40 +227,47 @@ router.post("/password-reset/confirm", authRateLimit, async (req, res) => {
   try {
     const parsed = passwordResetConfirmSchema.safeParse(req.body);
     if (!parsed.success) {
-      return badRequest(res, parsed.error.errors[0].message);
+      const invalidToken = parsed.error.issues.some(issue => issue.path[0] === "token");
+      return res.status(400).json({
+        ok: false,
+        code: invalidToken ? "RESET_TOKEN_INVALID" : "RESET_PASSWORD_INVALID",
+        message: invalidToken ? "Invalid reset token." : "Password must be at least 8 characters.",
+        requestId: req.requestId,
+      });
     }
 
     const { token, password } = parsed.data;
     const tokenHash = crypto.createHash("sha256").update(token).digest("hex");
 
-    const tokenRows = await db
-      .select()
-      .from(passwordResetTokens)
-      .where(
-        and(
-          eq(passwordResetTokens.tokenHash, tokenHash),
-          gt(passwordResetTokens.expiresAt, new Date())
-        )
-      )
-      .limit(1);
-
-    if (tokenRows.length === 0 || tokenRows[0].usedAt) {
-      return badRequest(res, "Invalid or expired reset token.");
-    }
-
-    const resetToken = tokenRows[0];
-
     const passwordHash = await bcrypt.hash(password, 10);
+    const resetToken = await db.transaction(async (tx) => {
+      // PostgreSQL rechecks this predicate after waiting for concurrent writers.
+      // Claim and password replacement commit together, or neither commits.
+      const now = new Date();
+      const claimed = await tx.update(passwordResetTokens)
+        .set({ usedAt: now })
+        .where(and(
+          eq(passwordResetTokens.tokenHash, tokenHash),
+          isNull(passwordResetTokens.usedAt),
+          gt(passwordResetTokens.expiresAt, now)
+        ))
+        .returning({ userId: passwordResetTokens.userId });
+      if (claimed.length === 0) return null;
+      if (claimed.length !== 1) throw new Error("Reset token integrity failure");
+      const updated = await tx.update(users)
+        .set({ passwordHash, updatedAt: now })
+        .where(eq(users.id, claimed[0].userId))
+        .returning({ id: users.id });
+      if (updated.length !== 1) throw new Error("Reset account unavailable");
+      return claimed[0];
+    });
 
-    await db
-      .update(users)
-      .set({ passwordHash, updatedAt: new Date() })
-      .where(eq(users.id, resetToken.userId));
-
-    await db
-      .update(passwordResetTokens)
-      .set({ usedAt: new Date() })
-      .where(eq(passwordResetTokens.id, resetToken.id));
+    if (!resetToken) {
+      return res.status(400).json({
+        ok: false, code: "RESET_TOKEN_INVALID",
+        message: "Invalid or expired reset token.", requestId: req.requestId,
+      });
+    }
 
     await logAuditEvent({
       userId: resetToken.userId,
@@ -267,8 +277,8 @@ router.post("/password-reset/confirm", authRateLimit, async (req, res) => {
 
     return success(res, null, "Password has been reset successfully.");
   } catch (error) {
-    logger.error("Password reset confirm failed", { error: error.message, requestId: req.requestId });
-    return res.status(500).json({ ok: false, message: "Server error" });
+    logger.error("Password reset confirm failed", { code: "RESET_CONFIRM_FAILED", requestId: req.requestId });
+    return res.status(500).json({ ok: false, code: "RESET_CONFIRM_FAILED", message: "Server error", requestId: req.requestId });
   }
 });
 

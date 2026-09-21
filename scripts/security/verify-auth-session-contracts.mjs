@@ -7,7 +7,7 @@ const EXPECTED = Object.freeze({
   "server/services/refreshTokens.service.mjs":
     "5a9756caa3c772ac8c70f4a7860372dd42895e7df47c4e0956e42fa041528e8e",
   "server/routes/account.mjs":
-    "e766374c5bc57032a5ad8573ed1c9bb37ef66dceb703957bf2bba289a5acd331",
+    "665a3747fe926d1384c92c26e4457cee4b35bffd3864b75d675cdb65550a1752",
 });
 
 const VERIFY_COMMAND =
