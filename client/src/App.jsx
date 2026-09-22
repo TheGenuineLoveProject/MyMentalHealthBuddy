@@ -559,6 +559,17 @@ export default function App() {
               <Route path="/wellness-dashboard">
                 <WellnessRoute><WellnessDashboard /></WellnessRoute>
               </Route>
+              {/* Public directories must precede the individual-tool wildcard. */}
+              <Route path="/wellness-tools-hub"><WellnessToolsHub /></Route>
+              <Route path="/tools/all"><ToolsIndex /></Route>
+              <Route path="/tools/gad7"><GAD7Assessment /></Route>
+              <Route path="/tools/phq9"><PHQ9Assessment /></Route>
+              <Route path="/tools/distortion-checker"><CognitiveDistortionChecker /></Route>
+              <Route path="/tools/manipulation-detector"><ManipulationDetector /></Route>
+              <Route path="/tools/breath-pacer"><BreathPacer /></Route>
+              <Route path="/tools/boundary-builder"><BoundaryBuilderTool /></Route>
+              <Route path="/tools/sleep-quality-calculator"><SleepQualityCalculator /></Route>
+              <Route path="/tools/nervous-system-check"><NervousSystemCheck /></Route>
               <ToolRoutes path="/tools/*" WellnessRoute={WellnessRoute} ConfigRoute={ConfigRoute} />
               <HubRoutes path={/^\/(?:hubs(?:\/.*)?|explore\/(?:topics|pathways|search))\/?$/} WellnessRoute={WellnessRoute} ProtectedRoute={ProtectedRoute} />
               <Route path="/twelve-practices">
