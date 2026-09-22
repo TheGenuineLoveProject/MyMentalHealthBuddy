@@ -12,8 +12,10 @@ import {
 } from "../lib/healScheduler.mjs";
 import { requireAuth as requireAuthCanonical } from "../middleware/auth.mjs";
 import requireAdmin from "../middleware/requireAdmin.mjs";
+import { registerDashboardStats } from "./adminDashboardStats.mjs";
 
 const router = Router();
+registerDashboardStats(router);
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN;
 
 function requireAuth(req, res, next) {

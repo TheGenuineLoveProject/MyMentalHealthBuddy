@@ -6,10 +6,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/ReflectionFooter";
 import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+import { fetchDashboardStats, metricValue } from "@/lib/adminDashboardStats";
 
 export default function EngagementDashboard() {
   const { data: stats, isLoading, refetch, isRefetching, error: statsError } = useQuery({
     queryKey: ['/api/admin/dashboard-stats'],
+    queryFn: fetchDashboardStats,
     retry: 2,
     retryDelay: 1000,
     staleTime: 30000,
@@ -24,38 +26,31 @@ export default function EngagementDashboard() {
     staleTime: 30000,
   });
 
-  const userCount = stats?.users || 0;
-  const blogCount = stats?.blogPosts || 0;
-  const socialCount = stats?.socialPosts || 0;
-  const leadsCount = stats?.leads || 0;
-  const uptimeSeconds = stats?.uptimeSeconds || health?.uptime || 0;
-  const uptimeFormatted = health?.uptimeFormatted || (uptimeSeconds > 0 ? `${Math.floor(uptimeSeconds / 60)}m` : "—");
+  const userCount = metricValue(stats?.users);
+  const blogCount = metricValue(stats?.blogPosts);
+  const socialCount = metricValue(stats?.socialPosts);
+  const leadsCount = metricValue(stats?.leads);
+  const uptimeSeconds = stats?.uptimeSeconds;
+  const uptimeFormatted = Number.isFinite(uptimeSeconds) ? `${Math.floor(uptimeSeconds / 60)}m` : "Unavailable";
 
   const metrics = [
     { label: "Registered Users", value: userCount.toLocaleString(), icon: Users, desc: "Total platform users" },
     { label: "Session Uptime", value: uptimeFormatted, icon: Clock, desc: "Current server session" },
-    { label: "Blog Posts", value: blogCount.toString(), icon: TrendingUp, desc: `${stats?.publishedBlogs || 0} published` },
-    { label: "Newsletter Leads", value: leadsCount.toString(), icon: Heart, desc: "Email subscribers" }
+    { label: "Blog Posts", value: blogCount, icon: TrendingUp, desc: `${metricValue(stats?.publishedBlogs)} published` },
+    { label: "Newsletter Subscribers", value: leadsCount, icon: Heart, desc: "Status: active" }
   ];
 
   const topFeatures = [
-    { name: "AI Chat Therapy", endpoint: "/api/ai", percentage: 85 },
-    { name: "Journal System", endpoint: "/api/journal", percentage: 65 },
-    { name: "Mood Tracker", endpoint: "/api/mood", percentage: 55 },
-    { name: "Wellness Tools", endpoint: "/api/wellness-tools", percentage: 45 },
-    { name: "Daily Wisdom", endpoint: "/api/wisdom", percentage: 38 },
-    { name: "Reflection Tools", endpoint: "/api/reflection", percentage: 32 },
-    { name: "Gratitude Prompts", endpoint: "/api/gratitude", percentage: 28 },
-    { name: "Mirror Reflection", endpoint: "/api/mirror", percentage: 22 },
+    { name: "Feature usage measurements are unavailable." },
   ];
 
   const platformStats = [
-    { label: "Platform Tools", value: health?.platform?.totalTools || 123 },
-    { label: "API Routes", value: health?.platform?.totalRoutes || 123 },
-    { label: "Admin Pages", value: health?.platform?.adminPages || 26 },
+    { label: "Platform Tools", value: "Unavailable" },
+    { label: "API Routes", value: "Unavailable" },
+    { label: "Admin Pages", value: "Unavailable" },
     { label: "Social Posts", value: socialCount },
-    { label: "Active Campaigns", value: stats?.campaigns || 0 },
-    { label: "Draft Posts", value: stats?.socialDrafts || 0 },
+    { label: "Active Campaigns", value: metricValue(stats?.campaigns) },
+    { label: "Draft Posts", value: metricValue(stats?.socialDrafts) },
   ];
 
   if (isLoading) {
@@ -66,7 +61,7 @@ export default function EngagementDashboard() {
     );
   }
 
-  if (statsError && !stats) {
+  if (statsError) {
     return <AdminErrorBanner title="Unable to load engagement data" onRetry={refetch} />;
   }
 
@@ -127,12 +122,12 @@ export default function EngagementDashboard() {
                   <div key={i} data-testid={`feature-bar-${i}`}>
                     <div className="flex justify-between mb-1">
                       <span className="font-medium text-sm">{feature.name}</span>
-                      <span className="text-muted-foreground text-xs">{feature.percentage}%</span>
+                      <span className="text-muted-foreground text-xs">Unavailable</span>
                     </div>
                     <div className="h-2 bg-muted rounded-full overflow-hidden">
                       <div
                         className="h-full bg-primary rounded-full transition-all duration-500"
-                        style={{ width: `${feature.percentage}%` }}
+                        style={{ width: 0 }}
                       />
                     </div>
                   </div>
