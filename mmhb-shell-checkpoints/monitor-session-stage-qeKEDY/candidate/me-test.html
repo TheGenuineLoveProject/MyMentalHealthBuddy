@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Me Test Page ✓</title>
+    <style>
+      body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        padding: 2rem;
+      }
+      pre {
+        background: #000;
+        color: #0f0;
+        padding: 1rem;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+      button {
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Me Test Page ✓</h1>
+    <p>
+      This calls <code>/me</code> using the JWT token saved from
+      <code>auth-test.html</code>.
+    </p>
+
+    <button id="callMeBtn">Call /me</button>
+
+    <h2>Response</h2>
+    <pre id="output">Waiting for request…</pre>
+
+    <script>
+      const output = document.getElementById("output");
+      const btn = document.getElementById("callMeBtn");
+
+      btn.addEventListener("click", async () => {
+        output.textContent = "Sending request to /me…";
+
+        // Get token saved by auth-test.html
+        const token = localStorage.getItem("mmhb_token");
+
+        if (!token) {
+          output.textContent =
+            "No token found in localStorage.\n\n" +
+            "→ Open /auth-test.html, log in, then come back here.";
+          return;
+        }
+
+        try {
+          const res = await fetch("/me", {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          const data = await res.json();
+          output.textContent =
+            `Status: ${res.status}\nPath: /me\n\n` +
+            JSON.stringify(data, null, 2);
+        } catch (err) {
+          output.textContent = "Error: " + err.message;
+        }
+      });
+    </script>
+  </body>
+</html>

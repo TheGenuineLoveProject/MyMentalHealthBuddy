@@ -1,0 +1,12 @@
+import fs from 'node:fs'; import path from 'node:path'; import {createHash,randomUUID} from 'node:crypto';
+const root="/home/runner/workspace", index="client/dist/index.html", backup="mmhb-shell-checkpoints/frontend-stage-WI0bP0/preview-backup-hYv1Cz/index.before.html";
+const sha=b=>createHash('sha256').update(b).digest('hex');
+function safe(f){let p=root;for(const part of f.split('/')){p=path.join(p,part);if(fs.existsSync(p)&&fs.lstatSync(p).isSymbolicLink())throw Error('SYMLINK_REVIEW_REQUIRED');}return p;}
+const old=fs.readFileSync(safe(backup)), current=sha(fs.readFileSync(safe(index)));
+if(sha(old)!=="b3c4e249992f7eecb077a9790f4c0b41a2d32980466f66baf6d1588e4b7d106a")throw Error('BACKUP_CHANGED');
+if(current===sha(old)){console.log('PREVIEW_ALREADY_RESTORED');}
+else{if(current!=="ca16698d89f00657a90ff4196eccc05b489c757000037c69f8dba25e0e8b7ed7")throw Error('INDEX_CHANGED_NOT_OVERWRITTEN');
+const temp=safe('client/dist/.mmhb-'+randomUUID()+'.tmp'), previousTime=fs.statSync(safe(index)).mtimeMs;
+fs.writeFileSync(temp,old,{flag:'wx',mode:0o644});fs.utimesSync(temp,new Date(),new Date(Math.max(Date.now(),previousTime+1000)));
+if(sha(fs.readFileSync(safe(index)))!==current)throw Error('INDEX_CHANGED_NOT_OVERWRITTEN');
+fs.renameSync(temp,safe(index));console.log('PREVIEW_INDEX_RESTORED');}

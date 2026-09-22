@@ -1,0 +1,9 @@
+{
+  "command": "MMHB-MONITOR-ACCURACY-20260922",
+  "target": "client/src/components/admin/OperationsPanel.jsx",
+  "beforeHash": "b65be2906a351a3496b746551e371db64b994cd61f0263f5489ddd5942731f8e",
+  "afterHash": "3ed8e0b95d943f33b70c1c549b206317562250d8f87cb95a03f7d8fd43aba5e4",
+  "head": "5c9446e5db76d55a6f5b59447d24daed59935de9",
+  "packageHash": "e034489afed62c076902a2176193bbfb682de357d0c673a517b4026dded4aa7f",
+  "createdAt": "2026-09-22T06:09:29.346Z"
+}

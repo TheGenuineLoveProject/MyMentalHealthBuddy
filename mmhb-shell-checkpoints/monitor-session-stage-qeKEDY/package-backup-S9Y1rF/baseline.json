@@ -1,0 +1,31 @@
+{
+  "repository": {
+    "head": "5c9446e5db76d55a6f5b59447d24daed59935de9",
+    "branch": "integration",
+    "otherTrackedStatusSha256": "41632b88ea324c4604fd288ee12314dfd3f8f9a85c002e8da55ba49e41da333a"
+  },
+  "before": {
+    "client/src/components/admin/OperationsPanel.jsx": "b95bd4722d8bea0821b409f8b5a640458a1a614890bd08f44717dd12e0314778",
+    "package.json": "e034489afed62c076902a2176193bbfb682de357d0c673a517b4026dded4aa7f",
+    "vite.config.js": "4b0866ecaacafc2f497010f37c40de9377766f554ca06989efd3ff027a4fff5e",
+    ".replit": "46d67ae89a05f553947272596612d16c370d0c304985d4a0fb7d67dcab582b1d",
+    "server/app.mjs": "eb9368edeb93cef830dd2aa0cf97646300c7b3f99f734d61ff2eb4e9cb2c73ac",
+    "client/vite.config.js": "ca5e85e3219dd2879ff431a9ed4a619424922345689b4e487fcf1891fb0dcac2",
+    "scripts/build-server.mjs": "9e046524ba1e77b5202c0bbe895b8a6a430e38b5188b1a2f2613525a183c4816",
+    "package-lock.json": "6574eef640049a1acea6692899408b2d803bcd481fb9b9d3d59efe8d25b76fae",
+    "pnpm-lock.yaml": "MISSING",
+    "yarn.lock": "MISSING",
+    "bun.lock": "MISSING",
+    "bundle-report.html": "395f09919934f66050dd4252399ff513f6a2f07cff4aca611ffbe3b83b0646fe",
+    "client/dist/index.html": "8ee76908c36cc92e6f2fd70cfc60d9b4ec0c320e94c81b4c7b579637f80f3204",
+    "dist/client/dist/index.html": "19d623a4c10637a987f71b7557052c11faaff6b6a53d17f9ccbbb08f1f6973ac",
+    "server/client/dist/index.html": "MISSING",
+    ".replitignore": "6d29d03fe1eaa92c7c0868c19c1afa487c7872252334b691a81b7a41ff246429",
+    "dist/server.mjs": "65699d4c8606ea4454d112a72f58459d515086aae98c337984ed412942e6284b",
+    "server/db/schema.canonical.sql": "e92e18c4d6bbfdf6faef7760e1116aa786b7b9dddc266db37c2f03998913e712",
+    "dist/schema.canonical.sql": "e92e18c4d6bbfdf6faef7760e1116aa786b7b9dddc266db37c2f03998913e712",
+    "mmhb-shell-checkpoints/monitor-session-stage-qeKEDY/result.json": "d55e686b5e3022ff954706a299113552e2a024585f7a54f229ef238367274566",
+    "mmhb-shell-checkpoints/monitor-session-stage-qeKEDY/before.json": "ad2fb813d970a42f1645624db11b161b1173b858efdd3fdc1e69ece4f90b042d",
+    "mmhb-shell-checkpoints/monitor-session-stage-qeKEDY/artifact-hashes.json": "ad88f5a2a32de7567d293728e6ac551a981ecbda9e461f834a81627d806c4cac"
+  }
+}

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MyMentalHealthBuddy Offline</title>
+  <style>
+    :root {
+      --serenity-sage: #4a7e72;
+      --eternal-gold: #b8963e;
+      --warm-cream: #fff9f2;
+      --deep-text: #243d38;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(255, 212, 107, 0.28), transparent 32%),
+        radial-gradient(circle at 86% 14%, rgba(174, 233, 255, 0.24), transparent 30%),
+        var(--warm-cream);
+      color: var(--deep-text);
+    }
+
+    main {
+      width: min(680px, calc(100% - 32px));
+      padding: clamp(24px, 5vw, 40px);
+      border: 1px solid rgba(74, 126, 114, 0.22);
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 24px 70px rgba(74, 126, 114, 0.14);
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(1.55rem, 4vw, 2.35rem);
+      line-height: 1.1;
+    }
+
+    p {
+      margin: 0 0 16px;
+      line-height: 1.65;
+      font-size: 1rem;
+    }
+
+    .safety {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255, 212, 107, 0.18);
+      border: 1px solid rgba(184, 150, 62, 0.25);
+    }
+
+    button {
+      margin-top: 8px;
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 18px;
+      background: var(--serenity-sage);
+      color: white;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    button:focus-visible {
+      outline: 3px solid rgba(255, 212, 107, 0.7);
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>You are offline</h1>
+    <p>MyMentalHealthBuddy needs a connection to safely refresh the latest interface.</p>
+    <p>This offline screen is shown only when the network is unavailable. It prevents an old cached page from loading outdated app files after a deploy.</p>
+    <div class="safety">
+      <p><strong>Safety note:</strong> If you may be in immediate danger or need urgent help, call local emergency services. In the U.S. you can call or text <strong>988</strong>.</p>
+    </div>
+    <button type="button" onclick="window.location.reload()">Try loading again</button>
+  </main>
+</body>
+</html>
