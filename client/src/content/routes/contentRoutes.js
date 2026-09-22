@@ -7,6 +7,91 @@
 // =============================================================================
 export const contentRoutes = [
   {
+    route: '/research-evidence',
+    category: 'content',
+    pageLabel: 'Research & Evidence',
+    title: 'Research & Evidence — MyMentalHealthBuddy',
+    description: 'Learn to examine mental health information, research limits, and personal experiences.',
+    hero: {
+      eyebrow: 'MyMentalHealthBuddy',
+      title: 'Research & Evidence',
+      subtitle: 'Explore information with curiosity and care. Educational information, not diagnosis or treatment.',
+      primaryCta: { label: 'Explore sources', href: '#sources' },
+      secondaryCta: { label: 'Questions to ask', href: '#checklist' }
+    },
+    sections: [
+      {
+        id: 'introduction',
+        title: 'What counts as evidence?',
+        subtitle: {
+          beginner: 'A citation points to information you can examine. It does not prove a claim. Personal stories matter, but results differ. Philosophy and spirituality are not clinical evidence. Not all MMHB tools are clinically validated.',
+          intermediate: 'Citations offer evidence to examine, not automatic proof; personal testimony cannot establish results for everyone. Philosophy and spirituality can offer meaning, but are not clinical evidence, and not all MMHB tools are clinically validated.',
+          advanced: 'Clinical evidence is research evaluating health outcomes in defined conditions and populations; citations invite appraisal of methods, limitations, and relevance rather than guaranteeing effectiveness. Testimony is not universal evidence, philosophy and spirituality are distinct from clinical findings, and not all MMHB tools are clinically validated.'
+        }
+      },
+      {
+        id: 'checklist',
+        title: 'A short evidence checklist',
+        bullets: {
+          beginner: [
+            'Who wrote this? What are their sources?',
+            'When was it updated? Who paid for it?',
+            'Who took part? What changed, and what did not?',
+            'What are the limits? Could results differ for me?'
+          ],
+          intermediate: [
+            'Check the author, their expertise, and the original source.',
+            'Look for the date, funding, and possible conflicts of interest.',
+            'Ask who participated, what was measured, and what comparison was used.',
+            'Look for uncertainty, possible harms, and whether findings fit your situation.'
+          ],
+          advanced: [
+            'Trace claims to original research and assess author expertise and publication context.',
+            'Check currency, funding disclosures, and potential conflicts of interest.',
+            'Assess study design, sample selection, comparison groups, and meaningful outcomes.',
+            'Consider bias, uncertainty, adverse effects, replication, and applicability beyond the study population.'
+          ]
+        }
+      },
+      {
+        id: 'example',
+        title: 'A hypothetical journal example',
+        subtitle: 'Imagine someone says, “I felt calmer after journaling.” This is an invented example, not a study or a promise.',
+        bullets: [
+          'What did “calmer” mean, and how long did it last?',
+          'Could rest, company, or another change explain the feeling?',
+          'Would others have the same experience? What research could help us examine that question?',
+          'One experience does not show that journaling treats a condition. You can pause any practice that feels uncomfortable.'
+        ]
+      },
+      {
+        id: 'sources',
+        title: 'Sources to explore',
+        subtitle: 'These external educational resources open in a new tab. Links do not imply endorsement of MMHB or validate its tools. Link-check date supplied for this page: September 22, 2026.',
+        cards: [
+          {
+            title: 'NCCIH: Finding Health Information Online (opens in a new tab)',
+            text: 'A guide to examining online health information and asking questions about its reliability.',
+            icon: 'Search',
+            href: 'https://www.nccih.nih.gov/health/know-science/finding-and-evaluating-online-resources/finding-health-information-online/introduction'
+          },
+          {
+            title: 'NIMH: Psychotherapies (opens in a new tab)',
+            text: 'An overview of psychotherapy and considerations when looking for professional care; not a treatment recommendation.',
+            icon: 'BookOpen',
+            href: 'https://www.nimh.nih.gov/health/topics/psychotherapies'
+          },
+          {
+            title: 'NLM: About PubMed (opens in a new tab)',
+            text: 'Learn about PubMed, a resource for biomedical citations and abstracts, not always full articles. A listing alone does not establish research quality.',
+            icon: 'FileText',
+            href: 'https://pubmed.ncbi.nlm.nih.gov/about/'
+          }
+        ]
+      }
+    ]
+  },
+  {
     route: '/blog',
     category: 'content',
     pageLabel: 'Blog',
