@@ -1,4 +1,5 @@
-import db from "../db/client.mjs";
+import db, { pool as readinessPool } from "../db/client.mjs";
+import { performance as readinessClock } from "node:perf_hooks";
 import { sql } from "drizzle-orm";
 import express from "express";
 import { isConfigured } from "../utils/aiClient.mjs";
@@ -84,13 +85,30 @@ router.get("/", async (_req, res) => {
   }
 });
 
-router.get("/ready", async (_req, res) => {
+router.get("/ready", async (req, res) => {
+  // MMHB_READINESS_DIAGNOSTICS_V1: failure-only measurements, no extra query.
+  const startedAt = readinessClock.now();
+  const samplePool = () => {
+    try {
+      return Object.fromEntries(["totalCount", "idleCount", "waitingCount"].map(key => {
+        const value = readinessPool[key];
+        return [key, Number.isSafeInteger(value) && value >= 0 ? value : null];
+      }));
+    } catch { return null; }
+  };
+  const poolAtStart = samplePool();
+  let timerScheduledAt = null;
+  let timerFiredAt = null;
   try {
     if (process.env.DATABASE_URL) {
       let timeoutHandle;
       const timeoutPromise = new Promise((_resolve, reject) => {
+        timerScheduledAt = readinessClock.now();
         timeoutHandle = setTimeout(
-          () => reject(new Error(`readiness DB ping exceeded ${READINESS_DB_TIMEOUT_MS}ms`)),
+          () => {
+            timerFiredAt = readinessClock.now();
+            reject(new Error(`readiness DB ping exceeded ${READINESS_DB_TIMEOUT_MS}ms`));
+          },
           READINESS_DB_TIMEOUT_MS,
         );
         timeoutHandle.unref?.();
@@ -103,7 +121,28 @@ router.get("/ready", async (_req, res) => {
     }
     res.json({ status: "ready" });
   } catch (readyErr) {
-    logger.warn("Readiness check failed", { error: readyErr?.message || readyErr });
+    // Numeric pool state and monotonic timing only; no query, URL or session data.
+    const diagnostics = {
+      schemaVersion: 1,
+      handlerElapsedMs: Math.max(0, Math.round(readinessClock.now() - startedAt)),
+      configuredTimeoutMs: Number.isFinite(READINESS_DB_TIMEOUT_MS) ? READINESS_DB_TIMEOUT_MS : null,
+      timerFired: timerFiredAt !== null,
+      timerLatenessMs: timerFiredAt !== null && Number.isInteger(READINESS_DB_TIMEOUT_MS) &&
+        READINESS_DB_TIMEOUT_MS >= 1 && READINESS_DB_TIMEOUT_MS <= 2147483647
+        ? Math.max(0, Math.round(timerFiredAt - timerScheduledAt - READINESS_DB_TIMEOUT_MS)) : null,
+      poolAtStart,
+      poolAtFailure: samplePool(),
+    };
+    const requestId = typeof req.requestId === "string" &&
+      /^[0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12}$/i.test(req.requestId)
+      ? req.requestId : undefined;
+    try {
+      logger.warn("Readiness check failed", {
+        error: readyErr?.message || readyErr,
+        ...(requestId ? { requestId } : {}),
+        readiness: diagnostics,
+      });
+    } catch { /* Diagnostics must not prevent the existing 503 response. */ }
     res.status(503).json({ status: "not ready" });
   }
 });
