@@ -44,11 +44,9 @@ async function throwIfResNotOk(res) {
   }
 }
 
-export async function apiRequest(method, url, data) {
+export function getRequestHeaders(url) {
   const token = getToken();
-  const headers = {
-    "Content-Type": "application/json",
-  };
+  const headers = {};
   
   if (token) {
     headers["Authorization"] = `Bearer ${token}`;
@@ -58,25 +56,75 @@ export async function apiRequest(method, url, data) {
     headers["x-age-confirmed"] = "true";
   }
 
-  const res = await fetch(url, {
-    method,
-    headers,
-    body: data ? JSON.stringify(data) : undefined,
-    credentials: "include",
-  });
+  if (typeof window !== "undefined" && typeof url === "string") {
+    try {
+      const parsed = new URL(url, window.location.origin);
+      const path = parsed.pathname;
+      if (parsed.origin === window.location.origin &&
+          (path === "/api/admin" || path.startsWith("/api/admin/"))) {
+        const session = getAdminSessionToken();
+        if (session) {
+          headers["x-admin-session"] = session;
+          if (path === "/api/admin/browser-health" ||
+              path === "/api/admin/health-deep" || path.startsWith("/api/admin/health-deep/")) {
+            headers.Authorization = `Bearer ${session}`;
+          }
+        }
+      }
+    } catch {
+      // Invalid URLs never receive the privileged browser session.
+    }
+  }
+  return headers;
+}
 
-  await throwIfResNotOk(res);
-  
-  if (res.status === 204 || res.headers.get("content-length") === "0") {
-    return undefined;
+// The deadline includes consuming the response body, not just receiving headers.
+async function requestWithDeadline(url, init, consume, { timeoutMs = 30000 } = {}) {
+  const controller = new AbortController();
+  let timeout;
+  try {
+    return await Promise.race([
+      (async () => {
+        const res = await fetch(url, { ...init, credentials: "include", signal: controller.signal });
+        await throwIfResNotOk(res);
+        return consume(res);
+      })(),
+      new Promise((_, reject) => {
+        timeout = setTimeout(() => {
+          reject(new Error("Request timed out. The operation may still be running; refresh health before trying again."));
+          controller.abort();
+        }, timeoutMs);
+      }),
+    ]);
+  } finally {
+    clearTimeout(timeout);
   }
-  
+}
+
+async function readJson(res) {
+  if (res.status === 204 || res.headers.get("content-length") === "0") return undefined;
   const text = await res.text();
-  if (!text) {
-    return undefined;
-  }
-  
+  if (!text) return undefined;
   return JSON.parse(text);
+}
+
+export async function apiRequest(method, url, data, options) {
+  return requestWithDeadline(url, {
+    method,
+    headers: { ...getRequestHeaders(url), "Content-Type": "application/json" },
+    body: data ? JSON.stringify(data) : undefined,
+  }, readJson, options);
+}
+
+export async function apiDownload(url, options) {
+  return requestWithDeadline(url, { headers: getRequestHeaders(url) }, async res => {
+    const blob = await res.blob();
+    if (!blob.size) throw new Error("The diagnostic download was empty.");
+    const disposition = res.headers.get("Content-Disposition") || "";
+    const filename = disposition.match(/filename="([^"]+)"/i)?.[1] ||
+      disposition.match(/filename=([^;\s]+)/i)?.[1];
+    return { blob, filename: filename?.replace(/[\\/\x00-\x1f]/g, "_") };
+  }, options);
 }
 
 export const queryClient = new QueryClient({
@@ -84,47 +132,7 @@ export const queryClient = new QueryClient({
     queries: {
       queryFn: async ({ queryKey, signal }) => {
         const url = Array.isArray(queryKey) ? queryKey[0] : queryKey;
-        const token = getToken();
-        const headers = {};
-        
-        if (token) {
-          headers["Authorization"] = `Bearer ${token}`;
-        }
-
-        if (hasAgeConsent()) {
-          headers["x-age-confirmed"] = "true";
-        }
-
-        if (typeof url === "string") {
-          let pathname = url;
-          let isSameOrigin = true;
-          try {
-            const parsed = new URL(
-              url,
-              typeof window !== "undefined" ? window.location.origin : "http://localhost"
-            );
-            pathname = parsed.pathname;
-            if (typeof window !== "undefined") {
-              isSameOrigin = parsed.origin === window.location.origin;
-            }
-          } catch {
-            isSameOrigin = url.startsWith("/");
-          }
-          if (
-            isSameOrigin &&
-            (pathname === "/api/admin" || pathname.startsWith("/api/admin/"))
-          ) {
-            const adminSession = getAdminSessionToken();
-            if (adminSession) {
-              headers["x-admin-session"] = adminSession;
-              // This summary uses canonical Bearer auth. Prefer the short-lived
-              // admin login session over any ordinary account login in this tab.
-              if (pathname === "/api/admin/browser-health") {
-                headers["Authorization"] = `Bearer ${adminSession}`;
-              }
-            }
-          }
-        }
+        const headers = getRequestHeaders(url);
 
         const res = await fetch(url, {
           headers,

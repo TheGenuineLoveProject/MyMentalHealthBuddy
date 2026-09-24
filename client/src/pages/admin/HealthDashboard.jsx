@@ -2,7 +2,7 @@
 // PHASE11745_HEALTH_DASHBOARD_REMAINING_TOKEN_CLEANUP
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { apiRequest, queryClient } from "@/lib/queryClient";
+import { apiRequest, apiDownload, queryClient } from "@/lib/queryClient";
 import { healthQueryOptions } from "@/lib/adminHealthQuery";
 import { useToast } from "@/hooks/use-toast";
 import "@/styles/glp-pane.css";
@@ -12,6 +12,16 @@ import { useSEO } from "@/hooks/useSEO";
 import Top50ProcessTracker from "@/components/admin/Top50ProcessTracker";
 import SafetyFooter from "../../components/ui/ReflectionFooter";
 import { AdminErrorBanner, AdminInlineError } from "../../components/admin/AdminQueryStates";
+
+async function healthControl(path) {
+  // Self-heal has a 90s server deadline. Never automatically retry a control:
+  // a lost response does not mean the server stopped performing the operation.
+  const data = await apiRequest("POST", `/api/admin/health-deep/${path}`, undefined, { timeoutMs: 120000 });
+  if (!data || typeof data !== "object" || Array.isArray(data) || data.ok === false) {
+    throw new Error("Invalid health control response. Refresh health before trying again.");
+  }
+  return data;
+}
 
 function StatusIndicator({ status }) {
   const statusConfig = {
@@ -99,8 +109,7 @@ export default function HealthDashboard() {
   const { toast } = useToast();
   const reprobe = useMutation({
     mutationFn: async () => {
-      const res = await apiRequest("POST", "/api/admin/health-deep/run");
-      return res.json();
+      return healthControl("run");
     },
     onSuccess: (data) => {
       toast({
@@ -124,8 +133,7 @@ export default function HealthDashboard() {
   // Heavier than re-probe; longer cooldown (60s) and may take ~30s to finish.
   const selfHeal = useMutation({
     mutationFn: async () => {
-      const res = await apiRequest("POST", "/api/admin/health-deep/self-heal");
-      return res.json();
+      return healthControl("self-heal");
     },
     onSuccess: (data) => {
       const before = data?.before?.verdict || "?";
@@ -150,8 +158,7 @@ export default function HealthDashboard() {
   // 60s cooldown + 30s timeout.  Admin-only; never touches user-facing AI.
   const aiAnalyze = useMutation({
     mutationFn: async () => {
-      const res = await apiRequest("POST", "/api/admin/health-deep/ai-analyze");
-      return res.json();
+      return healthControl("ai-analyze");
     },
     onSuccess: (data) => {
       toast({
@@ -175,8 +182,7 @@ export default function HealthDashboard() {
   // shared deep-health query so the UI pill updates immediately.
   const schedulerResume = useMutation({
     mutationFn: async () => {
-      const res = await apiRequest("POST", "/api/admin/health-deep/scheduler/resume");
-      return res.json();
+      return healthControl("scheduler/resume");
     },
     onSuccess: () => {
       toast({ title: "Auto-heal scheduler resumed" });
@@ -188,8 +194,7 @@ export default function HealthDashboard() {
   });
   const schedulerPause = useMutation({
     mutationFn: async () => {
-      const res = await apiRequest("POST", "/api/admin/health-deep/scheduler/pause");
-      return res.json();
+      return healthControl("scheduler/pause");
     },
     onSuccess: () => {
       toast({ title: "Auto-heal scheduler paused" });
@@ -201,32 +206,25 @@ export default function HealthDashboard() {
   });
 
   // Export: downloads a single JSON diagnostic bundle (probe + watch +
-  // scheduler + ring buffers + alerts).  Uses fetch + blob + temp anchor
-  // so the browser's download UI handles it naturally.  Auth header is
-  // attached via the same Bearer-token pattern apiRequest uses.
+  // scheduler + ring buffers + alerts), using the shared session contract.
   const [exporting, setExporting] = useState(false);
   const handleExport = async () => {
     if (exporting) return;
     setExporting(true);
     try {
-      const token = localStorage.getItem("adminSessionToken");
-      const res = await fetch("/api/admin/health-deep/export", {
-        headers: token ? { Authorization: `Bearer ${token}` } : {},
-      });
-      if (!res.ok) {
-        throw new Error(`Export failed (${res.status})`);
-      }
-      const blob = await res.blob();
+      const { blob, filename } = await apiDownload("/api/admin/health-deep/export", { timeoutMs: 10000 });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
-      a.href = url;
-      const cd = res.headers.get("Content-Disposition") || "";
-      const m = cd.match(/filename="?([^"]+)"?/);
-      a.download = m?.[1] || `mmhb-health-bundle-${new Date().toISOString().replace(/[:.]/g, "-")}.json`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
+      try {
+        a.href = url;
+        a.download = filename || `mmhb-health-bundle-${new Date().toISOString().replace(/[:.]/g, "-")}.json`;
+        document.body.appendChild(a);
+        a.click();
+      } finally {
+        a.remove();
+        // Give the browser time to start reading the object URL.
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      }
       toast({ title: "Diagnostic bundle downloaded", description: a.download });
     } catch (e) {
       toast({
