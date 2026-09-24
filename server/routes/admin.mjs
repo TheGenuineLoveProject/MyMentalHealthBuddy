@@ -15,6 +15,13 @@ import requireAdmin from "../middleware/requireAdmin.mjs";
 import { registerDashboardStats } from "./adminDashboardStats.mjs";
 
 const router = Router();
+// Protect the entire diagnostic namespace, including controls and future routes.
+// Public health and internal-only /health guards have separate contracts.
+router.use("/health-deep",
+  (_req, res, next) => { res.set("Cache-Control", "no-store"); next(); },
+  requireAuthCanonical,
+  requireAdmin,
+);
 registerDashboardStats(router);
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN;
 
