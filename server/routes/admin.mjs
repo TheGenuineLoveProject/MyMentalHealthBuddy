@@ -13,6 +13,7 @@ import {
 import { requireAuth as requireAuthCanonical } from "../middleware/auth.mjs";
 import requireAdmin from "../middleware/requireAdmin.mjs";
 import { registerDashboardStats } from "./adminDashboardStats.mjs";
+import { registerBrowserHealth } from "./adminBrowserHealth.mjs";
 
 const router = Router();
 // Protect the entire diagnostic namespace, including controls and future routes.
@@ -23,6 +24,7 @@ router.use("/health-deep",
   requireAdmin,
 );
 registerDashboardStats(router);
+registerBrowserHealth(router);
 const ADMIN_TOKEN = process.env.ADMIN_TOKEN;
 
 function requireAuth(req, res, next) {

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "@/lib/queryClient";
+import { healthQueryOptions } from "@/lib/adminHealthQuery";
 import { useToast } from "@/hooks/use-toast";
 import "@/styles/glp-pane.css";
 import { Server, Database, Cpu, Activity, CheckCircle, AlertTriangle, AlertCircle, RefreshCw, Clock, Shield, Zap, TrendingUp, ArrowLeft, Stethoscope, Sparkles, PauseCircle, PlayCircle, BotMessageSquare, Download, BellRing, BellOff } from 'lucide-react';
@@ -10,7 +11,7 @@ import { Link } from "wouter";
 import { useSEO } from "@/hooks/useSEO";
 import Top50ProcessTracker from "@/components/admin/Top50ProcessTracker";
 import SafetyFooter from "../../components/ui/ReflectionFooter";
-import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+import { AdminErrorBanner, AdminInlineError } from "../../components/admin/AdminQueryStates";
 
 function StatusIndicator({ status }) {
   const statusConfig = {
@@ -72,27 +73,26 @@ export default function HealthDashboard() {
   const [refreshKey, setRefreshKey] = useState(0);
 
   const { data: health, isLoading, error, refetch } = useQuery({
-    queryKey: ["/api/admin/health", refreshKey],
-    refetchInterval: 30000
-  });
-
-  const { data: diagnostics } = useQuery({
-    queryKey: ["/api/admin/diagnostics", refreshKey],
-    refetchInterval: 60000
+    ...healthQueryOptions,
+    queryKey: ["/api/admin/browser-health", refreshKey],
   });
 
   // Deep health surfaces the heal-360 report + heal-watch streak.
   // Read-only; the report is produced by `bash scripts/heal-all.sh` /
   // `node scripts/heal-360.mjs` / `node scripts/heal-watch.mjs`.
-  const { data: deep } = useQuery({
+  const { data: deep, error: deepError, refetch: refetchDeep } = useQuery({
+    ...healthQueryOptions,
     queryKey: ["/api/admin/health-deep", refreshKey],
+    enabled: !!health && !error,
     refetchInterval: 60000,
   });
 
   // Declarative alert rules — read-only evaluation against current state.
   // Same source of truth as the Prometheus `mmhb_alert_firing{rule}` gauge.
-  const { data: alertsData } = useQuery({
+  const { data: alertsData, error: alertsError, refetch: refetchAlerts } = useQuery({
+    ...healthQueryOptions,
     queryKey: ["/api/admin/health-deep/alerts", refreshKey],
+    enabled: !!health && !error,
     refetchInterval: 60000,
   });
 
@@ -241,7 +241,6 @@ export default function HealthDashboard() {
 
   const handleRefresh = () => {
     setRefreshKey(prev => prev + 1);
-    refetch();
   };
 
   if (isLoading) {
@@ -261,8 +260,8 @@ export default function HealthDashboard() {
 
   const dbStatus = health?.database?.status || "unknown";
   const envConfig = health?.environment || {};
-  const systemInfo = health?.system || diagnostics?.diagnostics?.server || {};
-  const memoryInfo = diagnostics?.diagnostics?.memory || {};
+  const systemInfo = health?.system || {};
+  const memoryInfo = systemInfo;
 
   return (
     <div className="min-h-screen bg-[var(--glp-ivory)] dark:bg-[var(--glp-charcoal)] p-4 sm:p-6">
@@ -304,7 +303,7 @@ export default function HealthDashboard() {
           />
           <MetricCard
             title="Database"
-            value={`${health?.database?.latencyMs || 0}ms`}
+            value={health?.database?.latencyMs == null ? "Unavailable" : `${health.database.latencyMs}ms`}
             subtitle="Response latency"
             icon={Database}
             status={dbStatus}
@@ -395,7 +394,10 @@ export default function HealthDashboard() {
         </div>
 
         {/* Deep Health (heal-360 report) */}
-        <div className="glp-pane mt-8 rounded-xl p-6" data-testid="section-deep-health">
+        {deepError && <AdminInlineError message="Deep health is unavailable. The health summary above is still available." onRetry={refetchDeep} testId="deep-health-error" />}
+        {alertsError && <AdminInlineError message="Health alerts are unavailable." onRetry={refetchAlerts} testId="health-alerts-error" />}
+        {!deep && !deepError && <p role="status">Loading deep health…</p>}
+        {deep && !deepError && <div className="glp-pane mt-8 rounded-xl p-6" data-testid="section-deep-health">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <Stethoscope className="w-5 h-5 text-sage-600" />
@@ -869,7 +871,7 @@ export default function HealthDashboard() {
               </div>
             </>
           )}
-        </div>
+        </div>}
 
         {/* Top-50 Platform Processes Tracker */}
         <div className="mt-8" data-testid="section-top50">

@@ -82,7 +82,7 @@ export async function apiRequest(method, url, data) {
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      queryFn: async ({ queryKey }) => {
+      queryFn: async ({ queryKey, signal }) => {
         const url = Array.isArray(queryKey) ? queryKey[0] : queryKey;
         const token = getToken();
         const headers = {};
@@ -117,6 +117,11 @@ export const queryClient = new QueryClient({
             const adminSession = getAdminSessionToken();
             if (adminSession) {
               headers["x-admin-session"] = adminSession;
+              // This summary uses canonical Bearer auth. Prefer the short-lived
+              // admin login session over any ordinary account login in this tab.
+              if (pathname === "/api/admin/browser-health") {
+                headers["Authorization"] = `Bearer ${adminSession}`;
+              }
             }
           }
         }
@@ -124,6 +129,7 @@ export const queryClient = new QueryClient({
         const res = await fetch(url, {
           headers,
           credentials: "include",
+          signal,
         });
 
         await throwIfResNotOk(res);
