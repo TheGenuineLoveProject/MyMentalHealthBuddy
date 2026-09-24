@@ -29,7 +29,7 @@ async function isProcessed(eventId) {
     return rows.length > 0;
   } catch (err) {
     logger.error("Idempotency check failed", { error: err.message, eventId });
-    return false; // Allow retry on DB error
+    throw err; // Do not perform side effects when durability cannot be checked.
   }
 }
 
@@ -45,8 +45,8 @@ async function markProcessed(event) {
       processedAt: new Date(),
     });
   } catch (err) {
-    // Log but don't fail - duplicate insert is acceptable
-    logger.warn("Failed to mark event processed", { error: err.message, eventId: event.id });
+    logger.error("Failed to mark event processed", { error: err.message, eventId: event.id });
+    throw err; // Do not acknowledge an event without durable processing evidence.
   }
 }
 
@@ -88,14 +88,14 @@ router.post(
       return res.status(400).send("Webhook signature verification failed");
     }
 
-    // Durable idempotency check
-    if (await isProcessed(event.id)) {
-      logger.info("Duplicate webhook event skipped", { eventId: event.id, type: event.type });
-      return res.json({ received: true, duplicate: true });
-    }
-
-    // Handle events safely (retry-safe, idempotent)
+    // Keep durability checks inside the error boundary: database failures
+    // must return a retryable response before side effects run.
     try {
+      if (await isProcessed(event.id)) {
+        logger.info("Duplicate webhook event skipped", { eventId: event.id, type: event.type });
+        return res.json({ received: true, duplicate: true });
+      }
+
       switch (event.type) {
         case "checkout.session.completed": {
           const session = event.data.object;
