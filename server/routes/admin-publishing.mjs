@@ -29,15 +29,17 @@ const publishingRegistryPatchSchema = publishingRegistrySchema.partial();
 router.use(requireAuth);
 router.use(requireAdmin);
 
+class PublishingFileReadError extends Error {}
+
 function readJsonFile(filepath) {
   try {
-    if (fs.existsSync(filepath)) {
-      return JSON.parse(fs.readFileSync(filepath, 'utf8'));
-    }
+    return JSON.parse(fs.readFileSync(filepath, 'utf8'));
   } catch (err) {
+    // Missing optional files are empty; permissions, I/O and parse failures are not.
+    if (err.code === 'ENOENT') return null;
     logger.error('Failed to read JSON file', { filepath, error: err.message });
+    throw new PublishingFileReadError('Failed to load publishing data. Please retry.');
   }
-  return null;
 }
 
 function writeJsonFile(filepath, data) {
@@ -375,6 +377,11 @@ router.get('/recommendations', async (req, res) => {
 // Health check endpoint for admin daily tools monitoring
 router.get("/", (req, res) => {
   res.json({ ok: true, module: "admin-publishing", status: "operational", timestamp: new Date().toISOString() });
+});
+
+router.use((err, req, res, next) => {
+  if (!(err instanceof PublishingFileReadError)) return next(err);
+  return res.status(500).json({ ok: false, error: err.message });
 });
 
 export default router;

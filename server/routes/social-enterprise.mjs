@@ -399,7 +399,7 @@ router.get("/signals", requireAuth, requireAdmin, async (req, res) => {
     });
   } catch (error) {
     logger.error("Failed to fetch social signals:", error);
-    return success(res, { topThemes: [], recentBlogActivity: [], statusCounts: {}, suggestedFocus: [] });
+    return res.status(500).json({ ok: false, error: "Failed to load social signals. Please retry." });
   }
 });
 
@@ -418,7 +418,7 @@ router.get("/audit", requireAuth, requireAdmin, async (req, res) => {
     return success(res, events);
   } catch (error) {
     logger.error("Failed to fetch social audit log:", error);
-    return success(res, []);
+    return res.status(500).json({ ok: false, error: "Failed to load social audit log. Please retry." });
   }
 });
 
@@ -558,7 +558,7 @@ router.get("/weekly-queue", requireAuth, requireAdmin, async (req, res) => {
     return success(res, posts);
   } catch (error) {
     logger.error("Failed to fetch weekly queue:", error);
-    return success(res, []);
+    return res.status(500).json({ ok: false, error: "Failed to load weekly queue. Please retry." });
   }
 });
 
@@ -641,7 +641,7 @@ router.get("/click-stats", requireAuth, requireAdmin, async (req, res) => {
     return success(res, clicks);
   } catch (error) {
     logger.error("Failed to fetch click stats:", error);
-    return success(res, []);
+    return res.status(500).json({ ok: false, error: "Failed to load click statistics. Please retry." });
   }
 });
 
