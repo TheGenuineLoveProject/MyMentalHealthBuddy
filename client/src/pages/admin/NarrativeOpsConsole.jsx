@@ -10,6 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import SafetyFooter from "../../components/ui/ReflectionFooter";
 import { SEO } from "../../components/SEO";
 import PublishingQueryState from "../../components/admin/PublishingQueryState";
+import { readPublishingResponse } from "../../lib/publishingResponses";
 
 const API_BASE = "/api/admin/social/enterprise";
 
@@ -143,21 +144,21 @@ export default function NarrativeOpsConsole() {
   const { data: postsData, isLoading: postsLoading, error, refetch, isFetching: postsFetching } = useQuery({
     queryKey: [API_BASE, "/posts", statusFilter, campaignFilter],
     queryFn: async () => {
-      return apiRequest("GET", buildQueryUrl());
+      return readPublishingResponse(buildQueryUrl(), "posts");
     },
   });
 
   const { data: campaignsData, isLoading: campaignsLoading, ...campaignsQuery } = useQuery({
     queryKey: [API_BASE, "/campaigns"],
     queryFn: async () => {
-      return apiRequest("GET", `${API_BASE}/campaigns`);
+      return readPublishingResponse(`${API_BASE}/campaigns`, "campaigns");
     },
   });
 
   const { data: weeklyData, isLoading: weeklyLoading, ...weeklyQuery } = useQuery({
     queryKey: [API_BASE, "/weekly-queue"],
     queryFn: async () => {
-      return apiRequest("GET", `${API_BASE}/weekly-queue`);
+      return readPublishingResponse(`${API_BASE}/weekly-queue`, "weekly");
     },
     enabled: activePanel === "weekly",
   });
@@ -165,7 +166,7 @@ export default function NarrativeOpsConsole() {
   const { data: signalsData, isLoading: signalsLoading, ...signalsQuery } = useQuery({
     queryKey: [API_BASE, "/signals"],
     queryFn: async () => {
-      return apiRequest("GET", `${API_BASE}/signals`);
+      return readPublishingResponse(`${API_BASE}/signals`, "signals");
     },
     enabled: activePanel === "signals",
   });
@@ -173,7 +174,7 @@ export default function NarrativeOpsConsole() {
   const { data: clickData, ...clickQuery } = useQuery({
     queryKey: [API_BASE, "/click-stats"],
     queryFn: async () => {
-      return apiRequest("GET", `${API_BASE}/click-stats`);
+      return readPublishingResponse(`${API_BASE}/click-stats`, "clicks");
     },
     enabled: activePanel === "signals",
   });
@@ -181,7 +182,7 @@ export default function NarrativeOpsConsole() {
   const { data: auditData, isLoading: auditLoading, ...auditQuery } = useQuery({
     queryKey: [API_BASE, "/audit"],
     queryFn: async () => {
-      return apiRequest("GET", `${API_BASE}/audit`);
+      return readPublishingResponse(`${API_BASE}/audit`, "audit");
     },
     enabled: activePanel === "audit",
   });
@@ -189,7 +190,7 @@ export default function NarrativeOpsConsole() {
   const { data: blogData, ...blogQuery } = useQuery({
     queryKey: ["/api/blog"],
     queryFn: async () => {
-      return apiRequest("GET", "/api/blog?limit=20");
+      return readPublishingResponse("/api/blog?limit=20", "blogs");
     },
     enabled: activePanel === "pipeline",
   });
@@ -343,13 +344,13 @@ export default function NarrativeOpsConsole() {
     });
   }
 
-  const posts = postsData?.data || postsData || [];
-  const campaigns = campaignsData?.data || campaignsData || [];
-  const weeklyPosts = weeklyData?.data || weeklyData || [];
-  const signals = signalsData?.data || signalsData || {};
-  const clicks = clickData?.data || clickData || [];
-  const audit = auditData?.data || auditData || [];
-  const blogs = blogData?.posts || blogData?.data || blogData || [];
+  const posts = postsData?.data ?? [];
+  const campaigns = campaignsData?.data ?? [];
+  const weeklyPosts = weeklyData?.data ?? [];
+  const signals = signalsData?.data;
+  const clicks = clickData?.data ?? [];
+  const audit = auditData?.data ?? [];
+  const blogs = blogData?.data ?? [];
 
   const postsByStatus = {
     draft: (Array.isArray(posts) ? posts : []).filter(p => p.status === "draft"),

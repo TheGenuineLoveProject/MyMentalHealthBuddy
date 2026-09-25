@@ -10,6 +10,7 @@ import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 import PublishingQueryState from "../../components/admin/PublishingQueryState";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "../../lib/queryClient";
+import { readPublishingResponse } from "../../lib/publishingResponses";
 
 const PLATFORMS = [
   { key: "instagram", label: "Instagram" },
@@ -61,7 +62,7 @@ export default function AdminPublishingToday() {
   const { data: draftsData, isLoading: draftsLoading, error: draftsError, refetch: refetchDrafts } = useQuery({
     queryKey: ['/api/admin/publishing/draft-packs'],
     queryFn: async () => {
-      return apiRequest("GET", "/api/admin/publishing/draft-packs");
+      return readPublishingResponse("/api/admin/publishing/draft-packs", "drafts");
     },
     retry: 2,
     retryDelay: 1000,
@@ -70,7 +71,7 @@ export default function AdminPublishingToday() {
   const { data: featuredData, error: featuredError, isLoading: featuredLoading, isFetching: featuredFetching, refetch: refetchFeatured } = useQuery({
     queryKey: ['/api/admin/publishing/featured'],
     queryFn: async () => {
-      return apiRequest("GET", "/api/admin/publishing/featured");
+      return readPublishingResponse("/api/admin/publishing/featured", "featured");
     },
     retry: 2,
     retryDelay: 1000,
@@ -100,8 +101,8 @@ export default function AdminPublishingToday() {
     onError: (err) => toast({ title: "Failed to mark posted", description: err.message, variant: "destructive" }),
   });
 
-  const drafts = draftsData?.ok ? (draftsData.data || []) : [];
-  const featured = featuredData?.ok ? (featuredData.data?.[today] || null) : null;
+  const drafts = draftsData?.data ?? [];
+  const featured = featuredError ? null : featuredData?.data[today] ?? null;
 
   const readyDrafts = drafts.filter((d) => d.status === "draft" || d.status === "approved");
   const postedDrafts = drafts.filter((d) => d.status === "posted");
