@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SafetyFooter from "../../components/ui/ReflectionFooter";
 import { SEO } from "../../components/SEO";
 import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+import PublishingQueryState from "../../components/admin/PublishingQueryState";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "../../lib/queryClient";
 
@@ -66,7 +67,7 @@ export default function AdminPublishingToday() {
     retryDelay: 1000,
   });
 
-  const { data: featuredData, refetch: refetchFeatured } = useQuery({
+  const { data: featuredData, error: featuredError, isLoading: featuredLoading, isFetching: featuredFetching, refetch: refetchFeatured } = useQuery({
     queryKey: ['/api/admin/publishing/featured'],
     queryFn: async () => {
       return apiRequest("GET", "/api/admin/publishing/featured");
@@ -167,12 +168,13 @@ export default function AdminPublishingToday() {
         </Card>
         <Card>
           <CardContent className="p-4 text-center">
-            <p className="text-2xl font-bold text-blue-600" data-testid="stat-featured">{featuredDraft ? "1" : "0"}</p>
+            <p className="text-2xl font-bold text-blue-600" data-testid="stat-featured">{featuredError ? "Unavailable" : featuredLoading ? "Loading…" : featuredDraft ? "1" : "0"}</p>
             <p className="text-xs text-muted-foreground">Featured</p>
           </CardContent>
         </Card>
       </div>
 
+      <PublishingQueryState section="featured publishing" error={featuredError} loading={featuredLoading} fetching={featuredFetching} onRetry={refetchFeatured}>
       {featuredDraft && (
         <Card className="border-2 border-green-300 bg-green-50/50 dark:bg-green-950/20" data-testid="featured-card">
           <CardContent className="p-5">
@@ -211,6 +213,8 @@ export default function AdminPublishingToday() {
           </CardContent>
         </Card>
       )}
+
+      </PublishingQueryState>
 
       <div className="flex gap-2 flex-wrap" data-testid="panel-filters">
         {["all", "social", "blog", "newsletter"].map((f) => (
