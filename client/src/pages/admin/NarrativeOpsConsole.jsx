@@ -143,24 +143,21 @@ export default function NarrativeOpsConsole() {
   const { data: postsData, isLoading: postsLoading, error, refetch } = useQuery({
     queryKey: [API_BASE, "/posts", statusFilter, campaignFilter],
     queryFn: async () => {
-      const res = await fetch(buildQueryUrl(), { credentials: "include" });
-      return res.json();
+      return apiRequest("GET", buildQueryUrl());
     },
   });
 
   const { data: campaignsData, isLoading: campaignsLoading } = useQuery({
     queryKey: [API_BASE, "/campaigns"],
     queryFn: async () => {
-      const res = await fetch(`${API_BASE}/campaigns`, { credentials: "include" });
-      return res.json();
+      return apiRequest("GET", `${API_BASE}/campaigns`);
     },
   });
 
   const { data: weeklyData, isLoading: weeklyLoading } = useQuery({
     queryKey: [API_BASE, "/weekly-queue"],
     queryFn: async () => {
-      const res = await fetch(`${API_BASE}/weekly-queue`, { credentials: "include" });
-      return res.json();
+      return apiRequest("GET", `${API_BASE}/weekly-queue`);
     },
     enabled: activePanel === "weekly",
   });
@@ -168,8 +165,7 @@ export default function NarrativeOpsConsole() {
   const { data: signalsData, isLoading: signalsLoading } = useQuery({
     queryKey: [API_BASE, "/signals"],
     queryFn: async () => {
-      const res = await fetch(`${API_BASE}/signals`, { credentials: "include" });
-      return res.json();
+      return apiRequest("GET", `${API_BASE}/signals`);
     },
     enabled: activePanel === "signals",
   });
@@ -177,8 +173,7 @@ export default function NarrativeOpsConsole() {
   const { data: clickData } = useQuery({
     queryKey: [API_BASE, "/click-stats"],
     queryFn: async () => {
-      const res = await fetch(`${API_BASE}/click-stats`, { credentials: "include" });
-      return res.json();
+      return apiRequest("GET", `${API_BASE}/click-stats`);
     },
     enabled: activePanel === "signals",
   });
@@ -186,8 +181,7 @@ export default function NarrativeOpsConsole() {
   const { data: auditData, isLoading: auditLoading } = useQuery({
     queryKey: [API_BASE, "/audit"],
     queryFn: async () => {
-      const res = await fetch(`${API_BASE}/audit`, { credentials: "include" });
-      return res.json();
+      return apiRequest("GET", `${API_BASE}/audit`);
     },
     enabled: activePanel === "audit",
   });
@@ -195,8 +189,7 @@ export default function NarrativeOpsConsole() {
   const { data: blogData } = useQuery({
     queryKey: ["/api/blog"],
     queryFn: async () => {
-      const res = await fetch("/api/blog?limit=20", { credentials: "include" });
-      return res.json();
+      return apiRequest("GET", "/api/blog?limit=20");
     },
     enabled: activePanel === "pipeline",
   });
@@ -207,7 +200,7 @@ export default function NarrativeOpsConsole() {
       const res = isEdit
         ? await apiRequest("PUT", `${API_BASE}/post/${editingPost.id}`, data)
         : await apiRequest("POST", `${API_BASE}/post`, data);
-      return { ...(await res.json()), _isEdit: isEdit };
+      return { ...res, _isEdit: isEdit };
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: [API_BASE, "/posts"] });
@@ -223,7 +216,7 @@ export default function NarrativeOpsConsole() {
     mutationFn: async ({ id, action, body }) => {
       try {
         const res = await apiRequest("POST", `${API_BASE}/post/${id}/${action}`, body || {});
-        return await res.json();
+        return res;
       } catch (err) {
         let parsed = null;
         const colonIdx = err.message?.indexOf(": ");
@@ -259,7 +252,7 @@ export default function NarrativeOpsConsole() {
   const campaignMutation = useMutation({
     mutationFn: async (data) => {
       const res = await apiRequest("POST", `${API_BASE}/campaigns`, data);
-      return res.json();
+      return res;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [API_BASE, "/campaigns"] });
@@ -274,7 +267,7 @@ export default function NarrativeOpsConsole() {
   const scheduleMutation = useMutation({
     mutationFn: async ({ id, scheduledFor }) => {
       const res = await apiRequest("POST", `${API_BASE}/post/${id}/schedule`, { scheduledFor });
-      return res.json();
+      return res;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [API_BASE, "/posts"] });
@@ -290,7 +283,7 @@ export default function NarrativeOpsConsole() {
   const utmMutation = useMutation({
     mutationFn: async (data) => {
       const res = await apiRequest("POST", `${API_BASE}/build-utm`, data);
-      return res.json();
+      return res;
     },
     onSuccess: (data) => {
       setUtmResult(data?.data?.utmUrl || data?.utmUrl || "");
@@ -302,7 +295,7 @@ export default function NarrativeOpsConsole() {
   const blogToSocialMutation = useMutation({
     mutationFn: async ({ blogPostId, campaignId }) => {
       const res = await apiRequest("POST", `${API_BASE}/generate-from-blog`, { blogPostId, campaignId });
-      return res.json();
+      return res;
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: [API_BASE, "/posts"] });

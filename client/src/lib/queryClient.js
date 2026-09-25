@@ -66,7 +66,9 @@ export function getRequestHeaders(url) {
         if (session) {
           headers["x-admin-session"] = session;
           if (path === "/api/admin/browser-health" ||
-              path === "/api/admin/health-deep" || path.startsWith("/api/admin/health-deep/")) {
+              path === "/api/admin/health-deep" || path.startsWith("/api/admin/health-deep/") ||
+              path === "/api/admin/publishing" || path.startsWith("/api/admin/publishing/") ||
+              path === "/api/admin/social/enterprise" || path.startsWith("/api/admin/social/enterprise/")) {
             headers.Authorization = `Bearer ${session}`;
           }
         }

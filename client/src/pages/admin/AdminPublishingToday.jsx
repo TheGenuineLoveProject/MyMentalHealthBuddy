@@ -8,6 +8,7 @@ import SafetyFooter from "../../components/ui/ReflectionFooter";
 import { SEO } from "../../components/SEO";
 import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
 import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "../../lib/queryClient";
 
 const PLATFORMS = [
   { key: "instagram", label: "Instagram" },
@@ -59,9 +60,7 @@ export default function AdminPublishingToday() {
   const { data: draftsData, isLoading: draftsLoading, error: draftsError, refetch: refetchDrafts } = useQuery({
     queryKey: ['/api/admin/publishing/draft-packs'],
     queryFn: async () => {
-      const res = await fetch("/api/admin/publishing/draft-packs", { credentials: "include" });
-      if (!res.ok) throw new Error("Failed to load drafts");
-      return res.json();
+      return apiRequest("GET", "/api/admin/publishing/draft-packs");
     },
     retry: 2,
     retryDelay: 1000,
@@ -70,9 +69,7 @@ export default function AdminPublishingToday() {
   const { data: featuredData, refetch: refetchFeatured } = useQuery({
     queryKey: ['/api/admin/publishing/featured'],
     queryFn: async () => {
-      const res = await fetch("/api/admin/publishing/featured", { credentials: "include" });
-      if (!res.ok) throw new Error("Failed to load featured");
-      return res.json();
+      return apiRequest("GET", "/api/admin/publishing/featured");
     },
     retry: 2,
     retryDelay: 1000,
@@ -80,14 +77,7 @@ export default function AdminPublishingToday() {
 
   const setFeaturedMutation = useMutation({
     mutationFn: async (id) => {
-      const res = await fetch("/api/admin/publishing/featured", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ date: today, glpId: id }),
-      });
-      if (!res.ok) throw new Error("Failed to set featured");
-      return res.json();
+      return apiRequest("POST", "/api/admin/publishing/featured", { date: today, glpId: id });
     },
     onSuccess: () => {
       refetchFeatured();
@@ -99,13 +89,7 @@ export default function AdminPublishingToday() {
 
   const markPostedMutation = useMutation({
     mutationFn: async (id) => {
-      const res = await fetch(`/api/admin/publishing/mark-posted/${id}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-      });
-      if (!res.ok) throw new Error("Failed to mark posted");
-      return res.json();
+      return apiRequest("POST", `/api/admin/publishing/mark-posted/${id}`);
     },
     onSuccess: () => {
       refetchDrafts();

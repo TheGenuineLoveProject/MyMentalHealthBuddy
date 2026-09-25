@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useRoute } from "wouter";
+import { apiRequest } from "../lib/queryClient";
 
 export default function BlogDraftViewer() {
   const [, params] = useRoute("/blog/draft/:id");
@@ -11,10 +12,8 @@ export default function BlogDraftViewer() {
   useEffect(() => {
     if (!id) return;
     setLoading(true);
-    fetch(`/api/admin/publishing/draft-packs/${encodeURIComponent(id)}`, {
-      credentials: "include",
-    })
-      .then((r) => r.json())
+    setError(null);
+    apiRequest("GET", `/api/admin/publishing/draft-packs/${encodeURIComponent(id)}`)
       .then((data) => {
         if (data.ok) {
           setDraft(data.data);
