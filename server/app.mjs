@@ -1,4 +1,5 @@
 import adminPublishingRoutes from "./routes/admin-publishing.mjs";
+import socialEnterpriseRoutes from "./routes/social-enterprise.mjs";
 import adminSecurityRoutes from "./routes/admin-security.mjs";
 import auditLogRoutes from "./routes/audit-logs.mjs";
 import authRoutes from "./routes/auth.mjs";
@@ -560,6 +561,7 @@ app.use("/api/ai/business", aiBusinessRoutes);
 app.use("/api/integrations", requireAuth, requireAdmin, integrationHealthRoutes);
 app.use("/api/admin/billing", adminBillingRoutes);
 app.use("/api/admin/publishing", adminPublishingRoutes);
+app.use("/api/admin/social/enterprise", requireAuth, requireAdmin, socialEnterpriseRoutes);
 app.use("/api/admin/security", requireAuth, requireAdmin, adminSecurityRoutes);
 app.use("/api/admin/platform-evolution", requireAuth, requireAdmin, platformEvolutionRoutes);
 app.use("/api/admin/audit-logs", requireAuth, requireAdmin, auditLogRoutes);

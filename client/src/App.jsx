@@ -1434,10 +1434,10 @@ export default function App() {
                 <AdminGuard><AdminHealthDashboard /></AdminGuard>
               </Route>
               <Route path="/admin/social/ops">
-                <AdminGuard><AdminSocial /></AdminGuard>
+                <AdminGuard><NarrativeOpsConsole /></AdminGuard>
               </Route>
               <Route path="/admin/social">
-                <AdminGuard><AdminSocial /></AdminGuard>
+                <AdminGuard><NarrativeOpsConsole /></AdminGuard>
               </Route>
               <Route path="/admin/social/generate">
                 <AdminGuard><SocialGenerator /></AdminGuard>

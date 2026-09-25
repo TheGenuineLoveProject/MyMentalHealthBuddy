@@ -20,23 +20,28 @@ try {
   const publishingSource = await fs.readFile("server/routes/admin-publishing.mjs", "utf8");
   const socialSource = await fs.readFile("server/routes/social-enterprise.mjs", "utf8");
   assert.match(appSource, /app\.use\(["']\/api\/admin\/publishing["'],\s*adminPublishingRoutes\)/);
+  assert.match(appSource, /app\.use\(["']\/api\/admin\/social\/enterprise["'],\s*requireAuth,\s*requireAdmin,\s*socialEnterpriseRoutes\)/);
   assert.match(publishingSource, /router\.use\(requireAuth\);\s*router\.use\(requireAdmin\)/);
   assert.match(socialSource, /import\s*\{\s*requireAuth,\s*requireAdmin\s*\}\s*from\s*["']\.\.\/middleware\/auth\.mjs["']/);
   for (const match of socialSource.matchAll(/router\.(?:get|post|put|patch|delete)\(["'](\/[^"']*)["'],([^;\n]*)/g)) {
-    if (match[1] !== "/") assert.match(match[2], /requireAuth,\s*requireAdmin/, `unprotected social route: ${match[1]}`);
+    assert.match(match[2], /requireAuth,\s*requireAdmin/, `unprotected social route: ${match[1]}`);
   }
-  assert.doesNotMatch(appSource, /app\.use\(["']\/api\/admin\/social\/enterprise["']/);
-  assert.match(socialSource, /router\.get\(["']\/["'],\s*\(req,\s*res\)/);
   const appUi = await fs.readFile("client/src/App.jsx", "utf8");
   for (const route of ["/admin/social", "/admin/social/ops"]) {
     assert.ok(appUi.includes(`<Route path="${route}">`), `${route} must be present`);
     assert.match(appUi.slice(appUi.indexOf(`<Route path="${route}">`), appUi.indexOf(`<Route path="${route}">`) + 150),
-      /<AdminGuard><AdminSocial \/><\/AdminGuard>/, `${route} must render AdminSocial (not NarrativeOpsConsole)`);
+      /<AdminGuard><NarrativeOpsConsole \/><\/AdminGuard>/, `${route} must render NarrativeOpsConsole`);
   }
 
   const { requireAuth, requireAdmin } = await import(path.resolve("server/middleware/auth.mjs"));
   const adminToken = jwt.sign({ id: "synthetic-admin", role: "admin" }, secret, { expiresIn: "1h" });
-  const sessionToken = jwt.sign({ id: "synthetic-tab", role: "admin" }, secret, { expiresIn: "1h" });
+  const sessionTimestamp = Date.now();
+  const sessionToken = jwt.sign({ role: "admin", timestamp: sessionTimestamp }, secret, { expiresIn: "4h" });
+  const decodedSession = jwt.decode(sessionToken);
+  assert.equal(decodedSession.id, undefined);
+  assert.equal(decodedSession.role, "admin");
+  assert.equal(decodedSession.timestamp, sessionTimestamp);
+  assert.ok(decodedSession.iat && decodedSession.exp > decodedSession.iat);
   const userToken = jwt.sign({ id: "synthetic-user", role: "user" }, secret, { expiresIn: "1h" });
   const expiredToken = jwt.sign({ id: "synthetic-expired", role: "admin", exp: Math.floor(Date.now() / 1000) - 60 }, secret);
   let account = null;
@@ -47,7 +52,6 @@ try {
 
   const calls = [];
   const responseData = { ok: true, data: [] };
-  let socialUnmounted = false;
   function authorize(headers) {
     const req = { headers: { authorization: new Headers(headers).get("authorization") } };
     let status = 200;
@@ -64,9 +68,6 @@ try {
     const auth = protectedPath ? authorize(headers) : { status: 200, passed: true };
     const call = { url, method: options.method || "GET", headers, body: options.body, auth };
     calls.push(call);
-    if (socialUnmounted && url.startsWith(social)) {
-      return new Response(JSON.stringify({ error: "Synthetic unmounted route" }), { status: 404 });
-    }
     if (protectedPath) {
       if (!auth.passed) return new Response(JSON.stringify({ error: "Synthetic denial" }), { status: auth.status });
     }
@@ -110,6 +111,7 @@ try {
   }
   // Only the two exact route families get a session bearer; other admin requests retain account bearer.
   assert.equal(new Headers(getRequestHeaders("/api/admin/another-tool")).get("authorization"), `Bearer ${userToken}`);
+  // When both are present, the real no-id admin session token must override the account token.
   for (const [token, tab, status] of [
     [adminToken, null, 200], [null, sessionToken, 200], [userToken, sessionToken, 200],
     [null, null, 401], [userToken, null, 403], [expiredToken, null, 401],
@@ -268,7 +270,7 @@ try {
     name: "synthetic-effects",
     setup(b) {
       b.onResolve({ filter: /^react$/, namespace: "file" }, args => {
-        if (/\/(?:BlogDraftViewer|AdminSocial)\.jsx$/.test(args.importer)) {
+        if (/\/BlogDraftViewer\.jsx$/.test(args.importer)) {
           return { path: "hooks", namespace: "effect" };
         }
       });
@@ -297,7 +299,6 @@ try {
   };
   for (const [entry, output] of [
     ["client/src/pages/BlogDraftViewer.jsx", "viewer.mjs"],
-    ["client/src/pages/admin/AdminSocial.jsx", "mounted-social.mjs"],
   ]) {
     await build({
       entryPoints: [entry], bundle: true, platform: "node", format: "esm",
@@ -306,7 +307,6 @@ try {
     });
   }
   const Viewer = (await import(path.join(dir, "viewer.mjs"))).default;
-  const MountedSocial = (await import(path.join(dir, "mounted-social.mjs"))).default;
   function captureEffect(Page) {
     globalThis.effectIndex = 0;
     globalThis.effectStates = {};
@@ -342,35 +342,7 @@ try {
     }
   }
 
-  // The actually mounted social page sends bare credentialed fetches (no Authorization);
-  // even with an admin/session in storage, the declared guards reject these requests.
-  account = adminToken;
-  session = sessionToken;
-  const mounted = captureEffect(MountedSocial);
-  const start = calls.length;
-  mounted.run();
-  await settle(() => mounted.states[9] === false);
-  const mountedCalls = calls.slice(start);
-  assert.equal(mountedCalls.length, 8);
-  const enterpriseCalls = mountedCalls.filter(call => call.url.startsWith(social));
-  assert.equal(enterpriseCalls.length, 6);
-  for (const call of enterpriseCalls) {
-    assert.equal(call.headers.get("authorization"), null);
-    assert.equal(call.headers.get("x-admin-session"), null);
-    assert.equal(call.auth.status, 401);
-  }
-  // Simulate actual unmounted route separately: the response is 404, not success,
-  // while the page's .json() and fallback render silently empty panels.
-  socialUnmounted = true;
-  const unmounted = captureEffect(MountedSocial);
-  const before = calls.length;
-  unmounted.run();
-  await settle(() => unmounted.states[9] === false);
-  assert.equal(calls.slice(before).filter(call => call.url.startsWith(social)).length, 6);
-  assert.deepEqual(unmounted.states[1], []); // posts after 404 JSON without data
-  socialUnmounted = false;
-  console.log("PASS: synthetic publishing page reads/writes, parsed responses, JWT auth matrix, exact session scope, and static router guards");
-  console.log("CURRENT ACCESS FAILURE: /admin/social and /admin/social/ops mount AdminSocial, whose fetches omit Authorization; social-enterprise router is unmounted (404). Activation and page migration require follow-up.");
+  console.log("PASS: synthetic publishing page reads/writes, parsed responses, JWT auth matrix, exact session scope, and protected social console mounts");
 } finally {
   process.env.JWT_SECRET = previousSecret;
   for (const key of ["window", "localStorage", "sessionStorage", "fetch", "syntheticHooks", "syntheticMutations", "syntheticEditingPost", "effectIndex", "effectStates", "effectCallbacks"]) delete globalThis[key];

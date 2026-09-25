@@ -1,5 +1,5 @@
 import express from "express";
-import { randomUUID } from "crypto";
+import { createHash } from "crypto";
 import { db } from "../db/connection.mjs";
 import { socialPosts, socialCampaigns, publishingEvents, analyticsEvents, blogPosts } from "../../shared/schema.mjs";
 import { eq, desc, and, gte, lte, sql, isNotNull } from "drizzle-orm";
@@ -24,6 +24,27 @@ const STATUS_TRANSITIONS = {
   review: "approved",
   approved: "posted",
 };
+
+// Admin-token login deliberately has no account ID. Give that verified session
+// a stable, namespaced author UUID without impersonating a users-table account.
+// This identifies a shared-token session, not an individual human.
+function publishingActor(req) {
+  if (req.dbUserId) {
+    return { id: req.dbUserId, name: `admin-account:${req.dbUserId}` };
+  }
+  if (req.user?.role !== "admin" || !Number.isFinite(req.user.timestamp) ||
+      !Number.isFinite(req.user.iat)) {
+    throw new Error("Publishing requires an account or a verified administrator session");
+  }
+  const bytes = createHash("sha256")
+    .update(`narrative-admin-session:${req.user.timestamp}:${req.user.iat}`)
+    .digest().subarray(0, 16);
+  bytes[6] = (bytes[6] & 0x0f) | 0x80;
+  bytes[8] = (bytes[8] & 0x3f) | 0x80;
+  const hex = bytes.toString("hex");
+  const id = `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
+  return { id, name: `admin-token-session:${id}` };
+}
 
 function logPublishingEvent(type, meta) {
   return db.insert(publishingEvents).values({ type, meta }).catch(err => {
@@ -93,8 +114,7 @@ router.post("/post", requireAuth, requireAdmin, async (req, res) => {
     if (!content || !content.trim()) return badRequest(res, "Content is required");
     if (!safetyNote || !safetyNote.trim()) return badRequest(res, "Safety note is required");
 
-    const userId = req.dbUserId;
-    const userName = req.session?.passport?.user?.username || "admin";
+    const { id: userId, name: userName } = publishingActor(req);
 
     const [newPost] = await db.insert(socialPosts).values({
       title: title.trim(),
@@ -170,7 +190,7 @@ router.put("/post/:id", requireAuth, requireAdmin, async (req, res) => {
     }
 
     const [updated] = await db.update(socialPosts).set(updateData).where(eq(socialPosts.id, id)).returning();
-    const userName = req.session?.passport?.user?.username || "admin";
+    const { name: userName } = publishingActor(req);
     await logPublishingEvent("social_post_edited", { postId: id, editedBy: userName });
 
     return success(res, updated, "Post updated.");
@@ -191,7 +211,7 @@ router.post("/post/:id/submit", requireAuth, requireAdmin, async (req, res) => {
       return badRequest(res, "Safety note is required before submitting for review");
     }
 
-    const userName = req.session?.passport?.user?.username || "admin";
+    const { name: userName } = publishingActor(req);
     const [updated] = await db.update(socialPosts).set({
       status: "review",
       reviewedAt: new Date(),
@@ -249,7 +269,7 @@ router.post("/post/:id/approve", requireAuth, requireAdmin, async (req, res) => 
       }
     }
 
-    const userName = req.session?.passport?.user?.username || "admin";
+    const { name: userName } = publishingActor(req);
     const [updated] = await db.update(socialPosts).set({
       status: "approved",
       approvedAt: new Date(),
@@ -291,7 +311,7 @@ router.post("/post/:id/mark-posted", requireAuth, requireAdmin, async (req, res)
     const existingPlatforms = Array.isArray(post.postedPlatforms) ? post.postedPlatforms : [];
     const allPlatforms = [...new Set([...existingPlatforms, ...platforms])];
 
-    const userName = req.session?.passport?.user?.username || "admin";
+    const { name: userName } = publishingActor(req);
     const [updated] = await db.update(socialPosts).set({
       status: "posted",
       postedPlatforms: allPlatforms,
@@ -323,7 +343,7 @@ router.get("/signals", requireAuth, requireAdmin, async (req, res) => {
       .from(socialPosts)
       .where(and(
         eq(socialPosts.status, "posted"),
-        socialPosts.theme !== null,
+        isNotNull(socialPosts.theme),
       ))
       .groupBy(socialPosts.theme)
       .orderBy(desc(sql`count(*)`))
@@ -440,7 +460,7 @@ router.post("/campaigns", requireAuth, requireAdmin, async (req, res) => {
       status: status || "active",
     }).returning();
 
-    const userName = req.session?.passport?.user?.username || "admin";
+    const { name: userName } = publishingActor(req);
     await logPublishingEvent("campaign_created", { campaignId: campaign.id, name: campaign.name, createdBy: userName });
 
     return success(res, campaign, "Campaign created.");
@@ -490,7 +510,7 @@ router.post("/post/:id/schedule", requireAuth, requireAdmin, async (req, res) =>
       updatedAt: new Date(),
     }).where(eq(socialPosts.id, id)).returning();
 
-    const userName = req.session?.passport?.user?.username || "admin";
+    const { name: userName } = publishingActor(req);
     await logPublishingEvent("social_post_scheduled", { postId: id, scheduledFor: scheduleDate.toISOString(), scheduledBy: userName });
 
     return success(res, updated, "Post scheduled.");
@@ -550,8 +570,7 @@ router.post("/generate-from-blog", requireAuth, requireAdmin, async (req, res) =
     const [blogPost] = await db.select().from(blogPosts).where(eq(blogPosts.id, blogPostId)).limit(1);
     if (!blogPost) return badRequest(res, "Blog post not found", 404);
 
-    const userName = req.session?.passport?.user?.username || "admin";
-    const userId = req.dbUserId;
+    const { id: userId, name: userName } = publishingActor(req);
 
     const postFormats = [
       { type: "micro-tool", hook: `Try this 60-second reset inspired by "${blogPost.title}":`, cta: "Save this. Try it inside the app." },
@@ -628,7 +647,7 @@ router.get("/click-stats", requireAuth, requireAdmin, async (req, res) => {
 
 
 // Health check endpoint for admin daily tools monitoring
-router.get("/", (req, res) => {
+router.get("/", requireAuth, requireAdmin, (req, res) => {
   res.json({ ok: true, module: "social-enterprise", status: "operational", timestamp: new Date().toISOString() });
 });
 
