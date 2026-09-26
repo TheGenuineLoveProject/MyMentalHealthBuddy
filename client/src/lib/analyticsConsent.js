@@ -10,6 +10,12 @@ export const LEGACY_ANALYTICS_OPTOUT_KEY = "analytics_opt_out";
 export const ANALYTICS_CONSENT_CHANGED_EVENT =
   "glp:analytics-consent-changed";
 
+let consentSaveBlocked = false;
+
+function defaultConsentStorage() {
+  try { return globalThis.localStorage; } catch { return null; }
+}
+
 function safeStorageGet(storage, key) {
   try {
     return storage?.getItem?.(key) ?? null;
@@ -36,7 +42,7 @@ function privacySignalEnabled(navigatorLike) {
   }
 }
 
-export function readAnalyticsConsent(storage = globalThis.localStorage) {
+export function readAnalyticsConsent(storage = defaultConsentStorage()) {
   const raw = safeStorageGet(storage, ANALYTICS_CONSENT_KEY);
 
   if (!raw) return null;
@@ -55,9 +61,11 @@ export function readAnalyticsConsent(storage = globalThis.localStorage) {
 }
 
 export function isAnalyticsAllowed({
-  storage = globalThis.localStorage,
+  storage = defaultConsentStorage(),
   navigatorLike = globalThis.navigator,
 } = {}) {
+  if (consentSaveBlocked) return false;
+
   if (privacySignalEnabled(navigatorLike)) {
     return false;
   }
@@ -76,21 +84,26 @@ export function isAnalyticsAllowed({
 
 export function persistAnalyticsConsent(
   consentData,
-  storage = globalThis.localStorage,
+  storage = defaultConsentStorage(),
 ) {
-  const analyticsEnabled =
-    consentData?.preferences?.analytics === true;
+  // A failed save must not keep analytics enabled in this module instance.
+  consentSaveBlocked = true;
+  const analyticsEnabled = consentData?.preferences?.analytics === true;
+  const serialized = JSON.stringify(consentData);
+  function writeVerified(key, value) {
+    storage.setItem(key, value);
+    if (storage.getItem(key) !== value) {
+      throw new Error("Consent storage verification failed");
+    }
+  }
 
-  storage.setItem(
-    ANALYTICS_CONSENT_KEY,
-    JSON.stringify(consentData),
-  );
-
-  // Compatibility for any remaining legacy readers.
-  storage.setItem(
-    LEGACY_ANALYTICS_OPTOUT_KEY,
-    analyticsEnabled ? "false" : "true",
-  );
+  // Establish a durable denial before changing the canonical preference.
+  writeVerified(LEGACY_ANALYTICS_OPTOUT_KEY, "true");
+  writeVerified(ANALYTICS_CONSENT_KEY, serialized);
+  if (analyticsEnabled) {
+    writeVerified(LEGACY_ANALYTICS_OPTOUT_KEY, "false");
+  }
+  consentSaveBlocked = false;
 
   try {
     globalThis.dispatchEvent?.(
@@ -99,6 +112,6 @@ export function persistAnalyticsConsent(
       }),
     );
   } catch {
-    // Consent persistence must never break the interface.
+    // Notification failure does not undo verified persistence.
   }
 }

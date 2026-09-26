@@ -8,6 +8,7 @@ import {
 
 export default function ConsentBanner() {
   const [visible, setVisible] = useState(false);
+  const [saveError, setSaveError] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [preferences, setPreferences] = useState({
     essential: true,
@@ -16,7 +17,12 @@ export default function ConsentBanner() {
   });
 
   useEffect(() => {
-    const consent = localStorage.getItem(ANALYTICS_CONSENT_KEY);
+    let consent = null;
+    try {
+      consent = localStorage.getItem(ANALYTICS_CONSENT_KEY);
+    } catch {
+      // Unavailable storage must not prevent consent controls rendering.
+    }
     if (!consent) {
       const timer = setTimeout(() => setVisible(true), 1000);
       return () => clearTimeout(timer);
@@ -35,9 +41,11 @@ export default function ConsentBanner() {
     };
     try {
       persistAnalyticsConsent(consentData);
-    } catch (err) {
-      console.warn("[storage-safe-write]", err);
+    } catch {
+      setSaveError(true);
+      return;
     }
+    setSaveError(false);
     setVisible(false);
   };
 
@@ -50,6 +58,13 @@ export default function ConsentBanner() {
       aria-label="Cookie consent"
     >
       <div className="container mx-auto max-w-4xl">
+        {saveError && (
+          <p role="alert" className="mb-4 text-sm text-foreground">
+            We could not save your preferences. Analytics is off for this page.
+            Please try again before reloading; earlier saved preferences may
+            apply after a reload.
+          </p>
+        )}
         {!showSettings ? (
           <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
             <div className="flex items-start gap-3 flex-1">
@@ -102,6 +117,7 @@ export default function ConsentBanner() {
                 size="sm"
                 onClick={() => setShowSettings(false)}
                 className="min-h-[44px] min-w-[44px] p-2 rounded-lg"
+                aria-label="Close cookie preferences"
                 data-testid="button-close-settings"
               >
                 <X className="w-5 h-5" />
