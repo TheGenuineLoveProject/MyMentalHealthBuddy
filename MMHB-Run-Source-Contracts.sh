@@ -1,0 +1,64 @@
+#!/usr/bin/env bash
+set -euo pipefail
+umask 077
+cd /home/runner/workspace
+node --input-type=commonjs <<'MMHB68_NODE'
+'use strict';
+const pins=[{"file": "server/app.mjs", "current": {"state": "PRESENT", "sha256": "b45e08aeac03fff78f4bb932b035ada905dad1566298e8b3537957ca553620d7"}, "candidate": {"state": "PRESENT", "sha256": "765912295f0cdd6476a90aeb043b2bbe09edbe34cd8756a203cc8f1c2b9115d2"}, "identical": false, "overlay": {"state": "PRESENT", "sha256": "dd7453f6b22c45c6546f27a6980616836ca4b26775638d02756dbd78d602d35d"}}, {"file": "server/startupReadiness.mjs", "current": {"state": "PRESENT", "sha256": "22747454dfdbd1e04e1f82c6e6ae046206d2ef16e0a40c8ea26fec33403e60f3"}, "candidate": {"state": "MISSING"}, "identical": false, "overlay": {"state": "PRESENT", "sha256": "22747454dfdbd1e04e1f82c6e6ae046206d2ef16e0a40c8ea26fec33403e60f3"}}, {"file": "server/db/ensureSchema.mjs", "current": {"state": "PRESENT", "sha256": "f8db060b03d1b85c632cc8a183d9843fe05701a73fdcd9e3a2c752fdafacf451"}, "candidate": {"state": "PRESENT", "sha256": "23343e14ace7796e1da29fb335a448f044982c3346b26a1b026bd7b711cfb7e0"}, "identical": false, "overlay": {"state": "PRESENT", "sha256": "f8db060b03d1b85c632cc8a183d9843fe05701a73fdcd9e3a2c752fdafacf451"}}, {"file": "server/routes/webhook.mjs", "current": {"state": "PRESENT", "sha256": "5f09d685e57e53a79e959e650b8e2b6a60abda89e1b089e07ad6a16672095ba7"}, "candidate": {"state": "PRESENT", "sha256": "7b732eb34bb528491dce4da3e68af4f0edf5b93f8abf98ae873a25655fb38c73"}, "identical": false, "overlay": {"state": "PRESENT", "sha256": "7b732eb34bb528491dce4da3e68af4f0edf5b93f8abf98ae873a25655fb38c73"}}, {"file": "server/billing/application.mjs", "current": {"state": "MISSING"}, "candidate": {"state": "PRESENT", "sha256": "63ca099e749e1501000288cc28d6507a125dcde805accee64d5f8e1272a0ae2f"}, "identical": false, "overlay": {"state": "PRESENT", "sha256": "63ca099e749e1501000288cc28d6507a125dcde805accee64d5f8e1272a0ae2f"}}, {"file": "server/billing/createApplication.mjs", "current": {"state": "MISSING"}, "candidate": {"state": "PRESENT", "sha256": "5647e7176c073994c54c6c08dedbb0283b7a16780bf7602ed620c51714be89a6"}, "identical": false, "overlay": {"state": "PRESENT", "sha256": "5647e7176c073994c54c6c08dedbb0283b7a16780bf7602ed620c51714be89a6"}}, {"file": "server/billing/billingRuntime.mjs", "current": {"state": "MISSING"}, "candidate": {"state": "PRESENT", "sha256": "11899c03bd21bf40ee473bb7e910fe0ee74ea09f420efd21b9ca488ee889f055"}, "identical": false, "overlay": {"state": "PRESENT", "sha256": "11899c03bd21bf40ee473bb7e910fe0ee74ea09f420efd21b9ca488ee889f055"}}, {"file": "server/billing/billingShutdown.mjs", "current": {"state": "MISSING"}, "candidate": {"state": "PRESENT", "sha256": "7a1118cab260659e475f6d58fd9acb4cf32661ddaef5dede716f1bd967178aeb"}, "identical": false, "overlay": {"state": "PRESENT", "sha256": "7a1118cab260659e475f6d58fd9acb4cf32661ddaef5dede716f1bd967178aeb"}}, {"file": "server/db/billingSchema.mjs", "current": {"state": "MISSING"}, "candidate": {"state": "PRESENT", "sha256": "a76caf2a49a63b9f0fece48c81eefd43c352b0b541ca856cff184e045f47cd13"}, "identical": false, "overlay": {"state": "PRESENT", "sha256": "a76caf2a49a63b9f0fece48c81eefd43c352b0b541ca856cff184e045f47cd13"}}, {"file": "server/db/billingSchemaContract.mjs", "current": {"state": "MISSING"}, "candidate": {"state": "PRESENT", "sha256": "3d3c0bb732c54b83843e6b1ab1147b8e0ad7eba927c5c5e03ae488725d4398d2"}, "identical": false, "overlay": {"state": "PRESENT", "sha256": "3d3c0bb732c54b83843e6b1ab1147b8e0ad7eba927c5c5e03ae488725d4398d2"}}, {"file": "server/db/billingUsersReadiness.mjs", "current": {"state": "MISSING"}, "candidate": {"state": "PRESENT", "sha256": "3914d63a3bf2d37b550730fcdc6918bb262d526c5482a14974bda5a484c74d10"}, "identical": false, "overlay": {"state": "PRESENT", "sha256": "3914d63a3bf2d37b550730fcdc6918bb262d526c5482a14974bda5a484c74d10"}}, {"file": "server/services/billingEventTransaction.mjs", "current": {"state": "MISSING"}, "candidate": {"state": "PRESENT", "sha256": "f8a9fce70124b55d5197cdfed53be393cbd098b80cafb607b352c4a101f9db60"}, "identical": false, "overlay": {"state": "PRESENT", "sha256": "f8a9fce70124b55d5197cdfed53be393cbd098b80cafb607b352c4a101f9db60"}}, {"file": "server/services/billingDelivery.mjs", "current": {"state": "MISSING"}, "candidate": {"state": "PRESENT", "sha256": "39cee16ceae83013e500f10cbc3ccc9ccbfca8bd9f9ceafbdb5d2065c3d68f25"}, "identical": false, "overlay": {"state": "PRESENT", "sha256": "39cee16ceae83013e500f10cbc3ccc9ccbfca8bd9f9ceafbdb5d2065c3d68f25"}}, {"file": "server/services/billingEmailTransport.mjs", "current": {"state": "MISSING"}, "candidate": {"state": "PRESENT", "sha256": "c4757e3c030600af8bf4bb6d7946fc85195541b38e5c0534b8ba5608ec1892d4"}, "identical": false, "overlay": {"state": "PRESENT", "sha256": "c4757e3c030600af8bf4bb6d7946fc85195541b38e5c0534b8ba5608ec1892d4"}}, {"file": "server/services/billingNotificationTemplate.mjs", "current": {"state": "MISSING"}, "candidate": {"state": "PRESENT", "sha256": "cdb91217cea6ea6fb1bee2633a0f9b396d3d9a452acafd37a6d1491a37bd8e34"}, "identical": false, "overlay": {"state": "PRESENT", "sha256": "cdb91217cea6ea6fb1bee2633a0f9b396d3d9a452acafd37a6d1491a37bd8e34"}}, {"file": "server/services/billingNotificationWorker.mjs", "current": {"state": "MISSING"}, "candidate": {"state": "PRESENT", "sha256": "daac9fb0f94fa026a5567d22c3de74041cc1e3f793f44ce4edb0fe3476c2a940"}, "identical": false, "overlay": {"state": "PRESENT", "sha256": "daac9fb0f94fa026a5567d22c3de74041cc1e3f793f44ce4edb0fe3476c2a940"}}],verifiers={"scripts/security/verify-auth-session-contracts.mjs": "abacd65e1f6061aba3999a44fc94bfbad62d2983d50176dfcbef169944c4ba3d", "scripts/safety/verify-safety-guardrails.mjs": "245e6196b6929cbeaf8182e83251be8513d653a7e4072bc65c4bc3373b37e558", "scripts/billing/verify-stripe-contract.mjs": "d86f36d3353e70987ceb5dfd4320c7740c5e1654e7934bbe0f3ac1262a86b112", "scripts/security/verify-rate-limit-ip-spoof.mjs": "0839826938cc3de037f2142a6ab4d42db32cd9850f9d70cacb394167a66aeb28"};
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),{spawnSync}=require('node:child_process');
+const ROOT='/home/runner/workspace',PRIOR=ROOT+'/.git/mmhb-review-evidence/staged-server-boot-Jg0hQ4';
+const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
+const check=(v,m)=>{if(!v)throw Error(m);};
+const env={PATH:process.env.PATH||'/usr/bin:/bin',LANG:'C.UTF-8',TZ:'UTC',CI:'true',NODE_ENV:'test',GIT_OPTIONAL_LOCKS:'0',GIT_NO_LAZY_FETCH:'1'};
+const inputs=new Map(),outputs=new Map(),results=[];let before,directory,status='STOPPED';
+function read(file){const s=fs.lstatSync(file);check(s.isFile()&&s.size<=4194304&&fs.realpathSync(file)===file,'Unsafe input: '+file);const b=fs.readFileSync(file),h=hash(b);if(inputs.has(file))check(inputs.get(file)===h,'Input changed: '+file);inputs.set(file,h);return b;}
+function git(...args){const r=spawnSync('git',['--no-pager','--no-optional-locks','-c','core.fsmonitor=false',...args],{cwd:ROOT,env,encoding:'utf8',timeout:30000,maxBuffer:33554432});check(!r.error&&r.status===0,'Git inspection failed');return r.stdout;}
+function state(){return JSON.stringify({head:git('rev-parse','HEAD').trim(),branch:git('branch','--show-current').trim(),index:hash(read(path.resolve(ROOT,git('rev-parse','--git-path','index').trim()))),status:git('status','--porcelain=v1','--untracked-files=all'),diff:hash(git('diff','--binary','--no-ext-diff','--no-textconv','HEAD','--')),package:hash(read(ROOT+'/package.json')),lock:hash(read(ROOT+'/package-lock.json'))});}
+function put(rel,b,source=false){const f=directory+'/'+rel;fs.mkdirSync(path.dirname(f),{recursive:true,mode:0o700});fs.writeFileSync(f,b,{flag:'wx',mode:0o600});if(source)outputs.set(f,hash(b));return f;}
+try{
+ console.log('COMMAND_ID=MMHB-SOURCE-CONTRACT-REGRESSION-68');
+ check(JSON.parse(read(ROOT+'/package.json')).name==='mymentalhealthbuddy','Project identity differs');
+ check(!process.env.REPL_ID||process.env.REPL_ID==='9d71c4b8-8fcd-4b22-aee2-5883d9cbe5a4','Replit identity differs');
+ check(git('rev-parse','--show-toplevel').trim()===ROOT,'Repository root differs');before=state();const initial=JSON.parse(before);
+ check(initial.head==='0e6c2b2b8d0d484aca1ae3de18a49ed75c9dc681'&&initial.branch==='integration','Branch or HEAD changed');
+ const previous=JSON.parse(read(PRIOR+'/summary.json'));check(previous.status==='STAGED_SERVER_BOOT_QUALIFIED_WITH_SYNTHETIC_EXTERNAL_SERVICES'&&previous.tests===3&&previous.pass===3&&previous.fullServerBoot===true&&previous.disposableDatabaseStopped==='PASS','G65 evidence differs');
+ const tree=new Map();let bytes=0;
+ for(const rel of git('ls-files','-z','--','server','shared').split('\0').filter(Boolean)){
+  check(/^(server|shared)\//.test(rel)&&!rel.split('/').includes('..')&&!/(^|\/)\.env(?:\.|$)/.test(rel),'Unexpected snapshot path');const b=read(ROOT+'/'+rel);bytes+=b.length;check(bytes<=67108864&&tree.size<10000,'Snapshot limit exceeded');tree.set(rel,b);
+ }
+ const overlays=new Map();
+ for(const p of pins){
+  if(p.current.state==='PRESENT'){const b=read(ROOT+'/'+p.file);check(hash(b)===p.current.sha256,'Current pinned file changed: '+p.file);tree.set(p.file,b);}
+  else {let present=true;try{fs.lstatSync(ROOT+'/'+p.file);}catch(e){if(e.code==='ENOENT')present=false;else throw e;}check(!present,'Previously absent source now exists: '+p.file);}
+  const b=read(PRIOR+'/candidate/'+p.file);check(hash(b)===p.overlay.sha256,'G65 overlay differs: '+p.file);overlays.set(p.file,b);
+ }
+ for(const[rel,b]of tree)if(!overlays.has(rel))check(hash(read(PRIOR+'/candidate/'+rel))===hash(b),'Source differs from G65: '+rel);
+ check(hash(read(PRIOR+'/candidate/package.json'))===initial.package,'Package differs from G65');
+ for(const[file,h]of Object.entries(verifiers))check(hash(read(ROOT+'/'+file))===h,'Reviewed verifier changed: '+file);
+ const parent=ROOT+'/.git/mmhb-review-evidence';check(fs.realpathSync(parent)===parent,'Evidence parent differs');directory=fs.mkdtempSync(parent+'/source-contracts-');fs.chmodSync(directory,0o700);console.log('EVIDENCE_DIRECTORY='+directory);
+ for(const mode of ['baseline','candidate']){
+  const files=new Map(tree);if(mode==='candidate')for(const entry of overlays)files.set(...entry);
+  files.set('package.json',read(ROOT+'/package.json'));for(const file of Object.keys(verifiers))files.set(file,read(ROOT+'/'+file));
+  for(const[rel,b]of files)put(mode+'/'+rel,b,true);
+  for(const file of Object.keys(verifiers)){
+   const r=spawnSync(process.execPath,[file],{cwd:directory+'/'+mode,env,encoding:'utf8',timeout:20000,maxBuffer:1048576});
+   const output=(r.stdout||'')+(r.stderr||'');const label=path.basename(file,'.mjs');put('logs/'+mode+'-'+label+'.log',output);
+   const result={mode,file,pass:!r.error&&r.status===0,exitCode:r.status,timedOut:r.error?.code==='ETIMEDOUT'};results.push(result);console.log('CONTRACT_RESULT='+JSON.stringify(result));
+   // Reviewed scripts emit source-contract assertions only; no credentials are inherited.
+   console.log('ASSERTIONS_BEGIN='+mode+'/'+label);console.log(output.slice(0,16000));console.log('ASSERTIONS_END='+mode+'/'+label);
+  }
+ }
+ status=results.length===8&&results.every(r=>r.pass)?'SOURCE_CONTRACTS_PASS_BASELINE_AND_CANDIDATE':'SOURCE_CONTRACT_FAILURES_RECORDED';
+ if(results.some(r=>!r.pass))process.exitCode=2;
+}catch(e){console.log('REASON='+JSON.stringify(e.message));process.exitCode=2;}
+finally{
+ if(before)try{for(const[f,h]of inputs)check(hash(fs.readFileSync(f))===h,'Input changed');for(const[f,h]of outputs)check(hash(fs.readFileSync(f))===h,'Staged input changed');check(state()===before,'Checkout changed');console.log('OBSERVED_SOURCE_AND_INPUT_PRESERVATION=PASS');}catch(e){status='STOPPED';process.exitCode=2;console.log('PRESERVATION_ERROR='+JSON.stringify(e.message));}
+ if(directory)put('summary.json',JSON.stringify({command:'MMHB-SOURCE-CONTRACT-REGRESSION-68',status,results,fullAppTests:false,releaseQualified:false},null,2));
+}
+console.log('STATUS='+status);
+console.log('SOURCE_WRITES_BY_COMMAND=0\nAPPLICATION_MODULES_EXECUTED=0\nDATABASE_CONNECTIONS=0\nHTTP_REQUESTS=0');
+console.log('FULL_APP_TESTS=NOT_RUN:FOUR_SOURCE_CONTRACT_SCRIPTS_ONLY\nAUTH_RUNTIME=NOT_QUALIFIED\nPRETEST_TARGET_REPAIR=PENDING');
+console.log('APPLICATION_SOURCE_APPLY=NOT_RUN\nSERVER_RESTART=NOT_RUN\nCOMMIT_PUSH_DEPLOY=NOT_RUN\nRELEASE_QUALIFIED=false');
+console.log('NEXT_ACTION=RETURN_FULL_OUTPUT\nREPORT_END=MMHB-SOURCE-CONTRACT-REGRESSION-68');
+
+MMHB68_NODE

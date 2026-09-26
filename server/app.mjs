@@ -63,6 +63,7 @@ import sessionBoundaryRoutes from "./routes/session-boundary.mjs";
 import { csrfProtection, issueCsrfToken } from "./security/csrf.mjs";
 import db from "./db/client.mjs";
 import { ensureSchema } from "./db/ensureSchema.mjs";
+import { createStartupReadiness } from "./startupReadiness.mjs";
 import { blogPosts as blogPostsTable, users as usersTable } from "../shared/schema.mjs";
 import { eq, and } from "drizzle-orm";
 
@@ -74,6 +75,8 @@ if (db) globalThis.db = db;
 // APP INIT
 // ----------------------------
 const app = express();
+const startupReadiness = createStartupReadiness({schemaBootstrap: ensureSchema});
+app.use(startupReadiness.middleware);
 
 // MMHB_SENSITIVE_PATH_GUARD_V1_BEGIN
 // Reject hidden-file probes before any router, static handler or SPA fallback.
@@ -1091,6 +1094,7 @@ function countRegisteredRoutes() {
   }
 }
 function shutdown(signal) {
+  startupReadiness.stop();
   console.log(`[SERVER] ${signal} received — shutting down`);
   shuttingDown = true;
   if (relistenTimer) clearTimeout(relistenTimer);
@@ -1211,7 +1215,7 @@ server.on("listening", () => {
   // healthy DB is all no-ops). Fully isolated: it can never block port-open or
   // crash boot — any failure is logged and swallowed inside ensureSchema().
   setImmediate(() => {
-    ensureSchema().catch((err) => {
+    startupReadiness.start().catch((err) => {
       console.warn("[SERVER] ensureSchema bootstrap skipped:", err?.message || err);
     });
   });

@@ -166,9 +166,12 @@ export function createEnsureSchema({
   readCanonical = readFileSync,
 } = {}) {
   let bootstrapped = false;
+  let bootstrapFailure = null;
 
   return async function ensureSchemaInjected() {
-    if (bootstrapped) return { ok: true, cached: true };
+    if (bootstrapped) return bootstrapFailure
+      ? { ...structuredClone(bootstrapFailure), cached: true }
+      : { ok: true, cached: true };
 
     let statements;
     try {
@@ -178,7 +181,8 @@ export function createEnsureSchema({
       const failure = { category: "schema_read_failed", sqlstate };
       safeLog(log, "warn", "[ensureSchema] canonical schema read failed; continuing", failure);
       bootstrapped = true;
-      return { ok: false, ran: 0, failed: [failure], failedCount: 1, omittedFailures: 0 };
+      bootstrapFailure = { ok: false, ran: 0, failed: [failure], failedCount: 1, omittedFailures: 0 };
+      return structuredClone(bootstrapFailure);
     }
 
     const results = { ok: true, ran: 0, failed: [], failedCount: 0, omittedFailures: 0 };
@@ -228,6 +232,7 @@ export function createEnsureSchema({
         ran: results.ran,
       });
     }
+    if (!results.ok) bootstrapFailure = structuredClone(results);
     bootstrapped = true;
     return results;
   };
