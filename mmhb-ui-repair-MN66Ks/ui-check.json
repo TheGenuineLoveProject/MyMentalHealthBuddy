@@ -1,0 +1,86 @@
+{
+  "status": "CANDIDATE_UI_QUALIFICATION_PASS",
+  "results": [
+    {
+      "width": 320,
+      "theme": "light",
+      "result": "CONTROL_FIXTURE_PASS",
+      "controls": 3,
+      "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+      "blockedRequests": 0
+    },
+    {
+      "width": 320,
+      "theme": "dark",
+      "result": "CONTROL_FIXTURE_PASS",
+      "controls": 3,
+      "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+      "blockedRequests": 0
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "result": "CONTROL_FIXTURE_PASS",
+      "controls": 3,
+      "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+      "blockedRequests": 0
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "result": "CONTROL_FIXTURE_PASS",
+      "controls": 3,
+      "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+      "blockedRequests": 0
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "result": "CONTROL_FIXTURE_PASS",
+      "controls": 10,
+      "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+      "blockedRequests": 0
+    },
+    {
+      "width": 768,
+      "theme": "dark",
+      "result": "CONTROL_FIXTURE_PASS",
+      "controls": 10,
+      "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+      "blockedRequests": 0
+    },
+    {
+      "width": 1365,
+      "theme": "light",
+      "result": "CONTROL_FIXTURE_PASS",
+      "controls": 10,
+      "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+      "blockedRequests": 0
+    },
+    {
+      "width": 1365,
+      "theme": "dark",
+      "result": "CONTROL_FIXTURE_PASS",
+      "controls": 10,
+      "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+      "blockedRequests": 0
+    },
+    {
+      "result": "LOGOUT_REJECTION_DISPLAY_PASS"
+    },
+    {
+      "result": "LOCAL_SESSION_FULL_NAVIGATION_PASS",
+      "authentication": "SIMULATED"
+    },
+    {
+      "route": "/login",
+      "result": "CANDIDATE_APP_NAV_MOUNT_PASS",
+      "authenticatedAPIs": "BLOCKED"
+    }
+  ],
+  "limitations": [
+    "Authentication is simulated only in component fixtures.",
+    "No real login, token revocation, journal write, or community posting was tested.",
+    "Candidate login route mounts the changed navigation with API requests blocked."
+  ]
+}

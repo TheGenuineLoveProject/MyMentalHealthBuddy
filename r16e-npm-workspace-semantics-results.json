@@ -1,0 +1,36 @@
+{
+  "scope": "REAL_INSTALLED_NPM_VIRTUAL_LOADER_ON_SYNTHETIC_LOCAL_LOCKS_NO_INSTALL_OR_REIFY",
+  "node": "v24.19.0",
+  "npm": "11.9.0",
+  "identities": {
+    "package.json": "1e6c1475248247276dad8a00cb25a0af567a02a37ed549c1fb2d26739011d5d9",
+    "node_modules/@npmcli/arborist/package.json": "24436c9c1e9af9ee00a6ff351ec04e5bddf30bb29ecf4e7b4e2bc362be4c77ab",
+    "node_modules/@npmcli/map-workspaces/package.json": "4e5e0897f2ba236dbb738a523c4d95139cd9cc12acfeeb3aaa546464397bb994",
+    "node_modules/@npmcli/arborist/lib/arborist/load-virtual.js": "5acd380ec9f592db8f5418319facdd4e61de8d621cbeacd63e5f3edecdbe4c45",
+    "node_modules/@npmcli/map-workspaces/lib/index.js": "1deb734fa3b190cfe235f2c3bbffbd269f85496feadbd2d3e495cd07850bb4dd"
+  },
+  "passed": 3,
+  "interceptedApiCalls": {
+    "network": 0,
+    "children": 0
+  },
+  "cases": [
+    {
+      "name": "Real npm ignores dependency array workspace metadata for project mapping",
+      "status": "PASS"
+    },
+    {
+      "name": "Real npm ignores dependency object workspace metadata for project mapping",
+      "status": "PASS"
+    },
+    {
+      "name": "Positive control: actual root workspace is mapped and linked in virtual tree",
+      "status": "PASS"
+    }
+  ],
+  "limitations": [
+    "Virtual lock graph only; not npm ci or native/build/application execution.",
+    "API interception is a test guard, not an OS network sandbox.",
+    "Local npm version is recorded; the Replit npm version remains an execution-time observation."
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "source": "https://registry.npmjs.org/@esbuild/linux-x64/-/linux-x64-0.28.2.tgz",
+  "integrity": "sha512-4xTZr1FUmSoQW4XIWmit3tzQrUTZM+N3P0XV8xROKYF50XfI7xeO90+1bZvNwxIufQ9hDQVRJH5YhgPVF8A/HQ==",
+  "sha256": "9573bb2233aab0f9ea7647d5cca9726113cc1768de61d66b17267f4db84488f6",
+  "binarySha256": "e1698a3d5c6c0798fee4fd3b5cc816651f460c63d390a7a26ea4beb0b1884100",
+  "dateUTC": "2026-09-09",
+  "metadataURL": "https://registry.npmjs.org/@esbuild/linux-x64/0.28.2",
+  "archiveIntegrityMatchesRegistry": true,
+  "limitations": [
+    "Registry-provided integrity comparison is not independent publisher authentication.",
+    "Binary was used only to compile small local synthetic fixtures; outputs were never executed.",
+    "No compiler package or binary is included in the deliverable kit.",
+    "The actual retained R17B import that triggered R18 remains unobserved."
+  ]
+}

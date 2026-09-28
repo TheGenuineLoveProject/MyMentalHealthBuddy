@@ -60,8 +60,8 @@ export default function BenefitsSection() {
     },
     {
       icon: Shield,
-      title: "Complete Privacy",
-      description: "End-to-end encryption ensures your innermost thoughts remain completely private and secure.",
+      title: "Privacy Information",
+      description: "Read our Privacy Policy before sharing personal information with the service.",
       variant: "gold",
       color: "#eac33b",
     },

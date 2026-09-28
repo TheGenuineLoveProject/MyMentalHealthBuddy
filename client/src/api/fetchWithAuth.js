@@ -1,3 +1,6 @@
+const TOKEN_KEY = "mmhb_token";
+const USER_KEY = "mmhb_user";
+
 // Safe localStorage helpers for environments with blocked storage
 function safeGetItem(key) {
   try {
@@ -16,13 +19,13 @@ function safeSetItem(key, value) {
 }
 
 export async function fetchWithAuth(url, options = {}) {
-  const accessToken = safeGetItem("accessToken");
+  const token = safeGetItem(TOKEN_KEY);
 
   const res = await fetch(url, {
     ...options,
     headers: {
       ...(options.headers || {}),
-      Authorization: accessToken ? `Bearer ${accessToken}` : "",
+      Authorization: token ? `Bearer ${token}` : "",
       "Content-Type": "application/json",
     },
     credentials: "include", // IMPORTANT for refresh cookie
@@ -39,8 +42,14 @@ export async function fetchWithAuth(url, options = {}) {
   if (!refreshRes.ok) return res;
 
   const data = await refreshRes.json();
-  if (data.accessToken) {
-    safeSetItem("accessToken", data.accessToken);
+  const refreshedToken = data?.token;
+
+  if (!refreshedToken) return res;
+
+  safeSetItem(TOKEN_KEY, refreshedToken);
+
+  if (data.user) {
+    safeSetItem(USER_KEY, JSON.stringify(data.user));
   }
 
   // retry original
@@ -48,7 +57,7 @@ export async function fetchWithAuth(url, options = {}) {
     ...options,
     headers: {
       ...(options.headers || {}),
-      Authorization: `Bearer ${safeGetItem("accessToken")}`,
+      Authorization: `Bearer ${refreshedToken}`,
       "Content-Type": "application/json",
     },
     credentials: "include",

@@ -1,0 +1,9 @@
+{
+  "status": "PREVIEW_UPDATED",
+  "addedAssets": 277,
+  "localHttpVerified": true,
+  "browserVerified": false,
+  "published": false,
+  "backup": "mmhb-shell-checkpoints/frontend-stage-WI0bP0/preview-backup-hYv1Cz",
+  "rollbackCommand": "env -u NODE_OPTIONS -u NODE_PATH node ./mmhb-shell-checkpoints/frontend-stage-WI0bP0/preview-backup-hYv1Cz/restore.mjs"
+}

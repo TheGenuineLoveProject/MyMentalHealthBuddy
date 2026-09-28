@@ -1,0 +1,82 @@
+{
+  "project": "MyMentalHealthBuddy",
+  "replitExecution": "PENDING",
+  "commandSha256": "c2bcf0376b8478cce51d3b7d4dc3fec056ef1a48716a017e9163a3807dfa405f",
+  "files": [
+    {
+      "file": "MMHB-RUNTIME-CONTRACT-R18F.txt",
+      "bytes": 260347,
+      "sha256": "c2bcf0376b8478cce51d3b7d4dc3fec056ef1a48716a017e9163a3807dfa405f"
+    },
+    {
+      "file": "MMHB-R18F-Start.txt",
+      "bytes": 4511,
+      "sha256": "38fe4d11d4c24e78c2fc5ae351a7bf197234a9fbe677db8e7677e56ad6552b6b"
+    },
+    {
+      "file": "source_review/commit-review-r18f.mjs",
+      "bytes": 3504,
+      "sha256": "df7dc2952768a92f74bcd7c98f26eb7f70fc7219d18a99e5ed951557fc8ba3d2"
+    },
+    {
+      "file": "source_review/build-runtime-contract-r18f.py",
+      "bytes": 4152,
+      "sha256": "f778a665a645f998f41fcb5a1c81cd0dfae0e509b8ecd0c4abc8acde19385a6a"
+    },
+    {
+      "file": "source_review/runtime-contract-body-r18f.mjs",
+      "bytes": 23217,
+      "sha256": "796e7cc247148eb93c89079403a80fc2df2b51a8bf413f510bb606de3d557ecb"
+    },
+    {
+      "file": "source_review/runtime-contract-driver-r18f.mjs",
+      "bytes": 260015,
+      "sha256": "e41f1c1900f0f506581e3265143aaa0add1414691eac3e40f10c17e32ef6fcdb"
+    },
+    {
+      "file": "source_review/r18f-delivered-review-blobs.json",
+      "bytes": 142009,
+      "sha256": "690ab8df95f2d3b4217ffff7f2a800af1278ab6817f2f4be7874571f40e65e71"
+    },
+    {
+      "file": "source_review/r18f-catalog-provenance.json",
+      "bytes": 2886,
+      "sha256": "582ad269bbab65abafcb7c08c20eaefc89506a65e3621c27c3410c0cfdf8a469"
+    },
+    {
+      "file": "source_review/test-r18f-driver.py",
+      "bytes": 6579,
+      "sha256": "e8bc01c3bf2282fe55a5fa9e978476ae05dea494ea1cdf96c46d38abe827288b"
+    },
+    {
+      "file": "source_review/r18f-driver-fixture-results.json",
+      "bytes": 4438,
+      "sha256": "faaca99be2ab9211851f8acbe1c4bb16e27748570f3592436b67195c92480c90"
+    },
+    {
+      "file": "source_review/r18f-scope-comparison.json",
+      "bytes": 295,
+      "sha256": "ec7288e368fb631bbfd49642a1b7b41578eb97417bcf95f04b53f659fa650a0c"
+    },
+    {
+      "file": "source_review/r18e-user-result-analysis.json",
+      "bytes": 1219,
+      "sha256": "41474c6fecbded38fb82787f586b92a487d6f17ff00755390870f5b9fb03cb56"
+    },
+    {
+      "file": "source_review/r18d-ledger-handoff-archive.md",
+      "bytes": 5891,
+      "sha256": "7fd47865f5d2858f6c17c39a5599d2dc23ff2c1e3e26a808fcb86411bcf32999"
+    },
+    {
+      "file": "source_review/prepare-r18f-deliverables.py",
+      "bytes": 14706,
+      "sha256": "2277bf337789d87bd36de0a801c73d7286e78a9a60b6b9541637fa2cf42adcef"
+    },
+    {
+      "file": "source_review/test-r18c-driver.py",
+      "bytes": 30046,
+      "sha256": "c29289301ef1a1d09a3c958979a3367773d583578d4549fd2a11ac7114177bbf"
+    }
+  ]
+}

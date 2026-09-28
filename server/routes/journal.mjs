@@ -26,8 +26,13 @@ function requireAuth(req, res, next) {
     if (!token) return res.status(401).json({ ok: false, message: "Unauthorized." });
 
     const payload = jwt.verify(token, ACCESS_SECRET);
+    if (!payload || typeof payload !== "object" || Array.isArray(payload) ||
+        !Object.hasOwn(payload, "id") || typeof payload.id !== "string" ||
+        payload.id.trim().length === 0) {
+      return res.status(401).json({ ok: false, message: "Unauthorized." });
+    }
     req.user = payload;
-    if (payload.id) req.dbUserId = payload.id;
+    req.dbUserId = payload.id;
     return next();
   } catch (authErr) {
     logger.warn("Journal auth token verification failed", { error: authErr?.message || authErr });

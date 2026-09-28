@@ -1,0 +1,102 @@
+{
+  "project": "MyMentalHealthBuddy",
+  "status": "R16_PREPARED_AND_FIXTURE_TESTED_NOT_REPLIT_EXECUTED",
+  "preparedUtc": "2026-09-08T06:47:47.369410+00:00",
+  "latestUserExecution": "R15_PASS_2026-09-08T06:24:29.249Z",
+  "command": {
+    "file": "MMHB-LOCKED-DEPENDENCIES-R16.txt",
+    "sha256": "9d88c63b1aa8ac29c3e5755aadf3859caf1836770800008bda95fe92d3b16f82",
+    "bytes": 77620
+  },
+  "localNode": "v24.19.0",
+  "requiredReplitNode": "v24.13.0",
+  "checks": {
+    "policyFixtures": 49,
+    "runnerFixtures": 15,
+    "driverFixtures": 12,
+    "totalFixtures": 76,
+    "bashSyntax": "PASS",
+    "nodeSyntax": "PASS",
+    "independentReview": "RESOLVED_NO_BLOCKING_FINDING_IN_SCOPE",
+    "actualNpmInstall": "NOT_RUN_HERE",
+    "applicationRuntime": "UNPROVEN",
+    "releaseReady": false
+  },
+  "files": [
+    {
+      "file": "source_review/locked-dependencies-driver-r16.mjs",
+      "sha256": "7a5140968c6f9d34ca5c0078c78ac5de5f611515fcb44eb6b8a7ce14130046df",
+      "bytes": 77225
+    },
+    {
+      "file": "source_review/locked-dependencies-prefix-r16.mjs",
+      "sha256": "f0e45dacd13dfeb9f653c976a6d2ae8298f89737e9412518a6678ab278c2df90",
+      "bytes": 16566
+    },
+    {
+      "file": "source_review/locked-dependencies-body-r16.mjs",
+      "sha256": "196635008f055d1298eb5c87d723208e185795961d8649d8c1cb65b6e3a4676c",
+      "bytes": 12335
+    },
+    {
+      "file": "source_review/locked-dependency-policy-r16.mjs",
+      "sha256": "0d32a375e7f43b58a809f5f902e971d6030512729927b4f4f19668610c0f7404",
+      "bytes": 20843
+    },
+    {
+      "file": "source_review/locked-npm-runner-r16.mjs",
+      "sha256": "6f28f812900febfc749e1779e73c23203cee089f1c0c160e61a794f450214c4f",
+      "bytes": 15234
+    },
+    {
+      "file": "source_review/test-locked-dependency-policy-r16.mjs",
+      "sha256": "884dd40817e4db3e36a117ba512ef392cb1d2ebf8e947ff2e5b7a6d2ca312ad2",
+      "bytes": 19934
+    },
+    {
+      "file": "source_review/test-locked-npm-runner-r16.mjs",
+      "sha256": "ac0a221e93098a3f91b82206ee39f5eb75959db15cb98f324b4924bcd9f35431",
+      "bytes": 8973
+    },
+    {
+      "file": "source_review/test-locked-dependencies-r16.py",
+      "sha256": "25d5ca808d3c48b96148ac1875e99e6d7be0ae70cd260ade008cf048ef9de3bf",
+      "bytes": 18557
+    },
+    {
+      "file": "source_review/build-locked-dependencies-command-r16.py",
+      "sha256": "00606a1fff27d9a74cfa5ca4b77df2d0d8f29f5c32bdfe47ee894c570f1d3a6a",
+      "bytes": 1151
+    },
+    {
+      "file": "source_review/r16-locked-dependency-policy-fixture-results.json",
+      "sha256": "73ba8daecd380c37d1d4713caa7ad57ed61f04d7d722945f3afe3f6b6ec7e4ad",
+      "bytes": 4733
+    },
+    {
+      "file": "source_review/r16-npm-runner-fixture-results.json",
+      "sha256": "fde4cc12578faa9b6f3387e71a7f4f2bb2644d4c3b2aa4a8274fa3033308c07c",
+      "bytes": 1702
+    },
+    {
+      "file": "source_review/r16-driver-fixture-results.json",
+      "sha256": "e9166797fa36403355af7b1937f9fd64639ddc42e2e2fa1a332be1691c3202f7",
+      "bytes": 1749
+    },
+    {
+      "file": "source_review/r16-install-contract.md",
+      "sha256": "a9eb49c3a794fba9face5c5fc850c24a6e8ad4faf01fbb1868fe086b5fcfcd82",
+      "bytes": 8428
+    },
+    {
+      "file": "source_review/r16-release-review.md",
+      "sha256": "8570621ffb4aa29e9948096549a4974edab884e202df0ad8f1f98bb299ccbc1b",
+      "bytes": 4496
+    },
+    {
+      "file": "source_review/R16-Verification-README.md",
+      "sha256": "46168da832dc52a40a7636383932650ae11b6436a4c07c0f794a92eb5257f02a",
+      "bytes": 7329
+    }
+  ]
+}

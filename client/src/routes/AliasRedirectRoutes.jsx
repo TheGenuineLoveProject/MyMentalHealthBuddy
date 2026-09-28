@@ -22,7 +22,6 @@ export default function AliasRedirectRoutes() {
               <Route path="/challenges">{() => <Redirect to="/challenge" />}</Route>
               <Route path="/therapist">{() => <Redirect to="/therapy" />}</Route>
               <Route path="/donate">{() => <Redirect to="/pricing" />}</Route>
-              <AliasRedirectRoutes />
               <Route path="/logs">{() => <Redirect to="/journal" />}</Route>
               <Route path="/tutorial">{() => <Redirect to="/guides" />}</Route>
               <Route path="/class">{() => <Redirect to="/courses" />}</Route>

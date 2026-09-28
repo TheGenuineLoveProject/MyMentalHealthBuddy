@@ -1,0 +1,40 @@
+{
+  "id": "MMHB_PUBLIC_DESIGN_20260912_V1",
+  "scope": "REPLIT_WORKSPACE_PREVIEW",
+  "status": "UI_REPAIR_STOPPED",
+  "sourceChanges": [
+    {
+      "file": "client/src/pages/CanvaLanding.jsx",
+      "beforeSha256": "abaae2c41913dfd5b8f040014864dc3a8addcc125102324d30c7b42de68a6cf0",
+      "afterSha256": "fd4225dce3228535eceef35f125107516cb25aa18c954dc83ca042bc7c3d8340",
+      "mode": 420
+    },
+    {
+      "file": "client/src/pages/MeetLumi.jsx",
+      "beforeSha256": "73843b5478445da1179b54800c68c4a0af7a5d4363a4c65a4d9ed3b1d0173246",
+      "afterSha256": "5f4674a4260bd4f1c66688abb4f8fb13fb53701d9d6cc3f681268114f3ffc6a1",
+      "mode": 420
+    },
+    {
+      "file": "client/src/styles/meet-lumi-page.css",
+      "beforeSha256": "0b3f4a806816c5d67ff5465effd76715deb049111b9c785340ecd7420f08f3e0",
+      "afterSha256": "a102c6d0d4be75fa59f1c8a449fe57003ba03445473e046761ff1608e87995d5",
+      "mode": 420
+    },
+    {
+      "file": "client/src/styles/mmhb-ui-controls.css",
+      "beforeSha256": "a64958b4ca02cc572a3d3a85fca35c980bd62237b12164097eff7f900aa857cf",
+      "afterSha256": "90a631f6a934169f0e989a814a7d3a52590c10b4270f8f83512d4a96461d1fb6",
+      "mode": 420
+    }
+  ],
+  "publicDeployment": "NOT_RUN",
+  "authenticatedWorkflows": "UNPROVEN",
+  "fullTerms": "PENDING",
+  "backupDirectory": "/home/runner/workspace/mmhb-public-design-ER1d7h",
+  "error": "QUALIFY-CANDIDATE_FAILED",
+  "rollback": {
+    "status": "COMPLETED"
+  },
+  "previousPreview": "HTTP_VERIFIED"
+}

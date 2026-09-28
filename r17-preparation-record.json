@@ -1,0 +1,278 @@
+{
+  "project": "MyMentalHealthBuddy",
+  "command": "MMHB-FRESH-CANDIDATE-R17",
+  "scope": "PRIVATE_FRESH_BUILD_AND_SELECTED_SMOKES_NOT_RELEASE",
+  "actualReplitExecution": "PENDING",
+  "releaseReady": false,
+  "priorUserReportedResult": {
+    "stage": "R16E",
+    "status": "REGISTRY_LOCKED_STAGE_PASS_SCRIPTS_DISABLED_NOT_RELEASE",
+    "startUTC": "2026-09-09T01:20:00.612Z",
+    "reportDirectory": "/home/runner/workspace/.mmhb-release-evidence/r16e-rHi4aw",
+    "sourcesVerified": 933,
+    "privateUrlsCorrected": 1003,
+    "npmExitCode": 0
+  },
+  "localQualification": {
+    "workflowFixtures": 18,
+    "filesystemContractFixtures": 11,
+    "total": 29,
+    "status": "PASS",
+    "bashAndNodeSyntax": "PASS",
+    "baselinePinsPreserved": 41,
+    "assetPinsPreserved": 22,
+    "embeddedHelpersVerified": 7,
+    "compilerAndNative": "SYNTHETIC",
+    "promptLoader": "EXACT_REVIEWED_MODULE_EXECUTED",
+    "applicationStarted": false,
+    "databaseUsed": false,
+    "networkUsedByFixtures": false
+  },
+  "files": [
+    {
+      "file": "MMHB-FRESH-CANDIDATE-R17.txt",
+      "sha256": "77d6fb30fd17df113a4831c3dce32dbaad56a1f1f476dcabbf62a20c11c18c73",
+      "bytes": 155094
+    },
+    {
+      "file": "MMHB-Ledger.txt",
+      "sha256": "3a0de4f5266637f6f6f5c8efb705750603813fee7c632b4261988aad5712de8c",
+      "bytes": 136021
+    },
+    {
+      "file": "MMHB-R17-Start.txt",
+      "sha256": "edfddda0686c423936b6f336ab03c1bbfe1812517901a37483b71e23d5523455",
+      "bytes": 1580
+    },
+    {
+      "file": "MMHB-Readiness-Ledger-2026-09-07.md",
+      "sha256": "3a0de4f5266637f6f6f5c8efb705750603813fee7c632b4261988aad5712de8c",
+      "bytes": 136021
+    },
+    {
+      "file": "source_review/fresh-build-policy-r17.mjs",
+      "sha256": "a291a95fba91252ed006edc91808149413bcd88ae604afb5f3e2fa456f16483b",
+      "bytes": 6648
+    },
+    {
+      "file": "source_review/server-build-runner-r17.mjs",
+      "sha256": "a22927d5ed38086f6680e80a2b7f3cc383ea1df5f3343086b34f812b3c9581a9",
+      "bytes": 2698
+    },
+    {
+      "file": "source_review/frontend-build-runner-r17.mjs",
+      "sha256": "c7ee3155a20ed2465a86e99a8d950e0cbe76b93eb6c22cb99876717e299eb4d6",
+      "bytes": 13761
+    },
+    {
+      "file": "source_review/native-candidate-runner-r17.mjs",
+      "sha256": "51a02c481480181077abdef52d78ba6585b66a61a3bde3ffd9465a802022ebe0",
+      "bytes": 9367
+    },
+    {
+      "file": "source_review/fresh-candidate-body-r17.mjs",
+      "sha256": "a4ec447fe18513e97d0ed082f2ef0250d09aa02a45b8d1652ea4a010da43569c",
+      "bytes": 22695
+    },
+    {
+      "file": "source_review/fresh-candidate-prefix-r17.mjs",
+      "sha256": "44cab075512a6681941f2be8b154909369e78345c191deb6323ef30f480a2a56",
+      "bytes": 18261
+    },
+    {
+      "file": "source_review/fresh-candidate-driver-r17.mjs",
+      "sha256": "2d8a4933e4eb4f32f3e78973af0972c3f01d21d6ccd76c99896cea2bc769736e",
+      "bytes": 154702
+    },
+    {
+      "file": "source_review/build-fresh-candidate-command-r17.py",
+      "sha256": "4cb46d050bdfb4406c8acc7e7c2b6dcbef05777df47b22996d387a314a735703",
+      "bytes": 1830
+    },
+    {
+      "file": "source_review/test-fresh-candidate-r17.py",
+      "sha256": "2bb41ca629777d4602c76eed8c856a34ba678ffc9f6bc5de828b09616e2796db",
+      "bytes": 13098
+    },
+    {
+      "file": "source_review/test-fresh-build-policy-r17.mjs",
+      "sha256": "9702eaa9968ed7285e1aaa0061078e6ba1d8d33ec9134ee07df6ee62e3b01628",
+      "bytes": 3654
+    },
+    {
+      "file": "source_review/r17-driver-fixture-results.json",
+      "sha256": "7dcebc7807e7268b03139f9815039c0e9f9fda517cc579ac6802cb058afc32d1",
+      "bytes": 3019
+    },
+    {
+      "file": "source_review/r17-policy-fixture-results.json",
+      "sha256": "e19ad46a0db0770dd55a3993c2cf0b1bb2a3989af81c6607e9b7da2b64fcbc56",
+      "bytes": 994
+    },
+    {
+      "file": "source_review/R17-Verification-README.md",
+      "sha256": "509aa89c4656f09c56a8b9af84a156c6618b1161258d15549e866034fd87e091",
+      "bytes": 3682
+    },
+    {
+      "file": "source_review/locked-dependency-policy-r16e.mjs",
+      "sha256": "7e07c8ba2bf66a4b3198467f3a00c957a5dd7dad4372db1d6f66c23493fd5984",
+      "bytes": 25972
+    },
+    {
+      "file": "source_review/registry-archive-repair-r16d.mjs",
+      "sha256": "8f125c00a0f678152b53bc4904c1cfbb216a693b2982d0de6a2e7eb6eb9a732d",
+      "bytes": 14974
+    },
+    {
+      "file": "source_review/prompt-asset-runner-r15.mjs",
+      "sha256": "630d1d36884b0951281a29d5d1ba15c9676669689393285ad81be0f316462ca2",
+      "bytes": 11326
+    },
+    {
+      "file": "source_review/locked-dependencies-prefix-r16e.mjs",
+      "sha256": "b6ab0b5a5bfc4aa4e9205f96235d8f80163f92824e44ee7f4474f5db2bf0145b",
+      "bytes": 16567
+    },
+    {
+      "file": "source_review/locked-dependencies-body-r16e.mjs",
+      "sha256": "f35127d364c151db4d5c241ef2bb3d5fa6d7b00d2b043d1c840a3afb50fd3819",
+      "bytes": 21645
+    },
+    {
+      "file": "source_review/frontend-candidate-runner-r12.mjs",
+      "sha256": "2f10da8de204a93ec87135c367e86c41cd6a706c4246eff1de451c1e2b90b43e",
+      "bytes": 13754
+    },
+    {
+      "file": "source_review/native-candidate-runner-r13.mjs",
+      "sha256": "0b1ff6782fccbd158cb54c3c88267e7d9035222dc0a6547fac862ef130ce8053",
+      "bytes": 9344
+    },
+    {
+      "file": "source_review/test-frontend-runner-r12.py",
+      "sha256": "619f67486ed07083b4e0e1e32a676aeca897389bc19e7e0f70d84476a36f6fe5",
+      "bytes": 9189
+    },
+    {
+      "file": "source_review/r15-asset-repair-policy.json",
+      "sha256": "517df8a9ce25a31ea5cbe13182a93d8ab32cefc1371654e6cb649a3d3fac4c03",
+      "bytes": 29343
+    },
+    {
+      "file": "source_review/r14-assets-server-lib-promptEngine.mjs",
+      "sha256": "fbbd43eaab399b029b5d976508da8f1e055e25d69fd2ee65551e23d102363170",
+      "bytes": 7669
+    },
+    {
+      "file": "source_review/r14-assets-ai-business-prompts-b01_offer_design.md",
+      "sha256": "213c90aed86e64685dd0ef9dfe2117736a441d019b419de9b9fd0c4df756eddc",
+      "bytes": 954
+    },
+    {
+      "file": "source_review/r14-assets-ai-business-prompts-b02_funnel_map.md",
+      "sha256": "f9499b81f35d0a53c3442296f84fd6a70be7ca288a5a905a05f6340da05af1bf",
+      "bytes": 752
+    },
+    {
+      "file": "source_review/r14-assets-ai-business-prompts-b03_content_factory.md",
+      "sha256": "d27b0be5cbf7509c13cb299e24d8cdc395bb2ead7bb4d4297baf3865152e8252",
+      "bytes": 781
+    },
+    {
+      "file": "source_review/r14-assets-ai-business-prompts-b04_email_sequences.md",
+      "sha256": "77bb6e3b57aa7ef73f3a5703e5ba6df3137c1ce9b41b082cc2d7e5ef3d9a837f",
+      "bytes": 868
+    },
+    {
+      "file": "source_review/r14-assets-ai-business-prompts-b05_seo_briefs.md",
+      "sha256": "38cf749f52577272b841e0e4eb86bf53e9d8d27a71b4c4100dfc1db65746419f",
+      "bytes": 941
+    },
+    {
+      "file": "source_review/r14-assets-ai-business-prompts-b06_competitive_scan.md",
+      "sha256": "d79db57c633b5e11141b1e5d13af0e13d478d4dab3307e82fdb5be7adc2ea709",
+      "bytes": 805
+    },
+    {
+      "file": "source_review/r14-assets-ai-business-prompts-b07_pricing_packaging.md",
+      "sha256": "f9e1be975bcbb611cb03d133650619d9356e9515452ee79ea04b0d0c49f51e57",
+      "bytes": 995
+    },
+    {
+      "file": "source_review/r14-assets-ai-business-prompts-b08_retention_loyalty.md",
+      "sha256": "ebafa326a0a5d552f9fc7316321b93119bc88df7e15b5aa87edff1f6a7feff7b",
+      "bytes": 820
+    },
+    {
+      "file": "source_review/r14-assets-ai-business-prompts-b09_partnerships.md",
+      "sha256": "7b409622fdf473b8e2e01f5145503fe35578ba7ba0e7d1e05ca94d256a22433d",
+      "bytes": 1075
+    },
+    {
+      "file": "source_review/r14-assets-ai-business-prompts-b10_ops_sops.md",
+      "sha256": "d03b38de531eb442d925c71a1f33b1ab82667887a4b9ab4d722ff4b6c2ffab8e",
+      "bytes": 1030
+    },
+    {
+      "file": "source_review/r14-assets-ai-business-registry.json",
+      "sha256": "d90a0981f3b9dab33c80da4923aa6abe4e6503762740193a78a8134081c5663b",
+      "bytes": 848
+    },
+    {
+      "file": "source_review/r14-assets-ai-business-system.md",
+      "sha256": "400428b0164409e84c048e29447a4f6b7cf484729efb01dabb6b31fba36a5da7",
+      "bytes": 925
+    },
+    {
+      "file": "source_review/r14-assets-ai-healing-prompts-h01_intake.md",
+      "sha256": "6bdf4ea38534d527bc4fd84ecaa8cfb004da1de967ba70cb2885a3ce0ccadaa1",
+      "bytes": 861
+    },
+    {
+      "file": "source_review/r14-assets-ai-healing-prompts-h02_journal_reflect.md",
+      "sha256": "f5f4872d9447030b1b26d054894b3650e9bdb2c6c30ff83e0e41fa37a1778902",
+      "bytes": 426
+    },
+    {
+      "file": "source_review/r14-assets-ai-healing-prompts-h03_cbt_reframe.md",
+      "sha256": "44062bd3e621d7abf7d32b77c01d2f70287a699bb1a913686b5d4c35e01b338d",
+      "bytes": 1033
+    },
+    {
+      "file": "source_review/r14-assets-ai-healing-prompts-h04_act_values.md",
+      "sha256": "b5ad3efc7403874112502dde7f01b5eb8e9aaf21de93e499036ceafb77ba7f5b",
+      "bytes": 1095
+    },
+    {
+      "file": "source_review/r14-assets-ai-healing-prompts-h05_breathing_grounding.md",
+      "sha256": "0488004edba218e43fa5ecf6aea53df3d98a08838633bf579033f01b36ea4e56",
+      "bytes": 1105
+    },
+    {
+      "file": "source_review/r14-assets-ai-healing-prompts-h06_sleep_reset.md",
+      "sha256": "578769ff00486a72436d68789c403a8f2e31405bb9cc8242249992981104edd2",
+      "bytes": 1068
+    },
+    {
+      "file": "source_review/r14-assets-ai-healing-prompts-h07_conflict_script.md",
+      "sha256": "2aaaa5d222baeb746d452514af1ca17e0417fd013cb45dd1d90891e9f73e63f4",
+      "bytes": 1267
+    },
+    {
+      "file": "source_review/r14-assets-ai-healing-prompts-h08_safety_check.md",
+      "sha256": "99292ed3282e9bb35a564f1341b5d59511e7406a90d6fd113129671a12241c30",
+      "bytes": 1746
+    },
+    {
+      "file": "source_review/r14-assets-ai-healing-registry.json",
+      "sha256": "be846525e46ce27d2f79f7f3baaeca990f8de91433cff89368da71bcc07178ce",
+      "bytes": 746
+    },
+    {
+      "file": "source_review/r14-assets-ai-healing-system.md",
+      "sha256": "7c7b9649f650bbfa75259b5f6a0ed7015680ac94fd8912f1dd01ae78ae57ed65",
+      "bytes": 1418
+    }
+  ]
+}

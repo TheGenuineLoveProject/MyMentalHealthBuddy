@@ -1,0 +1,98 @@
+{
+  "scope": "candidate-preview",
+  "indexSha256": "33e6aa5d4ebd419f62c02f47714d846d9a51c19735a284e75855bff793ed61d0",
+  "inputs": {
+    "package.json": "0f7ef43511c004e3d268a2e2840d46a264453892937f5a2eb6a680b01481c1e0",
+    "vite.config.js": "4b0866ecaacafc2f497010f37c40de9377766f554ca06989efd3ff027a4fff5e",
+    "client/postcss.config.js": "c14012cb0c28be42b5f7f84ff408983939df2597d4037c5409ee47814fc17b10",
+    "tailwind.config.js": "87a9665c33337dd4d0a4192702895926f2d8256838637838ec960398c0a0acc2",
+    "client/src/App.jsx": "441d8fb3fdd0d1ceef4c776f74f4c17870255293444d63f163e3d5e5ee4f6d65",
+    "client/src/pages/Terms.tsx": "40f73f2e221930c7d9902adba0b5204501108d9c531d18643409ee70c3d36802",
+    "client/src/pages/Login.jsx": "b0580800ebac8ad2174e2c4fa7cc6940383a9b9c83d6a2cd50f6142be31a771b",
+    "client/src/pages/Register.jsx": "26bd513c8f48b860c7634389cdffad56cc0fa0ba2980f06ceae03cf53582187d",
+    "client/src/pages/Privacy.jsx": "65cfd8bcb02e91edb49ce9cce3eb44eb8cc40d71244b160cd15dd633e9cfdb02",
+    "client/src/components/BenefitsSection.jsx": "26023c92c9e3057dc3bcf31c8fe7e0af79c379fb9a8e4b8d8f9a848e8b4067e5"
+  },
+  "results": [
+    {
+      "route": "/terms",
+      "width": 1365,
+      "result": "FAIL",
+      "pageErrors": [],
+      "assetFailures": [],
+      "error": "page.waitForFunction: Timeout 15000ms exceeded."
+    },
+    {
+      "route": "/tos",
+      "width": 1365,
+      "result": "FAIL",
+      "pageErrors": [],
+      "assetFailures": [],
+      "error": "page.waitForFunction: Timeout 15000ms exceeded."
+    },
+    {
+      "route": "/login",
+      "width": 1365,
+      "result": "PASS",
+      "pageErrors": [],
+      "assetFailures": [],
+      "horizontalOverflow": false
+    },
+    {
+      "route": "/register",
+      "width": 1365,
+      "result": "PASS",
+      "pageErrors": [],
+      "assetFailures": [],
+      "horizontalOverflow": false
+    },
+    {
+      "route": "/privacy",
+      "width": 1365,
+      "result": "PASS",
+      "pageErrors": [],
+      "assetFailures": [],
+      "horizontalOverflow": false
+    },
+    {
+      "route": "/terms",
+      "width": 390,
+      "result": "FAIL",
+      "pageErrors": [],
+      "assetFailures": [],
+      "error": "page.waitForFunction: Timeout 15000ms exceeded."
+    },
+    {
+      "route": "/tos",
+      "width": 390,
+      "result": "FAIL",
+      "pageErrors": [],
+      "assetFailures": [],
+      "error": "page.waitForFunction: Timeout 15000ms exceeded."
+    },
+    {
+      "route": "/login",
+      "width": 390,
+      "result": "PASS",
+      "pageErrors": [],
+      "assetFailures": [],
+      "horizontalOverflow": false
+    },
+    {
+      "route": "/register",
+      "width": 390,
+      "result": "PASS",
+      "pageErrors": [],
+      "assetFailures": [],
+      "horizontalOverflow": false
+    },
+    {
+      "route": "/privacy",
+      "width": 390,
+      "result": "PASS",
+      "pageErrors": [],
+      "assetFailures": [],
+      "horizontalOverflow": false
+    }
+  ]
+}

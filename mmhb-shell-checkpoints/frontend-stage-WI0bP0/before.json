@@ -1,0 +1,17 @@
+{
+  "client/src/components/admin/OperationsPanel.jsx": "3ed8e0b95d943f33b70c1c549b206317562250d8f87cb95a03f7d8fd43aba5e4",
+  "package.json": "e034489afed62c076902a2176193bbfb682de357d0c673a517b4026dded4aa7f",
+  "vite.config.js": "4b0866ecaacafc2f497010f37c40de9377766f554ca06989efd3ff027a4fff5e",
+  ".replit": "46d67ae89a05f553947272596612d16c370d0c304985d4a0fb7d67dcab582b1d",
+  "server/app.mjs": "eb9368edeb93cef830dd2aa0cf97646300c7b3f99f734d61ff2eb4e9cb2c73ac",
+  "client/vite.config.js": "ca5e85e3219dd2879ff431a9ed4a619424922345689b4e487fcf1891fb0dcac2",
+  "scripts/build-server.mjs": "9e046524ba1e77b5202c0bbe895b8a6a430e38b5188b1a2f2613525a183c4816",
+  "package-lock.json": "6574eef640049a1acea6692899408b2d803bcd481fb9b9d3d59efe8d25b76fae",
+  "pnpm-lock.yaml": "MISSING",
+  "yarn.lock": "MISSING",
+  "bun.lock": "MISSING",
+  "bundle-report.html": "395f09919934f66050dd4252399ff513f6a2f07cff4aca611ffbe3b83b0646fe",
+  "client/dist/index.html": "b3c4e249992f7eecb077a9790f4c0b41a2d32980466f66baf6d1588e4b7d106a",
+  "dist/client/dist/index.html": "19d623a4c10637a987f71b7557052c11faaff6b6a53d17f9ccbbb08f1f6973ac",
+  "server/client/dist/index.html": "MISSING"
+}

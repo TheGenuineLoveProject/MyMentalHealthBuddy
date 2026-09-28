@@ -1,3 +1,5 @@
+import * as fs from "node:fs";
+import { createRequire } from "node:module";
 import { build } from "esbuild";
 import { copyFileSync, mkdirSync, rmSync, cpSync } from "node:fs";
 import path from "node:path";
@@ -11,8 +13,8 @@ const ROOT = path.resolve(__dirname, "..");
 // Why this exists: the Replit deploy upload excludes node_modules (the full tree
 // is multi-GB and times out the uploader), and the runtime VM image does not
 // reliably carry build-phase node_modules. So the production server must run
-// WITHOUT a node_modules tree. esbuild inlines every dependency into a single
-// file (dist/server.mjs) that boots with zero runtime install. The deployment
+// with a small packaged node_modules tree. esbuild bundles the application;
+// runtime dependencies are copied below without a runtime install. The deployment
 // run command is `node dist/server.mjs`.
 //
 // External deps that must NOT be inlined:
@@ -20,13 +22,9 @@ const ROOT = path.resolve(__dirname, "..");
 //    deps with pure-JS fallbacks inside pg / ws, so absent-at-runtime is harmless.
 //  - bcrypt: a real native module (loads a prebuilt .node via node-gyp-build and
 //    needs a real __dirname); it cannot be bundled. It is shipped instead as a
-//    pinned tree under dist/node_modules (see NATIVE_DEPS below).
+//    pinned tree under dist/node_modules (see packageRuntime below).
 const EXTERNAL = ["pg-native", "pg-cloudflare", "bufferutil", "utf-8-validate", "bcrypt"];
 
-// Native deps copied verbatim into dist/node_modules so the bundle's
-// require("bcrypt") resolves at runtime with zero npm install. node-addon-api is
-// build-time only (prebuilds already exist) and is intentionally omitted.
-const NATIVE_DEPS = ["bcrypt", "node-gyp-build"];
 
 mkdirSync(path.join(ROOT, "dist"), { recursive: true });
 
@@ -64,19 +62,55 @@ cpSync(path.join(ROOT, "client", "dist"), packagedClientDist, {
   dereference: true,
 });
 
-// Stage the pinned native-dep tree under dist/node_modules so require("bcrypt")
-// resolves at runtime with no npm install. Rebuilt fresh every time so the
-// shipped tree always matches the installed version.
-const distModules = path.join(ROOT, "dist", "node_modules");
-rmSync(distModules, { recursive: true, force: true });
-mkdirSync(distModules, { recursive: true });
-for (const dep of NATIVE_DEPS) {
-  cpSync(path.join(ROOT, "node_modules", dep), path.join(distModules, dep), {
-    recursive: true,
-    dereference: true,
-  });
+// Copy installed runtime dependencies, preserving nested versions.
+function packageRuntime(root, destination) {
+  const lock = JSON.parse(fs.readFileSync(path.join(root, 'package-lock.json'), 'utf8'));
+  const modules = path.join(root, 'node_modules') + path.sep;
+  const found = new Map();
+  const stable = object => JSON.stringify(Object.entries(object || {}).sort());
+  function visit(name, from, optional = false) {
+    if (!/^(?:@[a-z0-9_.-]+\/)?[a-z0-9_.-]+$/i.test(name)) throw Error('INVALID_PACKAGE_NAME');
+    const search = createRequire(path.join(from, 'package.json')).resolve.paths(name) || [];
+    let folder;
+    for (const base of search) {
+      const candidate = path.join(base, name);
+      if (candidate.startsWith(modules) && fs.existsSync(path.join(candidate, 'package.json'))) {
+        folder = candidate; break;
+      }
+    }
+    if (!folder) { if (optional) return; throw Error('MISSING_INSTALLED_DEPENDENCY: ' + name); }
+    if (fs.realpathSync(folder) !== folder) throw Error('LINKED_PACKAGE_REVIEW_REQUIRED: ' + name);
+    const relative = path.relative(root, folder).split(path.sep).join('/');
+    if (found.has(relative)) return;
+    const pkg = JSON.parse(fs.readFileSync(path.join(folder, 'package.json'), 'utf8'));
+    const pinned = lock.packages?.[relative];
+    if (!pinned || pinned.link || pkg.name !== name || pkg.version !== pinned.version)
+      throw Error('LOCK_MISMATCH: ' + relative);
+    for (const field of ['dependencies','optionalDependencies','peerDependencies'])
+      if (stable(pkg[field]) !== stable(pinned[field])) throw Error('DEPENDENCY_METADATA_MISMATCH: ' + relative);
+    found.set(relative, folder);
+    if (found.size > 100) throw Error('DEPENDENCY_SET_REVIEW_REQUIRED');
+    for (const dep of Object.keys(pkg.dependencies || {}))
+      visit(dep, folder, Object.hasOwn(pkg.optionalDependencies || {}, dep));
+    for (const dep of Object.keys(pkg.optionalDependencies || {})) visit(dep, folder, true);
+    for (const dep of Object.keys(pkg.peerDependencies || {}))
+      visit(dep, folder, pkg.peerDependenciesMeta?.[dep]?.optional === true);
+  }
+  for (const name of ['bcrypt','node-gyp-build','speakeasy','base32.js','qrcode']) visit(name, root);
+  const entries = [...found].sort((a,b) => a[0].split('/').length - b[0].split('/').length || a[0].localeCompare(b[0]));
+  if (destination) for (const [relative, folder] of entries) {
+    const output = path.join(destination, relative);
+    fs.mkdirSync(path.dirname(output), {recursive:true});
+    fs.cpSync(folder, output, {recursive:true, dereference:true, filter:source => {
+      if (path.relative(folder, source).split(path.sep).includes('node_modules')) return false;
+      const actual = fs.realpathSync(source);
+      if (actual !== folder && !actual.startsWith(folder + path.sep)) throw Error('PACKAGE_SYMLINK_ESCAPES: ' + relative);
+      return true;
+    }});
+  }
+  return entries.map(([relative]) => relative);
 }
-
-console.log(
-  `[build-server] dist/server.mjs + dist/schema.canonical.sql + dist/node_modules/{${NATIVE_DEPS.join(",")}} written`,
-);
+const packaged = packageRuntime(ROOT);
+rmSync(path.join(ROOT,"dist","node_modules"), {recursive:true,force:true});
+packageRuntime(ROOT, path.join(ROOT,"dist"));
+console.log("[build-server] runtime packages copied:", packaged.length);

@@ -268,11 +268,14 @@ const output = {
   status: failures.length === 0 ? "PASS" : "FAIL",
 };
 
-fs.mkdirSync("tmp/governance", { recursive: true });
-fs.writeFileSync(
-  "tmp/governance/registry-semantic-audit.json",
-  `${JSON.stringify(output, null, 2)}\n`,
-);
+const noWrite = process.argv.includes("--no-write");
+if (!noWrite) {
+  fs.mkdirSync("tmp/governance", { recursive: true });
+  fs.writeFileSync(
+    "tmp/governance/registry-semantic-audit.json",
+    `${JSON.stringify(output, null, 2)}\n`,
+  );
+}
 
 console.log("\n========================================");
 console.log("REGISTRY SEMANTIC AUDIT SUMMARY");
@@ -281,7 +284,7 @@ console.log(`Registry files evaluated: ${registryFiles.length}`);
 console.log(`Warnings: ${warnings.length}`);
 console.log(`Failures: ${failures.length}`);
 console.log(
-  "Artifact: tmp/governance/registry-semantic-audit.json",
+  noWrite ? "Artifact: disabled (read-only audit)" : "Artifact: tmp/governance/registry-semantic-audit.json",
 );
 
 for (const warning of warnings) {

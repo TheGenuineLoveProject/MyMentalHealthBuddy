@@ -1,0 +1,39 @@
+MyMentalHealthBuddy — identify R18A's rejected input filename
+
+You ran R18A correctly after uploading the file. The checksum passed.
+The screenshots show: 63 pins match;5,192 source files match;625 candidate
+files match;zero observed changes. No helper or SDK tests were attempted.
+The blocker is RUNTIME_INPUT_PRIVATE_OR_INVALID on a 52-byte input path.
+This is a checker/path-classification failure; it does not by itself prove
+that a secret exists in the build or that the application is broken.
+
+1. Download MMHB-INPUT-PATH-INSPECT-R18B.txt.
+2. Upload the TXT beside MyMentalHealthBuddy's package.json in Replit.
+   Wait until the exact filename is visible in the project's files.
+3. Open Replit Shell and paste:
+
+cd /home/runner/workspace &&
+printf '%s\n' '8363179cf0a25f7f3af8bcb910caecf3c707f83c610a873558d4520ed64546ec  MMHB-INPUT-PATH-INSPECT-R18B.txt' |
+sha256sum -c - &&
+env -u BASH_ENV bash --noprofile --norc MMHB-INPUT-PATH-INSPECT-R18B.txt
+
+4. Return all printed output. Allow about 2–5 minutes for upload/run/return.
+
+This small command reads the existing R18A receipt, both saved compiler
+metadata files, the saved input manifest and relevant package metadata.
+It identifies only the fingerprint from your screenshot. It reads no
+application module contents, starts no app, makes no provider requests,
+changes no source, installs nothing, builds nothing and writes no report.
+Ordinary module filenames may be displayed; sensitive/non-module filenames
+remain redacted. The existing privacy rule is not changed by this command.
+
+Expected status:INPUT_PATH_IDENTIFIED_REVIEW_REQUIRED. This is identification,
+not a release pass. Other failures print a gate; return those too.
+The actual path is unavailable to ChatGPT until this output is returned.
+Replit AI is not needed. Local validation: 6 synthetic fixtures PASS plus
+Node and Bash syntax checks; actual Replit execution remains pending.
+
+First-release estimate remains 27–61 engineering hours, low confidence,
+assuming substantial core features exist. This excludes expanded content,
+calendar/social/provider integrations and external waiting. There is no
+verified overall completion percentage yet.

@@ -1,3 +1,4 @@
+@import "tailwindcss" source(none);
 @import "./styles/lumi-visual-system.css";
 @import "./styles/brand-tokens.css";
 @import "./styles/tokens.css";
@@ -22,9 +23,30 @@
 @import "./styles/lumi-pastel-visual-system.css";
 @import "./styles/lumi-living-presence-phase64.css";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@config "../../tailwind.config.js";
+@source "./";
+@source "../index.html";
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+}
 :root {
   /* Brand Colors */
   --sage: var(--glp-sage);
@@ -8463,17 +8485,17 @@ button:disabled,
      token blocks so the live UI resolves to one cohesive visual language. */
 
   --glp-sage: #8FBF9F;
-  --glp-sage-rgb: 143 191 159;
+  --glp-sage-rgb: 143, 191, 159;
   --glp-sage-soft: #DDECE3;
   --glp-sage-mist: #EEF7F1;
   --glp-sage-light: #CFE5D7;
   --glp-sage-vivid: #8FBF9F;
   --glp-sage-glow: #BFDCC9;
   --glp-sage-deep: #2F5D5D;
-  --glp-sage-deep-rgb: 47 93 93;
+  --glp-sage-deep-rgb: 47, 93, 93;
 
   --glp-blossom: #F4C7C3;
-  --glp-blossom-rgb: 244 199 195;
+  --glp-blossom-rgb: 244, 199, 195;
   --glp-blossom-soft: #FBE9E7;
   --glp-blossom-mist: #FFF5F3;
   --glp-blossom-glow: #F8D7D4;
@@ -8484,9 +8506,9 @@ button:disabled,
   --glp-rose-mist: var(--glp-blossom-mist);
 
   --glp-deep-teal: #2F5D5D;
-  --glp-deep-teal-rgb: 47 93 93;
+  --glp-deep-teal-rgb: 47, 93, 93;
   --glp-teal: #2F5D5D;
-  --glp-teal-rgb: 47 93 93;
+  --glp-teal-rgb: 47, 93, 93;
   --glp-teal-soft: #D8E5E5;
   --glp-teal-mist: #EEF5F5;
   --glp-teal-glow: #B8D2D2;
@@ -8497,13 +8519,13 @@ button:disabled,
   --glp-surface-soft: color-mix(in srgb, var(--glp-ivory) 88%, var(--glp-sage) 12%);
 
   --glp-ink: #3A3A3A;
-  --glp-ink-rgb: 58 58 58;
+  --glp-ink-rgb: 58, 58, 58;
   --glp-ink-70: color-mix(in srgb, var(--glp-ink) 70%, transparent);
   --glp-ink-60: color-mix(in srgb, var(--glp-ink) 60%, transparent);
   --glp-ink-40: color-mix(in srgb, var(--glp-ink) 40%, transparent);
 
   --glp-gold: #D4AF37;
-  --glp-gold-rgb: 212 175 55;
+  --glp-gold-rgb: 212, 175, 55;
   --glp-gold-soft: #F3E6B2;
   --glp-gold-mist: #FBF6DF;
   --glp-gold-glow: #E7CB6A;

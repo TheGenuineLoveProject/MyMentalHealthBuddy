@@ -1,0 +1,13 @@
+{
+  "status": "PACKAGED_FRONTEND_PARITY_PASSED",
+  "matchedFiles": 429,
+  "addedAssets": 277,
+  "previewHttpUnchanged": true,
+  "watchedFilesUnchanged": true,
+  "applicationStarted": false,
+  "buildsRun": 0,
+  "published": false,
+  "backup": "mmhb-shell-checkpoints/monitor-session-stage-qeKEDY/package-backup-S9Y1rF",
+  "scope": "Workspace frontend file parity only; packaged backend runtime and production are not verified.",
+  "rollbackCommand": "env -u NODE_OPTIONS -u NODE_PATH node ./mmhb-shell-checkpoints/monitor-session-stage-qeKEDY/package-backup-S9Y1rF/restore.mjs"
+}

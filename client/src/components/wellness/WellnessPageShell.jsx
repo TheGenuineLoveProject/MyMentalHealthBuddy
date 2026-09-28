@@ -1,21 +1,10 @@
 import { useState } from "react";
-import { Link } from "wouter";
 import { BenefitBlock } from "@/components/benefits/BenefitBlock";
 import { ConsentStrip } from "@/components/wellness/ConsentStrip";
 import { ClarityCard } from "@/components/wellness/ClarityCard";
 import { ExamplesAccordion } from "@/components/wellness/ExamplesAccordion";
-import { CRISIS_PATH } from "@/lib/safety";
-import { Info, Heart, Lightbulb, ChevronDown, ChevronUp, Home, Sparkles, MessageCircle, BookOpen, Activity, LifeBuoy } from "lucide-react";
+import { Info, Heart, Lightbulb, ChevronDown, ChevronUp } from "lucide-react";
 import "@/styles/wellness-shell.css";
-
-const QUICK_NAV = [
-  { href: "/", label: "Home", icon: Home, testId: "quicknav-home" },
-  { href: "/start", label: "Start", icon: Sparkles, testId: "quicknav-start" },
-  { href: "/ai-chat", label: "Chat", icon: MessageCircle, testId: "quicknav-chat" },
-  { href: "/journal", label: "Journal", icon: BookOpen, testId: "quicknav-journal" },
-  { href: "/state", label: "Mood", icon: Activity, testId: "quicknav-mood" },
-  { href: CRISIS_PATH, label: "Crisis", icon: LifeBuoy, testId: "quicknav-crisis" },
-];
 
 export function WellnessPageShell({
   title,
@@ -35,27 +24,7 @@ export function WellnessPageShell({
   ];
 
   return (
-    <div className="wellness-shell mx-auto max-w-5xl px-4 py-8">
-      <nav
-        aria-label="Quick navigation"
-        className="mb-6 -mx-1 flex flex-nowrap items-center gap-3 overflow-x-auto scrollbar-thin"
-        style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', marginBottom: '1.5rem' }}
-        data-testid="wellness-quicknav"
-      >
-        {QUICK_NAV.map(({ href, label, icon: Icon, testId }) => (
-          <Link
-            key={href}
-            href={href}
-            className="no-underline inline-flex items-center gap-1.5 px-3 py-2 min-h-[40px] rounded-full border border-[var(--glp-sage-20)] text-sm text-[var(--glp-sage-deep)] hover:border-[var(--glp-sage)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-sage)] transition-colors"
-            style={{ display: 'inline-flex', alignItems: 'center', gap: '0.375rem', padding: '0.5rem 0.875rem', minHeight: '40px', whiteSpace: 'nowrap' }}
-            data-testid={testId}
-          >
-            <Icon className="w-4 h-4" aria-hidden="true" />
-            <span>{label}</span>
-          </Link>
-        ))}
-      </nav>
-
+    <div className="wellness-shell mx-auto max-w-5xl px-4 py-8" data-testid="wellness-page-shell">
       {title ? (
         <header className="mb-6">
           <h1 className="text-3xl font-semibold text-foreground">{title}</h1>

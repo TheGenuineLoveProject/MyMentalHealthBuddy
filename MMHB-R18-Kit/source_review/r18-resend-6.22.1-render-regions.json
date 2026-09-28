@@ -1,0 +1,35 @@
+{
+  "scope": "REGION_COMPARISON_ONLY_NOT_FULL_ENTRY_EQUIVALENCE",
+  "regions": [
+    {
+      "region": "src/render.ts",
+      "esmCjsRegionEqual": true,
+      "cjsSha256": "c7ccd0b75ad9a5b468a93b742160d55e9df74c27968f6702e5cfbc2fdbedcf5e",
+      "esmSha256": "c7ccd0b75ad9a5b468a93b742160d55e9df74c27968f6702e5cfbc2fdbedcf5e"
+    },
+    {
+      "region": "src/batch/batch.ts",
+      "esmCjsRegionEqual": true,
+      "cjsSha256": "2df46513bcd1b01273eb40a8389a23e47bc2e6915da0ef6f7602e1b2f27806ea",
+      "esmSha256": "2df46513bcd1b01273eb40a8389a23e47bc2e6915da0ef6f7602e1b2f27806ea"
+    },
+    {
+      "region": "src/broadcasts/broadcasts.ts",
+      "esmCjsRegionEqual": true,
+      "cjsSha256": "bb11b7f173c0038dda88973675a5013f979c75a7850c450c0ad3f518429faaf3",
+      "esmSha256": "bb11b7f173c0038dda88973675a5013f979c75a7850c450c0ad3f518429faaf3"
+    },
+    {
+      "region": "src/emails/emails.ts",
+      "esmCjsRegionEqual": true,
+      "cjsSha256": "54bf6518e3205de4b3f9ca9482167ada0b148328c8dcee60354762b82ba9020e",
+      "esmSha256": "54bf6518e3205de4b3f9ca9482167ada0b148328c8dcee60354762b82ba9020e"
+    },
+    {
+      "region": "src/templates/templates.ts",
+      "esmCjsRegionEqual": true,
+      "cjsSha256": "12cb4ad4847f9ea32ad79255ba2fcf8134569d5fba6e89b0319a1048958aec05",
+      "esmSha256": "12cb4ad4847f9ea32ad79255ba2fcf8134569d5fba6e89b0319a1048958aec05"
+    }
+  ]
+}

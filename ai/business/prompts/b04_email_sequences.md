@@ -9,7 +9,7 @@ Draft a multi-email lifecycle sequence (welcome, nurture, re-engagement, win-bac
 3. **Cadence Map** (table):
    | # | Day | Subject Line | Preview | One-Line Body Goal | CTA |
 4. **Tone Notes** (3 bullets): voice, length, signature.
-5. **Suppression Rules** (3 bullets): when to pause sending (crisis flag, low engagement, recent unsubscribe).
+5. **Suppression Rules** (3 bullets): when to pause sending based only on consent, communication preferences, unsubscribe status, or bounces; do not use crisis flags, health information, or inferred mental state.
 6. **Success Metric** (1 line): open %, click %, reply %, or unsubscribe rate threshold.
 
 ## Hard Rules

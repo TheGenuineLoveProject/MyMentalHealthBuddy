@@ -1,0 +1,846 @@
+{
+  "project": "MyMentalHealthBuddy",
+  "analysisType": "USER_PASTED_R17C_METADATA_COMPARED_WITH_LOCAL_DELIVERED_KITS",
+  "reportDirectory": "/home/runner/workspace/.mmhb-release-evidence/r17c-tn3PWG",
+  "reportedUtc": "2026-09-09T08:20:09.797Z",
+  "reportedStatus": "PRESERVATION_DIAGNOSTIC_COMPLETE_REVIEW_REQUIRED",
+  "releaseReady": false,
+  "sourceLimitations": [
+    "The raw R17C JSON report and Replit worktree are not available locally. This analysis uses visible user-pasted observations and retained local ZIP bytes.",
+    "Visible names, SHA-256 values and byte counts were manually transcribed. Markdown backslashes before underscores were normalized as presentation escaping.",
+    "Kit-byte matches identify content correspondence, not the writer, extraction action, exact creation time or historical ignore rules.",
+    "The historical R17B preservation failure remains in the record. Current matching artifacts do not retroactively change its status."
+  ],
+  "historical": {
+    "count": 42,
+    "components": [
+      "worktree",
+      "files"
+    ],
+    "kindForEveryRow": "ADDED_TO_OBSERVED_SET",
+    "beforeForEveryRow": "NOT_IN_OBSERVED_SET",
+    "afterModeForEveryRow": 33152,
+    "currentForEveryRow": {
+      "tracked": false,
+      "matchesIgnoreRules": false,
+      "inObservedSet": true,
+      "matchesAfter": true
+    },
+    "scopeForEveryRow": {
+      "pinned": false,
+      "inRecordedSourceCopy": false
+    },
+    "classification": "DELIVERED_REVIEW_MATERIAL_ADDITIONS_IN_OBSERVED_SET",
+    "actor": "UNKNOWN",
+    "rows": [
+      {
+        "file": "source_review/R17A-Verification-README.md",
+        "sha256": "4f815b62d9f263b3d8686f420f5f77c71e6a6490030bf79df989774909f43d5e",
+        "bytes": 3599
+      },
+      {
+        "file": "source_review/R17B-Verification-README.md",
+        "sha256": "d1576a7e3da99ed09b38ffcf286cb1f15f607e77827e44a2509f3214c0e0d37d",
+        "bytes": 3334
+      },
+      {
+        "file": "source_review/build-fresh-candidate-command-r17b.py",
+        "sha256": "aa4f07c5d63132e464cd5346881fdb5ec18d57e07040ab195ea37abbde7467f1",
+        "bytes": 1484
+      },
+      {
+        "file": "source_review/build-resumed-candidate-command-r17a.py",
+        "sha256": "15dd4034a58c5037a6970ed8e77703061be5587b8d36f0ae87ca236cbcaa14ce",
+        "bytes": 1484
+      },
+      {
+        "file": "source_review/fresh-candidate-body-r17.mjs",
+        "sha256": "a4ec447fe18513e97d0ed082f2ef0250d09aa02a45b8d1652ea4a010da43569c",
+        "bytes": 22695
+      },
+      {
+        "file": "source_review/fresh-candidate-body-r17b.mjs",
+        "sha256": "d9373de711af10c6e91971b0d278ad1e10f6e962652db177e48569f808c98802",
+        "bytes": 27178
+      },
+      {
+        "file": "source_review/fresh-candidate-driver-r17.mjs",
+        "sha256": "2d8a4933e4eb4f32f3e78973af0972c3f01d21d6ccd76c99896cea2bc769736e",
+        "bytes": 154702
+      },
+      {
+        "file": "source_review/fresh-candidate-driver-r17b.mjs",
+        "sha256": "d8aa5018d3c1c5431cd5dc7f5e012b36f4ebef0bbe60aca5be99a95abbb66002",
+        "bytes": 170030
+      },
+      {
+        "file": "source_review/fresh-candidate-prefix-r17.mjs",
+        "sha256": "44cab075512a6681941f2be8b154909369e78345c191deb6323ef30f480a2a56",
+        "bytes": 18261
+      },
+      {
+        "file": "source_review/frontend-build-runner-r17b.mjs",
+        "sha256": "1c84aae3d2ff2590553d9893665779d8d60c91cc805f21968e9aed00ea9c3b49",
+        "bytes": 14316
+      },
+      {
+        "file": "source_review/frontend-graph-policy-r17a.mjs",
+        "sha256": "4d8c2e06216230ed6b7311d1414dd4a847adc7644c836cc817857ba15029ffca",
+        "bytes": 7105
+      },
+      {
+        "file": "source_review/locked-dependency-policy-r16e.mjs",
+        "sha256": "7e07c8ba2bf66a4b3198467f3a00c957a5dd7dad4372db1d6f66c23493fd5984",
+        "bytes": 25972
+      },
+      {
+        "file": "source_review/native-candidate-runner-r17.mjs",
+        "sha256": "51a02c481480181077abdef52d78ba6585b66a61a3bde3ffd9465a802022ebe0",
+        "bytes": 9367
+      },
+      {
+        "file": "source_review/native-candidate-runner-r17a.mjs",
+        "sha256": "94c606a4a912781ba279a028336518dea67322a25902afec2b82f921d9466872",
+        "bytes": 9368
+      },
+      {
+        "file": "source_review/native-candidate-runner-r17b.mjs",
+        "sha256": "1ef8cc6dd7c5b5060cd0b2647b4565091daa3cbd69571cc9c88e4a22f397fdb0",
+        "bytes": 9368
+      },
+      {
+        "file": "source_review/r17a-graph-fixture-results.json",
+        "sha256": "71151aeed966bbdade595471d4b6bc63f2f2929e633a5670c2f3f6f025db9e75",
+        "bytes": 2062
+      },
+      {
+        "file": "source_review/r17a-upstream-rolldown-LICENSE.txt",
+        "sha256": "3b952c73f89b174e0ac02e660437f4ee1f7a9260f3b08922fc75ff8ad26d33b5",
+        "bytes": 1303
+      },
+      {
+        "file": "source_review/r17a-upstream-rolldown-native-context-v1.0.3.rs",
+        "sha256": "57dcd1012175b146b757aa5275b46c0f1b778c449472126027e11d2c3e5dc725",
+        "bytes": 8013
+      },
+      {
+        "file": "source_review/r17a-upstream-rolldown-plugin-context-v1.0.3.ts",
+        "sha256": "ecabf416a1d916049d863352050d4564390df217a57cad291f055e4b89517084",
+        "bytes": 16065
+      },
+      {
+        "file": "source_review/r17a-upstream-rolldown-runtime-v1.0.3.rs",
+        "sha256": "97347fda247290b0770b44627cd425e7014bb9e311fad222a452ac2dbf5846c0",
+        "bytes": 2212
+      },
+      {
+        "file": "source_review/r17a-upstream-rolldown-vite-resolve-v1.0.3.rs",
+        "sha256": "870eb89ba06cb3d0f0774b68fec1bfc1d28cb5f546a27f7c5b8ff9775002db83",
+        "bytes": 21561
+      },
+      {
+        "file": "source_review/r17a-upstream-rolldown-vite-utils-v1.0.3.rs",
+        "sha256": "df87c6d67f78ded081331df3088c2a28a3977b6d7acab79b894c773941a6f7b4",
+        "bytes": 2172
+      },
+      {
+        "file": "source_review/r17a-upstream-source-manifest.json",
+        "sha256": "d3816ffa0f749794f9be0371a0a7614e3ea37e4e85bde6f659b8bdca8b591c29",
+        "bytes": 3118
+      },
+      {
+        "file": "source_review/r17a-upstream-vite-LICENSE.txt",
+        "sha256": "e01e8b64570c0ebabbac7792ada3e84a4bd80e4f98b0de4dd60db6d69d1a6227",
+        "bytes": 1102
+      },
+      {
+        "file": "source_review/r17a-upstream-vite-module-preload-v8.0.16.ts",
+        "sha256": "eaccbf1488007f9dc55d863d837ca55eb7975e45f2607349071d949391b64395",
+        "bytes": 1042
+      },
+      {
+        "file": "source_review/r17a-upstream-vite-resolve-v8.0.16.ts",
+        "sha256": "7013245413c01b121656158a90652596bd80bf240c382fa2c5071cc2542da46f",
+        "bytes": 37206
+      },
+      {
+        "file": "source_review/r17a-user-result-observation.json",
+        "sha256": "06a964fbb369d0b8f04b496d2fcaec8f936064be40d49a31aac770578ca4a876",
+        "bytes": 1344
+      },
+      {
+        "file": "source_review/r17b-driver-fixture-results.json",
+        "sha256": "a85e331b511eddec61ec3ede62481fab22f3d274ed8ff920102069a6da90b412",
+        "bytes": 4885
+      },
+      {
+        "file": "source_review/r17b-preparation-record.json",
+        "sha256": "b880d32874c9eb523315d4aab6e6ec3b78b754bcdaae8af7e9412f3439ba5d41",
+        "bytes": 3733
+      },
+      {
+        "file": "source_review/r17b-upstream-tailwind-LICENSE.txt",
+        "sha256": "60e0b68c0f35c078eef3a5d29419d0b03ff84ec1df9c3f9d6e39a519a5ae7985",
+        "bytes": 1071
+      },
+      {
+        "file": "source_review/r17b-upstream-tailwind-scanner-provenance.json",
+        "sha256": "ff3023101140d1f5e4e9550f1a388d4fec2fdeb15f76f0eb53af092ebed9868e",
+        "bytes": 897
+      },
+      {
+        "file": "source_review/r17b-upstream-tailwind-scanner-v4.3.0.rs",
+        "sha256": "349e1e1a24849656e44a034244a0dcf3df81f8129dab72f05e15e146cfc37de8",
+        "bytes": 31362
+      },
+      {
+        "file": "source_review/registry-archive-repair-r16d.mjs",
+        "sha256": "8f125c00a0f678152b53bc4904c1cfbb216a693b2982d0de6a2e7eb6eb9a732d",
+        "bytes": 14974
+      },
+      {
+        "file": "source_review/resumed-candidate-body-r17a.mjs",
+        "sha256": "2e336ed7a1fdb6aeb5045344cd9e7ae3f00f63510d1b2431f99fccc2ed539cdf",
+        "bytes": 27829
+      },
+      {
+        "file": "source_review/resumed-candidate-driver-r17a.mjs",
+        "sha256": "0a2eac43e73fa48bf386371a4cc6ced11d0bbf1f0d07b61aa09103b90f383cd6",
+        "bytes": 169413
+      },
+      {
+        "file": "source_review/server-build-runner-r17.mjs",
+        "sha256": "a22927d5ed38086f6680e80a2b7f3cc383ea1df5f3343086b34f812b3c9581a9",
+        "bytes": 2698
+      },
+      {
+        "file": "source_review/server-build-runner-r17b.mjs",
+        "sha256": "90c17c09befd87f38a54365e842693f8926c22dea43fa8dc17e989723c7444bb",
+        "bytes": 3095
+      },
+      {
+        "file": "source_review/test-fresh-candidate-r17.py",
+        "sha256": "2bb41ca629777d4602c76eed8c856a34ba678ffc9f6bc5de828b09616e2796db",
+        "bytes": 13098
+      },
+      {
+        "file": "source_review/test-fresh-candidate-r17b.py",
+        "sha256": "cfd993070d211c760bcd1ab27692a8562eecd81877eb0aa97ba36df9d196f25e",
+        "bytes": 15911
+      },
+      {
+        "file": "source_review/test-frontend-graph-r17a.mjs",
+        "sha256": "8c684cd95add2b7abcfd784d0baef43ddc7fd4b8e07485f238f674b897ac5c0e",
+        "bytes": 6062
+      },
+      {
+        "file": "source_review/test-frontend-runner-r12.py",
+        "sha256": "619f67486ed07083b4e0e1e32a676aeca897389bc19e7e0f70d84476a36f6fe5",
+        "bytes": 9189
+      },
+      {
+        "file": "source_review/test-resumed-candidate-r17a.py",
+        "sha256": "2a7903c4b0ee5d3b7a70003b5e4175bcb4f10887d2e6703167cf32fce7a2c52f",
+        "bytes": 8165
+      }
+    ]
+  },
+  "sinceR17B": {
+    "count": 97,
+    "components": [
+      "worktree",
+      "files"
+    ],
+    "addedRows": 96,
+    "changedExistingRows": 1,
+    "nestedKitPrefix": "MMHB-R17C-Kit/",
+    "nestedKitAddedRows": 86,
+    "nestedKitEntryRows": [
+      {
+        "file": "source_review/R17A-Verification-README.md",
+        "sha256": "4f815b62d9f263b3d8686f420f5f77c71e6a6490030bf79df989774909f43d5e",
+        "bytes": 3599
+      },
+      {
+        "file": "source_review/R17B-Verification-README.md",
+        "sha256": "d1576a7e3da99ed09b38ffcf286cb1f15f607e77827e44a2509f3214c0e0d37d",
+        "bytes": 3334
+      },
+      {
+        "file": "source_review/build-fresh-candidate-command-r17b.py",
+        "sha256": "aa4f07c5d63132e464cd5346881fdb5ec18d57e07040ab195ea37abbde7467f1",
+        "bytes": 1484
+      },
+      {
+        "file": "source_review/build-resumed-candidate-command-r17a.py",
+        "sha256": "15dd4034a58c5037a6970ed8e77703061be5587b8d36f0ae87ca236cbcaa14ce",
+        "bytes": 1484
+      },
+      {
+        "file": "source_review/fresh-candidate-body-r17.mjs",
+        "sha256": "a4ec447fe18513e97d0ed082f2ef0250d09aa02a45b8d1652ea4a010da43569c",
+        "bytes": 22695
+      },
+      {
+        "file": "source_review/fresh-candidate-body-r17b.mjs",
+        "sha256": "d9373de711af10c6e91971b0d278ad1e10f6e962652db177e48569f808c98802",
+        "bytes": 27178
+      },
+      {
+        "file": "source_review/fresh-candidate-driver-r17.mjs",
+        "sha256": "2d8a4933e4eb4f32f3e78973af0972c3f01d21d6ccd76c99896cea2bc769736e",
+        "bytes": 154702
+      },
+      {
+        "file": "source_review/fresh-candidate-driver-r17b.mjs",
+        "sha256": "d8aa5018d3c1c5431cd5dc7f5e012b36f4ebef0bbe60aca5be99a95abbb66002",
+        "bytes": 170030
+      },
+      {
+        "file": "source_review/fresh-candidate-prefix-r17.mjs",
+        "sha256": "44cab075512a6681941f2be8b154909369e78345c191deb6323ef30f480a2a56",
+        "bytes": 18261
+      },
+      {
+        "file": "source_review/frontend-build-runner-r17b.mjs",
+        "sha256": "1c84aae3d2ff2590553d9893665779d8d60c91cc805f21968e9aed00ea9c3b49",
+        "bytes": 14316
+      },
+      {
+        "file": "source_review/frontend-graph-policy-r17a.mjs",
+        "sha256": "4d8c2e06216230ed6b7311d1414dd4a847adc7644c836cc817857ba15029ffca",
+        "bytes": 7105
+      },
+      {
+        "file": "source_review/locked-dependency-policy-r16e.mjs",
+        "sha256": "7e07c8ba2bf66a4b3198467f3a00c957a5dd7dad4372db1d6f66c23493fd5984",
+        "bytes": 25972
+      },
+      {
+        "file": "source_review/native-candidate-runner-r17.mjs",
+        "sha256": "51a02c481480181077abdef52d78ba6585b66a61a3bde3ffd9465a802022ebe0",
+        "bytes": 9367
+      },
+      {
+        "file": "source_review/native-candidate-runner-r17a.mjs",
+        "sha256": "94c606a4a912781ba279a028336518dea67322a25902afec2b82f921d9466872",
+        "bytes": 9368
+      },
+      {
+        "file": "source_review/native-candidate-runner-r17b.mjs",
+        "sha256": "1ef8cc6dd7c5b5060cd0b2647b4565091daa3cbd69571cc9c88e4a22f397fdb0",
+        "bytes": 9368
+      },
+      {
+        "file": "source_review/r17a-graph-fixture-results.json",
+        "sha256": "71151aeed966bbdade595471d4b6bc63f2f2929e633a5670c2f3f6f025db9e75",
+        "bytes": 2062
+      },
+      {
+        "file": "source_review/r17a-upstream-rolldown-LICENSE.txt",
+        "sha256": "3b952c73f89b174e0ac02e660437f4ee1f7a9260f3b08922fc75ff8ad26d33b5",
+        "bytes": 1303
+      },
+      {
+        "file": "source_review/r17a-upstream-rolldown-native-context-v1.0.3.rs",
+        "sha256": "57dcd1012175b146b757aa5275b46c0f1b778c449472126027e11d2c3e5dc725",
+        "bytes": 8013
+      },
+      {
+        "file": "source_review/r17a-upstream-rolldown-plugin-context-v1.0.3.ts",
+        "sha256": "ecabf416a1d916049d863352050d4564390df217a57cad291f055e4b89517084",
+        "bytes": 16065
+      },
+      {
+        "file": "source_review/r17a-upstream-rolldown-runtime-v1.0.3.rs",
+        "sha256": "97347fda247290b0770b44627cd425e7014bb9e311fad222a452ac2dbf5846c0",
+        "bytes": 2212
+      },
+      {
+        "file": "source_review/r17a-upstream-rolldown-vite-resolve-v1.0.3.rs",
+        "sha256": "870eb89ba06cb3d0f0774b68fec1bfc1d28cb5f546a27f7c5b8ff9775002db83",
+        "bytes": 21561
+      },
+      {
+        "file": "source_review/r17a-upstream-rolldown-vite-utils-v1.0.3.rs",
+        "sha256": "df87c6d67f78ded081331df3088c2a28a3977b6d7acab79b894c773941a6f7b4",
+        "bytes": 2172
+      },
+      {
+        "file": "source_review/r17a-upstream-source-manifest.json",
+        "sha256": "d3816ffa0f749794f9be0371a0a7614e3ea37e4e85bde6f659b8bdca8b591c29",
+        "bytes": 3118
+      },
+      {
+        "file": "source_review/r17a-upstream-vite-LICENSE.txt",
+        "sha256": "e01e8b64570c0ebabbac7792ada3e84a4bd80e4f98b0de4dd60db6d69d1a6227",
+        "bytes": 1102
+      },
+      {
+        "file": "source_review/r17a-upstream-vite-module-preload-v8.0.16.ts",
+        "sha256": "eaccbf1488007f9dc55d863d837ca55eb7975e45f2607349071d949391b64395",
+        "bytes": 1042
+      },
+      {
+        "file": "source_review/r17a-upstream-vite-resolve-v8.0.16.ts",
+        "sha256": "7013245413c01b121656158a90652596bd80bf240c382fa2c5071cc2542da46f",
+        "bytes": 37206
+      },
+      {
+        "file": "source_review/r17a-user-result-observation.json",
+        "sha256": "06a964fbb369d0b8f04b496d2fcaec8f936064be40d49a31aac770578ca4a876",
+        "bytes": 1344
+      },
+      {
+        "file": "source_review/r17b-driver-fixture-results.json",
+        "sha256": "a85e331b511eddec61ec3ede62481fab22f3d274ed8ff920102069a6da90b412",
+        "bytes": 4885
+      },
+      {
+        "file": "source_review/r17b-preparation-record.json",
+        "sha256": "b880d32874c9eb523315d4aab6e6ec3b78b754bcdaae8af7e9412f3439ba5d41",
+        "bytes": 3733
+      },
+      {
+        "file": "source_review/r17b-upstream-tailwind-LICENSE.txt",
+        "sha256": "60e0b68c0f35c078eef3a5d29419d0b03ff84ec1df9c3f9d6e39a519a5ae7985",
+        "bytes": 1071
+      },
+      {
+        "file": "source_review/r17b-upstream-tailwind-scanner-provenance.json",
+        "sha256": "ff3023101140d1f5e4e9550f1a388d4fec2fdeb15f76f0eb53af092ebed9868e",
+        "bytes": 897
+      },
+      {
+        "file": "source_review/r17b-upstream-tailwind-scanner-v4.3.0.rs",
+        "sha256": "349e1e1a24849656e44a034244a0dcf3df81f8129dab72f05e15e146cfc37de8",
+        "bytes": 31362
+      },
+      {
+        "file": "source_review/registry-archive-repair-r16d.mjs",
+        "sha256": "8f125c00a0f678152b53bc4904c1cfbb216a693b2982d0de6a2e7eb6eb9a732d",
+        "bytes": 14974
+      },
+      {
+        "file": "source_review/resumed-candidate-body-r17a.mjs",
+        "sha256": "2e336ed7a1fdb6aeb5045344cd9e7ae3f00f63510d1b2431f99fccc2ed539cdf",
+        "bytes": 27829
+      },
+      {
+        "file": "source_review/resumed-candidate-driver-r17a.mjs",
+        "sha256": "0a2eac43e73fa48bf386371a4cc6ced11d0bbf1f0d07b61aa09103b90f383cd6",
+        "bytes": 169413
+      },
+      {
+        "file": "source_review/server-build-runner-r17.mjs",
+        "sha256": "a22927d5ed38086f6680e80a2b7f3cc383ea1df5f3343086b34f812b3c9581a9",
+        "bytes": 2698
+      },
+      {
+        "file": "source_review/server-build-runner-r17b.mjs",
+        "sha256": "90c17c09befd87f38a54365e842693f8926c22dea43fa8dc17e989723c7444bb",
+        "bytes": 3095
+      },
+      {
+        "file": "source_review/test-fresh-candidate-r17.py",
+        "sha256": "2bb41ca629777d4602c76eed8c856a34ba678ffc9f6bc5de828b09616e2796db",
+        "bytes": 13098
+      },
+      {
+        "file": "source_review/test-fresh-candidate-r17b.py",
+        "sha256": "cfd993070d211c760bcd1ab27692a8562eecd81877eb0aa97ba36df9d196f25e",
+        "bytes": 15911
+      },
+      {
+        "file": "source_review/test-frontend-graph-r17a.mjs",
+        "sha256": "8c684cd95add2b7abcfd784d0baef43ddc7fd4b8e07485f238f674b897ac5c0e",
+        "bytes": 6062
+      },
+      {
+        "file": "source_review/test-frontend-runner-r12.py",
+        "sha256": "619f67486ed07083b4e0e1e32a676aeca897389bc19e7e0f70d84476a36f6fe5",
+        "bytes": 9189
+      },
+      {
+        "file": "source_review/test-resumed-candidate-r17a.py",
+        "sha256": "2a7903c4b0ee5d3b7a70003b5e4175bcb4f10887d2e6703167cf32fce7a2c52f",
+        "bytes": 8165
+      },
+      {
+        "file": "source_review/R17C-Verification-README.md",
+        "sha256": "d0fc45254678cc783ed65c91fba9d24033cd753e0a584b583ab225933bf64177",
+        "bytes": 1787
+      },
+      {
+        "file": "source_review/build-preservation-diagnostic-r17c.py",
+        "sha256": "9c35e1a88a9c059070e6173abc5160a2dc9ca3606fe5ec6a4e14910e36a2d62a",
+        "bytes": 1295
+      },
+      {
+        "file": "source_review/prepare-r17c-deliverables.py",
+        "sha256": "d2c51a20e938c26c03db0d4f7d0e0799a56d3999d059f22b2e16002ba8258690",
+        "bytes": 18813
+      },
+      {
+        "file": "source_review/preservation-diagnostic-body-r17c.mjs",
+        "sha256": "4994dfb0f869fc9098d05d2f35dda6b41764a9240c7845176bbe501f7b393d43",
+        "bytes": 18865
+      },
+      {
+        "file": "source_review/preservation-diagnostic-driver-r17c.mjs",
+        "sha256": "25a86eefcc5f6d6123e481a2cd7bea0b9d15874bea1eeacd4f782f57dfc98f56",
+        "bytes": 85653
+      },
+      {
+        "file": "source_review/preservation-snapshot-policy-r17c.mjs",
+        "sha256": "6cb281aece331b0801b598e26c56ed061d13dccd94f5a1500640b034e0725906",
+        "bytes": 3525
+      },
+      {
+        "file": "source_review/r17b-user-result-observation.json",
+        "sha256": "41eafaaa87311b57ba94290d09f32561036cf9ce80b13ecc2ed0dce143b9292a",
+        "bytes": 2607
+      },
+      {
+        "file": "source_review/r17c-diagnostic-fixture-results.json",
+        "sha256": "4e9d268149f2d3e590e717c4d7b6890ceda1a7bc6baa7b7c2df7aaf4a143a01d",
+        "bytes": 7974
+      },
+      {
+        "file": "source_review/r17c-preparation-record.json",
+        "sha256": "35352c07859941e9df88fffba7548d14175b1408640c8509cb4f0fb8143377d3",
+        "bytes": 416
+      },
+      {
+        "file": "source_review/test-r17c.py",
+        "sha256": "6072386569a98324f140e7ce0d5a660852bfa90e8cb7fc1d3bbd895860b378ef",
+        "bytes": 21807
+      },
+      {
+        "file": "source_review/fresh-build-policy-r17.mjs",
+        "sha256": "a291a95fba91252ed006edc91808149413bcd88ae604afb5f3e2fa456f16483b",
+        "bytes": 6648
+      },
+      {
+        "file": "source_review/frontend-build-runner-r17.mjs",
+        "sha256": "c7ee3155a20ed2465a86e99a8d950e0cbe76b93eb6c22cb99876717e299eb4d6",
+        "bytes": 13761
+      },
+      {
+        "file": "source_review/prompt-asset-runner-r15.mjs",
+        "sha256": "630d1d36884b0951281a29d5d1ba15c9676669689393285ad81be0f316462ca2",
+        "bytes": 11326
+      },
+      {
+        "file": "source_review/r14-assets-ai-business-prompts-b01_offer_design.md",
+        "sha256": "213c90aed86e64685dd0ef9dfe2117736a441d019b419de9b9fd0c4df756eddc",
+        "bytes": 954
+      },
+      {
+        "file": "source_review/r14-assets-ai-business-prompts-b02_funnel_map.md",
+        "sha256": "f9499b81f35d0a53c3442296f84fd6a70be7ca288a5a905a05f6340da05af1bf",
+        "bytes": 752
+      },
+      {
+        "file": "source_review/r14-assets-ai-business-prompts-b03_content_factory.md",
+        "sha256": "d27b0be5cbf7509c13cb299e24d8cdc395bb2ead7bb4d4297baf3865152e8252",
+        "bytes": 781
+      },
+      {
+        "file": "source_review/r14-assets-ai-business-prompts-b04_email_sequences.md",
+        "sha256": "77bb6e3b57aa7ef73f3a5703e5ba6df3137c1ce9b41b082cc2d7e5ef3d9a837f",
+        "bytes": 868
+      },
+      {
+        "file": "source_review/r14-assets-ai-business-prompts-b05_seo_briefs.md",
+        "sha256": "38cf749f52577272b841e0e4eb86bf53e9d8d27a71b4c4100dfc1db65746419f",
+        "bytes": 941
+      },
+      {
+        "file": "source_review/r14-assets-ai-business-prompts-b06_competitive_scan.md",
+        "sha256": "d79db57c633b5e11141b1e5d13af0e13d478d4dab3307e82fdb5be7adc2ea709",
+        "bytes": 805
+      },
+      {
+        "file": "source_review/r14-assets-ai-business-prompts-b07_pricing_packaging.md",
+        "sha256": "f9e1be975bcbb611cb03d133650619d9356e9515452ee79ea04b0d0c49f51e57",
+        "bytes": 995
+      },
+      {
+        "file": "source_review/r14-assets-ai-business-prompts-b08_retention_loyalty.md",
+        "sha256": "ebafa326a0a5d552f9fc7316321b93119bc88df7e15b5aa87edff1f6a7feff7b",
+        "bytes": 820
+      },
+      {
+        "file": "source_review/r14-assets-ai-business-prompts-b09_partnerships.md",
+        "sha256": "7b409622fdf473b8e2e01f5145503fe35578ba7ba0e7d1e05ca94d256a22433d",
+        "bytes": 1075
+      },
+      {
+        "file": "source_review/r14-assets-ai-business-prompts-b10_ops_sops.md",
+        "sha256": "d03b38de531eb442d925c71a1f33b1ab82667887a4b9ab4d722ff4b6c2ffab8e",
+        "bytes": 1030
+      },
+      {
+        "file": "source_review/r14-assets-ai-business-registry.json",
+        "sha256": "d90a0981f3b9dab33c80da4923aa6abe4e6503762740193a78a8134081c5663b",
+        "bytes": 848
+      },
+      {
+        "file": "source_review/r14-assets-ai-business-system.md",
+        "sha256": "400428b0164409e84c048e29447a4f6b7cf484729efb01dabb6b31fba36a5da7",
+        "bytes": 925
+      },
+      {
+        "file": "source_review/r14-assets-ai-healing-prompts-h01_intake.md",
+        "sha256": "6bdf4ea38534d527bc4fd84ecaa8cfb004da1de967ba70cb2885a3ce0ccadaa1",
+        "bytes": 861
+      },
+      {
+        "file": "source_review/r14-assets-ai-healing-prompts-h02_journal_reflect.md",
+        "sha256": "f5f4872d9447030b1b26d054894b3650e9bdb2c6c30ff83e0e41fa37a1778902",
+        "bytes": 426
+      },
+      {
+        "file": "source_review/r14-assets-ai-healing-prompts-h03_cbt_reframe.md",
+        "sha256": "44062bd3e621d7abf7d32b77c01d2f70287a699bb1a913686b5d4c35e01b338d",
+        "bytes": 1033
+      },
+      {
+        "file": "source_review/r14-assets-ai-healing-prompts-h04_act_values.md",
+        "sha256": "b5ad3efc7403874112502dde7f01b5eb8e9aaf21de93e499036ceafb77ba7f5b",
+        "bytes": 1095
+      },
+      {
+        "file": "source_review/r14-assets-ai-healing-prompts-h05_breathing_grounding.md",
+        "sha256": "0488004edba218e43fa5ecf6aea53df3d98a08838633bf579033f01b36ea4e56",
+        "bytes": 1105
+      },
+      {
+        "file": "source_review/r14-assets-ai-healing-prompts-h06_sleep_reset.md",
+        "sha256": "578769ff00486a72436d68789c403a8f2e31405bb9cc8242249992981104edd2",
+        "bytes": 1068
+      },
+      {
+        "file": "source_review/r14-assets-ai-healing-prompts-h07_conflict_script.md",
+        "sha256": "2aaaa5d222baeb746d452514af1ca17e0417fd013cb45dd1d90891e9f73e63f4",
+        "bytes": 1267
+      },
+      {
+        "file": "source_review/r14-assets-ai-healing-prompts-h08_safety_check.md",
+        "sha256": "99292ed3282e9bb35a564f1341b5d59511e7406a90d6fd113129671a12241c30",
+        "bytes": 1746
+      },
+      {
+        "file": "source_review/r14-assets-ai-healing-registry.json",
+        "sha256": "be846525e46ce27d2f79f7f3baaeca990f8de91433cff89368da71bcc07178ce",
+        "bytes": 746
+      },
+      {
+        "file": "source_review/r14-assets-ai-healing-system.md",
+        "sha256": "7c7b9649f650bbfa75259b5f6a0ed7015680ac94fd8912f1dd01ae78ae57ed65",
+        "bytes": 1418
+      },
+      {
+        "file": "source_review/r14-assets-server-lib-promptEngine.mjs",
+        "sha256": "fbbd43eaab399b029b5d976508da8f1e055e25d69fd2ee65551e23d102363170",
+        "bytes": 7669
+      },
+      {
+        "file": "source_review/r15-asset-repair-policy.json",
+        "sha256": "517df8a9ce25a31ea5cbe13182a93d8ab32cefc1371654e6cb649a3d3fac4c03",
+        "bytes": 29343
+      },
+      {
+        "file": "source_review/r17a-preparation-record.json",
+        "sha256": "58122eedf4237c0ce199b4e4f37f35057146428dc208d5814ac88d45360ca311",
+        "bytes": 12952
+      },
+      {
+        "file": "source_review/r17a-resume-fixture-results.json",
+        "sha256": "8b128258ca251b3f43b060838c9937e081a27c590cbe1b4821c31dd65d8fb4a4",
+        "bytes": 3430
+      },
+      {
+        "file": "source_review/r17a-upstream-rolldown-vite-resolver-v1.0.3.rs",
+        "sha256": "5f9e1b93d4ddb77a658bdc7b3d2e25953a7b8d4fd4ea8a511ae82c9d39cf9d06",
+        "bytes": 17721
+      },
+      {
+        "file": "MMHB-Ledger.txt",
+        "sha256": "7c8e0231e4db23ba9c90e2bb8699523c711d37c771c284fbdaf37e160678a325",
+        "bytes": 169980
+      },
+      {
+        "file": "MMHB-PRESERVATION-INSPECT-R17C.txt",
+        "sha256": "244214493d285410fbf04c2410a8495b8c961c55634a67b98fc7e3409e2dd214",
+        "bytes": 86042
+      },
+      {
+        "file": "MMHB-R17C-Start.txt",
+        "sha256": "508eeffcfb4343d5f87d003bf3832c2558494dbf11f6208d67f1b5a812b8dc1e",
+        "bytes": 1738
+      },
+      {
+        "file": "MMHB-Readiness-Ledger-2026-09-07.md",
+        "sha256": "7c8e0231e4db23ba9c90e2bb8699523c711d37c771c284fbdaf37e160678a325",
+        "bytes": 169980
+      }
+    ],
+    "rootSourceReviewAddedRows": [
+      {
+        "file": "source_review/R17C-Verification-README.md",
+        "sha256": "d0fc45254678cc783ed65c91fba9d24033cd753e0a584b583ab225933bf64177",
+        "bytes": 1787
+      },
+      {
+        "file": "source_review/build-preservation-diagnostic-r17c.py",
+        "sha256": "9c35e1a88a9c059070e6173abc5160a2dc9ca3606fe5ec6a4e14910e36a2d62a",
+        "bytes": 1295
+      },
+      {
+        "file": "source_review/prepare-r17c-deliverables.py",
+        "sha256": "d2c51a20e938c26c03db0d4f7d0e0799a56d3999d059f22b2e16002ba8258690",
+        "bytes": 18813
+      },
+      {
+        "file": "source_review/preservation-diagnostic-body-r17c.mjs",
+        "sha256": "4994dfb0f869fc9098d05d2f35dda6b41764a9240c7845176bbe501f7b393d43",
+        "bytes": 18865
+      },
+      {
+        "file": "source_review/preservation-diagnostic-driver-r17c.mjs",
+        "sha256": "25a86eefcc5f6d6123e481a2cd7bea0b9d15874bea1eeacd4f782f57dfc98f56",
+        "bytes": 85653
+      },
+      {
+        "file": "source_review/preservation-snapshot-policy-r17c.mjs",
+        "sha256": "6cb281aece331b0801b598e26c56ed061d13dccd94f5a1500640b034e0725906",
+        "bytes": 3525
+      },
+      {
+        "file": "source_review/r17b-user-result-observation.json",
+        "sha256": "41eafaaa87311b57ba94290d09f32561036cf9ce80b13ecc2ed0dce143b9292a",
+        "bytes": 2607
+      },
+      {
+        "file": "source_review/r17c-diagnostic-fixture-results.json",
+        "sha256": "4e9d268149f2d3e590e717c4d7b6890ceda1a7bc6baa7b7c2df7aaf4a143a01d",
+        "bytes": 7974
+      },
+      {
+        "file": "source_review/r17c-preparation-record.json",
+        "sha256": "35352c07859941e9df88fffba7548d14175b1408640c8509cb4f0fb8143377d3",
+        "bytes": 416
+      },
+      {
+        "file": "source_review/test-r17c.py",
+        "sha256": "6072386569a98324f140e7ce0d5a660852bfa90e8cb7fc1d3bbd895860b378ef",
+        "bytes": 21807
+      }
+    ],
+    "changedLedger": {
+      "file": "MMHB-Readiness-Ledger-2026-09-07.md",
+      "kind": "IDENTITY_CHANGED",
+      "fields": [
+        "sha256",
+        "bytes"
+      ],
+      "before": {
+        "sha256": "c94c9ba784544008000cd419e6d3b5e21e5e5fab6a79bb55f2fbb7d10425fd3f",
+        "bytes": 95222,
+        "mode": 33152
+      },
+      "after": {
+        "sha256": "7c8e0231e4db23ba9c90e2bb8699523c711d37c771c284fbdaf37e160678a325",
+        "bytes": 169980,
+        "mode": 33152
+      },
+      "matchesDeliveredR17CLedger": true
+    },
+    "classification": "DELIVERED_R17C_REVIEW_MATERIALS_AND_UPDATED_LEDGER",
+    "actor": "UNKNOWN"
+  },
+  "localComparisons": [
+    {
+      "zip": "MMHB-R17B-Kit.zip",
+      "zipSha256": "00120833f02490e03d600865b4282f952c74da7e0e1a7d145c18d3eb14561f72",
+      "zipBytes": 532521,
+      "zipFileCount": 76,
+      "visibleRowsCompared": 42,
+      "mismatchCount": 0,
+      "mismatches": []
+    },
+    {
+      "zip": "MMHB-R17C-Kit.zip",
+      "zipSha256": "a68751d7fd6dcca9e8bc1aedaee96d9c4b4ec08090141fd50475c65cdddcc82d",
+      "zipBytes": 568795,
+      "zipFileCount": 86,
+      "visibleRowsCompared": 86,
+      "mismatchCount": 0,
+      "mismatches": []
+    }
+  ],
+  "currentLocalFilesCompared": 86,
+  "currentLocalFileMismatches": [],
+  "reportedCurrentEvidence": {
+    "gitHeadMatchesExpected": true,
+    "branchMatchesExpected": true,
+    "diagnosticIssues": [],
+    "pins": {
+      "count": 63,
+      "mismatchCount": 0
+    },
+    "recordedSource": {
+      "checked": 5192,
+      "changedFileCount": 0
+    },
+    "candidate": {
+      "files": 625,
+      "bytes": 40486374,
+      "manifestSha256": "cb4c9c57fce1124f453110eb713d86b0f32855436df1030427cc32c2a2df0320",
+      "matchesRecorded": true
+    },
+    "frontend": {
+      "files": 554,
+      "bytes": 33758149,
+      "manifestSha256": "1c3777d1fc93595a7e3ec2c93b35692b1ee324e4cffd3a27cd7c7086f49e6f78",
+      "matchesRecorded": true
+    },
+    "server": {
+      "bytes": 5543955,
+      "sha256": "d103e3532fe45af0d270c777310334a4672338fc2345660287033e9ecf98d2c7",
+      "matchesObserved": true
+    },
+    "retainedInputs": {
+      "recordedRows": 82136,
+      "status": "RETAINED_INPUTS_MATCH_RECORDED_IDENTITIES_NOW"
+    },
+    "diagnosticPreservation": {
+      "components": [],
+      "changedFileCount": 0,
+      "status": "OBSERVED_CURRENT_WORKTREE_AND_READ_ARTIFACTS_STABLE"
+    },
+    "recordedSmokes": {
+      "nativeStatus": "NATIVE_CANDIDATE_SMOKE_PASS",
+      "promptStatus": "PROMPT_ASSET_LOAD_PASS",
+      "moduleLoads": 18,
+      "reexecuted": false
+    },
+    "applicationRuntime": "UNPROVEN",
+    "deployedArtifact": "UNPROVEN"
+  },
+  "recommendation": {
+    "preservationDisposition": "Accept the exact observed non-application review-file additions as classified; preserve the old failure and establish a current baseline for the next qualification.",
+    "nextBoundedReadOnlyStep": "Inspect the retained server bundle and package source to classify runtime reachability of the five external packages, then prepare the smallest runtime-packaging/startup qualification.",
+    "externalPackages": [
+      "@react-email/render",
+      "bufferutil",
+      "pg-cloudflare",
+      "pg-native",
+      "utf-8-validate"
+    ],
+    "doNotInfer": "Absence does not establish that an external package is unused; presence does not prove runtime behavior.",
+    "avoid": "No rebuild, reinstall, source reset, deletion of review materials, blanket ignore rule, or retroactive pass is supported by this diagnostic."
+  }
+}

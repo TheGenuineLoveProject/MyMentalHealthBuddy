@@ -1,0 +1,63 @@
+{
+  "baseline_id": "A9F4R-2026-CANONICAL-BASELINE",
+  "type": "observed_nonexecuting_baseline",
+  "verified_at_utc": "2026-08-26T01:29:45Z",
+  "repository": {
+    "branch": "integration",
+    "head": "8c682a753e6ba47b55541d56d85acdfa8e93e16d",
+    "canonical_hash": "6beec34e98b351dd50ff073fe87c44d8fc58d256",
+    "shared_schema_hash": "d4a197dc3531a6b18c18d5a21250dc1892ab1d75"
+  },
+  "provenance_policy": {
+    "historical_migration_ledger": "absent_or_untrusted",
+    "fabricate_historical_migrations": false,
+    "drizzle_push_as_baseline": false,
+    "replay_full_canonical_ddl": false,
+    "future_policy": "forward_only_after_verified_baseline"
+  },
+  "r9_pre_convergence_state": {
+    "tables": 81,
+    "canonical_columns": 620,
+    "live_columns": 624,
+    "canonical_standalone_indexes": 75,
+    "live_standalone_indexes": 80,
+    "residuals": {
+      "live_only_columns": 4,
+      "live_only_indexes": 5,
+      "webhook_nullability": 1,
+      "total": 10
+    },
+    "live_only_columns": [
+      "journals.content",
+      "user_achievements.user_id",
+      "user_achievements.achievement_id",
+      "user_achievements.earned_at"
+    ],
+    "live_only_indexes": [
+      "idx_daily_quests_user_id",
+      "idx_discernment_lessons_belt",
+      "idx_tool_sessions_user_id",
+      "idx_user_achievements_user_id",
+      "idx_user_progress_user_id"
+    ]
+  },
+  "expected_post_convergence_state": {
+    "tables": 81,
+    "columns": 620,
+    "standalone_indexes": 75,
+    "webhook_processed_at_not_null": true,
+    "modeled_residual_drift": 0
+  },
+  "execution_requirements": [
+    "fresh preflight equivalent to R9",
+    "verified backup and restore capability",
+    "explicit migration authorization",
+    "bounded maintenance or low-traffic window",
+    "ON_ERROR_STOP semantics",
+    "post-migration canonical-vs-live proof"
+  ],
+  "artifacts": {
+    "forward_sql_sha256": "dd9d8dae0420e96eb651f55040966f27abbb59d56c3913e6771b2aea969db41f",
+    "rollback_sql_sha256": "f67dc9ae269b557b9f3a58a0ccbadb511890aa2567b8c1486710432c3b72c7db"
+  }
+}

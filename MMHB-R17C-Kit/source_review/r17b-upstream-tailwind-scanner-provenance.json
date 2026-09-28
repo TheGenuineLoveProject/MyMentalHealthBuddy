@@ -1,0 +1,13 @@
+{
+  "repository": "tailwindlabs/tailwindcss",
+  "tag": "v4.3.0",
+  "path": "crates/oxide/src/scanner/mod.rs",
+  "url": "https://github.com/tailwindlabs/tailwindcss/blob/v4.3.0/crates/oxide/src/scanner/mod.rs",
+  "retrievedDate": "2026-09-09",
+  "localFile": "r17b-upstream-tailwind-scanner-v4.3.0.rs",
+  "sha256": "349e1e1a24849656e44a034244a0dcf3df81f8129dab72f05e15e146cfc37de8",
+  "license": "MIT",
+  "licenseUrl": "https://github.com/tailwindlabs/tailwindcss/blob/v4.3.0/LICENSE",
+  "licenseFile": "r17b-upstream-tailwind-LICENSE.txt",
+  "basis": "Locked @tailwindcss/oxide 4.3.0 scanner permits hidden paths and consults ancestor gitignore rules. We infer that compiling inside the evidence root with its ignore-all rule risks changing automatic class discovery. R17B retains inputs there but compiles a separately verified identical temporary copy, preserving the prior scanner ancestry."
+}

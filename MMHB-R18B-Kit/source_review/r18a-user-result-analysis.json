@@ -1,0 +1,31 @@
+{
+  "project": "MyMentalHealthBuddy",
+  "source": "USER_SCREENSHOTS_NOT_RETRIEVED_RAW_REPORT",
+  "command": "MMHB-RUNTIME-CONTRACT-R18A",
+  "utc": "2026-09-09T20:50:09.516Z",
+  "reportDirectory": "/home/runner/workspace/.mmhb-release-evidence/r18a-8GxfuU",
+  "status": "RUNTIME_CONTRACT_FAILED",
+  "failure": {
+    "phase": "RETAINED_BUILD_LINKAGE",
+    "gate": "RUNTIME_INPUT_PRIVATE_OR_INVALID",
+    "graphDetails": {
+      "metadataIndex": 1,
+      "graphSide": "INPUT",
+      "specifierSha256": "c4c8b0e9f50a3e6490cdce714f0cfe8b89563962cc4a3709a00a11e80704258b",
+      "specifierBytes": 52,
+      "specifierClass": "OPAQUE"
+    }
+  },
+  "pinsMatch": 63,
+  "sourceFilesMatch": 5192,
+  "candidateFilesMatch": 625,
+  "historicalReviewAdditionsAccounted": 42,
+  "changedFileCount": 0,
+  "helperTestsAttempted": false,
+  "resendTestsAttempted": false,
+  "evidenceWrite": "SAVED",
+  "releaseReady": false,
+  "applicationRuntime": "UNPROVEN",
+  "deployedArtifact": "UNPROVEN",
+  "exactInputPath": "NOT_YET_IDENTIFIED"
+}

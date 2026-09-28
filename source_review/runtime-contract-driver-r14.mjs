@@ -1,0 +1,1021 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import { execFileSync, spawnSync } from 'node:child_process';
+import { createRequire, isBuiltin } from 'node:module';
+const EXPECTED_ROOT = '/home/runner/workspace';
+const EXPECTED_HEAD = 'ba56d50f2f86bc9e47f829e9596f0d0b31699ab0';
+const EXPECTED_NODE = 'v24.13.0';
+const ESBUILD_REL = 'node_modules/esbuild/bin/esbuild';
+const PINS = {
+  "vite.config.js": "4b0866ecaacafc2f497010f37c40de9377766f554ca06989efd3ff027a4fff5e",
+  "client/postcss.config.js": "c14012cb0c28be42b5f7f84ff408983939df2597d4037c5409ee47814fc17b10",
+  "client/tsconfig.json": "572f19c483057a7ac7bace550896eea0a6c81e58c2025d348d0ac9ff5e945a9e",
+  "tailwind.config.js": "87a9665c33337dd4d0a4192702895926f2d8256838637838ec960398c0a0acc2",
+  "node_modules/vite/package.json": "a2b943431b51bfcc2e9386eecf8b4b3f6e4bf443e56d17b1f4c8495a61b4050c",
+  "node_modules/rollup-plugin-visualizer/package.json": "90bd00f65f82ef3d9793f59c1874a27438923bef0d270e37f9e25d9c507e8c36",
+  "node_modules/postcss/package.json": "e0f23518d0e8fc0570ac68438eff7ecc7554774de3194af6f54f502e33f0c25b",
+  "node_modules/tailwindcss/package.json": "3dc86b46c511947ca00838aa3f1776243abe923ac347c092e60a0cbc7ae68559",
+  "node_modules/@tailwindcss/postcss/package.json": "2f8268cf1c0b9947d4f5fc6de60d45d2ee0bac3523c485c15722d2f8de7a65b4",
+  "package.json": "0f7ef43511c004e3d268a2e2840d46a264453892937f5a2eb6a680b01481c1e0",
+  "scripts/security/verify-auth-session-contracts.mjs": "71d2009a0c2b13001dc0e0606b72973527f6646ea091540dd3f4bd3311f4905f",
+  "server/routes/auth.mjs": "fd4d9d7cfc75e23fc60dde5df5139ffb1fc826a338acf3c9cc7c2faba4ce362c",
+  "server/services/refreshTokens.service.mjs": "5a9756caa3c772ac8c70f4a7860372dd42895e7df47c4e0956e42fa041528e8e",
+  "server/routes/account.mjs": "e766374c5bc57032a5ad8573ed1c9bb37ef66dceb703957bf2bba289a5acd331",
+  "server/app.mjs": "fb7316818f033e5748f7710a8c7c6f01991f03da6aa649a56189fbab71329818",
+  "server/security/csrf.mjs": "648e21f3eb89933aeaaad1e967c59640cc52d2f8634002d3abbc6dafe358bce1",
+  "server/replit_integrations/auth/replitAuth.mjs": "6235fd16449ca0974cc9d5103c1c3ae42e5ace1b7bbcdb6d3351aa7fbae7f9f2",
+  "client/src/context/AuthContext.jsx": "ab68888ba5ebdc783ef77260c33546a1d4638b3950205e71c4210862f927c61d",
+  "client/src/api/fetchWithAuth.js": "6c1ac4bca06cee87b46194521b3162cd82f31e364ee7862172b49abb168c6ef9",
+  "client/src/lib/queryClient.js": "791ad03c4678a60a2582386a70d8798d5ced77089bf300207f053ea17b5f1388",
+  "server/utils/cookies.mjs": "67d22050139f06abef51675f960607db950319de3ad590b80b8adf7991ef80b3",
+  ".replit": "fdd7294d6332ab7814be58d8021b3ffee7e5f2157c035752454c541d3de34b63",
+  "server/replit_integrations/auth/index.mjs": "96c6aacd6ee1239771cd50479b2090f2c90a141f948f7e48af279a9afd41d47a",
+  "server/auth/mfa.service.mjs": "257135ac9d20fe3b96276011be6ea5d47770dd568af70653f11227ecc3aaf364",
+  "server/db/sessionStore.mjs": "23f26b54c3b75135348f0c9fcb9193893f0e09fc8f471195c3d62969eaf8c6fb",
+  "node_modules/typescript/package.json": "9332e97c30d3e53ed54910b89207ed657fb444066484df6e5b6965bf130865e9",
+  "node_modules/typescript/lib/typescript.js": "569177652966bd528c319171c7dd22860dbf72bde116cbc4f644f1d02bb12e39",
+  "package-lock.json": "648b869facffba16150769018ee062210691bd4ff10819ca379f501bfdb8d287",
+  "scripts/build-server.mjs": "95fd8ce7393f7b99c32d2fad346bb580f736301aa891085e384b911e04d1394c",
+  "tsconfig.json": "ca65a65cc06d0224dde35f5a8a635fc8f9527770d8c96211ce36b3ebb29548ed",
+  "server/db/schema.canonical.sql": "e92e18c4d6bbfdf6faef7760e1116aa786b7b9dddc266db37c2f03998913e712",
+  "node_modules/esbuild/package.json": "9d0bc453f4e791553c4cc2298ba023b409241fd9801e494741666eb0f6051490",
+  "node_modules/esbuild/bin/esbuild": "e1698a3d5c6c0798fee4fd3b5cc816651f460c63d390a7a26ea4beb0b1884100",
+  "node_modules/bcrypt/package.json": "33510b2b8859265a413ab101cdf961b1c9b076d93496f52d8ac7eacc007859a4",
+  "node_modules/node-gyp-build/package.json": "9e8def3fbf123e28aa1ca4b6aa557fba4e66eecf6e86d170b61ec1c7ed51305d",
+  "node_modules/@vitejs/plugin-react/package.json": "c5420bbbe5ea17fec4b09d44114f9eedd774efbfcc6f9a1d6228103b590af705",
+  "dist/server.mjs": "74800300f01552beab4749dc0d6566488bb04a89e488075615198fb559d1b7a2",
+  "dist/schema.canonical.sql": "9018cdef35b7585d18918c10f56cc0802afaf369cc7f05bc7efa9624979ddb7b",
+  "client/dist/index.html": "957f6d802cda8b8fc0b5b4f0a7ce429a26d6a27638399e787e0de5f368bea393",
+  "dist/client/dist/index.html": "7ff9516e7145f55e26c3ee8caccb1abe6dea74bf646cd5ad6738a66009d0d226",
+  "bundle-report.html": "40b6a2dd45c614a8e2bec05de9692fac05cac65f5684169cf5eb7b89b1cc27f9"
+};
+const ROOT = fs.realpathSync('.');
+const hash = value => crypto.createHash('sha256').update(value).digest('hex');
+const gate = (ok, code, detail = {}) => {
+  if (!ok) throw Object.assign(new Error(code), { gate: code, detail });
+};
+const inside = (root, full) => full.startsWith(root + path.sep);
+const privatePath = value => /(?:^|\/)(?:\.env(?:\.|$)|\.npmrc$|\.git(?:\/|$))|\.(?:pem|key|p12|pfx)$/i.test(value);
+const publicPath = value => typeof value === 'string' && value.length <= 300 &&
+  /^[A-Za-z0-9_@.+/-]+$/.test(value) && !privatePath(value) &&
+  !path.isAbsolute(value) && !value.split('/').some(x => x === '..' || x === '.');
+const label = value => publicPath(value) ? value : 'REDACTED_PATH_' + hash(String(value)).slice(0, 12);
+// No npm commands, project scripts, application imports or inherited child secrets.
+const MIN_ENV = { PATH: '/usr/local/bin:/usr/bin:/bin', LANG: 'C', LC_ALL: 'C',
+  NODE_ENV: 'production', GIT_OPTIONAL_LOCKS: '0' };
+// Replit's git may live in a Nix store, outside the compiler's minimal PATH.
+const GIT_BIN = (process.env.PATH || '').split(path.delimiter).filter(path.isAbsolute)
+  .map(dir => path.join(dir, 'git')).find(file => {
+    try { fs.accessSync(file, fs.constants.X_OK); return fs.statSync(file).isFile(); }
+    catch { return false; }
+  });
+const git = (...args) => execFileSync(GIT_BIN || '/usr/bin/git', ['-c', 'core.fsmonitor=false',
+  '-c', 'core.untrackedCache=false', ...args], {
+  cwd: ROOT, env: MIN_ENV, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'],
+  timeout: 30000, maxBuffer: 64 * 1024 * 1024
+});
+
+function identity(full, allowLink = false, readPolicy = null) {
+  gate(inside(ROOT, full), 'INPUT_OUTSIDE_WORKSPACE');
+  const rel = path.relative(ROOT, full);
+  if (readPolicy) gate(readPolicy(rel), 'METAFILE_PRIVATE_OR_UNSUPPORTED_INPUT', { file: label(rel) });
+  let cursor = ROOT;
+  for (const part of rel.split(path.sep)) {
+    cursor = path.join(cursor, part);
+    try {
+      const st = fs.lstatSync(cursor);
+      gate(!st.isSymbolicLink() || allowLink, 'INPUT_SYMLINK', { file: label(rel) });
+    } catch (error) {
+      if (error.code === 'ENOENT') return { state: 'ABSENT' };
+      throw error;
+    }
+  }
+  const resolved = fs.realpathSync(full);
+  gate(inside(ROOT, resolved), 'RESOLVED_INPUT_OUTSIDE_WORKSPACE', { file: label(rel) });
+  // Enforce the resolved read boundary before any file-content hashing.
+  if (readPolicy) gate(readPolicy(path.relative(ROOT, resolved)),
+    'METAFILE_PRIVATE_OR_UNSUPPORTED_RESOLUTION', { file: label(rel) });
+  const st = fs.statSync(full);
+  gate(st.isFile() && st.size <= 256 * 1024 * 1024, 'INPUT_FILE_LIMIT', { file: label(rel) });
+  const fd = fs.openSync(full, 'r'), buffer = Buffer.alloc(1024 * 1024);
+  const digest = crypto.createHash('sha256');
+  try {
+    let count;
+    while ((count = fs.readSync(fd, buffer, 0, buffer.length, null)) > 0) digest.update(buffer.subarray(0, count));
+  } finally { fs.closeSync(fd); }
+  const after = fs.statSync(full);
+  gate(after.ino === st.ino && after.size === st.size && after.mtimeMs === st.mtimeMs && after.mode === st.mode,
+    'INPUT_CHANGED_DURING_HASH', { file: label(rel) });
+  return { state: 'FILE', sha256: digest.digest('hex'), bytes: st.size, mode: st.mode,
+    resolved: path.relative(ROOT, resolved) };
+}
+function rawIdentity(rel) {
+  const full = path.resolve(ROOT, rel);
+  gate(inside(ROOT, full), 'WORKTREE_PATH_OUTSIDE_ROOT');
+  try {
+    const st = fs.lstatSync(full);
+    if (st.isSymbolicLink()) return { state: 'SYMLINK', mode: st.mode, sha256: hash(fs.readlinkSync(full)) };
+  } catch (error) { if (error.code === 'ENOENT') return { state: 'ABSENT' }; throw error; }
+  return identity(full, true);
+}
+function snapshot() {
+  // git status/diff can invoke clean filters. Hash file bytes and index instead.
+  const names = [...new Set(git('ls-files', '--cached', '--others', '--exclude-standard', '-z')
+    .split('\0').filter(Boolean))].sort();
+  gate(names.length <= 30000, 'WORKTREE_FILE_COUNT_LIMIT');
+  let total = 0;
+  const records = names.map(file => {
+    const record = rawIdentity(file);
+    total += record.bytes || 0;
+    gate(total <= 4 * 1024 ** 3, 'WORKTREE_SIZE_LIMIT');
+    return [file, record];
+  });
+  const index = path.relative(ROOT, path.resolve(ROOT, git('rev-parse', '--git-path', 'index').trim()));
+  return { head: git('rev-parse', 'HEAD').trim(), branch: git('branch', '--show-current').trim(),
+    index: rawIdentity(index), stagedEntriesSha256: hash(git('ls-files', '--stage', '-z')),
+    trackedFlagsSha256: hash(git('ls-files', '-v', '-z')),
+    worktree: hash(JSON.stringify(records)), files: names.length, records };
+}
+function snapshotDifference(before, after) {
+  const components = ['head', 'branch', 'index', 'stagedEntriesSha256', 'trackedFlagsSha256', 'worktree', 'files']
+    .filter(key => JSON.stringify(before[key]) !== JSON.stringify(after[key]));
+  const b = new Map(before.records), a = new Map(after.records), changes = [];
+  for (const file of [...new Set([...b.keys(), ...a.keys()])].sort()) {
+    const old = b.get(file), next = a.get(file);
+    if (JSON.stringify(old) !== JSON.stringify(next)) changes.push({ file: label(file),
+      fields: [...new Set([...Object.keys(old || {}), ...Object.keys(next || {})])]
+        .filter(key => JSON.stringify(old?.[key]) !== JSON.stringify(next?.[key])) });
+  }
+  return { components, changedFileCount: changes.length, changes: changes.slice(0, 40),
+    rawIndexOnly: components.length === 1 && components[0] === 'index',
+    scope: 'CURRENT_R14_OBSERVATIONS_ONLY_NOT_HISTORICAL_RUNS' };
+}
+function checkPins() {
+  const result = {};
+  for (const [rel, expected] of Object.entries(PINS)) {
+    const observed = identity(path.join(ROOT, rel), rel.startsWith('node_modules/'));
+    gate(observed.sha256 === expected, 'R10A_BASELINE_DRIFT', { file: label(rel) });
+    result[rel] = observed;
+  }
+  return result;
+}
+function readJSON(full, max = 32 * 1024 * 1024) {
+  const st = fs.lstatSync(full);
+  gate(st.isFile() && st.size <= max, 'JSON_FILE_LIMIT');
+  return JSON.parse(fs.readFileSync(full, 'utf8'));
+}
+function outputIdentity(full) {
+  const st = fs.lstatSync(full);
+  gate(st.isFile() && st.size <= 64 * 1024 * 1024, 'OUTPUT_FILE_LIMIT');
+  return { sha256: hash(fs.readFileSync(full)), bytes: st.size };
+}
+
+const PRIOR_REPORT = '/tmp/mmhb-release-assembly-r13-1kpDjX';
+const SERVER_REPORT = '/tmp/mmhb-server-candidate-r11d-SRSfZ5';
+const EXPECTED_ASSEMBLY_MANIFEST = '1095b15223d1fa650535017c44c24ecc2a2018c018759026e3a29dbf42820dd2';
+const EXPECTED_SERVER_INPUT_MANIFEST = '9f330a1ada87eca0e9872144311b9ea197dc777c81b1cef80539639f486c1c2f';
+const POLICY = {
+  "sources": [
+    {
+      "file": "server/lib/promptEngine.mjs",
+      "sha256": "fbbd43eaab399b029b5d976508da8f1e055e25d69fd2ee65551e23d102363170",
+      "classification": "RUNTIME_ASSET_CONSUMER",
+      "sourceURL": "https://github.com/TheGenuineLoveProject/MyMentalHealthBuddy/blob/integration/server/lib/promptEngine.mjs"
+    },
+    {
+      "file": "server/engine/prompt-os/kernel-bridge.mjs",
+      "sha256": "79bcf958b3d336839f8aac2f072e6566bfefd1276d5d9af22cb53389cfc811c8",
+      "classification": "RUNTIME_ASSET_CONSUMER",
+      "sourceURL": "https://github.com/TheGenuineLoveProject/MyMentalHealthBuddy/blob/integration/server/engine/prompt-os/kernel-bridge.mjs"
+    },
+    {
+      "file": "server/routes/rss.mjs",
+      "sha256": "164d2d1e12c0e63b568fdcc077a12ce801f512a74385f63e8c45e999d81b6430",
+      "classification": "RUNTIME_ASSET_CONSUMER",
+      "sourceURL": "https://github.com/TheGenuineLoveProject/MyMentalHealthBuddy/blob/integration/server/routes/rss.mjs"
+    },
+    {
+      "file": "server/lib/healScheduler.mjs",
+      "sha256": "d68159a5ef62eac98f6d5325cfd1e5df2a4c7cce2cebdf1f4fa097efb081de0f",
+      "classification": "RUNTIME_ASSET_CONSUMER",
+      "sourceURL": "https://github.com/TheGenuineLoveProject/MyMentalHealthBuddy/blob/integration/server/lib/healScheduler.mjs"
+    },
+    {
+      "file": "node_modules/ws/lib/buffer-util.js",
+      "sha256": "8b0a45739132f82e25ea13163780abf547ccfe989267f3eb7abb475beec92da3",
+      "classification": "OPTIONAL_BUFFERUTIL_WITH_JS_FALLBACK",
+      "sourceURL": "https://github.com/websockets/ws/blob/8.21.0/lib/buffer-util.js",
+      "conditions": [
+        "Source assigns JavaScript mask/unmask before trying bufferutil.",
+        "Missing or failing bufferutil is caught; original JavaScript mask/unmask remain.",
+        "WS_NO_BUFFER_UTIL truthiness prevents the optional attempt.",
+        "Qualifies this source implementation only; does not establish every caller or bundled reachability."
+      ]
+    },
+    {
+      "file": "node_modules/ws/lib/validation.js",
+      "sha256": "41ce8e83d0d434132e1704895fedb91f6703a701b42d91c80954ab29b2845593",
+      "classification": "OPTIONAL_UTF8_VALIDATE_WITH_NODE_OR_JS_FALLBACK",
+      "sourceURL": "https://github.com/websockets/ws/blob/8.21.0/lib/validation.js",
+      "conditions": [
+        "If buffer.isUtf8 is truthy it is used for long inputs and utf-8-validate is not requested.",
+        "Otherwise the optional utf-8-validate require is caught; JavaScript validation remains if missing.",
+        "WS_NO_UTF_8_VALIDATE truthiness prevents the optional attempt.",
+        "Qualifies this source implementation only; runtime builtin branch remains to be exercised."
+      ]
+    },
+    {
+      "file": "node_modules/pg/lib/index.js",
+      "sha256": "3fad6e6d3d976edbabe0cbc9e1d39f4340bcb719bbbb186a0d3a24f3dbd4a94c",
+      "classification": "PG_NATIVE_CONDITIONAL_DEFAULT_JS",
+      "sourceURL": "https://github.com/brianc/node-postgres/blob/pg@8.21.0/packages/pg/lib/index.js",
+      "conditions": [
+        "The default client constructor is the JavaScript Client.",
+        "Truthy NODE_PG_FORCE_NATIVE switches to require ./native; production must not unintentionally force the missing addon.",
+        "Accessing pg.native invokes a lazy getter that catches MODULE_NOT_FOUND and returns null.",
+        "Explicit consumers requiring a native client still need that dependency; selected source review is not a complete caller graph."
+      ]
+    },
+    {
+      "file": "node_modules/pg/lib/stream.js",
+      "sha256": "0bd4001775301604ddf7c94152e05f6f30a9354876717bdae2ab636d00eb12ba",
+      "classification": "PG_CLOUDFLARE_CONDITIONAL_RUNTIME_BRANCH",
+      "sourceURL": "https://github.com/brianc/node-postgres/blob/pg@8.21.0/packages/pg/lib/stream.js",
+      "conditions": [
+        "pg-cloudflare is required only inside the Cloudflare stream factory getStream.",
+        "Cloudflare is selected by navigator.userAgent equal to Cloudflare-Workers, or a Response cf extension probe.",
+        "Default Node branch uses built-in net/tls; runtime detection and application overrides are not proven by source hashing."
+      ]
+    },
+    {
+      "file": "node_modules/pg/esm/index.mjs",
+      "sha256": "5ef4d06556eeb775987759c2c09229dca2139421ee40e819b566612db2b4a8dc",
+      "classification": "PG_ESM_WRAPPER_DEFAULT_JS_NO_NATIVE_GETTER_ACCESS",
+      "sourceURL": "https://github.com/brianc/node-postgres/blob/pg@8.21.0/packages/pg/esm/index.mjs",
+      "conditions": [
+        "The default export is the CommonJS pg export.",
+        "Named exports do not access pg.native in this reviewed wrapper."
+      ]
+    },
+    {
+      "file": "node_modules/pg/lib/native/client.js",
+      "sha256": "d88c124d4835cc9d5b0389e2aaf63a144df8434c1b4b0d5e588691e068f49acf",
+      "classification": "PG_NATIVE_REQUEST_PROPAGATES_MISSING_ADDON",
+      "sourceURL": "https://github.com/brianc/node-postgres/blob/pg@8.21.0/packages/pg/lib/native/client.js",
+      "conditions": [
+        "Top-level require pg-native catch rethrows; this module is not an unconditional fallback.",
+        "Only the default/lazy selection described by reviewed pg/lib/index.js bounds startup impact."
+      ]
+    },
+    {
+      "file": "server/utils/email.mjs",
+      "sha256": "9a787e04026ec9225fca35420546d744fc78874958739eab76a0c9754fef7113",
+      "classification": "SELECTED_RESEND_HTML_CALLER",
+      "sourceURL": "https://github.com/TheGenuineLoveProject/MyMentalHealthBuddy/blob/df8137696e4c7b0a7c16a08347e1b92f85b85371/server/utils/email.mjs",
+      "conditions": [
+        "sendTransactionalEmail sends an object containing from, to, subject and html; no react field at that call."
+      ]
+    },
+    {
+      "file": "server/services/email.mjs",
+      "sha256": "23fbd9967964b7c65c18ddb2cdbeff44aa69ab33eb6b4d40edce8abfa11ab2c4",
+      "classification": "SELECTED_RESEND_HTML_CALLERS",
+      "sourceURL": "https://github.com/TheGenuineLoveProject/MyMentalHealthBuddy/blob/df8137696e4c7b0a7c16a08347e1b92f85b85371/server/services/email.mjs",
+      "conditions": [
+        "Six selected emails.send calls use explicit html template fields; no payload spreads or react fields at those calls.",
+        "Other-platform names and links occur in this remote source and require MMHB-only launch review if current hashes match."
+      ]
+    },
+    {
+      "file": "server/services/newsletterSend.mjs",
+      "sha256": "f39a0864816fabc44395c676df8ef6bac4d13b499b6725912257f3b4705c52e1",
+      "classification": "SELECTED_RESEND_HTML_TEXT_CALLERS",
+      "sourceURL": "https://github.com/TheGenuineLoveProject/MyMentalHealthBuddy/blob/df8137696e4c7b0a7c16a08347e1b92f85b85371/server/services/newsletterSend.mjs",
+      "conditions": [
+        "Two selected emails.send calls use explicit html/text payloads, no react field or payload spread."
+      ]
+    },
+    {
+      "file": "server/routes/blog.mjs",
+      "sha256": "ad22034ff650b56c65d1d9dcee916e32d9f22ab04bde0a7d4a738b7188ec12e5",
+      "classification": "SELECTED_RESEND_HTML_CALLER",
+      "sourceURL": "https://github.com/TheGenuineLoveProject/MyMentalHealthBuddy/blob/df8137696e4c7b0a7c16a08347e1b92f85b85371/server/routes/blog.mjs",
+      "conditions": [
+        "The selected Resend emails.send test path uses an explicit html field, no react field or payload spread."
+      ]
+    },
+    {
+      "file": "server/db/connection.mjs",
+      "sha256": "6baa2747e839ce79d623564b5ad64067e9a8ca90975dc262383185592e7500fc",
+      "classification": "SELECTED_PG_DEFAULT_POOL_CONSUMER",
+      "sourceURL": "https://github.com/TheGenuineLoveProject/MyMentalHealthBuddy/blob/df8137696e4c7b0a7c16a08347e1b92f85b85371/server/db/connection.mjs",
+      "conditions": [
+        "Imports default pg and destructures Pool; no pg.native access in this file.",
+        "Application-wide use of native clients is not ruled out by this selected-file match."
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "file": "ai/healing/registry.json",
+      "sha256": "be846525e46ce27d2f79f7f3baaeca990f8de91433cff89368da71bcc07178ce",
+      "bytes": 746,
+      "observedBrandNames": [],
+      "classification": "EXISTING_MMHB_HEALING_ENGINE_ASSET"
+    },
+    {
+      "file": "ai/business/registry.json",
+      "sha256": "d90a0981f3b9dab33c80da4923aa6abe4e6503762740193a78a8134081c5663b",
+      "bytes": 848,
+      "observedBrandNames": [],
+      "classification": "EXISTING_MMHB_BUSINESS_ENGINE_ASSET_ROLE_ENFORCEMENT_UNPROVEN"
+    },
+    {
+      "file": "prompt-os-kernel/schemas/promptspec.schema.json",
+      "sha256": "23cfe8419ca3737a39d66ab3a7d04b0ac98198bf265f899e99846187fb9a7839",
+      "bytes": 3154,
+      "observedBrandNames": [],
+      "classification": "EXISTING_MMHB_KERNEL_HEALTH_REFERENCE"
+    },
+    {
+      "file": "content/blog/index.json",
+      "sha256": "8e70857b567fb367d124c97e5b1687d21acea2721cede66cb4f676a316409835",
+      "bytes": 2859,
+      "observedBrandNames": [
+        "GLP"
+      ],
+      "classification": "RSS_FALLBACK_CONTENT_ACTIVE_ROUTE_UNPROVEN"
+    },
+    {
+      "file": "ai/healing/system.md",
+      "sha256": "7c7b9649f650bbfa75259b5f6a0ed7015680ac94fd8912f1dd01ae78ae57ed65",
+      "bytes": 1418,
+      "observedBrandNames": [
+        "MMHB",
+        "GLP"
+      ],
+      "classification": "EXISTING_MMHB_HEALING_ENGINE_ASSET"
+    },
+    {
+      "file": "ai/business/system.md",
+      "sha256": "400428b0164409e84c048e29447a4f6b7cf484729efb01dabb6b31fba36a5da7",
+      "bytes": 925,
+      "observedBrandNames": [
+        "GLP"
+      ],
+      "classification": "EXISTING_MMHB_BUSINESS_ENGINE_ASSET_ROLE_ENFORCEMENT_UNPROVEN"
+    },
+    {
+      "file": "prompt-os-kernel/governance/MASTER_STRATEGY.md",
+      "sha256": "1d17a28700a7c38e26696138dec488811297c7f1e0053f51260cb189d7638d87",
+      "bytes": 1405,
+      "observedBrandNames": [
+        "MMHB",
+        "GLP"
+      ],
+      "classification": "EXISTING_MMHB_KERNEL_HEALTH_REFERENCE"
+    },
+    {
+      "file": "prompt-os-kernel/governance/domain-router.md",
+      "sha256": "288c4e11cfd98a77b2120e36e9453172cde260ba9d81830d8638e1123b30a117",
+      "bytes": 2585,
+      "observedBrandNames": [],
+      "classification": "EXISTING_MMHB_KERNEL_HEALTH_REFERENCE"
+    },
+    {
+      "file": "prompt-os-kernel/governance/execution-protocol.md",
+      "sha256": "053caba9bf2c205dca92bf55421329a4ed3abe4f4ad775d6062d4cb919495c02",
+      "bytes": 2107,
+      "observedBrandNames": [],
+      "classification": "EXISTING_MMHB_KERNEL_HEALTH_REFERENCE"
+    },
+    {
+      "file": "prompt-os-kernel/governance/quality-gates.md",
+      "sha256": "f43cf43bff0f744d5601510bf08827014425908270deed066ae7d269372f39f1",
+      "bytes": 1803,
+      "observedBrandNames": [],
+      "classification": "EXISTING_MMHB_KERNEL_HEALTH_REFERENCE"
+    },
+    {
+      "file": "prompt-os-kernel/engines/business-command-engine.md",
+      "sha256": "33b1d426179ef1f4f35e9364272b345a07d8d261e26630d1114571e8f40980c5",
+      "bytes": 1678,
+      "observedBrandNames": [],
+      "classification": "EXISTING_MMHB_KERNEL_HEALTH_REFERENCE"
+    },
+    {
+      "file": "ai/healing/prompts/h01_intake.md",
+      "sha256": "6bdf4ea38534d527bc4fd84ecaa8cfb004da1de967ba70cb2885a3ce0ccadaa1",
+      "bytes": 861,
+      "observedBrandNames": [],
+      "classification": "EXISTING_MMHB_HEALING_ENGINE_ASSET"
+    },
+    {
+      "file": "ai/healing/prompts/h02_journal_reflect.md",
+      "sha256": "f5f4872d9447030b1b26d054894b3650e9bdb2c6c30ff83e0e41fa37a1778902",
+      "bytes": 426,
+      "observedBrandNames": [],
+      "classification": "EXISTING_MMHB_HEALING_ENGINE_ASSET"
+    },
+    {
+      "file": "ai/healing/prompts/h03_cbt_reframe.md",
+      "sha256": "44062bd3e621d7abf7d32b77c01d2f70287a699bb1a913686b5d4c35e01b338d",
+      "bytes": 1033,
+      "observedBrandNames": [],
+      "classification": "EXISTING_MMHB_HEALING_ENGINE_ASSET"
+    },
+    {
+      "file": "ai/healing/prompts/h04_act_values.md",
+      "sha256": "b5ad3efc7403874112502dde7f01b5eb8e9aaf21de93e499036ceafb77ba7f5b",
+      "bytes": 1095,
+      "observedBrandNames": [],
+      "classification": "EXISTING_MMHB_HEALING_ENGINE_ASSET"
+    },
+    {
+      "file": "ai/healing/prompts/h05_breathing_grounding.md",
+      "sha256": "0488004edba218e43fa5ecf6aea53df3d98a08838633bf579033f01b36ea4e56",
+      "bytes": 1105,
+      "observedBrandNames": [],
+      "classification": "EXISTING_MMHB_HEALING_ENGINE_ASSET"
+    },
+    {
+      "file": "ai/healing/prompts/h06_sleep_reset.md",
+      "sha256": "578769ff00486a72436d68789c403a8f2e31405bb9cc8242249992981104edd2",
+      "bytes": 1068,
+      "observedBrandNames": [],
+      "classification": "EXISTING_MMHB_HEALING_ENGINE_ASSET"
+    },
+    {
+      "file": "ai/healing/prompts/h07_conflict_script.md",
+      "sha256": "2aaaa5d222baeb746d452514af1ca17e0417fd013cb45dd1d90891e9f73e63f4",
+      "bytes": 1267,
+      "observedBrandNames": [],
+      "classification": "EXISTING_MMHB_HEALING_ENGINE_ASSET"
+    },
+    {
+      "file": "ai/healing/prompts/h08_safety_check.md",
+      "sha256": "99292ed3282e9bb35a564f1341b5d59511e7406a90d6fd113129671a12241c30",
+      "bytes": 1746,
+      "observedBrandNames": [],
+      "classification": "EXISTING_MMHB_HEALING_ENGINE_ASSET"
+    },
+    {
+      "file": "ai/business/prompts/b01_offer_design.md",
+      "sha256": "213c90aed86e64685dd0ef9dfe2117736a441d019b419de9b9fd0c4df756eddc",
+      "bytes": 954,
+      "observedBrandNames": [
+        "GLP"
+      ],
+      "classification": "EXISTING_MMHB_BUSINESS_ENGINE_ASSET_ROLE_ENFORCEMENT_UNPROVEN"
+    },
+    {
+      "file": "ai/business/prompts/b02_funnel_map.md",
+      "sha256": "f9499b81f35d0a53c3442296f84fd6a70be7ca288a5a905a05f6340da05af1bf",
+      "bytes": 752,
+      "observedBrandNames": [],
+      "classification": "EXISTING_MMHB_BUSINESS_ENGINE_ASSET_ROLE_ENFORCEMENT_UNPROVEN"
+    },
+    {
+      "file": "ai/business/prompts/b03_content_factory.md",
+      "sha256": "d27b0be5cbf7509c13cb299e24d8cdc395bb2ead7bb4d4297baf3865152e8252",
+      "bytes": 781,
+      "observedBrandNames": [],
+      "classification": "EXISTING_MMHB_BUSINESS_ENGINE_ASSET_ROLE_ENFORCEMENT_UNPROVEN"
+    },
+    {
+      "file": "ai/business/prompts/b04_email_sequences.md",
+      "sha256": "77bb6e3b57aa7ef73f3a5703e5ba6df3137c1ce9b41b082cc2d7e5ef3d9a837f",
+      "bytes": 868,
+      "observedBrandNames": [],
+      "classification": "EXISTING_MMHB_BUSINESS_ENGINE_ASSET_ROLE_ENFORCEMENT_UNPROVEN"
+    },
+    {
+      "file": "ai/business/prompts/b05_seo_briefs.md",
+      "sha256": "38cf749f52577272b841e0e4eb86bf53e9d8d27a71b4c4100dfc1db65746419f",
+      "bytes": 941,
+      "observedBrandNames": [],
+      "classification": "EXISTING_MMHB_BUSINESS_ENGINE_ASSET_ROLE_ENFORCEMENT_UNPROVEN"
+    },
+    {
+      "file": "ai/business/prompts/b06_competitive_scan.md",
+      "sha256": "d79db57c633b5e11141b1e5d13af0e13d478d4dab3307e82fdb5be7adc2ea709",
+      "bytes": 805,
+      "observedBrandNames": [],
+      "classification": "EXISTING_MMHB_BUSINESS_ENGINE_ASSET_ROLE_ENFORCEMENT_UNPROVEN"
+    },
+    {
+      "file": "ai/business/prompts/b07_pricing_packaging.md",
+      "sha256": "f9e1be975bcbb611cb03d133650619d9356e9515452ee79ea04b0d0c49f51e57",
+      "bytes": 995,
+      "observedBrandNames": [],
+      "classification": "EXISTING_MMHB_BUSINESS_ENGINE_ASSET_ROLE_ENFORCEMENT_UNPROVEN"
+    },
+    {
+      "file": "ai/business/prompts/b08_retention_loyalty.md",
+      "sha256": "ebafa326a0a5d552f9fc7316321b93119bc88df7e15b5aa87edff1f6a7feff7b",
+      "bytes": 820,
+      "observedBrandNames": [],
+      "classification": "EXISTING_MMHB_BUSINESS_ENGINE_ASSET_ROLE_ENFORCEMENT_UNPROVEN"
+    },
+    {
+      "file": "ai/business/prompts/b09_partnerships.md",
+      "sha256": "7b409622fdf473b8e2e01f5145503fe35578ba7ba0e7d1e05ca94d256a22433d",
+      "bytes": 1075,
+      "observedBrandNames": [],
+      "classification": "EXISTING_MMHB_BUSINESS_ENGINE_ASSET_ROLE_ENFORCEMENT_UNPROVEN"
+    },
+    {
+      "file": "ai/business/prompts/b10_ops_sops.md",
+      "sha256": "d03b38de531eb442d925c71a1f33b1ab82667887a4b9ab4d722ff4b6c2ffab8e",
+      "bytes": 1030,
+      "observedBrandNames": [],
+      "classification": "EXISTING_MMHB_BUSINESS_ENGINE_ASSET_ROLE_ENFORCEMENT_UNPROVEN"
+    },
+    {
+      "file": "prompt-os-kernel/scripts/verify-platform-kernel.mjs",
+      "sha256": "7fab57c10f5d122d24b9b597212fe7f4719e1af0603853e82b4249a598839e86",
+      "bytes": 3370,
+      "observedBrandNames": [],
+      "classification": "EXISTING_MMHB_KERNEL_HEALTH_REFERENCE"
+    },
+    {
+      "file": "prompt-os-kernel/install.sh",
+      "sha256": "607a3f0ef38be50008c314afdb61f102cf0c4a4e837f357667f584e15c21af5e",
+      "bytes": 799,
+      "observedBrandNames": [],
+      "classification": "EXISTING_MMHB_KERNEL_HEALTH_REFERENCE"
+    }
+  ],
+  "unreviewedFiles": [
+    "node_modules/resend/dist/index.mjs",
+    "node_modules/resend/dist/index.cjs",
+    "scripts/heal-self.mjs"
+  ],
+  "packages": [
+    "@vitejs/plugin-react",
+    "ws",
+    "pg",
+    "resend",
+    "@react-email/render",
+    "bufferutil",
+    "utf-8-validate",
+    "pg-cloudflare",
+    "pg-native"
+  ],
+  "flags": [
+    "NODE_PG_FORCE_NATIVE",
+    "WS_NO_BUFFER_UTIL",
+    "WS_NO_UTF_8_VALIDATE",
+    "HEAL_AUTO_ENABLED"
+  ]
+};
+// BEGIN R14 REVIEWED PURE ANALYSIS HELPERS
+// Pure, bounded summaries. The caller owns file reads and the approved path list.
+// No source, prompt text, commands, URLs, integrity strings, or unknown IDs escape.
+const R14_ENGINES = ['healing', 'business'];
+const R14_AUDIENCES = ['anonymous', 'subscriber', 'owner', 'admin', 'staff'];
+const R14_RISKS = ['low', 'medium', 'high'];
+const R14_DEPENDENCY_FIELDS = ['dependencies', 'devDependencies', 'optionalDependencies', 'peerDependencies'];
+const R14_LIFECYCLE_NAMES = ['preinstall', 'install', 'postinstall', 'prepublish', 'preprepare', 'prepare', 'postprepare'];
+
+function r14Record(value) {
+  return value !== null && typeof value === 'object' && !Array.isArray(value);
+}
+
+function r14Parse(value) {
+  if (value === null || value === undefined) return { state: 'ABSENT', value: null };
+  if (typeof value === 'string') {
+    if (value.length > 1_048_576) return { state: 'SIZE_LIMIT', value: null };
+    try { value = JSON.parse(value); } catch { return { state: 'INVALID_JSON', value: null }; }
+  }
+  return r14Record(value) ? { state: 'OBJECT', value } : { state: 'INVALID_OBJECT', value: null };
+}
+
+function r14Version(value) {
+  // Numeric releases and narrowly recognized prereleases only; never echo unknown suffixes.
+  return typeof value === 'string' && value.length <= 64 &&
+    /^(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)\.(?:0|[1-9]\d*)(?:-(?:alpha|beta|rc|next|canary|dev)(?:[.-]\d+)?)?$/.test(value)
+    ? value : null;
+}
+
+function r14AvailableAsset(assets, file) {
+  if (!r14Record(assets) || !Object.hasOwn(assets, file)) return false;
+  const asset = assets[file];
+  return r14Record(asset) && ['FILE', 'PRESENT'].includes(asset.state) &&
+    Number.isSafeInteger(asset.bytes) && asset.bytes > 0;
+}
+
+export function r14RegistrySummary(engine, jsonText, allowedAssetPaths, assets) {
+  const result = {
+    engine: R14_ENGINES.includes(engine) ? engine : null,
+    status: 'REGISTRY_STRUCTURE_REVIEW_REQUIRED', valid: false, version: null,
+    promptCount: 0, approvedPromptCount: 0, allowedAudiences: [],
+    riskCounts: { low: 0, medium: 0, high: 0 }, requiredAssets: [], issues: [],
+    scope: 'STRUCTURE_AND_CALLER_ASSET_METADATA_ONLY_NOT_CONTENT_OR_RUNTIME_QUALIFICATION',
+  };
+  const issue = (code, index) => result.issues.push(index === undefined ? { code } : { code, index });
+  if (!R14_ENGINES.includes(engine)) { issue('UNSUPPORTED_ENGINE'); return result; }
+  if (!Array.isArray(allowedAssetPaths) || allowedAssetPaths.length > 1000) {
+    issue('APPROVED_PATHS_INVALID'); return result;
+  }
+  const prefix = engine === 'healing' ? 'h' : 'b';
+  const system = `ai/${engine}/system.md`;
+  const promptPathPattern = new RegExp(`^ai/${engine}/prompts/${prefix}\\d{2}_[a-z0-9_]+\\.md$`);
+  const approved = new Set(allowedAssetPaths.filter(file => typeof file === 'string' &&
+    file.length <= 256 && (file === system || promptPathPattern.test(file))));
+  const required = new Set();
+  function addAsset(file, index) {
+    if (required.has(file)) return;
+    required.add(file);
+    const available = r14AvailableAsset(assets, file);
+    result.requiredAssets.push({ file, available });
+    if (!available) issue(file === system ? 'SYSTEM_ASSET_MISSING_OR_EMPTY' : 'PROMPT_ASSET_MISSING_OR_EMPTY', index);
+  }
+  if (!approved.has(system)) issue('SYSTEM_ASSET_NOT_APPROVED');
+  else addAsset(system);
+
+  const parsed = r14Parse(jsonText);
+  if (parsed.state !== 'OBJECT') { issue(`REGISTRY_${parsed.state}`); return result; }
+  const registry = parsed.value;
+  if (registry.engine !== engine) issue('ENGINE_MISMATCH');
+  result.version = r14Version(registry.version);
+  if (result.version === null) issue('VERSION_UNRECOGNIZED');
+  if (!Array.isArray(registry.allowed_audiences) || registry.allowed_audiences.length === 0 ||
+      registry.allowed_audiences.length > R14_AUDIENCES.length) issue('AUDIENCES_INVALID');
+  else {
+    const seen = new Set();
+    for (const [index, audience] of registry.allowed_audiences.entries()) {
+      if (!R14_AUDIENCES.includes(audience)) issue('AUDIENCE_UNRECOGNIZED', index);
+      else if (seen.has(audience)) issue('AUDIENCE_DUPLICATE', index);
+      else { seen.add(audience); result.allowedAudiences.push(audience); }
+    }
+  }
+  if (!Array.isArray(registry.prompts)) { issue('PROMPTS_INVALID'); return result; }
+  result.promptCount = registry.prompts.length;
+  if (registry.prompts.length === 0 || registry.prompts.length > 100) {
+    issue('PROMPT_COUNT_OUT_OF_BOUNDS'); return result;
+  }
+  const seenIds = new Set();
+  for (const [index, prompt] of registry.prompts.entries()) {
+    if (!r14Record(prompt)) { issue('PROMPT_INVALID', index); continue; }
+    if (!R14_RISKS.includes(prompt.risk)) issue('RISK_UNRECOGNIZED', index);
+    else result.riskCounts[prompt.risk]++;
+    if (typeof prompt.id !== 'string' || prompt.id.length > 160 ||
+        !/^[a-z]\d{2}_[a-z0-9_]+$/.test(prompt.id)) {
+      issue('PROMPT_ID_INVALID', index); continue;
+    }
+    if (prompt.id[0] !== prefix) { issue('PROMPT_ENGINE_MISMATCH', index); continue; }
+    if (seenIds.has(prompt.id)) { issue('PROMPT_ID_DUPLICATE', index); continue; }
+    seenIds.add(prompt.id);
+    const path = `ai/${engine}/prompts/${prompt.id}.md`;
+    if (!approved.has(path)) { issue('PROMPT_ASSET_NOT_APPROVED', index); continue; }
+    result.approvedPromptCount++;
+    addAsset(path, index);
+  }
+  result.valid = result.issues.length === 0;
+  if (result.valid) result.status = 'REGISTRY_STRUCTURE_PASS';
+  return result;
+}
+
+function r14DependencyMap(value) {
+  if (value === undefined) return { valid: true, count: 0, identity: '[]' };
+  if (!r14Record(value)) return { valid: false, count: null, identity: null };
+  const entries = Object.entries(value);
+  if (entries.length > 5000 || entries.some(([key, item]) =>
+    key.length > 256 || typeof item !== 'string' || item.length > 4096)) {
+    return { valid: false, count: null, identity: null };
+  }
+  entries.sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0);
+  return { valid: true, count: entries.length, identity: JSON.stringify(entries) };
+}
+
+function r14Resolved(value) {
+  const result = { present: value !== undefined, officialNpmRegistry: false };
+  if (typeof value !== 'string' || value.length > 4096) return result;
+  try {
+    const parsed = new URL(value);
+    result.officialNpmRegistry = parsed.protocol === 'https:' &&
+      parsed.hostname === 'registry.npmjs.org' && parsed.username === '' && parsed.password === '' &&
+      parsed.port === '' && parsed.search === '' && parsed.hash === '';
+  } catch { /* Return metadata only. */ }
+  return result;
+}
+
+function r14PackageRecord(name, raw) {
+  const parsed = r14Parse(raw);
+  const result = { state: parsed.state, version: null, versionRecognized: false };
+  if (parsed.state !== 'OBJECT') return { result, maps: null };
+  const value = parsed.value;
+  result.nameMatches = value.name === undefined ? null : value.name === name;
+  result.version = r14Version(value.version);
+  result.versionRecognized = result.version !== null;
+  const maps = {};
+  result.dependencyMaps = {};
+  for (const field of R14_DEPENDENCY_FIELDS) {
+    maps[field] = r14DependencyMap(value[field]);
+    result.dependencyMaps[field] = { valid: maps[field].valid, count: maps[field].count };
+  }
+  result.resolved = r14Resolved(value.resolved);
+  result.integrity = {
+    present: value.integrity !== undefined,
+    sha512Format: typeof value.integrity === 'string' && /^sha512-[A-Za-z0-9+/]{86}==$/.test(value.integrity),
+  };
+  const scripts = value.scripts;
+  result.scripts = { present: scripts !== undefined, valid: true, count: 0, lifecycleNames: [], otherCount: 0 };
+  if (scripts !== undefined) {
+    if (!r14Record(scripts) || Object.keys(scripts).length > 1000 ||
+        Object.values(scripts).some(command => typeof command !== 'string')) result.scripts.valid = false;
+    else {
+      result.scripts.count = Object.keys(scripts).length;
+      result.scripts.lifecycleNames = R14_LIFECYCLE_NAMES.filter(key => Object.hasOwn(scripts, key));
+      result.scripts.otherCount = result.scripts.count - result.scripts.lifecycleNames.length;
+    }
+  }
+  result.bin = { present: value.bin !== undefined, valid: true, count: 0 };
+  if (typeof value.bin === 'string') result.bin.count = 1;
+  else if (value.bin !== undefined) {
+    if (!r14Record(value.bin) || Object.keys(value.bin).length > 1000 ||
+        Object.values(value.bin).some(path => typeof path !== 'string')) result.bin.valid = false;
+    else result.bin.count = Object.keys(value.bin).length;
+  }
+  return { result, maps };
+}
+
+export function r14PackageSummary(name, installedJsonOrNull, lockEntryOrNull, hiddenLockEntryOrNull) {
+  const safeName = typeof name === 'string' && name.length <= 128 &&
+    /^(?:@[a-z0-9][a-z0-9._-]*\/)?[a-z0-9][a-z0-9._-]*$/.test(name) ? name : null;
+  const sources = {
+    installed: r14PackageRecord(safeName, installedJsonOrNull),
+    locked: r14PackageRecord(safeName, lockEntryOrNull),
+    hiddenLocked: r14PackageRecord(safeName, hiddenLockEntryOrNull),
+  };
+  function compare(left, right) {
+    const a = sources[left], b = sources[right];
+    const result = { versionMatch: null, dependencyMapsMatch: {} };
+    if (a.result.versionRecognized && b.result.versionRecognized) result.versionMatch = a.result.version === b.result.version;
+    for (const field of R14_DEPENDENCY_FIELDS) result.dependencyMapsMatch[field] =
+      a.maps?.[field].valid && b.maps?.[field].valid ? a.maps[field].identity === b.maps[field].identity : null;
+    return result;
+  }
+  return {
+    name: safeName,
+    status: safeName === null ? 'PACKAGE_NAME_UNRECOGNIZED' : 'PACKAGE_METADATA_ONLY',
+    installed: sources.installed.result, locked: sources.locked.result, hiddenLocked: sources.hiddenLocked.result,
+    comparisons: { installedToLock: compare('installed', 'locked'),
+      installedToHiddenLock: compare('installed', 'hiddenLocked'), hiddenLockToLock: compare('hiddenLocked', 'locked') },
+    scope: 'DECLARED_METADATA_ONLY_NOT_INSTALLED_TREE_INTEGRITY_OR_RUNTIME_QUALIFICATION',
+  };
+}
+
+// END R14 REVIEWED PURE ANALYSIS HELPERS
+const safePath = rel => typeof rel === 'string' && rel.length <= 1024 &&
+  !path.isAbsolute(rel) && !/[\x00-\x1f\x7f\\]/.test(rel) && !privatePath(rel) &&
+  !rel.split('/').some(x => !x || x === '.' || x === '..');
+function directory(base) {
+  const st = fs.lstatSync(base);
+  gate(st.isDirectory() && !st.isSymbolicLink() && fs.realpathSync(base) === base, 'ARTIFACT_DIRECTORY_BOUNDARY');
+}
+function artifactIdentity(base, rel) {
+  gate(safePath(rel), 'ARTIFACT_PATH_BOUNDARY', {file:label(rel)});
+  directory(base);
+  let full = base;
+  for (const part of rel.split('/')) {
+    full = path.join(full,part);
+    const st = fs.lstatSync(full);
+    gate(!st.isSymbolicLink(), 'ARTIFACT_SYMLINK', {file:label(rel)});
+  }
+  const before = fs.statSync(full);
+  gate(before.isFile() && before.size <= 64*1024*1024, 'ARTIFACT_FILE_LIMIT', {file:label(rel)});
+  const fd = fs.openSync(full,'r'), buffer = Buffer.alloc(1024*1024), digest = crypto.createHash('sha256');
+  try {let n;while((n=fs.readSync(fd,buffer,0,buffer.length,null))>0)digest.update(buffer.subarray(0,n));}
+  finally {fs.closeSync(fd);}
+  const after = fs.statSync(full);
+  gate(['dev','ino','size','mode','mtimeMs','ctimeMs'].every(k=>before[k]===after[k]), 'ARTIFACT_CHANGED_DURING_READ', {file:label(rel)});
+  return {file:rel,sha256:digest.digest('hex'),bytes:before.size,mode:before.mode};
+}
+function artifactTree(base) {
+  directory(base);const rows=[];let bytes=0;
+  function walk(dir) {
+    directory(dir);
+    for(const name of fs.readdirSync(dir).sort()) {
+      const full=path.join(dir,name),rel=path.relative(base,full);
+      gate(safePath(rel),'ARTIFACT_PATH_BOUNDARY',{file:label(rel)});
+      const st=fs.lstatSync(full);
+      gate(!st.isSymbolicLink(),'ARTIFACT_SYMLINK',{file:label(rel)});
+      if(st.isDirectory())walk(full);
+      else {const row=artifactIdentity(base,rel);bytes+=row.bytes;rows.push(row);
+        gate(rows.length<=5000&&bytes<=512*1024*1024,'ARTIFACT_TREE_LIMIT');}
+    }
+  }
+  walk(base);return {rows,bytes};
+}
+const retainedFiles = new Map();
+function retainedJSON(base,rel) {
+  const id=artifactIdentity(base,rel);
+  gate(id.bytes<=32*1024*1024,'REPORT_JSON_LIMIT');
+  const raw=fs.readFileSync(path.join(base,rel));
+  gate(hash(raw)===id.sha256,'REPORT_CHANGED_DURING_READ');
+  retainedFiles.set(base+'\0'+rel,{base,rel,id});
+  return JSON.parse(raw.toString('utf8'));
+}
+function checkedRows(rows) {
+  gate(Array.isArray(rows)&&rows.length<=5000,'MANIFEST_ROWS_LIMIT');
+  const names=new Set();
+  for(const row of rows) {
+    gate(row&&safePath(row.file)&&!names.has(row.file)&&/^[a-f0-9]{64}$/.test(row.sha256)
+      &&Number.isSafeInteger(row.bytes)&&row.bytes>=0&&row.bytes<=64*1024*1024,'MANIFEST_ROW_INVALID');
+    names.add(row.file);
+  }
+  return names;
+}
+function matchTree(actual,expected,code) {
+  const names=checkedRows(expected),map=new Map(actual.rows.map(row=>[row.file,row]));
+  gate(map.size===names.size&&actual.rows.length===expected.length,code,{reason:'FILE_SET'});
+  for(const row of expected) {
+    const item=map.get(row.file);
+    gate(item&&item.sha256===row.sha256&&item.bytes===row.bytes
+      &&(row.mode===undefined||item.mode===row.mode),code,{file:label(row.file)});
+  }
+}
+function sameTree(a,b,code){gate(JSON.stringify(a)===JSON.stringify(b),code);}
+const observations = new Map();
+function observe(file) {
+  gate(publicPath(file),'SELECTED_PATH_BOUNDARY');
+  const id=identity(path.join(ROOT,file));
+  if(observations.has(file))gate(JSON.stringify(id)===JSON.stringify(observations.get(file)),'SELECTED_FILE_CHANGED_DURING_READ',{file});
+  else observations.set(file,id);
+  return id;
+}
+function selectedJSON(file,max=4*1024*1024) {
+  const id=observe(file);
+  if(id.state==='ABSENT')return null;
+  gate(id.bytes<=max,'SELECTED_JSON_SIZE',{file});
+  const raw=fs.readFileSync(path.join(ROOT,file));
+  gate(hash(raw)===id.sha256,'SELECTED_FILE_CHANGED_DURING_READ',{file});
+  try{return JSON.parse(raw.toString('utf8'));}catch{return {__r14InvalidJSON:true};}
+}
+function selectedText(file,max=1024*1024) {
+  const id=observe(file);
+  if(id.state==='ABSENT')return null;
+  gate(id.bytes<=max,'SELECTED_TEXT_SIZE',{file});
+  const raw=fs.readFileSync(path.join(ROOT,file));
+  gate(hash(raw)===id.sha256,'SELECTED_FILE_CHANGED_DURING_READ',{file});
+  return raw.toString('utf8');
+}
+function sourceReview(item,manifest) {
+  const current=observe(item.file),prior=manifest.records[item.file];
+  const reviewed=current.sha256===item.sha256;
+  const listed=manifest.inputs.includes(item.file);
+  const priorMatches=!!prior&&prior.sha256===current.sha256&&current.state==='FILE';
+  return {file:item.file,current,reviewedSourceMatch:reviewed,
+    listedCompilerInput:listed,retainedInputIdentityMatches:priorMatches,
+    classification:reviewed?item.classification:'CURRENT_BYTES_REQUIRE_REVIEW',
+    conditions:reviewed?(item.conditions||[]):[],
+    scope:'SOURCE_BEHAVIOR_ONLY_NOT_CALLER_REACHABILITY_OR_RUNTIME_PROOF'};
+}
+let reportDir,before,baseline,priorTree,failure;let phase='WORKSPACE_PREFLIGHT';
+let result={project:'MyMentalHealthBuddy',status:'NOT_STARTED',releaseReady:false,
+  dependencyAlignment:'PENDING',applicationRuntime:'UNPROVEN',deployedArtifact:'UNPROVEN'};
+function failureInfo(error,at,fallback='UNEXPECTED_CONTRACT_FAILURE') {
+  const detail={...(error.detail||{})};
+  if(typeof error.path==='string') {
+    const full=path.resolve(ROOT,error.path),base=[reportDir,PRIOR_REPORT,SERVER_REPORT].find(x=>x&&(full===x||inside(x,full)));
+    detail.file=base?'REPORT/'+label(path.relative(base,full)||'ROOT'):inside(ROOT,full)?label(path.relative(ROOT,full)):label(error.path);
+  }
+  if(['lstat','stat','open','read','write','realpath','scandir','mkdir'].includes(error.syscall))detail.syscall=error.syscall;
+  return {gate:error.gate||fallback,phase:at,detail,errorCode:/^[A-Z0-9_]+$/.test(error.code||'')?error.code:undefined};
+}
+function save(name,value){fs.writeFileSync(path.join(reportDir,name),JSON.stringify(value,null,2),{flag:'wx',mode:0o600});}
+function terminalSummary(value,evidenceIdentity) {
+  return {project:value.project,status:value.status,releaseReady:false,
+    dependencyAlignment:value.dependencyAlignment,applicationRuntime:value.applicationRuntime,deployedArtifact:value.deployedArtifact,
+    sourceReviews:value.sourceReviews?.map(x=>({file:x.file,state:x.current.state,sha256:x.current.sha256,
+      reviewedSourceMatch:x.reviewedSourceMatch,listedCompilerInput:x.listedCompilerInput,
+      retainedInputIdentityMatches:x.retainedInputIdentityMatches,classification:x.classification})),
+    unreviewedSelectedFiles:value.unreviewedSelectedFiles,
+    packages:value.packageMetadata?.map(x=>({name:x.name,installedState:x.installed.state,
+      installed:x.installed.version,locked:x.locked.version,hiddenLocked:x.hiddenLocked.version,
+      installedToLock:x.comparisons.installedToLock,installedToHiddenLock:x.comparisons.installedToHiddenLock})),
+    packageMetadataScope:value.packageMetadataScope,
+    hiddenInstallLock:value.hiddenInstallLock,assetSummary:value.assetSummary,
+    assetReviewGaps:value.assetReviews?.filter(x=>!x.reviewedRemoteBytesMatch).map(x=>({file:x.file,current:x.current})),
+    registries:value.registries?.map(x=>({engine:x.engine,status:x.status,version:x.version,
+      promptCount:x.promptCount,approvedPromptCount:x.approvedPromptCount,
+      missingAssets:x.requiredAssets.filter(a=>!a.available).map(a=>a.file),issues:x.issues})),
+    registryScope:'STRUCTURE_AND_FILE_AVAILABILITY_NOT_CONTENT_SAFETY_OR_AUTHORIZATION',
+    shellFlags:value.shellFlags,shellFlagScope:value.shellFlagScope,
+    sourceReviewScope:'MATCHED_CODE_AND_LISTED_BUILD_INPUTS_NOT_COMPLETE_RUNTIME_REACHABILITY',
+    openReleaseRequirements:value.openReleaseRequirements,
+    currentPreservation:value.currentPreservation,preservation:value.preservation,
+    preservationFailures:value.preservationFailures,failure:value.failure,
+    detailedEvidence:evidenceIdentity?{file:'runtime-contract-evidence.json',...evidenceIdentity}:undefined,
+    evidenceWrite:value.evidenceWrite};
+}
+console.log('COMMAND_ID=MMHB-RUNTIME-CONTRACT-R14');console.log('UTC='+new Date().toISOString());
+console.log('ISSUE_ID=RUNTIME-ASSET-AND-DEPENDENCY-CONTRACT-001');
+try {
+  gate(ROOT===EXPECTED_ROOT,'WORKSPACE_PATH');
+  gate(process.version===EXPECTED_NODE&&process.platform==='linux'&&process.arch==='x64','MACHINE_DRIFT');
+  gate(fs.realpathSync(git('rev-parse','--show-toplevel').trim())===ROOT,'GIT_ROOT');
+  reportDir=fs.mkdtempSync('/tmp/mmhb-runtime-contract-r14-');fs.chmodSync(reportDir,0o700);console.log('REPORT_DIRECTORY='+reportDir);
+  phase='INITIAL_BASELINES';before=snapshot();save('worktree-before.json',before);
+  gate(before.head===EXPECTED_HEAD&&before.branch==='integration','GIT_BASELINE_DRIFT');
+  baseline=checkPins();save('pinned-before.json',baseline);
+  phase='RETAINED_CANDIDATE_AND_BUILD_INPUTS';
+  const report=retainedJSON(PRIOR_REPORT,'assembly-evidence.json');
+  const assembly=retainedJSON(PRIOR_REPORT,'assembly-manifest-before.json');
+  const inputs=retainedJSON(SERVER_REPORT,'inputs-before-final-build.json');
+  gate(report.status==='CORE_CANDIDATE_ASSEMBLED_NATIVE_PASS_NOT_RELEASE'
+    &&report.preservation==='OBSERVED_INPUTS_AND_CANDIDATES_PRESERVED'
+    &&report.nativeSmoke?.status==='NATIVE_CANDIDATE_SMOKE_PASS','R13_SUCCESS_REQUIRED');
+  gate(hash(JSON.stringify(assembly))===EXPECTED_ASSEMBLY_MANIFEST,'R13_ASSEMBLY_MANIFEST_PIN');
+  gate(hash(JSON.stringify(inputs))===EXPECTED_SERVER_INPUT_MANIFEST,'R11D_INPUT_MANIFEST_PIN');
+  gate(Array.isArray(inputs.inputs)&&inputs.records&&typeof inputs.records==='object','RETAINED_INPUT_FORMAT');
+  priorTree=artifactTree(path.join(PRIOR_REPORT,'candidate'));
+  matchTree(priorTree,assembly.rows,'R13_CANDIDATE_CHANGED');
+  gate(priorTree.bytes===assembly.bytes,'R13_CANDIDATE_SIZE');
+  save('retained-artifact-identities.json',priorTree);
+  save('retained-report-identities.json',[...retainedFiles.values()]);
+  console.log('GATE=R13_CORE_AND_R11D_INPUT_IDENTITIES RESULT=PASS');
+  phase='SELECTED_RUNTIME_SOURCE_REVIEW';
+  result.sourceReviews=POLICY.sources.map(item=>sourceReview(item,inputs));
+  result.unreviewedSelectedFiles=POLICY.unreviewedFiles.map(file=>({file,current:observe(file),review:'REVIEW_REQUIRED',executed:false}));
+  phase='INSTALLED_AND_LOCK_METADATA';
+  const lock=selectedJSON('package-lock.json',32*1024*1024);
+  gate(lock&&lock.packages&&typeof lock.packages==='object','ROOT_LOCK_PACKAGES_REQUIRED');
+  const hidden=selectedJSON('node_modules/.package-lock.json',32*1024*1024);
+  result.hiddenInstallLock=hidden===null?'ABSENT':hidden.__r14InvalidJSON?'INVALID_JSON':'PRESENT_METADATA_ONLY';
+  result.packageMetadata=POLICY.packages.map(name=>r14PackageSummary(name,
+    selectedText('node_modules/'+name+'/package.json'),lock.packages['node_modules/'+name]||null,
+    hidden?.packages?.['node_modules/'+name]||null));
+  result.packageMetadataScope='SELECTED_VERSION_AND_METADATA_COMPARISON_NOT_REGISTRY_INTEGRITY_OR_CLEAN_INSTALL_PROOF';
+  phase='SELECTED_ASSET_AVAILABILITY';
+  const candidateNames=new Set(priorTree.rows.map(row=>row.file)),assetRecords={};
+  result.assetReviews=POLICY.assets.map(item=>{
+    const current=observe(item.file);assetRecords[item.file]=current;
+    const match=current.sha256===item.sha256&&current.bytes===item.bytes;
+    return {file:item.file,current,reviewedRemoteBytesMatch:match,
+      presentInCoreCandidate:candidateNames.has(item.file),
+      classification:match?item.classification:'CURRENT_ASSET_REVIEW_REQUIRED',
+      observedBrandNames:match?item.observedBrandNames:[],
+      contentScope:match&&item.observedBrandNames.includes('GLP')?'MMHB_BRAND_SEPARATION_REVIEW_REQUIRED':'CONTENT_PUBLICATION_NOT_QUALIFIED'};
+  });
+  result.registries=['healing','business'].map(engine=>r14RegistrySummary(engine,
+    selectedText('ai/'+engine+'/registry.json'),POLICY.assets.map(item=>item.file),assetRecords));
+  result.assetSummary={selected:POLICY.assets.length,presentInWorkspace:result.assetReviews.filter(x=>x.current.state==='FILE').length,
+    presentInCoreCandidate:result.assetReviews.filter(x=>x.presentInCoreCandidate).length,
+    reviewedRemoteMatches:result.assetReviews.filter(x=>x.reviewedRemoteBytesMatch).length,
+    matchedOtherBrandText:result.assetReviews.filter(x=>x.contentScope==='MMHB_BRAND_SEPARATION_REVIEW_REQUIRED').map(x=>x.file),
+    packagingPerformed:false,scope:'EXPLICIT_31_PATHS_ONLY_NOT_COMPLETE_RUNTIME_FILESYSTEM_INVENTORY'};
+  phase='SELECTED_SHELL_FLAGS';
+  result.shellFlags=POLICY.flags.map(name=>({name,present:Object.hasOwn(process.env,name),
+    nonempty:Boolean(process.env[name]),exactLowercaseTrue:process.env[name]==='true'}));
+  result.shellFlagScope='FOUR_NONSECRET_FLAGS_BOOLEAN_ONLY_NOT_DEPLOYED_CONFIGURATION';
+  save('selected-file-identities-before.json',Object.fromEntries(observations));
+  result.status='RUNTIME_CONTRACT_EVIDENCE_COMPLETE';
+  result.openReleaseRequirements=['React plugin install/lock alignment and reproducible build',
+    'Complete runtime external reachability; unreviewed Resend distribution',
+    'Current runtime assets and MMHB-only brand/content review before packaging',
+    'Public VITE configuration and candidate working-directory qualification',
+    'Application/browser/database/AI safety acceptance, recovery and deployment identity'];
+  result.limitations=['Exact source matches describe reviewed code; compiler input presence is not runtime reachability',
+    'Registry structure and file availability are not clinical safety, enforcement or full JSON-schema validation',
+    'Only explicit paths are observed; no recursive runtime asset discovery or read of other project trees',
+    'Current snapshots do not lock editors or repair historical missing baselines',
+    'Reports contain selected metadata, identities and boolean flags; source text, prompt text and credentials are not printed',
+    'No application, dependency, compiler, install, database, browser, native or deployment code executed'];
+  console.log('GATE=SELECTED_RUNTIME_CONTRACT_COLLECTION RESULT=PASS');
+}catch(error){failure=failureInfo(error,phase);}
+finally {
+  const failures=[];function attempt(at,fn){try{fn();}catch(error){failures.push(failureInfo(error,at,'PRESERVATION_CHECK_FAILED'));}}
+  if(baseline)attempt('FINAL_PINS',()=>{
+    const after=Object.fromEntries(Object.keys(baseline).map(file=>[file,identity(path.join(ROOT,file),file.startsWith('node_modules/'))]));
+    save('pinned-after.json',after);gate(JSON.stringify(after)===JSON.stringify(baseline),'PINNED_FILE_NOT_PRESERVED');});
+  if(observations.size)attempt('FINAL_SELECTED_FILES',()=>{
+    const after=Object.fromEntries([...observations].map(([file])=>[file,identity(path.join(ROOT,file))]));
+    save('selected-file-identities-after.json',after);
+    const changed=[...observations].filter(([file,id])=>JSON.stringify(id)!==JSON.stringify(after[file])).map(([file])=>file);
+    gate(!changed.length,'SELECTED_FILES_NOT_PRESERVED',{files:changed.map(label)});});
+  if(retainedFiles.size)attempt('FINAL_RETAINED_REPORTS',()=>{
+    for(const {base,rel,id} of retainedFiles.values())gate(JSON.stringify(artifactIdentity(base,rel))===JSON.stringify(id),'RETAINED_REPORT_NOT_PRESERVED',{file:label(rel)});});
+  if(priorTree)attempt('FINAL_R13_CANDIDATE',()=>sameTree(priorTree,artifactTree(path.join(PRIOR_REPORT,'candidate')),'R13_CANDIDATE_NOT_PRESERVED'));
+  if(before)attempt('FINAL_WORKTREE',()=>{const after=snapshot();save('worktree-after.json',after);
+    result.currentPreservation=snapshotDifference(before,after);save('worktree-comparison.json',result.currentPreservation);
+    gate(!result.currentPreservation.components.length,'GIT_OR_WORKTREE_NOT_PRESERVED',result.currentPreservation);});
+  if(failures.length){failure={...failures[0],previousFailure:failure};result.preservation='FAILED';result.preservationFailures=failures;}
+  else if(before&&baseline&&priorTree){result.preservation='OBSERVED_INPUTS_AND_R13_CANDIDATE_PRESERVED';console.log('GATE=OBSERVED_INPUTS_AND_R13_CANDIDATE_PRESERVED RESULT=PASS');}
+  else result.preservation='PARTIAL_OBSERVATIONS_ONLY';
+  if(failure){result.status='RUNTIME_CONTRACT_EVIDENCE_FAILED';result.failure=failure;}
+  result.evidenceWrite=reportDir?'SAVED':'REPORT_NOT_CREATED';
+  let evidenceIdentity;
+  if(reportDir)try{save('runtime-contract-evidence.json',result);const raw=JSON.stringify(result,null,2);evidenceIdentity={sha256:hash(raw),bytes:Buffer.byteLength(raw)};}catch(error){failure={...failureInfo(error,'FINAL_EVIDENCE_WRITE','EVIDENCE_WRITE_FAILED'),previousFailure:failure};result.status='RUNTIME_CONTRACT_EVIDENCE_FAILED';result.failure=failure;result.evidenceWrite='FAILED';}
+  if(failure)console.log('FAILED_GATE='+failure.gate);
+  console.log(JSON.stringify(terminalSummary(result,evidenceIdentity),null,2));
+  console.log('SOURCE_EDIT=0 PACKAGE_EDIT=0 PACKAGE_INSTALL=0 BUILD=NOT_RUN APPLICATION_STARTED=0');
+  console.log('PROJECT_CODE_EXECUTED=0 NETWORK_REQUEST=0 DATABASE_CONNECTION=0 DATABASE_WRITE=0');
+  console.log('CREDENTIAL_CHANGE=0 STAGE=0 COMMIT=0 PUSH=0 DEPLOY=0 R13_CANDIDATE_MODIFIED=0');
+  console.log('DEPENDENCY_ALIGNMENT=PENDING APPLICATION_RUNTIME=UNPROVEN DEPLOYED_ARTIFACT_PROVEN=NO');
+  if(reportDir)console.log('REPORT_DIRECTORY='+reportDir);
+  console.log('STATUS='+result.status);console.log('NEXT_ACTION=STOP_AND_RETURN_COMPLETE_OUTPUT');process.exitCode=failure?1:0;
+}

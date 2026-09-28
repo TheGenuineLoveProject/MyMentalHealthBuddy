@@ -1,0 +1,24 @@
+{
+  "project": "MyMentalHealthBuddy",
+  "retrievedAt": "2026-09-09T08:42:24.278Z",
+  "files": [
+    {
+      "package": "ws",
+      "source": "https://github.com/websockets/ws/blob/8.21.0/LICENSE",
+      "gitBlobSha": "1da5b96a11ac2c83160e3085188f04eba7e3dd7d",
+      "localPath": "source_review/r18-upstream-ws-LICENSE.txt",
+      "acquisition": "GitHub connector fetch_file UTF-8; one successful request per license; no package install",
+      "bytes": 1183,
+      "sha256": "2b29dcfe0d6471f7e8c92c5fb38c9f93edee10330937055440192f1832b1ecef"
+    },
+    {
+      "package": "pg",
+      "source": "https://github.com/brianc/node-postgres/blob/pg@8.23.0/LICENSE",
+      "gitBlobSha": "5c1405646fa9dfc49a4638bfc5c8ca908d912505",
+      "localPath": "source_review/r18-upstream-pg-LICENSE.txt",
+      "acquisition": "GitHub connector fetch_file UTF-8; one successful request per license; no package install",
+      "bytes": 1077,
+      "sha256": "192b8f5c96900f04a1271dec39688655d7416c1c6ea84a508e18b50d2b6751f3"
+    }
+  ]
+}

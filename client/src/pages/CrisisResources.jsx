@@ -26,11 +26,11 @@ const CRISIS_HOTLINES = [
   },
   {
     name: "National Alliance on Mental Illness (NAMI)",
-    description: "Support, education, and advocacy for mental health",
+    description: "Non-crisis emotional support, mental health information, and resources",
     phone: "1-800-950-NAMI (6264)",
-    text: "Text NAMI to 741741",
-    website: "https://www.nami.org",
-    available: "Mon-Fri, 10am-10pm ET",
+    text: "Text NAMI to 62640",
+    website: "https://www.nami.org/nami-helpline/",
+    available: "Mon-Fri, 10am-10pm ET, excluding federal holidays",
     priority: false,
   },
   {

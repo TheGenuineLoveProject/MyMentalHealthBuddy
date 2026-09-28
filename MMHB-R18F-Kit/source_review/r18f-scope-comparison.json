@@ -1,0 +1,14 @@
+{
+  "unchangedConstants": {
+    "PINS": true,
+    "ASSET_PINS": true,
+    "HELPERS": true,
+    "REVIEWED_ADDITIONS": true,
+    "SOURCE_REVIEWS": true,
+    "ASSET_SETS": true,
+    "RUNTIME_PACKAGES": true
+  },
+  "originalPrefixUnchanged": true,
+  "pinCount": 63,
+  "r18cCommandUnchanged": true
+}

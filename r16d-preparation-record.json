@@ -1,0 +1,59 @@
+{
+  "project": "MyMentalHealthBuddy",
+  "status": "R16D_PREPARED_LOCAL_FIXTURES_PASS_REPLIT_EXECUTION_PENDING",
+  "releaseReady": false,
+  "date": "2026-09-09",
+  "inputEvidence": {
+    "command": "R16C",
+    "observedUtc": "2026-09-09T00:36:19.797Z",
+    "reportDirectory": "/home/runner/workspace/.mmhb-release-evidence/r16c-7iFNig",
+    "failure": "ARCHIVE_INTEGRITY_INVALID",
+    "file": "node_modules/@tailwindcss/oxide-wasm32-wasi/node_modules/@emnapi/core",
+    "npmAttempted": false,
+    "source": "USER_SUPPLIED_SCREENSHOTS",
+    "exactFailedEntryFields": "NOT_SHOWN_REVALIDATED_BY_R16D"
+  },
+  "localVerification": {
+    "node": "v24.19.0",
+    "policyFixtures": 72,
+    "registryFixtures": 52,
+    "driverFixtures": 32,
+    "total": 156,
+    "syntax": "BASH_AND_NODE_PASS",
+    "scope": "SYNTHETIC_LOCK_FILES_METADATA_ARCHIVES_HTTPS_AND_INERT_NPM_ONLY"
+  },
+  "command": {
+    "file": "MMHB-BUNDLE-AWARE-DEPENDENCIES-R16D.txt",
+    "sha256": "6259e14199ac353382a3f43dc1864f1fc2e59a8cfbebd34ef599491ae09804a5"
+  },
+  "helpers": {
+    "locked-dependency-policy-r16d.mjs": "626d830cfba7b24bed8d18b8236dfa4b1a62c222fb628cbc0105898e45756a43",
+    "registry-archive-repair-r16d.mjs": "8f125c00a0f678152b53bc4904c1cfbb216a693b2982d0de6a2e7eb6eb9a732d",
+    "locked-npm-runner-r16.mjs": "6f28f812900febfc749e1779e73c23203cee089f1c0c160e61a794f450214c4f",
+    "build-locked-dependencies-command-r16d.py": "09297aeaa46a7a51b4ee12b19cbe28d2da1d5ce9354e230dbf1b12430bebb15d",
+    "locked-dependencies-prefix-r16d.mjs": "639a21f0f056802f7091204bf3314536a7b61a9256e43d05e16891c230f68bc5",
+    "locked-dependencies-body-r16d.mjs": "814e96b5108cd5a7321fa2ed00cb472be0133d0cb8bff16076fbfd7d6764a6a9",
+    "locked-dependencies-driver-r16d.mjs": "79cace2013c93aab36b34d94e028e45c1f40b203ba2c07e67329dd3c78a0af2b",
+    "test-locked-dependency-policy-r16d.mjs": "02664629b499461226f725cbd8ac53046fff3fa8eca777ea20fa04b3ec131a27",
+    "test-registry-archive-repair-r16d.mjs": "ec98f67459ef54ea185c1f78c9f36f5f4c39e9dc51fc7aab111bc51c002b9d60",
+    "test-locked-dependencies-r16d.py": "55b379b6aee44864ac441c3c83be11bcab35e7acbffe9fecc8f0a2deb48d46d8"
+  },
+  "preservedContracts": {
+    "sourcePins": 41,
+    "promptAssetPins": 22,
+    "npmRunner": "BYTE_IDENTICAL_R16",
+    "requiredReplitNode": "v24.13.0",
+    "platform": "linux-x64"
+  },
+  "limitations": [
+    "Actual current Replit bundle entry fields not supplied; next command qualifies them before exemption.",
+    "No current root lock file installed or overwritten from this ChatGPT workspace.",
+    "No real public registry/npm install, application/native execution, database operation or deployment was performed.",
+    "A fixture pass does not qualify application runtime or clinical content."
+  ],
+  "references": [
+    "https://docs.npmjs.com/cli/v11/configuring-npm/package-lock-json/",
+    "https://github.com/npm/cli/blob/latest/workspaces/arborist/lib/shrinkwrap.js",
+    "https://github.com/tailwindlabs/tailwindcss/blob/main/crates/node/npm/wasm32-wasi/package.json"
+  ]
+}

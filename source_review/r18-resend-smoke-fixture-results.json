@@ -1,0 +1,190 @@
+{
+  "status": "RESEND_CJS_SYNTHETIC_BRANCH_SMOKE_PASS",
+  "negativeHashAndTypeChecks": 3,
+  "version": "6.22.1",
+  "sourceSha256": "66659b52d6b3350895d34b8bc290ccf07e4ceb7a0f0625d1a70f3850baf11806",
+  "cases": [
+    {
+      "entrypoint": "emails.send",
+      "mode": "html_absent_react",
+      "passed": true,
+      "dynamicRendererRequests": 0,
+      "syntheticTransportCalls": 1,
+      "missingRendererBlocksTransport": null
+    },
+    {
+      "entrypoint": "emails.send",
+      "mode": "text_absent_react",
+      "passed": true,
+      "dynamicRendererRequests": 0,
+      "syntheticTransportCalls": 1,
+      "missingRendererBlocksTransport": null
+    },
+    {
+      "entrypoint": "emails.send",
+      "mode": "html_false_react",
+      "passed": true,
+      "dynamicRendererRequests": 0,
+      "syntheticTransportCalls": 1,
+      "missingRendererBlocksTransport": null
+    },
+    {
+      "entrypoint": "emails.send",
+      "mode": "truthy_react_missing_renderer",
+      "passed": true,
+      "dynamicRendererRequests": 1,
+      "syntheticTransportCalls": 0,
+      "missingRendererBlocksTransport": true
+    },
+    {
+      "entrypoint": "batch.send",
+      "mode": "html_absent_react",
+      "passed": true,
+      "dynamicRendererRequests": 0,
+      "syntheticTransportCalls": 1,
+      "missingRendererBlocksTransport": null
+    },
+    {
+      "entrypoint": "batch.send",
+      "mode": "text_absent_react",
+      "passed": true,
+      "dynamicRendererRequests": 0,
+      "syntheticTransportCalls": 1,
+      "missingRendererBlocksTransport": null
+    },
+    {
+      "entrypoint": "batch.send",
+      "mode": "html_false_react",
+      "passed": true,
+      "dynamicRendererRequests": 0,
+      "syntheticTransportCalls": 1,
+      "missingRendererBlocksTransport": null
+    },
+    {
+      "entrypoint": "batch.send",
+      "mode": "truthy_react_missing_renderer",
+      "passed": true,
+      "dynamicRendererRequests": 1,
+      "syntheticTransportCalls": 0,
+      "missingRendererBlocksTransport": true
+    },
+    {
+      "entrypoint": "broadcasts.create",
+      "mode": "html_absent_react",
+      "passed": true,
+      "dynamicRendererRequests": 0,
+      "syntheticTransportCalls": 1,
+      "missingRendererBlocksTransport": null
+    },
+    {
+      "entrypoint": "broadcasts.create",
+      "mode": "text_absent_react",
+      "passed": true,
+      "dynamicRendererRequests": 0,
+      "syntheticTransportCalls": 1,
+      "missingRendererBlocksTransport": null
+    },
+    {
+      "entrypoint": "broadcasts.create",
+      "mode": "html_false_react",
+      "passed": true,
+      "dynamicRendererRequests": 0,
+      "syntheticTransportCalls": 1,
+      "missingRendererBlocksTransport": null
+    },
+    {
+      "entrypoint": "broadcasts.create",
+      "mode": "truthy_react_missing_renderer",
+      "passed": true,
+      "dynamicRendererRequests": 1,
+      "syntheticTransportCalls": 0,
+      "missingRendererBlocksTransport": true
+    },
+    {
+      "entrypoint": "broadcasts.update",
+      "mode": "html_absent_react",
+      "passed": true,
+      "dynamicRendererRequests": 0,
+      "syntheticTransportCalls": 1,
+      "missingRendererBlocksTransport": null
+    },
+    {
+      "entrypoint": "broadcasts.update",
+      "mode": "text_absent_react",
+      "passed": true,
+      "dynamicRendererRequests": 0,
+      "syntheticTransportCalls": 1,
+      "missingRendererBlocksTransport": null
+    },
+    {
+      "entrypoint": "broadcasts.update",
+      "mode": "html_false_react",
+      "passed": true,
+      "dynamicRendererRequests": 0,
+      "syntheticTransportCalls": 1,
+      "missingRendererBlocksTransport": null
+    },
+    {
+      "entrypoint": "broadcasts.update",
+      "mode": "truthy_react_missing_renderer",
+      "passed": true,
+      "dynamicRendererRequests": 1,
+      "syntheticTransportCalls": 0,
+      "missingRendererBlocksTransport": true
+    },
+    {
+      "entrypoint": "templates.create",
+      "mode": "html_absent_react",
+      "passed": true,
+      "dynamicRendererRequests": 0,
+      "syntheticTransportCalls": 1,
+      "missingRendererBlocksTransport": null
+    },
+    {
+      "entrypoint": "templates.create",
+      "mode": "text_absent_react",
+      "passed": true,
+      "dynamicRendererRequests": 0,
+      "syntheticTransportCalls": 1,
+      "missingRendererBlocksTransport": null
+    },
+    {
+      "entrypoint": "templates.create",
+      "mode": "html_false_react",
+      "passed": true,
+      "dynamicRendererRequests": 0,
+      "syntheticTransportCalls": 1,
+      "missingRendererBlocksTransport": null
+    },
+    {
+      "entrypoint": "templates.create",
+      "mode": "truthy_react_missing_renderer",
+      "passed": true,
+      "dynamicRendererRequests": 1,
+      "syntheticTransportCalls": 0,
+      "missingRendererBlocksTransport": true
+    }
+  ],
+  "caseCount": 20,
+  "dependencyImportsStubbed": [
+    "postal-mime",
+    "standardwebhooks"
+  ],
+  "dependencyImplementationsExecuted": false,
+  "dependencyUseAttempts": 0,
+  "dynamicImportRequests": 5,
+  "rendererImplementationExecuted": false,
+  "forbiddenFetchAttempts": 0,
+  "networkRequestsPerformedByHarness": 0,
+  "emailSent": false,
+  "applicationImported": false,
+  "environmentProvidedToSdk": false,
+  "realCredentialsProvided": false,
+  "scope": "EXACT_REVIEWED_CJS_WITH_STUBBED_DEPENDENCIES_AND_TRANSPORT_NOT_ESM_BUNDLE_APP_OR_DELIVERY_QUALIFICATION",
+  "limitations": [
+    "The actual ESM entry and application call graph require separate retained-input and runtime qualification.",
+    "postal-mime, standardwebhooks, Headers and SDK post/patch transports are test doubles; their implementations are not exercised.",
+    "The missing renderer is simulated by the dynamic-import callback; the successful React rendering path is not tested.",
+    "Node vm is not a security boundary; execution is restricted by an exact previously reviewed source hash."
+  ]
+}

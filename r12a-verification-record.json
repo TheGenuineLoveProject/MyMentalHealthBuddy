@@ -1,0 +1,64 @@
+{
+  "project": "MyMentalHealthBuddy",
+  "handoff": "MMHB-FRONTEND-CANDIDATE-R12A",
+  "date": "2026-09-08",
+  "actualR12": {
+    "utc": "2026-09-08T03:48:52.677Z",
+    "report": "/tmp/mmhb-frontend-candidate-r12-uAOF8r",
+    "status": "FRONTEND_CANDIDATE_FAILED",
+    "gate": "TREE_SYMLINK",
+    "file": "node_modules/postcss/node_modules/.bin/nanoid",
+    "buildProcessesStarted": 0,
+    "preserved": [
+      "git",
+      "pins",
+      "sourceTrees"
+    ],
+    "unobserved": [
+      "toolTrees"
+    ]
+  },
+  "repair": "Observe only contained npm-style executable links in selected tool trees; record link and target identities and retain all other link refusals",
+  "qualification": {
+    "parentFixtures": 55,
+    "newBinLinkCases": 23,
+    "inertChild": true,
+    "all41PinsUnchanged": true,
+    "embeddedChildUnchanged": true,
+    "childFixtureHistory": "Six prior passing stubbed API cases apply to byte-identical child; not rerun for this parent-only repair",
+    "bashSyntax": "PASS",
+    "nodeSyntax": "PASS",
+    "embeddedSourceIdentities": "PASS",
+    "independentTargetedReview": "PASS"
+  },
+  "actualR12ABuild": "NOT_RUN_HERE_REQUIRES_REPLIT_SHELL",
+  "dependencyAlignment": "PENDING",
+  "applicationRuntime": "UNPROVEN",
+  "deployment": "UNPROVEN",
+  "files": {
+    "MMHB-FRONTEND-CANDIDATE-R12A.txt": {
+      "sha256": "9e8d5547fd375ece98c969c3876d38fccd931e1960cbe726e6b439aa660d5f46",
+      "bytes": 50849
+    },
+    "source_review/frontend-candidate-driver-r12a.mjs": {
+      "sha256": "d4a195aaaec99f5860981ce7e30f9cd544d70bef908903933520a5fcd1feb779",
+      "bytes": 50386
+    },
+    "source_review/frontend-candidate-runner-r12.mjs": {
+      "sha256": "2f10da8de204a93ec87135c367e86c41cd6a706c4246eff1de451c1e2b90b43e",
+      "bytes": 13754
+    },
+    "source_review/test-frontend-candidate-r12a.py": {
+      "sha256": "a6f489c338f961024f5e66843c7eba1313741a53dbd4287128e264b720c2b214",
+      "bytes": 28819
+    },
+    "source_review/r12a-parent-fixture-results.txt": {
+      "sha256": "4d1f7794462f6f108d624255a629456cdbfa1936e8047d64b5e6ae134b1b8865",
+      "bytes": 3120
+    },
+    "source_review/test-frontend-runner-r12.py": {
+      "sha256": "619f67486ed07083b4e0e1e32a676aeca897389bc19e7e0f70d84476a36f6fe5",
+      "bytes": 9189
+    }
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "scope": "Disposable local Git fixture repositories, NOT the user Replit project. Fixture copies substitute only ROOT and known commit/hash/path-count identity constants.",
+  "script_name": "MMHB_BACKUP_A4_RESUME.py",
+  "script_sha256": "5a30584ef52b8f28928d51293a4008e567d192021dd4806ac9894b0817f99a6c",
+  "git_version": "git version 2.47.3",
+  "passed": 20,
+  "failed": 0,
+  "tests": [
+    {
+      "test": "Normal full bundle imports and stored contents match",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "result": "PASS",
+      "original_refs_index_config_workfiles_preserved": true,
+      "observed_stop": null,
+      "patch_text": "PATCH_TEXT=MATCHES_A4",
+      "bundle_matches_input": true,
+      "empty_restore_content_verified": true
+    },
+    {
+      "test": "Repeat verifies existing output without overwrite",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "result": "PASS",
+      "original_refs_index_config_workfiles_preserved": true,
+      "observed_stop": null,
+      "patch_text": "PATCH_TEXT=MATCHES_A4",
+      "bundle_matches_input": true,
+      "empty_restore_content_verified": true
+    },
+    {
+      "test": "Inherited Git routing variables cannot redirect operations",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "result": "PASS",
+      "original_refs_index_config_workfiles_preserved": true,
+      "observed_stop": null,
+      "patch_text": "PATCH_TEXT=MATCHES_A4",
+      "bundle_matches_input": true,
+      "empty_restore_content_verified": true
+    },
+    {
+      "test": "Original helper reproduces CHECKPOINT_PATCH_DIFFERS on identical stored content with source-only diff.context=7",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "result": "PASS"
+    },
+    {
+      "test": "Source-only diff.context mismatch resolved by object validation",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "result": "PASS",
+      "original_refs_index_config_workfiles_preserved": true,
+      "observed_stop": null,
+      "patch_text": "PATCH_TEXT=DIFFERS_BUT_STORED_CONTENT_MATCHES",
+      "bundle_matches_input": true,
+      "empty_restore_content_verified": true
+    },
+    {
+      "test": "Tracked attributes cause text/binary patch differences without changing objects",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "result": "PASS",
+      "original_refs_index_config_workfiles_preserved": true,
+      "observed_stop": null,
+      "patch_text": "PATCH_TEXT=DIFFERS_BUT_STORED_CONTENT_MATCHES",
+      "bundle_matches_input": true,
+      "empty_restore_content_verified": true
+    },
+    {
+      "test": "Corrupted pack rejected; no backup is published",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "result": "PASS",
+      "original_refs_index_config_workfiles_preserved": true,
+      "observed_stop": "STOP=GIT_COMMAND_FAILED:bundle:EXIT_1",
+      "patch_text": null
+    },
+    {
+      "test": "Truncated bundle rejected",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "result": "PASS",
+      "original_refs_index_config_workfiles_preserved": true,
+      "observed_stop": "STOP=GIT_COMMAND_FAILED:bundle:EXIT_1",
+      "patch_text": null
+    },
+    {
+      "test": "Incremental bundle rejected as not self-contained",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "result": "PASS",
+      "original_refs_index_config_workfiles_preserved": true,
+      "observed_stop": "STOP=BUNDLE_HAS_PREREQUISITES",
+      "patch_text": null
+    },
+    {
+      "test": "Changed source patch fingerprint blocks verification",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "result": "PASS",
+      "original_refs_index_config_workfiles_preserved": true,
+      "observed_stop": "STOP=SOURCE_A4_PATCH_DIFFERS",
+      "patch_text": null
+    },
+    {
+      "test": "Wrong candidate path count blocks verification",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "result": "PASS",
+      "original_refs_index_config_workfiles_preserved": true,
+      "observed_stop": "STOP=CANDIDATE_PATH_COUNT_DIFFERS",
+      "patch_text": null
+    },
+    {
+      "test": "Unexpected recovery commit rejected",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "result": "PASS",
+      "original_refs_index_config_workfiles_preserved": true,
+      "observed_stop": "STOP=RECOVERY_COMMIT_DIFFERS",
+      "patch_text": null
+    },
+    {
+      "test": "Symlink download target rejected",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "result": "PASS",
+      "original_refs_index_config_workfiles_preserved": true,
+      "observed_stop": "STOP=SYMLINK_PATH:MMHB_A4_63ff8372.bundle",
+      "patch_text": null
+    },
+    {
+      "test": "Different existing backup is preserved and rejected",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "result": "PASS",
+      "original_refs_index_config_workfiles_preserved": true,
+      "observed_stop": "STOP=EXISTING_BACKUP_DIFFERS",
+      "patch_text": null
+    },
+    {
+      "test": "Existing checksum conflict blocks publication",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "result": "PASS",
+      "original_refs_index_config_workfiles_preserved": true,
+      "observed_stop": "STOP=EXISTING_CHECKSUM_DIFFERS",
+      "patch_text": null
+    },
+    {
+      "test": "Missing existing bundle stops without re-export",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "result": "PASS",
+      "original_refs_index_config_workfiles_preserved": true,
+      "observed_stop": "STOP=REQUIRED_PATH_MISSING:candidate.bundle",
+      "patch_text": null
+    },
+    {
+      "test": "Original index lock stops safely",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "result": "PASS",
+      "original_refs_index_config_workfiles_preserved": true,
+      "observed_stop": "STOP=INDEX_OPERATION_IN_PROGRESS",
+      "patch_text": null
+    },
+    {
+      "test": "Backup not locally ignored is not exposed",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "result": "PASS",
+      "original_refs_index_config_workfiles_preserved": true,
+      "observed_stop": "STOP=BACKUP_TARGET_NOT_IGNORED",
+      "patch_text": null
+    },
+    {
+      "test": "Already tracked backup filename is rejected",
+      "expected_exit": 1,
+      "actual_exit": 1,
+      "result": "PASS",
+      "original_refs_index_config_workfiles_preserved": true,
+      "observed_stop": "STOP=BACKUP_TARGET_TRACKED",
+      "patch_text": null
+    },
+    {
+      "test": "Project checkout/commit hooks are not executed",
+      "expected_exit": 0,
+      "actual_exit": 0,
+      "result": "PASS",
+      "original_refs_index_config_workfiles_preserved": true,
+      "observed_stop": null,
+      "patch_text": "PATCH_TEXT=MATCHES_A4",
+      "bundle_matches_input": true,
+      "empty_restore_content_verified": true
+    }
+  ],
+  "reproduction": {
+    "repository_type": "disposable fixture; not MMHB",
+    "cause_introduced": "source-local diff.context=7; restore default context=3",
+    "source_sha256": "3c7cd3e4ded372d73a3d7dd640f5584e75e01ea3295f79a64cc4542405088f8a",
+    "restore_sha256": "bf67e162608bf49fe369097dfd5dae89e7ba1e6a809f3a8bff91cdf715612d55",
+    "patch_text_differs": true,
+    "commit_bytes_equal": true,
+    "tree_manifests_equal": true,
+    "fsck": ""
+  },
+  "verification_policy": "The source-side recorded A4 patch SHA256 must still match. A restored textual patch is reported, NOT silently relabeled equal. Backup acceptance separately requires an import into an empty isolated Git repository, full object fsck, exact parent, identical raw base and candidate commit bytes, and identical recursive tree inventories.",
+  "replit_execution": "Not executed here; awaiting user terminal output.",
+  "existing_artifacts": "Reuses the exact existing candidate.bundle from .git/mmhb-a4-backup-lcyKVK; does not regenerate history. Previous audit artifacts are retained.",
+  "backup_limits": "Local committed Git objects only; does not back up untracked files, live databases, secrets in environment, LFS object payloads, or separate submodule histories. A local hard link is not an independent/off-machine backup."
+}

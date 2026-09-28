@@ -16,6 +16,12 @@ localPort = 5000
 externalPort = 80
 
 [[ports]]
+localPort = 5001
+
+[[ports]]
+localPort = 5002
+
+[[ports]]
 localPort = 5055
 
 [[ports]]
@@ -25,10 +31,16 @@ localPort = 5098
 localPort = 5099
 
 [[ports]]
+localPort = 5103
+
+[[ports]]
 localPort = 5156
 
 [[ports]]
 localPort = 5157
+
+[[ports]]
+localPort = 5168
 
 [[ports]]
 localPort = 5998
@@ -62,6 +74,10 @@ waitForPort = 5000
 
 [workflows.workflow.metadata]
 outputType = "webview"
+
+[postMerge]
+path = "scripts/post-merge.sh"
+timeoutMs = 30000
 
 # PHASE115U8_FORCE_DEPLOYMENT_PICKUP_MARKER
 

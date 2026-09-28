@@ -1,0 +1,286 @@
+{
+  "schema": "MMHB_REACT_PLUGIN_V2_FIXTURES_V1",
+  "scope": "Disposable Git repositories; real Node metadata resolution; synthetic package tarballs, fixture-only digest pins, and controlled HTTP/HTTPS connection doubles. No request to Replit or npm, no real plugin execution, no Vite build or MMHB runtime.",
+  "node": "v22.16.0",
+  "python": "3.13.5",
+  "prior_fixture_cases": 28,
+  "additional_cases": 40,
+  "total": 68,
+  "passed": 68,
+  "results": [
+    {
+      "test": "candidate_local_stage_preserves_shared_source",
+      "pass": true
+    },
+    {
+      "test": "repeat_reuses_verified_archive_without_network",
+      "pass": true
+    },
+    {
+      "test": "bad_integrity_refused",
+      "pass": true
+    },
+    {
+      "test": "source_drift_refused_before_network",
+      "pass": true
+    },
+    {
+      "test": "changed_ref_refused",
+      "pass": true
+    },
+    {
+      "test": "missing_worktree_marker_refused",
+      "pass": true
+    },
+    {
+      "test": "node_modules_symlink_refused",
+      "pass": true
+    },
+    {
+      "test": "target_symlink_refused",
+      "pass": true
+    },
+    {
+      "test": "existing_local_package_never_overwritten",
+      "pass": true
+    },
+    {
+      "test": "related_dependency_mismatch_refused",
+      "pass": true
+    },
+    {
+      "test": "other_build_tool_mismatch_refused",
+      "pass": true
+    },
+    {
+      "test": "preload_environment_not_forwarded",
+      "pass": true
+    },
+    {
+      "test": "truncated_archive_refused",
+      "pass": true
+    },
+    {
+      "test": "archive_traversal_refused",
+      "pass": true
+    },
+    {
+      "test": "archive_symlink_refused",
+      "pass": true
+    },
+    {
+      "test": "archive_hardlink_refused",
+      "pass": true
+    },
+    {
+      "test": "archive_duplicate_refused",
+      "pass": true
+    },
+    {
+      "test": "archive_absolute_refused",
+      "pass": true
+    },
+    {
+      "test": "archive_special_refused",
+      "pass": true
+    },
+    {
+      "test": "archive_npmrc_refused",
+      "pass": true
+    },
+    {
+      "test": "archive_fileparent_refused",
+      "pass": true
+    },
+    {
+      "test": "manifest_version_refused",
+      "pass": true
+    },
+    {
+      "test": "manifest_lifecycle_refused",
+      "pass": true
+    },
+    {
+      "test": "manifest_dependency_refused",
+      "pass": true
+    },
+    {
+      "test": "url_http_refused",
+      "pass": true
+    },
+    {
+      "test": "url_host_refused",
+      "pass": true
+    },
+    {
+      "test": "url_version_refused",
+      "pass": true
+    },
+    {
+      "test": "atomic_publication_refuses_even_empty_existing_directory",
+      "pass": true
+    },
+    {
+      "test": "internal_exact_locked_path_stages_and_reuses",
+      "pass": true
+    },
+    {
+      "test": "v1_cache_without_source_proof_not_reused",
+      "pass": true
+    },
+    {
+      "test": "other_locked_endpoint_cache_not_reused",
+      "pass": true
+    },
+    {
+      "test": "firewall_denial_no_fallback_or_candidate_install",
+      "pass": true
+    },
+    {
+      "test": "actual_reviewed_digest_is_mandatory_default",
+      "pass": true
+    },
+    {
+      "test": "internal_bad_bytes_refused",
+      "pass": true
+    },
+    {
+      "test": "internal_http_exact_request_no_proxy_or_secrets",
+      "pass": true
+    },
+    {
+      "test": "original_https_preserves_certificate_verification",
+      "pass": true
+    },
+    {
+      "test": "source_policy_rejects_external_http",
+      "pass": true
+    },
+    {
+      "test": "source_policy_rejects_lookalike_internal",
+      "pass": true
+    },
+    {
+      "test": "source_policy_rejects_subdomain_internal",
+      "pass": true
+    },
+    {
+      "test": "source_policy_rejects_different_port",
+      "pass": true
+    },
+    {
+      "test": "source_policy_rejects_userinfo",
+      "pass": true
+    },
+    {
+      "test": "source_policy_rejects_query",
+      "pass": true
+    },
+    {
+      "test": "source_policy_rejects_fragment",
+      "pass": true
+    },
+    {
+      "test": "source_policy_rejects_newline",
+      "pass": true
+    },
+    {
+      "test": "source_policy_rejects_encoded_newline",
+      "pass": true
+    },
+    {
+      "test": "source_policy_rejects_traversal",
+      "pass": true
+    },
+    {
+      "test": "source_policy_rejects_backslash",
+      "pass": true
+    },
+    {
+      "test": "source_policy_rejects_encoded_slash_prefix",
+      "pass": true
+    },
+    {
+      "test": "source_policy_rejects_empty_port",
+      "pass": true
+    },
+    {
+      "test": "source_policy_rejects_invalid_percent",
+      "pass": true
+    },
+    {
+      "test": "source_policy_rejects_unapproved_internal_https",
+      "pass": true
+    },
+    {
+      "test": "redirect_301_refused",
+      "pass": true
+    },
+    {
+      "test": "redirect_302_refused",
+      "pass": true
+    },
+    {
+      "test": "redirect_303_refused",
+      "pass": true
+    },
+    {
+      "test": "redirect_307_refused",
+      "pass": true
+    },
+    {
+      "test": "redirect_308_refused",
+      "pass": true
+    },
+    {
+      "test": "http_401_no_fallback",
+      "pass": true
+    },
+    {
+      "test": "http_403_no_fallback",
+      "pass": true
+    },
+    {
+      "test": "http_404_no_fallback",
+      "pass": true
+    },
+    {
+      "test": "http_429_no_fallback",
+      "pass": true
+    },
+    {
+      "test": "http_451_no_fallback",
+      "pass": true
+    },
+    {
+      "test": "http_500_no_fallback",
+      "pass": true
+    },
+    {
+      "test": "transport_length_refused_and_closed",
+      "pass": true
+    },
+    {
+      "test": "transport_incomplete_refused_and_closed",
+      "pass": true
+    },
+    {
+      "test": "transport_encoded_refused_and_closed",
+      "pass": true
+    },
+    {
+      "test": "transport_empty_refused_and_closed",
+      "pass": true
+    },
+    {
+      "test": "transport_io_refused_and_closed",
+      "pass": true
+    },
+    {
+      "test": "transport_streamlimit_refused_and_closed",
+      "pass": true
+    }
+  ],
+  "helperSha256": "5d7f840362d49923c70f3543a40c0db1ebbe2d1b6642bf48da624d283e490fa7",
+  "pythonSyntax": "compile(source, filename, exec) passed; no application imported"
+}

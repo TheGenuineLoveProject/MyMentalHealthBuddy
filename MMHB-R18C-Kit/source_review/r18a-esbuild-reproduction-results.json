@@ -1,0 +1,314 @@
+{
+  "scope": "SYNTHETIC_COMPILER_FIXTURES_NOT_ACTUAL_R18_OFFENDING_SPECIFIER",
+  "compilerVersion": "0.28.2",
+  "compilerSha256": "e1698a3d5c6c0798fee4fd3b5cc816651f460c63d390a7a26ea4beb0b1884100",
+  "outputsExecuted": false,
+  "packageInstalls": 0,
+  "applicationBuilds": 0,
+  "cases": [
+    {
+      "name": "relative_live",
+      "compilerExit": 0,
+      "inputExternals": [
+        "./absent.node"
+      ],
+      "outputExternals": [
+        "./absent.node"
+      ],
+      "policies": [
+        {
+          "file": "runtime-graph-policy-r18.mjs",
+          "sha256": "ae526f214031105c70ddccecb0c31036fc94d8e97067eeb01a73d4e64b3984bf",
+          "outcome": "THREW",
+          "code": "RUNTIME_EXTERNAL_SPECIFIER"
+        },
+        {
+          "file": "runtime-graph-policy-r18a.mjs",
+          "sha256": "d39692c0d37004a921a8496c7b835ed6b31d8997ef875fb2830703412e45c94d",
+          "outcome": "THREW",
+          "code": "RUNTIME_EXTERNAL_SPECIFIER",
+          "details": {
+            "metadataIndex": 1,
+            "graphSide": "OUTPUT",
+            "owner": "server-build/server.mjs",
+            "importIndex": 0,
+            "kind": "require-call",
+            "specifierSha256": "a0d38ab2585a2c3f837ab75b10ead79bb5a7258885a10e3f5e88b36b6dadb3e0",
+            "specifierBytes": 13,
+            "specifierClass": "RELATIVE_PATH"
+          }
+        }
+      ]
+    },
+    {
+      "name": "relative_unused",
+      "compilerExit": 0,
+      "inputExternals": [
+        "./absent.node"
+      ],
+      "outputExternals": [],
+      "policies": [
+        {
+          "file": "runtime-graph-policy-r18.mjs",
+          "sha256": "ae526f214031105c70ddccecb0c31036fc94d8e97067eeb01a73d4e64b3984bf",
+          "outcome": "THREW",
+          "code": "RUNTIME_EXTERNAL_SPECIFIER"
+        },
+        {
+          "file": "runtime-graph-policy-r18a.mjs",
+          "sha256": "d39692c0d37004a921a8496c7b835ed6b31d8997ef875fb2830703412e45c94d",
+          "outcome": "RETURNED",
+          "status": "REPEATED_RECORDED_SERVER_GRAPH_MATCH",
+          "externalImports": [],
+          "externalInputReview": [
+            {
+              "graphSide": "INPUT",
+              "owner": "server/app.mjs",
+              "importIndex": 0,
+              "kind": "require-call",
+              "specifierSha256": "a0d38ab2585a2c3f837ab75b10ead79bb5a7258885a10e3f5e88b36b6dadb3e0",
+              "specifierBytes": 13,
+              "specifierClass": "RELATIVE_PATH",
+              "ownerPackage": null,
+              "ownerBytesInOutput": 32
+            }
+          ],
+          "requiresReview": true,
+          "fullResult": {
+            "status": "REPEATED_RECORDED_SERVER_GRAPH_MATCH",
+            "scope": "STATIC_REPORTED_INPUTS_AND_IMPORT_EDGES_NOT_RUNTIME_REACHABILITY_OR_COMPLETE_DYNAMIC_GRAPH",
+            "compilerWorkingDirectory": "/tmp/mmhb-build-r17b-AbC123",
+            "entryPoint": "server/app.mjs",
+            "inputCount": 1,
+            "outputBytes": 69,
+            "inputs": [
+              {
+                "file": "server/app.mjs",
+                "bytes": 100,
+                "imports": [
+                  {
+                    "opaqueSpecifier": {
+                      "specifierSha256": "a0d38ab2585a2c3f837ab75b10ead79bb5a7258885a10e3f5e88b36b6dadb3e0",
+                      "specifierBytes": 13,
+                      "specifierClass": "RELATIVE_PATH"
+                    },
+                    "kind": "require-call",
+                    "external": true
+                  }
+                ],
+                "bytesInOutput": 32,
+                "format": "esm"
+              }
+            ],
+            "externalImports": [],
+            "externalOwners": [],
+            "requiresReview": true,
+            "externalInputReview": [
+              {
+                "graphSide": "INPUT",
+                "owner": "server/app.mjs",
+                "importIndex": 0,
+                "kind": "require-call",
+                "specifierSha256": "a0d38ab2585a2c3f837ab75b10ead79bb5a7258885a10e3f5e88b36b6dadb3e0",
+                "specifierBytes": 13,
+                "specifierClass": "RELATIVE_PATH",
+                "ownerPackage": null,
+                "ownerBytesInOutput": 32
+              }
+            ],
+            "packages": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "relative_unused_export",
+      "compilerExit": 0,
+      "inputExternals": [
+        "./absent.node"
+      ],
+      "outputExternals": [],
+      "policies": [
+        {
+          "file": "runtime-graph-policy-r18.mjs",
+          "sha256": "ae526f214031105c70ddccecb0c31036fc94d8e97067eeb01a73d4e64b3984bf",
+          "outcome": "THREW",
+          "code": "RUNTIME_EXTERNAL_SPECIFIER"
+        },
+        {
+          "file": "runtime-graph-policy-r18a.mjs",
+          "sha256": "d39692c0d37004a921a8496c7b835ed6b31d8997ef875fb2830703412e45c94d",
+          "outcome": "RETURNED",
+          "status": "REPEATED_RECORDED_SERVER_GRAPH_MATCH",
+          "externalImports": [],
+          "externalInputReview": [
+            {
+              "graphSide": "INPUT",
+              "owner": "server/optional.mjs",
+              "importIndex": 0,
+              "kind": "require-call",
+              "specifierSha256": "a0d38ab2585a2c3f837ab75b10ead79bb5a7258885a10e3f5e88b36b6dadb3e0",
+              "specifierBytes": 13,
+              "specifierClass": "RELATIVE_PATH",
+              "ownerPackage": null,
+              "ownerBytesInOutput": 32
+            }
+          ],
+          "requiresReview": true,
+          "fullResult": {
+            "status": "REPEATED_RECORDED_SERVER_GRAPH_MATCH",
+            "scope": "STATIC_REPORTED_INPUTS_AND_IMPORT_EDGES_NOT_RUNTIME_REACHABILITY_OR_COMPLETE_DYNAMIC_GRAPH",
+            "compilerWorkingDirectory": "/tmp/mmhb-build-r17b-AbC123",
+            "entryPoint": "server/app.mjs",
+            "inputCount": 2,
+            "outputBytes": 95,
+            "inputs": [
+              {
+                "file": "server/app.mjs",
+                "bytes": 59,
+                "imports": [
+                  {
+                    "path": "server/optional.mjs",
+                    "kind": "import-statement",
+                    "external": false
+                  }
+                ],
+                "bytesInOutput": 21,
+                "format": "esm"
+              },
+              {
+                "file": "server/optional.mjs",
+                "bytes": 107,
+                "imports": [
+                  {
+                    "opaqueSpecifier": {
+                      "specifierSha256": "a0d38ab2585a2c3f837ab75b10ead79bb5a7258885a10e3f5e88b36b6dadb3e0",
+                      "specifierBytes": 13,
+                      "specifierClass": "RELATIVE_PATH"
+                    },
+                    "kind": "require-call",
+                    "external": true
+                  }
+                ],
+                "bytesInOutput": 32,
+                "format": "esm"
+              }
+            ],
+            "externalImports": [],
+            "externalOwners": [],
+            "requiresReview": true,
+            "externalInputReview": [
+              {
+                "graphSide": "INPUT",
+                "owner": "server/optional.mjs",
+                "importIndex": 0,
+                "kind": "require-call",
+                "specifierSha256": "a0d38ab2585a2c3f837ab75b10ead79bb5a7258885a10e3f5e88b36b6dadb3e0",
+                "specifierBytes": 13,
+                "specifierClass": "RELATIVE_PATH",
+                "ownerPackage": null,
+                "ownerBytesInOutput": 32
+              }
+            ],
+            "packages": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "package_unused",
+      "compilerExit": 0,
+      "inputExternals": [
+        "missing-package"
+      ],
+      "outputExternals": [],
+      "policies": [
+        {
+          "file": "runtime-graph-policy-r18.mjs",
+          "sha256": "ae526f214031105c70ddccecb0c31036fc94d8e97067eeb01a73d4e64b3984bf",
+          "outcome": "RETURNED",
+          "status": "REPEATED_RECORDED_SERVER_GRAPH_MATCH",
+          "externalImports": [],
+          "fullResult": {
+            "status": "REPEATED_RECORDED_SERVER_GRAPH_MATCH",
+            "scope": "STATIC_REPORTED_INPUTS_AND_IMPORT_EDGES_NOT_RUNTIME_REACHABILITY_OR_COMPLETE_DYNAMIC_GRAPH",
+            "compilerWorkingDirectory": "/tmp/mmhb-build-r17b-AbC123",
+            "entryPoint": "server/app.mjs",
+            "inputCount": 1,
+            "outputBytes": 69,
+            "inputs": [
+              {
+                "file": "server/app.mjs",
+                "bytes": 102,
+                "imports": [
+                  {
+                    "path": "missing-package",
+                    "kind": "require-call",
+                    "external": true
+                  }
+                ],
+                "bytesInOutput": 32,
+                "format": "esm"
+              }
+            ],
+            "externalImports": [],
+            "externalOwners": [
+              {
+                "specifier": "missing-package",
+                "owner": "server/app.mjs",
+                "kind": "require-call",
+                "ownerPackage": null
+              }
+            ],
+            "packages": []
+          }
+        },
+        {
+          "file": "runtime-graph-policy-r18a.mjs",
+          "sha256": "d39692c0d37004a921a8496c7b835ed6b31d8997ef875fb2830703412e45c94d",
+          "outcome": "RETURNED",
+          "status": "REPEATED_RECORDED_SERVER_GRAPH_MATCH",
+          "externalImports": [],
+          "externalInputReview": [],
+          "requiresReview": false,
+          "fullResult": {
+            "status": "REPEATED_RECORDED_SERVER_GRAPH_MATCH",
+            "scope": "STATIC_REPORTED_INPUTS_AND_IMPORT_EDGES_NOT_RUNTIME_REACHABILITY_OR_COMPLETE_DYNAMIC_GRAPH",
+            "compilerWorkingDirectory": "/tmp/mmhb-build-r17b-AbC123",
+            "entryPoint": "server/app.mjs",
+            "inputCount": 1,
+            "outputBytes": 69,
+            "inputs": [
+              {
+                "file": "server/app.mjs",
+                "bytes": 102,
+                "imports": [
+                  {
+                    "path": "missing-package",
+                    "kind": "require-call",
+                    "external": true
+                  }
+                ],
+                "bytesInOutput": 32,
+                "format": "esm"
+              }
+            ],
+            "externalImports": [],
+            "externalOwners": [
+              {
+                "specifier": "missing-package",
+                "owner": "server/app.mjs",
+                "kind": "require-call",
+                "ownerPackage": null,
+                "isEmittedSpecifier": false
+              }
+            ],
+            "requiresReview": false,
+            "externalInputReview": [],
+            "packages": []
+          }
+        }
+      ]
+    }
+  ]
+}

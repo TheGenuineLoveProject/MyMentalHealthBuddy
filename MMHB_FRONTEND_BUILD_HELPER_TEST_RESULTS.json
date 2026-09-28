@@ -1,0 +1,73 @@
+{
+  "schema": "MMHB_FRONTEND_RUNNER_FIXTURE_RESULTS_V1",
+  "node": "v22.16.0",
+  "scope": "Real Python Git checks and Node build orchestration against synthetic ESM Vite/React/PostCSS/visualizer packages. No actual MMHB compilation, real Vite build, browser or database execution.",
+  "total": 16,
+  "passed": 16,
+  "results": [
+    {
+      "test": "synthetic_bundle_and_reference_checks_preserve_previous_outputs",
+      "pass": true
+    },
+    {
+      "test": "missing_css_rejected",
+      "pass": true
+    },
+    {
+      "test": "empty_entry_javascript_rejected",
+      "pass": true
+    },
+    {
+      "test": "missing_dynamic_chunk_rejected",
+      "pass": true
+    },
+    {
+      "test": "traversal_reference_rejected",
+      "pass": true
+    },
+    {
+      "test": "missing_manifest_key_rejected",
+      "pass": true
+    },
+    {
+      "test": "changed_environment_loading_rejected",
+      "pass": true
+    },
+    {
+      "test": "compiler_failure_is_not_pass",
+      "pass": true
+    },
+    {
+      "test": "source_mutation_detected_after_build",
+      "pass": true
+    },
+    {
+      "test": "previous_bundle_mutation_detected",
+      "pass": true
+    },
+    {
+      "test": "preexisting_source_drift_refused",
+      "pass": true
+    },
+    {
+      "test": "unknown_config_reference_refused",
+      "pass": true
+    },
+    {
+      "test": "missing_git_marker_refused",
+      "pass": true
+    },
+    {
+      "test": "dependency_version_mismatch_refused",
+      "pass": true
+    },
+    {
+      "test": "node_version_mismatch_refused",
+      "pass": true
+    },
+    {
+      "test": "runtime_secrets_and_public_values_not_forwarded",
+      "pass": true
+    }
+  ]
+}

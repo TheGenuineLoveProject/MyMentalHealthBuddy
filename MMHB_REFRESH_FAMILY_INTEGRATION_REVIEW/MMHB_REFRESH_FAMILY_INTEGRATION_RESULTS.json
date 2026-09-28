@@ -1,0 +1,170 @@
+{
+  "schema": "MMHB_REFRESH_FAMILY_SOURCE_REVIEW_V1",
+  "helperSha256": "785094c978800906f042723a2e0362bdf6e16b2b0b7a4e5384e7207346a707bb",
+  "originalSqlSha256": "1feb46d6f7f142c34403032ca1a87e3f8a6f1e493e91a5b63cdf075624d4f340",
+  "originalAdapterSha256": "8cb12cc57ca893d2b399ca8ebf61ca52378d5c2bc3c777d87190904b1999b2df",
+  "sqlAndAdapterBytesUnchanged": true,
+  "localRuntime": "Node v22.16.0; production helper requires Node 24",
+  "localSourceChecks": {
+    "adapterBoundary": {
+      "total": 33,
+      "passed": 33,
+      "scope": "Previously reviewed adapter assertions; real hashing, synthetic SQL executor"
+    },
+    "serviceFacade": {
+      "total": 12,
+      "passed": 12,
+      "scope": "Actual proposed facade/adapter in VM; synthetic db/sql/hash imports; no application import"
+    },
+    "verifierSelfTests": {
+      "total": 17,
+      "passed": 17
+    },
+    "verifierGates": {
+      "total": 16,
+      "passed": 16
+    }
+  },
+  "helperFixtures": {
+    "schema": "MMHB_REFRESH_SOURCE_HELPER_TESTS_V1",
+    "node": "v22.16.0",
+    "scope": "Disposable repositories; real Git and Node; synthetic proof JSON, account and generator sentinels. No PostgreSQL or Replit operations.",
+    "total": 20,
+    "passed": 20,
+    "results": [
+      {
+        "test": "fresh_integration_preserves_head_index_and_six_guards",
+        "pass": true
+      },
+      {
+        "test": "repeat_reuses_checkpoint_and_writes_zero",
+        "pass": true
+      },
+      {
+        "test": "dry_run_changes_no_source_or_refs",
+        "pass": true
+      },
+      {
+        "test": "known_partial_application_resumes",
+        "pass": true
+      },
+      {
+        "test": "missing_evidence_stops_without_recreating_results",
+        "pass": true
+      },
+      {
+        "test": "failed_adapter_assertion_refused",
+        "pass": true
+      },
+      {
+        "test": "evidence_chain_hash_mismatch_refused",
+        "pass": true
+      },
+      {
+        "test": "previous_http_fix_drift_refused",
+        "pass": true
+      },
+      {
+        "test": "unreviewed_service_edit_refused",
+        "pass": true
+      },
+      {
+        "test": "missing_git_marker_no_upward_fallback",
+        "pass": true
+      },
+      {
+        "test": "symlink_new_destination_refused",
+        "pass": true
+      },
+      {
+        "test": "hardlinked_source_refused",
+        "pass": true
+      },
+      {
+        "test": "unrelated_tracked_edit_refused",
+        "pass": true
+      },
+      {
+        "test": "unrelated_staged_change_refused",
+        "pass": true
+      },
+      {
+        "test": "conflicting_checkpoint_ref_does_not_write_source",
+        "pass": true
+      },
+      {
+        "test": "lockfile_drift_refused",
+        "pass": true
+      },
+      {
+        "test": "packaged_sql_change_refused",
+        "pass": true
+      },
+      {
+        "test": "inherited_runtime_and_git_overrides_not_forwarded",
+        "pass": true
+      },
+      {
+        "test": "existing_file_blocks_new_directory",
+        "pass": true
+      },
+      {
+        "test": "missing_existing_client_guard_refused",
+        "pass": true
+      }
+    ]
+  },
+  "verifierRegressionFixtures": {
+    "schema": "MMHB_REFRESH_SOURCE_VERIFIER_MUTATIONS_V1",
+    "total": 7,
+    "passed": 7,
+    "scope": "Local Node 22.16; synthetic repository; two tests deliberately rebaseline fixture hashes to prove behavior assertions catch weakened implementations. Shipping hashes never changed.",
+    "results": [
+      {
+        "test": "updated_verifier_all_17_selftests_and_16_gates",
+        "pass": true
+      },
+      {
+        "test": "adapter_file_drift_rejected",
+        "pass": true
+      },
+      {
+        "test": "pipeline_error_swallowing_rejected",
+        "pass": true
+      },
+      {
+        "test": "verifier_pre_hook_injection_rejected",
+        "pass": true
+      },
+      {
+        "test": "qualified_sql_file_drift_rejected",
+        "pass": true
+      },
+      {
+        "test": "boundary_tests_detect_executor_regression_even_after_fixture_hash_rebaseline",
+        "pass": true
+      },
+      {
+        "test": "facade_tests_detect_missing_export_even_after_fixture_hash_rebaseline",
+        "pass": true
+      }
+    ]
+  },
+  "userReportedPriorDatabaseMilestones": {
+    "SQL_assertions": "31/31 in prior pasted output",
+    "adapterPostgres_assertions": "24/24 in latest pasted output",
+    "scope": "User reported Replit output; not a new PostgreSQL test run by this review"
+  },
+  "databaseOperationsThisTurn": 0,
+  "replitSourceIntegration": "NOT_RUN_BY_ASSISTANT",
+  "liveMigration": "NOT_APPROVED",
+  "newOrChangedFiles": {
+    "server/services/refreshTokens.service.mjs": "57e7b6b9eae46b971a9494a1320cd739f23b036097cd738aaf078861c55e45be",
+    "server/services/refreshFamilyAdapter.mjs": "8cb12cc57ca893d2b399ca8ebf61ca52378d5c2bc3c777d87190904b1999b2df",
+    "server/db/refresh-family/refresh-family-v1.sql": "1feb46d6f7f142c34403032ca1a87e3f8a6f1e493e91a5b63cdf075624d4f340",
+    "scripts/security/refresh-family/adapter-boundary.test.mjs": "07986b65d2bb56271c6d3f589f2e9acfe5fbab20604c02807c984736d72e99d8",
+    "scripts/security/refresh-family/service-wiring.test.mjs": "d249bf4c085109cd22ed685589a5296f272858906f86cdca80674582dede3845",
+    "scripts/security/verify-auth-session-contracts.mjs": "cba0fae453215b452948281d00f5e59cd01fce63e51d1dc58aa8256c87336194",
+    "docs/security/refresh-family-cutover.md": "c1bfeb602919eeaa009cdd47a1c95b5579d2bc03ecb3a5e25e061f250845cf4e"
+  }
+}

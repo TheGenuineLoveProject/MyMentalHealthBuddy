@@ -367,8 +367,15 @@ export async function sendUpgradeConfirmation(toEmail, userName) {
       `
     });
     
-    logger.info("[Email] Upgrade confirmation sent", { toEmail });
-    return { success: true, id: result.id };
+    if (result?.error != null) {
+      throw new Error('Billing email provider rejected the request');
+    }
+    const messageId = result?.data?.id;
+    if (typeof messageId !== 'string' || !messageId.trim()) {
+      throw new Error('Billing email provider returned no message ID');
+    }
+    logger.info("[Email] Upgrade confirmation accepted", { toEmail });
+    return { success: true, id: messageId };
   } catch (error) {
     logger.error("[Email] Failed to send upgrade confirmation", { error: error?.message || error });
     return { success: false, error: error.message };
@@ -430,8 +437,15 @@ export async function sendCancellationAcknowledgment(toEmail, userName, periodEn
       `
     });
     
-    logger.info("[Email] Cancellation acknowledgment sent", { toEmail });
-    return { success: true, id: result.id };
+    if (result?.error != null) {
+      throw new Error('Billing email provider rejected the request');
+    }
+    const messageId = result?.data?.id;
+    if (typeof messageId !== 'string' || !messageId.trim()) {
+      throw new Error('Billing email provider returned no message ID');
+    }
+    logger.info("[Email] Cancellation acknowledgment accepted", { toEmail });
+    return { success: true, id: messageId };
   } catch (error) {
     logger.error("[Email] Failed to send cancellation acknowledgment", { error: error?.message || error });
     return { success: false, error: error.message };

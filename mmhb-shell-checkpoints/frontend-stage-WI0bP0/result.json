@@ -1,0 +1,12 @@
+{
+  "check": "MMHB-STAGE-FRONTEND-20260922",
+  "status": "STAGED_BUILD_PASSED",
+  "repairedTextFound": true,
+  "oldTextFound": false,
+  "reachableChunks": 405,
+  "watchedFilesUnchanged": true,
+  "folder": "mmhb-shell-checkpoints/frontend-stage-WI0bP0",
+  "buildExitCode": 0,
+  "previewUpdated": false,
+  "published": false
+}

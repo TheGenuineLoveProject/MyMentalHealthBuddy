@@ -1,0 +1,9 @@
+{
+  "status": "PREVIEW_UPDATED",
+  "addedAssets": 275,
+  "localHttpVerified": true,
+  "browserVerified": false,
+  "published": false,
+  "backup": "mmhb-shell-checkpoints/monitor-session-stage-qeKEDY/preview-backup-GoB6HL",
+  "rollbackCommand": "env -u NODE_OPTIONS -u NODE_PATH node ./mmhb-shell-checkpoints/monitor-session-stage-qeKEDY/preview-backup-GoB6HL/restore.mjs"
+}

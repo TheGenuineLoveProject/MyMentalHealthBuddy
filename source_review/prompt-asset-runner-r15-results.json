@@ -1,0 +1,86 @@
+{
+  "project": "MyMentalHealthBuddy",
+  "status": "R15_PROMPT_ASSET_RUNNER_FIXTURES_PASS",
+  "fixtures": [
+    {
+      "name": "actual_reviewed_module_absent_asset_baseline",
+      "result": "PASS"
+    },
+    {
+      "name": "full_22_asset_candidate_actual_module_pass",
+      "result": "PASS"
+    },
+    {
+      "name": "absent_assets_preflight_denied",
+      "result": "PASS"
+    },
+    {
+      "name": "missing_prompt_file_denied",
+      "result": "PASS"
+    },
+    {
+      "name": "changed_prompt_hash_denied",
+      "result": "PASS"
+    },
+    {
+      "name": "changed_module_denied",
+      "result": "PASS"
+    },
+    {
+      "name": "invalid_manifest_json_redacted",
+      "result": "PASS"
+    },
+    {
+      "name": "duplicate_manifest_asset_denied",
+      "result": "PASS"
+    },
+    {
+      "name": "manifest_traversal_denied",
+      "result": "PASS"
+    },
+    {
+      "name": "manifest_extra_property_denied",
+      "result": "PASS"
+    },
+    {
+      "name": "asset_symlink_denied",
+      "result": "PASS"
+    },
+    {
+      "name": "asset_parent_symlink_denied",
+      "result": "PASS"
+    },
+    {
+      "name": "wrong_candidate_working_directory_denied",
+      "result": "PASS"
+    },
+    {
+      "name": "malformed_registry_actual_loader_detected",
+      "result": "PASS"
+    },
+    {
+      "name": "reordered_registry_ids_actual_loader_detected",
+      "result": "PASS"
+    },
+    {
+      "name": "incorrect_risk_contract_actual_loader_detected",
+      "result": "PASS"
+    },
+    {
+      "name": "non_utf8_prompt_denied",
+      "result": "PASS"
+    },
+    {
+      "name": "oversized_asset_manifest_denied",
+      "result": "PASS"
+    },
+    {
+      "name": "edited_candidate_bytes_pass_when_manifest_matches",
+      "result": "PASS"
+    }
+  ],
+  "count": 19,
+  "moduleSha256": "fbbd43eaab399b029b5d976508da8f1e055e25d69fd2ee65551e23d102363170",
+  "runnerSha256": "630d1d36884b0951281a29d5d1ba15c9676669689393285ad81be0f316462ca2",
+  "scope": "LOCAL_TEMPORARY_CANDIDATES_WITH_ACTUAL_HASH_VERIFIED_PROMPT_ENGINE_NO_APPLICATION_START"
+}

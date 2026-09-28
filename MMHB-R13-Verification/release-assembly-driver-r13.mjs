@@ -1,0 +1,403 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import { execFileSync, spawnSync } from 'node:child_process';
+import { createRequire, isBuiltin } from 'node:module';
+const EXPECTED_ROOT = '/home/runner/workspace';
+const EXPECTED_HEAD = 'ba56d50f2f86bc9e47f829e9596f0d0b31699ab0';
+const EXPECTED_NODE = 'v24.13.0';
+const ESBUILD_REL = 'node_modules/esbuild/bin/esbuild';
+const PINS = {
+  "vite.config.js": "4b0866ecaacafc2f497010f37c40de9377766f554ca06989efd3ff027a4fff5e",
+  "client/postcss.config.js": "c14012cb0c28be42b5f7f84ff408983939df2597d4037c5409ee47814fc17b10",
+  "client/tsconfig.json": "572f19c483057a7ac7bace550896eea0a6c81e58c2025d348d0ac9ff5e945a9e",
+  "tailwind.config.js": "87a9665c33337dd4d0a4192702895926f2d8256838637838ec960398c0a0acc2",
+  "node_modules/vite/package.json": "a2b943431b51bfcc2e9386eecf8b4b3f6e4bf443e56d17b1f4c8495a61b4050c",
+  "node_modules/rollup-plugin-visualizer/package.json": "90bd00f65f82ef3d9793f59c1874a27438923bef0d270e37f9e25d9c507e8c36",
+  "node_modules/postcss/package.json": "e0f23518d0e8fc0570ac68438eff7ecc7554774de3194af6f54f502e33f0c25b",
+  "node_modules/tailwindcss/package.json": "3dc86b46c511947ca00838aa3f1776243abe923ac347c092e60a0cbc7ae68559",
+  "node_modules/@tailwindcss/postcss/package.json": "2f8268cf1c0b9947d4f5fc6de60d45d2ee0bac3523c485c15722d2f8de7a65b4",
+  "package.json": "0f7ef43511c004e3d268a2e2840d46a264453892937f5a2eb6a680b01481c1e0",
+  "scripts/security/verify-auth-session-contracts.mjs": "71d2009a0c2b13001dc0e0606b72973527f6646ea091540dd3f4bd3311f4905f",
+  "server/routes/auth.mjs": "fd4d9d7cfc75e23fc60dde5df5139ffb1fc826a338acf3c9cc7c2faba4ce362c",
+  "server/services/refreshTokens.service.mjs": "5a9756caa3c772ac8c70f4a7860372dd42895e7df47c4e0956e42fa041528e8e",
+  "server/routes/account.mjs": "e766374c5bc57032a5ad8573ed1c9bb37ef66dceb703957bf2bba289a5acd331",
+  "server/app.mjs": "fb7316818f033e5748f7710a8c7c6f01991f03da6aa649a56189fbab71329818",
+  "server/security/csrf.mjs": "648e21f3eb89933aeaaad1e967c59640cc52d2f8634002d3abbc6dafe358bce1",
+  "server/replit_integrations/auth/replitAuth.mjs": "6235fd16449ca0974cc9d5103c1c3ae42e5ace1b7bbcdb6d3351aa7fbae7f9f2",
+  "client/src/context/AuthContext.jsx": "ab68888ba5ebdc783ef77260c33546a1d4638b3950205e71c4210862f927c61d",
+  "client/src/api/fetchWithAuth.js": "6c1ac4bca06cee87b46194521b3162cd82f31e364ee7862172b49abb168c6ef9",
+  "client/src/lib/queryClient.js": "791ad03c4678a60a2582386a70d8798d5ced77089bf300207f053ea17b5f1388",
+  "server/utils/cookies.mjs": "67d22050139f06abef51675f960607db950319de3ad590b80b8adf7991ef80b3",
+  ".replit": "fdd7294d6332ab7814be58d8021b3ffee7e5f2157c035752454c541d3de34b63",
+  "server/replit_integrations/auth/index.mjs": "96c6aacd6ee1239771cd50479b2090f2c90a141f948f7e48af279a9afd41d47a",
+  "server/auth/mfa.service.mjs": "257135ac9d20fe3b96276011be6ea5d47770dd568af70653f11227ecc3aaf364",
+  "server/db/sessionStore.mjs": "23f26b54c3b75135348f0c9fcb9193893f0e09fc8f471195c3d62969eaf8c6fb",
+  "node_modules/typescript/package.json": "9332e97c30d3e53ed54910b89207ed657fb444066484df6e5b6965bf130865e9",
+  "node_modules/typescript/lib/typescript.js": "569177652966bd528c319171c7dd22860dbf72bde116cbc4f644f1d02bb12e39",
+  "package-lock.json": "648b869facffba16150769018ee062210691bd4ff10819ca379f501bfdb8d287",
+  "scripts/build-server.mjs": "95fd8ce7393f7b99c32d2fad346bb580f736301aa891085e384b911e04d1394c",
+  "tsconfig.json": "ca65a65cc06d0224dde35f5a8a635fc8f9527770d8c96211ce36b3ebb29548ed",
+  "server/db/schema.canonical.sql": "e92e18c4d6bbfdf6faef7760e1116aa786b7b9dddc266db37c2f03998913e712",
+  "node_modules/esbuild/package.json": "9d0bc453f4e791553c4cc2298ba023b409241fd9801e494741666eb0f6051490",
+  "node_modules/esbuild/bin/esbuild": "e1698a3d5c6c0798fee4fd3b5cc816651f460c63d390a7a26ea4beb0b1884100",
+  "node_modules/bcrypt/package.json": "33510b2b8859265a413ab101cdf961b1c9b076d93496f52d8ac7eacc007859a4",
+  "node_modules/node-gyp-build/package.json": "9e8def3fbf123e28aa1ca4b6aa557fba4e66eecf6e86d170b61ec1c7ed51305d",
+  "node_modules/@vitejs/plugin-react/package.json": "c5420bbbe5ea17fec4b09d44114f9eedd774efbfcc6f9a1d6228103b590af705",
+  "dist/server.mjs": "74800300f01552beab4749dc0d6566488bb04a89e488075615198fb559d1b7a2",
+  "dist/schema.canonical.sql": "9018cdef35b7585d18918c10f56cc0802afaf369cc7f05bc7efa9624979ddb7b",
+  "client/dist/index.html": "957f6d802cda8b8fc0b5b4f0a7ce429a26d6a27638399e787e0de5f368bea393",
+  "dist/client/dist/index.html": "7ff9516e7145f55e26c3ee8caccb1abe6dea74bf646cd5ad6738a66009d0d226",
+  "bundle-report.html": "40b6a2dd45c614a8e2bec05de9692fac05cac65f5684169cf5eb7b89b1cc27f9"
+};
+const ROOT = fs.realpathSync('.');
+const hash = value => crypto.createHash('sha256').update(value).digest('hex');
+const gate = (ok, code, detail = {}) => {
+  if (!ok) throw Object.assign(new Error(code), { gate: code, detail });
+};
+const inside = (root, full) => full.startsWith(root + path.sep);
+const privatePath = value => /(?:^|\/)(?:\.env(?:\.|$)|\.npmrc$|\.git(?:\/|$))|\.(?:pem|key|p12|pfx)$/i.test(value);
+const publicPath = value => typeof value === 'string' && value.length <= 300 &&
+  /^[A-Za-z0-9_@.+/-]+$/.test(value) && !privatePath(value) &&
+  !path.isAbsolute(value) && !value.split('/').some(x => x === '..' || x === '.');
+const label = value => publicPath(value) ? value : 'REDACTED_PATH_' + hash(String(value)).slice(0, 12);
+// No npm commands, project scripts, application imports or inherited child secrets.
+const MIN_ENV = { PATH: '/usr/local/bin:/usr/bin:/bin', LANG: 'C', LC_ALL: 'C',
+  NODE_ENV: 'production', GIT_OPTIONAL_LOCKS: '0' };
+// Replit's git may live in a Nix store, outside the compiler's minimal PATH.
+const GIT_BIN = (process.env.PATH || '').split(path.delimiter).filter(path.isAbsolute)
+  .map(dir => path.join(dir, 'git')).find(file => {
+    try { fs.accessSync(file, fs.constants.X_OK); return fs.statSync(file).isFile(); }
+    catch { return false; }
+  });
+const git = (...args) => execFileSync(GIT_BIN || '/usr/bin/git', ['-c', 'core.fsmonitor=false',
+  '-c', 'core.untrackedCache=false', ...args], {
+  cwd: ROOT, env: MIN_ENV, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'],
+  timeout: 30000, maxBuffer: 64 * 1024 * 1024
+});
+
+function identity(full, allowLink = false, readPolicy = null) {
+  gate(inside(ROOT, full), 'INPUT_OUTSIDE_WORKSPACE');
+  const rel = path.relative(ROOT, full);
+  if (readPolicy) gate(readPolicy(rel), 'METAFILE_PRIVATE_OR_UNSUPPORTED_INPUT', { file: label(rel) });
+  let cursor = ROOT;
+  for (const part of rel.split(path.sep)) {
+    cursor = path.join(cursor, part);
+    try {
+      const st = fs.lstatSync(cursor);
+      gate(!st.isSymbolicLink() || allowLink, 'INPUT_SYMLINK', { file: label(rel) });
+    } catch (error) {
+      if (error.code === 'ENOENT') return { state: 'ABSENT' };
+      throw error;
+    }
+  }
+  const resolved = fs.realpathSync(full);
+  gate(inside(ROOT, resolved), 'RESOLVED_INPUT_OUTSIDE_WORKSPACE', { file: label(rel) });
+  // Enforce the resolved read boundary before any file-content hashing.
+  if (readPolicy) gate(readPolicy(path.relative(ROOT, resolved)),
+    'METAFILE_PRIVATE_OR_UNSUPPORTED_RESOLUTION', { file: label(rel) });
+  const st = fs.statSync(full);
+  gate(st.isFile() && st.size <= 256 * 1024 * 1024, 'INPUT_FILE_LIMIT', { file: label(rel) });
+  const fd = fs.openSync(full, 'r'), buffer = Buffer.alloc(1024 * 1024);
+  const digest = crypto.createHash('sha256');
+  try {
+    let count;
+    while ((count = fs.readSync(fd, buffer, 0, buffer.length, null)) > 0) digest.update(buffer.subarray(0, count));
+  } finally { fs.closeSync(fd); }
+  const after = fs.statSync(full);
+  gate(after.ino === st.ino && after.size === st.size && after.mtimeMs === st.mtimeMs && after.mode === st.mode,
+    'INPUT_CHANGED_DURING_HASH', { file: label(rel) });
+  return { state: 'FILE', sha256: digest.digest('hex'), bytes: st.size, mode: st.mode,
+    resolved: path.relative(ROOT, resolved) };
+}
+function rawIdentity(rel) {
+  const full = path.resolve(ROOT, rel);
+  gate(inside(ROOT, full), 'WORKTREE_PATH_OUTSIDE_ROOT');
+  try {
+    const st = fs.lstatSync(full);
+    if (st.isSymbolicLink()) return { state: 'SYMLINK', mode: st.mode, sha256: hash(fs.readlinkSync(full)) };
+  } catch (error) { if (error.code === 'ENOENT') return { state: 'ABSENT' }; throw error; }
+  return identity(full, true);
+}
+function snapshot() {
+  // git status/diff can invoke clean filters. Hash file bytes and index instead.
+  const names = [...new Set(git('ls-files', '--cached', '--others', '--exclude-standard', '-z')
+    .split('\0').filter(Boolean))].sort();
+  gate(names.length <= 30000, 'WORKTREE_FILE_COUNT_LIMIT');
+  let total = 0;
+  const records = names.map(file => {
+    const record = rawIdentity(file);
+    total += record.bytes || 0;
+    gate(total <= 4 * 1024 ** 3, 'WORKTREE_SIZE_LIMIT');
+    return [file, record];
+  });
+  const index = path.relative(ROOT, path.resolve(ROOT, git('rev-parse', '--git-path', 'index').trim()));
+  return { head: git('rev-parse', 'HEAD').trim(), branch: git('branch', '--show-current').trim(),
+    index: rawIdentity(index), stagedEntriesSha256: hash(git('ls-files', '--stage', '-z')),
+    trackedFlagsSha256: hash(git('ls-files', '-v', '-z')),
+    worktree: hash(JSON.stringify(records)), files: names.length, records };
+}
+function snapshotDifference(before, after) {
+  const components = ['head', 'branch', 'index', 'stagedEntriesSha256', 'trackedFlagsSha256', 'worktree', 'files']
+    .filter(key => JSON.stringify(before[key]) !== JSON.stringify(after[key]));
+  const b = new Map(before.records), a = new Map(after.records), changes = [];
+  for (const file of [...new Set([...b.keys(), ...a.keys()])].sort()) {
+    const old = b.get(file), next = a.get(file);
+    if (JSON.stringify(old) !== JSON.stringify(next)) changes.push({ file: label(file),
+      fields: [...new Set([...Object.keys(old || {}), ...Object.keys(next || {})])]
+        .filter(key => JSON.stringify(old?.[key]) !== JSON.stringify(next?.[key])) });
+  }
+  return { components, changedFileCount: changes.length, changes: changes.slice(0, 40),
+    rawIndexOnly: components.length === 1 && components[0] === 'index',
+    scope: 'CURRENT_R13_OBSERVATIONS_ONLY_NOT_HISTORICAL_RUNS' };
+}
+function checkPins() {
+  const result = {};
+  for (const [rel, expected] of Object.entries(PINS)) {
+    const observed = identity(path.join(ROOT, rel), rel.startsWith('node_modules/'));
+    gate(observed.sha256 === expected, 'R10A_BASELINE_DRIFT', { file: label(rel) });
+    result[rel] = observed;
+  }
+  return result;
+}
+function readJSON(full, max = 32 * 1024 * 1024) {
+  const st = fs.lstatSync(full);
+  gate(st.isFile() && st.size <= max, 'JSON_FILE_LIMIT');
+  return JSON.parse(fs.readFileSync(full, 'utf8'));
+}
+function outputIdentity(full) {
+  const st = fs.lstatSync(full);
+  gate(st.isFile() && st.size <= 64 * 1024 * 1024, 'OUTPUT_FILE_LIMIT');
+  return { sha256: hash(fs.readFileSync(full)), bytes: st.size };
+}
+
+const SERVER_REPORT = '/tmp/mmhb-server-candidate-r11d-SRSfZ5';
+const FRONTEND_REPORT = '/tmp/mmhb-frontend-candidate-r12a-CaA16N';
+const ARTIFACT_PINS = {
+  server: { sha256: '06f22097601e3bdc695f5dfa07d2f84b72f76a13cd3e8a4e3dc984eb389b79e5', bytes: 5555689 },
+  schema: { sha256: 'e92e18c4d6bbfdf6faef7760e1116aa786b7b9dddc266db37c2f03998913e712', bytes: 41651 },
+  nativeManifest: '216668ea2ec29526a3515960c9727ecc5d2d46f4796744e5b7b00ad913c74ff0',
+  frontendManifest: '019aad45ce6bf81dfdc438a9cf870a2e535ae8e19259cfbc39d76760edd9aa05',
+  frontendFiles: 554, frontendBytes: 33761688, nativeFiles: 47
+};
+const NATIVE_RUNNER_B64 = 'aW1wb3J0IGZzIGZyb20gJ25vZGU6ZnMnOwppbXBvcnQgcGF0aCBmcm9tICdub2RlOnBhdGgnOwppbXBvcnQgeyBjcmVhdGVSZXF1aXJlIH0gZnJvbSAnbm9kZTptb2R1bGUnOwppbXBvcnQgeyByYW5kb21CeXRlcyB9IGZyb20gJ25vZGU6Y3J5cHRvJzsKCi8vIFRoaXMgcnVubmVyIGxvYWRzIG9ubHkgdGhlIGNvcGllZCBiY3J5cHQgcGFja2FnZSBhbmQgaXRzIG5hdGl2ZSBsb2FkZXIuCi8vIFRoZSBwYXJlbnQgcGlucyB0aGUgY29waWVkIGZpbGVzIGFuZCBjaGVja3MgcHJlc2VydmF0aW9uIGJlZm9yZS9hZnRlciB0aGlzIHJ1bi4KY29uc3QgRVhQRUNURURfTk9ERSA9ICd2MjQuMTMuMCc7CmxldCBwaGFzZSA9ICdBUkdVTUVOVFMnOwpsZXQgcmVwb3J0RGlyOwpsZXQgY2FuZGlkYXRlRGlyOwpsZXQgcmVxdWlyZUZyb21DYW5kaWRhdGU7CmxldCBvcmlnaW5hbE5hdGl2ZUV4dGVuc2lvbjsKbGV0IHNlbGVjdGVkQmluZGluZzsKY29uc3QgbG9hZGVkTmF0aXZlRmlsZXMgPSBuZXcgU2V0KCk7CgpmdW5jdGlvbiBmYWlsKGNvZGUpIHsKICBjb25zdCBlcnJvciA9IG5ldyBFcnJvcihjb2RlKTsKICBlcnJvci5jb2RlID0gY29kZTsKICB0aHJvdyBlcnJvcjsKfQpmdW5jdGlvbiBhc3NlcnQodmFsdWUsIGNvZGUpIHsgaWYgKCF2YWx1ZSkgZmFpbChjb2RlKTsgfQpmdW5jdGlvbiByZWxhdGl2ZUluc2lkZShiYXNlLCBhYnNvbHV0ZSwgY29kZSkgewogIGFzc2VydCh0eXBlb2YgYWJzb2x1dGUgPT09ICdzdHJpbmcnICYmIHBhdGguaXNBYnNvbHV0ZShhYnNvbHV0ZSksIGNvZGUpOwogIGNvbnN0IHJlbGF0aXZlID0gcGF0aC5yZWxhdGl2ZShiYXNlLCBhYnNvbHV0ZSk7CiAgYXNzZXJ0KHJlbGF0aXZlICYmIHJlbGF0aXZlICE9PSAnLi4nICYmICFyZWxhdGl2ZS5zdGFydHNXaXRoKGAuLiR7cGF0aC5zZXB9YCkgJiYgIXBhdGguaXNBYnNvbHV0ZShyZWxhdGl2ZSksIGNvZGUpOwogIGFzc2VydCghL1tcdTAwMDAtXHUwMDFmXHUwMDdmXS8udGVzdChyZWxhdGl2ZSksIGNvZGUpOwogIHJldHVybiByZWxhdGl2ZS5zcGxpdChwYXRoLnNlcCkuam9pbignLycpOwp9CmZ1bmN0aW9uIGNhbm9uaWNhbERpcmVjdG9yeShkaXJlY3RvcnksIGNvZGUpIHsKICBhc3NlcnQodHlwZW9mIGRpcmVjdG9yeSA9PT0gJ3N0cmluZycgJiYgcGF0aC5pc0Fic29sdXRlKGRpcmVjdG9yeSksIGNvZGUpOwogIGFzc2VydChwYXRoLnJlc29sdmUoZGlyZWN0b3J5KSA9PT0gZGlyZWN0b3J5LCBjb2RlKTsKICBhc3NlcnQoZnMubHN0YXRTeW5jKGRpcmVjdG9yeSkuaXNEaXJlY3RvcnkoKSwgY29kZSk7CiAgYXNzZXJ0KGZzLnJlYWxwYXRoU3luYyhkaXJlY3RvcnkpID09PSBkaXJlY3RvcnksIGNvZGUpOwogIHJldHVybiBkaXJlY3Rvcnk7Cn0KZnVuY3Rpb24gY2Fub25pY2FsRmlsZShiYXNlLCBmaWxlLCBjb2RlKSB7CiAgY29uc3QgcmVsYXRpdmUgPSByZWxhdGl2ZUluc2lkZShiYXNlLCBmaWxlLCBjb2RlKTsKICBjb25zdCBzdGF0ID0gZnMubHN0YXRTeW5jKGZpbGUpOwogIGFzc2VydChzdGF0LmlzRmlsZSgpICYmIHN0YXQuc2l6ZSA+IDAsIGNvZGUpOwogIGFzc2VydChmcy5yZWFscGF0aFN5bmMoZmlsZSkgPT09IGZpbGUsIGNvZGUpOwogIHJldHVybiByZWxhdGl2ZTsKfQpmdW5jdGlvbiBjaGVja1JlcXVpcmVDYWNoZSgpIHsKICByZXR1cm4gT2JqZWN0LmtleXMocmVxdWlyZUZyb21DYW5kaWRhdGUuY2FjaGUpLnNvcnQoKS5tYXAoZmlsZSA9PiB7CiAgICBjb25zdCByZWxhdGl2ZSA9IGNhbm9uaWNhbEZpbGUoY2FuZGlkYXRlRGlyLCBmaWxlLCAnUkVRVUlSRV9DQUNIRV9PVVRTSURFX0NBTkRJREFURScpOwogICAgYXNzZXJ0KGZpbGUgIT09IHBhdGguam9pbihjYW5kaWRhdGVEaXIsICdzZXJ2ZXIubWpzJyksICdTRVJWRVJfTU9EVUxFX0lNUE9SVEVEJyk7CiAgICByZXR1cm4gcmVsYXRpdmU7CiAgfSk7Cn0KZnVuY3Rpb24gcHJpdmF0ZUV2aWRlbmNlKHZhbHVlKSB7CiAgYXNzZXJ0KHJlcG9ydERpciwgJ1JFUE9SVF9ESVJFQ1RPUllfVU5RVUFMSUZJRUQnKTsKICBjYW5vbmljYWxEaXJlY3RvcnkocmVwb3J0RGlyLCAnUkVQT1JUX0RJUkVDVE9SWV9DSEFOR0VEJyk7CiAgZnMud3JpdGVGaWxlU3luYyhwYXRoLmpvaW4ocmVwb3J0RGlyLCAnbmF0aXZlLXNtb2tlLWV2aWRlbmNlLmpzb24nKSwgYCR7SlNPTi5zdHJpbmdpZnkodmFsdWUsIG51bGwsIDIpfVxuYCwgewogICAgZW5jb2Rpbmc6ICd1dGY4JywgZmxhZzogJ3d4JywgbW9kZTogMG82MDAsCiAgfSk7Cn0KCnRyeSB7CiAgcHJvY2Vzcy51bWFzaygwbzA3Nyk7CiAgYXNzZXJ0KHByb2Nlc3MuYXJndi5sZW5ndGggPT09IDQsICdFWFBFQ1RFRF9UV09fQVJHVU1FTlRTJyk7CiAgY29uc3QgcmVxdWVzdGVkQ2FuZGlkYXRlID0gcHJvY2Vzcy5hcmd2WzJdOwogIGNvbnN0IHJlcXVlc3RlZFJlcG9ydCA9IHByb2Nlc3MuYXJndlszXTsKICBhc3NlcnQoL15cL3RtcFwvbW1oYi1yZWxlYXNlLWFzc2VtYmx5LXIxMy1bQS1aYS16MC05XSskLy50ZXN0KHJlcXVlc3RlZFJlcG9ydCksICdSRVBPUlRfRElSRUNUT1JZX0ZPUk1BVCcpOwogIGNhbm9uaWNhbERpcmVjdG9yeShyZXF1ZXN0ZWRSZXBvcnQsICdSRVBPUlRfRElSRUNUT1JZX05PVF9DQU5PTklDQUwnKTsKICBhc3NlcnQoKGZzLnN0YXRTeW5jKHJlcXVlc3RlZFJlcG9ydCkubW9kZSAmIDBvMDc3KSA9PT0gMCwgJ1JFUE9SVF9ESVJFQ1RPUllfTk9UX1BSSVZBVEUnKTsKICByZXBvcnREaXIgPSByZXF1ZXN0ZWRSZXBvcnQ7CiAgYXNzZXJ0KHJlcXVlc3RlZENhbmRpZGF0ZSA9PT0gcGF0aC5qb2luKHJlcG9ydERpciwgJ2NhbmRpZGF0ZScpLCAnQ0FORElEQVRFX0RJUkVDVE9SWV9GT1JNQVQnKTsKICBjYW5kaWRhdGVEaXIgPSBjYW5vbmljYWxEaXJlY3RvcnkocmVxdWVzdGVkQ2FuZGlkYXRlLCAnQ0FORElEQVRFX0RJUkVDVE9SWV9OT1RfQ0FOT05JQ0FMJyk7CgogIHBoYXNlID0gJ1JVTlRJTUUnOwogIGFzc2VydChwcm9jZXNzLnZlcnNpb24gPT09IEVYUEVDVEVEX05PREUgJiYgcHJvY2Vzcy5wbGF0Zm9ybSA9PT0gJ2xpbnV4JyAmJiBwcm9jZXNzLmFyY2ggPT09ICd4NjQnLCAnUlVOVElNRV9NSVNNQVRDSCcpOwogIGFzc2VydChwcm9jZXNzLmVudi5OT0RFX0VOViA9PT0gJ3Byb2R1Y3Rpb24nLCAnUFJPRFVDVElPTl9FTlZJUk9OTUVOVF9SRVFVSVJFRCcpOwogIGNvbnN0IG92ZXJyaWRlID0gL14oTk9ERV9PUFRJT05TfE5PREVfUEFUSHxCQ1JZUFRfUFJFQlVJTER8UFJFQlVJTERTX09OTFl8bnBtX2NvbmZpZ19hcmNofG5wbV9jb25maWdfcGxhdGZvcm18TElCQ3xBUk1fVkVSU0lPTnxFTEVDVFJPTl9SVU5fQVNfTk9ERSkkL2k7CiAgYXNzZXJ0KCFPYmplY3Qua2V5cyhwcm9jZXNzLmVudikuc29tZShrZXkgPT4gb3ZlcnJpZGUudGVzdChrZXkpICYmIHByb2Nlc3MuZW52W2tleV0gIT09ICcnKSwgJ05BVElWRV9SRVNPTFVUSU9OX0VOVklST05NRU5UX09WRVJSSURFJyk7CgogIHBoYXNlID0gJ1BBQ0tBR0VfUkVTT0xVVElPTic7CiAgY29uc3Qgc2VydmVyRmlsZSA9IHBhdGguam9pbihjYW5kaWRhdGVEaXIsICdzZXJ2ZXIubWpzJyk7CiAgY2Fub25pY2FsRmlsZShjYW5kaWRhdGVEaXIsIHNlcnZlckZpbGUsICdTRVJWRVJfQU5DSE9SX05PVF9DQU5PTklDQUwnKTsKICByZXF1aXJlRnJvbUNhbmRpZGF0ZSA9IGNyZWF0ZVJlcXVpcmUoc2VydmVyRmlsZSk7IC8vIFJlc29sdXRpb24gYW5jaG9yIG9ubHk7IHNlcnZlciBpcyBuZXZlciBpbXBvcnRlZC4KICBvcmlnaW5hbE5hdGl2ZUV4dGVuc2lvbiA9IHJlcXVpcmVGcm9tQ2FuZGlkYXRlLmV4dGVuc2lvbnNbJy5ub2RlJ107CiAgYXNzZXJ0KHR5cGVvZiBvcmlnaW5hbE5hdGl2ZUV4dGVuc2lvbiA9PT0gJ2Z1bmN0aW9uJywgJ05BVElWRV9FWFRFTlNJT05fVU5BVkFJTEFCTEUnKTsKICByZXF1aXJlRnJvbUNhbmRpZGF0ZS5leHRlbnNpb25zWycubm9kZSddID0gKG1vZHVsZSwgZmlsZW5hbWUpID0+IHsKICAgIGNvbnN0IHJlbGF0aXZlID0gY2Fub25pY2FsRmlsZShwYXRoLmpvaW4oY2FuZGlkYXRlRGlyLCAnbm9kZV9tb2R1bGVzL2JjcnlwdCcpLCBmaWxlbmFtZSwgJ05BVElWRV9MT0FEX09VVFNJREVfQkNSWVBUJyk7CiAgICBhc3NlcnQoc2VsZWN0ZWRCaW5kaW5nICYmIGZpbGVuYW1lID09PSBzZWxlY3RlZEJpbmRpbmcsICdVTkVYUEVDVEVEX05BVElWRV9CSU5ESU5HJyk7CiAgICBvcmlnaW5hbE5hdGl2ZUV4dGVuc2lvbihtb2R1bGUsIGZpbGVuYW1lKTsKICAgIGxvYWRlZE5hdGl2ZUZpbGVzLmFkZChgbm9kZV9tb2R1bGVzL2JjcnlwdC8ke3JlbGF0aXZlfWApOwogIH07CgogIGNvbnN0IGJjcnlwdERpcmVjdG9yeSA9IGNhbm9uaWNhbERpcmVjdG9yeShwYXRoLmpvaW4oY2FuZGlkYXRlRGlyLCAnbm9kZV9tb2R1bGVzL2JjcnlwdCcpLCAnQkNSWVBUX0RJUkVDVE9SWV9OT1RfQ0FOT05JQ0FMJyk7CiAgY29uc3QgbG9hZGVyRGlyZWN0b3J5ID0gY2Fub25pY2FsRGlyZWN0b3J5KHBhdGguam9pbihjYW5kaWRhdGVEaXIsICdub2RlX21vZHVsZXMvbm9kZS1neXAtYnVpbGQnKSwgJ0xPQURFUl9ESVJFQ1RPUllfTk9UX0NBTk9OSUNBTCcpOwogIGNvbnN0IGJjcnlwdEVudHJ5ID0gcmVxdWlyZUZyb21DYW5kaWRhdGUucmVzb2x2ZSgnYmNyeXB0Jyk7CiAgY29uc3QgYmNyeXB0UmVsYXRpdmUgPSBjYW5vbmljYWxGaWxlKGJjcnlwdERpcmVjdG9yeSwgYmNyeXB0RW50cnksICdCQ1JZUFRfRU5UUllfT1VUU0lERV9QQUNLQUdFJyk7CiAgY29uc3QgcmVxdWlyZUZyb21CY3J5cHQgPSBjcmVhdGVSZXF1aXJlKGJjcnlwdEVudHJ5KTsKICBjb25zdCBsb2FkZXJFbnRyeSA9IHJlcXVpcmVGcm9tQmNyeXB0LnJlc29sdmUoJ25vZGUtZ3lwLWJ1aWxkJyk7CiAgY29uc3QgbG9hZGVyUmVsYXRpdmUgPSBjYW5vbmljYWxGaWxlKGxvYWRlckRpcmVjdG9yeSwgbG9hZGVyRW50cnksICdMT0FERVJfRU5UUllfT1VUU0lERV9QQUNLQUdFJyk7CiAgY29uc3QgYmNyeXB0TWV0YWRhdGFGaWxlID0gcGF0aC5qb2luKGJjcnlwdERpcmVjdG9yeSwgJ3BhY2thZ2UuanNvbicpOwogIGNvbnN0IGxvYWRlck1ldGFkYXRhRmlsZSA9IHBhdGguam9pbihsb2FkZXJEaXJlY3RvcnksICdwYWNrYWdlLmpzb24nKTsKICBjYW5vbmljYWxGaWxlKGJjcnlwdERpcmVjdG9yeSwgYmNyeXB0TWV0YWRhdGFGaWxlLCAnQkNSWVBUX01FVEFEQVRBX05PVF9DQU5PTklDQUwnKTsKICBjYW5vbmljYWxGaWxlKGxvYWRlckRpcmVjdG9yeSwgbG9hZGVyTWV0YWRhdGFGaWxlLCAnTE9BREVSX01FVEFEQVRBX05PVF9DQU5PTklDQUwnKTsKICBjb25zdCBiY3J5cHRNZXRhZGF0YSA9IEpTT04ucGFyc2UoZnMucmVhZEZpbGVTeW5jKGJjcnlwdE1ldGFkYXRhRmlsZSwgJ3V0ZjgnKSk7CiAgY29uc3QgbG9hZGVyTWV0YWRhdGEgPSBKU09OLnBhcnNlKGZzLnJlYWRGaWxlU3luYyhsb2FkZXJNZXRhZGF0YUZpbGUsICd1dGY4JykpOwogIGFzc2VydChiY3J5cHRNZXRhZGF0YS5uYW1lID09PSAnYmNyeXB0JyAmJiBiY3J5cHRNZXRhZGF0YS52ZXJzaW9uID09PSAnNi4wLjAnLCAnQkNSWVBUX1ZFUlNJT05fTUlTTUFUQ0gnKTsKICBhc3NlcnQobG9hZGVyTWV0YWRhdGEubmFtZSA9PT0gJ25vZGUtZ3lwLWJ1aWxkJyAmJiBsb2FkZXJNZXRhZGF0YS52ZXJzaW9uID09PSAnNC44LjQnLCAnTE9BREVSX1ZFUlNJT05fTUlTTUFUQ0gnKTsKCiAgcGhhc2UgPSAnTkFUSVZFX1JFU09MVVRJT04nOwogIGNvbnN0IGxvYWRlciA9IHJlcXVpcmVGcm9tQmNyeXB0KGxvYWRlckVudHJ5KTsKICBhc3NlcnQodHlwZW9mIGxvYWRlciA9PT0gJ2Z1bmN0aW9uJyAmJiB0eXBlb2YgbG9hZGVyLnJlc29sdmUgPT09ICdmdW5jdGlvbicsICdMT0FERVJfUkVTT0xWRV9VTkFWQUlMQUJMRScpOwogIC8vIG5vZGUtZ3lwLWJ1aWxkIGNhbiBmYWxsIGJhY2sgdG8gcHJlYnVpbGRzIGJlc2lkZSBwcm9jZXNzLmV4ZWNQYXRoLiBSZWZ1c2UKICAvLyB0aGF0IGxvY2F0aW9uIGJlZm9yZSBpbXBvcnRpbmcgYmNyeXB0IG9yIGxvYWRpbmcgYW55IG5hdGl2ZSBiaW5kaW5nLgogIHNlbGVjdGVkQmluZGluZyA9IGxvYWRlci5yZXNvbHZlKGJjcnlwdERpcmVjdG9yeSk7CiAgYXNzZXJ0KHR5cGVvZiBzZWxlY3RlZEJpbmRpbmcgPT09ICdzdHJpbmcnICYmIHBhdGguZXh0bmFtZShzZWxlY3RlZEJpbmRpbmcpID09PSAnLm5vZGUnLCAnTkFUSVZFX0JJTkRJTkdfRVhURU5TSU9OJyk7CiAgY29uc3QgYmluZGluZ1JlbGF0aXZlID0gY2Fub25pY2FsRmlsZShiY3J5cHREaXJlY3RvcnksIHNlbGVjdGVkQmluZGluZywgJ05BVElWRV9CSU5ESU5HX09VVFNJREVfUEFDS0FHRScpOwogIGNoZWNrUmVxdWlyZUNhY2hlKCk7CgogIHBoYXNlID0gJ0JDUllQVF9JTVBPUlQnOwogIGNvbnN0IGJjcnlwdCA9IHJlcXVpcmVGcm9tQ2FuZGlkYXRlKGJjcnlwdEVudHJ5KTsKICBhc3NlcnQobG9hZGVkTmF0aXZlRmlsZXMuc2l6ZSA9PT0gMSAmJiBsb2FkZWROYXRpdmVGaWxlcy5oYXMoYG5vZGVfbW9kdWxlcy9iY3J5cHQvJHtiaW5kaW5nUmVsYXRpdmV9YCksICdTRUxFQ1RFRF9OQVRJVkVfQklORElOR19OT1RfTE9BREVEJyk7CiAgYXNzZXJ0KFsnaGFzaFN5bmMnLCAnY29tcGFyZVN5bmMnLCAnZ2V0Um91bmRzJ10uZXZlcnkoa2V5ID0+IHR5cGVvZiBiY3J5cHRba2V5XSA9PT0gJ2Z1bmN0aW9uJyksICdCQ1JZUFRfQVBJX0lOQ09NUExFVEUnKTsKCiAgcGhhc2UgPSAnU1lOVEhFVElDX0hBU0hfQ09NUEFSSVNPTic7CiAgY29uc3Qgc2FtcGxlID0gcmFuZG9tQnl0ZXMoMjQpLnRvU3RyaW5nKCdoZXgnKTsKICBjb25zdCBoYXNoID0gYmNyeXB0Lmhhc2hTeW5jKHNhbXBsZSwgNCk7CiAgYXNzZXJ0KHR5cGVvZiBoYXNoID09PSAnc3RyaW5nJyAmJiAvXlwkMlthYnldXCQwNFwkWy4vQS1aYS16MC05XXs1M30kLy50ZXN0KGhhc2gpLCAnQkNSWVBUX0hBU0hfRk9STUFUJyk7CiAgYXNzZXJ0KGJjcnlwdC5jb21wYXJlU3luYyhzYW1wbGUsIGhhc2gpID09PSB0cnVlLCAnQ09SUkVDVF9QQVNTV09SRF9SRUpFQ1RFRCcpOwogIGFzc2VydChiY3J5cHQuY29tcGFyZVN5bmMoYCR7c2FtcGxlfS1pbmNvcnJlY3RgLCBoYXNoKSA9PT0gZmFsc2UsICdJTkNPUlJFQ1RfUEFTU1dPUkRfQUNDRVBURUQnKTsKICBhc3NlcnQoYmNyeXB0LmdldFJvdW5kcyhoYXNoKSA9PT0gNCwgJ0JDUllQVF9ST1VORFNfTUlTTUFUQ0gnKTsKCiAgcGhhc2UgPSAnUE9TVF9MT0FEX0JPVU5EQVJJRVMnOwogIGNhbm9uaWNhbEZpbGUoYmNyeXB0RGlyZWN0b3J5LCBzZWxlY3RlZEJpbmRpbmcsICdOQVRJVkVfQklORElOR19DSEFOR0VEJyk7CiAgYXNzZXJ0KHJlcXVpcmVGcm9tQ2FuZGlkYXRlLmNhY2hlW3NlbGVjdGVkQmluZGluZ10sICdTRUxFQ1RFRF9OQVRJVkVfQklORElOR19OT1RfQ0FDSEVEJyk7CiAgY29uc3QgbG9hZGVkTW9kdWxlRmlsZXMgPSBjaGVja1JlcXVpcmVDYWNoZSgpOwogIGNvbnN0IGV2aWRlbmNlID0gewogICAgcHJvamVjdDogJ015TWVudGFsSGVhbHRoQnVkZHknLCBzdGF0dXM6ICdOQVRJVkVfQ0FORElEQVRFX1NNT0tFX1BBU1MnLAogICAgcnVudGltZTogeyBub2RlOiBwcm9jZXNzLnZlcnNpb24sIHBsYXRmb3JtOiBwcm9jZXNzLnBsYXRmb3JtLCBhcmNoOiBwcm9jZXNzLmFyY2gsIG1vZHVsZXNBQkk6IHByb2Nlc3MudmVyc2lvbnMubW9kdWxlcywgbmFwaTogcHJvY2Vzcy52ZXJzaW9ucy5uYXBpIH0sCiAgICBwYWNrYWdlczogeyBiY3J5cHQ6ICc2LjAuMCcsIG5vZGVHeXBCdWlsZDogJzQuOC40JyB9LAogICAgcGF0aHM6IHsgYmNyeXB0RW50cnk6IGBub2RlX21vZHVsZXMvYmNyeXB0LyR7YmNyeXB0UmVsYXRpdmV9YCwgbG9hZGVyRW50cnk6IGBub2RlX21vZHVsZXMvbm9kZS1neXAtYnVpbGQvJHtsb2FkZXJSZWxhdGl2ZX1gLCBiaW5kaW5nOiBgbm9kZV9tb2R1bGVzL2JjcnlwdC8ke2JpbmRpbmdSZWxhdGl2ZX1gIH0sCiAgICBjaGVja3M6IHsgYmluZGluZ0NvbnRhaW5lZDogJ1BBU1MnLCBzZWxlY3RlZEJpbmRpbmdMb2FkZWQ6ICdQQVNTJywgc3ludGhldGljSGFzaDogJ1BBU1MnLCBjb3JyZWN0UGFzc3dvcmQ6ICdQQVNTJywgaW5jb3JyZWN0UGFzc3dvcmQ6ICdQQVNTJywgcm91bmRzOiAnUEFTUycsIHJlcXVpcmVDYWNoZUNvbnRhaW5lZDogJ1BBU1MnIH0sCiAgICBsb2FkZWROYXRpdmVGaWxlczogWy4uLmxvYWRlZE5hdGl2ZUZpbGVzXS5zb3J0KCksIGxvYWRlZE1vZHVsZUNvdW50OiBsb2FkZWRNb2R1bGVGaWxlcy5sZW5ndGgsIGxvYWRlZE1vZHVsZUZpbGVzLAogICAgc2NvcGU6IHsgc2VydmVySW1wb3J0ZWQ6IGZhbHNlLCBhcHBsaWNhdGlvblN0YXJ0ZWQ6IGZhbHNlLCBuZXR3b3JrUmVxdWVzdHM6IDAsIGRhdGFiYXNlQ29ubmVjdGlvbnM6IDAsIHN5bnRoZXRpY09ubHk6IHRydWUgfSwKICAgIGxpbWl0YXRpb25zOiBbJ0NvcGllZCBiY3J5cHQgcGFja2FnZSBzbW9rZSB0ZXN0IG9uIHRoaXMgTm9kZS9wbGF0Zm9ybS9hcmNoaXRlY3R1cmUgb25seScsICdOb3QgYXBwbGljYXRpb24gYXV0aGVudGljYXRpb24sIGRhdGFiYXNlLCBicm93c2VyLCBvciBkZXBsb3llZC1ydW50aW1lIHF1YWxpZmljYXRpb24nLCAnQ29udGFpbm1lbnQgY2hlY2tzIGFyZSBub3QgYW4gb3BlcmF0aW5nLXN5c3RlbSBmaWxlc3lzdGVtL25ldHdvcmsgc2FuZGJveCddLAogIH07CiAgcGhhc2UgPSAnRVZJREVOQ0VfV1JJVEUnOwogIHByaXZhdGVFdmlkZW5jZShldmlkZW5jZSk7CiAgY29uc29sZS5sb2coJ1NUQVRVUz1OQVRJVkVfQ0FORElEQVRFX1NNT0tFX1BBU1MnKTsKfSBjYXRjaCAoZXJyb3IpIHsKICBjb25zdCBjb2RlID0gdHlwZW9mIGVycm9yPy5jb2RlID09PSAnc3RyaW5nJyAmJiAvXltBLVowLTlfXXsxLDgwfSQvLnRlc3QoZXJyb3IuY29kZSkgPyBlcnJvci5jb2RlIDogJ1VORVhQRUNURURfTkFUSVZFX1JVTk5FUl9GQUlMVVJFJzsKICBjb25zdCBldmlkZW5jZSA9IHsgcHJvamVjdDogJ015TWVudGFsSGVhbHRoQnVkZHknLCBzdGF0dXM6ICdOQVRJVkVfQ0FORElEQVRFX1NNT0tFX0ZBSUxFRCcsIGZhaWx1cmU6IHsgcGhhc2UsIGNvZGUgfSB9OwogIGxldCBldmlkZW5jZVNhdmVkID0gZmFsc2U7CiAgdHJ5IHsgcHJpdmF0ZUV2aWRlbmNlKGV2aWRlbmNlKTsgZXZpZGVuY2VTYXZlZCA9IHRydWU7IH0gY2F0Y2gge30KICBjb25zb2xlLmxvZyhgU1RBVFVTPU5BVElWRV9DQU5ESURBVEVfU01PS0VfRkFJTEVEIFBIQVNFPSR7cGhhc2V9IENPREU9JHtjb2RlfSBFVklERU5DRV9TQVZFRD0ke2V2aWRlbmNlU2F2ZWQgPyAxIDogMH1gKTsKICBwcm9jZXNzLmV4aXRDb2RlID0gMTsKfSBmaW5hbGx5IHsKICBpZiAocmVxdWlyZUZyb21DYW5kaWRhdGUgJiYgb3JpZ2luYWxOYXRpdmVFeHRlbnNpb24pIHJlcXVpcmVGcm9tQ2FuZGlkYXRlLmV4dGVuc2lvbnNbJy5ub2RlJ10gPSBvcmlnaW5hbE5hdGl2ZUV4dGVuc2lvbjsKfQo=';
+const safePath = rel => typeof rel === 'string' && rel.length <= 1024 &&
+  !path.isAbsolute(rel) && !/[\x00-\x1f\x7f\\]/.test(rel) && !privatePath(rel) &&
+  !rel.split('/').some(x => !x || x === '.' || x === '..');
+function directory(base) {
+  const st = fs.lstatSync(base);
+  gate(st.isDirectory() && !st.isSymbolicLink() && fs.realpathSync(base) === base, 'ARTIFACT_DIRECTORY_BOUNDARY');
+}
+function artifactIdentity(base, rel) {
+  gate(safePath(rel), 'ARTIFACT_PATH_BOUNDARY', {file:label(rel)});
+  directory(base);
+  let full = base;
+  for (const part of rel.split('/')) {
+    full = path.join(full,part);
+    const st = fs.lstatSync(full);
+    gate(!st.isSymbolicLink(), 'ARTIFACT_SYMLINK', {file:label(rel)});
+  }
+  const before = fs.statSync(full);
+  gate(before.isFile() && before.size <= 64*1024*1024, 'ARTIFACT_FILE_LIMIT', {file:label(rel)});
+  const fd = fs.openSync(full,'r'), buffer = Buffer.alloc(1024*1024), digest = crypto.createHash('sha256');
+  try {let n;while((n=fs.readSync(fd,buffer,0,buffer.length,null))>0)digest.update(buffer.subarray(0,n));}
+  finally {fs.closeSync(fd);}
+  const after = fs.statSync(full);
+  gate(['dev','ino','size','mode','mtimeMs','ctimeMs'].every(k=>before[k]===after[k]), 'ARTIFACT_CHANGED_DURING_READ', {file:label(rel)});
+  return {file:rel,sha256:digest.digest('hex'),bytes:before.size,mode:before.mode};
+}
+function artifactTree(base) {
+  directory(base);const rows=[];let bytes=0;
+  function walk(dir) {
+    directory(dir);
+    for(const name of fs.readdirSync(dir).sort()) {
+      const full=path.join(dir,name),rel=path.relative(base,full);
+      gate(safePath(rel),'ARTIFACT_PATH_BOUNDARY',{file:label(rel)});
+      const st=fs.lstatSync(full);
+      gate(!st.isSymbolicLink(),'ARTIFACT_SYMLINK',{file:label(rel)});
+      if(st.isDirectory())walk(full);
+      else {const row=artifactIdentity(base,rel);bytes+=row.bytes;rows.push(row);
+        gate(rows.length<=5000&&bytes<=512*1024*1024,'ARTIFACT_TREE_LIMIT');}
+    }
+  }
+  walk(base);return {rows,bytes};
+}
+const retainedFiles = new Map();
+function retainedJSON(base,rel) {
+  const id=artifactIdentity(base,rel);
+  gate(id.bytes<=32*1024*1024,'REPORT_JSON_LIMIT');
+  const raw=fs.readFileSync(path.join(base,rel));
+  gate(hash(raw)===id.sha256,'REPORT_CHANGED_DURING_READ');
+  retainedFiles.set(base+'\0'+rel,{base,rel,id});
+  return JSON.parse(raw.toString('utf8'));
+}
+function checkedRows(rows) {
+  gate(Array.isArray(rows)&&rows.length<=5000,'MANIFEST_ROWS_LIMIT');
+  const names=new Set();
+  for(const row of rows) {
+    gate(row&&safePath(row.file)&&!names.has(row.file)&&/^[a-f0-9]{64}$/.test(row.sha256)
+      &&Number.isSafeInteger(row.bytes)&&row.bytes>=0&&row.bytes<=64*1024*1024,'MANIFEST_ROW_INVALID');
+    names.add(row.file);
+  }
+  return names;
+}
+function matchTree(actual,expected,code) {
+  const names=checkedRows(expected),map=new Map(actual.rows.map(row=>[row.file,row]));
+  gate(map.size===names.size&&actual.rows.length===expected.length,code,{reason:'FILE_SET'});
+  for(const row of expected) {
+    const item=map.get(row.file);
+    gate(item&&item.sha256===row.sha256&&item.bytes===row.bytes
+      &&(row.mode===undefined||item.mode===row.mode),code,{file:label(row.file)});
+  }
+}
+function sameTree(a,b,code){gate(JSON.stringify(a)===JSON.stringify(b),code);}
+function copyTree(from,tree,to) {
+  fs.mkdirSync(to,{recursive:true,mode:0o700});
+  for(const row of tree.rows) {
+    gate(safePath(row.file),'COPY_PATH_BOUNDARY');
+    const target=path.join(to,row.file);fs.mkdirSync(path.dirname(target),{recursive:true,mode:0o700});
+    fs.copyFileSync(path.join(from,row.file),target,fs.constants.COPYFILE_EXCL);
+    fs.chmodSync(target,row.mode&0o777);
+    const copied=artifactIdentity(to,row.file);
+    gate(copied.sha256===row.sha256&&copied.bytes===row.bytes&&copied.mode===row.mode,'COPY_IDENTITY_MISMATCH',{file:label(row.file)});
+  }
+}
+function inspectExternalResolution(candidate,specifiers) {
+  gate(Array.isArray(specifiers)&&specifiers.length<=200,'EXTERNAL_INVENTORY_LIMIT');
+  const anchored=createRequire(path.join(candidate,'server.mjs'));
+  return specifiers.map(specifier=>{
+    gate(typeof specifier==='string'&&specifier.length<=200,'EXTERNAL_SPECIFIER_FORMAT');
+    if(isBuiltin(specifier))return {specifier,state:'NODE_BUILTIN'};
+    if(!/^(?:@[a-z0-9_.-]+\/)?[a-z0-9_-][a-z0-9_.-]*$/i.test(specifier))
+      return {specifier:label(specifier),state:'UNCLASSIFIED'};
+    try {
+      const resolved=fs.realpathSync(anchored.resolve(specifier));
+      return inside(candidate,resolved)?{specifier,state:'RESOLVES_INSIDE_CANDIDATE',file:label(path.relative(candidate,resolved))}:
+        {specifier,state:'RESOLVES_OUTSIDE_CANDIDATE'};
+    }catch(error){return {specifier,state:'NOT_RESOLVED_BY_COMMONJS',code:/^[A-Z0-9_]+$/.test(error.code||'')?error.code:'RESOLUTION_ERROR'};}
+  });
+}
+
+let reportDir,candidateDir,before,baseline,serverTree,frontendTree,assembledBefore,failure;
+let phase='WORKSPACE_PREFLIGHT';const processes=[];
+let result={project:'MyMentalHealthBuddy',status:'NOT_STARTED',dependencyAlignment:'PENDING',applicationRuntime:'UNPROVEN',deployedArtifact:'UNPROVEN'};
+function failureInfo(error,at,fallback='UNEXPECTED_ASSEMBLY_FAILURE') {
+  const detail={...(error.detail||{})};
+  if(typeof error.path==='string') {
+    const full=path.resolve(ROOT,error.path);
+    const base=[reportDir,SERVER_REPORT,FRONTEND_REPORT].find(x=>x&&(full===x||inside(x,full)));
+    detail.file=base?'REPORT/'+label(path.relative(base,full)||'ROOT'):inside(ROOT,full)?label(path.relative(ROOT,full)):label(error.path);
+  }
+  if(['lstat','stat','open','read','write','realpath','scandir','mkdir','copyfile','chmod','readlink'].includes(error.syscall))detail.syscall=error.syscall;
+  return {gate:error.gate||fallback,phase:at,detail,errorCode:/^[A-Z0-9_]+$/.test(error.code||'')?error.code:undefined};
+}
+function save(name,value){fs.writeFileSync(path.join(reportDir,name),JSON.stringify(value,null,2),{flag:'wx',mode:0o600});}
+function runChild(name,args,cwd) {
+  const log=path.join(reportDir,name+'.log'),fd=fs.openSync(log,'wx',0o600);let child;
+  const entry={name,attempts:1,started:false};processes.push(entry);
+  try {child=spawnSync(process.execPath,args,{cwd,env:{...MIN_ENV,NODE_DISABLE_COMPILE_CACHE:'1',TMPDIR:reportDir},
+    stdio:['ignore',fd,fd],timeout:30000,killSignal:'SIGTERM'});}finally{fs.closeSync(fd);}
+  entry.started=child.pid>0;entry.exitCode=child.status;entry.signal=child.signal||null;entry.timedOut=child.error?.code==='ETIMEDOUT';
+  entry.errorCode=/^[A-Z0-9_]+$/.test(child.error?.code||'')?child.error.code:undefined;
+  if(name==='native-smoke'&&(child.status!==0||child.signal||child.error)) {
+    try {
+      const evidence=readJSON(path.join(reportDir,'native-smoke-evidence.json'),1024*1024);
+      if(evidence.status==='NATIVE_CANDIDATE_SMOKE_FAILED'
+        &&/^[A-Z0-9_]{1,80}$/.test(evidence.failure?.phase||'')
+        &&/^[A-Z0-9_]{1,80}$/.test(evidence.failure?.code||'')) {
+        entry.nativeFailure={phase:evidence.failure.phase,code:evidence.failure.code};
+        result.nativeSmoke={status:evidence.status,failure:entry.nativeFailure};
+      }
+    }catch{entry.nativeEvidence='ABSENT_OR_UNREADABLE';}
+  }
+  gate(child.status===0&&!child.signal&&!child.error,'CANDIDATE_CHILD_FAILED',{...entry,rawLog:'PRIVATE_NOT_PRINTED'});
+}
+console.log('COMMAND_ID=MMHB-RELEASE-ASSEMBLY-R13');console.log('UTC='+new Date().toISOString());
+console.log('ISSUE_ID=CORE-CANDIDATE-ASSEMBLY-001');
+try {
+  gate(ROOT===EXPECTED_ROOT,'WORKSPACE_PATH');
+  gate(process.version===EXPECTED_NODE&&process.platform==='linux'&&process.arch==='x64','MACHINE_DRIFT');
+  gate(fs.realpathSync(git('rev-parse','--show-toplevel').trim())===ROOT,'GIT_ROOT');
+  reportDir=fs.mkdtempSync('/tmp/mmhb-release-assembly-r13-');fs.chmodSync(reportDir,0o700);console.log('REPORT_DIRECTORY='+reportDir);
+  phase='INITIAL_SNAPSHOT';before=snapshot();save('worktree-before.json',before);
+  gate(before.head===EXPECTED_HEAD&&before.branch==='integration','GIT_BASELINE_DRIFT');
+  phase='PINNED_BASELINE';baseline=checkPins();save('pinned-before.json',baseline);
+  phase='RETAINED_CANDIDATE_REPORTS';
+  const server=retainedJSON(SERVER_REPORT,'server-candidate-evidence.json');
+  const native=retainedJSON(SERVER_REPORT,'native-copy-manifest.json');
+  const frontend=retainedJSON(FRONTEND_REPORT,'frontend-candidate-evidence.json');
+  const manifest=retainedJSON(FRONTEND_REPORT,'output-manifest.json');
+  gate(server.status==='SERVER_CANDIDATE_ONLY_NOT_RELEASE'&&server.preservation==='OBSERVED_INPUTS_AND_GIT_STATE_PRESERVED'
+    &&frontend.status==='FRONTEND_CANDIDATE_ONLY_NOT_RELEASE'&&frontend.preservation==='OBSERVED_SOURCES_TOOLS_AND_GIT_STATE_PRESERVED','RETAINED_CANDIDATE_STATUS');
+  gate(hash(JSON.stringify(native))===ARTIFACT_PINS.nativeManifest&&native.length===ARTIFACT_PINS.nativeFiles,'NATIVE_MANIFEST_PIN');
+  gate(hash(JSON.stringify(manifest))===ARTIFACT_PINS.frontendManifest&&manifest.rows.length===ARTIFACT_PINS.frontendFiles
+    &&manifest.bytes===ARTIFACT_PINS.frontendBytes,'FRONTEND_MANIFEST_PIN');
+  checkedRows(native);checkedRows(manifest.rows);
+  gate(native.every(row=>row.file.startsWith('node_modules/bcrypt/')||row.file.startsWith('node_modules/node-gyp-build/')),'NATIVE_MANIFEST_SCOPE');
+  phase='RETAINED_ARTIFACT_IDENTITIES';
+  const serverBase=path.join(SERVER_REPORT,'candidate'),frontendBase=path.join(FRONTEND_REPORT,'frontend');
+  serverTree=artifactTree(serverBase);frontendTree=artifactTree(frontendBase);
+  matchTree(serverTree,[{file:'server.mjs',...ARTIFACT_PINS.server},{file:'schema.canonical.sql',...ARTIFACT_PINS.schema},...native],'SERVER_ARTIFACT_MISMATCH');
+  matchTree(frontendTree,manifest.rows,'FRONTEND_ARTIFACT_MISMATCH');
+  save('retained-server-files.json',serverTree);save('retained-frontend-files.json',frontendTree);
+  save('retained-report-identities.json',[...retainedFiles.values()]);
+  console.log('GATE=RETAINED_CANDIDATE_IDENTITIES RESULT=PASS');
+  phase='CORE_CANDIDATE_ASSEMBLY';candidateDir=path.join(reportDir,'candidate');
+  copyTree(serverBase,serverTree,candidateDir);copyTree(frontendBase,frontendTree,path.join(candidateDir,'client/dist'));
+  const expected=[...serverTree.rows,...frontendTree.rows.map(row=>({...row,file:'client/dist/'+row.file}))];
+  assembledBefore=artifactTree(candidateDir);matchTree(assembledBefore,expected,'ASSEMBLED_CANDIDATE_MISMATCH');
+  for(const rel of ['server.mjs','schema.canonical.sql','client/dist/index.html','client/dist/serviceWorker.js'])
+    gate(assembledBefore.rows.some(row=>row.file===rel&&row.bytes>0),'REQUIRED_RUNTIME_LAYOUT_FILE_MISSING',{file:rel});
+  save('assembly-manifest-before.json',assembledBefore);
+  result.externalResolution=inspectExternalResolution(candidateDir,server.externalImports);
+  result.externalResolutionScope='COMMONJS_RESOLUTION_ONLY_NO_OPTIONALITY_OR_ESM_REACHABILITY_PROOF';
+  console.log('GATE=CORE_CANDIDATE_ASSEMBLY RESULT=PASS');
+  phase='SERVER_SYNTAX_CHECK';runChild('server-syntax',['--check',path.join(candidateDir,'server.mjs')],candidateDir);
+  console.log('GATE=SERVER_SYNTAX_ONLY RESULT=PASS');
+  phase='NATIVE_CANDIDATE_SMOKE';const childFile=path.join(reportDir,'native-runner.mjs');
+  fs.writeFileSync(childFile,Buffer.from(NATIVE_RUNNER_B64,'base64'),{flag:'wx',mode:0o600});
+  runChild('native-smoke',[childFile,candidateDir,reportDir],candidateDir);
+  const smoke=readJSON(path.join(reportDir,'native-smoke-evidence.json'));
+  gate(smoke.status==='NATIVE_CANDIDATE_SMOKE_PASS','NATIVE_SMOKE_EVIDENCE');
+  result={...result,status:'CORE_CANDIDATE_ASSEMBLED_NATIVE_PASS_NOT_RELEASE',candidateDirectory:candidateDir,
+    nativeSmoke:smoke,files:assembledBefore.rows.length,bytes:assembledBefore.bytes,
+    assemblyManifestSha256:hash(JSON.stringify(assembledBefore)),
+    retainedServerReport:SERVER_REPORT,retainedFrontendReport:FRONTEND_REPORT,
+    limitations:['Assembly reuses the supplied passing candidates; no build repeated or dependency installed',
+      'Retained manifests and artifact hashes matched; not a clean-install build or complete current-source audit',
+      'Native smoke proves local copied bcrypt compatibility only; application and deployed runtime remain untested',
+      'Required runtime prompt/content assets and their working-directory assumptions still require current-source qualification',
+      'Public VITE configuration, browser layout, service-worker behavior, account isolation, backup/restore and release gates remain open',
+      'Missing external resolution results require reachability review; dependency alignment remains pending',
+      'Private paths and minimal child environments are not an OS filesystem/network sandbox']};
+  console.log('GATE=COPIED_NATIVE_COMPATIBILITY RESULT=PASS');
+}catch(error){failure=failureInfo(error,phase);}
+finally {
+  const failures=[];function attempt(at,fn){try{fn();}catch(error){failures.push(failureInfo(error,at,'PRESERVATION_CHECK_FAILED'));}}
+  if(baseline)attempt('FINAL_PIN_PRESERVATION',()=>{
+    const after=Object.fromEntries(Object.keys(baseline).map(rel=>[rel,identity(path.join(ROOT,rel),rel.startsWith('node_modules/'))]));
+    save('pinned-after.json',after);gate(JSON.stringify(after)===JSON.stringify(baseline),'PINNED_FILE_NOT_PRESERVED');});
+  if(retainedFiles.size)attempt('FINAL_RETAINED_REPORT_PRESERVATION',()=>{
+    for(const {base,rel,id} of retainedFiles.values())gate(JSON.stringify(artifactIdentity(base,rel))===JSON.stringify(id),'RETAINED_REPORT_NOT_PRESERVED',{file:label(rel)});});
+  if(serverTree)attempt('FINAL_SERVER_CANDIDATE_PRESERVATION',()=>sameTree(serverTree,artifactTree(path.join(SERVER_REPORT,'candidate')),'RETAINED_SERVER_NOT_PRESERVED'));
+  if(frontendTree)attempt('FINAL_FRONTEND_CANDIDATE_PRESERVATION',()=>sameTree(frontendTree,artifactTree(path.join(FRONTEND_REPORT,'frontend')),'RETAINED_FRONTEND_NOT_PRESERVED'));
+  if(assembledBefore)attempt('FINAL_ASSEMBLED_CANDIDATE_PRESERVATION',()=>{
+    const after=artifactTree(candidateDir);save('assembly-manifest-after.json',after);sameTree(assembledBefore,after,'ASSEMBLED_CANDIDATE_NOT_PRESERVED');});
+  if(before)attempt('FINAL_WORKTREE_SNAPSHOT',()=>{const after=snapshot();save('worktree-after.json',after);
+    result.currentPreservation=snapshotDifference(before,after);save('worktree-comparison.json',result.currentPreservation);
+    gate(!result.currentPreservation.components.length,'GIT_OR_WORKTREE_NOT_PRESERVED',result.currentPreservation);});
+  if(failures.length){failure={...failures[0],previousFailure:failure};result.preservation='FAILED';result.preservationFailures=failures;}
+  else if(before&&baseline&&serverTree&&frontendTree&&assembledBefore){result.preservation='OBSERVED_INPUTS_AND_CANDIDATES_PRESERVED';console.log('GATE=OBSERVED_INPUTS_AND_CANDIDATES_PRESERVED RESULT=PASS');}
+  else {result.preservation='PARTIAL_OBSERVATIONS_ONLY';result.preservationScope={git:!!before,pins:!!baseline,serverCandidate:!!serverTree,frontendCandidate:!!frontendTree,assembledCandidate:!!assembledBefore};}
+  if(failure){result.status='CORE_CANDIDATE_ASSEMBLY_FAILED';result.failure=failure;}
+  result.processes=processes;result.evidenceWrite=reportDir?'SAVED':'REPORT_NOT_CREATED';
+  if(reportDir)try{save('assembly-evidence.json',result);}catch(error){failure={...failureInfo(error,'FINAL_EVIDENCE_WRITE','EVIDENCE_WRITE_FAILED'),previousFailure:failure};result.status='CORE_CANDIDATE_ASSEMBLY_FAILED';result.failure=failure;result.evidenceWrite='FAILED';}
+  if(failure)console.log('FAILED_GATE='+failure.gate);
+  console.log(JSON.stringify(result,null,2));
+  console.log('SOURCE_EDIT=0 PACKAGE_EDIT=0 PACKAGE_INSTALL=0 BUILD=NOT_RUN APPLICATION_STARTED=0');
+  console.log('DATABASE_CODE_EXECUTED=0 CREDENTIAL_CHANGE=0 STAGE=0 COMMIT=0 PUSH=0 DEPLOY=0');
+  console.log('NATIVE_SMOKE_STATUS='+String(result.nativeSmoke?.status||'NOT_QUALIFIED'));
+  console.log('DEPENDENCY_ALIGNMENT=PENDING APPLICATION_RUNTIME=UNPROVEN DEPLOYED_ARTIFACT_PROVEN=NO');
+  if(reportDir)console.log('REPORT_DIRECTORY='+reportDir);
+  console.log('STATUS='+result.status);console.log('NEXT_ACTION=STOP_AND_RETURN_COMPLETE_OUTPUT');process.exitCode=failure?1:0;
+}

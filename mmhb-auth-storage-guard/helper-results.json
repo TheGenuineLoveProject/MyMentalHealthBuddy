@@ -1,0 +1,56 @@
+{
+  "schema": "MMHB_STORAGE_PATCH_HELPER_TESTS_V1",
+  "tests": [
+    {
+      "name": "Apply one file, preserve HEAD/index/other source, create exact local checkpoint",
+      "pass": true
+    },
+    {
+      "name": "Repeat execution reuses identical source and checkpoint",
+      "pass": true
+    },
+    {
+      "name": "Default dry run does not write source/checkpoint/index",
+      "pass": true
+    },
+    {
+      "name": "Report drift is refused",
+      "pass": true
+    },
+    {
+      "name": "Working source drift is refused",
+      "pass": true
+    },
+    {
+      "name": "Unrelated tracked edits are refused",
+      "pass": true
+    },
+    {
+      "name": "Staged edits are refused",
+      "pass": true
+    },
+    {
+      "name": "Unexpected candidate commit is refused",
+      "pass": true
+    },
+    {
+      "name": "Source symlink is refused",
+      "pass": true
+    },
+    {
+      "name": "Source hardlink is refused",
+      "pass": true
+    },
+    {
+      "name": "Inherited Git routing/Node options and reference hook are suppressed",
+      "pass": true
+    },
+    {
+      "name": "Conflicting safety reference prevents source edit",
+      "pass": true
+    }
+  ],
+  "total": 12,
+  "passed": 12,
+  "scope": "Disposable Git repositories using supplied storage body; no Replit or production database execution"
+}

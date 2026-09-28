@@ -5,6 +5,7 @@ export default function AccountAdminRoutes({
   AdminGuard,
   ConfigRoute,
   AccountProfile,
+  AccountSecurity,
   AccountBilling,
   NotificationPreferences,
   SafetyPreferences,
@@ -15,6 +16,9 @@ export default function AccountAdminRoutes({
     <>
       <Route path="/account/profile">
         <ProtectedRoute><AccountProfile /></ProtectedRoute>
+      </Route>
+      <Route path="/account/security">
+        <ProtectedRoute><AccountSecurity /></ProtectedRoute>
       </Route>
       <Route path="/account/billing">
         <ProtectedRoute><AccountBilling /></ProtectedRoute>

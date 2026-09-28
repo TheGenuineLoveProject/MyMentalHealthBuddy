@@ -89,6 +89,14 @@ function safeDefaultMeta(routeKey: string): RouteMeta {
  * These win over auto-generated entries.
  */
 const MANUAL_REGISTRY: Record<string, any> = {
+  "research-evidence": {
+    canonicalPath: "/research-evidence",
+    title: "Research & Evidence — MyMentalHealthBuddy",
+    description: "Learn to examine mental health information, research limits, and personal experiences.",
+    benefits: [],
+    internalLinks: [],
+    modules: [],
+  },
   // ═══════════════════════════════════════════════════════════════════
   // CORE TOOLS
   // ═══════════════════════════════════════════════════════════════════

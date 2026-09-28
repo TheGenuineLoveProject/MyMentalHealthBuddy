@@ -1,0 +1,107 @@
+{
+  "sources": {
+    "server/app.mjs": "import { keep } from \"./optional.mjs\"; console.log(keep());",
+    "server/optional.mjs": "export function keep() { return 1 }; export function unused() { try { require(\"./absent.node\") } catch {} }"
+  },
+  "rawMeta": {
+    "inputs": {
+      "server/optional.mjs": {
+        "bytes": 107,
+        "imports": [
+          {
+            "path": "./absent.node",
+            "kind": "require-call",
+            "external": true
+          }
+        ],
+        "format": "esm"
+      },
+      "server/app.mjs": {
+        "bytes": 59,
+        "imports": [
+          {
+            "path": "server/optional.mjs",
+            "kind": "import-statement",
+            "original": "./optional.mjs"
+          }
+        ],
+        "format": "esm"
+      }
+    },
+    "outputs": {
+      "server.mjs": {
+        "imports": [],
+        "exports": [],
+        "entryPoint": "server/app.mjs",
+        "inputs": {
+          "server/optional.mjs": {
+            "bytesInOutput": 32
+          },
+          "server/app.mjs": {
+            "bytesInOutput": 21
+          }
+        },
+        "bytes": 95
+      }
+    }
+  },
+  "meta": {
+    "inputs": {
+      "server/optional.mjs": {
+        "bytes": 107,
+        "imports": [
+          {
+            "path": "./absent.node",
+            "kind": "require-call",
+            "external": true
+          }
+        ],
+        "format": "esm"
+      },
+      "server/app.mjs": {
+        "bytes": 59,
+        "imports": [
+          {
+            "path": "server/optional.mjs",
+            "kind": "import-statement",
+            "original": "./optional.mjs"
+          }
+        ],
+        "format": "esm"
+      }
+    },
+    "outputs": {
+      "/home/runner/workspace/.mmhb-release-evidence/r17b-AbC123/server-build/server.mjs": {
+        "imports": [],
+        "exports": [],
+        "entryPoint": "server/app.mjs",
+        "inputs": {
+          "server/optional.mjs": {
+            "bytesInOutput": 32
+          },
+          "server/app.mjs": {
+            "bytesInOutput": 21
+          }
+        },
+        "bytes": 95
+      }
+    }
+  },
+  "options": {
+    "compilerWorkingDirectory": "/tmp/mmhb-build-r17b-AbC123",
+    "reportDirectory": "/home/runner/workspace/.mmhb-release-evidence/r17b-AbC123",
+    "inputRows": [
+      {
+        "file": "server/app.mjs",
+        "type": "file",
+        "bytes": 59
+      },
+      {
+        "file": "server/optional.mjs",
+        "type": "file",
+        "bytes": 107
+      }
+    ]
+  },
+  "adapter": "ONLY_OUTPUT_MAP_KEY_REPLACED_WITH_SYNTHETIC_EXPECTED_REPORT_PATH"
+}

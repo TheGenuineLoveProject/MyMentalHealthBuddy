@@ -1,0 +1,157 @@
+{
+  "status": "PASS",
+  "fixtureCount": 10,
+  "node": "v24.19.0",
+  "driverSha256": "e41f1c1900f0f506581e3265143aaa0add1414691eac3e40f10c17e32ef6fcdb",
+  "scope": "LOCAL_REAL_GIT_AND_RETAINED_FIXTURES_NOT_REPLIT_OR_LIVE_APP",
+  "fixtures": [
+    {
+      "case": "success_508_known_additions",
+      "status": "PASS",
+      "observedStatus": "RETAINED_RUNTIME_CONTRACT_CHECKS_PASS_NOT_RELEASE",
+      "failure": null,
+      "existingFilesPreserved": 905,
+      "execution": {
+        "helperTestsAttempted": true,
+        "resendTestsAttempted": true
+      },
+      "realTransportAttempts": 0
+    },
+    {
+      "case": "changed_delivered_bytes",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "failure": {
+        "phase": "COMMITTED_CHANGE_REVIEW",
+        "gate": "COMMITTED_CHANGES_REQUIRE_REVIEW"
+      },
+      "existingFilesPreserved": 905,
+      "execution": {
+        "helperTestsAttempted": false,
+        "resendTestsAttempted": false
+      },
+      "realTransportAttempts": 0
+    },
+    {
+      "case": "unknown_application_addition",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "failure": {
+        "phase": "COMMITTED_CHANGE_REVIEW",
+        "gate": "COMMITTED_CHANGES_REQUIRE_REVIEW"
+      },
+      "existingFilesPreserved": 907,
+      "execution": {
+        "helperTestsAttempted": false,
+        "resendTestsAttempted": false
+      },
+      "realTransportAttempts": 0
+    },
+    {
+      "case": "modified_tracked_source",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "failure": {
+        "phase": "COMMITTED_CHANGE_REVIEW",
+        "gate": "COMMITTED_CHANGES_REQUIRE_REVIEW"
+      },
+      "existingFilesPreserved": 906,
+      "execution": {
+        "helperTestsAttempted": false,
+        "resendTestsAttempted": false
+      },
+      "realTransportAttempts": 0
+    },
+    {
+      "case": "deleted_tracked_source",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "failure": {
+        "phase": "COMMITTED_CHANGE_REVIEW",
+        "gate": "COMMITTED_CHANGES_REQUIRE_REVIEW"
+      },
+      "existingFilesPreserved": 903,
+      "execution": {
+        "helperTestsAttempted": false,
+        "resendTestsAttempted": false
+      },
+      "realTransportAttempts": 0
+    },
+    {
+      "case": "executable_addition",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "failure": {
+        "phase": "COMMITTED_CHANGE_REVIEW",
+        "gate": "COMMITTED_CHANGES_REQUIRE_REVIEW"
+      },
+      "existingFilesPreserved": 905,
+      "execution": {
+        "helperTestsAttempted": false,
+        "resendTestsAttempted": false
+      },
+      "realTransportAttempts": 0
+    },
+    {
+      "case": "symlink_addition",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "failure": {
+        "phase": "COMMITTED_CHANGE_REVIEW",
+        "gate": "COMMITTED_CHANGES_REQUIRE_REVIEW"
+      },
+      "existingFilesPreserved": 905,
+      "execution": {
+        "helperTestsAttempted": false,
+        "resendTestsAttempted": false
+      },
+      "realTransportAttempts": 0
+    },
+    {
+      "case": "count_mismatch",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "failure": {
+        "phase": "COMMITTED_CHANGE_REVIEW",
+        "gate": "COMMITTED_CHANGE_COUNT"
+      },
+      "existingFilesPreserved": 904,
+      "execution": {
+        "helperTestsAttempted": false,
+        "resendTestsAttempted": false
+      },
+      "realTransportAttempts": 0
+    },
+    {
+      "case": "wrong_parent",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "failure": {
+        "phase": "COMMITTED_CHANGE_REVIEW",
+        "gate": "OBSERVED_COMMIT_PARENT"
+      },
+      "existingFilesPreserved": 906,
+      "execution": {
+        "helperTestsAttempted": false,
+        "resendTestsAttempted": false
+      },
+      "realTransportAttempts": 0
+    },
+    {
+      "case": "current_source_drift",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "failure": {
+        "phase": "RETAINED_BUILD_LINKAGE",
+        "gate": "RETAINED_INPUT_CHANGED",
+        "file": "server/app.mjs"
+      },
+      "existingFilesPreserved": 905,
+      "execution": {
+        "helperTestsAttempted": false,
+        "resendTestsAttempted": false
+      },
+      "realTransportAttempts": 0
+    }
+  ]
+}

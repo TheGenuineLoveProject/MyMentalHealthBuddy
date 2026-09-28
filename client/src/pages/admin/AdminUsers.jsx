@@ -6,12 +6,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SEO from "../../components/SEO";
 import SafetyFooter from "../../components/ui/ReflectionFooter";
 import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+import { fetchDashboardStats, metricValue } from "@/lib/adminDashboardStats";
 
 export default function AdminUsers() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const { data: stats, isLoading, refetch, isRefetching, error } = useQuery({
     queryKey: ['/api/admin/dashboard-stats'],
+    queryFn: fetchDashboardStats,
     retry: 2,
     retryDelay: 1000,
     staleTime: 30000,
@@ -26,10 +28,10 @@ export default function AdminUsers() {
     staleTime: 30000,
   });
 
-  const userCount = stats?.users || 0;
-  const leadsCount = stats?.leads || 0;
-  const proUsers = stats?.proUsers || 0;
-  const freeUsers = Math.max(0, userCount - proUsers);
+  const userCount = metricValue(stats?.users);
+  const leadsCount = metricValue(stats?.leads);
+  const proUsers = metricValue(stats?.proUsers);
+  const freeUsers = metricValue(stats?.freeUsers);
 
   if (isLoading) {
     return (
@@ -42,17 +44,17 @@ export default function AdminUsers() {
     );
   }
 
-  if (error && !stats) {
+  if (error) {
     return <AdminErrorBanner title="Unable to load user data" onRetry={refetch} />;
   }
 
   const userMetrics = [
     { label: "Total Users", value: userCount, icon: Users, desc: "Registered platform users", color: "text-blue-600" },
-    { label: "Pro Subscribers", value: proUsers, icon: TrendingUp, desc: "Active Pro subscriptions", color: "text-emerald-600" },
+    { label: "Pro Subscribers", value: proUsers, icon: TrendingUp, desc: "Local Pro plan; unexpired or no expiry recorded", color: "text-emerald-600" },
     { label: "Free Users", value: freeUsers, icon: Users, desc: "Free tier users", color: "text-slate-600" },
-    { label: "Newsletter Subscribers", value: leadsCount, icon: Mail, desc: "Email subscribers", color: "text-amber-600" },
-    { label: "Admin Users", value: stats?.adminCount || 1, icon: Shield, desc: "Users with admin access", color: "text-red-600" },
-    { label: "Platform Uptime", value: healthData?.uptimeFormatted || "—", icon: Clock, desc: "Current server uptime", color: "text-purple-600" },
+    { label: "Newsletter Subscribers", value: leadsCount, icon: Mail, desc: "Status: active", color: "text-amber-600" },
+    { label: "Admin Users", value: metricValue(stats?.adminCount), icon: Shield, desc: "Accounts with role admin", color: "text-red-600" },
+    { label: "Platform Uptime", value: Number.isFinite(stats?.uptimeSeconds) ? `${Math.floor(stats.uptimeSeconds / 60)}m` : "Unavailable", icon: Clock, desc: "Current server uptime", color: "text-purple-600" },
   ];
 
   const quickLinks = [

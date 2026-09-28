@@ -1,0 +1,166 @@
+{
+  "status": "PASS",
+  "fixtureCount": 14,
+  "node": "v24.19.0",
+  "generatedDriverSha256": "c357ffefec604c71d4d56b9272fbfd92147f98745753fbf8aaeda3d32faf4dff",
+  "embeddedGraphSha256": "d39692c0d37004a921a8496c7b835ed6b31d8997ef875fb2830703412e45c94d",
+  "fixtures": [
+    {
+      "case": "success_absent_tmp",
+      "status": "PASS",
+      "observedStatus": "RETAINED_RUNTIME_CONTRACT_CHECKS_PASS_NOT_RELEASE",
+      "existingFilesChecked": 100,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false
+    },
+    {
+      "case": "candidate_tamper",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "existingFilesChecked": 100,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false
+    },
+    {
+      "case": "source_tamper",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "existingFilesChecked": 100,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false
+    },
+    {
+      "case": "pin_tamper",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "existingFilesChecked": 100,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false
+    },
+    {
+      "case": "dependency_tamper",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "existingFilesChecked": 100,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false
+    },
+    {
+      "case": "unknown_source_hash",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_REVIEW_REQUIRED",
+      "existingFilesChecked": 100,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false
+    },
+    {
+      "case": "unknown_resend_hash",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_REVIEW_REQUIRED",
+      "existingFilesChecked": 100,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false
+    },
+    {
+      "case": "malformed_output",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "existingFilesChecked": 100,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false
+    },
+    {
+      "case": "history_mismatch",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "existingFilesChecked": 100,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false
+    },
+    {
+      "case": "concurrent_change",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "existingFilesChecked": 100,
+      "expectedTestHookChanges": [
+        "user-work.txt"
+      ],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false
+    },
+    {
+      "case": "evidence_write_failure",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "existingFilesChecked": 100,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false
+    },
+    {
+      "case": "opaque_input_only",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_REVIEW_REQUIRED",
+      "existingFilesChecked": 100,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false
+    },
+    {
+      "case": "opaque_input_repeat_mismatch",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "existingFilesChecked": 100,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false
+    },
+    {
+      "case": "invalid_inferred_package",
+      "status": "PASS",
+      "observedStatus": "RUNTIME_CONTRACT_FAILED",
+      "existingFilesChecked": 101,
+      "expectedTestHookChanges": [],
+      "allowedReadOnlyGitCalls": 16,
+      "realTransportAttempts": 0,
+      "applicationCanaryExecuted": false,
+      "historicalTemporaryCompilerDirectoryPresent": false
+    }
+  ],
+  "scope": "GENUINE_GIT_HANDWRITTEN_RETAINED_EVIDENCE_AND_ACTUAL_REVIEWED_HELPERS_NOT_REAL_MMHB_BUILD_OR_RUNTIME"
+}

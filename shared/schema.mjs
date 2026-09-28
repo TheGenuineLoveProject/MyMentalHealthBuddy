@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import { pgTable, text, timestamp, uuid, integer, varchar, boolean, jsonb, index, uniqueIndex } from "drizzle-orm/pg-core";
 
 /**
@@ -226,7 +227,9 @@ export const toolSessions = pgTable("tool_sessions", {
   xpEarned: integer("xp_earned").notNull(),
   completedAt: timestamp("completed_at").defaultNow().notNull(),
   metadata: text("metadata"),
-});
+}, (table) => [
+  index("idx_tool_sessions_user_completed").on(table.userId, table.completedAt),
+]);
 
 export const userProgress = pgTable("user_progress", {
   id: uuid("id").defaultRandom().primaryKey(),
@@ -261,13 +264,15 @@ export const dailyQuests = pgTable("daily_quests", {
   isCompleted: integer("is_completed").default(0).notNull(),
   expiresAt: timestamp("expires_at").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
-});
+}, (table) => [
+  index("idx_daily_quests_user_created").on(table.userId, table.createdAt),
+]);
 
 export const webhookEvents = pgTable("webhook_events", {
   id: text("id").primaryKey(), // Stripe event ID (not UUID)
   eventType: varchar("event_type", { length: 100 }).notNull(),
   status: varchar("status", { length: 50 }).default("processed").notNull(),
-  processedAt: timestamp("processed_at").defaultNow().notNull(),
+  processedAt: timestamp("processed_at", { withTimezone: true }).defaultNow().notNull(),
 });
 
 export const auditLog = pgTable("audit_log", {
@@ -281,6 +286,28 @@ export const auditLog = pgTable("audit_log", {
   userAgent: varchar("user_agent", { length: 500 }),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
+
+/**
+ * Short-lived protocol-specific MFA login challenge state.
+ *
+ * Only SHA-256(jti) is persisted. Successful verification deletes
+ * exactly one matching unexpired row so one challenge can establish
+ * at most one authenticated session across concurrent processes.
+ */
+export const mfaLoginChallenges = pgTable("mfa_login_challenges", {
+  jtiHash: varchar("jti_hash", { length: 64 }).primaryKey(),
+  userId: uuid("user_id")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true })
+    .defaultNow()
+    .notNull(),
+}, (table) => [
+  index("idx_mfa_login_challenges_user").on(table.userId),
+  index("idx_mfa_login_challenges_expires").on(table.expiresAt),
+]);
+
 
 export const passwordResetTokens = pgTable("password_reset_tokens", {
   id: uuid("id").defaultRandom().primaryKey(),
@@ -338,7 +365,10 @@ export const blogComments = pgTable("blog_comments", {
   parentId: uuid("parent_id"), // for nested comments
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
-});
+}, (table) => [
+  index("idx_blog_comments_post_id").on(table.postId),
+  index("idx_blog_comments_parent_id").on(table.parentId),
+]);
 
 /* ================= COMMUNITY AFFIRMATIONS ================= */
 export const communityAffirmations = pgTable("community_affirmations", {
@@ -958,7 +988,7 @@ export const biometricConnections = pgTable("biometric_connections", {
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 }, (table) => [
   index("idx_biometric_connections_user").on(table.userId),
-  index("uniq_biometric_connections_user_source").on(table.userId, table.deviceSource),
+  uniqueIndex("uniq_biometric_connections_user_source").on(table.userId, table.deviceSource),
 ]);
 
 export const biometricReadings = pgTable("biometric_readings", {
@@ -975,6 +1005,12 @@ export const biometricReadings = pgTable("biometric_readings", {
 }, (table) => [
   index("idx_biometric_readings_user_recorded").on(table.userId, table.recordedAt),
   index("idx_biometric_readings_user_metric").on(table.userId, table.metricType, table.recordedAt),
+  uniqueIndex("uniq_biometric_readings_user_source_metric_time").on(
+    table.userId,
+    table.deviceSource,
+    table.metricType,
+    table.recordedAt
+  ),
 ]);
 
 
@@ -1067,7 +1103,7 @@ export const discernmentLessons = pgTable("discernment_lessons", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 }, (table) => [
   index("idx_discernment_lessons_belt_seq").on(table.belt, table.sequence),
-  index("uniq_discernment_lessons_belt_seq").on(table.belt, table.sequence),
+  uniqueIndex("uniq_discernment_lessons_belt_seq").on(table.belt, table.sequence),
 ]);
 
 export const discernmentUserProgress = pgTable("discernment_user_progress", {
@@ -1093,6 +1129,9 @@ export const discernmentAttempts = pgTable("discernment_attempts", {
 }, (table) => [
   index("idx_discernment_attempts_user_created").on(table.userId, table.createdAt),
   index("idx_discernment_attempts_user_lesson").on(table.userId, table.lessonId),
+  uniqueIndex("uniq_discernment_first_correct")
+    .on(table.userId, table.lessonId)
+    .where(sql`${table.correct} = true AND ${table.pointsEarned} > 0`),
 ]);
 
 /* =====================================================================

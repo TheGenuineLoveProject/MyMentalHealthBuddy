@@ -1,0 +1,44 @@
+{
+  "manifest_id": "A9F4S-HARDENED-EXECUTION-MANIFEST",
+  "verified_at_utc": "2026-08-26T03:46:51Z",
+  "live_execution_authorized": false,
+  "repository": {
+    "branch": "integration",
+    "head": "8c682a753e6ba47b55541d56d85acdfa8e93e16d",
+    "canonical_hash": "6beec34e98b351dd50ff073fe87c44d8fc58d256",
+    "shared_schema_hash": "d4a197dc3531a6b18c18d5a21250dc1892ab1d75"
+  },
+  "database_provider_class": "NEON",
+  "provenance": {
+    "source_forward": "A9F4R_RESIDUAL_CONVERGENCE.sql",
+    "source_forward_sha256": "dd9d8dae0420e96eb651f55040966f27abbb59d56c3913e6771b2aea969db41f",
+    "hardened_forward": "A9F4S_RESIDUAL_CONVERGENCE_HARDENED.sql",
+    "hardened_forward_sha256": "d79a4c1bf44da43089291c3e5c6149dfb42b024c629b20c8c6501c3e529e4ef6",
+    "rollback": "A9F4R_RESIDUAL_ROLLBACK.sql",
+    "rollback_sha256": "f67dc9ae269b557b9f3a58a0ccbadb511890aa2567b8c1486710432c3b72c7db"
+  },
+  "hardening": {
+    "biometric_readings": "SHARE UPDATE EXCLUSIVE",
+    "discernment_attempts": "SHARE UPDATE EXCLUSIVE",
+    "existing_mutation_tables": "ACCESS EXCLUSIVE",
+    "exact_source_delta_only": true
+  },
+  "isolated_qualification": {
+    "restore": true,
+    "forward": true,
+    "post_state": {
+      "tables": 81,
+      "columns": 620,
+      "standalone_indexes": 75
+    },
+    "rollback": true,
+    "roundtrip_fingerprint_equal": true,
+    "roundtrip_fingerprint": "f2e603c6850a863ee6606b288014a548ff0cfd6779d0895c5792e4265e9f9884"
+  },
+  "remaining_gates": [
+    "provider-native recovery checkpoint or equivalent verified recovery proof",
+    "fresh production preflight immediately before execution",
+    "explicit production migration authorization",
+    "post-production-migration canonical/live parity verification"
+  ]
+}

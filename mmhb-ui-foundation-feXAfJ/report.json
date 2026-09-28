@@ -1,0 +1,294 @@
+{
+  "id": "MMHB_UI_FOUNDATION_20260912_V3",
+  "scope": "REPLIT_WORKSPACE_PREVIEW",
+  "status": "RUNNING_PREVIEW_UI_UPDATE_PASS",
+  "sourceChanges": [
+    {
+      "file": "client/src/index.css",
+      "beforeSha256": "4f3c8ee78dae5e51ebea71ae7cc6eba28314762bd229ada87ab84ca63d6d9113",
+      "afterSha256": "4cd664160fa56ca74c6f4ce8f956b52d547df66b7d28330f50e19c5778080f83",
+      "mode": 420
+    },
+    {
+      "file": "client/src/components/wellness/WellnessPageShell.jsx",
+      "beforeSha256": "ce29eb8b7bce5e7b6c575e2fa0e9da48903c31dc7e4c06dd5408bd4abc5624cc",
+      "afterSha256": "a7786f30b920e59a001a9257f331972570d7b245b825190d4148a7b0a35a46d1",
+      "mode": 420
+    },
+    {
+      "file": "client/src/components/TglpNavbar.jsx",
+      "beforeSha256": "8a9ff07e86b086ec6579a8e49419f4898043ed2a8f4d6944748580b738d88a32",
+      "afterSha256": "53ee47e3fe33934446a5904699359ad5f473028fd0c79fb89363741de743d103",
+      "mode": 420
+    },
+    {
+      "file": "client/src/pages/JournalPage.jsx",
+      "beforeSha256": "c226dc9bced13f4a03b1a1b6132b18809f7f0a6e7d1bee349e22e5a0b6d87dce",
+      "afterSha256": "987b58914510c4550f2de76ba36633e8cab4918b6675abe1eeb5f066265b5c62",
+      "mode": 420
+    },
+    {
+      "file": "client/src/styles/mmhb-ui-controls.css",
+      "beforeSha256": "62761c1b67d0d48082340db79f17209d4b5e59db59270b43b9d24dc0174711a7",
+      "afterSha256": "a64958b4ca02cc572a3d3a85fca35c980bd62237b12164097eff7f900aa857cf",
+      "mode": 420
+    },
+    {
+      "file": "tailwind.config.js",
+      "beforeSha256": "87a9665c33337dd4d0a4192702895926f2d8256838637838ec960398c0a0acc2",
+      "afterSha256": "c36c20564f4f62effe1c5a802804df682d7e4da519d643e99dfde2955569d880",
+      "mode": 420
+    }
+  ],
+  "publicDeployment": "NOT_RUN",
+  "authenticatedWorkflows": "UNPROVEN",
+  "fullTerms": "PENDING",
+  "backupDirectory": "/home/runner/workspace/mmhb-ui-foundation-feXAfJ",
+  "uiQualification": {
+    "status": "CANDIDATE_UI_QUALIFICATION_PASS",
+    "results": [
+      {
+        "width": 320,
+        "theme": "light",
+        "result": "CONTROL_FIXTURE_PASS",
+        "controls": 3,
+        "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+        "blockedRequests": 0
+      },
+      {
+        "width": 320,
+        "theme": "dark",
+        "result": "CONTROL_FIXTURE_PASS",
+        "controls": 3,
+        "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+        "blockedRequests": 0
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "result": "CONTROL_FIXTURE_PASS",
+        "controls": 3,
+        "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+        "blockedRequests": 0
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "result": "CONTROL_FIXTURE_PASS",
+        "controls": 3,
+        "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+        "blockedRequests": 0
+      },
+      {
+        "width": 768,
+        "theme": "light",
+        "result": "CONTROL_FIXTURE_PASS",
+        "controls": 10,
+        "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+        "blockedRequests": 0
+      },
+      {
+        "width": 768,
+        "theme": "dark",
+        "result": "CONTROL_FIXTURE_PASS",
+        "controls": 10,
+        "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+        "blockedRequests": 0
+      },
+      {
+        "width": 1365,
+        "theme": "light",
+        "result": "CONTROL_FIXTURE_PASS",
+        "controls": 10,
+        "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+        "blockedRequests": 0
+      },
+      {
+        "width": 1365,
+        "theme": "dark",
+        "result": "CONTROL_FIXTURE_PASS",
+        "controls": 10,
+        "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+        "blockedRequests": 0
+      },
+      {
+        "result": "LOGOUT_REJECTION_DISPLAY_PASS"
+      },
+      {
+        "result": "LOCAL_SESSION_FULL_NAVIGATION_PASS",
+        "authentication": "SIMULATED"
+      },
+      {
+        "route": "/login",
+        "result": "CANDIDATE_APP_NAV_MOUNT_PASS",
+        "authenticatedAPIs": "BLOCKED"
+      },
+      {
+        "route": "/journal",
+        "width": 320,
+        "theme": "light",
+        "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+        "contrastRatios": {
+          "signout": 11.03,
+          "dashboard": 11.03,
+          "title": 11.03,
+          "date": 11.03,
+          "share": 11.03,
+          "save": 7.38,
+          "insights": 7.38,
+          "input": 12.41
+        }
+      },
+      {
+        "route": "/dashboard",
+        "width": 320,
+        "theme": "light",
+        "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+        "contrastRatios": {
+          "signout": 11.03,
+          "dashboard": 11.03
+        }
+      },
+      {
+        "route": "/journal",
+        "width": 320,
+        "theme": "dark",
+        "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+        "contrastRatios": {
+          "signout": 11.03,
+          "dashboard": 11.03,
+          "title": 11.03,
+          "date": 11.03,
+          "share": 11.03,
+          "save": 7.38,
+          "insights": 7.38,
+          "input": 12.41
+        }
+      },
+      {
+        "route": "/dashboard",
+        "width": 320,
+        "theme": "dark",
+        "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+        "contrastRatios": {
+          "signout": 11.03,
+          "dashboard": 11.03
+        }
+      },
+      {
+        "route": "/journal",
+        "width": 768,
+        "theme": "light",
+        "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+        "contrastRatios": {
+          "signout": 11.03,
+          "dashboard": 11.03,
+          "title": 11.03,
+          "date": 11.03,
+          "share": 11.03,
+          "save": 7.38,
+          "insights": 7.38,
+          "input": 12.41
+        }
+      },
+      {
+        "route": "/dashboard",
+        "width": 768,
+        "theme": "light",
+        "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+        "contrastRatios": {
+          "signout": 11.03,
+          "dashboard": 11.03
+        }
+      },
+      {
+        "route": "/journal",
+        "width": 768,
+        "theme": "dark",
+        "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+        "contrastRatios": {
+          "signout": 11.03,
+          "dashboard": 11.03,
+          "title": 11.03,
+          "date": 11.03,
+          "share": 11.03,
+          "save": 7.38,
+          "insights": 7.38,
+          "input": 12.41
+        }
+      },
+      {
+        "route": "/dashboard",
+        "width": 768,
+        "theme": "dark",
+        "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+        "contrastRatios": {
+          "signout": 11.03,
+          "dashboard": 11.03
+        }
+      },
+      {
+        "route": "/journal",
+        "width": 1365,
+        "theme": "light",
+        "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+        "contrastRatios": {
+          "signout": 11.03,
+          "dashboard": 11.03,
+          "title": 11.03,
+          "date": 11.03,
+          "share": 11.03,
+          "save": 7.38,
+          "insights": 7.38,
+          "input": 12.41
+        }
+      },
+      {
+        "route": "/dashboard",
+        "width": 1365,
+        "theme": "light",
+        "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+        "contrastRatios": {
+          "signout": 11.03,
+          "dashboard": 11.03
+        }
+      },
+      {
+        "route": "/journal",
+        "width": 1365,
+        "theme": "dark",
+        "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+        "contrastRatios": {
+          "signout": 11.03,
+          "dashboard": 11.03,
+          "title": 11.03,
+          "date": 11.03,
+          "share": 11.03,
+          "save": 7.38,
+          "insights": 7.38,
+          "input": 12.41
+        }
+      },
+      {
+        "route": "/dashboard",
+        "width": 1365,
+        "theme": "dark",
+        "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+        "contrastRatios": {
+          "signout": 11.03,
+          "dashboard": 11.03
+        }
+      }
+    ],
+    "limitations": [
+      "Authentication and API data are simulated in component and page-composition fixtures.",
+      "No real login, token revocation, journal write, or community posting was tested.",
+      "Candidate login route mounts the changed navigation with API requests blocked."
+    ]
+  },
+  "indexSha256": "eb2d4aca621338dc8942ea57ad36ea2be4526cdea2661ca731c0d4bfbc4fb416",
+  "candidateFiles": 554,
+  "servedScriptAndStyleFiles": 431,
+  "copiedFiles": 287,
+  "sourceFilesChanged": 6
+}

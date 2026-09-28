@@ -1,0 +1,32 @@
+{
+  "project": "MyMentalHealthBuddy",
+  "preparedDate": "2026-09-08",
+  "command": "MMHB-SERVER-CANDIDATE-R11D.txt",
+  "sha256": "8be3a8a2209385ed8646f4728906002a089b5306f663332b97fd09da86777424",
+  "bytes": 30567,
+  "actualR11C": {
+    "utc": "2026-09-08T02:47:24.734Z",
+    "status": "SERVER_CANDIDATE_FAILED",
+    "gate": "UNEXPECTED_DRIVER_FAILURE",
+    "code": "ENOENT",
+    "compilerProcessesStarted": 0,
+    "currentPreservation": "PASS",
+    "exactMissingPath": "UNKNOWN"
+  },
+  "localVerification": {
+    "fullDriverInertCompilerFixtures": 22,
+    "result": "PASS",
+    "independentReview": "PASS_WITHIN_BOUNDED_CANDIDATE_SCOPE",
+    "bashSyntax": "PASS",
+    "nodeSyntax": "PASS",
+    "embeddedDriverIdentity": "PASS",
+    "exact32PinsCompilerArgsPathPolicyPackagingPreserved": "PASS"
+  },
+  "actualR11D": "NOT_RUN_REPLIT_HANDOFF_REQUIRED",
+  "scope": "ORCHESTRATION_ONLY_NOT_REAL_ESBUILD_APPLICATION_NATIVE_DATABASE_BROWSER_OR_DEPLOYMENT",
+  "files": {
+    "MMHB-SERVER-CANDIDATE-R11D.txt": "8be3a8a2209385ed8646f4728906002a089b5306f663332b97fd09da86777424",
+    "server-candidate-driver-r11d.mjs": "987dfe8c6b9c9a26a223514cd842c0ea5de81d255606c75560d703990856fe7e",
+    "test-server-candidate-r11d.py": "63bbbb7398653a19a196cb354c19c7ff9598d3299d6f89fdc155e89807caf303"
+  }
+}

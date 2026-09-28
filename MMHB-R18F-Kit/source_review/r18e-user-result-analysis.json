@@ -1,0 +1,31 @@
+{
+  "project": "MyMentalHealthBuddy",
+  "source": "USER_SUPPLIED_R18D_AND_R18E_SCREENSHOTS",
+  "r18d": {
+    "branch": "integration",
+    "expectedHead": "ba56d50f2f86bc9e47f829e9596f0d0b31699ab0",
+    "currentAndSavedHead": "15afbd26287e028bb1a1146cad06f08fa77208ce",
+    "mismatch": [
+      "head"
+    ],
+    "savedAndCurrentIdentitiesStable": true
+  },
+  "r18e": {
+    "status": "COMMIT_COMPARISON_COMPLETE_REVIEW_REQUIRED",
+    "oldOnlyCommits": 0,
+    "newOnlyCommits": 1,
+    "parentMatchesOriginalHead": true,
+    "changedPaths": 508,
+    "displayLimit": 80,
+    "oldTree": "dc6eb22da900cd130f754c7be3108c6a91d8889c",
+    "newTree": "0f5b762adcf81c9b81a8880f59ed2aaa5d288339",
+    "visibleRows": "ADDITIONS_TO_MMHB_REVIEW_ARTIFACTS; REMAINING_ROWS_NOT_VISIBLE",
+    "worktreeChecked": false,
+    "applicationRuntime": "UNPROVEN"
+  },
+  "r18f": {
+    "status": "PREPARED_AND_TESTED_LOCALLY_REPLIT_PENDING",
+    "commandSha256": "c2bcf0376b8478cce51d3b7d4dc3fec056ef1a48716a017e9163a3807dfa405f",
+    "automaticContinuationCondition": "Exact child/head/branch, 508 regular additions, every exact path and Git blob ID matches prior delivered review bytes; then original R18C source/pin/candidate checks run."
+  }
+}

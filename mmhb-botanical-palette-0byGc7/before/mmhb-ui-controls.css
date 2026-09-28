@@ -1,0 +1,192 @@
+/* MMHB UI repair: scoped controls; no global theme or authentication changes. */
+.tglp-nav-root.mmhb-nav-root {
+  position: sticky; top: 0; z-index: 50; width: 100%;
+  background: #faf8f2 !important; color: #293329 !important;
+  border-bottom: 1px solid #85927c;
+}
+.tglp-nav-root.mmhb-nav-root .mmhb-nav-inner {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  max-width: 1280px; margin: 0 auto; padding: 12px 16px; gap: 12px 20px;
+  height: auto; min-width: 0;
+}
+.tglp-nav-root.mmhb-nav-root .mmhb-nav-inner > nav {
+  display: flex; flex: 1 1 100%; width: 100%; min-width: 0;
+  flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px;
+}
+.tglp-nav-root.mmhb-nav-root a:not([data-testid="link-brand-home"]),
+.tglp-nav-root.mmhb-nav-root button {
+  box-sizing: border-box;
+  min-height: 44px !important; min-width: 44px; padding: 10px 14px !important;
+  border: 1px solid #46583e !important; border-radius: 12px !important;
+  background: #faf8f2 !important; color: #293329 !important;
+  font-family: inherit !important; font-size: 14px !important;
+  font-weight: 600 !important; line-height: 22px !important;
+  text-decoration: none !important; box-shadow: none !important;
+  transform: none !important; filter: none !important; opacity: 1; white-space: nowrap;
+}
+.tglp-nav-root.mmhb-nav-root a:not([data-testid="link-brand-home"]) svg,
+.tglp-nav-root.mmhb-nav-root button svg {
+  width: 18px !important; height: 18px !important; flex-shrink: 0;
+  color: inherit !important;
+}
+.tglp-nav-root.mmhb-nav-root a:not([data-testid="link-brand-home"]) span,
+.tglp-nav-root.mmhb-nav-root button span {
+  color: inherit !important; font: inherit;
+}
+.tglp-nav-root.mmhb-nav-root a:not([data-testid="link-brand-home"]):hover,
+.tglp-nav-root.mmhb-nav-root button:not(:disabled):hover { background: #e7eddf !important; }
+.tglp-nav-root.mmhb-nav-root a:not([data-testid="link-brand-home"])[aria-current="page"],
+.tglp-nav-root.mmhb-nav-root button[aria-expanded="true"] {
+  background: #46583e !important; color: #fffdf8 !important;
+}
+.tglp-nav-root.mmhb-nav-root a:focus-visible,
+.tglp-nav-root.mmhb-nav-root button:focus-visible,
+.mmhb-journal-sharing input:focus-visible {
+  outline: 3px solid #293329 !important; outline-offset: 3px !important;
+  box-shadow: 0 0 0 3px #faf8f2 !important;
+}
+.tglp-nav-root.mmhb-nav-root button:disabled { cursor: wait; opacity: .8; }
+.tglp-nav-root.mmhb-nav-root .mmhb-signout {
+  display: inline-flex !important; align-items: center; justify-content: center;
+  gap: 8px; flex-shrink: 0;
+}
+.tglp-nav-root.mmhb-nav-root .mmhb-nav-label-short { display: none !important; }
+.tglp-nav-root.mmhb-nav-root .mmhb-nav-label-full { display: inline !important; }
+.tglp-nav-root.mmhb-nav-root [role="menu"] { max-width: calc(100vw - 32px); }
+.tglp-nav-root.mmhb-nav-root [role="menu"] a {
+  display: block; white-space: normal; border-color: transparent !important;
+}
+.tglp-nav-root.mmhb-nav-root .mmhb-signout-error {
+  max-width: 70ch; margin: 0 auto; padding: 8px 16px; color: #293329;
+}
+.mmhb-journal-sharing {
+  box-sizing: border-box; margin-bottom: 20px; padding: 16px;
+  border: 1px solid #46583e; border-radius: 12px;
+  background: #faf8f2 !important; color: #293329 !important;
+}
+.mmhb-journal-sharing .mmhb-sharing-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; min-height: 44px; cursor: pointer;
+}
+.mmhb-journal-sharing .mmhb-sharing-copy { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.mmhb-journal-sharing .mmhb-sharing-title {
+  display: block; color: #293329 !important; font-size: 16px; font-weight: 600; line-height: 1.5;
+}
+.mmhb-journal-sharing .mmhb-sharing-help,
+.mmhb-journal-sharing .mmhb-sharing-anonymous {
+  color: #46583e !important; font-size: 14px; line-height: 1.5;
+}
+.mmhb-journal-sharing .mmhb-sharing-help { display: block; }
+.mmhb-journal-sharing svg { color: #46583e !important; width: 20px; height: 20px; flex-shrink: 0; }
+.mmhb-journal-sharing input[type="checkbox"] {
+  display: inline-block !important; visibility: visible !important;
+  appearance: auto !important; -webkit-appearance: checkbox !important;
+  width: 20px !important; height: 20px !important; min-width: 20px;
+  flex-shrink: 0; margin: 0; accent-color: #46583e; color-scheme: light; opacity: 1 !important;
+}
+.mmhb-journal-sharing .mmhb-sharing-anonymous {
+  display: flex; align-items: center; gap: 12px; min-height: 44px;
+  margin-top: 12px; padding-top: 12px; border-top: 1px solid #85927c; cursor: pointer;
+}
+@media (max-width: 767px) {
+  .tglp-nav-root.mmhb-nav-root .mmhb-nav-inner { padding: 8px 12px; gap: 8px; }
+  .tglp-nav-root.mmhb-nav-root a:not([data-testid="link-brand-home"]),
+  .tglp-nav-root.mmhb-nav-root button { padding: 10px !important; }
+  .tglp-nav-root.mmhb-nav-root [data-testid="menu-mobile"] a { white-space: normal; }
+}
+@media (forced-colors: active) {
+  .tglp-nav-root.mmhb-nav-root a:not([data-testid="link-brand-home"]),
+  .tglp-nav-root.mmhb-nav-root button,
+  .mmhb-journal-sharing { border-color: ButtonText !important; }
+}
+
+.mmhb-journal-sharing input[type="checkbox"]::after { content: none !important; }
+
+/* MMHB: readable journal controls and native entry disclosure. */
+.hxos-vnext.mmhb-journal-page {
+  --foreground: 120 11% 18%; --muted-foreground: 102 17% 29%;
+  --background: 45 44% 96%; --card: 0 0% 100%;
+  --card-foreground: 120 11% 18%; --primary: 102 17% 29%;
+  --primary-foreground: 0 0% 100%;
+}
+.hxos-vnext.mmhb-journal-page button {
+  min-height: 44px; min-width: 44px; padding: 10px 14px;
+  color: #fffdf8 !important; background: #46583e !important;
+  border: 1px solid #46583e; border-radius: 12px;
+  font-size: 14px; line-height: 1.5; font-weight: 600;
+  text-shadow: none !important; -webkit-text-fill-color: currentColor !important;
+}
+.hxos-vnext.mmhb-journal-page button:not(:disabled):hover { background: #354230 !important; }
+.hxos-vnext.mmhb-journal-page button :is(span, p, svg) {
+  color: inherit !important; -webkit-text-fill-color: currentColor !important;
+}
+.hxos-vnext.mmhb-journal-page button:disabled { opacity: 1 !important; cursor: not-allowed; }
+.hxos-vnext.mmhb-journal-page button:focus-visible,
+.hxos-vnext.mmhb-journal-page input:focus-visible, .hxos-vnext.mmhb-journal-page textarea:focus-visible {
+  outline: 3px solid #293329 !important; outline-offset: 3px !important;
+}
+.hxos-vnext.mmhb-journal-page [data-testid="form-journal"] { background: #fffdf8 !important; }
+.hxos-vnext.mmhb-journal-page [data-testid="form-journal"] :is(input[type="text"], textarea) {
+  color: #293329 !important; background: #fffdf8 !important;
+  font-size: 16px; line-height: 1.5; border: 1px solid #85927c;
+  -webkit-text-fill-color: currentColor !important;
+}
+.hxos-vnext.mmhb-journal-page [data-testid="form-journal"] :is(input, textarea)::placeholder {
+  color: #46583e !important; opacity: 1 !important;
+}
+.hxos-vnext.mmhb-journal-page .mmhb-entry-row {
+  display: flex; align-items: center; gap: 8px; padding-right: 8px;
+  color: #293329; background: #faf8f2; border-radius: 12px;
+}
+.hxos-vnext.mmhb-journal-page .mmhb-entry-heading {
+  flex: 1; min-width: 0; margin: 0; padding: 0; background: none !important;
+}
+.hxos-vnext.mmhb-journal-page button.mmhb-entry-toggle {
+  display: flex; align-items: center; gap: 12px; width: 100%;
+  min-width: 0; padding: 16px; text-align: left;
+}
+.hxos-vnext.mmhb-journal-page .mmhb-entry-copy { display: block; flex: 1; min-width: 0; }
+.hxos-vnext.mmhb-journal-page .mmhb-entry-title {
+  display: block; font-size: 16px; font-weight: 600; white-space: normal;
+  overflow-wrap: anywhere; color: #293329 !important; background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+.hxos-vnext.mmhb-journal-page .mmhb-entry-date {
+  display: flex; align-items: center; gap: 6px; margin-top: 4px;
+  color: #46583e !important; font-size: 14px; font-weight: 400;
+}
+.hxos-vnext.mmhb-journal-page .mmhb-entry-row svg { width: 18px; height: 18px; flex-shrink: 0; }
+.hxos-vnext.mmhb-journal-page button.mmhb-entry-delete { flex-shrink: 0; padding: 10px; }
+.hxos-vnext.mmhb-journal-page :is(button.mmhb-entry-toggle, button.mmhb-entry-delete,
+  button[data-testid="button-cancel"], button[data-testid="button-refresh-prompt"],
+  button[role="tab"][aria-selected="false"]) {
+  color: #293329 !important; background: #faf8f2 !important; box-shadow: none !important;
+}
+.hxos-vnext.mmhb-journal-page :is(button.mmhb-entry-toggle, button.mmhb-entry-delete,
+  button[data-testid="button-cancel"], button[data-testid="button-refresh-prompt"]):hover {
+  background: #e7eddf !important;
+}
+@media (max-width: 479px) {
+  .hxos-vnext.mmhb-journal-page [data-testid="journal-prompts"] > div { flex-wrap: wrap; }
+  .hxos-vnext.mmhb-journal-page [data-testid="journal-prompts"] > div > div:first-child { flex-basis: 100%; }
+}
+@media (forced-colors: active) {
+  .hxos-vnext.mmhb-journal-page button { border-color: ButtonText !important; }
+}
+
+/* Keep navbar label paint aligned with its accessible text color. */
+.tglp-nav-root.mmhb-nav-root .mmhb-nav-label-full,
+.tglp-nav-root.mmhb-nav-root .mmhb-nav-label-short {
+  -webkit-text-fill-color: currentColor !important;
+}
+
+/* Public identity refresh; preserve navigation sizing and existing handlers. */
+.tglp-nav-root.mmhb-nav-root { --mn-paper:#faf8f2; --mn-ink:#293329; --mn-action:#46583e; --mn-on-action:#fffdf8; --mn-soft:#e7eddf; background:var(--mn-paper) !important; color:var(--mn-ink) !important; border-color:#85927c; font-family:Inter,system-ui,sans-serif; }
+.dark .tglp-nav-root.mmhb-nav-root { --mn-paper:#20271f; --mn-ink:#faf8f2; --mn-action:#bdcdaa; --mn-on-action:#293329; --mn-soft:#354230; }
+.tglp-nav-root.mmhb-nav-root a:not([data-testid="link-brand-home"]), .tglp-nav-root.mmhb-nav-root button { background:var(--mn-paper) !important; color:var(--mn-ink) !important; border-color:var(--mn-action) !important; }
+.tglp-nav-root.mmhb-nav-root a:not([data-testid="link-brand-home"]):hover, .tglp-nav-root.mmhb-nav-root button:not(:disabled):hover { background:var(--mn-soft) !important; }
+.tglp-nav-root.mmhb-nav-root a:not([data-testid="link-brand-home"])[aria-current="page"], .tglp-nav-root.mmhb-nav-root button[aria-expanded="true"] { background:var(--mn-action) !important; color:var(--mn-on-action) !important; }
+.tglp-nav-root.mmhb-nav-root [data-testid="link-brand-home"], .tglp-nav-root.mmhb-nav-root [data-testid="link-brand-home"] :is(span,h1,h2,p) { color:var(--mn-ink) !important; -webkit-text-fill-color:currentColor !important; text-shadow:none !important; background-image:none !important; }
+.tglp-nav-root.mmhb-nav-root [role="menu"], .tglp-nav-root.mmhb-nav-root [data-testid="menu-mobile"] { background:var(--mn-paper) !important; }
+.tglp-nav-root.mmhb-nav-root a:focus-visible, .tglp-nav-root.mmhb-nav-root button:focus-visible { outline-color:var(--mn-action) !important; box-shadow:0 0 0 3px var(--mn-paper) !important; }
+@media(forced-colors:active) { .tglp-nav-root.mmhb-nav-root a, .tglp-nav-root.mmhb-nav-root button { border-color:ButtonText !important; } }

@@ -1,0 +1,126 @@
+{
+  "id": "MMHB_NAV_SHARE_20260911_V1",
+  "scope": "REPLIT_WORKSPACE_PREVIEW",
+  "status": "RUNNING_PREVIEW_UI_UPDATE_PASS",
+  "sourceChanges": [
+    {
+      "file": "client/src/styles/mmhb-ui-controls.css",
+      "beforeSha256": null,
+      "afterSha256": "62761c1b67d0d48082340db79f17209d4b5e59db59270b43b9d24dc0174711a7",
+      "mode": 420
+    },
+    {
+      "file": "client/src/components/JournalSharingOptions.jsx",
+      "beforeSha256": null,
+      "afterSha256": "91dc07839429ad3284160309503450f5d5cd0f4a518ed952c37f851abc26c1c0",
+      "mode": 420
+    },
+    {
+      "file": "client/src/components/TglpNavbar.jsx",
+      "beforeSha256": "c9637670a039d15acba6625ae236ab335e304a40f482d0f65614f5e46f158159",
+      "afterSha256": "8a9ff07e86b086ec6579a8e49419f4898043ed2a8f4d6944748580b738d88a32",
+      "mode": 420
+    },
+    {
+      "file": "client/src/pages/JournalPage.jsx",
+      "beforeSha256": "f6e6a114aa33b0d4093f8fbbd8dc9279ac27421302f3076b80e7e48046f10181",
+      "afterSha256": "c226dc9bced13f4a03b1a1b6132b18809f7f0a6e7d1bee349e22e5a0b6d87dce",
+      "mode": 420
+    }
+  ],
+  "publicDeployment": "NOT_RUN",
+  "authenticatedWorkflows": "UNPROVEN",
+  "fullTerms": "PENDING",
+  "backupDirectory": "/home/runner/workspace/mmhb-ui-repair-MN66Ks",
+  "uiQualification": {
+    "status": "CANDIDATE_UI_QUALIFICATION_PASS",
+    "results": [
+      {
+        "width": 320,
+        "theme": "light",
+        "result": "CONTROL_FIXTURE_PASS",
+        "controls": 3,
+        "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+        "blockedRequests": 0
+      },
+      {
+        "width": 320,
+        "theme": "dark",
+        "result": "CONTROL_FIXTURE_PASS",
+        "controls": 3,
+        "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+        "blockedRequests": 0
+      },
+      {
+        "width": 390,
+        "theme": "light",
+        "result": "CONTROL_FIXTURE_PASS",
+        "controls": 3,
+        "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+        "blockedRequests": 0
+      },
+      {
+        "width": 390,
+        "theme": "dark",
+        "result": "CONTROL_FIXTURE_PASS",
+        "controls": 3,
+        "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+        "blockedRequests": 0
+      },
+      {
+        "width": 768,
+        "theme": "light",
+        "result": "CONTROL_FIXTURE_PASS",
+        "controls": 10,
+        "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+        "blockedRequests": 0
+      },
+      {
+        "width": 768,
+        "theme": "dark",
+        "result": "CONTROL_FIXTURE_PASS",
+        "controls": 10,
+        "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+        "blockedRequests": 0
+      },
+      {
+        "width": 1365,
+        "theme": "light",
+        "result": "CONTROL_FIXTURE_PASS",
+        "controls": 10,
+        "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+        "blockedRequests": 0
+      },
+      {
+        "width": 1365,
+        "theme": "dark",
+        "result": "CONTROL_FIXTURE_PASS",
+        "controls": 10,
+        "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+        "blockedRequests": 0
+      },
+      {
+        "result": "LOGOUT_REJECTION_DISPLAY_PASS"
+      },
+      {
+        "result": "LOCAL_SESSION_FULL_NAVIGATION_PASS",
+        "authentication": "SIMULATED"
+      },
+      {
+        "route": "/login",
+        "result": "CANDIDATE_APP_NAV_MOUNT_PASS",
+        "authenticatedAPIs": "BLOCKED"
+      }
+    ],
+    "limitations": [
+      "Authentication is simulated only in component fixtures.",
+      "No real login, token revocation, journal write, or community posting was tested.",
+      "Candidate login route mounts the changed navigation with API requests blocked."
+    ]
+  },
+  "indexSha256": "5a1c51ba4285c1d3335d8ee8d15e9b015d47654f2aa4589109b8bf1fbea87bba",
+  "candidateFiles": 554,
+  "servedScriptAndStyleFiles": 431,
+  "copiedFiles": 277,
+  "sourceFilesChanged": 4
+}

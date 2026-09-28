@@ -1,0 +1,206 @@
+{
+  "project": "MyMentalHealthBuddy",
+  "scope": "Storage-only candidate change; NOT production certification",
+  "source_basis": "Full storage.mjs body pasted by the user on September 13, 2026. Whitespace-normalized source is pinned; application helper also requires the original nine-file report checksum, commit and Git blob match.",
+  "storage_assertions": {
+    "schema": "MMHB_STORAGE_GUARD_TEST_V1",
+    "runtime": "v22.16.0",
+    "scope": "Provided storage method bodies, mocked Drizzle API and database; no real SQL, OIDC, HTTP or browser",
+    "total": 25,
+    "passed": 25,
+    "results": [
+      {
+        "name": "Original: no administrator causes new account admin",
+        "kind": "baseline_unsafe_behavior_reproduced",
+        "pass": true
+      },
+      {
+        "name": "Original: test-named administrators allow another admin",
+        "kind": "baseline_unsafe_behavior_reproduced",
+        "pass": true
+      },
+      {
+        "name": "Original: same email overwrites a different linked subject",
+        "kind": "baseline_unsafe_behavior_reproduced",
+        "pass": true
+      },
+      {
+        "name": "Empty account table: new account is ordinary",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "No admin but ordinary users: new account is ordinary",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Only test-named admin: new account is ordinary",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Only fixture-named admin: new account is ordinary",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Normal existing admin: new account is ordinary",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Mixed admin emails: new account is ordinary",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Incidental substring in real-looking admin email: new account is ordinary",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Input role cannot promote new account",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Email omitted: legacy placeholder preserved, role ordinary",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Existing linked administrator retains role and identity",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Existing linked ordinary user cannot request promotion",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Existing linked account keeps absent profile fields",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Unlinked matching email is not linked automatically",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Different subject on ordinary account is not replaced",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Different subject on admin account is not replaced",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Arbitrary verification/link flags cannot bypass explicit-link requirement",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Multiple matching-email rows cause zero writes",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Database read failure propagates without writes",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Existing getters preserve return shape (privacy filtering not addressed)",
+        "kind": "unresolved_behavior_retained",
+        "pass": true
+      },
+      {
+        "name": "Mutation: automatic admin grant is detected",
+        "kind": "mutation_detection",
+        "pass": true
+      },
+      {
+        "name": "Mutation: email-only linking is detected",
+        "kind": "mutation_detection",
+        "pass": true
+      },
+      {
+        "name": "Mutation: existing administrator demotion is detected",
+        "kind": "mutation_detection",
+        "pass": true
+      }
+    ]
+  },
+  "patch_helper_checks": {
+    "schema": "MMHB_STORAGE_PATCH_HELPER_TESTS_V1",
+    "tests": [
+      {
+        "name": "Apply one file, preserve HEAD/index/other source, create exact local checkpoint",
+        "pass": true
+      },
+      {
+        "name": "Repeat execution reuses identical source and checkpoint",
+        "pass": true
+      },
+      {
+        "name": "Default dry run does not write source/checkpoint/index",
+        "pass": true
+      },
+      {
+        "name": "Report drift is refused",
+        "pass": true
+      },
+      {
+        "name": "Working source drift is refused",
+        "pass": true
+      },
+      {
+        "name": "Unrelated tracked edits are refused",
+        "pass": true
+      },
+      {
+        "name": "Staged edits are refused",
+        "pass": true
+      },
+      {
+        "name": "Unexpected candidate commit is refused",
+        "pass": true
+      },
+      {
+        "name": "Source symlink is refused",
+        "pass": true
+      },
+      {
+        "name": "Source hardlink is refused",
+        "pass": true
+      },
+      {
+        "name": "Inherited Git routing/Node options and reference hook are suppressed",
+        "pass": true
+      },
+      {
+        "name": "Conflicting safety reference prevents source edit",
+        "pass": true
+      }
+    ],
+    "total": 12,
+    "passed": 12,
+    "scope": "Disposable Git repositories using supplied storage body; no Replit or production database execution"
+  },
+  "not_tested": [
+    "Real Drizzle/PostgreSQL queries and constraints",
+    "OIDC callback error UX",
+    "Production account role inventory",
+    "Public-profile field filtering",
+    "Session/refresh-token invalidation",
+    "Mounted routing order and CORS",
+    "Complete application builds and CI"
+  ],
+  "replit_applied": false,
+  "helper_sha256": "09b4fe81dda67ecfff94629e89cf0977318b84f8bde04ae9efb39b901d975a06"
+}

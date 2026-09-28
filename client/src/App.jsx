@@ -317,6 +317,8 @@ import {
   Presence
 } from "./routes/lazyRoutes.jsx";
 
+import MMHBTermsPage from "./pages/Terms";
+
 function ConfigRoute({ route }) {
   const routeKey = routeKeyFromRoute(route);
   return <AutopilotPage route={route} routeKey={routeKey} />;
@@ -557,6 +559,17 @@ export default function App() {
               <Route path="/wellness-dashboard">
                 <WellnessRoute><WellnessDashboard /></WellnessRoute>
               </Route>
+              {/* Public directories must precede the individual-tool wildcard. */}
+              <Route path="/wellness-tools-hub"><WellnessToolsHub /></Route>
+              <Route path="/tools/all"><ToolsIndex /></Route>
+              <Route path="/tools/gad7"><GAD7Assessment /></Route>
+              <Route path="/tools/phq9"><PHQ9Assessment /></Route>
+              <Route path="/tools/distortion-checker"><CognitiveDistortionChecker /></Route>
+              <Route path="/tools/manipulation-detector"><ManipulationDetector /></Route>
+              <Route path="/tools/breath-pacer"><BreathPacer /></Route>
+              <Route path="/tools/boundary-builder"><BoundaryBuilderTool /></Route>
+              <Route path="/tools/sleep-quality-calculator"><SleepQualityCalculator /></Route>
+              <Route path="/tools/nervous-system-check"><NervousSystemCheck /></Route>
               <ToolRoutes path="/tools/*" WellnessRoute={WellnessRoute} ConfigRoute={ConfigRoute} />
               <HubRoutes path={/^\/(?:hubs(?:\/.*)?|explore\/(?:topics|pathways|search))\/?$/} WellnessRoute={WellnessRoute} ProtectedRoute={ProtectedRoute} />
               <Route path="/twelve-practices">
@@ -755,8 +768,8 @@ export default function App() {
               <Route path="/lesson">{() => <Redirect to="/learn" />}</Route>
               <Route path="/session">{() => <Redirect to="/meditation" />}</Route>
               <Route path="/program">{() => <Redirect to="/courses" />}</Route>
-              <AliasRedirectRoutes />
-              <ConfigUtilityRoutes ConfigRoute={ConfigRoute} MindfulnessCanonical={MindfulnessCanonical} />
+              <AliasRedirectRoutes path={/^(?:\/subscribe|\/article|\/posts|\/breathwork|\/meditate|\/affirmation|\/timer|\/activity|\/prompt|\/story|\/stories|\/track|\/tracker|\/tracking|\/log|\/challenges|\/therapist|\/donate|\/logs|\/tutorial|\/class|\/classes|\/selfcare|\/selflove|\/innerchild|\/quotes|\/heal|\/mentalhealth|\/ground|\/routine|\/explore|\/discover|\/toolkit|\/breathe|\/technique|\/techniques|\/selfworth|\/emotion|\/topics|\/talk|\/conversations|\/discussion|\/find|\/search|\/guidance|\/healing-tools|\/my-journey|\/media|\/downloads|\/user|\/apps|\/appointment|\/test|\/begin|\/join|\/worksheets|\/meditations|\/appointments|\/members|\/member|\/log-in|\/contact-us|\/about-us|\/faqs|\/getting-started|\/how-it-works|\/sitemap|\/my-profile|\/my-account|\/my-settings|\/preferences|\/logout|\/signout|\/sign-out)\/?$/i} />
+              <ConfigUtilityRoutes path={/^(?:\/billing|\/overview|\/breathing|\/grounding|\/meditation|\/mindfulness)\/?$/i} ConfigRoute={ConfigRoute} MindfulnessCanonical={MindfulnessCanonical} />
               <Route path="/log-out">{() => <Redirect to="/login" />}</Route>
               <Route path="/products">{() => <Redirect to="/features" />}</Route>
               <Route path="/index">{() => <Redirect to="/" />}</Route>
@@ -1199,7 +1212,7 @@ export default function App() {
                 <WellnessRoute><DailyWisdomOraclePage /></WellnessRoute>
               </Route>
 
-                            <AdvancedGrowthRoutes WellnessRoute={WellnessRoute} ProtectedRoute={ProtectedRoute} />
+                            <AdvancedGrowthRoutes path={/^(?:\/tools|\/alignment-path|\/system-map|\/tools\/breath|\/tools\/reframe|\/advanced|\/mastery|\/ritual|\/atlas|\/strategy-maps|\/meta-learning|\/systems-thinking|\/cognitive-architecture|\/philosophical-inquiry|\/knowledge-synthesis|\/content-studio|\/study-vault|\/elite-tools|\/resilience|\/companion|\/collaborative-lab|\/growth-analytics|\/guided-journaling|\/insight-cards|\/progress|\/mirror)\/?$/i} WellnessRoute={WellnessRoute} ProtectedRoute={ProtectedRoute} />
 
               {/* Batch 11 - Personalization (P201-P210) */}
               <Route path="/pathways">
@@ -1253,7 +1266,7 @@ export default function App() {
               </Route>
 
               {/* Community Routes */}
-              <CommunityRoutes
+              <CommunityRoutes path={/^(?:\/community|\/community\/feed|\/community\/circle|\/community\/discussion\/[^\/]+|\/community\/events|\/community\/stories|\/community\/mentors|\/community\/challenges|\/community-guidelines)\/?$/i}
                 CommunityHub={CommunityHub}
                 CommunityPage={CommunityPage}
                 CommunityCircle={CommunityCircle}
@@ -1421,10 +1434,10 @@ export default function App() {
                 <AdminGuard><AdminHealthDashboard /></AdminGuard>
               </Route>
               <Route path="/admin/social/ops">
-                <AdminGuard><AdminSocial /></AdminGuard>
+                <AdminGuard><NarrativeOpsConsole /></AdminGuard>
               </Route>
               <Route path="/admin/social">
-                <AdminGuard><AdminSocial /></AdminGuard>
+                <AdminGuard><NarrativeOpsConsole /></AdminGuard>
               </Route>
               <Route path="/admin/social/generate">
                 <AdminGuard><SocialGenerator /></AdminGuard>
@@ -1490,8 +1503,8 @@ export default function App() {
               <Route path="/design-dashboard">{() => <ConfigRoute route="/design-dashboard" />}</Route>
 
               {/* Legal Pages - Config Driven */}
-              <Route path="/terms">{() => <ConfigRoute route="/terms" />}</Route>
-              <Route path="/tos">{() => <ConfigRoute route="/tos" />}</Route>
+              <Route path="/terms">{() => <MMHBTermsPage />}</Route>
+              <Route path="/tos">{() => <MMHBTermsPage />}</Route>
               <Route path="/legal">{() => <ConfigRoute route="/legal" />}</Route>
               <Route path="/ethics">{() => <ConfigRoute route="/ethics" />}</Route>
               <Route path="/disclaimer">{() => <ConfigRoute route="/disclaimer" />}</Route>
@@ -1509,7 +1522,7 @@ export default function App() {
               <Route path="/courses">{() => <CourseCatalog />}</Route>
               <Route path="/learn/courses">{() => <CourseCatalog />}</Route>
               <Route path="/practices">{() => <PracticeLibrary />}</Route>
-              <AdminRoutes AdminGuard={AdminGuard} RolesPermissions={RolesPermissions} FeatureFlags={FeatureFlags} SystemAlerts={SystemAlerts} FeedbackAggregator={FeedbackAggregator} NarrativeDrafts={NarrativeDrafts} EngagementDashboard={EngagementDashboard} AnalyticsDashboard={AnalyticsDashboard} AdminUsers={AdminUsers} AdminTools={AdminTools} />
+              <AdminRoutes path={/^(?:\/admin\/roles|\/admin\/feature-flags|\/admin\/alerts|\/admin\/feedback|\/admin\/narrative|\/admin\/engagement|\/admin\/analytics|\/admin\/users|\/admin\/tools)\/?$/i} AdminGuard={AdminGuard} RolesPermissions={RolesPermissions} FeatureFlags={FeatureFlags} SystemAlerts={SystemAlerts} FeedbackAggregator={FeedbackAggregator} NarrativeDrafts={NarrativeDrafts} EngagementDashboard={EngagementDashboard} AnalyticsDashboard={AnalyticsDashboard} AdminUsers={AdminUsers} AdminTools={AdminTools} />
               <Route path="/goals">{() => <ProtectedRoute><WellnessGoals /></ProtectedRoute>}</Route>
               
               <Route path="/tools/emotion-wheel">{() => <WellnessRoute><EmotionWheel /></WellnessRoute>}</Route>
@@ -1536,11 +1549,12 @@ export default function App() {
               <Route path="/workshops">{() => <CourseCatalog />}</Route>
               <Route path="/library" component={LearnHub} />
 
-              <AccountAdminRoutes
+              <AccountAdminRoutes path={/^(?:\/account\/profile|\/account\/security|\/account\/billing|\/preferences\/notifications|\/preferences\/safety|\/content-admin|\/crm|\/control|\/health|\/publishing|\/qa)\/?$/i}
                 ProtectedRoute={ProtectedRoute}
                 AdminGuard={AdminGuard}
                 ConfigRoute={ConfigRoute}
                 AccountProfile={AccountProfile}
+                AccountSecurity={AccountSecurity}
                 AccountBilling={AccountBilling}
                 NotificationPreferences={NotificationPreferences}
                 SafetyPreferences={SafetyPreferences}

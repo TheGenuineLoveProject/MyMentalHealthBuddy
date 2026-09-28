@@ -1,0 +1,81 @@
+{
+  "scope": "Disposable local Git fixture repositories, not the user Replit project. Fixture constants are substituted only in test copies. Each case verifies original refs, original index bytes and original working files are preserved.",
+  "script_sha256": "b29629223881be75426b0f04dc106ce1a35a4f1ff512efa789118a9cac00373b",
+  "git_version": "git version 2.47.3",
+  "passed": 12,
+  "failed": 0,
+  "tests": [
+    {
+      "test": "Full bundle imports into an empty independent repository and reproduces A4",
+      "result": "PASS",
+      "exit_code": 0,
+      "observed_status": "STATUS=A4_PORTABLE_BACKUP_READY"
+    },
+    {
+      "test": "Existing bundle is verified and reused without overwriting",
+      "result": "PASS",
+      "exit_code": 0,
+      "observed_status": "STATUS=A4_PORTABLE_BACKUP_READY"
+    },
+    {
+      "test": "Corrupted saved bundle is rejected and not overwritten",
+      "result": "PASS",
+      "exit_code": 0,
+      "observed_status": "STATUS=A4_PORTABLE_BACKUP_READY"
+    },
+    {
+      "test": "Inherited Git routing variables do not redirect operations",
+      "result": "PASS",
+      "exit_code": 0,
+      "observed_status": "STATUS=A4_PORTABLE_BACKUP_READY"
+    },
+    {
+      "test": "Wrong patch checksum stops before export",
+      "result": "PASS",
+      "exit_code": 1,
+      "observed_status": "STATUS=BACKUP_STOPPED"
+    },
+    {
+      "test": "Wrong candidate path count stops before export",
+      "result": "PASS",
+      "exit_code": 1,
+      "observed_status": "STATUS=BACKUP_STOPPED"
+    },
+    {
+      "test": "Unexpected recovery commit stops",
+      "result": "PASS",
+      "exit_code": 1,
+      "observed_status": "STATUS=BACKUP_STOPPED"
+    },
+    {
+      "test": "Symlink backup target rejected",
+      "result": "PASS",
+      "exit_code": 1,
+      "observed_status": "STATUS=BACKUP_STOPPED"
+    },
+    {
+      "test": "Missing recovery reference stops",
+      "result": "PASS",
+      "exit_code": 1,
+      "observed_status": "STATUS=BACKUP_STOPPED"
+    },
+    {
+      "test": "Partial clone rejected instead of fetching missing data",
+      "result": "PASS",
+      "exit_code": 1,
+      "observed_status": "STATUS=BACKUP_STOPPED"
+    },
+    {
+      "test": "Disk-space policy failure stops safely",
+      "result": "PASS",
+      "exit_code": 1,
+      "observed_status": "STATUS=BACKUP_STOPPED"
+    },
+    {
+      "test": "No checkout or project hook executes during backup",
+      "result": "PASS",
+      "exit_code": 0,
+      "observed_status": "STATUS=A4_PORTABLE_BACKUP_READY"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "MMHB_STORAGE_V2_REGRESSION_TESTS",
+  "tests": [
+    {
+      "name": "Immutable GitHub blob identity and one-character fixture mismatch",
+      "pass": true,
+      "bytes": 2793,
+      "github_blob_id": "dc3ff519e39f3f0c33e9fbe42ffeff7656e7191e",
+      "source_sha256": "2e7c6e0ec6fc269abc26bac6270e571e2ebdc4839e49b649c68a7806aaf38127",
+      "difference": "one R/r character in fallback-email string"
+    },
+    {
+      "name": "Reproduce original reported stop after valid report/commit checks, before writes",
+      "pass": true,
+      "observed_stop": "UNREVIEWED_STORAGE_BODY",
+      "source_head_index_refs_config": "unchanged"
+    },
+    {
+      "name": "V2 rejects uppercase reference even with internally consistent fixture report/commit",
+      "pass": true
+    },
+    {
+      "name": "V2 rejects even whitespace drift rather than normalizing the JavaScript source",
+      "pass": true
+    },
+    {
+      "name": "V2 rejects semantic code change rather than updating its expected fingerprint",
+      "pass": true
+    },
+    {
+      "name": "Apply and repeat in restored detached-worktree layout; exact one-file checkpoint",
+      "pass": true,
+      "mode": "detached worktree attached to independent bare repository",
+      "new_checkpoint_files": 1
+    },
+    {
+      "name": "Split-index detached worktree preserves existing index",
+      "pass": true
+    }
+  ],
+  "total": 7,
+  "passed": 7
+}

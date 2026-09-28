@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import {
   Activity, Cpu, Network, Wrench, AlertCircle, CheckCircle2,
   RefreshCw, Pause, Play, Sparkles, ServerCog, ShieldAlert, Clock,
-  Lock, ShieldCheck,
+  Lock,
 } from "lucide-react";
 import { apiFetch } from "@/lib/api";
 
@@ -12,9 +12,8 @@ function panelChrome(extra = "") {
 
 /* True when an apiFetch error message is a 401/403 — i.e. the route is
  * doing its job (auth required) and the viewer simply isn't signed in as
- * admin. We classify those as "needs sign-in" rather than as a red error,
- * because per SOP_FEATURE_MAP a 401/403 on a protected route is the
- * SUCCESS condition (a 200 there would be the failure). */
+ * admin. These responses describe the current request's access result;
+ * they do not verify endpoint functionality or anonymous authorization. */
 function isAuthRequiredError(err) {
   if (!err) return false;
   const msg = typeof err === "string" ? err : (err.message || String(err));
@@ -26,6 +25,7 @@ function StatusDot({ state }) {
     ok:    { bg: "var(--glp-sage)",   ring: "var(--glp-sage-30)", label: "OK" },
     warn:  { bg: "var(--glp-gold)",   ring: "var(--glp-gold-30)", label: "Warn" },
     fail:  { bg: "var(--glp-rose)",   ring: "var(--glp-rose-30)", label: "Fail" },
+    skipped: { bg: "var(--glp-sage-30)", ring: "var(--glp-sage-15)", label: "Not checked" },
     idle:  { bg: "var(--glp-sage-30)", ring: "var(--glp-sage-15)", label: "Idle" },
   };
   const s = map[state] || map.idle;
@@ -627,23 +627,55 @@ function SelfHealingPanel() {
 }
 
 /* ---------------- Route Status ----------------
- * Lightweight liveness probe for the small set of admin / public health
- * endpoints we always care about. Each row pings its endpoint, classifies
- * the response status (2xx ok, 4xx warn, 5xx/network fail) and renders a
- * StatusDot row. This is intentionally additive — the existing readiness +
- * health-deep panels stay untouched. */
+ * Availability checks use the current session. They do not test anonymous
+ * access or certify an endpoint's security or full application behavior. */
+async function inspectRouteResponse(res, auth = "account") {
+  const result = (state, detail) => ({ state, detail });
+  if (res.redirected) return result("warn", "Redirected response; review needed");
+  if (res.status === 401) return result("warn", auth === "admin-session"
+    ? "Administrator session expired; sign in again"
+    : auth === "kernel" ? "Administrator sign-in required or expired"
+    : "Account sign-in required or expired");
+  if (res.status === 403) return result("warn", "Access denied");
+  if (res.status === 404) return result("warn", "Not found or access restricted");
+  if (res.status === 429) return result("warn", "Rate limited; try later");
+  if (res.status >= 500) return result("fail", "Server error");
+  if (!res.ok) return result("warn", "Unexpected HTTP status");
+  const type = (res.headers.get("content-type") || "").split(";")[0].trim().toLowerCase();
+  if (type !== "application/json" && !/^application\/[a-z0-9!#$&^_.+-]+\+json$/.test(type)) {
+    return result("warn", "Expected JSON; received another format");
+  }
+  let body;
+  try { body = await res.json(); }
+  catch (error) {
+    if (error?.name === "AbortError") throw error;
+    return result("warn", "Invalid JSON response");
+  }
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    return result("warn", "Unexpected JSON response");
+  }
+  if (body.ok === false || body.success === false || body.error ||
+      (Array.isArray(body.errors) && body.errors.length > 0) ||
+      ["error", "failed", "unhealthy", "down"].includes(body.status)) {
+    return result("fail", "Endpoint reports a problem");
+  }
+  if (auth === "admin-session") {
+    return body.valid === true && body.role === "admin"
+      ? result("ok", "Administrator session accepted")
+      : result("warn", "Administrator session not confirmed");
+  }
+  if (body.status === "degraded") return result("warn", "Endpoint reports degraded health");
+  return result("ok", "JSON response received");
+}
+
 function RouteStatusPanel() {
-  // `protected: true` flips the success semantics for that row:
-  //   protected + 401/403 → "ok"   (security boundary working as intended)
-  //   protected + 200     → "fail" (security LEAK — admin data served to anon)
-  // Public rows stay with the conventional 2xx-is-good classifier.
-  // Source of truth for which routes are protected: docs/SOP_FEATURE_MAP.md.
   const ROUTES = [
-    { label: "Public health", path: "/api/health",         protected: false },
-    { label: "Admin health",  path: "/api/admin/health",   protected: true  },
-    { label: "Auth (me)",     path: "/api/auth/me",        protected: true  },
-    { label: "Kernel health", path: "/api/kernel/health",  protected: true  },
-    { label: "Email health",  path: "/api/email/health",   protected: false },
+    { label: "Public health", path: "/api/health", protected: false },
+    { label: "Admin health (internal)", path: "/api/admin/health", protected: true, auth: "internal" },
+    { label: "Administrator token session", path: "/api/admin/verify-session", protected: true, auth: "admin-session" },
+    { label: "Account session", path: "/api/auth/me", protected: true, auth: "account" },
+    { label: "Kernel health", path: "/api/kernel/health", protected: true, auth: "kernel" },
+    { label: "Email health", path: "/api/email/health", protected: false },
   ];
 
   const [rows, setRows] = useState([]);
@@ -654,11 +686,8 @@ function RouteStatusPanel() {
     setLoading(true);
     setError(null);
     try {
-      // Use raw fetch (NOT apiFetch) here on purpose: apiFetch throws on
-      // non-2xx, but a probe panel needs to SEE the actual status code to
-      // classify it. We *do* attach the same Authorization header apiFetch
-      // would, so admin-only endpoints don't false-warn with 401/403 just
-      // because the bearer token wasn't forwarded.
+      // Keep current-session credentials. A successful response here is
+      // not evidence that the same endpoint permits anonymous access.
       const token = (() => {
         try {
           return typeof localStorage !== "undefined"
@@ -668,47 +697,52 @@ function RouteStatusPanel() {
           return null;
         }
       })();
+      const adminSession = (() => {
+        try {
+          return typeof sessionStorage !== "undefined"
+            ? sessionStorage.getItem("adminSessionToken") : null;
+        } catch { return null; }
+      })();
       const baseHeaders = { Accept: "application/json" };
       if (token) baseHeaders.Authorization = `Bearer ${token}`;
 
       const results = await Promise.all(
         ROUTES.map(async (r) => {
+          if (r.auth === "internal" || (r.auth === "admin-session" && !adminSession)) {
+            return { ...r, status: null, ms: null, state: "skipped", detail: r.auth === "internal"
+              ? "Not checked; requires an internal server credential"
+              : "Not checked; Command Center token sign-in is separate from account sign-in" };
+          }
+          const headers = { ...baseHeaders };
+          if ((r.auth === "admin-session" || r.auth === "kernel") && adminSession) {
+            headers.Authorization = `Bearer ${adminSession}`;
+          }
           const t0 = (typeof performance !== "undefined" ? performance.now() : Date.now());
+          const controller = new AbortController();
+          const timeout = setTimeout(() => controller.abort(), 10000);
+          let status = 0;
           try {
             const res = await fetch(r.path, {
               credentials: "include",
-              headers: baseHeaders,
+              headers,
+              cache: "no-store",
+              redirect: "error",
+              signal: controller.signal,
             });
+            status = res.status;
+            const outcome = await inspectRouteResponse(res, r.auth);
             const dt = Math.round(
               (typeof performance !== "undefined" ? performance.now() : Date.now()) - t0
             );
-            // Two-axis classifier (status × protected flag):
-            //   PROTECTED route:
-            //     5xx          → fail (server problem)
-            //     401 / 403    → ok   (security boundary intact — the goal)
-            //     2xx          → fail (LEAK — admin route served without auth)
-            //     other 4xx    → warn
-            //   PUBLIC route:
-            //     5xx          → fail
-            //     2xx          → ok
-            //     4xx (incl. 401/403) → warn (public route shouldn't auth-fail)
-            let state = "ok";
-            if (res.status >= 500) {
-              state = "fail";
-            } else if (r.protected) {
-              if (res.status === 401 || res.status === 403) state = "ok";
-              else if (res.status >= 200 && res.status < 300) state = "fail"; // security leak
-              else state = "warn";
-            } else {
-              if (res.status >= 200 && res.status < 300) state = "ok";
-              else state = "warn";
-            }
-            return { ...r, status: res.status, ms: dt, state };
-          } catch (e) {
+            return { ...r, status, ms: dt, ...outcome };
+          } catch (error) {
             const dt = Math.round(
               (typeof performance !== "undefined" ? performance.now() : Date.now()) - t0
             );
-            return { ...r, status: 0, ms: dt, state: "fail", error: e?.message };
+            return { ...r, status, ms: dt, state: "fail",
+              detail: error?.name === "AbortError" ? "Request timed out" : "Request failed" };
+          } finally {
+            clearTimeout(timeout);
           }
         })
       );
@@ -728,7 +762,7 @@ function RouteStatusPanel() {
       <PanelHeader
         icon={Network}
         title="Route Status"
-        subtitle="Live probe of key admin + public endpoints"
+        subtitle="Checks account and administrator sessions separately. Anonymous access is not tested."
         onRefresh={probe}
         refreshing={loading}
       />
@@ -757,7 +791,7 @@ function RouteStatusPanel() {
                         background: "var(--glp-sage-15)",
                         color: "var(--glp-sage-deep)",
                       }}
-                      title="Protected route — 401/403 is the success condition"
+                      title="Protected endpoint; the server decides which credentials it accepts"
                       data-testid={`tag-route-protected-${row.path}`}
                     >
                       <Lock className="w-2.5 h-2.5" aria-hidden="true" />
@@ -774,19 +808,8 @@ function RouteStatusPanel() {
                 style={{ color: "var(--glp-sage)" }}
                 data-testid={`text-route-status-${row.path}`}
               >
-                <div>{row.status === 0 ? "—" : row.status} · {row.ms}ms</div>
-                {row.protected && row.state === "ok" && (
-                  <div className="flex items-center justify-end gap-1 mt-0.5 text-xs" style={{ color: "var(--glp-sage-deep)" }}>
-                    <ShieldCheck className="w-3 h-3" aria-hidden="true" />
-                    <span>secured</span>
-                  </div>
-                )}
-                {row.protected && row.state === "fail" && row.status >= 200 && row.status < 300 && (
-                  <div className="flex items-center justify-end gap-1 mt-0.5 text-xs" style={{ color: "var(--glp-rose-deep, #7a3041)" }}>
-                    <ShieldAlert className="w-3 h-3" aria-hidden="true" />
-                    <span>LEAK — auth bypassed</span>
-                  </div>
-                )}
+                <div>{row.status === null ? "Not checked" : `${row.status === 0 ? "—" : row.status} · ${row.ms}ms`}</div>
+                <div className="mt-1 max-w-40 whitespace-normal">{row.detail}</div>
               </div>
             </li>
           ))}

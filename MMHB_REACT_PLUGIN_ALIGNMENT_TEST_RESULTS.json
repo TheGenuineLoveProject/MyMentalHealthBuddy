@@ -1,0 +1,121 @@
+{
+  "scope": "Disposable Git repositories, real Node module resolution, synthetic package archives and fake downloader. No npm registry request, real plugin execution, Vite build, or MMHB runtime.",
+  "node": "v22.16.0",
+  "python": "3.13.5",
+  "total": 28,
+  "passed": 28,
+  "results": [
+    {
+      "test": "candidate_local_stage_preserves_shared_source",
+      "pass": true
+    },
+    {
+      "test": "repeat_reuses_verified_archive_without_network",
+      "pass": true
+    },
+    {
+      "test": "bad_integrity_refused",
+      "pass": true
+    },
+    {
+      "test": "source_drift_refused_before_network",
+      "pass": true
+    },
+    {
+      "test": "changed_ref_refused",
+      "pass": true
+    },
+    {
+      "test": "missing_worktree_marker_refused",
+      "pass": true
+    },
+    {
+      "test": "node_modules_symlink_refused",
+      "pass": true
+    },
+    {
+      "test": "target_symlink_refused",
+      "pass": true
+    },
+    {
+      "test": "existing_local_package_never_overwritten",
+      "pass": true
+    },
+    {
+      "test": "related_dependency_mismatch_refused",
+      "pass": true
+    },
+    {
+      "test": "other_build_tool_mismatch_refused",
+      "pass": true
+    },
+    {
+      "test": "preload_environment_not_forwarded",
+      "pass": true
+    },
+    {
+      "test": "truncated_archive_refused",
+      "pass": true
+    },
+    {
+      "test": "archive_traversal_refused",
+      "pass": true
+    },
+    {
+      "test": "archive_symlink_refused",
+      "pass": true
+    },
+    {
+      "test": "archive_hardlink_refused",
+      "pass": true
+    },
+    {
+      "test": "archive_duplicate_refused",
+      "pass": true
+    },
+    {
+      "test": "archive_absolute_refused",
+      "pass": true
+    },
+    {
+      "test": "archive_special_refused",
+      "pass": true
+    },
+    {
+      "test": "archive_npmrc_refused",
+      "pass": true
+    },
+    {
+      "test": "archive_fileparent_refused",
+      "pass": true
+    },
+    {
+      "test": "manifest_version_refused",
+      "pass": true
+    },
+    {
+      "test": "manifest_lifecycle_refused",
+      "pass": true
+    },
+    {
+      "test": "manifest_dependency_refused",
+      "pass": true
+    },
+    {
+      "test": "url_http_refused",
+      "pass": true
+    },
+    {
+      "test": "url_host_refused",
+      "pass": true
+    },
+    {
+      "test": "url_version_refused",
+      "pass": true
+    },
+    {
+      "test": "atomic_publication_refuses_even_empty_existing_directory",
+      "pass": true
+    }
+  ]
+}

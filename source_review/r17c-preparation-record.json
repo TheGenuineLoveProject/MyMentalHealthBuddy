@@ -1,0 +1,13 @@
+{
+  "command": "MMHB-PRESERVATION-INSPECT-R17C.txt",
+  "commandSha256": "244214493d285410fbf04c2410a8495b8c961c55634a67b98fc7e3409e2dd214",
+  "localWorkflowChecks": 22,
+  "embeddedHelperHashesVerified": 3,
+  "unchangedSourceToolPins": 41,
+  "unchangedPromptPins": 22,
+  "bashSyntax": "PASS",
+  "nodeSyntax": "PASS",
+  "realReplitExecution": "PENDING",
+  "runtimeQualification": "UNPROVEN",
+  "releaseReady": false
+}

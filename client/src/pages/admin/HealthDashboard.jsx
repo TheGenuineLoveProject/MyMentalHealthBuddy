@@ -2,7 +2,8 @@
 // PHASE11745_HEALTH_DASHBOARD_REMAINING_TOKEN_CLEANUP
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { apiRequest, queryClient } from "@/lib/queryClient";
+import { apiRequest, apiDownload, queryClient } from "@/lib/queryClient";
+import { healthQueryOptions } from "@/lib/adminHealthQuery";
 import { useToast } from "@/hooks/use-toast";
 import "@/styles/glp-pane.css";
 import { Server, Database, Cpu, Activity, CheckCircle, AlertTriangle, AlertCircle, RefreshCw, Clock, Shield, Zap, TrendingUp, ArrowLeft, Stethoscope, Sparkles, PauseCircle, PlayCircle, BotMessageSquare, Download, BellRing, BellOff } from 'lucide-react';
@@ -10,7 +11,17 @@ import { Link } from "wouter";
 import { useSEO } from "@/hooks/useSEO";
 import Top50ProcessTracker from "@/components/admin/Top50ProcessTracker";
 import SafetyFooter from "../../components/ui/ReflectionFooter";
-import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+import { AdminErrorBanner, AdminInlineError } from "../../components/admin/AdminQueryStates";
+
+async function healthControl(path) {
+  // Self-heal has a 90s server deadline. Never automatically retry a control:
+  // a lost response does not mean the server stopped performing the operation.
+  const data = await apiRequest("POST", `/api/admin/health-deep/${path}`, undefined, { timeoutMs: 120000 });
+  if (!data || typeof data !== "object" || Array.isArray(data) || data.ok === false) {
+    throw new Error("Invalid health control response. Refresh health before trying again.");
+  }
+  return data;
+}
 
 function StatusIndicator({ status }) {
   const statusConfig = {
@@ -72,35 +83,33 @@ export default function HealthDashboard() {
   const [refreshKey, setRefreshKey] = useState(0);
 
   const { data: health, isLoading, error, refetch } = useQuery({
-    queryKey: ["/api/admin/health", refreshKey],
-    refetchInterval: 30000
-  });
-
-  const { data: diagnostics } = useQuery({
-    queryKey: ["/api/admin/diagnostics", refreshKey],
-    refetchInterval: 60000
+    ...healthQueryOptions,
+    queryKey: ["/api/admin/browser-health", refreshKey],
   });
 
   // Deep health surfaces the heal-360 report + heal-watch streak.
   // Read-only; the report is produced by `bash scripts/heal-all.sh` /
   // `node scripts/heal-360.mjs` / `node scripts/heal-watch.mjs`.
-  const { data: deep } = useQuery({
+  const { data: deep, error: deepError, refetch: refetchDeep } = useQuery({
+    ...healthQueryOptions,
     queryKey: ["/api/admin/health-deep", refreshKey],
+    enabled: !!health && !error,
     refetchInterval: 60000,
   });
 
   // Declarative alert rules — read-only evaluation against current state.
   // Same source of truth as the Prometheus `mmhb_alert_firing{rule}` gauge.
-  const { data: alertsData } = useQuery({
+  const { data: alertsData, error: alertsError, refetch: refetchAlerts } = useQuery({
+    ...healthQueryOptions,
     queryKey: ["/api/admin/health-deep/alerts", refreshKey],
+    enabled: !!health && !error,
     refetchInterval: 60000,
   });
 
   const { toast } = useToast();
   const reprobe = useMutation({
     mutationFn: async () => {
-      const res = await apiRequest("POST", "/api/admin/health-deep/run");
-      return res.json();
+      return healthControl("run");
     },
     onSuccess: (data) => {
       toast({
@@ -124,8 +133,7 @@ export default function HealthDashboard() {
   // Heavier than re-probe; longer cooldown (60s) and may take ~30s to finish.
   const selfHeal = useMutation({
     mutationFn: async () => {
-      const res = await apiRequest("POST", "/api/admin/health-deep/self-heal");
-      return res.json();
+      return healthControl("self-heal");
     },
     onSuccess: (data) => {
       const before = data?.before?.verdict || "?";
@@ -150,8 +158,7 @@ export default function HealthDashboard() {
   // 60s cooldown + 30s timeout.  Admin-only; never touches user-facing AI.
   const aiAnalyze = useMutation({
     mutationFn: async () => {
-      const res = await apiRequest("POST", "/api/admin/health-deep/ai-analyze");
-      return res.json();
+      return healthControl("ai-analyze");
     },
     onSuccess: (data) => {
       toast({
@@ -175,8 +182,7 @@ export default function HealthDashboard() {
   // shared deep-health query so the UI pill updates immediately.
   const schedulerResume = useMutation({
     mutationFn: async () => {
-      const res = await apiRequest("POST", "/api/admin/health-deep/scheduler/resume");
-      return res.json();
+      return healthControl("scheduler/resume");
     },
     onSuccess: () => {
       toast({ title: "Auto-heal scheduler resumed" });
@@ -188,8 +194,7 @@ export default function HealthDashboard() {
   });
   const schedulerPause = useMutation({
     mutationFn: async () => {
-      const res = await apiRequest("POST", "/api/admin/health-deep/scheduler/pause");
-      return res.json();
+      return healthControl("scheduler/pause");
     },
     onSuccess: () => {
       toast({ title: "Auto-heal scheduler paused" });
@@ -201,32 +206,25 @@ export default function HealthDashboard() {
   });
 
   // Export: downloads a single JSON diagnostic bundle (probe + watch +
-  // scheduler + ring buffers + alerts).  Uses fetch + blob + temp anchor
-  // so the browser's download UI handles it naturally.  Auth header is
-  // attached via the same Bearer-token pattern apiRequest uses.
+  // scheduler + ring buffers + alerts), using the shared session contract.
   const [exporting, setExporting] = useState(false);
   const handleExport = async () => {
     if (exporting) return;
     setExporting(true);
     try {
-      const token = localStorage.getItem("adminSessionToken");
-      const res = await fetch("/api/admin/health-deep/export", {
-        headers: token ? { Authorization: `Bearer ${token}` } : {},
-      });
-      if (!res.ok) {
-        throw new Error(`Export failed (${res.status})`);
-      }
-      const blob = await res.blob();
+      const { blob, filename } = await apiDownload("/api/admin/health-deep/export", { timeoutMs: 10000 });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
-      a.href = url;
-      const cd = res.headers.get("Content-Disposition") || "";
-      const m = cd.match(/filename="?([^"]+)"?/);
-      a.download = m?.[1] || `mmhb-health-bundle-${new Date().toISOString().replace(/[:.]/g, "-")}.json`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
+      try {
+        a.href = url;
+        a.download = filename || `mmhb-health-bundle-${new Date().toISOString().replace(/[:.]/g, "-")}.json`;
+        document.body.appendChild(a);
+        a.click();
+      } finally {
+        a.remove();
+        // Give the browser time to start reading the object URL.
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      }
       toast({ title: "Diagnostic bundle downloaded", description: a.download });
     } catch (e) {
       toast({
@@ -241,7 +239,6 @@ export default function HealthDashboard() {
 
   const handleRefresh = () => {
     setRefreshKey(prev => prev + 1);
-    refetch();
   };
 
   if (isLoading) {
@@ -261,8 +258,8 @@ export default function HealthDashboard() {
 
   const dbStatus = health?.database?.status || "unknown";
   const envConfig = health?.environment || {};
-  const systemInfo = health?.system || diagnostics?.diagnostics?.server || {};
-  const memoryInfo = diagnostics?.diagnostics?.memory || {};
+  const systemInfo = health?.system || {};
+  const memoryInfo = systemInfo;
 
   return (
     <div className="min-h-screen bg-[var(--glp-ivory)] dark:bg-[var(--glp-charcoal)] p-4 sm:p-6">
@@ -304,7 +301,7 @@ export default function HealthDashboard() {
           />
           <MetricCard
             title="Database"
-            value={`${health?.database?.latencyMs || 0}ms`}
+            value={health?.database?.latencyMs == null ? "Unavailable" : `${health.database.latencyMs}ms`}
             subtitle="Response latency"
             icon={Database}
             status={dbStatus}
@@ -395,7 +392,10 @@ export default function HealthDashboard() {
         </div>
 
         {/* Deep Health (heal-360 report) */}
-        <div className="glp-pane mt-8 rounded-xl p-6" data-testid="section-deep-health">
+        {deepError && <AdminInlineError message="Deep health is unavailable. The health summary above is still available." onRetry={refetchDeep} testId="deep-health-error" />}
+        {alertsError && <AdminInlineError message="Health alerts are unavailable." onRetry={refetchAlerts} testId="health-alerts-error" />}
+        {!deep && !deepError && <p role="status">Loading deep health…</p>}
+        {deep && !deepError && <div className="glp-pane mt-8 rounded-xl p-6" data-testid="section-deep-health">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <Stethoscope className="w-5 h-5 text-sage-600" />
@@ -869,7 +869,7 @@ export default function HealthDashboard() {
               </div>
             </>
           )}
-        </div>
+        </div>}
 
         {/* Top-50 Platform Processes Tracker */}
         <div className="mt-8" data-testid="section-top50">

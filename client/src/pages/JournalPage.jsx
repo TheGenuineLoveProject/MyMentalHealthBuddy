@@ -1,4 +1,5 @@
 import { useState, useMemo } from "react";
+import JournalSharingOptions from "../components/JournalSharingOptions.jsx";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { deriveGovernance } from "@/governance/interactions/deriveGovernance";
 import { buildGovernanceAttrs } from "@/governance/interactions/buildGovernanceAttrs";
@@ -240,7 +241,7 @@ export default function JournalPage() {
 
   return (
     <div
-      className="hxos-vnext"
+      className="hxos-vnext mmhb-journal-page"
       data-testid="journal-page-root"
       {...governanceAttrs}
     >
@@ -356,40 +357,13 @@ export default function JournalPage() {
             </div>
           )}
 
-          <div className="mb-5 p-4 rounded-xl bg-primary/5 border border-primary/20">
-            <label className="flex items-center justify-between cursor-pointer">
-              <div className="flex items-center gap-3">
-                <Share2 className="w-4 h-4 text-[var(--glp-deep-teal)]" aria-hidden="true" />
-                <div>
-                  <span className="font-medium text-foreground block text-sm">Share with Community</span>
-                  <span className="text-xs text-muted-foreground">Share your reflection anonymously</span>
-                </div>
-              </div>
-              <input
-                type="checkbox"
-                checked={shareWithCommunity}
-                onChange={(e) => setShareWithCommunity(e.target.checked)}
-                className="w-5 h-5 rounded text-primary focus:ring-primary"
-                data-testid="toggle-share"
-              />
-            </label>
-            
-            {shareWithCommunity && (
-              <div className="mt-3 pt-3 border-t border-primary/20">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={shareAnonymously}
-                    onChange={(e) => setShareAnonymously(e.target.checked)}
-                    className="w-4 h-4 rounded text-primary focus:ring-primary"
-                    data-testid="toggle-anonymous"
-                  />
-                  <span className="text-sm text-muted-foreground">Share anonymously (hide your name)</span>
-                </label>
-              </div>
-            )}
-          </div>
-          
+          <JournalSharingOptions
+            shareWithCommunity={shareWithCommunity}
+            setShareWithCommunity={setShareWithCommunity}
+            shareAnonymously={shareAnonymously}
+            setShareAnonymously={setShareAnonymously}
+          />
+
           <div className="flex gap-3">
             <button
               type="submit"
@@ -446,50 +420,35 @@ export default function JournalPage() {
               className="rounded-xl border border-border bg-card"
               data-testid={`entry-${entry.id}`}
             >
-              <div
-                className="p-4 flex items-center justify-between gap-2 cursor-pointer hover:bg-muted/50 transition"
-                onClick={() => setExpandedId(expandedId === entry.id ? null : entry.id)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => e.key === "Enter" && setExpandedId(expandedId === entry.id ? null : entry.id)}
-                aria-expanded={expandedId === entry.id}
-                aria-controls={`entry-content-${entry.id}`}
-              >
-                <div className="flex items-center gap-3 min-w-0">
-                  <PenLine className="w-4 h-4 text-primary flex-shrink-0" aria-hidden="true" />
-                  <div className="min-w-0">
-                    <h3 className="font-semibold text-sm text-foreground truncate">{entry.title || "Untitled"}</h3>
-                    <p className="text-xs text-muted-foreground flex items-center gap-1 mt-0.5">
-                      <Calendar className="w-3 h-3" aria-hidden="true" />
-                      <time dateTime={entry.createdAt}>
-                        {new Date(entry.createdAt).toLocaleDateString("en-US", {
-                          month: "short",
-                          day: "numeric",
-                          year: "numeric",
-                        })}
-                      </time>
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-1 flex-shrink-0">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleDelete(entry.id);
-                    }}
-                    disabled={deleteMutation.isPending}
-                    className="p-2 rounded-lg text-muted-foreground hover:text-[var(--glp-deep-teal)] hover:bg-[var(--glp-blossom)]/25 transition disabled:opacity-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)]"
-                    data-testid={`button-delete-${entry.id}`}
-                    aria-label={`Delete entry: ${entry.title || "Untitled"}`}
-                  >
-                    <Trash2 className="w-4 h-4" aria-hidden="true" />
+              <div className="mmhb-entry-row">
+                <h3 className="mmhb-entry-heading">
+                  <button type="button" className="mmhb-entry-toggle"
+                    onClick={() => setExpandedId(expandedId === entry.id ? null : entry.id)}
+                    aria-expanded={expandedId === entry.id}
+                    aria-controls={`entry-content-${entry.id}`}
+                    data-testid={`button-expand-${entry.id}`}>
+                    <PenLine aria-hidden="true" />
+                    <span className="mmhb-entry-copy">
+                      <span className="mmhb-entry-title">{entry.title || "Untitled"}</span>
+                      <span className="mmhb-entry-date">
+                        <Calendar aria-hidden="true" />
+                        <time dateTime={entry.createdAt}>
+                          {new Date(entry.createdAt).toLocaleDateString("en-US", {
+                            month: "short", day: "numeric", year: "numeric",
+                          })}
+                        </time>
+                      </span>
+                    </span>
+                    {expandedId === entry.id ? <ChevronUp aria-hidden="true" /> : <ChevronDown aria-hidden="true" />}
                   </button>
-                  {expandedId === entry.id ? (
-                    <ChevronUp className="w-4 h-4 text-muted-foreground" aria-hidden="true" />
-                  ) : (
-                    <ChevronDown className="w-4 h-4 text-muted-foreground" aria-hidden="true" />
-                  )}
-                </div>
+                </h3>
+                <button type="button" className="mmhb-entry-delete"
+                  onClick={() => handleDelete(entry.id)}
+                  disabled={deleteMutation.isPending}
+                  data-testid={`button-delete-${entry.id}`}
+                  aria-label={`Delete entry: ${entry.title || "Untitled"}`}>
+                  <Trash2 aria-hidden="true" />
+                </button>
               </div>
               {expandedId === entry.id && (
                 <div 

@@ -1,0 +1,239 @@
+{
+  "status": "PASS",
+  "checks": 22,
+  "scope": "REAL_R17B_SEED_WITH_SYNTHETIC_COMPILER_AND_NATIVE_PACKAGES; REAL_R17C_DIAGNOSTIC; ACTUAL_PROMPT_LOADER_IN_SEED; NO_APP_DATABASE_NETWORK",
+  "results": [
+    {
+      "case": "42_changes",
+      "result": "PASS",
+      "status": "PRESERVATION_DIAGNOSTIC_COMPLETE_REVIEW_REQUIRED",
+      "failure": null,
+      "historicalFixtureChangedFileCount": 42,
+      "diagnosticProcessAttempts": 18,
+      "onlyReadOnlyGitChildren": true,
+      "priorEvidenceBytesAndModesUnchanged": true
+    },
+    {
+      "case": "history_delete",
+      "result": "PASS",
+      "status": "PRESERVATION_DIAGNOSTIC_COMPLETE_REVIEW_REQUIRED",
+      "failure": null,
+      "historicalFixtureChangedFileCount": 42,
+      "diagnosticProcessAttempts": 18,
+      "onlyReadOnlyGitChildren": true,
+      "priorEvidenceBytesAndModesUnchanged": true
+    },
+    {
+      "case": "history_visibility",
+      "result": "PASS",
+      "status": "PRESERVATION_DIAGNOSTIC_COMPLETE_REVIEW_REQUIRED",
+      "failure": null,
+      "historicalFixtureChangedFileCount": 42,
+      "diagnosticProcessAttempts": 18,
+      "onlyReadOnlyGitChildren": true,
+      "priorEvidenceBytesAndModesUnchanged": true
+    },
+    {
+      "case": "sensitive_name",
+      "result": "PASS",
+      "status": "PRESERVATION_DIAGNOSTIC_COMPLETE_REVIEW_REQUIRED",
+      "failure": null,
+      "historicalFixtureChangedFileCount": 42,
+      "diagnosticProcessAttempts": 18,
+      "onlyReadOnlyGitChildren": true,
+      "priorEvidenceBytesAndModesUnchanged": true
+    },
+    {
+      "case": "source_drift",
+      "result": "PASS",
+      "status": "PRESERVATION_DIAGNOSTIC_COMPLETE_REVIEW_REQUIRED",
+      "failure": null,
+      "historicalFixtureChangedFileCount": 42,
+      "diagnosticProcessAttempts": 18,
+      "onlyReadOnlyGitChildren": true,
+      "priorEvidenceBytesAndModesUnchanged": true
+    },
+    {
+      "case": "pin_drift",
+      "result": "PASS",
+      "status": "PRESERVATION_DIAGNOSTIC_COMPLETE_REVIEW_REQUIRED",
+      "failure": null,
+      "historicalFixtureChangedFileCount": 42,
+      "diagnosticProcessAttempts": 18,
+      "onlyReadOnlyGitChildren": true,
+      "priorEvidenceBytesAndModesUnchanged": true
+    },
+    {
+      "case": "candidate_drift",
+      "result": "PASS",
+      "status": "PRESERVATION_DIAGNOSTIC_COMPLETE_REVIEW_REQUIRED",
+      "failure": null,
+      "historicalFixtureChangedFileCount": 42,
+      "diagnosticProcessAttempts": 18,
+      "onlyReadOnlyGitChildren": true,
+      "priorEvidenceBytesAndModesUnchanged": true
+    },
+    {
+      "case": "candidate_symlink",
+      "result": "PASS",
+      "status": "PRESERVATION_DIAGNOSTIC_COMPLETE_REVIEW_REQUIRED",
+      "failure": null,
+      "historicalFixtureChangedFileCount": 42,
+      "diagnosticProcessAttempts": 18,
+      "onlyReadOnlyGitChildren": true,
+      "priorEvidenceBytesAndModesUnchanged": true
+    },
+    {
+      "case": "retained_dependency_drift",
+      "result": "PASS",
+      "status": "PRESERVATION_DIAGNOSTIC_COMPLETE_REVIEW_REQUIRED",
+      "failure": null,
+      "historicalFixtureChangedFileCount": 42,
+      "diagnosticProcessAttempts": 18,
+      "onlyReadOnlyGitChildren": true,
+      "priorEvidenceBytesAndModesUnchanged": true
+    },
+    {
+      "case": "r16e_dependency_drift",
+      "result": "PASS",
+      "status": "PRESERVATION_DIAGNOSTIC_COMPLETE_REVIEW_REQUIRED",
+      "failure": null,
+      "historicalFixtureChangedFileCount": 42,
+      "diagnosticProcessAttempts": 18,
+      "onlyReadOnlyGitChildren": true,
+      "priorEvidenceBytesAndModesUnchanged": true
+    },
+    {
+      "case": "absent_tmp",
+      "result": "PASS",
+      "status": "PRESERVATION_DIAGNOSTIC_COMPLETE_REVIEW_REQUIRED",
+      "failure": null,
+      "historicalFixtureChangedFileCount": 42,
+      "diagnosticProcessAttempts": 18,
+      "onlyReadOnlyGitChildren": true,
+      "priorEvidenceBytesAndModesUnchanged": true
+    },
+    {
+      "case": "history_hash_inconsistent",
+      "result": "PASS",
+      "status": "PRESERVATION_DIAGNOSTIC_FAILED",
+      "failure": {
+        "phase": "HISTORICAL_SNAPSHOTS",
+        "gate": "SNAPSHOT_SELF_CONSISTENCY"
+      },
+      "historicalFixtureChangedFileCount": 42,
+      "diagnosticProcessAttempts": 16,
+      "onlyReadOnlyGitChildren": true,
+      "priorEvidenceBytesAndModesUnchanged": true
+    },
+    {
+      "case": "history_duplicate",
+      "result": "PASS",
+      "status": "PRESERVATION_DIAGNOSTIC_FAILED",
+      "failure": {
+        "phase": "HISTORICAL_SNAPSHOTS",
+        "gate": "SNAPSHOT_DUPLICATE_OR_ORDER"
+      },
+      "historicalFixtureChangedFileCount": 42,
+      "diagnosticProcessAttempts": 16,
+      "onlyReadOnlyGitChildren": true,
+      "priorEvidenceBytesAndModesUnchanged": true
+    },
+    {
+      "case": "current_edit",
+      "result": "PASS",
+      "status": "PRESERVATION_DIAGNOSTIC_COMPLETE_REVIEW_REQUIRED",
+      "failure": null,
+      "historicalFixtureChangedFileCount": 42,
+      "diagnosticProcessAttempts": 18,
+      "onlyReadOnlyGitChildren": true,
+      "priorEvidenceBytesAndModesUnchanged": true
+    },
+    {
+      "case": "concurrent_edit",
+      "result": "PASS",
+      "status": "PRESERVATION_DIAGNOSTIC_FAILED",
+      "failure": {
+        "phase": "DIAGNOSTIC_PRESERVATION",
+        "gate": "CURRENT_WORKTREE_CHANGED_DURING_DIAGNOSTIC"
+      },
+      "historicalFixtureChangedFileCount": 42,
+      "diagnosticProcessAttempts": 18,
+      "onlyReadOnlyGitChildren": true,
+      "priorEvidenceBytesAndModesUnchanged": true
+    },
+    {
+      "case": "current_snapshot_oversized",
+      "result": "PASS",
+      "status": "PRESERVATION_DIAGNOSTIC_COMPLETE_REVIEW_REQUIRED",
+      "failure": null,
+      "historicalFixtureChangedFileCount": 42,
+      "diagnosticProcessAttempts": 7,
+      "onlyReadOnlyGitChildren": true,
+      "priorEvidenceBytesAndModesUnchanged": true
+    },
+    {
+      "case": "manifest_package_row_replaced",
+      "result": "PASS",
+      "status": "PRESERVATION_DIAGNOSTIC_COMPLETE_REVIEW_REQUIRED",
+      "failure": null,
+      "historicalFixtureChangedFileCount": 42,
+      "diagnosticProcessAttempts": 18,
+      "onlyReadOnlyGitChildren": true,
+      "priorEvidenceBytesAndModesUnchanged": true
+    },
+    {
+      "case": "r16e_package_drift",
+      "result": "PASS",
+      "status": "PRESERVATION_DIAGNOSTIC_COMPLETE_REVIEW_REQUIRED",
+      "failure": null,
+      "historicalFixtureChangedFileCount": 42,
+      "diagnosticProcessAttempts": 18,
+      "onlyReadOnlyGitChildren": true,
+      "priorEvidenceBytesAndModesUnchanged": true
+    },
+    {
+      "case": "history_unknown_identity_field",
+      "result": "PASS",
+      "status": "PRESERVATION_DIAGNOSTIC_FAILED",
+      "failure": {
+        "phase": "HISTORICAL_SNAPSHOTS",
+        "gate": "SNAPSHOT_IDENTITY_SCHEMA"
+      },
+      "historicalFixtureChangedFileCount": 42,
+      "diagnosticProcessAttempts": 16,
+      "onlyReadOnlyGitChildren": true,
+      "priorEvidenceBytesAndModesUnchanged": true
+    },
+    {
+      "case": "unsafe_graph_id",
+      "result": "PASS",
+      "status": "PRESERVATION_DIAGNOSTIC_COMPLETE_REVIEW_REQUIRED",
+      "failure": null,
+      "historicalFixtureChangedFileCount": 42,
+      "diagnosticProcessAttempts": 18,
+      "onlyReadOnlyGitChildren": true,
+      "priorEvidenceBytesAndModesUnchanged": true
+    },
+    {
+      "case": "unsafe_graph_status",
+      "result": "PASS",
+      "status": "PRESERVATION_DIAGNOSTIC_COMPLETE_REVIEW_REQUIRED",
+      "failure": null,
+      "historicalFixtureChangedFileCount": 42,
+      "diagnosticProcessAttempts": 18,
+      "onlyReadOnlyGitChildren": true,
+      "priorEvidenceBytesAndModesUnchanged": true
+    },
+    {
+      "case": "unsafe_external_specifier",
+      "result": "PASS",
+      "status": "PRESERVATION_DIAGNOSTIC_COMPLETE_REVIEW_REQUIRED",
+      "failure": null,
+      "historicalFixtureChangedFileCount": 42,
+      "diagnosticProcessAttempts": 18,
+      "onlyReadOnlyGitChildren": true,
+      "priorEvidenceBytesAndModesUnchanged": true
+    }
+  ]
+}

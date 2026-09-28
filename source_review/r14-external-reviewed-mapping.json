@@ -1,0 +1,188 @@
+{
+  "scope": "EXACT_SOURCE_MATCH_ONLY_NO_APPLICATION_OR_PACKAGE_EXECUTION_NO_COMPLETE_CALL_GRAPH",
+  "versionBasis": "Version tags and stale remote lock are clues; actual installed version and hash must be reported separately.",
+  "sources": [
+    {
+      "workspacePath": "node_modules/ws/lib/buffer-util.js",
+      "sha256": "8b0a45739132f82e25ea13163780abf547ccfe989267f3eb7abb475beec92da3",
+      "package": "ws",
+      "version": "8.21.0",
+      "classification": "OPTIONAL_BUFFERUTIL_WITH_JS_FALLBACK",
+      "conditions": [
+        "Source assigns JavaScript mask/unmask before trying bufferutil.",
+        "Missing or failing bufferutil is caught; original JavaScript mask/unmask remain.",
+        "WS_NO_BUFFER_UTIL truthiness prevents the optional attempt.",
+        "Qualifies this source implementation only; does not establish every caller or bundled reachability."
+      ],
+      "sourceURL": "https://github.com/websockets/ws/blob/8.21.0/lib/buffer-util.js",
+      "localSource": "source_review/r14-external-ws-lib-buffer-util.js",
+      "kind": "DEPENDENCY_SOURCE"
+    },
+    {
+      "workspacePath": "node_modules/ws/lib/validation.js",
+      "sha256": "41ce8e83d0d434132e1704895fedb91f6703a701b42d91c80954ab29b2845593",
+      "package": "ws",
+      "version": "8.21.0",
+      "classification": "OPTIONAL_UTF8_VALIDATE_WITH_NODE_OR_JS_FALLBACK",
+      "conditions": [
+        "If buffer.isUtf8 is truthy it is used for long inputs and utf-8-validate is not requested.",
+        "Otherwise the optional utf-8-validate require is caught; JavaScript validation remains if missing.",
+        "WS_NO_UTF_8_VALIDATE truthiness prevents the optional attempt.",
+        "Qualifies this source implementation only; runtime builtin branch remains to be exercised."
+      ],
+      "sourceURL": "https://github.com/websockets/ws/blob/8.21.0/lib/validation.js",
+      "localSource": "source_review/r14-external-ws-lib-validation.js",
+      "kind": "DEPENDENCY_SOURCE"
+    },
+    {
+      "workspacePath": "node_modules/pg/lib/index.js",
+      "sha256": "3fad6e6d3d976edbabe0cbc9e1d39f4340bcb719bbbb186a0d3a24f3dbd4a94c",
+      "package": "pg",
+      "version": "8.21.0",
+      "classification": "PG_NATIVE_CONDITIONAL_DEFAULT_JS",
+      "conditions": [
+        "The default client constructor is the JavaScript Client.",
+        "Truthy NODE_PG_FORCE_NATIVE switches to require ./native; production must not unintentionally force the missing addon.",
+        "Accessing pg.native invokes a lazy getter that catches MODULE_NOT_FOUND and returns null.",
+        "Explicit consumers requiring a native client still need that dependency; selected source review is not a complete caller graph."
+      ],
+      "sourceURL": "https://github.com/brianc/node-postgres/blob/pg@8.21.0/packages/pg/lib/index.js",
+      "localSource": "source_review/r14-external-node-postgres-packages-pg-lib-index.js",
+      "kind": "DEPENDENCY_SOURCE"
+    },
+    {
+      "workspacePath": "node_modules/pg/lib/stream.js",
+      "sha256": "0bd4001775301604ddf7c94152e05f6f30a9354876717bdae2ab636d00eb12ba",
+      "package": "pg",
+      "version": "8.21.0",
+      "classification": "PG_CLOUDFLARE_CONDITIONAL_RUNTIME_BRANCH",
+      "conditions": [
+        "pg-cloudflare is required only inside the Cloudflare stream factory getStream.",
+        "Cloudflare is selected by navigator.userAgent equal to Cloudflare-Workers, or a Response cf extension probe.",
+        "Default Node branch uses built-in net/tls; runtime detection and application overrides are not proven by source hashing."
+      ],
+      "sourceURL": "https://github.com/brianc/node-postgres/blob/pg@8.21.0/packages/pg/lib/stream.js",
+      "localSource": "source_review/r14-external-node-postgres-packages-pg-lib-stream.js",
+      "kind": "DEPENDENCY_SOURCE"
+    },
+    {
+      "workspacePath": "node_modules/pg/esm/index.mjs",
+      "sha256": "5ef4d06556eeb775987759c2c09229dca2139421ee40e819b566612db2b4a8dc",
+      "package": "pg",
+      "version": "8.21.0",
+      "classification": "PG_ESM_WRAPPER_DEFAULT_JS_NO_NATIVE_GETTER_ACCESS",
+      "conditions": [
+        "The default export is the CommonJS pg export.",
+        "Named exports do not access pg.native in this reviewed wrapper."
+      ],
+      "sourceURL": "https://github.com/brianc/node-postgres/blob/pg@8.21.0/packages/pg/esm/index.mjs",
+      "localSource": "source_review/r14-external-node-postgres-packages-pg-esm-index.mjs",
+      "kind": "DEPENDENCY_SOURCE"
+    },
+    {
+      "workspacePath": "node_modules/pg/lib/native/client.js",
+      "sha256": "d88c124d4835cc9d5b0389e2aaf63a144df8434c1b4b0d5e588691e068f49acf",
+      "package": "pg",
+      "version": "8.21.0",
+      "classification": "PG_NATIVE_REQUEST_PROPAGATES_MISSING_ADDON",
+      "conditions": [
+        "Top-level require pg-native catch rethrows; this module is not an unconditional fallback.",
+        "Only the default/lazy selection described by reviewed pg/lib/index.js bounds startup impact."
+      ],
+      "sourceURL": "https://github.com/brianc/node-postgres/blob/pg@8.21.0/packages/pg/lib/native/client.js",
+      "localSource": "source_review/r14-external-node-postgres-packages-pg-lib-native-client.js",
+      "kind": "DEPENDENCY_SOURCE"
+    },
+    {
+      "workspacePath": "server/utils/email.mjs",
+      "sha256": "9a787e04026ec9225fca35420546d744fc78874958739eab76a0c9754fef7113",
+      "package": "MyMentalHealthBuddy",
+      "version": "remote commit df8137696e4c7b0a7c16a08347e1b92f85b85371",
+      "classification": "SELECTED_RESEND_HTML_CALLER",
+      "conditions": [
+        "sendTransactionalEmail sends an object containing from, to, subject and html; no react field at that call."
+      ],
+      "sourceURL": "https://github.com/TheGenuineLoveProject/MyMentalHealthBuddy/blob/df8137696e4c7b0a7c16a08347e1b92f85b85371/server/utils/email.mjs",
+      "localSource": "source_review/r14-external-mmhb-server-utils-email.mjs",
+      "kind": "SELECTED_APPLICATION_SOURCE"
+    },
+    {
+      "workspacePath": "server/services/email.mjs",
+      "sha256": "23fbd9967964b7c65c18ddb2cdbeff44aa69ab33eb6b4d40edce8abfa11ab2c4",
+      "package": "MyMentalHealthBuddy",
+      "version": "remote commit df8137696e4c7b0a7c16a08347e1b92f85b85371",
+      "classification": "SELECTED_RESEND_HTML_CALLERS",
+      "conditions": [
+        "Six selected emails.send calls use explicit html template fields; no payload spreads or react fields at those calls.",
+        "Other-platform names and links occur in this remote source and require MMHB-only launch review if current hashes match."
+      ],
+      "sourceURL": "https://github.com/TheGenuineLoveProject/MyMentalHealthBuddy/blob/df8137696e4c7b0a7c16a08347e1b92f85b85371/server/services/email.mjs",
+      "localSource": "source_review/r14-external-mmhb-server-services-email.mjs",
+      "kind": "SELECTED_APPLICATION_SOURCE"
+    },
+    {
+      "workspacePath": "server/services/newsletterSend.mjs",
+      "sha256": "f39a0864816fabc44395c676df8ef6bac4d13b499b6725912257f3b4705c52e1",
+      "package": "MyMentalHealthBuddy",
+      "version": "remote commit df8137696e4c7b0a7c16a08347e1b92f85b85371",
+      "classification": "SELECTED_RESEND_HTML_TEXT_CALLERS",
+      "conditions": [
+        "Two selected emails.send calls use explicit html/text payloads, no react field or payload spread."
+      ],
+      "sourceURL": "https://github.com/TheGenuineLoveProject/MyMentalHealthBuddy/blob/df8137696e4c7b0a7c16a08347e1b92f85b85371/server/services/newsletterSend.mjs",
+      "localSource": "source_review/r14-external-mmhb-server-services-newsletterSend.mjs",
+      "kind": "SELECTED_APPLICATION_SOURCE"
+    },
+    {
+      "workspacePath": "server/routes/blog.mjs",
+      "sha256": "ad22034ff650b56c65d1d9dcee916e32d9f22ab04bde0a7d4a738b7188ec12e5",
+      "package": "MyMentalHealthBuddy",
+      "version": "remote commit df8137696e4c7b0a7c16a08347e1b92f85b85371",
+      "classification": "SELECTED_RESEND_HTML_CALLER",
+      "conditions": [
+        "The selected Resend emails.send test path uses an explicit html field, no react field or payload spread."
+      ],
+      "sourceURL": "https://github.com/TheGenuineLoveProject/MyMentalHealthBuddy/blob/df8137696e4c7b0a7c16a08347e1b92f85b85371/server/routes/blog.mjs",
+      "localSource": "source_review/r14-external-mmhb-server-routes-blog.mjs",
+      "kind": "SELECTED_APPLICATION_SOURCE"
+    },
+    {
+      "workspacePath": "server/db/connection.mjs",
+      "sha256": "6baa2747e839ce79d623564b5ad64067e9a8ca90975dc262383185592e7500fc",
+      "package": "MyMentalHealthBuddy",
+      "version": "remote commit df8137696e4c7b0a7c16a08347e1b92f85b85371",
+      "classification": "SELECTED_PG_DEFAULT_POOL_CONSUMER",
+      "conditions": [
+        "Imports default pg and destructures Pool; no pg.native access in this file.",
+        "Application-wide use of native clients is not ruled out by this selected-file match."
+      ],
+      "sourceURL": "https://github.com/TheGenuineLoveProject/MyMentalHealthBuddy/blob/df8137696e4c7b0a7c16a08347e1b92f85b85371/server/db/connection.mjs",
+      "localSource": "source_review/r14-external-mmhb-server-db-connection.mjs",
+      "kind": "SELECTED_APPLICATION_SOURCE"
+    }
+  ],
+  "unqualifiedInstalledPaths": [
+    {
+      "workspacePath": "node_modules/resend/dist/index.mjs",
+      "package": "resend",
+      "versionClue": "6.12.4",
+      "classification": "REVIEW_REQUIRED",
+      "reason": "Published ESM file absent from official v6.12.4 GitHub tag. TypeScript source is not byte-equivalent to installed distribution."
+    },
+    {
+      "workspacePath": "node_modules/resend/dist/index.cjs",
+      "package": "resend",
+      "versionClue": "6.12.4",
+      "classification": "REVIEW_REQUIRED",
+      "reason": "Published CJS file absent from official v6.12.4 GitHub tag. TypeScript source is not byte-equivalent to installed distribution."
+    }
+  ],
+  "resendContext": {
+    "sourceURLs": [
+      "https://github.com/resend/resend-node/blob/v6.12.4/src/render.ts",
+      "https://github.com/resend/resend-node/blob/v6.12.4/src/emails/emails.ts",
+      "https://github.com/resend/resend-node/blob/v6.12.4/src/batch/batch.ts"
+    ],
+    "claim": "At upstream v6.12.4, email and batch creation invoke render only for a truthy react payload; render dynamically imports @react-email/render. Installed transpiled bytes remain unqualified."
+  }
+}

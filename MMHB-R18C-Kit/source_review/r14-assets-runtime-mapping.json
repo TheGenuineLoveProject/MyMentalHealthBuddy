@@ -1,0 +1,158 @@
+{
+  "project": "MyMentalHealthBuddy",
+  "scope": "Read-only remote integration source review. No application/database execution. Remote consumers and assets require on-Replit identity and bundle-input match before qualification.",
+  "matchingApp": {
+    "file": "server/app.mjs",
+    "sha256": "fb7316818f033e5748f7710a8c7c6f01991f03da6aa649a56189fbab71329818",
+    "match": "USER_SUPPLIED_R13_ANCESTRAL_APP_PIN"
+  },
+  "consumerPins": [
+    {
+      "file": "server/lib/promptEngine.mjs",
+      "sha256": "fbbd43eaab399b029b5d976508da8f1e055e25d69fd2ee65551e23d102363170",
+      "bytes": 7669,
+      "gitBlobSha": "c8544c62336cc918ed9bced3b0bc253721a75ea6",
+      "url": "https://github.com/TheGenuineLoveProject/MyMentalHealthBuddy/blob/integration/server/lib/promptEngine.mjs",
+      "qualification": "REMOTE_INTEGRATION_BYTES_REQUIRE_ON_REPLIT_HASH_MATCH"
+    },
+    {
+      "file": "server/engine/prompt-os/kernel-bridge.mjs",
+      "sha256": "79bcf958b3d336839f8aac2f072e6566bfefd1276d5d9af22cb53389cfc811c8",
+      "bytes": 4357,
+      "gitBlobSha": "7ec7e66fd8cdf2df9ac8c7f9684d6f3dff4da0b5",
+      "url": "https://github.com/TheGenuineLoveProject/MyMentalHealthBuddy/blob/integration/server/engine/prompt-os/kernel-bridge.mjs",
+      "qualification": "REMOTE_INTEGRATION_BYTES_REQUIRE_ON_REPLIT_HASH_MATCH"
+    },
+    {
+      "file": "server/routes/rss.mjs",
+      "sha256": "164d2d1e12c0e63b568fdcc077a12ce801f512a74385f63e8c45e999d81b6430",
+      "bytes": 3306,
+      "gitBlobSha": "a032b5ce9baf58dba99db7451a283139640fda5e",
+      "url": "https://github.com/TheGenuineLoveProject/MyMentalHealthBuddy/blob/integration/server/routes/rss.mjs",
+      "qualification": "REMOTE_INTEGRATION_BYTES_REQUIRE_ON_REPLIT_HASH_MATCH"
+    },
+    {
+      "file": "server/lib/healScheduler.mjs",
+      "sha256": "d68159a5ef62eac98f6d5325cfd1e5df2a4c7cce2cebdf1f4fa097efb081de0f",
+      "bytes": 7790,
+      "gitBlobSha": "41ec6cb87390bbf762f688ee933601abf9cc0c9d",
+      "url": "https://github.com/TheGenuineLoveProject/MyMentalHealthBuddy/blob/integration/server/lib/healScheduler.mjs",
+      "qualification": "REMOTE_INTEGRATION_BYTES_REQUIRE_ON_REPLIT_HASH_MATCH"
+    }
+  ],
+  "assetSets": [
+    {
+      "consumer": "server/lib/promptEngine.mjs",
+      "root": "process.cwd()/ai",
+      "files": [
+        "ai/healing/registry.json",
+        "ai/business/registry.json",
+        "ai/healing/system.md",
+        "ai/business/system.md",
+        "ai/healing/prompts/h01_intake.md",
+        "ai/healing/prompts/h02_journal_reflect.md",
+        "ai/healing/prompts/h03_cbt_reframe.md",
+        "ai/healing/prompts/h04_act_values.md",
+        "ai/healing/prompts/h05_breathing_grounding.md",
+        "ai/healing/prompts/h06_sleep_reset.md",
+        "ai/healing/prompts/h07_conflict_script.md",
+        "ai/healing/prompts/h08_safety_check.md",
+        "ai/business/prompts/b01_offer_design.md",
+        "ai/business/prompts/b02_funnel_map.md",
+        "ai/business/prompts/b03_content_factory.md",
+        "ai/business/prompts/b04_email_sequences.md",
+        "ai/business/prompts/b05_seo_briefs.md",
+        "ai/business/prompts/b06_competitive_scan.md",
+        "ai/business/prompts/b07_pricing_packaging.md",
+        "ai/business/prompts/b08_retention_loyalty.md",
+        "ai/business/prompts/b09_partnerships.md",
+        "ai/business/prompts/b10_ops_sops.md"
+      ],
+      "count": 22,
+      "startup": "Registries read at module import; missing/invalid registry caught and silently reported as unavailable with no prompt IDs. Systems/modules read on request.",
+      "writes": "writePromptSource writes temporary markdown and atomically renames in same ai tree; runtime editing requires separate durable storage strategy for immutable release.",
+      "validation": "Validate registry engine, version, prompt array, unique IDs, allowed audiences; allowlist ID syntax; prove each system and registered module exists as contained regular file.",
+      "qualification": "Filesystem/JSON availability does not prove clinical effectiveness, data boundary enforcement or content safety."
+    },
+    {
+      "consumer": "server/engine/prompt-os/kernel-bridge.mjs",
+      "root": "process.cwd()/prompt-os-kernel",
+      "files": [
+        "prompt-os-kernel/schemas/promptspec.schema.json",
+        "prompt-os-kernel/governance/MASTER_STRATEGY.md",
+        "prompt-os-kernel/governance/domain-router.md",
+        "prompt-os-kernel/governance/execution-protocol.md",
+        "prompt-os-kernel/governance/quality-gates.md",
+        "prompt-os-kernel/engines/business-command-engine.md",
+        "prompt-os-kernel/scripts/verify-platform-kernel.mjs",
+        "prompt-os-kernel/install.sh"
+      ],
+      "count": 8,
+      "startup": "Runtime health function checks existence of eight paths, JSON parsing and master strategy length; two scripts are presence checks, not executed by this consumer.",
+      "writes": "None in reviewed consumer.",
+      "qualification": "Most domain/state/gate/failure health entries are hard-coded pass=true. validatePromptSpec checks only id/domain/version and enum, not the 14-field referenced JSON schema. Do not use healthy as proof of actual gate enforcement."
+    },
+    {
+      "consumer": "server/routes/rss.mjs",
+      "root": "process.cwd()/content/blog",
+      "files": [
+        "content/blog/index.json"
+      ],
+      "count": 1,
+      "startup": "Handler first queries published database posts; filesystem fallback only on database error, not empty query result.",
+      "writes": "None in reviewed consumer.",
+      "qualification": "Current matching app has no direct RSS import/registration; confirm retained build metafile and active route registry before calling this launch-critical."
+    },
+    {
+      "consumer": "server/lib/healScheduler.mjs",
+      "root": "process.cwd()",
+      "files": [
+        "scripts/heal-self.mjs"
+      ],
+      "writablePaths": [
+        "docs/health-scheduler-status.json",
+        "docs/health-self-status.json"
+      ],
+      "startup": "startScheduler requires HEAL_AUTO_ENABLED=true; persists state immediately when enabled and schedules child process node scripts/heal-self.mjs --silent.",
+      "qualification": "Do not package or enable automatic repair based on comments. Full child-script effects are unreviewed; keep disabled during qualification. pause/resume methods can persist even while disabled."
+    }
+  ],
+  "contentScopeFindings": [
+    {
+      "file": "ai/healing/system.md",
+      "finding": "Describes MMHB companion for The Genuine Love Project; includes no-retention assertion that must match actual data behavior; NLP-informed reframing needs evidence-label review."
+    },
+    {
+      "file": "ai/business/system.md",
+      "finding": "Identifies BusinessOpsOS for The Genuine Love Project; current MMHB-only scope requires brand separation review before publishing."
+    },
+    {
+      "file": "content/blog/index.json",
+      "finding": "Nine rows including welcome-to-genuine-love / Welcome to The Genuine Love Project; preserve source, do not publish as MMHB-specific without review."
+    },
+    {
+      "file": "server/routes/rss.mjs",
+      "finding": "RSS title hard-coded The Genuine Love Project \u2014 Blog."
+    },
+    {
+      "file": "prompt-os-kernel/governance/MASTER_STRATEGY.md",
+      "finding": "Specifies cross-brand parent/product hierarchy and historical prices. Existing document is evidence, not current user instruction or approved pricing."
+    }
+  ],
+  "matchingAppStartupHazards": [
+    "server/app.mjs opens 0.0.0.0 listener and schedules ensureSchema automatically; schema bootstrap can write database.",
+    "On address-in-use retries the app can signal older same-app processes with SIGTERM then SIGKILL.",
+    "Frontend uses module-relative candidate/client/dist, but asset consumers use process.cwd(). Starting candidate from original workspace can mask missing package assets."
+  ],
+  "recommendedNextStep": {
+    "kind": "PRIVATE_ASSET_QUALIFICATION_WITH_ON_REPLIT_MATCH",
+    "steps": [
+      "Compare these four reviewed module hashes to current workspace and retained server build metafile input observations; identify which consumers are actually bundled.",
+      "Inspect the exact 31 selected regular-file asset paths in MMHB workspace, validate registries and all 18 referenced prompt modules; record bytes/hashes and brand/evidence findings without printing text.",
+      "If packaging is done in same command, copy only contained verified current workspace assets into a new private candidate; preserve the 603-file R13 candidate and all source. Record content/domain review pending instead of claiming release.",
+      "Do not bulk-copy ai, docs, content, prompt-os-kernel or scripts recursively. Exclude user data and unrelated platform assets. Never execute install.sh or self-heal scripts.",
+      "Run any eventual application test with candidate working directory and isolated test database/network setup after explicit startup effects are accounted for."
+    ],
+    "releaseStatus": "NOT_READY: dependency alignment, live behavior, content/domain correctness and self-contained runtime assets remain unqualified."
+  }
+}

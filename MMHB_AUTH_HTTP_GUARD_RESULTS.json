@@ -1,0 +1,298 @@
+{
+  "project": "MyMentalHealthBuddy",
+  "artifact": "MMHB_AUTH_HTTP_GUARD",
+  "source_basis": [
+    "Pasted text (2)(4).txt: complete server/routes/auth.mjs from checksum-verified report",
+    "Previously supplied server/security/csrf.mjs, repeated in current attachments"
+  ],
+  "candidate_base": "63ff8372d07368a5434c11ff58bdf87bb468449d",
+  "required_storage_checkpoint": "d2c83727bbfbb6b43fbddcb8f219bfe10bf5db35",
+  "application_source_changes": [
+    "server/routes/auth.mjs: local logout error handling only",
+    "server/security/csrf.mjs: generic API prefix recognition only"
+  ],
+  "behavior": {
+    "schema": "MMHB_HTTP_BOUNDARY_TESTS_V1",
+    "scope": "Actual module bodies; Node crypto real; Express request/response and all auth dependencies mocked. No application/network/database integration.",
+    "runtime": "v22.16.0",
+    "total": 39,
+    "passed": 39,
+    "results": [
+      {
+        "name": "Original logout reports success when revocation rejects",
+        "kind": "baseline_defect_reproduced",
+        "pass": true
+      },
+      {
+        "name": "Original generic uppercase API path skips token check",
+        "kind": "baseline_defect_reproduced",
+        "pass": true
+      },
+      {
+        "name": "Missing token rejected for /api/private-probe",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Missing token rejected for /API/private-probe",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Missing token rejected for /Api/private-probe",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Missing token rejected for /aPi/private-probe",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Missing token rejected for /api",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Missing token rejected for /API",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Safe method preserved: GET",
+        "kind": "preserved_behavior",
+        "pass": true
+      },
+      {
+        "name": "Safe method preserved: HEAD",
+        "kind": "preserved_behavior",
+        "pass": true
+      },
+      {
+        "name": "Safe method preserved: OPTIONS",
+        "kind": "preserved_behavior",
+        "pass": true
+      },
+      {
+        "name": "Non-API path preserved: /outside",
+        "kind": "preserved_behavior",
+        "pass": true
+      },
+      {
+        "name": "Non-API path preserved: /apiary/private",
+        "kind": "preserved_behavior",
+        "pass": true
+      },
+      {
+        "name": "Non-API path preserved: /apix/private",
+        "kind": "preserved_behavior",
+        "pass": true
+      },
+      {
+        "name": "Valid generic token accepted without path rewrite",
+        "kind": "preserved_behavior",
+        "pass": true
+      },
+      {
+        "name": "Mismatched generic token rejected",
+        "kind": "preserved_behavior",
+        "pass": true
+      },
+      {
+        "name": "Auth foreign-origin rejects before bearer exemption: /api/auth/logout",
+        "kind": "preserved_behavior",
+        "pass": true
+      },
+      {
+        "name": "Auth same-origin accepted: /api/auth/logout",
+        "kind": "preserved_behavior",
+        "pass": true
+      },
+      {
+        "name": "Auth foreign-origin rejects before bearer exemption: /API/AUTH/logout",
+        "kind": "preserved_behavior",
+        "pass": true
+      },
+      {
+        "name": "Auth same-origin accepted: /API/AUTH/logout",
+        "kind": "preserved_behavior",
+        "pass": true
+      },
+      {
+        "name": "Existing lowercase public exemption unchanged",
+        "kind": "preserved_behavior",
+        "pass": true
+      },
+      {
+        "name": "No new uppercase public exemption introduced",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Existing bearer exception is unchanged, not newly validated",
+        "kind": "unresolved_behavior_preserved",
+        "pass": true
+      },
+      {
+        "name": "Logout revocation count 0 remains idempotent",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Logout revocation count 1 remains idempotent",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Logout revocation count 2 remains idempotent",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Logout without refresh cookie remains successful",
+        "kind": "preserved_behavior",
+        "pass": true
+      },
+      {
+        "name": "Revocation error returns incomplete, preserves retry cookie",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Cookie-clear failure 1 never returns success",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Cookie-clear failure 2 never returns success",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Cookie-clear failure 3 never returns success",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Null revocation result returns incomplete",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Pending revocation cannot produce premature success",
+        "kind": "patched_behavior",
+        "pass": true
+      },
+      {
+        "name": "Local public projection retained for /user",
+        "kind": "preserved_behavior",
+        "pass": true
+      },
+      {
+        "name": "Local public projection retained for /me",
+        "kind": "preserved_behavior",
+        "pass": true
+      },
+      {
+        "name": "All code preceding local logout handler is byte-identical",
+        "kind": "scope_check",
+        "pass": true
+      },
+      {
+        "name": "Mutation: restoring uppercase bypass is detected",
+        "kind": "mutation_detection",
+        "pass": true
+      },
+      {
+        "name": "Mutation: swallowed revocation error is detected",
+        "kind": "mutation_detection",
+        "pass": true
+      },
+      {
+        "name": "Mutation: false success in error handler is detected",
+        "kind": "mutation_detection",
+        "pass": true
+      }
+    ]
+  },
+  "helper": {
+    "scope": "Disposable Git fixtures, real Git and real Node builtins; no MMHB runtime, database or external API",
+    "total": 16,
+    "passed": 16,
+    "results": [
+      {
+        "name": "Apply preserves storage correction, HEAD/index/config and chains checkpoint",
+        "pass": true
+      },
+      {
+        "name": "Repeated apply does not rewrite source or checkpoint reference",
+        "pass": true
+      },
+      {
+        "name": "Dry run creates no checkpoint or source writes",
+        "pass": true
+      },
+      {
+        "name": "Wrong report checksum rejected",
+        "pass": true
+      },
+      {
+        "name": "Unreviewed source edit rejected",
+        "pass": true
+      },
+      {
+        "name": "Missing storage correction rejected",
+        "pass": true
+      },
+      {
+        "name": "Unrelated working edit preserved and rejected",
+        "pass": true
+      },
+      {
+        "name": "Unrelated staged edit preserved and rejected",
+        "pass": true
+      },
+      {
+        "name": "Known partial two-file write resumes without overwriting unknown data",
+        "pass": true
+      },
+      {
+        "name": "Wrong storage parent rejected",
+        "pass": true
+      },
+      {
+        "name": "Conflicting checkpoint reference preserved and rejected",
+        "pass": true
+      },
+      {
+        "name": "Hardlinked target refused",
+        "pass": true
+      },
+      {
+        "name": "Symlinked target refused",
+        "pass": true
+      },
+      {
+        "name": "Inherited Git/Node routing variables not used",
+        "pass": true
+      },
+      {
+        "name": "Split index preserved",
+        "pass": true
+      },
+      {
+        "name": "Detached linked worktree supported",
+        "pass": true
+      }
+    ]
+  },
+  "limitations": [
+    "No live Replit execution in this conversation",
+    "Express/auth/database dependencies mocked in behavior tests",
+    "No real PostgreSQL revocation, browser, OIDC or network integration tested",
+    "No JWT access-token revocation mechanism added",
+    "No frozen-hash test baseline changed",
+    "No complete routing graph established",
+    "A first experimental vm.SourceTextModule harness crashed under Node 22; the delivered harness uses vm.Script and the recorded suite completed with it."
+  ]
+}

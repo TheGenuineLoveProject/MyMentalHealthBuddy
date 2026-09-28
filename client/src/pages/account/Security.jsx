@@ -13,6 +13,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useSEO } from "@/hooks/useSEO";
 import SafetyFooter from "@/components/ui/ReflectionFooter";
 import { apiRequest } from "@/lib/queryClient";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Security() {
   useSEO({
@@ -23,6 +24,7 @@ export default function Security() {
 
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const { logout } = useAuth();
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [passwordForm, setPasswordForm] = useState({
@@ -33,103 +35,362 @@ export default function Security() {
   
   const [show2FASetup, setShow2FASetup] = useState(false);
   const [twoFAStep, setTwoFAStep] = useState(1);
+  const [mfaCurrentPassword, setMfaCurrentPassword] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
   const [backupCodes, setBackupCodes] = useState([]);
-  
+  const [qrCodeUrl, setQrCodeUrl] = useState("");
+
+  const [showDisable2FA, setShowDisable2FA] = useState(false);
+  const [disableCurrentPassword, setDisableCurrentPassword] = useState("");
+  const [disableFactorMode, setDisableFactorMode] = useState("totp");
+  const [disableTotpCode, setDisableTotpCode] = useState("");
+  const [disableRecoveryCode, setDisableRecoveryCode] = useState("");
+
   const { data: securityData } = useQuery({
     queryKey: ["/api/account/security"],
   });
-  
-  const twoFactorEnabled = securityData?.twoFactorEnabled || false;
-  
-  const [qrCodeUrl, setQrCodeUrl] = useState("");
 
-  const setup2FAMutation = useMutation({
-    mutationFn: async () => {
-      return apiRequest("POST", "/api/account/2fa/setup");
-    },
-    onSuccess: (data) => {
-      setBackupCodes(data.backupCodes || []);
-      setQrCodeUrl(data.qrCode || "");
+  const twoFactorEnabled = securityData?.twoFactorEnabled || false;
+  const hasPassword = securityData?.hasPassword === true;
+
+  const resetMfaSetupState = () => {
+    setShow2FASetup(false);
+    setTwoFAStep(1);
+    setMfaCurrentPassword("");
+    setVerificationCode("");
+    setBackupCodes([]);
+    setQrCodeUrl("");
+  };
+
+  const resetDisable2FAState = () => {
+    setShowDisable2FA(false);
+    setDisableCurrentPassword("");
+    setDisableFactorMode("totp");
+    setDisableTotpCode("");
+    setDisableRecoveryCode("");
+  };
+
+  const completeSecurityStateChange = async () => {
+    try {
+      await logout();
+    } catch {
+      /*
+       * The canonical owner is responsible for local credential erasure.
+       * Navigation remains mandatory even if its server logout request fails.
+       */
+    } finally {
+      window.location.assign("/login");
+    }
+  };
+
+  const [mfaSetupPending, setMfaSetupPending] = useState(false);
+  const [mfaVerifyPending, setMfaVerifyPending] = useState(false);
+  const [mfaDisablePending, setMfaDisablePending] = useState(false);
+
+  const handleEnable2FA = () => {
+    if (!hasPassword) {
+      toast({
+        title: "Reauthentication Required",
+        description: "This account requires provider reauthentication before two-factor authentication can be changed.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    resetMfaSetupState();
+    setShow2FASetup(true);
+  };
+
+  const handleStart2FASetup = async () => {
+    if (mfaSetupPending) return;
+
+    if (!mfaCurrentPassword) {
+      toast({
+        title: "Current Password Required",
+        description: "Enter your current password before starting two-factor authentication.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setMfaSetupPending(true);
+
+    try {
+      const data = await apiRequest(
+        "POST",
+        "/api/account/2fa/setup",
+        { currentPassword: mfaCurrentPassword }
+      );
+
+      const qrCode =
+        typeof data?.qrCode === "string"
+          ? data.qrCode
+          : "";
+
+      if (!qrCode) {
+        toast({
+          title: "Setup Could Not Continue",
+          description: "The authenticator enrollment response was incomplete.",
+          variant: "destructive"
+        });
+        resetMfaSetupState();
+        return;
+      }
+
+      setQrCodeUrl(qrCode);
       setTwoFAStep(2);
-    },
-    onError: (error) => {
+    } catch (error) {
       toast({
         title: "Setup Failed",
-        description: error.message || "Unable to start 2FA setup. Please try again.",
+        description: error.message || "Unable to start two-factor authentication.",
         variant: "destructive"
       });
-      setShow2FASetup(false);
-      setTwoFAStep(1);
+    } finally {
+      setMfaSetupPending(false);
     }
-  });
-  
-  const verify2FAMutation = useMutation({
-    mutationFn: async (code) => {
-      return apiRequest("POST", "/api/account/2fa/verify", { code });
-    },
-    onSuccess: () => {
-      toast({
-        title: "2FA Enabled Successfully",
-        description: "Your account is now protected with two-factor authentication."
-      });
-      setShow2FASetup(false);
-      setTwoFAStep(1);
-      setVerificationCode("");
-      queryClient.invalidateQueries({ queryKey: ["/api/account/security"] });
-    },
-    onError: (error) => {
-      toast({
-        title: "Verification Failed",
-        description: error.message || "Invalid code. Please check your authenticator and try again.",
-        variant: "destructive"
-      });
-    }
-  });
-  
-  const disable2FAMutation = useMutation({
-    mutationFn: async () => {
-      return apiRequest("POST", "/api/account/2fa/disable");
-    },
-    onSuccess: () => {
-      toast({
-        title: "2FA Disabled",
-        description: "Two-factor authentication has been removed from your account."
-      });
-      queryClient.invalidateQueries({ queryKey: ["/api/account/security"] });
-    },
-    onError: (error) => {
-      toast({
-        title: "Failed to Disable 2FA",
-        description: error.message || "Unable to disable 2FA. Please try again.",
-        variant: "destructive"
-      });
-    }
-  });
-  
-  const handleEnable2FA = () => {
-    setShow2FASetup(true);
-    setup2FAMutation.mutate();
   };
-  
-  const handleVerify2FA = () => {
-    if (verificationCode.length === 6) {
-      verify2FAMutation.mutate(verificationCode);
-    } else {
+
+  const handleVerify2FA = async () => {
+    if (mfaVerifyPending) return;
+
+    if (!mfaCurrentPassword) {
+      toast({
+        title: "Current Password Required",
+        description: "Your current password is required to complete setup.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (!/^\d{6}$/.test(verificationCode)) {
       toast({
         title: "Invalid Code",
-        description: "Please enter a 6-digit verification code.",
+        description: "Enter the 6-digit code from your authenticator app.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setMfaVerifyPending(true);
+
+    let data;
+    let verified = false;
+
+    try {
+      data = await apiRequest(
+        "POST",
+        "/api/account/2fa/verify",
+        {
+          currentPassword: mfaCurrentPassword,
+          code: verificationCode
+        }
+      );
+      verified = true;
+    } catch (error) {
+      toast({
+        title: "Verification Failed",
+        description: error.message || "The password or authenticator code could not be verified.",
+        variant: "destructive"
+      });
+    } finally {
+      setMfaVerifyPending(false);
+    }
+
+    if (!verified) return;
+
+    const codes =
+      Array.isArray(data?.backupCodes)
+        ? data.backupCodes.filter(
+            (code) =>
+              typeof code === "string" &&
+              code.length > 0
+          )
+        : [];
+
+    if (
+      codes.length !== 6 ||
+      new Set(codes).size !== codes.length
+    ) {
+      resetMfaSetupState();
+
+      queryClient.invalidateQueries({
+        queryKey: ["/api/account/security"]
+      });
+
+      toast({
+        title: "2FA Enabled — Sign In Again",
+        description: "The security change completed, but the one-time recovery response was incomplete.",
+        variant: "destructive"
+      });
+
+      await completeSecurityStateChange();
+      return;
+    }
+
+    setMfaCurrentPassword("");
+    setVerificationCode("");
+    setQrCodeUrl("");
+    setBackupCodes(codes);
+    setTwoFAStep(4);
+
+    queryClient.invalidateQueries({
+      queryKey: ["/api/account/security"]
+    });
+
+    toast({
+      title: "2FA Enabled Successfully",
+      description: "Save your recovery codes now. They will not be shown again."
+    });
+  };
+
+  const copyBackupCodes = async () => {
+    if (backupCodes.length === 0) return;
+
+    try {
+      await navigator.clipboard.writeText(backupCodes.join("\n"));
+      toast({
+        title: "Copied",
+        description: "Recovery codes copied. Store them in a secure location."
+      });
+    } catch {
+      toast({
+        title: "Copy Unavailable",
+        description: "Copy was unavailable. Record each recovery code manually.",
         variant: "destructive"
       });
     }
   };
-  
-  const copyBackupCodes = () => {
-    navigator.clipboard.writeText(backupCodes.join("\n"));
-    toast({
-      title: "Copied",
-      description: "Backup codes copied to clipboard. Store them safely!"
+
+  const acknowledgeBackupCodes = async () => {
+    if (backupCodes.length === 0) return;
+
+    resetMfaSetupState();
+    await completeSecurityStateChange();
+  };
+
+  const handleClose2FASetup = () => {
+    if (twoFAStep === 4) {
+      toast({
+        title: "Save Recovery Codes",
+        description: "Save the recovery codes and use the acknowledgement button to finish setup.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    resetMfaSetupState();
+  };
+
+  const handleOpenDisable2FA = () => {
+    if (!hasPassword) {
+      toast({
+        title: "Reauthentication Required",
+        description: "This account requires provider reauthentication before two-factor authentication can be changed.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    resetDisable2FAState();
+    setShowDisable2FA(true);
+  };
+
+  const handleDisableModeChange = (mode) => {
+    setDisableFactorMode(mode);
+
+    if (mode === "totp") {
+      setDisableRecoveryCode("");
+    } else {
+      setDisableTotpCode("");
+    }
+  };
+
+  const handleDisable2FA = async () => {
+    if (mfaDisablePending) return;
+
+    if (!disableCurrentPassword) {
+      toast({
+        title: "Current Password Required",
+        description: "Enter your current password before disabling two-factor authentication.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const totpSupplied =
+      disableFactorMode === "totp" &&
+      /^\d{6}$/.test(disableTotpCode);
+
+    const recoverySupplied =
+      disableFactorMode === "recovery" &&
+      disableRecoveryCode.trim().length > 0;
+
+    if (totpSupplied === recoverySupplied) {
+      toast({
+        title: "One Verification Method Required",
+        description: "Provide exactly one authenticator code or one recovery code.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    if (
+      recoverySupplied &&
+      disableRecoveryCode.trim().length > 128
+    ) {
+      toast({
+        title: "Invalid Recovery Code",
+        description: "The recovery credential is not valid.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const payload = totpSupplied
+      ? {
+          currentPassword: disableCurrentPassword,
+          code: disableTotpCode
+        }
+      : {
+          currentPassword: disableCurrentPassword,
+          recoveryCode: disableRecoveryCode.trim()
+        };
+
+    setMfaDisablePending(true);
+
+    let disabled = false;
+
+    try {
+      await apiRequest(
+        "POST",
+        "/api/account/2fa/disable",
+        payload
+      );
+      disabled = true;
+    } catch (error) {
+      toast({
+        title: "Failed to Disable 2FA",
+        description: error.message || "The password or MFA factor could not be verified.",
+        variant: "destructive"
+      });
+    } finally {
+      setMfaDisablePending(false);
+    }
+
+    if (!disabled) return;
+
+    resetDisable2FAState();
+
+    queryClient.invalidateQueries({
+      queryKey: ["/api/account/security"]
     });
+
+    toast({
+      title: "2FA Disabled",
+      description: "Two-factor authentication was removed. Sign in again to continue."
+    });
+
+    await completeSecurityStateChange();
   };
 
   const passwordMutation = useMutation({
@@ -326,147 +587,503 @@ export default function Security() {
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Smartphone className="w-5 h-5" />
-                Two-Factor Authentication
-              </CardTitle>
-              <CardDescription>Add an extra layer of security to your account</CardDescription>
-            </CardHeader>
-            <CardContent>
-              {securityStatus.twoFactorEnabled ? (
-                <div className="flex items-center justify-between p-4 rounded-lg border bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800">
-                  <div className="flex items-center gap-3">
-                    <ShieldCheck className="w-5 h-5 text-green-600" />
-                    <div>
-                      <p className="font-medium text-green-900 dark:text-green-100">2FA Enabled</p>
-                      <p className="text-sm text-green-700 dark:text-green-300">
-                        Your account is protected with two-factor authentication
-                      </p>
-                    </div>
-                  </div>
-                  <Button 
-                    variant="outline" 
-                    data-testid="button-disable-2fa"
-                    onClick={() => disable2FAMutation.mutate()}
-                    disabled={disable2FAMutation.isPending}
-                  >
-                    {disable2FAMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : "Disable 2FA"}
-                  </Button>
-                </div>
-              ) : (
-                <div className="flex items-center justify-between p-4 rounded-lg border bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800">
-                  <div className="flex items-center gap-3">
-                    <AlertTriangle className="w-5 h-5 text-amber-600" />
-                    <div>
-                      <p className="font-medium text-amber-900 dark:text-amber-100">2FA Not Enabled</p>
-                      <p className="text-sm text-amber-700 dark:text-amber-300">
-                        Protect your account with two-factor authentication
-                      </p>
-                    </div>
-                  </div>
-                  <Button 
-                    variant="outline" 
-                    data-testid="button-enable-2fa"
-                    onClick={handleEnable2FA}
-                    disabled={setup2FAMutation.isPending}
-                  >
-                    {setup2FAMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : "Enable 2FA"}
-                  </Button>
-                </div>
-              )}
-            </CardContent>
-          </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Smartphone className="w-5 h-5" />
+                  Two-Factor Authentication
+                </CardTitle>
+                <CardDescription>
+                  Add an extra layer of security to your account
+                </CardDescription>
+              </CardHeader>
 
-          {show2FASetup && (
-            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-              <Card className="w-full max-w-md">
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <CardTitle className="flex items-center gap-2">
-                      <QrCode className="w-5 h-5" />
-                      {twoFAStep === 1 ? "Setting up 2FA..." : twoFAStep === 2 ? "Scan QR Code" : "Enter Verification Code"}
-                    </CardTitle>
-                    <Button variant="ghost" size="sm" onClick={() => { setShow2FASetup(false); setTwoFAStep(1); }}>
-                      <X className="w-4 h-4" />
+              <CardContent>
+                {securityStatus.twoFactorEnabled ? (
+                  <div className="flex items-center justify-between gap-4 p-4 rounded-lg border bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800">
+                    <div className="flex items-center gap-3">
+                      <ShieldCheck className="w-5 h-5 text-green-600" />
+                      <div>
+                        <p className="font-medium text-green-900 dark:text-green-100">
+                          2FA Enabled
+                        </p>
+                        <p className="text-sm text-green-700 dark:text-green-300">
+                          Your account is protected with two-factor authentication.
+                        </p>
+                      </div>
+                    </div>
+
+                    <Button
+                      variant="outline"
+                      data-testid="button-disable-2fa"
+                      onClick={handleOpenDisable2FA}
+                      disabled={!hasPassword}
+                    >
+                      Disable 2FA
                     </Button>
                   </div>
-                </CardHeader>
-                <CardContent>
-                  {twoFAStep === 1 && (
-                    <div className="flex items-center justify-center py-8">
-                      <Loader2 className="w-8 h-8 animate-spin text-primary" />
-                    </div>
-                  )}
-                  
-                  {twoFAStep === 2 && (
-                    <div className="space-y-4">
-                      <div className="flex justify-center">
-                        {qrCodeUrl ? (
-                          <img 
-                            src={qrCodeUrl} 
-                            alt="Scan this QR code with your authenticator app" 
-                            className="w-48 h-48 rounded-lg border"
-                            data-testid="img-2fa-qr"
-                          />
-                        ) : (
-                          <div className="w-48 h-48 bg-white p-4 rounded-lg border-2 border-dashed border-gray-300 flex items-center justify-center">
-                            <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
-                          </div>
-                        )}
+                ) : (
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between gap-4 p-4 rounded-lg border bg-amber-50 dark:bg-amber-900/20 border-amber-200 dark:border-amber-800">
+                      <div className="flex items-center gap-3">
+                        <AlertTriangle className="w-5 h-5 text-amber-600" />
+                        <div>
+                          <p className="font-medium text-amber-900 dark:text-amber-100">
+                            2FA Not Enabled
+                          </p>
+                          <p className="text-sm text-amber-700 dark:text-amber-300">
+                            Protect your account with two-factor authentication.
+                          </p>
+                        </div>
                       </div>
-                      <p className="text-sm text-center text-muted-foreground">
-                        Scan this QR code with Google Authenticator, Authy, or another TOTP app.
-                      </p>
-                      <Button className="w-full" onClick={() => setTwoFAStep(3)}>
-                        Continue
+
+                      <Button
+                        variant="outline"
+                        data-testid="button-enable-2fa"
+                        onClick={handleEnable2FA}
+                        disabled={!hasPassword}
+                      >
+                        Enable 2FA
                       </Button>
                     </div>
-                  )}
-                  
-                  {twoFAStep === 3 && (
-                    <div className="space-y-4">
-                      <p className="text-sm text-muted-foreground">
-                        Enter the 6-digit code from your authenticator app to verify setup.
+
+                    {securityData && !hasPassword && (
+                      <p className="text-sm text-muted-foreground" role="status">
+                        Provider reauthentication is required before MFA security settings can be changed for this account.
                       </p>
-                      <Input
-                        type="text"
-                        placeholder="000000"
-                        maxLength={6}
-                        value={verificationCode}
-                        onChange={(e) => setVerificationCode(e.target.value.replace(/\D/g, ""))}
-                        className="text-center text-2xl tracking-widest font-mono"
-                        data-testid="input-2fa-code"
-                      />
-                      <div className="bg-muted p-3 rounded-lg">
-                        <div className="flex items-center justify-between mb-2">
-                          <p className="text-xs font-medium">Backup Codes (save these!):</p>
-                          <Button variant="ghost" size="sm" onClick={copyBackupCodes}>
-                            <Copy className="w-4 h-4 mr-1" /> Copy
-                          </Button>
+                    )}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+
+            {show2FASetup && (
+              <div
+                className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="mfa-setup-title"
+                onKeyDown={(event) => {
+                  if (
+                    event.key === "Escape" &&
+                    twoFAStep !== 4
+                  ) {
+                    handleClose2FASetup();
+                  }
+                }}
+              >
+                <Card className="w-full max-w-md">
+                  <CardHeader>
+                    <div className="flex items-center justify-between gap-4">
+                      <CardTitle
+                        id="mfa-setup-title"
+                        className="flex items-center gap-2"
+                      >
+                        <QrCode className="w-5 h-5" />
+                        {twoFAStep === 1
+                          ? "Confirm Your Password"
+                          : twoFAStep === 2
+                            ? "Scan QR Code"
+                            : twoFAStep === 3
+                              ? "Verify Authenticator"
+                              : "Save Recovery Codes"}
+                      </CardTitle>
+
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        aria-label="Close two-factor authentication setup"
+                        disabled={twoFAStep === 4}
+                        onClick={handleClose2FASetup}
+                      >
+                        <X className="w-4 h-4" />
+                      </Button>
+                    </div>
+                  </CardHeader>
+
+                  <CardContent className="space-y-4">
+                    {twoFAStep === 1 && (
+                      <div className="space-y-4">
+                        <p
+                          id="mfa-setup-password-help"
+                          className="text-sm text-muted-foreground"
+                        >
+                          Confirm your current password before creating an authenticator enrollment.
+                        </p>
+
+                        <div className="space-y-2">
+                          <label
+                            htmlFor="mfa-setup-current-password"
+                            className="text-sm font-medium"
+                          >
+                            Current Password
+                          </label>
+
+                          <Input
+                            id="mfa-setup-current-password"
+                            type="password"
+                            autoComplete="current-password"
+                            autoFocus
+                            value={mfaCurrentPassword}
+                            onChange={(event) =>
+                              setMfaCurrentPassword(event.target.value)
+                            }
+                            aria-describedby="mfa-setup-password-help"
+                            data-testid="input-mfa-current-password"
+                          />
                         </div>
-                        <div className="grid grid-cols-2 gap-1">
-                          {backupCodes.map((code, i) => (
-                            <code key={i} className="text-xs font-mono bg-background p-1 rounded">{code}</code>
+
+                        <Button
+                          className="w-full"
+                          onClick={handleStart2FASetup}
+                          disabled={
+                            !mfaCurrentPassword ||
+                            mfaSetupPending
+                          }
+                          data-testid="button-mfa-start-setup"
+                        >
+                          {mfaSetupPending ? (
+                            <>
+                              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                              Verifying Password...
+                            </>
+                          ) : (
+                            "Continue"
+                          )}
+                        </Button>
+                      </div>
+                    )}
+
+                    {twoFAStep === 2 && (
+                      <div className="space-y-4">
+                        <div className="flex justify-center">
+                          {qrCodeUrl ? (
+                            <img
+                              src={qrCodeUrl}
+                              alt="Authenticator enrollment QR code"
+                              className="w-48 h-48 rounded-lg border"
+                              data-testid="img-2fa-qr"
+                            />
+                          ) : (
+                            <div
+                              className="w-48 h-48 bg-white p-4 rounded-lg border-2 border-dashed border-gray-300 flex items-center justify-center"
+                              role="status"
+                              aria-label="Loading authenticator QR code"
+                            >
+                              <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
+                            </div>
+                          )}
+                        </div>
+
+                        <p className="text-sm text-center text-muted-foreground">
+                          Scan this QR code with a TOTP authenticator app. Recovery codes do not exist until the authenticator is successfully verified.
+                        </p>
+
+                        <Button
+                          className="w-full"
+                          onClick={() => setTwoFAStep(3)}
+                          disabled={!qrCodeUrl}
+                          data-testid="button-mfa-qr-continue"
+                        >
+                          I Scanned the QR Code
+                        </Button>
+                      </div>
+                    )}
+
+                    {twoFAStep === 3 && (
+                      <div className="space-y-4">
+                        <p
+                          id="mfa-verification-help"
+                          className="text-sm text-muted-foreground"
+                        >
+                          Enter the 6-digit code from your authenticator app.
+                        </p>
+
+                        <label
+                          htmlFor="mfa-verification-code"
+                          className="text-sm font-medium"
+                        >
+                          Authenticator Code
+                        </label>
+
+                        <Input
+                          id="mfa-verification-code"
+                          type="text"
+                          inputMode="numeric"
+                          autoComplete="one-time-code"
+                          placeholder="000000"
+                          maxLength={6}
+                          autoFocus
+                          value={verificationCode}
+                          onChange={(event) =>
+                            setVerificationCode(
+                              event.target.value.replace(/\D/g, "")
+                            )
+                          }
+                          aria-describedby="mfa-verification-help"
+                          className="text-center text-2xl tracking-widest font-mono"
+                          data-testid="input-2fa-code"
+                        />
+
+                        <Button
+                          className="w-full"
+                          onClick={handleVerify2FA}
+                          disabled={
+                            verificationCode.length !== 6 ||
+                            mfaVerifyPending
+                          }
+                          data-testid="button-mfa-verify"
+                        >
+                          {mfaVerifyPending ? (
+                            <>
+                              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                              Verifying...
+                            </>
+                          ) : (
+                            "Enable 2FA"
+                          )}
+                        </Button>
+                      </div>
+                    )}
+
+                    {twoFAStep === 4 && (
+                      <div className="space-y-4">
+                        <div
+                          className="rounded-lg border p-3 bg-muted"
+                          role="status"
+                        >
+                          <p className="font-medium">
+                            Save these recovery codes now.
+                          </p>
+                          <p className="text-sm text-muted-foreground mt-1">
+                            Each code is a one-time credential. The platform will not show this set again.
+                          </p>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-2">
+                          {backupCodes.map((code, index) => (
+                            <code
+                              key={index}
+                              className="text-xs font-mono bg-background border p-2 rounded break-all"
+                            >
+                              {code}
+                            </code>
                           ))}
                         </div>
+
+                        <Button
+                          type="button"
+                          variant="outline"
+                          className="w-full"
+                          onClick={() => void copyBackupCodes()}
+                          data-testid="button-copy-recovery-codes"
+                        >
+                          <Copy className="w-4 h-4 mr-2" />
+                          Copy Recovery Codes
+                        </Button>
+
+                        <p className="text-xs text-muted-foreground">
+                          Refresh sessions were revoked when MFA was enabled. After you confirm that the codes are saved, this browser will also clear its current authentication state and require a new sign-in.
+                        </p>
+
+                        <Button
+                          className="w-full"
+                          onClick={() => void acknowledgeBackupCodes()}
+                          disabled={backupCodes.length !== 6}
+                          data-testid="button-acknowledge-recovery-codes"
+                        >
+                          I Saved My Codes — Sign Me Out
+                        </Button>
                       </div>
-                      <Button 
-                        className="w-full" 
-                        onClick={handleVerify2FA}
-                        disabled={verificationCode.length !== 6 || verify2FAMutation.isPending}
+                    )}
+                  </CardContent>
+                </Card>
+              </div>
+            )}
+
+            {showDisable2FA && (
+              <div
+                className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="mfa-disable-title"
+                onKeyDown={(event) => {
+                  if (event.key === "Escape") {
+                    resetDisable2FAState();
+                  }
+                }}
+              >
+                <Card className="w-full max-w-md">
+                  <CardHeader>
+                    <div className="flex items-center justify-between gap-4">
+                      <CardTitle id="mfa-disable-title">
+                        Disable Two-Factor Authentication
+                      </CardTitle>
+
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        aria-label="Close disable two-factor authentication dialog"
+                        onClick={resetDisable2FAState}
                       >
-                        {verify2FAMutation.isPending ? (
-                          <><Loader2 className="w-4 h-4 animate-spin mr-2" /> Verifying...</>
-                        ) : "Enable 2FA"}
+                        <X className="w-4 h-4" />
                       </Button>
                     </div>
-                  )}
-                </CardContent>
-              </Card>
-            </div>
-          )}
+
+                    <CardDescription>
+                      This security downgrade requires your current password and exactly one current MFA verification method.
+                    </CardDescription>
+                  </CardHeader>
+
+                  <CardContent className="space-y-4">
+                    <div className="space-y-2">
+                      <label
+                        htmlFor="mfa-disable-current-password"
+                        className="text-sm font-medium"
+                      >
+                        Current Password
+                      </label>
+
+                      <Input
+                        id="mfa-disable-current-password"
+                        type="password"
+                        autoComplete="current-password"
+                        autoFocus
+                        value={disableCurrentPassword}
+                        onChange={(event) =>
+                          setDisableCurrentPassword(event.target.value)
+                        }
+                        data-testid="input-disable-mfa-password"
+                      />
+                    </div>
+
+                    <div
+                      className="grid grid-cols-2 gap-2"
+                      aria-label="MFA verification method"
+                    >
+                      <Button
+                        type="button"
+                        variant={
+                          disableFactorMode === "totp"
+                            ? "default"
+                            : "outline"
+                        }
+                        aria-pressed={disableFactorMode === "totp"}
+                        onClick={() => handleDisableModeChange("totp")}
+                        data-testid="button-disable-factor-totp"
+                      >
+                        Authenticator
+                      </Button>
+
+                      <Button
+                        type="button"
+                        variant={
+                          disableFactorMode === "recovery"
+                            ? "default"
+                            : "outline"
+                        }
+                        aria-pressed={disableFactorMode === "recovery"}
+                        onClick={() => handleDisableModeChange("recovery")}
+                        data-testid="button-disable-factor-recovery"
+                      >
+                        Recovery Code
+                      </Button>
+                    </div>
+
+                    {disableFactorMode === "totp" ? (
+                      <div className="space-y-2">
+                        <label
+                          htmlFor="mfa-disable-totp"
+                          className="text-sm font-medium"
+                        >
+                          6-Digit Authenticator Code
+                        </label>
+
+                        <Input
+                          id="mfa-disable-totp"
+                          type="text"
+                          inputMode="numeric"
+                          autoComplete="one-time-code"
+                          maxLength={6}
+                          value={disableTotpCode}
+                          onChange={(event) =>
+                            setDisableTotpCode(
+                              event.target.value.replace(/\D/g, "")
+                            )
+                          }
+                          data-testid="input-disable-mfa-totp"
+                        />
+                      </div>
+                    ) : (
+                      <div className="space-y-2">
+                        <label
+                          htmlFor="mfa-disable-recovery"
+                          className="text-sm font-medium"
+                        >
+                          Recovery Code
+                        </label>
+
+                        <Input
+                          id="mfa-disable-recovery"
+                          type="text"
+                          autoComplete="off"
+                          spellCheck={false}
+                          maxLength={128}
+                          value={disableRecoveryCode}
+                          onChange={(event) =>
+                            setDisableRecoveryCode(event.target.value)
+                          }
+                          data-testid="input-disable-mfa-recovery"
+                        />
+                      </div>
+                    )}
+
+                    <div
+                      className="rounded-lg border border-amber-200 bg-amber-50 dark:bg-amber-900/20 p-3"
+                      role="alert"
+                    >
+                      <p className="text-sm">
+                        Disabling 2FA reduces account protection and revokes refresh sessions. You will be signed out after the change.
+                      </p>
+                    </div>
+
+                    <div className="flex gap-2">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        className="flex-1"
+                        onClick={resetDisable2FAState}
+                      >
+                        Cancel
+                      </Button>
+
+                      <Button
+                        type="button"
+                        variant="destructive"
+                        className="flex-1"
+                        onClick={handleDisable2FA}
+                        disabled={
+                          !disableCurrentPassword ||
+                          mfaDisablePending
+                        }
+                        data-testid="button-confirm-disable-2fa"
+                      >
+                        {mfaDisablePending ? (
+                          <>
+                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                            Disabling...
+                          </>
+                        ) : (
+                          "Disable 2FA"
+                        )}
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
 
           <Card>
             <CardHeader>

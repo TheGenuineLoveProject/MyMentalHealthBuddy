@@ -1,0 +1,634 @@
+{
+  "schema": "MMHB_AUTH_BOUNDARY_REVIEW_V1",
+  "createdAt": "2026-09-13T14:31:43.871Z",
+  "reportedCandidateCommit": "63ff8372d07368a5434c11ff58bdf87bb468449d",
+  "nodeVersion": "v22.16.0",
+  "executionLocation": "ChatGPT container, not Replit",
+  "sourceDerivation": "Extracted contiguous numbered source lines from user-uploaded terminal transcripts; normalized line endings. No repository bytes or entire application available.",
+  "networkRequestsDuringTests": 0,
+  "realDatabaseUsed": false,
+  "realJWTLibraryUsed": false,
+  "realExpressUsed": false,
+  "realPassportUsed": false,
+  "sourceManifest": [
+    {
+      "file": "server/security/csrf.mjs",
+      "lines": 134,
+      "sha256": "648e21f3eb89933aeaaad1e967c59640cc52d2f8634002d3abbc6dafe358bce1"
+    },
+    {
+      "file": "server/replit_integrations/auth/routes.mjs",
+      "lines": 56,
+      "sha256": "e2920b8003e6a4ebfa43b5dcdade07c0bb09a87ea7607a780872259df3d10a83"
+    },
+    {
+      "file": "server/middleware/auth.mjs",
+      "lines": 98,
+      "sha256": "88cc7394e23d571a83ecd33fb35da9070f2614865bd619fd039ef9b657b2d3ed"
+    },
+    {
+      "file": "server/replit_integrations/auth/replitAuth.mjs",
+      "lines": 309,
+      "sha256": "6235fd16449ca0974cc9d5103c1c3ae42e5ace1b7bbcdb6d3351aa7fbae7f9f2"
+    }
+  ],
+  "summary": {
+    "checks": 67,
+    "passed": 67,
+    "failed": 0,
+    "mutationChecks": 4
+  },
+  "limits": [
+    "Behavior assertions include confirmation of review findings; PASS does not imply application safety.",
+    "JWT cryptography and claims validation are mocked, not independently certified.",
+    "Request/response objects, storage, provider discovery and refresh, Passport, and session store are mocked.",
+    "No production exploit, route reachability, browser behavior, revocation, or real session destruction proven."
+  ],
+  "results": [
+    {
+      "group": "origin predicate",
+      "name": "exact https origin",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": true
+    },
+    {
+      "group": "origin predicate",
+      "name": "different scheme",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": false
+    },
+    {
+      "group": "origin predicate",
+      "name": "foreign origin",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": false
+    },
+    {
+      "group": "origin predicate",
+      "name": "local exact port",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": true
+    },
+    {
+      "group": "origin predicate",
+      "name": "wrong port",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": false
+    },
+    {
+      "group": "origin predicate",
+      "name": "opaque null origin",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": false
+    },
+    {
+      "group": "origin predicate",
+      "name": "origin with path",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": false
+    },
+    {
+      "group": "origin predicate",
+      "name": "origin trailing slash",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": false
+    },
+    {
+      "group": "origin predicate",
+      "name": "multiple origin values",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": false
+    },
+    {
+      "group": "origin predicate",
+      "name": "origin array",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": false
+    },
+    {
+      "group": "origin predicate",
+      "name": "invalid origin does not fall back",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": false
+    },
+    {
+      "group": "origin predicate",
+      "name": "referer fallback same origin",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": true
+    },
+    {
+      "group": "origin predicate",
+      "name": "referer foreign origin",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": false
+    },
+    {
+      "group": "origin predicate",
+      "name": "referer credentials rejected",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": false
+    },
+    {
+      "group": "origin predicate",
+      "name": "referer whitespace rejected",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": false
+    },
+    {
+      "group": "origin predicate",
+      "name": "missing all signals",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": false
+    },
+    {
+      "group": "origin predicate",
+      "name": "same origin fetch metadata",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": true
+    },
+    {
+      "group": "origin predicate",
+      "name": "cross site overrides matching origin",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": false
+    },
+    {
+      "group": "origin predicate",
+      "name": "same site rejected",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": false
+    },
+    {
+      "group": "origin predicate",
+      "name": "none fetch site rejected",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": false
+    },
+    {
+      "group": "origin predicate",
+      "name": "unknown fetch site rejected",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": false
+    },
+    {
+      "group": "origin predicate",
+      "name": "host whitespace rejected",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": false
+    },
+    {
+      "group": "origin predicate",
+      "name": "host delimiter rejected",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": false
+    },
+    {
+      "group": "origin predicate",
+      "name": "invalid protocol",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": false
+    },
+    {
+      "group": "origin predicate",
+      "name": "metadata early return before host validation",
+      "classification": "POLICY_BOUNDARY_OBSERVATION",
+      "result": "PASS",
+      "observed": true
+    },
+    {
+      "group": "origin predicate",
+      "name": "metadata early return ignores referer conflict",
+      "classification": "POLICY_BOUNDARY_OBSERVATION",
+      "result": "PASS",
+      "observed": true
+    },
+    {
+      "group": "origin predicate",
+      "name": "target is request derived",
+      "classification": "POLICY_BOUNDARY_OBSERVATION",
+      "result": "PASS",
+      "observed": true
+    },
+    {
+      "group": "csrf middleware",
+      "name": "lowercase api without token",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": {
+        "next": 0,
+        "status": 403,
+        "body": {
+          "error": "CSRF token missing or invalid"
+        },
+        "headers": {}
+      }
+    },
+    {
+      "group": "csrf middleware",
+      "name": "uppercase API skips generic check",
+      "classification": "GUARD_SCOPE_OBSERVATION",
+      "result": "PASS",
+      "observed": {
+        "next": 1,
+        "status": 200,
+        "headers": {}
+      }
+    },
+    {
+      "group": "csrf middleware",
+      "name": "mixed case Api skips generic check",
+      "classification": "GUARD_SCOPE_OBSERVATION",
+      "result": "PASS",
+      "observed": {
+        "next": 1,
+        "status": 200,
+        "headers": {}
+      }
+    },
+    {
+      "group": "csrf middleware",
+      "name": "missing slash api path skips generic check",
+      "classification": "GUARD_SCOPE_OBSERVATION",
+      "result": "PASS",
+      "observed": {
+        "next": 1,
+        "status": 200,
+        "headers": {}
+      }
+    },
+    {
+      "group": "csrf middleware",
+      "name": "matching csrf cookie header",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": {
+        "next": 1,
+        "status": 200,
+        "headers": {}
+      }
+    },
+    {
+      "group": "csrf middleware",
+      "name": "wrong csrf token",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": {
+        "next": 0,
+        "status": 403,
+        "body": {
+          "error": "CSRF token missing or invalid"
+        },
+        "headers": {}
+      }
+    },
+    {
+      "group": "csrf middleware",
+      "name": "missing csrf cookie",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": {
+        "next": 0,
+        "status": 403,
+        "body": {
+          "error": "CSRF token missing or invalid"
+        },
+        "headers": {}
+      }
+    },
+    {
+      "group": "csrf middleware",
+      "name": "Bearer header alone skips csrf",
+      "classification": "GUARD_SCOPE_OBSERVATION",
+      "result": "PASS",
+      "observed": {
+        "next": 1,
+        "status": 200,
+        "headers": {}
+      }
+    },
+    {
+      "group": "csrf middleware",
+      "name": "guest header alone skips csrf",
+      "classification": "GUARD_SCOPE_OBSERVATION",
+      "result": "PASS",
+      "observed": {
+        "next": 1,
+        "status": 200,
+        "headers": {}
+      }
+    },
+    {
+      "group": "csrf middleware",
+      "name": "auth route gets origin check before bearer exemption",
+      "classification": "GUARD_SCOPE_OBSERVATION",
+      "result": "PASS",
+      "observed": {
+        "next": 0,
+        "status": 403,
+        "body": {
+          "error": "Same-origin authentication request required",
+          "code": "AUTH_ORIGIN_REQUIRED"
+        },
+        "headers": {
+          "cache-control": "no-store"
+        }
+      }
+    },
+    {
+      "group": "csrf middleware",
+      "name": "case varied auth still protected",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": {
+        "next": 0,
+        "status": 403,
+        "body": {
+          "error": "Same-origin authentication request required",
+          "code": "AUTH_ORIGIN_REQUIRED"
+        },
+        "headers": {
+          "cache-control": "no-store"
+        }
+      }
+    },
+    {
+      "group": "csrf middleware",
+      "name": "auth same origin passes without double submit",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": {
+        "next": 1,
+        "status": 200,
+        "headers": {}
+      }
+    },
+    {
+      "group": "csrf middleware",
+      "name": "GET safe method",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": {
+        "next": 1,
+        "status": 200,
+        "headers": {}
+      }
+    },
+    {
+      "group": "csrf middleware",
+      "name": "explicit feedback exemption",
+      "classification": "GUARD_SCOPE_OBSERVATION",
+      "result": "PASS",
+      "observed": {
+        "next": 1,
+        "status": 200,
+        "headers": {}
+      }
+    },
+    {
+      "group": "csrf issuance",
+      "name": "creates 32-byte hex cookie",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": {
+        "token_length": 64,
+        "httpOnly": true
+      }
+    },
+    {
+      "group": "csrf issuance",
+      "name": "production cookie secure",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": true
+    },
+    {
+      "group": "csrf issuance",
+      "name": "existing cookie reused",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": true
+    },
+    {
+      "group": "OIDC identity handling",
+      "name": "missing expiry",
+      "classification": "INCONSISTENT_IDENTITY_CHECK_CONFIRMED",
+      "result": "PASS",
+      "observed": {
+        "profileReturned": true,
+        "protectedMiddlewareAllowed": false,
+        "profileHasPrivateFixtureField": true
+      }
+    },
+    {
+      "group": "OIDC identity handling",
+      "name": "zero expiry",
+      "classification": "INCONSISTENT_IDENTITY_CHECK_CONFIRMED",
+      "result": "PASS",
+      "observed": {
+        "profileReturned": true,
+        "protectedMiddlewareAllowed": false,
+        "profileHasPrivateFixtureField": true
+      }
+    },
+    {
+      "group": "OIDC identity handling",
+      "name": "nonnumeric expiry",
+      "classification": "INCONSISTENT_IDENTITY_CHECK_CONFIRMED",
+      "result": "PASS",
+      "observed": {
+        "profileReturned": true,
+        "protectedMiddlewareAllowed": false,
+        "profileHasPrivateFixtureField": true
+      }
+    },
+    {
+      "group": "OIDC identity handling",
+      "name": "future expiry",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": {
+        "profileReturned": true,
+        "protectedMiddlewareAllowed": true,
+        "profileHasPrivateFixtureField": true
+      }
+    },
+    {
+      "group": "OIDC identity handling",
+      "name": "expired expiry",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": {
+        "profileReturned": false,
+        "protectedMiddlewareAllowed": false,
+        "profileHasPrivateFixtureField": false
+      }
+    },
+    {
+      "group": "profile output",
+      "name": "returned storage row forwarded without projection",
+      "classification": "CONDITIONAL_DATA_EXPOSURE",
+      "result": "PASS",
+      "observed": "Mock sensitive field is forwarded if storage returns it; real storage content not supplied."
+    },
+    {
+      "group": "profile output",
+      "name": "storage failure and anonymous both produce json null",
+      "classification": "ERROR_CLASSIFICATION_OBSERVATION",
+      "result": "PASS",
+      "observed": true
+    },
+    {
+      "group": "bearer middleware",
+      "name": "requireAuth rejects session-only caller",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": {
+        "status": 401
+      }
+    },
+    {
+      "group": "bearer middleware",
+      "name": "requireAuth verifies but supplies no issuer audience constraints",
+      "classification": "VERIFIER_OPTIONS_OBSERVATION",
+      "result": "PASS",
+      "observed": "JWT verification is mocked; the exact middleware supplies no verify options."
+    },
+    {
+      "group": "bearer middleware",
+      "name": "requireAuth does not require id in verified claims",
+      "classification": "CLAIM_SCHEMA_OBSERVATION",
+      "result": "PASS",
+      "observed": true
+    },
+    {
+      "group": "bearer middleware",
+      "name": "requireAuthStrict rejects session-only caller",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": {
+        "status": 401
+      }
+    },
+    {
+      "group": "bearer middleware",
+      "name": "requireAuthStrict verifies but supplies no issuer audience constraints",
+      "classification": "VERIFIER_OPTIONS_OBSERVATION",
+      "result": "PASS",
+      "observed": "JWT verification is mocked; the exact middleware supplies no verify options."
+    },
+    {
+      "group": "bearer middleware",
+      "name": "requireAuthStrict does not require id in verified claims",
+      "classification": "CLAIM_SCHEMA_OBSERVATION",
+      "result": "PASS",
+      "observed": true
+    },
+    {
+      "group": "combined guards",
+      "name": "guest csrf exemption alone does not pass requireAuth",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": 401
+    },
+    {
+      "group": "combined guards",
+      "name": "invalid bearer csrf exemption still fails requireAuth",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": 401
+    },
+    {
+      "group": "bearer/session independence",
+      "name": "removing cookie session does not enter JWT rejection path",
+      "classification": "LOGOUT_SCOPE_OBSERVATION",
+      "result": "PASS",
+      "observed": "With the same mocked valid JWT verifier result, the middleware admits both requests; no session-store or revocation call exists here."
+    },
+    {
+      "group": "combined logout guard",
+      "name": "same-origin logout",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": {
+        "status": 303,
+        "destroyCalls": 1,
+        "logoutCalls": 1
+      }
+    },
+    {
+      "group": "combined logout guard",
+      "name": "foreign-origin logout",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": {
+        "status": 403,
+        "destroyCalls": 0,
+        "logoutCalls": 0
+      }
+    },
+    {
+      "group": "combined logout guard",
+      "name": "missing-origin logout",
+      "classification": "BEHAVIOR_ASSERTION",
+      "result": "PASS",
+      "observed": {
+        "status": 403,
+        "destroyCalls": 0,
+        "logoutCalls": 0
+      }
+    },
+    {
+      "group": "mutation detection",
+      "name": "origin all allowed",
+      "classification": "MUTATION_DETECTED",
+      "result": "PASS",
+      "observed": "DETECTED"
+    },
+    {
+      "group": "mutation detection",
+      "name": "auth route precedence removed",
+      "classification": "MUTATION_DETECTED",
+      "result": "PASS",
+      "observed": "DETECTED"
+    },
+    {
+      "group": "mutation detection",
+      "name": "csrf mismatch accepted",
+      "classification": "MUTATION_DETECTED",
+      "result": "PASS",
+      "observed": "DETECTED"
+    },
+    {
+      "group": "mutation detection",
+      "name": "expired profile refresh ignored",
+      "classification": "MUTATION_DETECTED",
+      "result": "PASS",
+      "observed": "DETECTED"
+    }
+  ]
+}

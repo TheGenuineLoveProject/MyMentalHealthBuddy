@@ -1,0 +1,242 @@
+{
+  "status": "CANDIDATE_UI_QUALIFICATION_PASS",
+  "results": [
+    {
+      "width": 320,
+      "theme": "light",
+      "result": "CONTROL_FIXTURE_PASS",
+      "controls": 3,
+      "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+      "blockedRequests": 0
+    },
+    {
+      "width": 320,
+      "theme": "dark",
+      "result": "CONTROL_FIXTURE_PASS",
+      "controls": 3,
+      "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+      "blockedRequests": 0
+    },
+    {
+      "width": 390,
+      "theme": "light",
+      "result": "CONTROL_FIXTURE_PASS",
+      "controls": 3,
+      "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+      "blockedRequests": 0
+    },
+    {
+      "width": 390,
+      "theme": "dark",
+      "result": "CONTROL_FIXTURE_PASS",
+      "controls": 3,
+      "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+      "blockedRequests": 0
+    },
+    {
+      "width": 768,
+      "theme": "light",
+      "result": "CONTROL_FIXTURE_PASS",
+      "controls": 10,
+      "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+      "blockedRequests": 0
+    },
+    {
+      "width": 768,
+      "theme": "dark",
+      "result": "CONTROL_FIXTURE_PASS",
+      "controls": 10,
+      "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+      "blockedRequests": 0
+    },
+    {
+      "width": 1365,
+      "theme": "light",
+      "result": "CONTROL_FIXTURE_PASS",
+      "controls": 10,
+      "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+      "blockedRequests": 0
+    },
+    {
+      "width": 1365,
+      "theme": "dark",
+      "result": "CONTROL_FIXTURE_PASS",
+      "controls": 10,
+      "logout": "EXISTING_HANDLER_INVOCATION_ONLY",
+      "blockedRequests": 0
+    },
+    {
+      "result": "LOGOUT_REJECTION_DISPLAY_PASS"
+    },
+    {
+      "result": "LOCAL_SESSION_FULL_NAVIGATION_PASS",
+      "authentication": "SIMULATED"
+    },
+    {
+      "route": "/login",
+      "result": "CANDIDATE_APP_NAV_MOUNT_PASS",
+      "authenticatedAPIs": "BLOCKED"
+    },
+    {
+      "route": "/journal",
+      "width": 320,
+      "theme": "light",
+      "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+      "contrastRatios": {
+        "signout": 11.03,
+        "dashboard": 11.03,
+        "title": 11.03,
+        "date": 11.03,
+        "share": 11.03,
+        "save": 7.38,
+        "insights": 7.38,
+        "input": 12.41
+      }
+    },
+    {
+      "route": "/dashboard",
+      "width": 320,
+      "theme": "light",
+      "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+      "contrastRatios": {
+        "signout": 11.03,
+        "dashboard": 11.03
+      }
+    },
+    {
+      "route": "/journal",
+      "width": 320,
+      "theme": "dark",
+      "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+      "contrastRatios": {
+        "signout": 11.03,
+        "dashboard": 11.03,
+        "title": 11.03,
+        "date": 11.03,
+        "share": 11.03,
+        "save": 7.38,
+        "insights": 7.38,
+        "input": 12.41
+      }
+    },
+    {
+      "route": "/dashboard",
+      "width": 320,
+      "theme": "dark",
+      "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+      "contrastRatios": {
+        "signout": 11.03,
+        "dashboard": 11.03
+      }
+    },
+    {
+      "route": "/journal",
+      "width": 768,
+      "theme": "light",
+      "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+      "contrastRatios": {
+        "signout": 11.03,
+        "dashboard": 11.03,
+        "title": 11.03,
+        "date": 11.03,
+        "share": 11.03,
+        "save": 7.38,
+        "insights": 7.38,
+        "input": 12.41
+      }
+    },
+    {
+      "route": "/dashboard",
+      "width": 768,
+      "theme": "light",
+      "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+      "contrastRatios": {
+        "signout": 11.03,
+        "dashboard": 11.03
+      }
+    },
+    {
+      "route": "/journal",
+      "width": 768,
+      "theme": "dark",
+      "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+      "contrastRatios": {
+        "signout": 11.03,
+        "dashboard": 11.03,
+        "title": 11.03,
+        "date": 11.03,
+        "share": 11.03,
+        "save": 7.38,
+        "insights": 7.38,
+        "input": 12.41
+      }
+    },
+    {
+      "route": "/dashboard",
+      "width": 768,
+      "theme": "dark",
+      "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+      "contrastRatios": {
+        "signout": 11.03,
+        "dashboard": 11.03
+      }
+    },
+    {
+      "route": "/journal",
+      "width": 1365,
+      "theme": "light",
+      "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+      "contrastRatios": {
+        "signout": 11.03,
+        "dashboard": 11.03,
+        "title": 11.03,
+        "date": 11.03,
+        "share": 11.03,
+        "save": 7.38,
+        "insights": 7.38,
+        "input": 12.41
+      }
+    },
+    {
+      "route": "/dashboard",
+      "width": 1365,
+      "theme": "light",
+      "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+      "contrastRatios": {
+        "signout": 11.03,
+        "dashboard": 11.03
+      }
+    },
+    {
+      "route": "/journal",
+      "width": 1365,
+      "theme": "dark",
+      "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+      "contrastRatios": {
+        "signout": 11.03,
+        "dashboard": 11.03,
+        "title": 11.03,
+        "date": 11.03,
+        "share": 11.03,
+        "save": 7.38,
+        "insights": 7.38,
+        "input": 12.41
+      }
+    },
+    {
+      "route": "/dashboard",
+      "width": 1365,
+      "theme": "dark",
+      "result": "PAGE_COMPOSITION_FIXTURE_PASS",
+      "contrastRatios": {
+        "signout": 11.03,
+        "dashboard": 11.03
+      }
+    }
+  ],
+  "limitations": [
+    "Authentication and API data are simulated in component and page-composition fixtures.",
+    "No real login, token revocation, journal write, or community posting was tested.",
+    "Candidate login route mounts the changed navigation with API requests blocked."
+  ]
+}

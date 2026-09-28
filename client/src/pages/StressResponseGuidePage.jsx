@@ -173,25 +173,6 @@ const nervousSystemStates = [
 
 function ResponseCard({ response, isSelected, onSelect }) {
   return (
-  <WellnessPageShell
-    title="StressResponseGuidePage"
-    subtitle="Educational reflection tools. Choose what feels safe and supportive."
-    benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
-    clarity={{
-      what: "A self-paced reflection tool you control.",
-      why: "To support clarity, values alignment, and gentle next steps.",
-      who: "For adults (18+) who want educational wellness tools (not medical care).",
-      when: "Anytime you want a small reset or a thoughtful pause.",
-      where: "Anywhere you can breathe and write for 1–5 minutes.",
-      how: "Pick one prompt, answer briefly, stop whenever you want."
-    }}
-    examples={[
-      { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
-      { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
-      { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
-    ]}
-  >
-      <SEO title="Stress Response Guide — The Genuine Love Project" description="Understand and work with stress responses." />
 
 
     <button
@@ -289,6 +270,25 @@ export default function StressResponseGuidePage() {
   const [selectedResponse, setSelectedResponse] = useState(stressResponses[0]);
 
   return (
+    <WellnessPageShell
+      title="StressResponseGuidePage"
+      subtitle="Educational reflection tools. Choose what feels safe and supportive."
+      benefits={pickBenefits(["agency","calm","clarity","selfRespect","meaning"], 5)}
+      clarity={{
+        what: "A self-paced reflection tool you control.",
+        why: "To support clarity, values alignment, and gentle next steps.",
+        who: "For adults (18+) who want educational wellness tools (not medical care).",
+        when: "Anytime you want a small reset or a thoughtful pause.",
+        where: "Anywhere you can breathe and write for 1–5 minutes.",
+        how: "Pick one prompt, answer briefly, stop whenever you want."
+      }}
+      examples={[
+        { label: "Beginner", examples: ["Write one honest sentence about how you feel.", "Name one value you want to protect today."] },
+        { label: "Intermediate", examples: ["Describe the situation + the need underneath it.", "Write a boundary you could try in one sentence."] },
+        { label: "Advanced", examples: ["Identify a pattern and the smallest experiment to change it.", "Write a compassionate reframe and one measurable step."] }
+      ]}
+    >
+      <SEO title="Stress Response Guide — The Genuine Love Project" description="Understand and work with stress responses." />
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-white dark:from-slate-900 dark:to-slate-950">
       <div className="max-w-6xl mx-auto px-4 py-8">
         <Link href="/" className="inline-flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors mb-8" data-testid="link-back-home">

@@ -1,7 +1,8 @@
 import { Link, useLocation } from "wouter";
+import "../styles/mmhb-ui-controls.css";
 import {
   Sparkles, BookOpen, LayoutDashboard, Heart, Menu, X, Home, MessageCircle,
-  Search, Crown, ChevronDown, LifeBuoy, Wrench, Compass, Info,
+  Search, Crown, ChevronDown, LifeBuoy, Wrench, Compass, Info, LogOut,
 } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import ModeToggle from "./ModeToggle.jsx";
@@ -60,10 +61,12 @@ const ABOUT_LINKS = [
 
 // Tools dropdown sourced from the canonical registry so visibility tracks tools data.
 const TOOL_LINKS = [
+  { href: "/start", label: "Start Here" },
+  { href: "/state", label: "Mood Check-In" },
   { href: "/wellness-tools-hub", label: "Wellness Tools Hub" },
   { href: "/tools/all", label: "All Tools" },
   ...WELLNESS_HUB_TOOLS.map((t) => ({ href: t.href, label: t.title })),
-];
+].filter((item, index, items) => items.findIndex(t => t.href === item.href) === index);
 
 function Dropdown({ id, label, icon: Icon, items, openId, setOpenId, isActive }) {
   const open = openId === id;
@@ -132,7 +135,48 @@ export default function TglpNavbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [openId, setOpenId] = useState(null);
-  const { user, isPro } = useAuth();
+  const { user, isPro, logout, token } = useAuth();
+  const [signOutPending, setSignOutPending] = useState(false);
+  const [signOutError, setSignOutError] = useState("");
+  const signOutInFlight = useRef(false);
+  const mobileMenuButtonRef = useRef(null);
+
+  async function handleSignOut() {
+    if (signOutInFlight.current) return;
+    signOutInFlight.current = true;
+    setSignOutPending(true);
+    setSignOutError("");
+    setMobileMenuOpen(false);
+    setOpenId(null);
+    try {
+      await logout();
+      // A full navigation discards the previous page and its in-memory journal data.
+      // Federated logout owns its redirect inside AuthContext.
+      if (token) window.location.assign("/login");
+    } catch {
+      setSignOutError("Sign out could not be completed. Please try again.");
+    } finally {
+      signOutInFlight.current = false;
+      setSignOutPending(false);
+    }
+  }
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setOpenId(null);
+  }, [location]);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") {
+        setMobileMenuOpen(false);
+        mobileMenuButtonRef.current?.focus();
+      }
+    };
+    document.addEventListener("keydown", closeOnEscape);
+    return () => document.removeEventListener("keydown", closeOnEscape);
+  }, [mobileMenuOpen]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -146,7 +190,7 @@ export default function TglpNavbar() {
 
   return (
     <header
-      className={`tglp-nav-root sticky top-0 z-50 w-full transition-all duration-300 ${
+      className={`tglp-nav-root mmhb-nav-root sticky top-0 z-50 w-full transition-all duration-300 ${
         scrolled
           ? "bg-[var(--glp-paper)]/95 backdrop-blur-lg shadow-sm border-b border-[var(--glp-sage-10)]"
           : "bg-transparent"
@@ -155,7 +199,7 @@ export default function TglpNavbar() {
       role="banner"
       data-testid="navbar-main"
     >
-      <div className="mx-auto flex h-24 md:h-28 max-w-7xl items-center justify-between px-6 sm:px-10 lg:px-12 gap-6">
+      <div className="mmhb-nav-inner">
 
         {/* Left: Mode Toggle */}
         <div className="hidden md:flex items-center shrink-0">
@@ -239,8 +283,8 @@ export default function TglpNavbar() {
                 data-testid="link-dashboard-cta"
               >
                 <Sparkles className="w-4 h-4" aria-hidden="true" />
-                <span className="cta-label-full">Dashboard</span>
-                <span className="cta-label-short">Go</span>
+                <span className="mmhb-nav-label-full">Dashboard</span>
+                <span className="mmhb-nav-label-short">Go</span>
               </Link>
             </>
           ) : (
@@ -259,14 +303,25 @@ export default function TglpNavbar() {
                 data-testid="link-register"
               >
                 <Sparkles className="w-4 h-4" aria-hidden="true" />
-                <span className="cta-label-full">Get Started</span>
-                <span className="cta-label-short">Start</span>
+                <span className="mmhb-nav-label-full">Get Started</span>
+                <span className="mmhb-nav-label-short">Start</span>
               </Link>
             </>
           )}
 
+          {user && (
+            <button type="button" className="mmhb-signout"
+              onClick={handleSignOut} disabled={signOutPending}
+              aria-busy={signOutPending} data-testid="button-navbar-signout">
+              <LogOut aria-hidden="true" />
+              <span>{signOutPending ? "Signing out…" : "Sign out"}</span>
+            </button>
+          )}
+
           {/* Mobile Menu Button */}
           <button
+            ref={mobileMenuButtonRef}
+            type="button"
             className="md:hidden p-2 rounded-xl transition-colors hover:bg-[var(--glp-sage)]/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--glp-gold)] focus-visible:ring-offset-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
@@ -281,6 +336,8 @@ export default function TglpNavbar() {
           </button>
         </nav>
       </div>
+
+      {signOutError && <p role="alert" className="mmhb-signout-error">{signOutError}</p>}
 
       {/* Mobile Menu — renders only when open; overlays page (absolute, does not push layout) */}
       {mobileMenuOpen && (

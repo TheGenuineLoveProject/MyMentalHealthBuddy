@@ -1,0 +1,22 @@
+[
+  {
+    "file": "server/security/csrf.mjs",
+    "lines": 134,
+    "sha256": "648e21f3eb89933aeaaad1e967c59640cc52d2f8634002d3abbc6dafe358bce1"
+  },
+  {
+    "file": "server/replit_integrations/auth/routes.mjs",
+    "lines": 56,
+    "sha256": "e2920b8003e6a4ebfa43b5dcdade07c0bb09a87ea7607a780872259df3d10a83"
+  },
+  {
+    "file": "server/middleware/auth.mjs",
+    "lines": 98,
+    "sha256": "88cc7394e23d571a83ecd33fb35da9070f2614865bd619fd039ef9b657b2d3ed"
+  },
+  {
+    "file": "server/replit_integrations/auth/replitAuth.mjs",
+    "lines": 309,
+    "sha256": "6235fd16449ca0974cc9d5103c1c3ae42e5ace1b7bbcdb6d3351aa7fbae7f9f2"
+  }
+]

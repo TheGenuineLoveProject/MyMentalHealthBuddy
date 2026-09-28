@@ -21,9 +21,11 @@ import SystemTelemetryPanel from "@/components/admin/SystemTelemetryPanel";
 import DailyOpsChecklist from "@/components/admin/DailyOpsChecklist";
 import AIKnowledgeHub from "@/components/admin/AIKnowledgeHub";
 import styles from "./CommandCenter.module.css";
+import { fetchDashboardStats, metricValue } from "@/lib/adminDashboardStats";
+import { AdminErrorBanner } from "@/components/admin/AdminQueryStates";
 
 function formatUptime(seconds) {
-  if (!seconds) return "—";
+  if (!Number.isFinite(seconds)) return "Unavailable";
   const d = Math.floor(seconds / 86400);
   const h = Math.floor((seconds % 86400) / 3600);
   const m = Math.floor((seconds % 3600) / 60);
@@ -275,8 +277,9 @@ export default function AdminCommandCenter() {
     refetchInterval: 60000
   });
 
-  const { data: statsData, isLoading: isStatsLoading } = useQuery({
+  const { data: statsData, isLoading: isStatsLoading, error: statsError, refetch: refetchStats } = useQuery({
     queryKey: ['/api/admin/dashboard-stats'],
+    queryFn: fetchDashboardStats,
     retry: 2,
     retryDelay: 1000,
     staleTime: 30000,
@@ -294,18 +297,21 @@ export default function AdminCommandCenter() {
 
   const handleRefreshAll = () => {
     refetchHealth();
+    refetchStats();
   };
 
   const stats = statsData || {};
 
   const metrics = [
-    { title: "Users", value: stats.users?.toLocaleString() || "—", icon: Users, color: "sage", subtitle: "Total registered" },
-    { title: "Blog Posts", value: stats.blogPosts || "—", icon: BookOpen, color: "gold", subtitle: `${stats.publishedBlogs || 0} published` },
-    { title: "Social Posts", value: stats.socialPosts || "—", icon: Megaphone, color: "teal", subtitle: `${stats.socialDrafts || 0} drafts` },
-    { title: "Campaigns", value: stats.campaigns || "0", icon: Flag, color: "blush", subtitle: "Active campaigns" },
-    { title: "Leads", value: stats.leads || "—", icon: Mail, color: "sage", subtitle: "Newsletter signups" },
+    { title: "Users", value: metricValue(stats.users), icon: Users, color: "sage", subtitle: "Total registered" },
+    { title: "Blog Posts", value: metricValue(stats.blogPosts), icon: BookOpen, color: "gold", subtitle: `${metricValue(stats.publishedBlogs)} published` },
+    { title: "Social Posts", value: metricValue(stats.socialPosts), icon: Megaphone, color: "teal", subtitle: `${metricValue(stats.socialDrafts)} drafts` },
+    { title: "Campaigns", value: metricValue(stats.campaigns), icon: Flag, color: "blush", subtitle: "Status: active" },
+    { title: "Newsletter Subscribers", value: metricValue(stats.leads), icon: Mail, color: "sage", subtitle: "Status: active" },
     { title: "Uptime", value: formatUptime(stats.uptimeSeconds), icon: Activity, color: "teal", subtitle: "Current session" },
   ];
+
+  if (statsError) return <AdminErrorBanner title="Dashboard statistics unavailable" onRetry={refetchStats} />;
 
   if (isHealthLoading && isStatsLoading) {
     return (
@@ -374,7 +380,7 @@ export default function AdminCommandCenter() {
             />
           </SafeBoundary>
           <SafeBoundary label="Recent Activity">
-            <RecentActivityPanel activities={stats.recentActivity} formatEventType={formatEventType} timeAgo={timeAgo} styles={styles} />
+            <p role="status">Recent publishing activity is unavailable from the statistics service.</p>
           </SafeBoundary>
         </div>
 

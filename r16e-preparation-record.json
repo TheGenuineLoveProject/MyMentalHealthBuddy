@@ -1,0 +1,61 @@
+{
+  "project": "MyMentalHealthBuddy",
+  "status": "R16E_PREPARED_LOCAL_CHECKS_PASS_REPLIT_EXECUTION_PENDING",
+  "releaseReady": false,
+  "date": "2026-09-09",
+  "inputEvidence": {
+    "source": "USER_SUPPLIED_SCREENSHOTS",
+    "reportedStage": "R16D_INFERRED_FROM_REPORT_PATH_AND_METADATA_FORMAT",
+    "reportDirectory": "/home/runner/workspace/.mmhb-release-evidence/r16d-4VkQXR",
+    "failure": "WORKSPACES_UNSUPPORTED",
+    "file": "node_modules/eslint",
+    "phase": "LOCK_AND_NPM_PREFLIGHT",
+    "npmAttempted": false,
+    "observedChangedFileCount": 0,
+    "preservation": "PARTIAL_OBSERVATIONS_ONLY",
+    "sixDisplayedBundledChildren": "inBundle=true_optional=true_resolvedPresent=false",
+    "commandHeaderChecksumTimestamp": "NOT_SHOWN",
+    "eslintWorkspaceValueAndVersion": "NOT_SHOWN"
+  },
+  "localVerification": {
+    "node": "v24.19.0",
+    "policyFixtures": 83,
+    "driverFixtures": 36,
+    "realNpmOfflineVirtualLoaderChecks": 3,
+    "total": 122,
+    "npmVersionForVirtualLoader": "11.9.0",
+    "syntax": "NODE_AND_BASH_PASS"
+  },
+  "command": {
+    "file": "MMHB-DEPENDENCY-METADATA-R16E.txt",
+    "sha256": "192be0284a3675db24d89f7a27c63f9bbd93d9eedff9ea11607b2b088eefed5e"
+  },
+  "helpers": {
+    "locked-dependency-policy-r16e.mjs": "7e07c8ba2bf66a4b3198467f3a00c957a5dd7dad4372db1d6f66c23493fd5984",
+    "registry-archive-repair-r16d.mjs": "8f125c00a0f678152b53bc4904c1cfbb216a693b2982d0de6a2e7eb6eb9a732d",
+    "locked-npm-runner-r16.mjs": "6f28f812900febfc749e1779e73c23203cee089f1c0c160e61a794f450214c4f",
+    "build-locked-dependencies-command-r16e.py": "565adc186f06263b462535fa17b3be7aceef280b1ffd118942bbc6dc78657819",
+    "locked-dependencies-prefix-r16e.mjs": "b6ab0b5a5bfc4aa4e9205f96235d8f80163f92824e44ee7f4474f5db2bf0145b",
+    "locked-dependencies-body-r16e.mjs": "f35127d364c151db4d5c241ef2bb3d5fa6d7b00d2b043d1c840a3afb50fd3819",
+    "locked-dependencies-driver-r16e.mjs": "cd76473d25eeb27d8c73a1a6b85caa3dca7eee847af6594e293ef7c28a10aced",
+    "test-locked-dependency-policy-r16e.mjs": "98440c42b17563bbe608962ead16845a7a209e8ae47fdb47b878d38559e7f78c",
+    "test-locked-dependencies-r16e.py": "59d172e368855a17b7c066fbe2921127f88cbdc7e191b1473c73649397489967",
+    "test-npm-workspace-semantics-r16e.mjs": "e4df4855ba001c6f8ee4a79c9e66a4081eb156af1c65fc666eec7e5640aaf6a0"
+  },
+  "preservedContracts": {
+    "sourcePins": 41,
+    "promptAssetPins": 22,
+    "npmRunner": "BYTE_IDENTICAL_R16",
+    "archiveNormalizer": "BYTE_IDENTICAL_R16D",
+    "rootWorkspaces": "REJECTED",
+    "dependencyLinksAndNonRegistryEdges": "REJECTED",
+    "independentArchiveChecksums": "REQUIRED",
+    "replitRuntime": "v24.13.0_linux_x64"
+  },
+  "limitations": [
+    "Actual Replit root lock and current ESLint metadata value not available locally.",
+    "Full-command network/npm install was simulated using inert fixtures.",
+    "Installed npm library was exercised only through local virtual-tree loading; no npm ci or reify was run.",
+    "App/native tool/browser/AI/database/recovery/deployment acceptance remains unproven."
+  ]
+}

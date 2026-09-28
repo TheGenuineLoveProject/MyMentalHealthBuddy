@@ -7,7 +7,10 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SafetyFooter from "../../components/ui/ReflectionFooter";
 import { SEO } from "../../components/SEO";
 import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+import PublishingQueryState from "../../components/admin/PublishingQueryState";
 import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "../../lib/queryClient";
+import { readPublishingResponse } from "../../lib/publishingResponses";
 
 const PLATFORMS = [
   { key: "instagram", label: "Instagram" },
@@ -59,20 +62,16 @@ export default function AdminPublishingToday() {
   const { data: draftsData, isLoading: draftsLoading, error: draftsError, refetch: refetchDrafts } = useQuery({
     queryKey: ['/api/admin/publishing/draft-packs'],
     queryFn: async () => {
-      const res = await fetch("/api/admin/publishing/draft-packs", { credentials: "include" });
-      if (!res.ok) throw new Error("Failed to load drafts");
-      return res.json();
+      return readPublishingResponse("/api/admin/publishing/draft-packs", "drafts");
     },
     retry: 2,
     retryDelay: 1000,
   });
 
-  const { data: featuredData, refetch: refetchFeatured } = useQuery({
+  const { data: featuredData, error: featuredError, isLoading: featuredLoading, isFetching: featuredFetching, refetch: refetchFeatured } = useQuery({
     queryKey: ['/api/admin/publishing/featured'],
     queryFn: async () => {
-      const res = await fetch("/api/admin/publishing/featured", { credentials: "include" });
-      if (!res.ok) throw new Error("Failed to load featured");
-      return res.json();
+      return readPublishingResponse("/api/admin/publishing/featured", "featured");
     },
     retry: 2,
     retryDelay: 1000,
@@ -80,14 +79,7 @@ export default function AdminPublishingToday() {
 
   const setFeaturedMutation = useMutation({
     mutationFn: async (id) => {
-      const res = await fetch("/api/admin/publishing/featured", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({ date: today, glpId: id }),
-      });
-      if (!res.ok) throw new Error("Failed to set featured");
-      return res.json();
+      return apiRequest("POST", "/api/admin/publishing/featured", { date: today, glpId: id });
     },
     onSuccess: () => {
       refetchFeatured();
@@ -99,13 +91,7 @@ export default function AdminPublishingToday() {
 
   const markPostedMutation = useMutation({
     mutationFn: async (id) => {
-      const res = await fetch(`/api/admin/publishing/mark-posted/${id}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-      });
-      if (!res.ok) throw new Error("Failed to mark posted");
-      return res.json();
+      return apiRequest("POST", `/api/admin/publishing/mark-posted/${id}`);
     },
     onSuccess: () => {
       refetchDrafts();
@@ -115,8 +101,8 @@ export default function AdminPublishingToday() {
     onError: (err) => toast({ title: "Failed to mark posted", description: err.message, variant: "destructive" }),
   });
 
-  const drafts = draftsData?.ok ? (draftsData.data || []) : [];
-  const featured = featuredData?.ok ? (featuredData.data?.[today] || null) : null;
+  const drafts = draftsData?.data ?? [];
+  const featured = featuredError ? null : featuredData?.data[today] ?? null;
 
   const readyDrafts = drafts.filter((d) => d.status === "draft" || d.status === "approved");
   const postedDrafts = drafts.filter((d) => d.status === "posted");
@@ -183,12 +169,13 @@ export default function AdminPublishingToday() {
         </Card>
         <Card>
           <CardContent className="p-4 text-center">
-            <p className="text-2xl font-bold text-blue-600" data-testid="stat-featured">{featuredDraft ? "1" : "0"}</p>
+            <p className="text-2xl font-bold text-blue-600" data-testid="stat-featured">{featuredError ? "Unavailable" : featuredLoading ? "Loading…" : featuredDraft ? "1" : "0"}</p>
             <p className="text-xs text-muted-foreground">Featured</p>
           </CardContent>
         </Card>
       </div>
 
+      <PublishingQueryState section="featured publishing" error={featuredError} loading={featuredLoading} fetching={featuredFetching} onRetry={refetchFeatured}>
       {featuredDraft && (
         <Card className="border-2 border-green-300 bg-green-50/50 dark:bg-green-950/20" data-testid="featured-card">
           <CardContent className="p-5">
@@ -227,6 +214,8 @@ export default function AdminPublishingToday() {
           </CardContent>
         </Card>
       )}
+
+      </PublishingQueryState>
 
       <div className="flex gap-2 flex-wrap" data-testid="panel-filters">
         {["all", "social", "blog", "newsletter"].map((f) => (

@@ -1,18 +1,32 @@
 import express from "express";
 import bcrypt from "bcrypt";
-import { sql } from "drizzle-orm";
+import {
+  sql } from "drizzle-orm";
 import db from "../db/client.mjs";
 import { signUserToken, requireAuth } from "../middleware/auth.mjs";
 import { newRefreshToken } from "../auth/tokens.mjs";
-import { loginRateLimit, authRateLimit } from "../middleware/rateLimit.mjs";
+import { loginRateLimit,
+  authRateLimit } from "../middleware/rateLimit.mjs";
 import { makeRefreshToken } from "../auth/tokens.mjs";
 import { getRefreshCookieOptions } from "../utils/cookies.mjs";
 import {
   storeRefreshToken,
   findValidRefreshToken,
   revokeRefreshToken,
-  revokeAllRefreshTokens,
+  revokeRefreshTokenByToken,
+  rotateRefreshToken,
 } from "../services/refreshTokens.service.mjs";
+import {
+  createMfaChallengeRecord,
+  verifyMfaChallenge,
+  decryptMfaSecret,
+  verifyTotpCode,
+} from "../auth/mfa.service.mjs";
+import {
+  storeMfaLoginChallenge,
+  consumeMfaLoginChallenge,
+} from "../services/mfaChallenges.service.mjs";
+import { consumeMfaRecoveryLogin } from "../services/mfaRecoveryLogin.service.mjs";
 
 const router = express.Router();
 
@@ -213,6 +227,7 @@ router.post("/login", loginRateLimit, async (req, res) => {
         name,
         role,
         password_hash,
+        mfa_enabled,
         created_at,
         subscription_status,
         profile_image_url,
@@ -232,7 +247,39 @@ router.post("/login", loginRateLimit, async (req, res) => {
       return res.status(401).json({ error: "Invalid credentials" });
     }
 
+    if (user.mfa_enabled) {
+      const {
+        challenge,
+        jti,
+        expiresAt,
+      } = createMfaChallengeRecord(
+        user.id
+      );
+
+      /*
+       * Persist only SHA-256(jti) before exposing the signed
+       * pre-authentication credential to the client.
+       *
+       * If persistence fails, no usable challenge is returned.
+       */
+      await storeMfaLoginChallenge({
+        userId: user.id,
+        jti,
+        expiresAt,
+      });
+
+      res.set("Cache-Control", "no-store");
+
+      return res.json({
+        ok: true,
+        mfaRequired: true,
+        challenge,
+      });
+    }
+
     const token = await issueSession(res, user);
+
+    res.set("Cache-Control", "no-store");
 
     return res.json({
       ok: true,
@@ -242,6 +289,239 @@ router.post("/login", loginRateLimit, async (req, res) => {
   } catch (err) {
     console.error("login error:", err);
     return res.status(500).json({ error: "Login failed" });
+  }
+});
+
+router.post("/mfa/verify", authRateLimit, async (req, res) => {
+  try {
+    await ensureUsersTable();
+
+    const challenge = String(
+      req.body?.challenge || ""
+    ).trim();
+
+    const code = String(
+      req.body?.code || ""
+    ).trim();
+
+    const recoveryCode = String(
+      req.body?.recoveryCode || ""
+    ).trim();
+
+    const totpSupplied =
+      code.length > 0;
+
+    const recoverySupplied =
+      recoveryCode.length > 0;
+
+    /*
+     * Require exactly one second-factor mode.
+     *
+     * Presence and syntax are deliberately separate concepts:
+     * malformed TOTP + recovery code is still "both supplied" and
+     * therefore rejected rather than silently selecting recovery.
+     */
+    if (
+      !challenge ||
+      totpSupplied === recoverySupplied
+    ) {
+      return res.status(400).json({
+        error:
+          "MFA challenge and exactly one verification method required",
+      });
+    }
+
+    if (
+      totpSupplied &&
+      !/^\d{6}$/.test(code)
+    ) {
+      return res.status(400).json({
+        error:
+          "A 6-digit authenticator code is required",
+      });
+    }
+
+    /*
+     * Bound pre-auth recovery input size before cryptographic parsing.
+     */
+    if (
+      recoverySupplied &&
+      recoveryCode.length > 128
+    ) {
+      return res.status(400).json({
+        error:
+          "Invalid MFA recovery credential",
+      });
+    }
+
+    let claims;
+
+    try {
+      claims =
+        verifyMfaChallenge(challenge);
+    } catch {
+      return res.status(401).json({
+        error:
+          "Invalid or expired MFA challenge",
+      });
+    }
+
+    /*
+     * RECOVERY PATH
+     *
+     * consumeMfaRecoveryLogin() commits the coupled PostgreSQL
+     * transition:
+     *
+     *   recovery credential AVAILABLE -> CONSUMED
+     *   challenge nonce       AVAILABLE -> CONSUMED
+     *
+     * or rolls both back.
+     *
+     * Session issuance occurs only after that transaction promise
+     * resolves successfully.
+     */
+    if (recoverySupplied) {
+      const recoveryResult =
+        await consumeMfaRecoveryLogin({
+          userId: claims.sub,
+          jti: claims.jti,
+          code: recoveryCode,
+        });
+
+      if (!recoveryResult) {
+        return res.status(401).json({
+          error:
+            "Invalid, expired, or already used MFA verification credential",
+        });
+      }
+
+      const token =
+        await issueSession(
+          res,
+          recoveryResult.user
+        );
+
+      res.set(
+        "Cache-Control",
+        "no-store"
+      );
+
+      return res.json({
+        ok: true,
+        token,
+        user: toPublicUser(
+          recoveryResult.user
+        ),
+        recoveryCodeUsed: true,
+        remainingRecoveryCodes:
+          recoveryResult
+            .remainingRecoveryCodes,
+      });
+    }
+
+    /*
+     * TOTP PATH
+     *
+     * Preserve the previously-qualified TOTP behavior.
+     */
+    const result = await db.execute(sql`
+      SELECT
+        id,
+        email,
+        name,
+        role,
+        mfa_enabled,
+        mfa_secret,
+        created_at,
+        subscription_status,
+        profile_image_url,
+        timezone
+      FROM users
+      WHERE id = ${claims.sub}
+      LIMIT 1
+    `);
+
+    const user = result.rows?.[0];
+
+    if (
+      !user ||
+      !user.mfa_enabled ||
+      !user.mfa_secret
+    ) {
+      return res.status(401).json({
+        error:
+          "MFA verification unavailable",
+      });
+    }
+
+    let secret;
+
+    try {
+      secret =
+        decryptMfaSecret(
+          user.mfa_secret
+        );
+    } catch {
+      return res.status(401).json({
+        error:
+          "MFA verification failed",
+      });
+    }
+
+    if (
+      !verifyTotpCode(
+        secret,
+        code
+      )
+    ) {
+      return res.status(401).json({
+        error:
+          "Invalid verification code",
+      });
+    }
+
+    /*
+     * TOTP validity alone cannot create a session.
+     */
+    const consumed =
+      await consumeMfaLoginChallenge({
+        userId: user.id,
+        jti: claims.jti,
+      });
+
+    if (!consumed) {
+      return res.status(401).json({
+        error:
+          "Invalid, expired, or already used MFA challenge",
+      });
+    }
+
+    const token =
+      await issueSession(
+        res,
+        user
+      );
+
+    res.set(
+      "Cache-Control",
+      "no-store"
+    );
+
+    return res.json({
+      ok: true,
+      token,
+      user: toPublicUser(user),
+    });
+  } catch (err) {
+    console.error(
+      "mfa login verification error:",
+      err
+    );
+
+    return res.status(500).json({
+      error:
+        "MFA verification failed",
+    });
   }
 });
 
@@ -312,10 +592,26 @@ router.post("/refresh", async (req, res) => {
       return res.status(401).json({ error: "Refresh token required" });
     }
 
+    /*
+     * Read-only preflight lookup lets us resolve the account before consuming
+     * the credential. Security does not depend on this read: the authoritative
+     * single-consumer decision occurs inside rotateRefreshToken().
+     */
     const existing = await findValidRefreshToken(refreshToken);
     if (!existing) {
-      clearRefreshCookie(res);
-      return res.status(401).json({ error: "Invalid or expired refresh token" });
+      /*
+       * A refresh cookie was presented, but this request may be stale because
+       * another same-browser request already consumed the predecessor and
+       * installed its successor. Do not clear shared cookie state from the
+       * stale response: doing so could erase the winning credential.
+       *
+       * The absence of a refresh cookie is still handled above as 401.
+       */
+      res.set("Cache-Control", "no-store");
+      return res.status(409).json({
+        error: "Refresh token unavailable or rotation conflict",
+        retryable: true,
+      });
     }
 
     const userRows = await db.execute(sql`
@@ -335,13 +631,68 @@ router.post("/refresh", async (req, res) => {
 
     const user = userRows.rows?.[0];
     if (!user) {
-      await revokeRefreshToken({ userId: existing.userId, token: refreshToken });
+      await revokeRefreshToken({
+        userId: existing.userId,
+        token: refreshToken,
+      });
       clearRefreshCookie(res);
       return res.status(401).json({ error: "User not found" });
     }
 
-    await revokeRefreshToken({ userId: user.id, token: refreshToken });
-    const token = await issueSession(res, user);
+    /*
+     * Generate the successor before entering the transaction, but do not
+     * expose it to the client until PostgreSQL has atomically consumed the
+     * predecessor and persisted this replacement.
+     */
+    const replacementRefreshToken = newRefreshToken();
+
+    const rotation = await rotateRefreshToken({
+      token: refreshToken,
+      newToken: replacementRefreshToken,
+    });
+
+    /*
+     * A racing replay reaches this branch after the winning request has
+     * already consumed the predecessor. No successor credential is returned.
+     */
+    if (!rotation) {
+      /*
+       * This request passed the read-only preflight but lost the atomic
+       * consume race. Another same-browser tab/request may already have
+       * installed the successor cookie. Never clear shared browser credential
+       * state from the losing response.
+       */
+      res.set("Cache-Control", "no-store");
+      return res.status(409).json({
+        error: "Refresh token rotation conflict",
+        retryable: true,
+      });
+    }
+
+    /*
+     * Token hash ownership must remain stable across preflight and atomic
+     * consumption. Any impossible ownership disagreement is treated as a
+     * credential-integrity failure and the newly-created credential is
+     * immediately revoked.
+     */
+    if (String(rotation.userId) !== String(user.id)) {
+      await revokeRefreshToken({
+        userId: rotation.userId,
+        token: replacementRefreshToken,
+      });
+      clearRefreshCookie(res);
+      return res.status(401).json({
+        error: "Refresh credential integrity check failed",
+      });
+    }
+
+    const token = signUserToken(user);
+
+    res.cookie(
+      "refresh_token",
+      replacementRefreshToken,
+      getRefreshCookieOptions()
+    );
 
     return res.json({
       ok: true,
@@ -357,21 +708,22 @@ router.post("/refresh", async (req, res) => {
   }
 });
 
+
 router.post("/logout", async (req, res) => {
+  res.set("Cache-Control", "no-store");
+
   try {
     await ensureUsersTable();
 
     const refreshToken = req.cookies?.refresh_token;
     if (refreshToken) {
-      const existing = await findValidRefreshToken(refreshToken);
-      if (existing?.userId) {
-        await revokeAllRefreshTokens(existing.userId);
+      const revocation = await revokeRefreshTokenByToken(refreshToken);
+
+      if (revocation.revokedCount > 1) {
+        console.warn(
+          "logout integrity warning: duplicate refresh-token hashes revoked"
+        );
       }
-    } else if (req.headers.authorization?.startsWith("Bearer ")) {
-      try {
-        await new Promise((resolve) => requireAuth(req, res, resolve));
-        if (req.user?.id) await revokeAllRefreshTokens(req.user.id);
-      } catch {}
     }
   } catch (err) {
     console.warn("logout cleanup warning:", err?.message || err);

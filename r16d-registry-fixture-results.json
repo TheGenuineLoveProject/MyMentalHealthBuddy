@@ -1,0 +1,216 @@
+{
+  "scope": "ACTUAL_HELPER_WITH_SYNTHETIC_METADATA_ARCHIVES_AND_HTTPS_STREAMS_NO_EXTERNAL_NETWORK",
+  "node": "v24.19.0",
+  "helperSha256": "8f125c00a0f678152b53bc4904c1cfbb216a693b2982d0de6a2e7eb6eb9a732d",
+  "passed": 52,
+  "cases": [
+    {
+      "case": "reproduce R16C failure and accept only excluded bundled representation in R16D",
+      "status": "PASS"
+    },
+    {
+      "case": "excluded parent still requires original SHA512 before network",
+      "status": "PASS"
+    },
+    {
+      "case": "ordinary missing SHA512 is never treated as bundled",
+      "status": "PASS"
+    },
+    {
+      "case": "bundled member modification fails immutable lock check",
+      "status": "PASS"
+    },
+    {
+      "case": "parent registry checksum mismatch still stops excluded bundle plan",
+      "status": "PASS"
+    },
+    {
+      "case": "HTTP mirror relocated only in copy, checksums and dependency graph preserved",
+      "status": "PASS"
+    },
+    {
+      "case": "already canonical archive needs no registry query",
+      "status": "PASS"
+    },
+    {
+      "case": "nested alias uses locked real package name and deduplicates requests",
+      "status": "PASS"
+    },
+    {
+      "case": "conflicting identity digests refused before network",
+      "status": "PASS"
+    },
+    {
+      "case": "traversal path refused before network",
+      "status": "PASS"
+    },
+    {
+      "case": "file source refused before network",
+      "status": "PASS"
+    },
+    {
+      "case": "git source refused before network",
+      "status": "PASS"
+    },
+    {
+      "case": "credential source refused before network",
+      "status": "PASS"
+    },
+    {
+      "case": "query source refused before network",
+      "status": "PASS"
+    },
+    {
+      "case": "missing source refused before network",
+      "status": "PASS"
+    },
+    {
+      "case": "whitespace source refused before network",
+      "status": "PASS"
+    },
+    {
+      "case": "SHA-1 locked digest refused before network",
+      "status": "PASS"
+    },
+    {
+      "case": "mismatched root dependency maps refused before network",
+      "status": "PASS"
+    },
+    {
+      "case": "unsupported workspace declaration refused before network",
+      "status": "PASS"
+    },
+    {
+      "case": "linked lock package refused before network",
+      "status": "PASS"
+    },
+    {
+      "case": "mutated original object cannot be accepted",
+      "status": "PASS"
+    },
+    {
+      "case": "mutated staged version cannot be accepted",
+      "status": "PASS"
+    },
+    {
+      "case": "malformed change set cannot hide edits",
+      "status": "PASS"
+    },
+    {
+      "case": "exact public metadata validates all changed sources",
+      "status": "PASS"
+    },
+    {
+      "case": "wrong package name blocks verification",
+      "status": "PASS"
+    },
+    {
+      "case": "wrong package version blocks verification",
+      "status": "PASS"
+    },
+    {
+      "case": "third-party metadata tarball blocks verification",
+      "status": "PASS"
+    },
+    {
+      "case": "downgraded metadata tarball blocks verification",
+      "status": "PASS"
+    },
+    {
+      "case": "different SHA-512 blocks verification",
+      "status": "PASS"
+    },
+    {
+      "case": "malformed metadata integrity blocks verification",
+      "status": "PASS"
+    },
+    {
+      "case": "legacy metadata hashes archive bytes using unchanged SHA-512",
+      "status": "PASS"
+    },
+    {
+      "case": "SHA-1 metadata still requires archive SHA-512",
+      "status": "PASS"
+    },
+    {
+      "case": "legacy metadata archive mismatch blocks verification",
+      "status": "PASS"
+    },
+    {
+      "case": "no changed source completes without a request",
+      "status": "PASS"
+    },
+    {
+      "case": "cancellation prevents request and success",
+      "status": "PASS"
+    },
+    {
+      "case": "parallel metadata requests remain capped at four",
+      "status": "PASS"
+    },
+    {
+      "case": "HTTPS wrapper fixes host, TLS and credential-free GET",
+      "status": "PASS"
+    },
+    {
+      "case": "arbitrary request host rejected before transport",
+      "status": "PASS"
+    },
+    {
+      "case": "redirect is refused without following Location",
+      "status": "PASS"
+    },
+    {
+      "case": "404 stops without retry or response leakage",
+      "status": "PASS"
+    },
+    {
+      "case": "transient registry failure gets one bounded retry",
+      "status": "PASS"
+    },
+    {
+      "case": "persistent transient failure stops after second request",
+      "status": "PASS"
+    },
+    {
+      "case": "oversized declared metadata is refused",
+      "status": "PASS"
+    },
+    {
+      "case": "oversized streamed metadata is refused",
+      "status": "PASS"
+    },
+    {
+      "case": "incomplete metadata cannot pass",
+      "status": "PASS"
+    },
+    {
+      "case": "malformed metadata cannot pass",
+      "status": "PASS"
+    },
+    {
+      "case": "unexpected content encoding is refused",
+      "status": "PASS"
+    },
+    {
+      "case": "TLS errors do not leak raw error text",
+      "status": "PASS"
+    },
+    {
+      "case": "streamed archive bytes produce independent SHA-512",
+      "status": "PASS"
+    },
+    {
+      "case": "abort promptly ends an outstanding request",
+      "status": "PASS"
+    },
+    {
+      "case": "hard request timeout ends a stalled response",
+      "status": "PASS"
+    },
+    {
+      "case": "overall verification deadline cancels workers and cannot pass",
+      "status": "PASS"
+    }
+  ]
+}

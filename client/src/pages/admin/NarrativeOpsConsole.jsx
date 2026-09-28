@@ -9,7 +9,8 @@ import { queryClient, apiRequest } from "../../lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import SafetyFooter from "../../components/ui/ReflectionFooter";
 import { SEO } from "../../components/SEO";
-import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+import PublishingQueryState from "../../components/admin/PublishingQueryState";
+import { readPublishingResponse } from "../../lib/publishingResponses";
 
 const API_BASE = "/api/admin/social/enterprise";
 
@@ -140,63 +141,56 @@ export default function NarrativeOpsConsole() {
     return qs ? `${API_BASE}/posts?${qs}` : `${API_BASE}/posts`;
   }, [statusFilter, campaignFilter]);
 
-  const { data: postsData, isLoading: postsLoading, error, refetch } = useQuery({
+  const { data: postsData, isLoading: postsLoading, error, refetch, isFetching: postsFetching } = useQuery({
     queryKey: [API_BASE, "/posts", statusFilter, campaignFilter],
     queryFn: async () => {
-      const res = await fetch(buildQueryUrl(), { credentials: "include" });
-      return res.json();
+      return readPublishingResponse(buildQueryUrl(), "posts");
     },
   });
 
-  const { data: campaignsData, isLoading: campaignsLoading } = useQuery({
+  const { data: campaignsData, isLoading: campaignsLoading, ...campaignsQuery } = useQuery({
     queryKey: [API_BASE, "/campaigns"],
     queryFn: async () => {
-      const res = await fetch(`${API_BASE}/campaigns`, { credentials: "include" });
-      return res.json();
+      return readPublishingResponse(`${API_BASE}/campaigns`, "campaigns");
     },
   });
 
-  const { data: weeklyData, isLoading: weeklyLoading } = useQuery({
+  const { data: weeklyData, isLoading: weeklyLoading, ...weeklyQuery } = useQuery({
     queryKey: [API_BASE, "/weekly-queue"],
     queryFn: async () => {
-      const res = await fetch(`${API_BASE}/weekly-queue`, { credentials: "include" });
-      return res.json();
+      return readPublishingResponse(`${API_BASE}/weekly-queue`, "weekly");
     },
     enabled: activePanel === "weekly",
   });
 
-  const { data: signalsData, isLoading: signalsLoading } = useQuery({
+  const { data: signalsData, isLoading: signalsLoading, ...signalsQuery } = useQuery({
     queryKey: [API_BASE, "/signals"],
     queryFn: async () => {
-      const res = await fetch(`${API_BASE}/signals`, { credentials: "include" });
-      return res.json();
+      return readPublishingResponse(`${API_BASE}/signals`, "signals");
     },
     enabled: activePanel === "signals",
   });
 
-  const { data: clickData } = useQuery({
+  const { data: clickData, ...clickQuery } = useQuery({
     queryKey: [API_BASE, "/click-stats"],
     queryFn: async () => {
-      const res = await fetch(`${API_BASE}/click-stats`, { credentials: "include" });
-      return res.json();
+      return readPublishingResponse(`${API_BASE}/click-stats`, "clicks");
     },
     enabled: activePanel === "signals",
   });
 
-  const { data: auditData, isLoading: auditLoading } = useQuery({
+  const { data: auditData, isLoading: auditLoading, ...auditQuery } = useQuery({
     queryKey: [API_BASE, "/audit"],
     queryFn: async () => {
-      const res = await fetch(`${API_BASE}/audit`, { credentials: "include" });
-      return res.json();
+      return readPublishingResponse(`${API_BASE}/audit`, "audit");
     },
     enabled: activePanel === "audit",
   });
 
-  const { data: blogData } = useQuery({
+  const { data: blogData, ...blogQuery } = useQuery({
     queryKey: ["/api/blog"],
     queryFn: async () => {
-      const res = await fetch("/api/blog?limit=20", { credentials: "include" });
-      return res.json();
+      return readPublishingResponse("/api/blog?limit=20", "blogs");
     },
     enabled: activePanel === "pipeline",
   });
@@ -207,7 +201,7 @@ export default function NarrativeOpsConsole() {
       const res = isEdit
         ? await apiRequest("PUT", `${API_BASE}/post/${editingPost.id}`, data)
         : await apiRequest("POST", `${API_BASE}/post`, data);
-      return { ...(await res.json()), _isEdit: isEdit };
+      return { ...res, _isEdit: isEdit };
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: [API_BASE, "/posts"] });
@@ -223,7 +217,7 @@ export default function NarrativeOpsConsole() {
     mutationFn: async ({ id, action, body }) => {
       try {
         const res = await apiRequest("POST", `${API_BASE}/post/${id}/${action}`, body || {});
-        return await res.json();
+        return res;
       } catch (err) {
         let parsed = null;
         const colonIdx = err.message?.indexOf(": ");
@@ -259,7 +253,7 @@ export default function NarrativeOpsConsole() {
   const campaignMutation = useMutation({
     mutationFn: async (data) => {
       const res = await apiRequest("POST", `${API_BASE}/campaigns`, data);
-      return res.json();
+      return res;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [API_BASE, "/campaigns"] });
@@ -274,7 +268,7 @@ export default function NarrativeOpsConsole() {
   const scheduleMutation = useMutation({
     mutationFn: async ({ id, scheduledFor }) => {
       const res = await apiRequest("POST", `${API_BASE}/post/${id}/schedule`, { scheduledFor });
-      return res.json();
+      return res;
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: [API_BASE, "/posts"] });
@@ -290,7 +284,7 @@ export default function NarrativeOpsConsole() {
   const utmMutation = useMutation({
     mutationFn: async (data) => {
       const res = await apiRequest("POST", `${API_BASE}/build-utm`, data);
-      return res.json();
+      return res;
     },
     onSuccess: (data) => {
       setUtmResult(data?.data?.utmUrl || data?.utmUrl || "");
@@ -302,7 +296,7 @@ export default function NarrativeOpsConsole() {
   const blogToSocialMutation = useMutation({
     mutationFn: async ({ blogPostId, campaignId }) => {
       const res = await apiRequest("POST", `${API_BASE}/generate-from-blog`, { blogPostId, campaignId });
-      return res.json();
+      return res;
     },
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: [API_BASE, "/posts"] });
@@ -350,13 +344,13 @@ export default function NarrativeOpsConsole() {
     });
   }
 
-  const posts = postsData?.data || postsData || [];
-  const campaigns = campaignsData?.data || campaignsData || [];
-  const weeklyPosts = weeklyData?.data || weeklyData || [];
-  const signals = signalsData?.data || signalsData || {};
-  const clicks = clickData?.data || clickData || [];
-  const audit = auditData?.data || auditData || [];
-  const blogs = blogData?.posts || blogData?.data || blogData || [];
+  const posts = postsData?.data ?? [];
+  const campaigns = campaignsData?.data ?? [];
+  const weeklyPosts = weeklyData?.data ?? [];
+  const signals = signalsData?.data;
+  const clicks = clickData?.data ?? [];
+  const audit = auditData?.data ?? [];
+  const blogs = blogData?.data ?? [];
 
   const postsByStatus = {
     draft: (Array.isArray(posts) ? posts : []).filter(p => p.status === "draft"),
@@ -367,13 +361,10 @@ export default function NarrativeOpsConsole() {
 
   const getCampaignName = (id) => {
     if (!id) return "No Campaign";
+    if (campaignsQuery.error) return "Campaign unavailable";
     const c = (Array.isArray(campaigns) ? campaigns : []).find(c => c.id === id);
     return c?.name || "Unknown";
   };
-
-  if (error) {
-    return <AdminErrorBanner title="Unable to load narrative ops console" onRetry={refetch} />;
-  }
 
   return (
     <div className="min-h-screen bg-[var(--glp-ivory)] dark:bg-[var(--glp-charcoal)]">
@@ -420,6 +411,11 @@ export default function NarrativeOpsConsole() {
 
         {activePanel === "pipeline" && (
           <PipelinePanel
+            postsError={error}
+            postsFetching={postsFetching}
+            refetchPosts={refetch}
+            campaignsQuery={campaignsQuery}
+            blogQuery={blogQuery}
             posts={posts}
             postsByStatus={postsByStatus}
             postsLoading={postsLoading}
@@ -456,7 +452,9 @@ export default function NarrativeOpsConsole() {
         )}
 
         {activePanel === "campaigns" && (
+          <PublishingQueryState section="campaigns" error={campaignsQuery.error} fetching={campaignsQuery.isFetching} onRetry={campaignsQuery.refetch}>
           <CampaignsPanel
+            postsUnavailable={!!error || postsLoading}
             campaigns={campaigns}
             campaignsLoading={campaignsLoading}
             showCampaignForm={showCampaignForm}
@@ -467,9 +465,11 @@ export default function NarrativeOpsConsole() {
             postsByStatus={postsByStatus}
             posts={posts}
           />
+          </PublishingQueryState>
         )}
 
         {activePanel === "weekly" && (
+          <PublishingQueryState section="weekly queue" error={weeklyQuery.error} fetching={weeklyQuery.isFetching} onRetry={weeklyQuery.refetch}>
           <WeeklyQueuePanel
             weeklyPosts={weeklyPosts}
             weeklyLoading={weeklyLoading}
@@ -477,6 +477,7 @@ export default function NarrativeOpsConsole() {
             setSelectedPost={setSelectedPost}
             setActivePanel={setActivePanel}
           />
+          </PublishingQueryState>
         )}
 
         {activePanel === "utm" && (
@@ -490,11 +491,13 @@ export default function NarrativeOpsConsole() {
         )}
 
         {activePanel === "signals" && (
-          <SignalsPanel signals={signals} clicks={clicks} signalsLoading={signalsLoading} />
+          <SignalsPanel signals={signals} clicks={clicks} signalsLoading={signalsLoading} signalsQuery={signalsQuery} clickQuery={clickQuery} />
         )}
 
         {activePanel === "audit" && (
-          <AuditPanel audit={audit} auditLoading={auditLoading} />
+          <PublishingQueryState section="audit log" error={auditQuery.error} fetching={auditQuery.isFetching} onRetry={auditQuery.refetch}>
+            <AuditPanel audit={audit} auditLoading={auditLoading} />
+          </PublishingQueryState>
         )}
 
         <SafetyFooter />
@@ -504,6 +507,7 @@ export default function NarrativeOpsConsole() {
 }
 
 function PipelinePanel({
+  postsError, postsFetching, refetchPosts, campaignsQuery, blogQuery,
   posts, postsByStatus, postsLoading, statusFilter, setStatusFilter,
   campaignFilter, setCampaignFilter, campaigns,
   selectedPost, setSelectedPost, showCreateForm, setShowCreateForm,
@@ -519,6 +523,7 @@ function PipelinePanel({
 
   return (
     <div className="space-y-6">
+      <PublishingQueryState section="campaigns" error={campaignsQuery.error} fetching={campaignsQuery.isFetching} onRetry={campaignsQuery.refetch} />
       <div className="flex flex-wrap items-center gap-3 mb-4">
         <div className="flex items-center gap-2">
           <Filter className="w-4 h-4 text-[var(--glp-sage)]" />
@@ -540,6 +545,7 @@ function PipelinePanel({
           onChange={(e) => setCampaignFilter(e.target.value)}
           className="text-sm border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] rounded-lg px-3 py-1.5 bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]"
           data-testid="select-campaign-filter"
+          disabled={!!campaignsQuery.error}
         >
           <option value="all">All Campaigns</option>
           {(Array.isArray(campaigns) ? campaigns : []).map(c => (
@@ -569,6 +575,7 @@ function PipelinePanel({
         <SectionCard title="Generate 7 Social Drafts from Blog Post" icon={BookOpen}>
           <div className="space-y-3">
             <p className="text-xs text-[var(--glp-deep-teal)]">Select a blog post to automatically generate 7 social drafts (micro-tool, quote, story, demo, newsletter bridge, invitation, authority). All created as drafts — human review required.</p>
+            <PublishingQueryState section="blog posts" error={blogQuery.error} loading={blogQuery.isLoading} fetching={blogQuery.isFetching} onRetry={blogQuery.refetch}>
             <div className="grid gap-2 max-h-48 overflow-y-auto">
               {(Array.isArray(blogs) ? blogs : []).map(blog => (
                 <button
@@ -584,6 +591,7 @@ function PipelinePanel({
               ))}
               {(!blogs || blogs.length === 0) && <p className="text-xs text-[var(--glp-sage)]">No blog posts found.</p>}
             </div>
+            </PublishingQueryState>
             {blogToSocialMutation.isPending && (
               <div className="flex items-center gap-2 text-sm text-[var(--glp-deep-teal)]">
                 <Loader2 className="w-4 h-4 animate-spin" /> Generating drafts...
@@ -602,11 +610,13 @@ function PipelinePanel({
           isEdit={!!editingPost}
           isPending={createMutation.isPending}
           campaigns={campaigns}
+          campaignsUnavailable={!!campaignsQuery.error}
           platformTab={platformTab}
           setPlatformTab={setPlatformTab}
         />
       )}
 
+      <PublishingQueryState section="posts" error={postsError} fetching={postsFetching} onRetry={refetchPosts}>
       {postsLoading ? (
         <div className="flex items-center justify-center py-16">
           <Loader2 className="w-6 h-6 animate-spin text-[var(--glp-sage)]" />
@@ -643,7 +653,9 @@ function PipelinePanel({
         </div>
       )}
 
-      {selectedPost && (
+      </PublishingQueryState>
+
+      {!postsError && selectedPost && (
         <PostDetailPanel
           post={selectedPost}
           onClose={() => setSelectedPost(null)}
@@ -754,7 +766,7 @@ function PostCard({ post, onSelect, isSelected, onAction, onEdit, onMarkPosted, 
   );
 }
 
-function PostEditorForm({ form, setForm, onSubmit, onCancel, isEdit, isPending, campaigns, platformTab, setPlatformTab }) {
+function PostEditorForm({ form, setForm, onSubmit, onCancel, isEdit, isPending, campaigns, campaignsUnavailable, platformTab, setPlatformTab }) {
   const updateCaption = (platform, value) => {
     setForm(f => ({ ...f, captions: { ...f.captions, [platform]: value } }));
   };
@@ -784,7 +796,7 @@ function PostEditorForm({ form, setForm, onSubmit, onCancel, isEdit, isPending, 
             <div>
               <label className="block text-xs font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-1">Campaign</label>
               <select value={form.campaignId} onChange={(e) => setForm(f => ({ ...f, campaignId: e.target.value }))} className="w-full border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] rounded-lg px-3 py-2 text-sm bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]" data-testid="select-campaign">
-                <option value="">No campaign</option>
+                <option value="">{campaignsUnavailable ? "Campaigns unavailable" : "No campaign"}</option>
                 {(Array.isArray(campaigns) ? campaigns : []).map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
               </select>
             </div>
@@ -1079,7 +1091,7 @@ function MarkPostedModal({ post, platforms, setPlatforms, onConfirm, onClose, is
   );
 }
 
-function CampaignsPanel({ campaigns, campaignsLoading, showCampaignForm, setShowCampaignForm, campaignForm, setCampaignForm, campaignMutation, posts }) {
+function CampaignsPanel({ campaigns, campaignsLoading, showCampaignForm, setShowCampaignForm, campaignForm, setCampaignForm, campaignMutation, posts, postsUnavailable }) {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
@@ -1167,9 +1179,11 @@ function CampaignsPanel({ campaigns, campaignsLoading, showCampaignForm, setShow
                   {campaign.endDate && <span>{new Date(campaign.endDate).toLocaleDateString()}</span>}
                 </div>
                 <div className="flex gap-3 mt-3 pt-3 border-t border-[var(--glp-sage)] dark:border-[var(--glp-sage)] text-xs">
-                  <span className="text-[var(--glp-deep-teal)]">{campPosts.length} posts</span>
-                  <span className="text-[var(--glp-gold)]">{draftCount} drafts</span>
-                  <span className="text-green-500">{postedCount} posted</span>
+                  {postsUnavailable ? <span>Post counts unavailable</span> : <>
+                    <span className="text-[var(--glp-deep-teal)]">{campPosts.length} posts</span>
+                    <span className="text-[var(--glp-gold)]">{draftCount} drafts</span>
+                    <span className="text-green-500">{postedCount} posted</span>
+                  </>}
                 </div>
               </div>
             );
@@ -1351,11 +1365,7 @@ function UTMBuilderPanel({ utmForm, setUtmForm, utmResult, setUtmResult, utmMuta
   );
 }
 
-function SignalsPanel({ signals, clicks, signalsLoading }) {
-  if (signalsLoading) {
-    return <div className="flex items-center justify-center py-16"><Loader2 className="w-6 h-6 animate-spin text-[var(--glp-sage)]" /></div>;
-  }
-
+function SignalsPanel({ signals, clicks, signalsLoading, signalsQuery, clickQuery }) {
   const statusCounts = signals?.statusCounts || {};
   const topThemes = signals?.topThemes || [];
   const recentBlog = signals?.recentBlogActivity || [];
@@ -1369,6 +1379,7 @@ function SignalsPanel({ signals, clicks, signalsLoading }) {
         Performance Signals (Read-Only)
       </h2>
 
+      <PublishingQueryState section="performance signals" error={signalsQuery.error} loading={signalsLoading} fetching={signalsQuery.isFetching} onRetry={signalsQuery.refetch}>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {Object.entries(STATUS_CONFIG).map(([key, config]) => (
           <div key={key} className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl border border-[var(--glp-sage)] dark:border-[var(--glp-sage)] p-4 text-center">
@@ -1405,18 +1416,6 @@ function SignalsPanel({ signals, clicks, signalsLoading }) {
           ) : <p className="text-xs text-[var(--glp-sage)]">No posted themes yet.</p>}
         </SectionCard>
 
-        <SectionCard title="UTM Click Stats (7 days)" icon={Clipboard}>
-          {clickStats.length > 0 ? (
-            <div className="space-y-2">
-              {clickStats.map((c, i) => (
-                <div key={i} className="flex items-center justify-between text-sm">
-                  <span className="text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] truncate max-w-[200px]">{c.path}</span>
-                  <span className="text-xs bg-blue-100 dark:bg-blue-900/30 px-2 py-0.5 rounded text-[var(--glp-deep-teal)]">{c.count} clicks</span>
-                </div>
-              ))}
-            </div>
-          ) : <p className="text-xs text-[var(--glp-sage)]">No UTM click data yet.</p>}
-        </SectionCard>
       </div>
 
       {recentBlog.length > 0 && (
@@ -1431,6 +1430,22 @@ function SignalsPanel({ signals, clicks, signalsLoading }) {
           </div>
         </SectionCard>
       )}
+      </PublishingQueryState>
+
+        <SectionCard title="UTM Click Stats (7 days)" icon={Clipboard}>
+          <PublishingQueryState section="UTM click stats" error={clickQuery.error} loading={clickQuery.isLoading} fetching={clickQuery.isFetching} onRetry={clickQuery.refetch}>
+          {clickStats.length > 0 ? (
+            <div className="space-y-2">
+              {clickStats.map((c, i) => (
+                <div key={i} className="flex items-center justify-between text-sm">
+                  <span className="text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] truncate max-w-[200px]">{c.path}</span>
+                  <span className="text-xs bg-blue-100 dark:bg-blue-900/30 px-2 py-0.5 rounded text-[var(--glp-deep-teal)]">{c.count} clicks</span>
+                </div>
+              ))}
+            </div>
+          ) : <p className="text-xs text-[var(--glp-sage)]">No UTM click data yet.</p>}
+          </PublishingQueryState>
+        </SectionCard>
     </div>
   );
 }

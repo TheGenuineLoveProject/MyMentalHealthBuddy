@@ -4,16 +4,16 @@
 > overwritten on every `npm run verify` / `npm run verify:foundation`.
 > Structured history: `logs/verification.jsonl`.
 
-- **Last verified:** 2026-07-16T06:25:39.242Z
+- **Last verified:** 2026-09-13T04:41:20.462Z
 - **Base URL:** http://localhost:5000
-- **Overall (hard gates):** PASS
+- **Overall (hard gates):** FAIL
 
 | check | gate | result | detail |
 | --- | --- | --- | --- |
 | build_artifact | hard | PASS | present (10568 bytes) |
-| api_health | hard | PASS | http://localhost:5000/api/health -> 200 |
-| healthz | soft | PASS | http://localhost:5000/healthz -> 200 |
-| readyz | soft | PASS | http://localhost:5000/readyz -> 200 |
+| api_health | hard | FAIL | http://localhost:5000/api/health -> 0 (TypeError) |
+| healthz | soft | FAIL | http://localhost:5000/healthz -> 0 |
+| readyz | soft | FAIL | http://localhost:5000/readyz -> 0 |
 
 Hard gates must pass for the foundation to be considered green. Soft checks are
 informational (they do not fail the run).

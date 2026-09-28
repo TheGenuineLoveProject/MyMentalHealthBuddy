@@ -23,6 +23,10 @@ export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
+  const [mfaChallenge, setMfaChallenge] = useState("");
+  const [mfaCode, setMfaCode] = useState("");
+  const [mfaMethod, setMfaMethod] = useState("totp");
+  const [recoveryCode, setRecoveryCode] = useState("");
 
   useEffect(() => {
     if (!isLoading && isAuthenticated()) setLocation(landingPathFor(user));
@@ -49,42 +53,201 @@ export default function Login() {
 
   async function onSubmit(ev) {
     ev.preventDefault();
-    if (!validate() || submitting) return;
+
+    if (submitting) return;
+
+    if (mfaChallenge) {
+      if (mfaMethod === "recovery") {
+        const normalizedRecoveryCode =
+          recoveryCode.trim();
+
+        if (
+          !normalizedRecoveryCode ||
+          normalizedRecoveryCode.length > 128
+        ) {
+          setErrors({
+            recoveryCode:
+              "Enter one of your saved recovery codes.",
+          });
+          return;
+        }
+      } else if (!/^\d{6}$/.test(mfaCode)) {
+        setErrors({
+          mfaCode:
+            "Enter the 6-digit code from your authenticator app.",
+        });
+        return;
+      }
+    } else if (!validate()) {
+      return;
+    }
+
     setSubmitting(true);
+
     try {
-      const data = await apiRequest("POST", "/api/auth/login", {
-        email: form.email.trim().toLowerCase(),
-        password: form.password,
-      });
+      let data;
+
+      if (mfaChallenge) {
+        const mfaPayload =
+          mfaMethod === "recovery"
+            ? {
+                challenge: mfaChallenge,
+                recoveryCode:
+                  recoveryCode.trim(),
+              }
+            : {
+                challenge: mfaChallenge,
+                code: mfaCode,
+              };
+
+        data = await apiRequest(
+          "POST",
+          "/api/auth/mfa/verify",
+          mfaPayload
+        );
+      } else {
+        data = await apiRequest(
+          "POST",
+          "/api/auth/login",
+          {
+            email:
+              form.email
+                .trim()
+                .toLowerCase(),
+            password: form.password,
+          }
+        );
+      }
+
       if (!data || data?.ok === false) {
-        const msg = data?.error || data?.message || "Could not sign in. Please try again.";
-        toast({ title: "Sign in failed", description: msg, variant: "destructive" });
+        const msg =
+          data?.error ||
+          data?.message ||
+          "Could not sign in. Please try again.";
+
+        toast({
+          title: "Sign in failed",
+          description: msg,
+          variant: "destructive",
+        });
+
         setSubmitting(false);
         return;
       }
-      if (data?.token) login(data.token, data.user || null);
-      if (data?.token) {
-        setAuthToken(data.token);
-        try { localStorage.setItem("mmhb_user", JSON.stringify(data.user)); } catch {}
+
+      if (!mfaChallenge && data?.mfaRequired) {
+        if (
+          typeof data?.challenge !== "string" ||
+          !data.challenge
+        ) {
+          toast({
+            title: "Verification unavailable",
+            description:
+              "We could not start two-factor verification. Please try signing in again.",
+            variant: "destructive",
+          });
+
+          setSubmitting(false);
+          return;
+        }
+
+        /*
+         * Keep the pre-authentication challenge only in React memory.
+         * Clear the password as soon as the second-factor phase begins.
+         */
+        setMfaChallenge(data.challenge);
+        setMfaMethod("totp");
+        setMfaCode("");
+        setRecoveryCode("");
+        setErrors({});
+        setForm((current) => ({
+          ...current,
+          password: "",
+        }));
+        setSubmitting(false);
+
+        toast({
+          title: "Verification required",
+          description:
+            "Enter the 6-digit code from your authenticator app.",
+        });
+
+        return;
       }
-      toast({ title: "Welcome back", description: "You're signed in." });
-      window.location.href = data?.user?.role === "admin" ? "/admin" : "/dashboard";
-      setLocation(landingPathFor(data?.user));
+
+      if (!data?.token) {
+        toast({
+          title: "Sign in failed",
+          description:
+            "Authentication completed without a valid session. Please try again.",
+          variant: "destructive",
+        });
+
+        setSubmitting(false);
+        return;
+      }
+
+      /*
+       * Erase pre-authentication MFA values from component state before
+       * transitioning into the authenticated application.
+       */
+      setMfaChallenge("");
+      setMfaCode("");
+      setRecoveryCode("");
+      setMfaMethod("totp");
+      setErrors({});
+
+      login(data.token, data.user || null);
+      setAuthToken(data.token);
+
+      try {
+        localStorage.setItem(
+          "mmhb_user",
+          JSON.stringify(data.user)
+        );
+      } catch {}
+
+      toast({
+        title: "Welcome back",
+        description: "You're signed in.",
+      });
+
+      window.location.href =
+        data?.user?.role === "admin"
+          ? "/admin"
+          : "/dashboard";
+
+      setLocation(
+        landingPathFor(data?.user)
+      );
     } catch (err) {
       const raw = err?.message || "";
       let msg = raw;
+
       const m = raw.match(/^\d+:\s*(.*)$/);
+
       if (m) {
         try {
           const parsed = JSON.parse(m[1]);
-          msg = parsed?.error || parsed?.message || m[1];
-        } catch { msg = m[1]; }
+          msg =
+            parsed?.error ||
+            parsed?.message ||
+            m[1];
+        } catch {
+          msg = m[1];
+        }
       }
+
       toast({
-        title: "Sign in failed",
-        description: msg || "Network error. Please try again in a moment.",
+        title: mfaChallenge
+          ? "Verification failed"
+          : "Sign in failed",
+        description:
+          msg ||
+          "Network error. Please try again in a moment.",
         variant: "destructive",
       });
+
       setSubmitting(false);
     }
   }
@@ -132,11 +295,255 @@ export default function Login() {
           >
             <div className="text-center" style={{ marginBottom: '1.5rem' }}>
               <h1 className="text-3xl font-bold font-display" style={{ color: 'var(--glp-sage-deep)' }} data-testid="text-login-title">
-                Welcome Back
+                {mfaChallenge ? "Verify It’s You" : "Welcome Back"}
               </h1>
-              <p className="mt-2 text-sm" style={{ color: 'var(--glp-sage)' }}>Sign in to access your tools and reflections</p>
+              <p className="mt-2 text-sm" style={{ color: 'var(--glp-sage)' }}>
+                {mfaChallenge
+                  ? mfaMethod === "recovery"
+                    ? "Enter one of your saved recovery codes to finish signing in."
+                    : "Enter the code from your authenticator app to finish signing in."
+                  : "Sign in to access your tools and reflections"}
+              </p>
             </div>
 
+            {mfaChallenge ? (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0.85rem",
+                }}
+              >
+                {mfaMethod === "totp" ? (
+                  <>
+                    <label className="block">
+                      <span
+                        className="block text-sm font-medium"
+                        style={{
+                          color: "var(--glp-sage-deep)",
+                          marginBottom: "0.4rem",
+                        }}
+                      >
+                        Authentication code
+                      </span>
+
+                      <div className="relative">
+                        <Shield
+                          className="absolute w-4 h-4"
+                          style={{
+                            color: "var(--glp-sage)",
+                            left: "0.85rem",
+                            top: "50%",
+                            transform: "translateY(-50%)",
+                          }}
+                          aria-hidden="true"
+                        />
+
+                        <input
+                          type="text"
+                          inputMode="numeric"
+                          autoComplete="one-time-code"
+                          pattern="[0-9]*"
+                          maxLength={6}
+                          required
+                          autoFocus
+                          placeholder="123456"
+                          value={mfaCode}
+                          onChange={(e) => {
+                            const next = e.target.value
+                              .replace(/\D/g, "")
+                              .slice(0, 6);
+
+                            setMfaCode(next);
+                            setErrors((current) => ({
+                              ...current,
+                              mfaCode: undefined,
+                            }));
+                          }}
+                          className="w-full text-sm focus:outline-none focus:ring-2"
+                          style={{
+                            background: "var(--glp-paper)",
+                            border: "1px solid var(--glp-sage-20)",
+                            color: "var(--glp-sage-deep)",
+                            width: "100%",
+                            padding: "0.7rem 0.75rem 0.7rem 2.5rem",
+                            borderRadius: "0.75rem",
+                            letterSpacing: "0.15em",
+                          }}
+                          data-testid="input-mfa-code"
+                          aria-invalid={!!errors.mfaCode}
+                          aria-describedby={
+                            errors.mfaCode
+                              ? "err-mfa-code"
+                              : undefined
+                          }
+                        />
+                      </div>
+
+                      {errors.mfaCode && (
+                        <p
+                          id="err-mfa-code"
+                          className="text-xs"
+                          style={{
+                            color: "#b13c3c",
+                            marginTop: "0.25rem",
+                          }}
+                          data-testid="error-mfa-code"
+                        >
+                          {errors.mfaCode}
+                        </p>
+                      )}
+                    </label>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setMfaMethod("recovery");
+                        setMfaCode("");
+                        setRecoveryCode("");
+                        setErrors({});
+                      }}
+                      className="text-sm font-medium text-center"
+                      style={{
+                        color: "var(--glp-sage-deep)",
+                      }}
+                      data-testid="button-use-recovery-code"
+                    >
+                      Use a recovery code instead
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <label className="block">
+                      <span
+                        className="block text-sm font-medium"
+                        style={{
+                          color: "var(--glp-sage-deep)",
+                          marginBottom: "0.4rem",
+                        }}
+                      >
+                        Recovery code
+                      </span>
+
+                      <div className="relative">
+                        <Shield
+                          className="absolute w-4 h-4"
+                          style={{
+                            color: "var(--glp-sage)",
+                            left: "0.85rem",
+                            top: "50%",
+                            transform: "translateY(-50%)",
+                          }}
+                          aria-hidden="true"
+                        />
+
+                        <input
+                          type="text"
+                          autoComplete="off"
+                          autoCapitalize="none"
+                          autoCorrect="off"
+                          spellCheck={false}
+                          maxLength={128}
+                          required
+                          autoFocus
+                          placeholder="Recovery code"
+                          value={recoveryCode}
+                          onChange={(e) => {
+                            setRecoveryCode(
+                              e.target.value.slice(0, 128)
+                            );
+
+                            setErrors((current) => ({
+                              ...current,
+                              recoveryCode: undefined,
+                            }));
+                          }}
+                          className="w-full text-sm focus:outline-none focus:ring-2"
+                          style={{
+                            background: "var(--glp-paper)",
+                            border: "1px solid var(--glp-sage-20)",
+                            color: "var(--glp-sage-deep)",
+                            width: "100%",
+                            padding: "0.7rem 0.75rem 0.7rem 2.5rem",
+                            borderRadius: "0.75rem",
+                          }}
+                          data-testid="input-mfa-recovery-code"
+                          aria-invalid={!!errors.recoveryCode}
+                          aria-describedby={
+                            errors.recoveryCode
+                              ? "mfa-recovery-help err-recovery-code"
+                              : "mfa-recovery-help"
+                          }
+                        />
+                      </div>
+
+                      <p
+                        id="mfa-recovery-help"
+                        className="text-xs"
+                        style={{
+                          color: "var(--glp-sage)",
+                          marginTop: "0.4rem",
+                        }}
+                      >
+                        Recovery codes are single-use. Use one of the
+                        codes you saved when two-factor authentication
+                        was set up.
+                      </p>
+
+                      {errors.recoveryCode && (
+                        <p
+                          id="err-recovery-code"
+                          className="text-xs"
+                          style={{
+                            color: "#b13c3c",
+                            marginTop: "0.25rem",
+                          }}
+                          data-testid="error-mfa-recovery-code"
+                        >
+                          {errors.recoveryCode}
+                        </p>
+                      )}
+                    </label>
+
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setMfaMethod("totp");
+                        setRecoveryCode("");
+                        setMfaCode("");
+                        setErrors({});
+                      }}
+                      className="text-sm font-medium text-center"
+                      style={{
+                        color: "var(--glp-sage-deep)",
+                      }}
+                      data-testid="button-use-authenticator-code"
+                    >
+                      Use an authenticator code instead
+                    </button>
+                  </>
+                )}
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMfaChallenge("");
+                    setMfaMethod("totp");
+                    setMfaCode("");
+                    setRecoveryCode("");
+                    setErrors({});
+                    setSubmitting(false);
+                  }}
+                  className="text-xs font-medium text-center"
+                  style={{
+                    color: "var(--glp-sage-deep)",
+                  }}
+                  data-testid="button-mfa-back"
+                >
+                  Back to password sign in
+                </button>
+              </div>
+            ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
               <label className="block">
                 <span className="sr-only">Email address</span>
@@ -187,6 +594,7 @@ export default function Login() {
               </div>
             </div>
 
+            )}
             <button
               type="submit"
               disabled={submitting}
@@ -195,18 +603,28 @@ export default function Login() {
               data-testid="button-login"
             >
               {submitting ? <Loader2 className="w-5 h-5 animate-spin" aria-hidden="true" /> : <Sparkles className="w-5 h-5" aria-hidden="true" />}
-              <span>{submitting ? "Signing you in…" : "Sign In"}</span>
+              <span>
+                {submitting
+                  ? mfaChallenge
+                    ? "Verifying…"
+                    : "Signing you in…"
+                  : mfaChallenge
+                    ? mfaMethod === "recovery"
+                      ? "Use Recovery Code & Sign In"
+                      : "Verify & Sign In"
+                    : "Sign In"}
+              </span>
               {!submitting && <ArrowRight className="w-5 h-5" aria-hidden="true" />}
             </button>
 
             <div style={{ marginTop: '1.5rem', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               <div className="flex items-center text-sm" style={{ color: 'var(--glp-sage)', gap: '0.75rem' }}>
                 <Shield className="w-4 h-4 flex-shrink-0" style={{ color: 'var(--glp-sage-deep)' }} />
-                <span>Encrypted in transit. Private by default.</span>
+                <span>Choose what you share.</span>
               </div>
               <div className="flex items-center text-sm" style={{ color: 'var(--glp-sage)', gap: '0.75rem' }}>
                 <Heart className="w-4 h-4 flex-shrink-0" style={{ color: 'var(--glp-sage-deep)' }} />
-                <span>Your data stays private and secure.</span>
+                <span>Review the Privacy Policy before sharing personal information.</span>
               </div>
             </div>
 

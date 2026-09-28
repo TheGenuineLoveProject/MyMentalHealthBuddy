@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { apiRequest } from "../lib/queryClient.js";
+import { passwordResetErrorMessage } from "../lib/passwordResetError.js";
 import { CheckCircle, AlertCircle, Lock, Eye, EyeOff, Shield, ArrowRight } from 'lucide-react';
 import { useMemo, useState } from "react";
 import SEO from "../components/SEO";
@@ -50,9 +51,7 @@ export default function ResetPassword() {
       password: data.newPassword,
     }),
     onError: (err) => {
-      const message = err.message?.includes("expired") || err.message?.includes("invalid")
-        ? "This reset link has expired or is invalid. Please request a new one."
-        : "Something went wrong. Please try again.";
+      const message = passwordResetErrorMessage(err);
       setError("root", { message });
     },
   });

@@ -1,0 +1,119 @@
+{
+  "status": "PASS",
+  "checks": 16,
+  "scope": "REAL_R17_AND_R17A_DRIVERS_WITH_SYNTHETIC_COMPILER_NATIVE_PACKAGES; ACTUAL_PROMPT_LOADER; NO_APPLICATION_OR_NETWORK",
+  "results": [
+    {
+      "case": "success",
+      "result": "PASS",
+      "expectedGate": null,
+      "actualStatus": "RETAINED_CANDIDATE_BUILD_AND_SMOKE_PASS_NOT_RELEASE",
+      "newCompilerProcesses": 0
+    },
+    {
+      "case": "vite_builtin",
+      "result": "PASS",
+      "expectedGate": null,
+      "actualStatus": "RETAINED_CANDIDATE_BUILD_AND_SMOKE_PASS_NOT_RELEASE",
+      "newCompilerProcesses": 0
+    },
+    {
+      "case": "vite_optional_peer",
+      "result": "PASS",
+      "expectedGate": null,
+      "actualStatus": "RETAINED_CANDIDATE_BUILD_AND_SMOKE_PASS_NOT_RELEASE",
+      "newCompilerProcesses": 0
+    },
+    {
+      "case": "relative_directory",
+      "result": "PASS",
+      "expectedGate": null,
+      "actualStatus": "RETAINED_CANDIDATE_BUILD_AND_SMOKE_PASS_NOT_RELEASE",
+      "newCompilerProcesses": 0
+    },
+    {
+      "case": "unknown_ids",
+      "result": "PASS",
+      "expectedGate": "GRAPH_REVIEW_REQUIRED",
+      "actualStatus": "RETAINED_CANDIDATE_FAILED",
+      "newCompilerProcesses": 0
+    },
+    {
+      "case": "watch_escape",
+      "result": "PASS",
+      "expectedGate": "GRAPH_REVIEW_REQUIRED",
+      "actualStatus": "RETAINED_CANDIDATE_FAILED",
+      "newCompilerProcesses": 0
+    },
+    {
+      "case": "source_drift",
+      "result": "PASS",
+      "expectedGate": "R17_SOURCE_BASELINE_CHANGED",
+      "actualStatus": "RETAINED_CANDIDATE_FAILED",
+      "newCompilerProcesses": 0
+    },
+    {
+      "case": "copy_drift",
+      "result": "PASS",
+      "expectedGate": "R17_COPIED_SOURCE_CHANGED",
+      "actualStatus": "RETAINED_CANDIDATE_FAILED",
+      "newCompilerProcesses": 0
+    },
+    {
+      "case": "server_drift",
+      "result": "PASS",
+      "expectedGate": "SERVER_RETAINED_IDENTITY",
+      "actualStatus": "RETAINED_CANDIDATE_FAILED",
+      "newCompilerProcesses": 0
+    },
+    {
+      "case": "frontend_size_drift",
+      "result": "PASS",
+      "expectedGate": "R17_EMITTED_SIZE_CHANGED",
+      "actualStatus": "RETAINED_CANDIDATE_FAILED",
+      "newCompilerProcesses": 0
+    },
+    {
+      "case": "missing_copy",
+      "result": "PASS",
+      "expectedGate": "R17_BUILD_COPY_MISSING",
+      "actualStatus": "RETAINED_CANDIDATE_FAILED",
+      "newCompilerProcesses": 0
+    },
+    {
+      "case": "helper_drift",
+      "result": "PASS",
+      "expectedGate": "R17_BUILD_RUNNER_IDENTITY",
+      "actualStatus": "RETAINED_CANDIDATE_FAILED",
+      "newCompilerProcesses": 0
+    },
+    {
+      "case": "dependency_drift",
+      "result": "PASS",
+      "expectedGate": "R16E_INSTALLED_TREE_DRIFT",
+      "actualStatus": "RETAINED_CANDIDATE_FAILED",
+      "newCompilerProcesses": 0
+    },
+    {
+      "case": "native_failure",
+      "result": "PASS",
+      "expectedGate": "CHILD_FAILED",
+      "actualStatus": "RETAINED_CANDIDATE_FAILED",
+      "newCompilerProcesses": 0
+    },
+    {
+      "case": "concurrent_workspace_edit",
+      "result": "PASS",
+      "expectedGate": "WORKTREE_PRESERVATION",
+      "actualStatus": "RETAINED_CANDIDATE_FAILED",
+      "newCompilerProcesses": 0
+    },
+    {
+      "case": "concurrent_prior_frontend_edit",
+      "result": "PASS",
+      "expectedGate": "R17_FRONTEND_CHANGED",
+      "actualStatus": "RETAINED_CANDIDATE_FAILED",
+      "newCompilerProcesses": 0
+    }
+  ]
+}

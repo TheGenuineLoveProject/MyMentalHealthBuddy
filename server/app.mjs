@@ -1,4 +1,5 @@
 import adminPublishingRoutes from "./routes/admin-publishing.mjs";
+import socialEnterpriseRoutes from "./routes/social-enterprise.mjs";
 import adminSecurityRoutes from "./routes/admin-security.mjs";
 import auditLogRoutes from "./routes/audit-logs.mjs";
 import authRoutes from "./routes/auth.mjs";
@@ -62,6 +63,7 @@ import sessionBoundaryRoutes from "./routes/session-boundary.mjs";
 import { csrfProtection, issueCsrfToken } from "./security/csrf.mjs";
 import db from "./db/client.mjs";
 import { ensureSchema } from "./db/ensureSchema.mjs";
+import { createStartupReadiness } from "./startupReadiness.mjs";
 import { blogPosts as blogPostsTable, users as usersTable } from "../shared/schema.mjs";
 import { eq, and } from "drizzle-orm";
 
@@ -73,6 +75,40 @@ if (db) globalThis.db = db;
 // APP INIT
 // ----------------------------
 const app = express();
+const startupReadiness = createStartupReadiness({schemaBootstrap: ensureSchema});
+app.use(startupReadiness.middleware);
+
+// MMHB_SENSITIVE_PATH_GUARD_V1_BEGIN
+// Reject hidden-file probes before any router, static handler or SPA fallback.
+// Root .well-known remains available for public verification documents.
+app.use(function mmhbSensitivePathGuard(req, res, next) {
+  const reject = (status) => {
+    res.setHeader("Cache-Control", "no-store");
+    res.setHeader("X-Content-Type-Options", "nosniff");
+    return res.status(status).type("text/plain").send(
+      status === 404 ? "Not found" : "Bad request"
+    );
+  };
+  let pathname = (req.originalUrl || req.url || "/").split("?")[0];
+  try {
+    pathname = decodeURIComponent(pathname);
+  } catch {
+    return reject(400);
+  }
+  // Inspect repeated encodings without rewriting the URL used by other routes.
+  for (let depth = 0; depth <= 4; depth += 1) {
+    const segments = pathname.split(/[\\/]+/).filter(Boolean);
+    if (segments.some((segment, index) =>
+      segment.startsWith(".") && !(index === 0 && segment === ".well-known")
+    )) return reject(404);
+    const decoded = pathname.replace(/%(25|2e|2f|5c)/gi,
+      (_, hex) => String.fromCharCode(parseInt(hex, 16)));
+    if (decoded === pathname) return next();
+    pathname = decoded;
+  }
+  return reject(400);
+});
+// MMHB_SENSITIVE_PATH_GUARD_V1_END
 
 // PHASE116Z43_INTERNAL_INTELLIGENCE_SERVER_REGISTRATION
 registerInternalIntelligenceServer(app);
@@ -143,45 +179,6 @@ const phase113jgV2AdminDiagnosticGuard = (req, res, next) => {
 app.use("/api/admin/health", phase113jgV2AdminDiagnosticGuard);
 app.use("/api/admin/diagnostics", phase113jgV2AdminDiagnosticGuard);
 
-
-
-// Phase 113ER: compatibility bridge for legacy GET /api/logout links.
-// Keeps existing client logout links from becoming a runtime 404.
-// POST logout behavior remains owned by the authenticated auth router.
-app.get("/api/logout", (req, res) => {
-  res.set("Cache-Control", "no-store");
-
-  try {
-    if (typeof req.logout === "function") {
-      req.logout(() => {});
-    }
-  } catch {}
-
-  try {
-    if (req.session && typeof req.session.destroy === "function") {
-      req.session.destroy(() => {});
-    }
-  } catch {}
-
-  const commonCookieNames = [
-    "connect.sid",
-    "sid",
-    "session",
-    "sessionId",
-    "auth",
-    "token",
-    "access_token",
-    "refresh_token"
-  ];
-
-  for (const name of commonCookieNames) {
-    try {
-      res.clearCookie(name);
-    } catch {}
-  }
-
-  return res.redirect(302, "/login");
-});
 
 
 // Phase 113EK: universal earliest runtime health alias responder.
@@ -321,17 +318,29 @@ app.head("/healthz", (_req, res) => {
 });
 
 // ===== MIDDLEWARE =====
-app.use(cors({
+// Only explicit, serialized HTTP(S) origins receive credentialed CORS access.
+// Same-origin clients do not need CORS headers. This does not replace CSRF checks.
+const browserCors = cors({
   origin: (origin, cb) => {
     const allowed = (process.env.CORS_ORIGIN || "")
       .split(",").map(s => s.trim()).filter(Boolean);
-    if (!origin) return cb(null, true);
-    if (allowed.length === 0) return cb(null, true);
-    if (allowed.includes("*")) return cb(null, true);
-    return allowed.includes(origin) ? cb(null, true) : cb(new Error("CORS: origin not allowed"));
+    let validOrigin = false;
+    if (typeof origin === "string") {
+      try {
+        const parsed = new URL(origin);
+        validOrigin = (parsed.protocol === "https:" || parsed.protocol === "http:")
+          && parsed.origin === origin;
+      } catch {}
+    }
+    return cb(null, validOrigin && allowed.includes(origin));
   },
   credentials: true,
-}));
+});
+app.use((req, res, next) => {
+  // Include denied and no-Origin responses in cache variant selection too.
+  res.vary("Origin");
+  return browserCors(req, res, next);
+});
 // ===== STRIPE WEBHOOK — MUST mount BEFORE express.json so the router's
 // route-level express.raw() can read the raw byte stream for HMAC
 // signature verification. Server-to-server only; no cookies/CSRF needed.
@@ -555,6 +564,7 @@ app.use("/api/ai/business", aiBusinessRoutes);
 app.use("/api/integrations", requireAuth, requireAdmin, integrationHealthRoutes);
 app.use("/api/admin/billing", adminBillingRoutes);
 app.use("/api/admin/publishing", adminPublishingRoutes);
+app.use("/api/admin/social/enterprise", requireAuth, requireAdmin, socialEnterpriseRoutes);
 app.use("/api/admin/security", requireAuth, requireAdmin, adminSecurityRoutes);
 app.use("/api/admin/platform-evolution", requireAuth, requireAdmin, platformEvolutionRoutes);
 app.use("/api/admin/audit-logs", requireAuth, requireAdmin, auditLogRoutes);
@@ -1084,6 +1094,7 @@ function countRegisteredRoutes() {
   }
 }
 function shutdown(signal) {
+  startupReadiness.stop();
   console.log(`[SERVER] ${signal} received — shutting down`);
   shuttingDown = true;
   if (relistenTimer) clearTimeout(relistenTimer);
@@ -1204,7 +1215,7 @@ server.on("listening", () => {
   // healthy DB is all no-ops). Fully isolated: it can never block port-open or
   // crash boot — any failure is logged and swallowed inside ensureSchema().
   setImmediate(() => {
-    ensureSchema().catch((err) => {
+    startupReadiness.start().catch((err) => {
       console.warn("[SERVER] ensureSchema bootstrap skipped:", err?.message || err);
     });
   });
