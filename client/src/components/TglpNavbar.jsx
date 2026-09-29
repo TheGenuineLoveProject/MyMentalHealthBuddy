@@ -136,6 +136,9 @@ export default function TglpNavbar() {
   const [scrolled, setScrolled] = useState(false);
   const [openId, setOpenId] = useState(null);
   const { user, isPro, logout, token } = useAuth();
+  const primaryLinks = user?.role === "admin"
+    ? [...PRIMARY_LINKS, { href: "/admin", label: "Command Center", icon: LayoutDashboard }]
+    : PRIMARY_LINKS;
   const [signOutPending, setSignOutPending] = useState(false);
   const [signOutError, setSignOutError] = useState("");
   const signOutInFlight = useRef(false);
@@ -236,7 +239,7 @@ export default function TglpNavbar() {
           </div>
 
           {/* Desktop primary links */}
-          {PRIMARY_LINKS.map(({ href, label, icon: Icon }) => (
+          {primaryLinks.map(({ href, label, icon: Icon }) => (
             <Link
               key={href}
               href={href}
@@ -359,7 +362,7 @@ export default function TglpNavbar() {
           </div>
 
           {/* Primary */}
-          {PRIMARY_LINKS.map(({ href, label, icon: Icon }) => (
+          {primaryLinks.map(({ href, label, icon: Icon }) => (
             <Link
               key={href}
               href={href}
