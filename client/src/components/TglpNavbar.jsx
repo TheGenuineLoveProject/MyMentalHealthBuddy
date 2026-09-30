@@ -8,6 +8,7 @@ import { useState, useEffect, useRef } from "react";
 import ModeToggle from "./ModeToggle.jsx";
 import GlobalSearch from "./GlobalSearch.jsx";
 import { useAuth } from "../context/AuthContext";
+import { useVerifiedAdminSession } from "../hooks/useVerifiedAdminSession.js";
 import { LumiSceneRenderer } from "../lumi-registry/components/LumiSceneRenderer";
 import { WELLNESS_HUB_TOOLS } from "../content/tools/toolsRegistry.js";
 // PHASE115N_TGLP_NAVBAR_SHARED_BUTTON_POLISH_PATCH
@@ -136,7 +137,8 @@ export default function TglpNavbar() {
   const [scrolled, setScrolled] = useState(false);
   const [openId, setOpenId] = useState(null);
   const { user, isPro, logout, token } = useAuth();
-  const primaryLinks = user?.role === "admin"
+  const hasAdminSession = useVerifiedAdminSession(location);
+  const primaryLinks = user?.role === "admin" || hasAdminSession
     ? [...PRIMARY_LINKS, { href: "/admin", label: "Command Center", icon: LayoutDashboard }]
     : PRIMARY_LINKS;
   const [signOutPending, setSignOutPending] = useState(false);
