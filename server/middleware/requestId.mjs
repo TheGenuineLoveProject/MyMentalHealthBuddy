@@ -12,13 +12,17 @@ export function requestId(req, res, next) {
 
 export function requestLogger(req, res, next) {
   const startTime = Date.now();
+  // Preserve the external path before mounted routers rewrite req.url.
+  // Query strings can contain credentials and must not enter request logs.
+  const requestPath = (req.originalUrl || req.url || req.path || "/").split("?")[0];
+  const requestMethod = req.method;
   
   res.on("finish", () => {
     const duration = Date.now() - startTime;
     const logData = {
       requestId: req.requestId,
-      method: req.method,
-      path: req.path,
+      method: requestMethod,
+      path: requestPath,
       status: res.statusCode,
       duration: `${duration}ms`,
       userAgent: req.headers["user-agent"]?.substring(0, 100),
