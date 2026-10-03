@@ -100,7 +100,7 @@ export default function AdminTools() {
     try {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 8000);
-      let res = await fetch(tool.endpoint, { method: 'GET', credentials: 'include', signal: controller.signal });
+      let res = await fetch(tool.endpoint, { method: tool.method || 'GET', redirect: tool.expectedAllow ? 'manual' : 'follow', credentials: 'include', signal: controller.signal });
       clearTimeout(timeout);
       if (res.status === 405) {
         const controller2 = new AbortController();
@@ -117,7 +117,13 @@ export default function AdminTools() {
       else if (res.status === 429) status = 'warning';
       else if (res.status >= 500) status = 'error';
       else status = 'warning';
-      const statusLabel = res.status === 401 ? 'auth-gated' : res.status === 403 ? 'admin-only' : res.status === 405 ? 'post-only' : res.status === 429 ? 'rate-limited' : res.status >= 500 ? 'server-error' : res.ok ? 'ok' : `${res.status}`;
+      let statusLabel = res.status === 401 ? 'auth-gated' : res.status === 403 ? 'admin-only' : res.status === 405 ? 'post-only' : res.status === 429 ? 'rate-limited' : res.status >= 500 ? 'server-error' : res.ok ? 'ok' : `${res.status}`;
+      if (tool.expectedAllow) {
+        const allowed = (res.headers.get('allow') || '').split(',').map(value => value.trim().toUpperCase());
+        const reachable = res.ok && allowed.includes(tool.expectedAllow);
+        status = reachable ? 'warning' : 'error';
+        statusLabel = reachable ? 'route-available; sign-in not tested' : 'login-route-contract-failed';
+      }
       setToolResults(prev => ({ ...prev, [tool.id]: { status, code: res.status, time: new Date().toLocaleTimeString(), label: statusLabel, ms: responseTime } }));
     } catch (err) {
       const responseTime = Math.round(performance.now() - startTime);

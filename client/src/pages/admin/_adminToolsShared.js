@@ -114,6 +114,8 @@ export const TOOL_SEVERITY = {
 };
 
 export const AI_REMEDIATION = {
+  "route-available; sign-in not tested": { suggestion: "The password login route advertises POST support. This availability check does not test credentials, MFA, or session persistence.", action: "Verify sign-in separately; no server repair indicated", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
+  "login-route-contract-failed": { suggestion: "The login availability probe did not receive a successful OPTIONS response advertising POST. Inspect the response status, Allow header, middleware, and deployed route before changing authentication.", action: "Inspect the login route contract; no automatic repair", knowledgeBase: "Codex", autoFixable: false, fixCommand: null },
   "timeout": { suggestion: "Server may be under heavy load or endpoint is slow. Check server resources and consider adding response caching. Codex KB: High latency often correlates with unoptimized database queries or missing indexes.", action: "Check server CPU/memory usage", knowledgeBase: "Codex", autoFixable: true, fixCommand: "restart-service" },
   "unreachable": { suggestion: "Network connectivity issue or server is down. Verify the server process is running and the route is properly mounted in server/app.mjs.", action: "Restart application server", knowledgeBase: "Codex", autoFixable: true, fixCommand: "restart-service" },
   "server-error": { suggestion: "Internal server error (500). Check server logs for stack traces and recent code changes. Perplexity KB: Common causes include unhandled promise rejections, missing env vars, or database connection failures.", action: "Review server error logs", knowledgeBase: "Perplexity", autoFixable: false, fixCommand: null },
@@ -449,7 +451,7 @@ export const toolCategories = [
       { id: "invites", label: "Invite System", endpoint: "/api/invites", icon: Handshake, desc: "User invitations" },
       { id: "feed", label: "Feed Generator", endpoint: "/api/feed/feed.xml", icon: Share2, desc: "Content feed generation" },
       { id: "figma-api", label: "Figma Integration", endpoint: "/api/figma", icon: Palette, desc: "Figma design tools" },
-      { id: "login", label: "Login System", endpoint: "/api/login", icon: LogIn, desc: "User login endpoint" },
+      { id: "login", label: "Login Route Availability", endpoint: "/api/auth/login", method: "OPTIONS", expectedAllow: "POST", icon: LogIn, desc: "Route availability only; sign-in tested separately" },
       { id: "user-mgmt", label: "User Management", endpoint: "/api/user", icon: Users, desc: "User data management" },
       { id: "user-settings", label: "User Settings", endpoint: "/api/user-settings", icon: UserCog, desc: "User preferences" },
       { id: "uploads", label: "File Uploads", endpoint: "/api/uploads", icon: Upload, desc: "Object storage uploads" },
