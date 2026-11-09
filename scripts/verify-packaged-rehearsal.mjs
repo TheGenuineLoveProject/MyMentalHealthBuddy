@@ -64,7 +64,7 @@ function runOnCi() {
     cpSync(fileURLToPath(import.meta.url), join(stage, "probe.mjs"));
     run("openssl", [
       "req", "-x509", "-newkey", "rsa:2048", "-nodes", "-days", "1",
-      "-subj", "/CN=MMHB isolated rehearsal", "-addext", "subjectAltName=IP:127.0.0.1",
+      "-subj", "/CN=MMHB isolated rehearsal", "-addext", "subjectAltName=IP:127.0.0.1,DNS:localhost",
       "-keyout", join(stage, "fixture.key"), "-out", join(stage, "fixture.crt"),
     ], { stdio: "ignore" });
     chmodSync(join(stage, "fixture.key"), 0o644);
@@ -122,6 +122,12 @@ async function waitForApp(child, bootLog) {
       // Wait for the listener and schema bootstrap.
     }
     await pause(500);
+  }
+  try {
+    // Ask the existing database health route to emit its diagnostics on timeout.
+    await fetch(appOrigin + "/api/health/ready", { signal: AbortSignal.timeout(5_000) });
+  } catch {
+    // Report the original startup failure if the app cannot answer.
   }
   throw Error("Packaged app did not become ready\n" + bootLog());
 }
