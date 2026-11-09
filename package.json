@@ -11,7 +11,7 @@
     "start": "node server/app.mjs",
     "build": "vite build",
     "verify": "bash scripts/verify.sh",
-    "verify:foundation": "node scripts/verify-foundation.mjs && npm run verify:postgres-tls",
+    "verify:foundation": "node scripts/verify-foundation.mjs && npm run verify:postgres-tls && node scripts/verify-packaged-rehearsal.mjs",
     "routes:manifest": "node scripts/generate-route-manifest.mjs",
     "pretest": "bash scripts/check-contract-routes.sh",
     "governor": "bash scripts/governor/run-governor.sh",
