@@ -91,6 +91,7 @@ function runOnCi() {
 }
 
 const root = "/rehearsal";
+const appWorkdir = "/tmp/mmhb-app";
 const appOrigin = "http://127.0.0.1:5081";
 const issuer = "https://127.0.0.1:5082";
 const certificate = join(root, "fixture.crt");
@@ -126,7 +127,9 @@ async function waitForApp(child, bootLog) {
 }
 
 function startApp() {
-  const child = spawn(process.execPath, [join(root, "dist/server.mjs")], { cwd: root, env, stdio: ["ignore", "pipe", "pipe"] });
+  const child = spawn(process.execPath, [join(root, "dist/server.mjs")], {
+    cwd: appWorkdir, env, stdio: ["ignore", "pipe", "pipe"],
+  });
   let output = "";
   for (const stream of [child.stdout, child.stderr]) {
     stream.setEncoding("utf8").on("data", chunk => { output = (output + chunk).slice(-3200); });
@@ -203,6 +206,8 @@ async function runIsolated() {
     && interfaces[0][1].some(address => address.address === "127.0.0.1"), "Require IPv4 loopback-only isolation");
   console.log("LOOPBACK_ONLY=PASS");
   digestDistribution(root);
+  // Application log files belong on the disposable filesystem beside the database.
+  mkdirSync(appWorkdir, { mode: 0o700 });
   const discovery = createServer({
     key: readFileSync(join(root, "fixture.key")), cert: readFileSync(certificate),
   }, (req, res) => {
