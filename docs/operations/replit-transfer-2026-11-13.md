@@ -8,17 +8,45 @@ The cloud repairs are already applied in this workspace; do not reapply them her
 The [cloud repair note](cloud-repair-2026-11-13.md) describes the repairs and the
 limits of the existing evidence.
 
-Use the separate GitHub repair branches as the primary integration route after
-their push is verified:
+Both separate GitHub repair branches have been pushed and verified. Use them as
+the primary integration route for their matching Replit projects:
 
 | Replit application | GitHub repository | Intended repair branch | Transfer status |
 | --- | --- | --- | --- |
-| MyMentalHealthBuddy (MMHB) | `TheGenuineLoveProject/MyMentalHealthBuddy` | `codex/cloud-startup-repair-20261113` | Push/sync pending; coordinating task to verify/update |
+| MyMentalHealthBuddy (MMHB) | `TheGenuineLoveProject/MyMentalHealthBuddy` | `codex/cloud-startup-repair-20261113` | Repair commit pushed and remote SHA verified: `8f4f0ec77a01284b64bc55efb28bc95bde765f59`; Replit sync not performed |
 | TheGenuineLoveProject (GLP) | `TheGenuineLoveProject/TheGenuineLoveProject` | `codex/restore-brand-assets-20261113` | Pushed and remote SHA verified: `93d8d7efc58781722c5cb106eeea2f6b76659a13`; Replit sync not performed |
 
 Before syncing in Replit, confirm the project's repository and review the repair
 branch diff. No completed Replit import, remote merge, or deployment is recorded
 by this note.
+
+For the MMHB project, these commands fetch and display the repair branch:
+
+```sh
+git fetch origin codex/cloud-startup-repair-20261113
+git show --stat --oneline FETCH_HEAD
+```
+
+For the GLP project:
+
+```sh
+git fetch origin codex/restore-brand-assets-20261113
+git show --stat --oneline FETCH_HEAD
+```
+
+Fetching does not replace working files. Confirm the repository identity and
+preserve existing edits before switching branches or integrating changes. The
+code repairs and evidence are committed together; a later documentation-only
+commit may follow the repair commit listed above. No production branch was
+advanced: MMHB `integration` remained at `ed35be885b6dd1d99d2a744455c67dbdd2970af1`,
+MMHB `main` at `c6642e4cb7f2d7ec50455f891820ae42d0a39729`, and GLP `main` at
+`0de60d0810f2ea44e0f23041fad559b7cfb0d718` when checked.
+
+Direct Replit file access is not connected to this cloud task. GitHub REST API
+access returned `Forbidden`, so no pull request or remote CI result is claimed.
+Native Git push/read access succeeded. GitHub's push warnings describe the
+unchanged default branches and can differ from the current repair branch's
+production-only npm audit.
 
 ## Current follow-up verification
 
