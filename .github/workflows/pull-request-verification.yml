@@ -62,9 +62,22 @@ jobs:
 
       - run: npm run verify:rate-limit
 
+      - name: Run selected startup and auth regressions
+        run: |
+          ./node_modules/.bin/vitest run --config server/test.config.mjs \
+            server/tests/auth-provider-config.test.mjs \
+            server/tests/optional-ai-startup.test.mjs \
+            server/tests/qualification-process-cleanup.test.mjs \
+            server/tests/mood.test.mjs \
+            server/tests/journal.test.mjs \
+            server/tests/auth.test.mjs
+
       - name: Start isolated server
         run: |
-          JWT_SECRET="ci-only-nonproduction-jwt-secret-1234567890" OPENAI_API_KEY="ci-only-nonproduction-openai-key" SESSION_SECRET="ci-only-nonproduction-session-secret-1234567890" REPL_ID="ci-only-nonproduction-repl-id" node server/app.mjs &
+          JWT_SECRET="ci-only-nonproduction-jwt-secret-1234567890" \
+          SESSION_SECRET="ci-only-nonproduction-session-secret-1234567890" \
+          REPL_ID="" OPENAI_API_KEY="" AI_INTEGRATIONS_OPENAI_API_KEY="" \
+          AI_INTEGRATIONS_OPENAI_BASE_URL="" node server/app.mjs &
           echo $! > "$RUNNER_TEMP/mmhb-pr-server.pid"
 
       - name: Wait for server

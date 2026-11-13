@@ -15,10 +15,11 @@ const mirrorLimiter = rateLimit({
   legacyHeaders: false,
 });
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY || process.env.AI_INTEGRATIONS_OPENAI_API_KEY,
+const apiKey = process.env.OPENAI_API_KEY || process.env.AI_INTEGRATIONS_OPENAI_API_KEY;
+const openai = apiKey ? new OpenAI({
+  apiKey,
   baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL || undefined,
-});
+}) : null;
 
 function safeTrim(s) {
   return String(s ?? "").replace(/\s+/g, " ").trim();
@@ -72,8 +73,7 @@ function selectFramework(text) {
 }
 
 async function generateAIReflection(text, mode = "gentle") {
-  const apiKey = process.env.OPENAI_API_KEY || process.env.AI_INTEGRATIONS_OPENAI_API_KEY;
-  if (!apiKey) return null;
+  if (!openai) return null;
 
   const framework = selectFramework(text);
   

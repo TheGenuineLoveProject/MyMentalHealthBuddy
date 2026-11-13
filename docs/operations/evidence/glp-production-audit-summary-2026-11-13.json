@@ -1,0 +1,625 @@
+{
+  "observedAt": "2026-11-13T22:11:44.162Z",
+  "repository": "TheGenuineLoveProject/TheGenuineLoveProject",
+  "commit": "93d8d7efc58781722c5cb106eeea2f6b76659a13",
+  "lockfileSha256": "bc33b726c7c4d2a9590c49bf019af9888beeb282a68d593b605c2d4ff9ad85c9",
+  "scope": "Current npm audit --omit=dev; dependency alerts do not prove reachable exploitation",
+  "totals": {
+    "info": 0,
+    "low": 0,
+    "moderate": 48,
+    "high": 20,
+    "critical": 1,
+    "total": 69
+  },
+  "findings": [
+    {
+      "name": "@grpc/grpc-js",
+      "severity": "high",
+      "direct": false,
+      "range": "1.14.0 - 1.14.4",
+      "fixAvailable": true,
+      "advisories": [
+        {
+          "title": "@grpc/grpc-js: A malformed request can cause a server crash",
+          "url": "https://github.com/advisories/GHSA-5375-pq7m-f5r2",
+          "severity": "high",
+          "range": ">=1.14.0 <1.14.4"
+        },
+        {
+          "title": "@grpc/grpc-js: An incoming malformed compressed message can cause a client or server crash",
+          "url": "https://github.com/advisories/GHSA-99f4-grh7-6pcq",
+          "severity": "high",
+          "range": ">=1.14.0 <1.14.4"
+        },
+        {
+          "title": "@grpc/grpc-js: In certain configurations, getAuthContext can return unauthorized certificates as though they were authorized",
+          "url": "https://github.com/advisories/GHSA-m9gg-hp2v-232j",
+          "severity": "high",
+          "range": ">=1.14.0 <1.14.5"
+        },
+        {
+          "title": "@grpc/grpc-js: The server transmits some error messages thrown by method handlers to the client in status messages",
+          "url": "https://github.com/advisories/GHSA-f596-whhp-79r4",
+          "severity": "low",
+          "range": ">=1.14.0 <1.14.5"
+        }
+      ]
+    },
+    {
+      "name": "@opentelemetry/auto-instrumentations-node",
+      "severity": "high",
+      "direct": true,
+      "range": "<=0.79.0",
+      "fixAvailable": {
+        "name": "@opentelemetry/auto-instrumentations-node",
+        "version": "0.83.1",
+        "isSemVerMajor": true
+      },
+      "advisories": [
+        {
+          "title": "Prometheus exporter process crash via malformed HTTP request",
+          "url": "https://github.com/advisories/GHSA-q7rr-3cgh-j5r3",
+          "severity": "high",
+          "range": ">=0.55.0 <0.75.0"
+        }
+      ]
+    },
+    {
+      "name": "@opentelemetry/exporter-prometheus",
+      "severity": "high",
+      "direct": false,
+      "range": "<=0.218.0",
+      "fixAvailable": {
+        "name": "@opentelemetry/sdk-node",
+        "version": "0.301.2",
+        "isSemVerMajor": true
+      },
+      "advisories": [
+        {
+          "title": "Prometheus exporter process crash via malformed HTTP request",
+          "url": "https://github.com/advisories/GHSA-q7rr-3cgh-j5r3",
+          "severity": "high",
+          "range": "<0.217.0"
+        }
+      ]
+    },
+    {
+      "name": "@opentelemetry/propagator-jaeger",
+      "severity": "high",
+      "direct": false,
+      "range": "<=2.8.0",
+      "fixAvailable": {
+        "name": "@opentelemetry/sdk-node",
+        "version": "0.301.2",
+        "isSemVerMajor": true
+      },
+      "advisories": [
+        {
+          "title": "OpenTelemetry JavaScript: Denial of service in `JaegerPropagator` via unhandled exception on a malformed header",
+          "url": "https://github.com/advisories/GHSA-45rx-2jwx-cxfr",
+          "severity": "high",
+          "range": "<2.9.0"
+        }
+      ]
+    },
+    {
+      "name": "@opentelemetry/sdk-node",
+      "severity": "high",
+      "direct": true,
+      "range": "<=0.219.0",
+      "fixAvailable": {
+        "name": "@opentelemetry/sdk-node",
+        "version": "0.301.2",
+        "isSemVerMajor": true
+      },
+      "advisories": [
+        {
+          "title": "Prometheus exporter process crash via malformed HTTP request",
+          "url": "https://github.com/advisories/GHSA-q7rr-3cgh-j5r3",
+          "severity": "high",
+          "range": ">=0.57.0 <0.217.0"
+        }
+      ]
+    },
+    {
+      "name": "body-parser",
+      "severity": "high",
+      "direct": false,
+      "range": "<=1.20.8",
+      "fixAvailable": true,
+      "advisories": [
+        {
+          "title": "body-parser vulnerable to denial of service when invalid limit value silently disables size enforcement",
+          "url": "https://github.com/advisories/GHSA-v422-hmwv-36x6",
+          "severity": "low",
+          "range": "<1.20.6"
+        },
+        {
+          "title": "body-parser vulnerable to Denial of Service via trailing bytes after a compressed request body",
+          "url": "https://github.com/advisories/GHSA-27r3-jxmh-p828",
+          "severity": "high",
+          "range": "<1.20.9"
+        }
+      ]
+    },
+    {
+      "name": "brace-expansion",
+      "severity": "high",
+      "direct": false,
+      "range": "3.0.0 - 5.0.11",
+      "fixAvailable": true,
+      "advisories": [
+        {
+          "title": "brace-expansion: Large numeric range defeats documented `max` DoS protection",
+          "url": "https://github.com/advisories/GHSA-jxxr-4gwj-5jf2",
+          "severity": "moderate",
+          "range": ">=5.0.0 <5.0.6"
+        },
+        {
+          "title": "brace-expansion: DoS via exponential-time expansion of consecutive non-expanding {} groups",
+          "url": "https://github.com/advisories/GHSA-3jxr-9vmj-r5cp",
+          "severity": "high",
+          "range": ">=3.0.0 <5.0.7"
+        },
+        {
+          "title": "brace-expansion: DoS via unbounded expansion length causing an out-of-memory process crash",
+          "url": "https://github.com/advisories/GHSA-mh99-v99m-4gvg",
+          "severity": "high",
+          "range": ">=4.0.0 <5.0.8"
+        },
+        {
+          "title": "brace-expansion: DoS via unbounded intermediate arrays, bypassing the CVE-2026-14257 mitigation",
+          "url": "https://github.com/advisories/GHSA-rgw5-rvv9-x895",
+          "severity": "high",
+          "range": ">=4.0.0 <5.0.9"
+        },
+        {
+          "title": "brace-expansion: Quadratic-time expansion of the `{a},b}` rewrite causes CPU denial of service",
+          "url": "https://github.com/advisories/GHSA-q2hr-2g5m-vwhr",
+          "severity": "moderate",
+          "range": ">=4.0.0 <5.0.12"
+        },
+        {
+          "title": "brace-expansion: DoS via uncontrolled recursion on nested brace groups causing stack exhaustion",
+          "url": "https://github.com/advisories/GHSA-qhr7-859c-m2p7",
+          "severity": "high",
+          "range": ">=4.0.0 <5.0.11"
+        },
+        {
+          "title": "brace-expansion: DoS via uncontrolled recursion in parseCommaParts causing stack exhaustion",
+          "url": "https://github.com/advisories/GHSA-6j4f-fj2g-mc7p",
+          "severity": "high",
+          "range": ">=4.0.0 <5.0.10"
+        }
+      ]
+    },
+    {
+      "name": "browserslist",
+      "severity": "high",
+      "direct": false,
+      "range": "<=4.28.6",
+      "fixAvailable": true,
+      "advisories": [
+        {
+          "title": "Browserslist: Unbounded memory growth (no cache eviction) via distinct query results, leading to eventual OOM",
+          "url": "https://github.com/advisories/GHSA-c83g-rgw3-j3cx",
+          "severity": "high",
+          "range": "<=4.28.6"
+        },
+        {
+          "title": "Browserslist: Uncaught crash / prototype write via untrusted browserslist-stats.json custom stats (normalizeStats)",
+          "url": "https://github.com/advisories/GHSA-73wf-gq98-2v4g",
+          "severity": "high",
+          "range": "<=4.28.6"
+        }
+      ]
+    },
+    {
+      "name": "compression",
+      "severity": "high",
+      "direct": true,
+      "range": "<1.8.2",
+      "fixAvailable": true,
+      "advisories": [
+        {
+          "title": "compression vulnerable to Denial of Service via memory leak on premature response close",
+          "url": "https://github.com/advisories/GHSA-vc2v-76pw-4v95",
+          "severity": "high",
+          "range": "<1.8.2"
+        }
+      ]
+    },
+    {
+      "name": "dompurify",
+      "severity": "high",
+      "direct": true,
+      "range": "<=3.4.16",
+      "fixAvailable": true,
+      "advisories": [
+        {
+          "title": "DOMPurify: Cross-realm IN_PLACE sanitization leaves executable markup intact via realm-bound `instanceof` checks",
+          "url": "https://github.com/advisories/GHSA-hpcv-96wg-7vj8",
+          "severity": "moderate",
+          "range": "<=3.4.5"
+        },
+        {
+          "title": "DOMPurify: IN_PLACE mode preserves attributes of a clobbered root element, allowing XSS via attacker-controlled root DOM",
+          "url": "https://github.com/advisories/GHSA-r47g-fvhr-h676",
+          "severity": "moderate",
+          "range": "<=3.4.5"
+        },
+        {
+          "title": "DOMPurify IN_PLACE Sanitization Bypass via Attached Shadow Root Inside <template>.content",
+          "url": "https://github.com/advisories/GHSA-rp9w-3fw7-7cwq",
+          "severity": "moderate",
+          "range": "<=3.4.6"
+        },
+        {
+          "title": "DOMPurify: Permanent `ALLOWED_ATTR` pollution via `setConfig()` bypassing the hook clone-guard (incomplete fix of the 3.4.7 hook-pollution patch)",
+          "url": "https://github.com/advisories/GHSA-cmwh-pvxp-8882",
+          "severity": "moderate",
+          "range": "<=3.4.10"
+        },
+        {
+          "title": "DOMPurify: Trusted Types policy survives `clearConfig()` and can poison later `RETURN_TRUSTED_TYPE` output",
+          "url": "https://github.com/advisories/GHSA-vxr8-fq34-vvx9",
+          "severity": "low",
+          "range": "<3.4.9"
+        },
+        {
+          "title": "DOMPurify: SAFE_FOR_TEMPLATES bypass - template expressions survive sanitization inside <template> content when using DOM output modes",
+          "url": "https://github.com/advisories/GHSA-gvmj-g25r-r7wr",
+          "severity": "low",
+          "range": ">=3.0.0 <=3.4.7"
+        },
+        {
+          "title": "DOMPurify: `IN_PLACE` mode trusts attacker-controlled `nodeName` on live non-form nodes, allowing script retention and XSS via attacker-supplied DOM objects",
+          "url": "https://github.com/advisories/GHSA-x4vx-rjvf-j5p4",
+          "severity": "low",
+          "range": "<=3.4.6"
+        },
+        {
+          "title": "DOMPurify: Hook mutation of `data.allowedTags` / `data.allowedAttributes` permanently pollutes `DEFAULT_ALLOWED_TAGS` / `DEFAULT_ALLOWED_ATTR`",
+          "url": "https://github.com/advisories/GHSA-76mc-f452-cxcm",
+          "severity": "moderate",
+          "range": "<3.4.7"
+        },
+        {
+          "title": "DOMPurify: IN_PLACE hook removal leaves a detached subtree executable, causing XSS",
+          "url": "https://github.com/advisories/GHSA-55q2-fjhq-7xh7",
+          "severity": "moderate",
+          "range": "<=3.4.12"
+        },
+        {
+          "title": "DOMPurify: `CUSTOM_ELEMENT_HANDLING` bypasses `afterSanitizeElements` for allowed custom elements.",
+          "url": "https://github.com/advisories/GHSA-c2j3-45gr-mqc4",
+          "severity": "low",
+          "range": "<=3.4.11"
+        },
+        {
+          "title": "DOMPurify: IN_PLACE returns a force-removed rawtext root whose text carries attacker markup — pure HTML reparse executes",
+          "url": "https://github.com/advisories/GHSA-6688-9rhm-gjv2",
+          "severity": "low",
+          "range": "<=3.4.15"
+        },
+        {
+          "title": "DOMPurify IN_PLACE: hook that removes a parent or sibling leaves the detached subtree's event handlers armed (incomplete fix for GHSA-p98j-92pf-mc4p)",
+          "url": "https://github.com/advisories/GHSA-mrv2-3pqr-j5jr",
+          "severity": "high",
+          "range": "<=3.4.16"
+        },
+        {
+          "title": "DOMPurify: SMIL attributeName=href guard is skipped when PARSER_MEDIA_TYPE is application/xhtml+xml",
+          "url": "https://github.com/advisories/GHSA-c6gr-qvv4-5v3f",
+          "severity": "low",
+          "range": "<=3.4.16"
+        }
+      ]
+    },
+    {
+      "name": "form-data",
+      "severity": "high",
+      "direct": false,
+      "range": "4.0.0 - 4.0.5",
+      "fixAvailable": true,
+      "advisories": [
+        {
+          "title": "form-data: CRLF injection in form-data via unescaped multipart field names and filenames",
+          "url": "https://github.com/advisories/GHSA-hmw2-7cc7-3qxx",
+          "severity": "high",
+          "range": ">=4.0.0 <4.0.6"
+        }
+      ]
+    },
+    {
+      "name": "ip-address",
+      "severity": "high",
+      "direct": false,
+      "range": "<=10.7.3",
+      "fixAvailable": true,
+      "advisories": [
+        {
+          "title": "ip-address has XSS in Address6 HTML-emitting methods",
+          "url": "https://github.com/advisories/GHSA-v2v4-37r5-5v8g",
+          "severity": "moderate",
+          "range": "<=10.1.0"
+        },
+        {
+          "title": "ip-address: Address4 decodes leading-zero octets as decimal while resolvers decode them as octal, allowing SSRF and trust-boundary bypass",
+          "url": "https://github.com/advisories/GHSA-mwp4-54f8-5fhr",
+          "severity": "high",
+          "range": "<=10.3.0"
+        },
+        {
+          "title": "ip-address: Address6.isLinkLocal() recognizes fe80::/64 rather than fe80::/10, allowing SSRF and trust-boundary bypass to on-link hosts",
+          "url": "https://github.com/advisories/GHSA-rpw4-54j3-4h4q",
+          "severity": "moderate",
+          "range": "<=10.5.0"
+        },
+        {
+          "title": "ip-address: isInSubnet() and isHostInSubnet() compare addresses of different families as if they shared an address space, allowing an allowlist check to admit an address outside its range",
+          "url": "https://github.com/advisories/GHSA-j6r3-76f7-8jcv",
+          "severity": "moderate",
+          "range": "<=10.7.0"
+        },
+        {
+          "title": "ip-address: Address6 builds a parse diagnostic proportional to the input with no length bound, allowing a single long string to stall or crash the process",
+          "url": "https://github.com/advisories/GHSA-h3mg-xc3c-68pw",
+          "severity": "moderate",
+          "range": "<=10.7.0"
+        },
+        {
+          "title": "ip-address: Address6 matches a zone identifier in quadratic time ahead of its length limit, allowing a single long string to stall the process",
+          "url": "https://github.com/advisories/GHSA-rxp7-6hxx-x8q5",
+          "severity": "moderate",
+          "range": "<=10.7.3"
+        }
+      ]
+    },
+    {
+      "name": "langsmith",
+      "severity": "high",
+      "direct": false,
+      "range": "<0.6.0",
+      "fixAvailable": true,
+      "advisories": [
+        {
+          "title": "LangSmith SDK: Public prompt pull deserializes untrusted manifests without trust boundary warning",
+          "url": "https://github.com/advisories/GHSA-3644-q5cj-c5c7",
+          "severity": "high",
+          "range": "<0.6.0"
+        }
+      ]
+    },
+    {
+      "name": "nanoid",
+      "severity": "high",
+      "direct": false,
+      "range": "<=3.3.17",
+      "fixAvailable": true,
+      "advisories": [
+        {
+          "title": "nanoid: non-secure generators can loop indefinitely with negative size",
+          "url": "https://github.com/advisories/GHSA-28wg-ghj8-5hjv",
+          "severity": "high",
+          "range": "<3.3.16"
+        },
+        {
+          "title": "nanoid: custom generators can loop indefinitely when size is zero",
+          "url": "https://github.com/advisories/GHSA-2v37-7h3g-55p8",
+          "severity": "high",
+          "range": "<3.3.18"
+        },
+        {
+          "title": "nanoid: Integer Overflow or Wraparound",
+          "url": "https://github.com/advisories/GHSA-xwg4-73v4-xw9w",
+          "severity": "high",
+          "range": "<3.3.12"
+        }
+      ]
+    },
+    {
+      "name": "postcss",
+      "severity": "high",
+      "direct": false,
+      "range": "<=8.5.22",
+      "fixAvailable": true,
+      "advisories": [
+        {
+          "title": "PostCSS: Arbitrary file read and information disclosure via attacker-controlled sourceMappingURL in CSS comments",
+          "url": "https://github.com/advisories/GHSA-6g55-p6wh-862q",
+          "severity": "high",
+          "range": "<=8.5.11"
+        },
+        {
+          "title": "PostCSS: incomplete fix of GHSA-6g55-p6wh-862q — attacker-controlled sourceMappingURL reads arbitrary .map files when `from` is unset",
+          "url": "https://github.com/advisories/GHSA-fxqj-rqcc-2cmp",
+          "severity": "moderate",
+          "range": "<=8.5.22"
+        },
+        {
+          "title": "PostCSS: Path Traversal in Previous Source Map Auto-Loading (sourceMappingURL) leads to Arbitrary .map File Disclosure",
+          "url": "https://github.com/advisories/GHSA-r28c-9q8g-f849",
+          "severity": "high",
+          "range": "<=8.5.17"
+        }
+      ]
+    },
+    {
+      "name": "protobufjs",
+      "severity": "high",
+      "direct": false,
+      "range": "<=7.6.4 || 8.0.0 - 8.6.5",
+      "fixAvailable": true,
+      "advisories": [
+        {
+          "title": "protobufjs: Denial of Service via unbounded recursive JSON descriptor expansion",
+          "url": "https://github.com/advisories/GHSA-jggg-4jg4-v7c6",
+          "severity": "moderate",
+          "range": ">=8.0.0 <8.2.0"
+        },
+        {
+          "title": "protobufjs: Denial of Service via unbounded recursive JSON descriptor expansion",
+          "url": "https://github.com/advisories/GHSA-jggg-4jg4-v7c6",
+          "severity": "moderate",
+          "range": "<=7.5.7"
+        },
+        {
+          "title": "protobufjs: Denial of service through unbounded Any expansion during JSON conversion",
+          "url": "https://github.com/advisories/GHSA-wcpc-wj8m-hjx6",
+          "severity": "high",
+          "range": ">=8.0.0 <=8.4.0"
+        },
+        {
+          "title": "protobufjs: Denial of service through unbounded Any expansion during JSON conversion",
+          "url": "https://github.com/advisories/GHSA-wcpc-wj8m-hjx6",
+          "severity": "high",
+          "range": "<=7.6.0"
+        },
+        {
+          "title": "protobufjs : Schema-derived names can shadow runtime-significant properties",
+          "url": "https://github.com/advisories/GHSA-f38q-mgvj-vph7",
+          "severity": "moderate",
+          "range": ">=8.0.0 <=8.5.0"
+        },
+        {
+          "title": "protobufjs : Schema-derived names can shadow runtime-significant properties",
+          "url": "https://github.com/advisories/GHSA-f38q-mgvj-vph7",
+          "severity": "moderate",
+          "range": "<=7.6.2"
+        },
+        {
+          "title": "protobufjs: Denial of Service via infinite loop in .proto option parsing",
+          "url": "https://github.com/advisories/GHSA-j3f2-48v5-ccww",
+          "severity": "moderate",
+          "range": ">=8.0.0 <=8.6.5"
+        },
+        {
+          "title": "protobufjs: Denial of Service via infinite loop in .proto option parsing",
+          "url": "https://github.com/advisories/GHSA-j3f2-48v5-ccww",
+          "severity": "moderate",
+          "range": ">=7.5.0 <=7.6.4"
+        }
+      ]
+    },
+    {
+      "name": "proxy-addr",
+      "severity": "critical",
+      "direct": false,
+      "range": "1.1.0 - 2.0.7",
+      "fixAvailable": true,
+      "advisories": [
+        {
+          "title": "proxy-addr vulnerable to IP spoofing via IPv4-mapped IPv6 trust subnet",
+          "url": "https://github.com/advisories/GHSA-jqcg-44mw-7w3h",
+          "severity": "critical",
+          "range": ">=1.1.0 <2.0.8"
+        }
+      ]
+    },
+    {
+      "name": "source-map-js",
+      "severity": "high",
+      "direct": false,
+      "range": "1.0.0 - 1.2.1",
+      "fixAvailable": true,
+      "advisories": [
+        {
+          "title": "source-map-js allows event-loop denial of service through indexed source-map section offsets",
+          "url": "https://github.com/advisories/GHSA-68fv-2mgg-jv7q",
+          "severity": "high",
+          "range": ">=1.0.0 <1.2.2"
+        }
+      ]
+    },
+    {
+      "name": "vite",
+      "severity": "high",
+      "direct": true,
+      "range": "8.0.0 - 8.1.5",
+      "fixAvailable": true,
+      "advisories": [
+        {
+          "title": "launch-editor: NTLMv2 hash disclosure via UNC path handling on Windows",
+          "url": "https://github.com/advisories/GHSA-v6wh-96g9-6wx3",
+          "severity": "moderate",
+          "range": ">=8.0.0 <=8.0.15"
+        },
+        {
+          "title": "launch-editor: escapeCmdArgs() omits % escaping on Windows",
+          "url": "https://github.com/advisories/GHSA-698v-4r3x-3vcv",
+          "severity": "moderate",
+          "range": ">=8.0.0 <=8.1.5"
+        },
+        {
+          "title": "launch-editor: Editor CLI flag misinterpretation causing arbitrary command execution for some editors",
+          "url": "https://github.com/advisories/GHSA-r825-w8mm-5pxw",
+          "severity": "moderate",
+          "range": ">=8.0.0 <=8.1.5"
+        },
+        {
+          "title": "launch-editor: `fs.existsSync()` existence check can be bypassed on Windows",
+          "url": "https://github.com/advisories/GHSA-587h-7wmj-h5pm",
+          "severity": "high",
+          "range": ">=8.0.0 <=8.1.5"
+        },
+        {
+          "title": "Vite: Cross origin script execution through Vite custom middleware",
+          "url": "https://github.com/advisories/GHSA-9jrq-w75r-8gcw",
+          "severity": "low",
+          "range": ">=8.0.0 <=8.1.5"
+        },
+        {
+          "title": "Vite: Files outside `server.fs.allow` could be served when project paths match system paths on non-Windows machine",
+          "url": "https://github.com/advisories/GHSA-rq7h-c2jc-7f22",
+          "severity": "moderate",
+          "range": ">=8.0.0 <=8.1.5"
+        },
+        {
+          "title": "vite: `server.fs.deny` bypass on Windows alternate paths",
+          "url": "https://github.com/advisories/GHSA-fx2h-pf6j-xcff",
+          "severity": "moderate",
+          "range": ">=8.0.0 <=8.0.15"
+        }
+      ]
+    },
+    {
+      "name": "ws",
+      "severity": "high",
+      "direct": true,
+      "range": "8.0.0 - 8.20.1",
+      "fixAvailable": true,
+      "advisories": [
+        {
+          "title": "ws: Uninitialized memory disclosure",
+          "url": "https://github.com/advisories/GHSA-58qx-3vcg-4xpx",
+          "severity": "moderate",
+          "range": ">=8.0.0 <8.20.1"
+        },
+        {
+          "title": "ws: Memory exhaustion DoS from tiny fragments and data chunks",
+          "url": "https://github.com/advisories/GHSA-96hv-2xvq-fx4p",
+          "severity": "high",
+          "range": ">=8.0.0 <8.21.0"
+        }
+      ]
+    },
+    {
+      "name": "zod",
+      "severity": "high",
+      "direct": true,
+      "range": "<4.6.6",
+      "fixAvailable": true,
+      "advisories": [
+        {
+          "title": "Zod can exhaust memory while validating oversized constrained collections",
+          "url": "https://github.com/advisories/GHSA-mrhx-c7xc-m3w5",
+          "severity": "high",
+          "range": "<4.6.6"
+        }
+      ]
+    }
+  ],
+  "remediationStatus": "not_changed_in_asset_repair_branch"
+}

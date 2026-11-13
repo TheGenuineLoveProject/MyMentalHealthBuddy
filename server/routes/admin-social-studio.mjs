@@ -73,10 +73,19 @@ function validate(schema, req, res) {
   return parsed.data;
 }
 
-const openai = new OpenAI({
-  apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY || process.env.OPENAI_API_KEY,
+const apiKey = process.env.AI_INTEGRATIONS_OPENAI_API_KEY || process.env.OPENAI_API_KEY;
+const openai = apiKey ? new OpenAI({
+  apiKey,
   baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
-});
+}) : null;
+
+function requireAi(_req, res, next) {
+  if (!openai) {
+    res.set("Cache-Control", "no-store");
+    return res.status(503).json({ ok: false, error: "AI generation is not configured" });
+  }
+  return next();
+}
 
 const PLATFORM_SPECS = {
   instagram: { maxChars: 2200, hashtagLimit: 30, bestTimes: ["9am", "12pm", "7pm"], format: "Square/Vertical" },
@@ -568,7 +577,7 @@ router.get("/analytics/content-calendar", requireAuth, requireAdmin, async (req,
  * AI CONTENT GENERATION
  * ===================================================== */
 
-router.post("/generate", requireAuth, requireAdmin, adminAiLimiter, async (req, res) => {
+router.post("/generate", requireAuth, requireAdmin, requireAi, adminAiLimiter, async (req, res) => {
   try {
     const data = validate(zGenerateBody, req, res);
     if (!data) return;
@@ -635,7 +644,7 @@ OUTPUT FORMAT (JSON):
   }
 });
 
-router.post("/generate/repurpose", requireAuth, requireAdmin, adminAiLimiter, async (req, res) => {
+router.post("/generate/repurpose", requireAuth, requireAdmin, requireAi, adminAiLimiter, async (req, res) => {
   try {
     const data = validate(zRepurposeBody, req, res);
     if (!data) return;
@@ -744,7 +753,7 @@ router.post("/compliance/check", requireAuth, requireAdmin, async (req, res) => 
   }
 });
 
-router.post("/compliance/rewrite", requireAuth, requireAdmin, adminAiLimiter, async (req, res) => {
+router.post("/compliance/rewrite", requireAuth, requireAdmin, requireAi, adminAiLimiter, async (req, res) => {
   try {
     const data = validate(zComplianceRewriteBody, req, res);
     if (!data) return;
@@ -785,7 +794,7 @@ OUTPUT JSON: { "rewritten": "...", "changes": ["list of key changes made"] }`
  * IMAGE GENERATION
  * ===================================================== */
 
-router.post("/generate/image", requireAuth, requireAdmin, adminImageLimiter, async (req, res) => {
+router.post("/generate/image", requireAuth, requireAdmin, requireAi, adminImageLimiter, async (req, res) => {
   try {
     const data = validate(zImageBody, req, res);
     if (!data) return;
@@ -843,7 +852,7 @@ REQUIREMENTS:
  * BATCH CONTENT GENERATION
  * ===================================================== */
 
-router.post("/generate/batch", requireAuth, requireAdmin, adminAiLimiter, async (req, res) => {
+router.post("/generate/batch", requireAuth, requireAdmin, requireAi, adminAiLimiter, async (req, res) => {
   try {
     const data = validate(zBatchBody, req, res);
     if (!data) return;
@@ -899,7 +908,7 @@ OUTPUT JSON: { "hook": "...", "caption": "...", "cta": "...", "hashtags": "...",
  * CONTENT ENHANCEMENT SUGGESTIONS
  * ===================================================== */
 
-router.post("/enhance", requireAuth, requireAdmin, adminAiLimiter, async (req, res) => {
+router.post("/enhance", requireAuth, requireAdmin, requireAi, adminAiLimiter, async (req, res) => {
   try {
     const data = validate(zEnhanceBody, req, res);
     if (!data) return;

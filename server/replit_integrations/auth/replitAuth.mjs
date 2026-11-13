@@ -86,7 +86,15 @@ export async function setupAuth(app) {
   app.use(passport.initialize());
   app.use(passport.session());
 
-  const config = await getOidcConfig();
+  // Local password/JWT authentication also uses this session middleware.
+  // A non-Replit host must not depend on discovery for an unconfigured provider.
+  // When configured, discovery errors still fail startup instead of silently
+  // disabling the identity provider.
+  const config = process.env.REPL_ID?.trim() ? await getOidcConfig() : null;
+  const providerUnavailable = (res) => {
+    res.set("Cache-Control", "no-store");
+    return res.status(503).json({ error: "Replit sign-in is not configured" });
+  };
 
   const verify = async (tokens, verified) => {
     const user = {};
@@ -118,6 +126,7 @@ export async function setupAuth(app) {
   passport.deserializeUser((user, cb) => cb(null, user));
 
   app.get("/api/login", (req, res, next) => {
+    if (!config) return providerUnavailable(res);
     ensureStrategy(req.hostname);
     passport.authenticate(`replitauth:${req.hostname}`, {
       prompt: "login consent",
@@ -126,6 +135,7 @@ export async function setupAuth(app) {
   });
 
   app.get("/api/callback", (req, res, next) => {
+    if (!config) return providerUnavailable(res);
     ensureStrategy(req.hostname);
     passport.authenticate(`replitauth:${req.hostname}`, (err, user, info) => {
       if (err) {
@@ -199,10 +209,10 @@ export async function setupAuth(app) {
     let endSessionUrl;
     try {
       // Prepare the existing provider redirect before changing the session.
-      endSessionUrl = client.buildEndSessionUrl(config, {
+      endSessionUrl = config ? client.buildEndSessionUrl(config, {
         client_id: process.env.REPL_ID,
         post_logout_redirect_uri: `${req.protocol}://${req.hostname}`,
-      }).href;
+      }).href : "/";
       req.logout((logoutErr) => {
         if (logoutErr) return failLogout();
         try {
@@ -229,6 +239,7 @@ export async function setupAuth(app) {
 }
 
 export async function refreshUserToken(user, req) {
+  if (!process.env.REPL_ID?.trim()) return false;
   const refreshToken = user.refresh_token;
   if (!refreshToken) {
     return false;
@@ -250,6 +261,9 @@ export async function refreshUserToken(user, req) {
 }
 
 export const isAuthenticated = async (req, res, next) => {
+  if (!process.env.REPL_ID?.trim()) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
   // Check for passport user or backup userData in session
   let user = req.user;
   

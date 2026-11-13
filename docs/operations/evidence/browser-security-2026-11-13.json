@@ -1,0 +1,32 @@
+{
+  "observedAt": "2026-11-13T22:10:04.311Z",
+  "dompurifyVersion": "3.4.17",
+  "configSource": "client/src/pages/Blog.jsx",
+  "configSha256": "d19e2203c2f44ab1e11a3b0df55ef8b6ad09a28b1575598689e506d7983b4198",
+  "viewports": [
+    {
+      "width": 1280,
+      "httpStatus": 200,
+      "rendered": true,
+      "horizontalOverflow": false,
+      "pageErrors": 0
+    },
+    {
+      "width": 390,
+      "httpStatus": 200,
+      "rendered": true,
+      "horizontalOverflow": false,
+      "pageErrors": 0
+    }
+  ],
+  "sanitation": {
+    "readableMarkupPreserved": true,
+    "forbiddenElementsRemoved": true,
+    "eventHandlersRemoved": true,
+    "javascriptUrlRemoved": true,
+    "dataAttributesRemoved": true,
+    "safeLinkPreserved": true,
+    "syntheticScriptDidNotExecute": true
+  },
+  "scope": "Fresh local frontend and actual Blog sanitizer configuration; synthetic browser cases, not an exhaustive XSS evaluation"
+}

@@ -1,0 +1,178 @@
+{
+  "observedAt": "2026-11-13T21:39:43.560Z",
+  "nodeVersion": "v24.22.1",
+  "postgresVersion": "postgres (PostgreSQL) 17.11",
+  "scope": "Disposable PostgreSQL, NODE_ENV=test, real application HTTP; no external services",
+  "commit": "ed35be885b6dd1d99d2a744455c67dbdd2970af1",
+  "sourceHashes": {
+    "server/app.mjs": "b45e08aeac03fff78f4bb932b035ada905dad1566298e8b3537957ca553620d7",
+    "server/replit_integrations/auth/replitAuth.mjs": "1981c9e4c8b79d1329008862efbb6a71386e42ff5b4b383f5caeb3f6513c3792",
+    "server/ai/openaiClient.mjs": "6f49f9861df405852d8324da302e7b2b086ca8a410b8b88139075c364eb522f8",
+    "server/routes/mirror.mjs": "7e0eba345bb3ee400e22b3d47aa8b94b68526d67e2cbfd8616805d1ee890d004",
+    "server/routes/admin-social-studio.mjs": "d1d318955bd905fefb2ae81fa3a730b640d58f45c76a6e95b0da8fec3ed37364",
+    "server/routes/auth.mjs": "fd4d9d7cfc75e23fc60dde5df5139ffb1fc826a338acf3c9cc7c2faba4ce362c",
+    "server/routes/account.mjs": "665a3747fe926d1384c92c26e4457cee4b35bffd3864b75d675cdb65550a1752",
+    "server/routes/journal.mjs": "74ed3305f7265a83e2d6ac95c0cf9f3dbbdd4f46f3b6bba828390d875815493a",
+    "server/auth/mfa.service.mjs": "257135ac9d20fe3b96276011be6ea5d47770dd568af70653f11227ecc3aaf364",
+    "server/services/mfaRecoveryLogin.service.mjs": "1cfc17d848486f6c12feb9dd347881f975aea62332d704c27f75c89b398aff97",
+    "server/db/schema.canonical.sql": "e92e18c4d6bbfdf6faef7760e1116aa786b7b9dddc266db37c2f03998913e712",
+    "scripts/qualification/cloud-runtime.mjs": "fd620ac683d6a00bfd70facd5dcf2f9de1e831db6b12fdfed3881678661d253b",
+    "scripts/qualification/process-lifecycle.mjs": "a7d62b3f1098e4de431c17f1d7266b542d78f966880b2edd05ff4f71b41fadc2",
+    "server/tests/auth-provider-config.test.mjs": "a77bbf9d01c4efaad94dde4ad010a3a6137683273108628b6eb5c9af50bcd9cd",
+    "server/tests/optional-ai-startup.test.mjs": "7fba21b0e5af1258e7abb6dc611c078fb6e72987833c6e293400e4c5678682b3",
+    "server/tests/qualification-process-cleanup.test.mjs": "90b265323ed0a01e9a72d57feebd6da0f188f539dec36302aad0d5962970fd39"
+  },
+  "checks": [
+    {
+      "name": "private_socket_database_identity",
+      "result": "passed"
+    },
+    {
+      "name": "full_app_schema_startup_ready",
+      "result": "passed"
+    },
+    {
+      "name": "database_dependency_readiness",
+      "result": "passed"
+    },
+    {
+      "name": "public_crisis_route",
+      "result": "passed"
+    },
+    {
+      "name": "unconfigured_provider_explicit_503",
+      "result": "passed"
+    },
+    {
+      "name": "private_journal_requires_auth",
+      "result": "passed"
+    },
+    {
+      "name": "registration_returns_user_access",
+      "result": "passed"
+    },
+    {
+      "name": "second_independent_account",
+      "result": "passed"
+    },
+    {
+      "name": "native_bcrypt_persists_password_hash",
+      "result": "passed"
+    },
+    {
+      "name": "public_identity_excludes_password_hash",
+      "result": "passed"
+    },
+    {
+      "name": "incorrect_password_rejected",
+      "result": "passed"
+    },
+    {
+      "name": "journal_create_persists",
+      "result": "passed"
+    },
+    {
+      "name": "owner_can_read_journal",
+      "result": "passed"
+    },
+    {
+      "name": "other_user_cannot_read_journal",
+      "result": "passed"
+    },
+    {
+      "name": "other_user_cannot_update_journal",
+      "result": "passed"
+    },
+    {
+      "name": "other_user_cannot_delete_journal",
+      "result": "passed"
+    },
+    {
+      "name": "mfa_enrollment_generates_real_qr",
+      "result": "passed"
+    },
+    {
+      "name": "mfa_pending_not_enabled_or_recoverable",
+      "result": "passed"
+    },
+    {
+      "name": "mfa_secret_encrypted_at_rest",
+      "result": "passed"
+    },
+    {
+      "name": "real_totp_enables_mfa_and_recovery",
+      "result": "passed"
+    },
+    {
+      "name": "password_alone_cannot_issue_mfa_access",
+      "result": "passed"
+    },
+    {
+      "name": "mfa_challenge_is_not_access_token",
+      "result": "passed"
+    },
+    {
+      "name": "invalid_totp_rejected",
+      "result": "passed"
+    },
+    {
+      "name": "valid_totp_issues_access",
+      "result": "passed"
+    },
+    {
+      "name": "consumed_challenge_cannot_replay",
+      "result": "passed"
+    },
+    {
+      "name": "concurrent_challenge_has_one_winner",
+      "result": "passed"
+    },
+    {
+      "name": "recovery_login_consumes_one_code",
+      "result": "passed"
+    },
+    {
+      "name": "recovery_code_reuse_rejected_with_fresh_challenge",
+      "result": "passed"
+    },
+    {
+      "name": "real_refresh_cookie_issued",
+      "result": "passed"
+    },
+    {
+      "name": "logout_revokes_persisted_refresh",
+      "result": "passed"
+    },
+    {
+      "name": "revoked_refresh_cannot_issue_access",
+      "result": "passed"
+    },
+    {
+      "name": "journal_survives_application_restart",
+      "result": "passed"
+    },
+    {
+      "name": "mfa_survives_application_restart",
+      "result": "passed"
+    },
+    {
+      "name": "owner_can_delete_journal",
+      "result": "passed"
+    },
+    {
+      "name": "deleted_journal_stays_unavailable",
+      "result": "passed"
+    },
+    {
+      "name": "repository_npm_test_with_real_ready_server",
+      "result": "passed"
+    }
+  ],
+  "cleanup": {
+    "applicationStopped": true,
+    "databaseStopped": true
+  },
+  "releaseQualified": false,
+  "sourceIdentityUnchanged": true,
+  "result": "passed"
+}

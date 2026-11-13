@@ -1,0 +1,8 @@
+{
+  "observedAt": "2026-11-13T22:11:16.110Z",
+  "command": "eslint . --format json",
+  "exitCode": 0,
+  "files": 1881,
+  "errors": 0,
+  "warnings": 169
+}
