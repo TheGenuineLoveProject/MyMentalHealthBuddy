@@ -29,7 +29,7 @@ async function isProcessed(eventId) {
     const rows = await db.select().from(webhookEvents).where(eq(webhookEvents.id, eventId));
     return rows.length > 0;
   } catch (err) {
-    logger.error("Idempotency check failed", { error: err.message, eventId });
+    logger.error("Idempotency check failed");
     throw err; // Do not perform side effects when durability cannot be checked.
   }
 }
@@ -46,7 +46,7 @@ async function markProcessed(event) {
       processedAt: new Date(),
     });
   } catch (err) {
-    logger.error("Failed to mark event processed", { error: err.message, eventId: event.id });
+    logger.error("Failed to mark event processed");
     throw err; // Do not acknowledge an event without durable processing evidence.
   }
 }
@@ -79,12 +79,11 @@ router.post(
         sig,
         process.env.STRIPE_WEBHOOK_SECRET
       );
-    } catch (err) {
-      logger.error("Stripe webhook signature verification failed", { error: err.message });
+    } catch {
+      logger.error("Stripe webhook signature verification failed");
       void alertWebhookSignatureFailure({
         provider: "stripe",
-        error: err,
-        sourceIp: req.ip || req.headers["x-forwarded-for"] || null,
+        error: "Signature verification failed",
       });
       return res.status(400).send("Webhook signature verification failed");
     }
@@ -93,7 +92,7 @@ router.post(
     // must return a retryable response before side effects run.
     try {
       if (await isProcessed(event.id)) {
-        logger.info("Duplicate webhook event skipped", { eventId: event.id, type: event.type });
+        logger.info("Duplicate webhook event skipped", { type: event.type });
         return res.json({ received: true, duplicate: true });
       }
 
@@ -108,7 +107,7 @@ router.post(
             break;
           }
           if (!session.customer || (!isOneTimePayment && !session.subscription)) {
-            logger.warn("checkout.session.completed missing customer or subscription", { sessionId: session.id });
+            logger.warn("checkout.session.completed missing customer or subscription");
             break;
           }
           // Stripe leaves session.customer_email null when a Customer is
@@ -117,7 +116,7 @@ router.post(
           // both so the primary activation path can match the user.
           const customerEmail = session.customer_details?.email || session.customer_email;
           if (!customerEmail) {
-            logger.warn("checkout.session.completed missing customer email — cannot match user", { customer: session.customer });
+            logger.warn("checkout.session.completed missing customer email — cannot match user");
             break;
           }
           // Re-fetch session with line items expanded — webhook payload
@@ -133,10 +132,7 @@ router.post(
               expand: ["line_items"],
             });
           } catch (expandErr) {
-            logger.error("checkout.session.completed: line_items retrieve FAILED — refusing entitlement, deferring to Stripe retry", {
-              error: expandErr.message,
-              sessionId: session.id,
-            });
+            logger.error("checkout.session.completed: line_items retrieve FAILED — refusing entitlement, deferring to Stripe retry");
             increment("subscription_mapping_unknown", { source: "checkout_retrieve_failed" });
             throw expandErr; // outer catch → 500 → no markProcessed → Stripe retries
           }
@@ -147,9 +143,7 @@ router.post(
               authoritativeSession.payment_status !== "paid" ||
               chargedPlan !== "starter"
             ) {
-              logger.warn(`${event.type}: one-time checkout is not a verified paid Starter purchase`, {
-                sessionId: session.id,
-              });
+              logger.warn(`${event.type}: one-time checkout is not a verified paid Starter purchase`);
               break;
             }
           }
@@ -162,9 +156,9 @@ router.post(
                 ? "checkout.session.completed: SECURITY metadata.plan != price-derived plan — refusing entitlement"
                 : "checkout.session.completed: unknown plan — refusing to default",
               {
-                sessionId: session.id,
-                email: session.customer_email,
-                ...diag,
+                priceDerivedPlan: diag.priceDerivedPlan,
+                metadataIsValid: diag.metadataIsValid,
+                mismatch: diag.mismatch,
               }
             );
             increment("subscription_mapping_unknown", { source: alertSource });
@@ -182,13 +176,13 @@ router.post(
             .where(eq(users.email, customerEmail));
           const checkoutRowsAffected = checkoutResult?.rowCount ?? checkoutResult?.changes ?? 0;
           if (checkoutRowsAffected === 0) {
-            logger.warn("checkout.session.completed: no user matched by email", { email: customerEmail, customer: session.customer });
+            logger.warn("checkout.session.completed: no user matched by email");
           } else {
-            logger.info("Subscription activated via checkout", { customer: session.customer, status: checkoutPlan });
+            logger.info("Subscription activated via checkout", { status: checkoutPlan });
             increment("subscription_transition", { plan: `free_to_${checkoutPlan}` });
           }
-          sendUpgradeConfirmation(customerEmail, session.customer_details?.name || "").catch(err => {
-            logger.warn("Failed to send upgrade email", { error: err.message });
+          sendUpgradeConfirmation(customerEmail, session.customer_details?.name || "").catch(() => {
+            logger.warn("Failed to send upgrade email");
           });
           break;
         }
@@ -197,7 +191,7 @@ router.post(
         case "customer.subscription.updated": {
           const subscription = event.data.object;
           if (!subscription.customer) {
-            logger.warn(`${event.type} missing customer field`, { subscriptionId: subscription.id });
+            logger.warn(`${event.type} missing customer field`);
             break;
           }
           const isActive = ["active", "trialing"].includes(subscription.status);
@@ -205,11 +199,7 @@ router.post(
           if (isActive) {
             const mappedPlan = mapSubscriptionToPlan(subscription);
             if (!mappedPlan) {
-              logger.error(`${event.type}: unknown price id — refusing to default to pro`, {
-                subscriptionId: subscription.id,
-                priceId: subscription?.items?.data?.[0]?.price?.id ?? null,
-                customer: subscription.customer,
-              });
+              logger.error(`${event.type}: unknown price id — refusing to default to pro`);
               increment("subscription_mapping_unknown", { source: "subscription" });
               break;
             }
@@ -229,9 +219,9 @@ router.post(
             .where(eq(users.stripeCustomerId, subscription.customer));
           const syncRows = syncResult?.rowCount ?? syncResult?.changes ?? 0;
           if (syncRows === 0) {
-            logger.warn(`${event.type}: no user found for stripeCustomerId`, { customer: subscription.customer, stripeStatus: subscription.status });
+            logger.warn(`${event.type}: no user found for stripeCustomerId`, { stripeStatus: subscription.status });
           } else {
-            logger.info("Subscription status synced", { customer: subscription.customer, stripeStatus: subscription.status, canonicalStatus });
+            logger.info("Subscription status synced", { stripeStatus: subscription.status, canonicalStatus });
           }
           break;
         }
@@ -239,7 +229,7 @@ router.post(
         case "customer.subscription.deleted": {
           const subscription = event.data.object;
           if (!subscription.customer) {
-            logger.warn("customer.subscription.deleted missing customer field", { subscriptionId: subscription.id });
+            logger.warn("customer.subscription.deleted missing customer field");
             break;
           }
           const userRows = await db.select({ email: users.email, name: users.name })
@@ -256,9 +246,9 @@ router.post(
             .where(eq(users.stripeCustomerId, subscription.customer));
           const deleteRows = deleteResult?.rowCount ?? deleteResult?.changes ?? 0;
           if (deleteRows === 0) {
-            logger.warn("customer.subscription.deleted: no user found for stripeCustomerId", { customer: subscription.customer });
+            logger.warn("customer.subscription.deleted: no user found for stripeCustomerId");
           } else {
-            logger.info("Subscription deleted, reverted to free", { customer: subscription.customer });
+            logger.info("Subscription deleted, reverted to free");
             increment("subscription_transition", { plan: "pro_to_free" });
           }
           
@@ -268,8 +258,8 @@ router.post(
               cancelledUser.email, 
               cancelledUser.name || "",
               subscription.current_period_end
-            ).catch(err => {
-              logger.warn("Failed to send cancellation email", { error: err.message });
+            ).catch(() => {
+              logger.warn("Failed to send cancellation email");
             });
           }
           break;
@@ -278,16 +268,12 @@ router.post(
         case "invoice.paid": {
           const invoice = event.data.object;
           if (!invoice.customer) {
-            logger.warn("invoice.paid missing customer field", { invoiceId: invoice.id });
+            logger.warn("invoice.paid missing customer field");
             break;
           }
           const invoicePlan = mapInvoiceToPlan(invoice);
           if (!invoicePlan) {
-            logger.error("invoice.paid: unknown price id — refusing to default to pro", {
-              invoiceId: invoice.id,
-              priceId: invoice?.lines?.data?.[0]?.price?.id ?? null,
-              customer: invoice.customer,
-            });
+            logger.error("invoice.paid: unknown price id — refusing to default to pro");
             increment("subscription_mapping_unknown", { source: "invoice_paid" });
             break;
           }
@@ -300,9 +286,9 @@ router.post(
             .where(eq(users.stripeCustomerId, invoice.customer));
           const paidRows = paidResult?.rowCount ?? paidResult?.changes ?? 0;
           if (paidRows === 0) {
-            logger.warn("invoice.paid: no user found for stripeCustomerId", { customer: invoice.customer });
+            logger.warn("invoice.paid: no user found for stripeCustomerId");
           } else {
-            logger.info("Invoice paid, plan confirmed", { customer: invoice.customer, plan: invoicePlan });
+            logger.info("Invoice paid, plan confirmed", { plan: invoicePlan });
           }
           break;
         }
@@ -310,7 +296,7 @@ router.post(
         case "invoice.payment_failed": {
           const invoice = event.data.object;
           if (!invoice.customer) {
-            logger.warn("invoice.payment_failed missing customer field", { invoiceId: invoice.id });
+            logger.warn("invoice.payment_failed missing customer field");
             break;
           }
           const failedResult = await db
@@ -322,9 +308,9 @@ router.post(
             .where(eq(users.stripeCustomerId, invoice.customer));
           const failedRows = failedResult?.rowCount ?? failedResult?.changes ?? 0;
           if (failedRows === 0) {
-            logger.warn("invoice.payment_failed: no user found for stripeCustomerId", { customer: invoice.customer });
+            logger.warn("invoice.payment_failed: no user found for stripeCustomerId");
           } else {
-            logger.info("Invoice payment failed, reverted to free", { customer: invoice.customer });
+            logger.info("Invoice payment failed, reverted to free");
           }
           break;
         }
@@ -336,8 +322,8 @@ router.post(
       // Mark as processed ONLY after successful handling
       await markProcessed(event);
       return res.json({ received: true });
-    } catch (e) {
-      logger.error("Webhook handler failed", { error: e.message, eventType: event.type });
+    } catch {
+      logger.error("Webhook handler failed", { eventType: event.type });
       // Do NOT mark processed on failure; Stripe will retry.
       return res.status(500).json({ error: "Webhook handler failed" });
     }

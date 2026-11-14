@@ -43,6 +43,9 @@ async function fixture(session = starterSession()) {
     retrievals: [],
     updates: [],
     emails: [],
+    logEntries: [],
+    signatureAlerts: [],
+    matchedUsers: 1,
     processed: new Set(),
   };
   const db = {
@@ -51,7 +54,7 @@ async function fixture(session = starterSession()) {
     }) }),
     update: () => ({ set: values => ({ where: async condition => {
       state.updates.push({ values, condition });
-      return { rowCount: 1 };
+      return { rowCount: state.matchedUsers };
     } }) }),
     insert: () => ({ values: async values => { state.processed.add(values.id); } }),
   };
@@ -64,6 +67,7 @@ async function fixture(session = starterSession()) {
     } } },
   };
   const noop = () => {};
+  const captureLog = (...args) => { state.logEntries.push(args); };
   const dependencies = {
     express: { default: express, Router: express.Router },
     stripe: { default: class { constructor() { return stripe; } } },
@@ -73,13 +77,15 @@ async function fixture(session = starterSession()) {
       webhookEvents: { id: "id" },
     },
     "drizzle-orm": { eq: (column, value) => ({ column, value }) },
-    "../utils/logger.mjs": { logger: { info: noop, warn: noop, error: noop } },
+    "../utils/logger.mjs": { logger: { info: captureLog, warn: captureLog, error: captureLog } },
     "../utils/metrics.mjs": { increment: noop },
     "../services/email.mjs": {
       sendUpgradeConfirmation: async (...args) => { state.emails.push(args); },
       sendCancellationAcknowledgment: async () => {},
     },
-    "../observability/safetyAlerts.mjs": { alertWebhookSignatureFailure: async () => {} },
+    "../observability/safetyAlerts.mjs": {
+      alertWebhookSignatureFailure: async details => { state.signatureAlerts.push(details); },
+    },
   };
   // Isolated env prevents this suite from loading application credentials or
   // opening an application database, even when invoked in an owner's checkout.
@@ -184,12 +190,14 @@ test("async success also requires authoritative paid status", async () => {
 
 test("retrieval failure returns 500 without a marker; retry can activate", async () => {
   const f = await fixture();
-  f.state.retrievalError = new Error("Synthetic provider outage");
+  f.state.retrievalError = new Error("synthetic-provider-error cs_starter_fixture synthetic@example.invalid");
   const event = checkoutEvent(f.state.session);
   let result = await f.send(event);
   assert.equal(result.status, 500);
   assert.equal(f.state.processed.size, 0);
   assert.equal(f.state.updates.length, 0);
+  assert.match(JSON.stringify(f.state.logEntries), /line_items retrieve FAILED/);
+  assert.doesNotMatch(JSON.stringify(f.state.logEntries), /synthetic-provider-error|cs_starter_fixture|example\.invalid/);
   f.state.retrievalError = null;
   result = await f.send(event);
   assert.equal(result.status, 200);
@@ -228,4 +236,35 @@ test("invalid signature has no database or provider effects", async () => {
   assert.equal(f.state.retrievals.length, 0);
   assert.equal(f.state.updates.length, 0);
   assert.equal(f.state.processed.size, 0);
+  assert.deepEqual(
+    JSON.parse(JSON.stringify(f.state.signatureAlerts)),
+    [{ provider: "stripe", error: "Signature verification failed" }],
+  );
+  assert.deepEqual(f.state.logEntries, [["Stripe webhook signature verification failed"]]);
+});
+
+test("checkout logs omit buyer and provider identifiers when no user matches", async () => {
+  const f = await fixture();
+  f.state.matchedUsers = 0;
+  assert.equal((await f.send(checkoutEvent(f.state.session))).status, 200);
+  const logged = JSON.stringify(f.state.logEntries);
+  assert.match(logged, /no user matched by email/);
+  assert.doesNotMatch(logged, /synthetic@example\.invalid|cus_offline_fixture|cs_starter_fixture|evt_offline_fixture/);
+  assert.equal(f.state.updates[0].condition.value, "synthetic@example.invalid");
+});
+
+test("checkout plan diagnostics omit arbitrary metadata and provider price identifiers", async () => {
+  const session = starterSession({
+    mode: "subscription",
+    subscription: "sub_offline_fixture",
+    metadata: { plan: "synthetic-metadata" },
+    line_items: { data: [{ price: { id: "price_offline_unknown_fixture" } }] },
+  });
+  const f = await fixture(session);
+  assert.equal((await f.send(checkoutEvent(session))).status, 200);
+  const logged = JSON.stringify(f.state.logEntries);
+  assert.match(logged, /unknown plan/);
+  assert.match(logged, /"metadataIsValid":false/);
+  assert.doesNotMatch(logged, /synthetic-metadata|price_offline_unknown_fixture|cs_starter_fixture/);
+  assert.equal(f.state.updates.length, 0);
 });
