@@ -56,6 +56,9 @@ jobs:
       - name: Verify deployment probes and tracing offline
         run: npm run verify:operations-probes
 
+      - name: Verify backup and restore in isolated PostgreSQL
+        run: npm run verify:backup-roundtrip
+
       - run: node scripts/security/ci-production-audit-gate.mjs
 
       - run: npm run typecheck

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
+umask 077
 
 echo "=== DATABASE BACKUP START ==="
 
@@ -16,17 +17,30 @@ fi
 mkdir -p backups/db
 
 STAMP="$(date -u +%Y%m%dT%H%M%SZ)"
-OUT="backups/db/mmhb-db-backup-${STAMP}.sql"
+TEMP_OUT="$(mktemp "backups/db/.mmhb-db-backup-${STAMP}.XXXXXX")"
+trap 'rm -f -- "$TEMP_OUT"' EXIT
+trap 'exit 130' INT
+trap 'exit 143' TERM
+TEMP_NAME="${TEMP_OUT##*/}"
+OUT="backups/db/${TEMP_NAME#.}.sql"
 
-echo "Creating backup file: ${OUT}"
+echo "Creating private temporary backup..."
 pg_dump "$DATABASE_URL" \
   --no-owner \
   --no-privileges \
   --clean \
   --if-exists \
-  --file "$OUT"
+  --file "$TEMP_OUT"
 
-chmod 600 "$OUT"
+if [ ! -s "$TEMP_OUT" ]; then
+  echo "ERROR: pg_dump produced an empty backup."
+  exit 1
+fi
+
+# Publish only the completed dump. A hard link is atomic and refuses to replace
+# an existing destination; both names are on the same backup filesystem.
+ln -- "$TEMP_OUT" "$OUT"
+rm -- "$TEMP_OUT"
 
 echo "Backup complete."
 ls -lh "$OUT"

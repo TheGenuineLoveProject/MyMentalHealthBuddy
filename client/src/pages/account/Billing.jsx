@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "wouter";
+import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { CreditCard, ArrowLeft, Check, Crown, Zap, Star, Download, Calendar, Shield, Sparkles, Loader2, ExternalLink } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -7,9 +7,7 @@ import { useSEO } from "@/hooks/useSEO";
 import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { useToast } from "@/hooks/use-toast";
-import { apiRequest, queryClient } from "@/lib/queryClient";
-import { useAuth } from "@/context/AuthContext";
-import { getProFeatures, getFreeFeatures } from "@/config/featureAccess";
+import { apiRequest } from "@/lib/queryClient";
 
 const PRO_PLAN = {
   id: "pro",
@@ -67,21 +65,29 @@ export default function Billing() {
   });
   
   const { toast } = useToast();
-  const { subscriptionStatus, isPro, isLoading: authLoading } = useAuth();
-  const [location] = useLocation();
   const [upgrading, setUpgrading] = useState(false);
   const [billingInterval, setBillingInterval] = useState("monthly");
 
-  const { data: subscriptionData, isLoading: subLoading } = useQuery({
+  const subscriptionQuery = useQuery({
     queryKey: ["/api/billing/subscription-status"],
   });
+  const { data: subscriptionData, isPending: subLoading } = subscriptionQuery;
 
   const { data: invoicesData, isLoading: invoicesLoading } = useQuery({
     queryKey: ["/api/billing/invoices"],
   });
 
-  const currentPlan = subscriptionStatus || subscriptionData?.plan || "free";
-  const isActive = isPro || subscriptionData?.status === "active" || subscriptionData?.status === "trialing";
+  // The dedicated billing response can be newer than the signed-in user
+  // snapshot after checkout, cancellation, or expiry. Never infer a plan from
+  // authentication while billing confirmation is unavailable.
+  const hasConfirmedSubscription = subscriptionQuery.isSuccess &&
+    subscriptionData?.success === true &&
+    ["free", "starter", "pro", "elite"].includes(subscriptionData.plan) &&
+    ["active", "trialing", "none"].includes(subscriptionData.status);
+  const currentPlan = hasConfirmedSubscription ? subscriptionData.plan : null;
+  const isActive = hasConfirmedSubscription &&
+    ["active", "trialing"].includes(subscriptionData.status);
+  const isCurrentPro = currentPlan === "pro" && isActive;
   const invoices = invoicesData?.invoices || [];
 
   useEffect(() => {
@@ -129,13 +135,13 @@ export default function Billing() {
   });
 
   const handleUpgrade = (interval) => {
-    if (checkoutMutation.isPending) return;
+    if (!hasConfirmedSubscription || checkoutMutation.isPending) return;
     setUpgrading(true);
     checkoutMutation.mutate(interval || billingInterval);
   };
 
   const handleOpenPortal = () => {
-    if (portalMutation.isPending) return;
+    if (!hasConfirmedSubscription || portalMutation.isPending) return;
     portalMutation.mutate();
   };
 
@@ -184,9 +190,20 @@ export default function Billing() {
           <div className="space-y-8">
 
             {subLoading ? (
-              <div className="card-bordered flex items-center justify-center p-12">
-                <Loader2 className="h-8 w-8 animate-spin text-[var(--sage-500)]" />
+              <div className="card-bordered flex items-center justify-center gap-3 p-12" role="status">
+                <Loader2 className="h-8 w-8 animate-spin text-[var(--sage-500)]" aria-hidden="true" />
+                <span>Loading your billing details...</span>
               </div>
+            ) : !hasConfirmedSubscription ? (
+              <section className="card-bordered" role="alert">
+                <h2 className="text-heading-lg text-teal">Billing details unavailable</h2>
+                <p className="text-body-sm text-[var(--sage-600)] mb-4">
+                  We couldn't load your billing details. Please try again.
+                </p>
+                <Button variant="outline" onClick={() => subscriptionQuery.refetch()} disabled={subscriptionQuery.isFetching}>
+                  {subscriptionQuery.isFetching ? "Retrying..." : "Try again"}
+                </Button>
+              </section>
             ) : currentPlan !== "free" && isActive ? (
               <section className="card-bordered bg-gradient-to-r from-[var(--sage-50)] to-[var(--gold-50)]" data-testid="section-current-plan">
                 <div className="flex items-center justify-between flex-wrap gap-4">
@@ -197,7 +214,9 @@ export default function Billing() {
                     <div>
                       <h2 className="text-heading-lg text-teal capitalize">{currentPlan} Plan</h2>
                       <p className="text-body-sm text-[var(--sage-600)]">
-                        {subscriptionData?.cancelAtPeriodEnd
+                        {currentPlan === "starter"
+                          ? "One-time access"
+                          : subscriptionData?.cancelAtPeriodEnd
                           ? `Cancels on ${formatDate(subscriptionData?.currentPeriodEnd)}`
                           : `Renews on ${formatDate(subscriptionData?.currentPeriodEnd)}`
                         }
@@ -225,14 +244,20 @@ export default function Billing() {
                     <Star className="h-7 w-7" />
                   </div>
                   <div>
-                    <h2 className="text-heading-lg text-teal">Free Plan</h2>
-                    <p className="text-body-sm text-[var(--sage-600)]">Core tools are always free — no expiration, no pressure to upgrade, no features taken away</p>
+                    <h2 className="text-heading-lg text-teal capitalize">
+                      {currentPlan === "free" ? "Free Plan" : `${currentPlan} Plan — inactive`}
+                    </h2>
+                    <p className="text-body-sm text-[var(--sage-600)]">
+                      {currentPlan === "free"
+                        ? "Core tools are always free — no expiration, no pressure to upgrade, no features taken away"
+                        : "Your paid plan is inactive. Your free tools remain available."}
+                    </p>
                   </div>
                 </div>
               </section>
             )}
 
-            <section data-testid="section-plans">
+            {hasConfirmedSubscription && (<section data-testid="section-plans">
               <h2 className="text-heading-md text-teal mb-4">
                 {currentPlan === "free" ? "Compare Plans" : "Your Plan"}
               </h2>
@@ -285,9 +310,9 @@ export default function Billing() {
                   )}
                 </div>
 
-                <div className={`card-bordered relative transition-all ${currentPlan !== "free" && isActive ? 'ring-2 ring-[var(--teal-500)] bg-[var(--sage-50)]' : 'hover:border-[var(--teal-400)]'}`} data-testid="plan-pro">
+                <div className={`card-bordered relative transition-all ${isCurrentPro ? 'ring-2 ring-[var(--teal-500)] bg-[var(--sage-50)]' : 'hover:border-[var(--teal-400)]'}`} data-testid="plan-pro">
                   <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-gradient-to-r from-[var(--gold-500)] to-[var(--gold-400)] text-white text-caption font-medium">
-                    {currentPlan !== "free" && isActive ? "Your Plan" : "Recommended"}
+                    {isCurrentPro ? "Your Plan" : "Recommended"}
                   </span>
                   <div className="text-center mb-4 pt-4">
                     <div className="icon-container icon-lg mx-auto mb-3 icon-soft-gold">
@@ -360,7 +385,7 @@ export default function Billing() {
                   )}
                 </div>
               </div>
-            </section>
+            </section>)}
 
             <section className="card-bordered" data-testid="section-invoices">
               <div className="flex items-center justify-between mb-4">
@@ -368,7 +393,7 @@ export default function Billing() {
                   <Calendar className="h-5 w-5 text-[var(--sage-500)]" />
                   Payment History
                 </h2>
-                {currentPlan !== "free" && (
+                {hasConfirmedSubscription && currentPlan !== "free" && (
                   <Button 
                     variant="outline" 
                     size="sm" 
@@ -447,7 +472,7 @@ export default function Billing() {
               <p className="text-body-sm text-[var(--sage-600)] mb-4">
                 Pro subscriptions can be canceled anytime from this page — no hidden fees, no lock-in, no cancellation hoops. If you cancel, you keep full access through the end of your paid period, and your free tools never go away.
               </p>
-              {currentPlan !== "free" && (
+              {hasConfirmedSubscription && currentPlan !== "free" && (
                 <Button 
                   variant="outline" 
                   size="sm" 
