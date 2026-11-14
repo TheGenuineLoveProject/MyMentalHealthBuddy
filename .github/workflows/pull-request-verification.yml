@@ -53,6 +53,9 @@ jobs:
       - name: Verify billing, lead capture, and public metadata offline
         run: npm run verify:conversion-flows
 
+      - name: Verify deployment probes and tracing offline
+        run: npm run verify:operations-probes
+
       - run: node scripts/security/ci-production-audit-gate.mjs
 
       - run: npm run typecheck
@@ -81,6 +84,9 @@ jobs:
           exit 1
 
       - run: npm run verify:foundation
+
+      - name: Verify deployment health and database readiness
+        run: APP_BASE_URL=http://127.0.0.1:5099 npm run verify:deployment-target-health
 
       - run: npm run verify:clinical-safety-taxonomy
 

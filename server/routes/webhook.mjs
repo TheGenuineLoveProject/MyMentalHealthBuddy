@@ -242,7 +242,7 @@ router.post(
             logger.warn("customer.subscription.deleted missing customer field", { subscriptionId: subscription.id });
             break;
           }
-          const userRows = await db.select({ email: users.email, username: users.username })
+          const userRows = await db.select({ email: users.email, name: users.name })
             .from(users)
             .where(eq(users.stripeCustomerId, subscription.customer));
           
@@ -266,7 +266,7 @@ router.post(
           if (cancelledUser?.email) {
             sendCancellationAcknowledgment(
               cancelledUser.email, 
-              cancelledUser.username || "", 
+              cancelledUser.name || "",
               subscription.current_period_end
             ).catch(err => {
               logger.warn("Failed to send cancellation email", { error: err.message });

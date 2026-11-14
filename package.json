@@ -72,7 +72,8 @@
     "diagnose:registry-candidates": "node scripts/governance/diagnose-registry-candidate-precision.mjs",
     "filter:registry-candidates": "node scripts/governance/filter-registry-candidates-to-canonical-sources.mjs",
     "audit:registry-candidate-pipeline": "npm run generate:registry-candidates && npm run diagnose:registry-candidates && npm run filter:registry-candidates",
-    "verify:conversion-flows": "node --experimental-vm-modules --test server/tests/billing-starter-checkout.test.mjs && vitest run --config tests/unit/leads-vitest.config.mjs && vitest run --config tests/unit/pricing-lead-vitest.config.mjs && vitest run --config tests/unit/seo-vitest.config.mjs"
+    "verify:conversion-flows": "node --experimental-vm-modules --test server/tests/billing-starter-checkout.test.mjs server/tests/billing-cancellation.test.mjs && vitest run --config tests/unit/leads-vitest.config.mjs && vitest run --config tests/unit/pricing-lead-vitest.config.mjs && vitest run --config tests/unit/seo-vitest.config.mjs",
+    "verify:operations-probes": "node --test tests/operations/deployment-target-health.test.mjs tests/operations/tracing-runtime.test.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1083.0",
