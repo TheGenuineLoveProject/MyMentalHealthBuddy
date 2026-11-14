@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Exercise the real backup/restore scripts against an owned PostgreSQL fixture.
-// No inherited application DATABASE_URL, host database, ports or volumes are used.
+// No inherited application DATABASE_URL, host database, ports or bind mounts are used.
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
 import { createHash, randomUUID } from "node:crypto";
@@ -92,7 +92,7 @@ async function verify() {
     cleaned = true;
     try {
       if (creationAttempted) {
-        const removed = spawnSync("docker", ["rm", "--force", containerName], {
+        const removed = spawnSync("docker", ["rm", "--force", "--volumes", containerName], {
           env: dockerEnv, encoding: "utf8", timeout: 15000,
         });
         if (removed.error || (removed.status !== 0 && !/No such container/i.test(removed.stderr || ""))) {
