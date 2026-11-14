@@ -50,6 +50,9 @@ jobs:
 
       - run: npm ci
 
+      - name: Verify billing, lead capture, and public metadata offline
+        run: npm run verify:conversion-flows
+
       - run: node scripts/security/ci-production-audit-gate.mjs
 
       - run: npm run typecheck

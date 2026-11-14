@@ -29,7 +29,7 @@ router.post("/", authRateLimit, async (req, res) => {
   try {
     const validation = leadSchema.safeParse(req.body);
     if (!validation.success) {
-      return badRequest(res, validation.error.errors[0].message);
+      return badRequest(res, validation.error.issues[0].message);
     }
 
     let { email, consent, interests, source, utmSource, utmMedium, utmCampaign, utmContent, utmTerm, utmTimestamp } = validation.data;
@@ -53,6 +53,7 @@ router.post("/", authRateLimit, async (req, res) => {
       await db
         .update(leads)
         .set({
+          consent,
           interests: interests || [],
           source: source || "newsletter",
           utmSource,
@@ -84,7 +85,7 @@ router.post("/", authRateLimit, async (req, res) => {
     return res.status(201).json({
       ok: true,
       data: { subscribed: true },
-      message: "Thank you for subscribing! Check your email for wellness tips.",
+      message: "Thank you for subscribing! Your preferences have been saved.",
     });
   } catch (error) {
     logger.error("Lead capture failed", { error: error.message, requestId: req.requestId });

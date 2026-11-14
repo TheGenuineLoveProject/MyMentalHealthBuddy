@@ -11,6 +11,7 @@ import { WellnessPageShell } from "@/components/wellness/WellnessPageShell";
 import { pickBenefits } from "@/lib/benefits";
 import { useToast } from "@/hooks/use-toast";
 import { getAuthToken } from "@/lib/api";
+import NewsletterSignup from "../components/NewsletterSignup.jsx";
 import "@/styles/glp-pane.css";
 
 const freeTier = {
@@ -19,7 +20,7 @@ const freeTier = {
   cta: "Start Free",
   price: "$0",
   period: "forever",
-  description: "Unlimited emotional support, always free",
+  description: "A free space for daily reflection",
   features: [
     "Mood tracking & journaling",
     "5 AI chat sessions per day",
@@ -141,8 +142,6 @@ export default function Pricing() {
 
   const [checkingOut, setCheckingOut] = useState(false);
   const [interval, setInterval] = useState("yearly");
-  const [email, setEmail] = useState("");
-  const [emailSubmitted, setEmailSubmitted] = useState(false);
 
   useEffect(() => {
     const pricingViewToken = getAuthToken();
@@ -200,16 +199,6 @@ export default function Pricing() {
       });
       setCheckingOut(false);
     }
-  };
-
-  const submitEmail = (e) => {
-    e.preventDefault();
-    if (!email || !email.includes("@")) return;
-    try {
-      window.localStorage.setItem("mmhb-pricing-lead", JSON.stringify({ email, at: Date.now() }));
-    } catch { /* private mode */ }
-    setEmailSubmitted(true);
-    toast({ title: "You're on the list", description: "We'll send a gentle nudge when you're ready." });
   };
 
   return (
@@ -483,34 +472,11 @@ className={`w-full md:w-auto md:min-w-[220px] mx-auto py-3.5 px-6 rounded-full f
               Not ready yet? That's okay.
             </h2>
             <p className="max-w-xl mx-auto mb-6 text-base" style={{ color: 'var(--glp-sage)' }}>
-              Leave your email and we'll send one gentle reminder when the time feels right. No pressure. No spam. Unsubscribe anytime.
+              Subscribe for wellness tips and product updates. No pressure. Unsubscribe anytime.
             </p>
-            {emailSubmitted ? (
-              <div className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-medium" style={{ background: 'var(--glp-sage-20)', color: 'var(--glp-sage-deep)' }} data-testid="text-email-success">
-                <Check className="w-4 h-4" /> You're on the list. Be gentle with yourself.
-              </div>
-            ) : (
-              <form onSubmit={submitEmail} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" data-testid="form-email-capture">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your@email.com"
-                  required
-                  className="flex-1 rounded-full px-5 py-3 text-sm bg-white focus:outline-none focus-visible:ring-2"
-                  style={{ border: '1px solid var(--glp-sage-20)', color: 'var(--glp-sage-deep)' }}
-                  data-testid="input-email"
-                />
-                <button
-                  type="submit"
-                  className="rounded-full px-6 py-3 font-semibold text-white text-sm transition-all hover:scale-[1.02] hover:shadow-lg"
-                  style={{ background: 'linear-gradient(135deg, var(--glp-deep-teal, var(--glp-sage-deep)), var(--glp-sage))', boxShadow: '0 10px 24px color-mix(in srgb, var(--glp-deep-teal, var(--glp-sage-deep)) 26%, transparent)' }}
-                  data-testid="button-email-submit"
-                >
-                  Remind me gently
-                </button>
-              </form>
-            )}
+            <div className="max-w-md mx-auto text-left">
+              <NewsletterSignup variant="inline" source="pricing" />
+            </div>
           </section>
 
           {/* V30 — Return Loop banner */}

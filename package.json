@@ -71,7 +71,8 @@
     "generate:registry-candidates": "node scripts/governance/generate-registry-candidate-inventory.mjs",
     "diagnose:registry-candidates": "node scripts/governance/diagnose-registry-candidate-precision.mjs",
     "filter:registry-candidates": "node scripts/governance/filter-registry-candidates-to-canonical-sources.mjs",
-    "audit:registry-candidate-pipeline": "npm run generate:registry-candidates && npm run diagnose:registry-candidates && npm run filter:registry-candidates"
+    "audit:registry-candidate-pipeline": "npm run generate:registry-candidates && npm run diagnose:registry-candidates && npm run filter:registry-candidates",
+    "verify:conversion-flows": "node --experimental-vm-modules --test server/tests/billing-starter-checkout.test.mjs && vitest run --config tests/unit/leads-vitest.config.mjs && vitest run --config tests/unit/pricing-lead-vitest.config.mjs && vitest run --config tests/unit/seo-vitest.config.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1083.0",
@@ -178,6 +179,7 @@
     "drizzle-kit": "0.31.10",
     "eslint": "^10.4.1",
     "eslint-plugin-react-hooks": "^7.1.1",
+    "jsdom": "26.1.0",
     "nodemon": "^3.1.14",
     "playwright": "^1.60.0",
     "prettier": "^3.8.3",

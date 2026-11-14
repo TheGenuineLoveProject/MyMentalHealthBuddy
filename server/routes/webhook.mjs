@@ -9,6 +9,7 @@ import { increment } from "../utils/metrics.mjs";
 import { sendUpgradeConfirmation, sendCancellationAcknowledgment } from "../services/email.mjs";
 import { alertWebhookSignatureFailure } from "../observability/safetyAlerts.mjs";
 import {
+  mapPriceIdToPlan,
   mapSubscriptionToPlan,
   mapInvoiceToPlan,
   resolvePlanFromCheckoutSession,
@@ -97,9 +98,16 @@ router.post(
       }
 
       switch (event.type) {
-        case "checkout.session.completed": {
+        case "checkout.session.completed":
+        case "checkout.session.async_payment_succeeded": {
           const session = event.data.object;
-          if (!session.customer || !session.subscription) {
+          const isOneTimePayment = session.mode === "payment";
+          // Starter is sold in payment mode, which has no subscription ID.
+          // Delayed payments finish in a separate, signed async-success event.
+          if (event.type === "checkout.session.async_payment_succeeded" && !isOneTimePayment) {
+            break;
+          }
+          if (!session.customer || (!isOneTimePayment && !session.subscription)) {
             logger.warn("checkout.session.completed missing customer or subscription", { sessionId: session.id });
             break;
           }
@@ -132,6 +140,19 @@ router.post(
             increment("subscription_mapping_unknown", { source: "checkout_retrieve_failed" });
             throw expandErr; // outer catch → 500 → no markProcessed → Stripe retries
           }
+          if (isOneTimePayment) {
+            const chargedPlan = mapPriceIdToPlan(authoritativeSession?.line_items?.data?.[0]?.price?.id);
+            if (
+              authoritativeSession.mode !== "payment" ||
+              authoritativeSession.payment_status !== "paid" ||
+              chargedPlan !== "starter"
+            ) {
+              logger.warn(`${event.type}: one-time checkout is not a verified paid Starter purchase`, {
+                sessionId: session.id,
+              });
+              break;
+            }
+          }
           const checkoutPlan = resolvePlanFromCheckoutSession(authoritativeSession);
           if (!checkoutPlan) {
             const diag = diagnosePlanResolution(authoritativeSession);
@@ -154,6 +175,8 @@ router.post(
             .set({
               stripeCustomerId: session.customer,
               subscriptionStatus: checkoutPlan,
+              // A one-time unlock must not inherit an expired recurring plan.
+              ...(isOneTimePayment ? { subscriptionExpiresAt: null } : {}),
               updatedAt: new Date(),
             })
             .where(eq(users.email, customerEmail));
