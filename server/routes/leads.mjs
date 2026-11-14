@@ -25,6 +25,24 @@ const leadSchema = z.object({
 
 const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
 
+function interestsForCsv(value) {
+  if (value == null) return "";
+  if (Array.isArray(value)) return value.join(";");
+  // The TEXT column stores JSON arrays. Older writes may contain PostgreSQL
+  // array literals or raw text; retain unrecognized content for owner review.
+  const raw = String(value);
+  if (raw.trim() === "{}") return "";
+  try {
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed) && parsed.every(item => typeof item === "string")) {
+      return parsed.join(";");
+    }
+  } catch {
+    // Malformed legacy text remains visible in the export.
+  }
+  return raw;
+}
+
 router.post("/", authRateLimit, async (req, res) => {
   try {
     const validation = leadSchema.safeParse(req.body);
@@ -54,7 +72,7 @@ router.post("/", authRateLimit, async (req, res) => {
         .update(leads)
         .set({
           consent,
-          interests: interests || [],
+          ...(interests !== undefined ? { interests: JSON.stringify(interests) } : {}),
           source: source || "newsletter",
           utmSource,
           utmMedium,
@@ -71,7 +89,7 @@ router.post("/", authRateLimit, async (req, res) => {
     await db.insert(leads).values({
       email: email.toLowerCase(),
       consent,
-      interests: interests || [],
+      interests: JSON.stringify(interests || []),
       source: source || "newsletter",
       utmSource,
       utmMedium,
@@ -118,7 +136,7 @@ router.get("/export", isAdmin, async (req, res) => {
       ...allLeads.map(lead => [
         lead.email,
         lead.consent,
-        (lead.interests || []).join(";"),
+        interestsForCsv(lead.interests),
         lead.source || "",
         lead.utmSource || "",
         lead.utmMedium || "",
