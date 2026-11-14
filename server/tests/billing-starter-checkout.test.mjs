@@ -31,7 +31,8 @@ function starterSession(overrides = {}) {
 function checkoutEvent(session, type = "checkout.session.completed", id = "evt_offline_fixture") {
   // Real Checkout events omit expanded line items. Only the retrieved session
   // can establish which configured price was charged.
-  const { line_items, ...object } = session;
+  const object = { ...session };
+  delete object.line_items;
   return { id, type, data: { object } };
 }
 
