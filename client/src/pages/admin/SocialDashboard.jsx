@@ -1,6 +1,6 @@
 // PHASE11760_SOCIAL_DASHBOARD_VISUAL_TOKEN_PATCH
 // PHASE11762_SOCIAL_DASHBOARD_REMAINING_TOKEN_CLEANUP
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "wouter";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { ArrowLeft, Plus, Calendar, FileText, CheckCircle, Clock, Send, LayoutGrid, ListFilter, Sparkles, MessageCircle, AlertCircle, ExternalLink, Settings, Wifi, WifiOff, BarChart2, Activity, PieChart } from 'lucide-react';
@@ -14,6 +14,7 @@ import { queryClient, apiRequest } from "../../lib/queryClient";
 import { SEO } from "@/components/SEO";
 import SafetyFooter from "../../components/ui/ReflectionFooter";
 import { AdminErrorBanner } from "../../components/admin/AdminQueryStates";
+import { PUBLICATION_STATUS_LABELS } from "../../../../shared/socialPublicationStatus.mjs";
 
 const PLATFORMS = [
   { id: "youtube", name: "YouTube", icon: Youtube, color: "#FF0000", handle: "@GenuineLoveProject", url: "https://youtube.com/@GenuineLoveProject", status: "verified" },
@@ -26,16 +27,67 @@ const PLATFORMS = [
   { id: "linkedin", name: "LinkedIn", icon: Linkedin, color: "#0A66C2", handle: null, status: "pending" },
 ];
 
+function queryData(response) {
+  if (response && typeof response === "object" && !Array.isArray(response) &&
+      Object.prototype.hasOwnProperty.call(response, "ok")) {
+    if (response.ok !== true) throw new Error("Query was not confirmed");
+    return response.data;
+  }
+  return response;
+}
+
+function selectDrafts(response) {
+  const data = queryData(response);
+  if (!Array.isArray(data)) throw new Error("Invalid draft response");
+  return data;
+}
+
+function selectPlatforms(response) {
+  const data = queryData(response);
+  if (!data || !Array.isArray(data.platforms)) throw new Error("Invalid platform response");
+  return data;
+}
+
+function selectAnalytics(response) {
+  const data = queryData(response);
+  if (!data || typeof data !== "object" || Array.isArray(data)) throw new Error("Invalid analytics response");
+  return data;
+}
+
+const PUBLICATION_STATUS_CONFIG = {
+  published: { label: PUBLICATION_STATUS_LABELS.published, color: "bg-[rgba(143,191,159,0.22)] text-[var(--glp-deep-teal)] dark:bg-[rgba(143,191,159,0.14)] dark:text-[var(--glp-sage)]", icon: CheckCircle },
+  partial: { label: PUBLICATION_STATUS_LABELS.partial, color: "bg-[rgba(212,175,55,0.22)] text-[var(--glp-deep-teal)] dark:bg-[rgba(212,175,55,0.14)] dark:text-[var(--glp-gold)]", icon: AlertCircle },
+  processing: { label: PUBLICATION_STATUS_LABELS.processing, color: "bg-[rgba(212,175,55,0.22)] text-[var(--glp-deep-teal)] dark:bg-[rgba(212,175,55,0.14)] dark:text-[var(--glp-gold)]", icon: Clock },
+  manual_required: { label: PUBLICATION_STATUS_LABELS.manual_required, color: "bg-[rgba(212,175,55,0.22)] text-[var(--glp-deep-teal)] dark:bg-[rgba(212,175,55,0.14)] dark:text-[var(--glp-gold)]", icon: ExternalLink },
+  failed: { label: PUBLICATION_STATUS_LABELS.failed, color: "bg-[rgba(244,199,195,0.26)] text-[var(--glp-charcoal)] dark:bg-[rgba(244,199,195,0.12)] dark:text-[var(--glp-blossom)]", icon: AlertCircle },
+  unknown: { label: PUBLICATION_STATUS_LABELS.unknown, color: "bg-[rgba(212,175,55,0.22)] text-[var(--glp-deep-teal)] dark:bg-[rgba(212,175,55,0.14)] dark:text-[var(--glp-gold)]", icon: AlertCircle },
+  pending: { label: PUBLICATION_STATUS_LABELS.pending, color: "bg-[rgba(212,175,55,0.22)] text-[var(--glp-deep-teal)] dark:bg-[rgba(212,175,55,0.14)] dark:text-[var(--glp-gold)]", icon: Clock },
+  publishing: { label: PUBLICATION_STATUS_LABELS.publishing, color: "bg-[rgba(212,175,55,0.22)] text-[var(--glp-deep-teal)] dark:bg-[rgba(212,175,55,0.14)] dark:text-[var(--glp-gold)]", icon: Send },
+};
+
 const STATUS_CONFIG = {
   draft: { label: "Draft", color: "bg-[rgba(143,191,159,0.16)] text-[var(--glp-deep-teal)] dark:bg-[rgba(143,191,159,0.10)] dark:text-[var(--glp-sage)]", icon: FileText },
   review: { label: "In Review", color: "bg-[rgba(212,175,55,0.22)] text-[var(--glp-deep-teal)] dark:bg-[rgba(212,175,55,0.14)] dark:text-[var(--glp-gold)]", icon: Clock },
   approved: { label: "Approved", color: "bg-[rgba(143,191,159,0.22)] text-[var(--glp-deep-teal)] dark:bg-[rgba(143,191,159,0.14)] dark:text-[var(--glp-sage)]", icon: CheckCircle },
   scheduled: { label: "Scheduled", color: "bg-[rgba(143,191,159,0.18)] text-[var(--glp-deep-teal)] dark:bg-[rgba(143,191,159,0.12)] dark:text-[var(--glp-sage)]", icon: Calendar },
   exported: { label: "Exported", color: "bg-[rgba(244,199,195,0.26)] text-[var(--glp-deep-teal)] dark:bg-[rgba(244,199,195,0.12)] dark:text-[var(--glp-blossom)]", icon: Send },
+  ...PUBLICATION_STATUS_CONFIG,
 };
 
+const UNKNOWN_STATUS_CONFIG = {
+  label: "Unknown status",
+  color: "bg-[rgba(212,175,55,0.22)] text-[var(--glp-deep-teal)] dark:bg-[rgba(212,175,55,0.14)] dark:text-[var(--glp-gold)]",
+  icon: AlertCircle,
+};
+
+const EDITABLE_DRAFT_STATUSES = new Set([
+  "draft", "review", "approved", "scheduled", "exported", "manual_required", "failed",
+]);
+
 function StatusBadge({ status }) {
-  const config = STATUS_CONFIG[status] || STATUS_CONFIG.draft;
+  const config = typeof status === "string" && Object.prototype.hasOwnProperty.call(STATUS_CONFIG, status)
+    ? STATUS_CONFIG[status]
+    : UNKNOWN_STATUS_CONFIG;
   const Icon = config.icon;
   return (
     <span className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${config.color}`}>
@@ -45,9 +97,25 @@ function StatusBadge({ status }) {
   );
 }
 
+function preparedPostText(result) {
+  const platform = PLATFORMS.find(item => item.id === result.platform)?.name || result.platform;
+  const fields = [
+    ["Hook", result.content.hook],
+    ["Caption", result.content.caption],
+    ["Hashtags", result.content.hashtags],
+    ["Call to action", result.content.cta],
+    ["Disclaimer", result.content.disclaimer],
+  ];
+  return [platform, ...fields
+    .filter(([, value]) => typeof value === "string" && value.length > 0)
+    .map(([label, value]) => `${label}\n${value}`)]
+    .join("\n\n");
+}
+
 function DraftCard({ draft, onApprove, onDelete, onPublish, bulkMode, isSelected, onToggleSelect }) {
   const platform = PLATFORMS.find(p => p.id === draft.platform) || PLATFORMS[0];
   const PlatformIcon = platform.icon;
+  const canEdit = EDITABLE_DRAFT_STATUSES.has(draft.status);
   
   return (
     <div 
@@ -119,12 +187,15 @@ function DraftCard({ draft, onApprove, onDelete, onPublish, bulkMode, isSelected
                 data-testid={`button-publish-${draft.id}`}
               >
                 <Send className="w-3 h-3" />
-                Publish
+                Prepare upload
               </button>
             )}
             <button
-              onClick={(e) => { e.stopPropagation(); onDelete(draft.id); }}
-              className="text-xs px-2 py-1 bg-[rgba(244,199,195,0.30)] text-[var(--glp-charcoal)] rounded hover:bg-[rgba(244,199,195,0.42)] transition-colors"
+              onClick={(e) => { e.stopPropagation(); if (canEdit) onDelete(draft.id); }}
+              disabled={!canEdit}
+              title={!canEdit ? "Review this draft's publication status before deleting it." : undefined}
+              aria-label={!canEdit ? "Delete unavailable until publication status is reviewed" : "Delete"}
+              className="text-xs px-2 py-1 bg-[rgba(244,199,195,0.30)] text-[var(--glp-charcoal)] rounded hover:bg-[rgba(244,199,195,0.42)] transition-colors disabled:opacity-50"
               data-testid={`button-delete-${draft.id}`}
             >
               Delete
@@ -162,9 +233,12 @@ function QuickStats({ drafts }) {
 }
 
 function PlatformConnections() {
-  const { data: platformStatus = {}, isLoading } = useQuery({
+  const { data: platformStatus = {}, isLoading, error, refetch } = useQuery({
     queryKey: ["/api/social-posting/platforms/status"],
+    select: selectPlatforms,
   });
+
+  if (error) return <AdminErrorBanner title="Unable to load platform connections" onRetry={refetch} />;
   
   if (isLoading) {
     return (
@@ -178,16 +252,16 @@ function PlatformConnections() {
   }
   
   const platforms = platformStatus.platforms || [];
-  const connectedCount = platforms.filter(p => p.connected).length;
+  const configuredCount = platforms.filter(p => p.connected === true).length;
   
   return (
     <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl border border-[rgba(143,191,159,0.35)] dark:border-[rgba(143,191,159,0.22)] p-4 sm:p-6 mb-8" data-testid="section-platform-connections">
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-3">
           <Settings className="w-5 h-5 text-[var(--glp-deep-teal)]" />
-          <h3 className="font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">Platform Connections</h3>
+          <h3 className="font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]">Platform configuration</h3>
           <span className="text-xs px-2 py-1 bg-[rgba(143,191,159,0.16)] dark:bg-[rgba(143,191,159,0.10)] rounded-full text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">
-            {connectedCount}/{platforms.length} connected
+            {configuredCount}/{platforms.length} configured
           </span>
         </div>
         <a 
@@ -201,23 +275,24 @@ function PlatformConnections() {
           How to add API keys
         </a>
       </div>
+      <p className="text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-4">
+        Configured means the required credential fields are present. Provider access and delivery still need verification.
+      </p>
       
       <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
         {PLATFORMS.map(platform => {
           const status = platforms.find(p => p.id === platform.id);
-          const isConnected = status?.connected;
+          const isConfigured = status?.connected === true;
           const PlatformIcon = platform.icon;
-          
-          const hasHandle = platform.handle && platform.status !== 'pending';
           
           return (
             <a
               key={platform.id}
-              href={platform.url || '#'}
+              href={platform.url || undefined}
               target={platform.url ? "_blank" : undefined}
               rel="noopener noreferrer"
               className={`flex flex-col items-center p-3 rounded-lg border transition-all hover:shadow-sm ${
-                hasHandle
+                isConfigured
                   ? "border-[rgba(143,191,159,0.42)] dark:border-[rgba(143,191,159,0.26)] bg-[rgba(143,191,159,0.16)] dark:bg-[rgba(143,191,159,0.10)]" 
                   : "border-[rgba(143,191,159,0.30)] dark:border-[rgba(143,191,159,0.18)] bg-[rgba(143,191,159,0.08)] dark:bg-[rgba(143,191,159,0.06)] opacity-70"
               } ${platform.url ? 'cursor-pointer' : ''}`}
@@ -238,20 +313,15 @@ function PlatformConnections() {
                 </span>
               )}
               <div className="flex items-center gap-1 mt-1">
-                {hasHandle ? (
-                  <>
-                    <CheckCircle className="w-3 h-3 text-[var(--glp-sage)]" />
-                    <span className="text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] capitalize">{platform.status}</span>
-                  </>
-                ) : isConnected ? (
+                {isConfigured ? (
                   <>
                     <Wifi className="w-3 h-3 text-[var(--glp-sage)]" />
-                    <span className="text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">API Ready</span>
+                    <span className="text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">Configured</span>
                   </>
                 ) : (
                   <>
                     <WifiOff className="w-3 h-3 text-[var(--glp-sage)]" />
-                    <span className="text-xs text-[var(--glp-deep-teal)]">Pending</span>
+                    <span className="text-xs text-[var(--glp-deep-teal)]">Not configured</span>
                   </>
                 )}
               </div>
@@ -260,17 +330,17 @@ function PlatformConnections() {
         })}
       </div>
       
-      {connectedCount === 0 && (
+      {configuredCount === 0 && (
         <div className="mt-4 p-4 bg-[rgba(212,175,55,0.16)] dark:bg-[rgba(212,175,55,0.10)] rounded-lg border border-[rgba(212,175,55,0.35)] dark:border-[rgba(212,175,55,0.22)]">
           <div className="flex items-start gap-3">
             <AlertCircle className="w-5 h-5 text-[var(--glp-gold)] dark:text-[var(--glp-gold)] flex-shrink-0 mt-0.5" />
             <div>
               <p className="text-sm font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-gold)]">
-                No platforms connected yet
+                No platforms configured yet
               </p>
               <p className="text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-gold)] mt-1">
-                Add your social media API keys in Replit Secrets to enable automated posting. 
-                Content will be generated for manual export until platforms are connected.
+                Add your social media API credentials in Replit Secrets to configure provider access.
+                Preparing text for manual upload does not require these credentials.
               </p>
             </div>
           </div>
@@ -283,6 +353,7 @@ function PlatformConnections() {
 function ContentAnalytics() {
   const { data: analytics, isLoading } = useQuery({
     queryKey: ["/api/admin/social/analytics"],
+    select: selectAnalytics,
   });
   
   if (isLoading) {
@@ -322,7 +393,7 @@ function ContentAnalytics() {
         <div className="p-4 bg-[rgba(143,191,159,0.16)] dark:bg-[rgba(143,191,159,0.10)] rounded-lg border border-[rgba(143,191,159,0.25)]" data-testid="metric-ready-to-publish">
           <div className="flex items-center gap-2 mb-2">
             <CheckCircle className="w-4 h-4 text-[var(--glp-sage)]" />
-            <span className="text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">Ready to Publish</span>
+            <span className="text-xs text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">Approved content</span>
           </div>
           <p className="text-2xl font-bold text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">{contentHealth?.readyToPublish || 0}</p>
         </div>
@@ -411,9 +482,13 @@ export default function SocialDashboard() {
   const [showPublishModal, setShowPublishModal] = useState(false);
   const [publishDraft, setPublishDraft] = useState(null);
   const [publishPlatforms, setPublishPlatforms] = useState([]);
+  const [preparedContent, setPreparedContent] = useState(null);
+  const [downloadNotice, setDownloadNotice] = useState("");
+  const preparationGeneration = useRef(0);
   
   const { data: drafts = [], isLoading, error, refetch } = useQuery({
     queryKey: ["/api/admin/social/drafts"],
+    select: selectDrafts,
   });
   
   const approveMutation = useMutation({
@@ -449,22 +524,58 @@ export default function SocialDashboard() {
   });
   
   const batchPublishMutation = useMutation({
-    mutationFn: (data) => apiRequest("POST", "/api/admin/social/publish/batch", data),
-    onSuccess: () => {
+    mutationFn: async ({ draftId, platforms, generation }) => {
+      const response = await apiRequest("POST", "/api/admin/social/publish/batch", { draftId, platforms });
+      const result = response?.data;
+      const contentFields = ["hook", "caption", "hashtags", "cta", "disclaimer"];
+      if (response?.ok !== true || result?.draftId !== draftId ||
+          result?.mode !== "manual_preparation" || result?.published !== false ||
+          result?.successful !== 0 || !Array.isArray(result?.results) ||
+          result.results.length !== platforms.length ||
+          new Set(result.results.map(item => item?.platform)).size !== platforms.length ||
+          !result.results.every(item => typeof item?.platform === "string" &&
+            platforms.includes(item.platform) &&
+            item.success === false && item.status !== "published" &&
+            (item.prepared !== true || (item.status === "manual_required" &&
+              item.content && contentFields.every(field => item.content[field] == null || typeof item.content[field] === "string") &&
+              contentFields.some(field => typeof item.content[field] === "string" && item.content[field].trim().length > 0))))) {
+        throw new Error("Manual preparation could not be confirmed");
+      }
+      return { generation, result };
+    },
+    onSuccess: ({ generation, result }) => {
       queryClient.invalidateQueries({ queryKey: ["/api/admin/social/drafts"] });
-      setShowPublishModal(false);
-      setPublishDraft(null);
-      setPublishPlatforms([]);
+      if (generation !== preparationGeneration.current) return;
+      setPreparedContent(result);
+      setDownloadNotice("");
     },
   });
   
   const handleOpenPublish = (draft) => {
+    preparationGeneration.current += 1;
+    batchPublishMutation.reset();
+    setPreparedContent(null);
+    setDownloadNotice("");
     setPublishDraft(draft);
-    setPublishPlatforms([draft.platform]);
+    setPublishPlatforms(PLATFORMS.some(platform => platform.id === draft.platform) ? [draft.platform] : []);
     setShowPublishModal(true);
+  };
+
+  const handleClosePreparation = () => {
+    preparationGeneration.current += 1;
+    batchPublishMutation.reset();
+    setShowPublishModal(false);
+    setPublishDraft(null);
+    setPublishPlatforms([]);
+    setPreparedContent(null);
+    setDownloadNotice("");
   };
   
   const togglePublishPlatform = (platformId) => {
+    preparationGeneration.current += 1;
+    batchPublishMutation.reset();
+    setPreparedContent(null);
+    setDownloadNotice("");
     setPublishPlatforms(prev => 
       prev.includes(platformId) ? prev.filter(p => p !== platformId) : [...prev, platformId]
     );
@@ -472,15 +583,53 @@ export default function SocialDashboard() {
   
   const handleBatchPublish = () => {
     if (!publishDraft || publishPlatforms.length === 0) return;
+    preparationGeneration.current += 1;
+    setPreparedContent(null);
+    setDownloadNotice("");
     batchPublishMutation.mutate({
       draftId: publishDraft.id,
       platforms: publishPlatforms,
+      generation: preparationGeneration.current,
     });
+  };
+
+  const preparedResults = preparedContent && publishDraft && preparedContent.draftId === publishDraft.id
+    ? preparedContent.results.filter(result => result.prepared === true)
+    : [];
+
+  const handleDownloadPreparedContent = () => {
+    if (preparedResults.length === 0) return;
+    let url;
+    const anchor = document.createElement("a");
+    try {
+      const text = [
+        "MyMentalHealthBuddy manual upload content",
+        "Preparing this file does not publish its contents. Review each post before uploading it yourself.",
+        ...preparedResults.map(preparedPostText),
+      ].join("\n\n--------------------\n\n");
+      const blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+      url = window.URL.createObjectURL(blob);
+      anchor.href = url;
+      anchor.download = `mymentalhealthbuddy-manual-posts-${new Date().toISOString().split("T")[0]}.txt`;
+      document.body.appendChild(anchor);
+      anchor.click();
+      setDownloadNotice("Download requested. Check your browser downloads to confirm the file was saved.");
+    } catch {
+      setDownloadNotice("The download could not be prepared. Your content remains available below.");
+    } finally {
+      anchor.remove();
+      if (url) window.setTimeout(() => window.URL.revokeObjectURL(url), 1000);
+    }
   };
   
   const filteredDrafts = filter === "all" 
     ? drafts 
     : drafts.filter(d => d.status === filter);
+
+  const hasProtectedSelection = selectedIds.some(id => {
+    const draft = drafts.find(item => item.id === id);
+    return !draft || !EDITABLE_DRAFT_STATUSES.has(draft.status);
+  });
   
   const toggleSelect = (id) => {
     setSelectedIds(prev => 
@@ -586,12 +735,16 @@ export default function SocialDashboard() {
               <option value="review">In Review</option>
               <option value="approved">Approved</option>
               <option value="scheduled">Scheduled</option>
+              <option value="exported">Exported</option>
+              {Object.entries(PUBLICATION_STATUS_CONFIG).map(([status, config]) => (
+                <option key={status} value={status}>{config.label}</option>
+              ))}
             </select>
           </div>
         </div>
         
         {bulkMode && (
-          <div className="flex items-center gap-4 p-4 mb-6 bg-[rgba(244,199,195,0.18)] dark:bg-[rgba(244,199,195,0.10)] rounded-xl border border-[rgba(244,199,195,0.35)] dark:border-[rgba(244,199,195,0.22)]">
+          <div className="flex flex-wrap items-center gap-4 p-4 mb-6 bg-[rgba(244,199,195,0.18)] dark:bg-[rgba(244,199,195,0.10)] rounded-xl border border-[rgba(244,199,195,0.35)] dark:border-[rgba(244,199,195,0.22)]">
             <button
               type="button"
               onClick={selectAll}
@@ -606,8 +759,9 @@ export default function SocialDashboard() {
             <div className="flex gap-2 ml-auto">
               <button
                 type="button"
-                onClick={() => bulkApproveMutation.mutate(selectedIds)}
-                disabled={selectedIds.length === 0 || bulkApproveMutation.isPending}
+                onClick={() => { if (!hasProtectedSelection) bulkApproveMutation.mutate(selectedIds); }}
+                disabled={selectedIds.length === 0 || hasProtectedSelection || bulkApproveMutation.isPending}
+                aria-describedby={hasProtectedSelection ? "bulk-publication-review" : undefined}
                 className="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)] rounded-lg hover:bg-[var(--glp-charcoal)] disabled:opacity-50 transition-colors"
                 data-testid="button-bulk-approve"
               >
@@ -616,14 +770,20 @@ export default function SocialDashboard() {
               </button>
               <button
                 type="button"
-                onClick={() => bulkDeleteMutation.mutate(selectedIds)}
-                disabled={selectedIds.length === 0 || bulkDeleteMutation.isPending}
+                onClick={() => { if (!hasProtectedSelection) bulkDeleteMutation.mutate(selectedIds); }}
+                disabled={selectedIds.length === 0 || hasProtectedSelection || bulkDeleteMutation.isPending}
+                aria-describedby={hasProtectedSelection ? "bulk-publication-review" : undefined}
                 className="inline-flex items-center gap-2 px-3 py-1.5 text-sm bg-[var(--glp-blossom)] text-[var(--glp-charcoal)] rounded-lg hover:bg-[var(--glp-gold)] disabled:opacity-50 transition-colors"
                 data-testid="button-bulk-delete"
               >
                 Delete Selected
               </button>
             </div>
+            {hasProtectedSelection && (
+              <p id="bulk-publication-review" role="status" className="w-full text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-blossom)]">
+                Review the selected drafts' publication status before approving or deleting them.
+              </p>
+            )}
           </div>
         )}
         
@@ -679,15 +839,15 @@ export default function SocialDashboard() {
       </div>
       
       {showPublishModal && publishDraft && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-          <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl shadow-xl w-full max-w-lg border border-[rgba(143,191,159,0.35)] dark:border-[rgba(143,191,159,0.22)]">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" role="dialog" aria-modal="true" aria-labelledby="manual-upload-title">
+          <div className="bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] rounded-xl shadow-xl w-full max-w-lg max-h-[90vh] overflow-y-auto border border-[rgba(143,191,159,0.35)] dark:border-[rgba(143,191,159,0.22)]">
             <div className="flex items-center justify-between p-4 border-b border-[rgba(143,191,159,0.35)] dark:border-[rgba(143,191,159,0.22)]">
-              <h2 className="text-lg font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] flex items-center gap-2">
+              <h2 id="manual-upload-title" className="text-lg font-semibold text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)] flex items-center gap-2">
                 <Send className="w-5 h-5 text-[var(--glp-blossom)]" />
-                Publish to Platforms
+                Prepare for manual upload
               </h2>
               <button
-                onClick={() => setShowPublishModal(false)}
+                onClick={handleClosePreparation}
                 className="p-2 hover:bg-[rgba(143,191,159,0.16)] dark:hover:bg-[rgba(143,191,159,0.10)] rounded-lg transition-colors"
               >
                 <span className="sr-only">Close</span>
@@ -698,6 +858,9 @@ export default function SocialDashboard() {
             </div>
             
             <div className="p-4 space-y-4">
+              <p className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">
+                Prepare platform-specific text to review and upload yourself. This action does not post to your social accounts.
+              </p>
               <div className="p-3 bg-[rgba(244,199,195,0.18)] dark:bg-[rgba(244,199,195,0.10)] rounded-lg">
                 <p className="text-sm font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-blossom)] mb-1">
                   {publishDraft.hook?.slice(0, 60) || "Draft Content"}
@@ -709,10 +872,10 @@ export default function SocialDashboard() {
               
               <div>
                 <p className="text-sm font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] mb-3">
-                  Select platforms to publish:
+                  Select platforms to prepare:
                 </p>
                 <div className="grid grid-cols-2 gap-2">
-                  {PLATFORMS.filter(p => p.status !== "pending").map(platform => {
+                  {PLATFORMS.map(platform => {
                     const isSelected = publishPlatforms.includes(platform.id);
                     const PlatformIcon = platform.icon;
                     
@@ -721,6 +884,7 @@ export default function SocialDashboard() {
                         key={platform.id}
                         type="button"
                         onClick={() => togglePublishPlatform(platform.id)}
+                        disabled={batchPublishMutation.isPending}
                         className={`flex items-center gap-3 p-3 rounded-lg border transition-all ${
                           isSelected 
                             ? "border-[var(--glp-sage)] bg-[rgba(143,191,159,0.16)] dark:bg-[rgba(143,191,159,0.10)]" 
@@ -748,14 +912,60 @@ export default function SocialDashboard() {
                   })}
                 </div>
               </div>
+
+              {batchPublishMutation.isError && (
+                <p role="alert" className="text-sm text-[var(--glp-charcoal)] dark:text-[var(--glp-blossom)]">
+                  Content preparation could not be confirmed. Please retry preparation.
+                </p>
+              )}
+
+              {preparedContent && preparedContent.draftId === publishDraft.id && (
+                <section className="space-y-3 border-t border-[rgba(143,191,159,0.24)] pt-3" aria-label="Prepared manual upload content">
+                  <p role="status" className="text-sm font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">
+                    This preparation request has not published anything. {preparedResults.length} platform{preparedResults.length !== 1 ? "s" : ""} prepared for manual upload.
+                  </p>
+                  {preparedContent.results.map(result => (
+                    <div key={result.platform} className="space-y-1">
+                      <p className="text-sm font-medium text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">
+                        {PLATFORMS.find(platform => platform.id === result.platform)?.name || result.platform}
+                      </p>
+                      {result.prepared === true ? (
+                        <textarea
+                          readOnly
+                          rows={7}
+                          value={preparedPostText(result)}
+                          aria-label={`Prepared content for ${result.platform}`}
+                          className="w-full rounded-lg border border-[rgba(143,191,159,0.35)] bg-[var(--glp-ivory)] dark:bg-[var(--glp-deep-teal)] p-3 text-sm text-[var(--glp-charcoal)] dark:text-[var(--glp-ivory)]"
+                        />
+                      ) : (
+                        <p className="text-sm text-[var(--glp-charcoal)] dark:text-[var(--glp-blossom)]">
+                          {typeof result.error === "string" && result.error.trim()
+                            ? result.error
+                            : "Content could not be prepared for this platform."}
+                        </p>
+                      )}
+                    </div>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={handleDownloadPreparedContent}
+                    disabled={preparedResults.length === 0}
+                    className="px-3 py-2 rounded-lg bg-[var(--glp-deep-teal)] text-[var(--glp-ivory)] disabled:opacity-50"
+                    data-testid="button-download-manual-content"
+                  >
+                    Download prepared text
+                  </button>
+                  {downloadNotice && <p role="status" className="text-sm text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)]">{downloadNotice}</p>}
+                </section>
+              )}
               
               <div className="flex gap-3 pt-2">
                 <button
                   type="button"
-                  onClick={() => setShowPublishModal(false)}
+                  onClick={handleClosePreparation}
                   className="flex-1 px-4 py-2 border border-[rgba(143,191,159,0.35)] dark:border-[rgba(143,191,159,0.22)] rounded-lg text-[var(--glp-deep-teal)] dark:text-[var(--glp-sage)] hover:bg-[rgba(143,191,159,0.14)] dark:hover:bg-[rgba(143,191,159,0.10)] transition-colors"
                 >
-                  Cancel
+                  Close
                 </button>
                 <button
                   type="button"
@@ -769,7 +979,7 @@ export default function SocialDashboard() {
                   ) : (
                     <Send className="w-4 h-4" />
                   )}
-                  Publish to {publishPlatforms.length} Platform{publishPlatforms.length !== 1 ? "s" : ""}
+                  {batchPublishMutation.isPending ? "Preparing" : "Prepare"} for {publishPlatforms.length} Platform{publishPlatforms.length !== 1 ? "s" : ""}
                 </button>
               </div>
             </div>

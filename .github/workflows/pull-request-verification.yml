@@ -56,6 +56,9 @@ jobs:
       - name: Verify billing, lead capture, newsletter consent, and public metadata offline
         run: npm run verify:conversion-flows
 
+      - name: Verify social publication outcomes and manual preparation offline
+        run: npm run verify:social-publication
+
       - name: Verify deployment probes and tracing offline
         run: npm run verify:operations-probes
 

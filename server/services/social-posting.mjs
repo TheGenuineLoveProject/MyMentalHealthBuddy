@@ -5,14 +5,43 @@
 
 import { PLATFORMS, checkPlatformCredentials } from './social-platforms.mjs';
 import { logger } from '../utils/logger.mjs';
+import { normalizePublicationResult } from '../../shared/socialPublicationStatus.mjs';
 
 const SOCIAL_POSTING_FETCH_TIMEOUT_MS = 30000;
 
-function socialFetch(url, options = {}) {
-  return fetch(url, {
-    ...options,
-    signal: options.signal || AbortSignal.timeout(SOCIAL_POSTING_FETCH_TIMEOUT_MS),
-  });
+function unconfirmedAcknowledgement(cause) {
+  const error = new Error('Publication acknowledgement unavailable. Check the provider before retrying.', { cause });
+  error.publicationStatus = 'unknown';
+  return error;
+}
+
+async function socialFetch(url, options = {}) {
+  let response;
+  try {
+    response = await fetch(url, {
+      ...options,
+      signal: options.signal || AbortSignal.timeout(SOCIAL_POSTING_FETCH_TIMEOUT_MS),
+    });
+  } catch (cause) {
+    throw unconfirmedAcknowledgement(cause);
+  }
+  if (response.ok === false) {
+    const error = new Error(`Provider returned HTTP ${response.status}`);
+    error.publicationStatus = response.status >= 500 || response.status === 408 ? 'unknown' : 'failed';
+    throw error;
+  }
+  return response;
+}
+
+async function readSocialJson(response) {
+  try {
+    const data = await response.json();
+    if (!data || typeof data !== 'object' || Array.isArray(data)) {
+      throw new Error('Unexpected provider acknowledgement shape');
+    }
+    return data;
+  }
+  catch (cause) { throw unconfirmedAcknowledgement(cause); }
 }
 
 
@@ -20,10 +49,10 @@ function socialFetch(url, options = {}) {
  * Post content to a specific platform
  */
 export async function postToPlatform(platformId, content) {
-  const platform = PLATFORMS[platformId];
-  if (!platform) {
+  if (typeof platformId !== 'string' || !Object.hasOwn(PLATFORMS, platformId)) {
     throw new Error(`Unknown platform: ${platformId}`);
   }
+  const platform = PLATFORMS[platformId];
 
   const credentials = checkPlatformCredentials(platformId);
   if (!credentials.configured) {
@@ -31,15 +60,17 @@ export async function postToPlatform(platformId, content) {
   }
 
   const handler = platformHandlers[platformId];
-  if (!handler) {
+  if (!Object.hasOwn(platformHandlers, platformId)) {
     throw new Error(`No handler implemented for platform: ${platformId}`);
   }
 
   try {
     logger.info(`Posting to ${platform.name}`, { platformId, contentType: content.type });
-    const result = await handler(content);
-    logger.info(`Posted successfully to ${platform.name}`, { platformId, postId: result.postId });
-    return { success: true, platform: platformId, ...result };
+    const result = normalizePublicationResult(platformId, await handler(content));
+    logger.info(result.success ? `Published to ${platform.name}` : `Publication outcome for ${platform.name}`, {
+      platformId, status: result.status, postId: result.postId,
+    });
+    return result;
   } catch (error) {
     logger.error(`Failed to post to ${platform.name}`, { platformId, error: error.message });
     throw error;
@@ -50,6 +81,11 @@ export async function postToPlatform(platformId, content) {
  * Post content to multiple platforms
  */
 export async function postToMultiplePlatforms(platformIds, content) {
+  if (!Array.isArray(platformIds) || platformIds.length === 0 ||
+      new Set(platformIds).size !== platformIds.length ||
+      platformIds.some(id => typeof id !== 'string' || !Object.hasOwn(PLATFORMS, id))) {
+    throw new Error('Specify a nonempty list of distinct, known platforms');
+  }
   const results = await Promise.allSettled(
     platformIds.map(id => postToPlatform(id, content))
   );
@@ -59,11 +95,11 @@ export async function postToMultiplePlatforms(platformIds, content) {
     if (result.status === 'fulfilled') {
       return result.value;
     } else {
-      return {
-        success: false,
-        platform: id,
+      return normalizePublicationResult(id, {
+        status: result.reason?.publicationStatus === 'unknown' || result.reason?.name === 'SyntaxError'
+          ? 'unknown' : 'failed',
         error: result.reason?.message || 'Unknown error',
-      };
+      });
     }
   });
 }
@@ -92,7 +128,7 @@ const platformHandlers = {
           }),
         }
       );
-      const containerData = await containerRes.json();
+      const containerData = await readSocialJson(containerRes);
       if (containerData.error) throw new Error(containerData.error.message);
 
       const publishRes = await socialFetch(
@@ -106,7 +142,7 @@ const platformHandlers = {
           }),
         }
       );
-      const publishData = await publishRes.json();
+      const publishData = await readSocialJson(publishRes);
       if (publishData.error) throw new Error(publishData.error.message);
 
       return { postId: publishData.id, url: `https://instagram.com/p/${publishData.id}` };
@@ -126,7 +162,7 @@ const platformHandlers = {
           }),
         }
       );
-      const containerData = await containerRes.json();
+      const containerData = await readSocialJson(containerRes);
       if (containerData.error) throw new Error(containerData.error.message);
 
       await pollForMediaReady(accountId, containerData.id, accessToken);
@@ -142,7 +178,7 @@ const platformHandlers = {
           }),
         }
       );
-      const publishData = await publishRes.json();
+      const publishData = await readSocialJson(publishRes);
       if (publishData.error) throw new Error(publishData.error.message);
 
       return { postId: publishData.id };
@@ -171,7 +207,7 @@ const platformHandlers = {
           }),
         }
       );
-      const data = await res.json();
+      const data = await readSocialJson(res);
       if (data.error) throw new Error(data.error.message);
       return { postId: data.post_id || data.id };
     }
@@ -189,7 +225,7 @@ const platformHandlers = {
           }),
         }
       );
-      const data = await res.json();
+      const data = await readSocialJson(res);
       if (data.error) throw new Error(data.error.message);
       return { postId: data.id };
     }
@@ -226,10 +262,21 @@ const platformHandlers = {
         }),
       }
     );
-    const initData = await initRes.json();
-    if (initData.error) throw new Error(initData.error.message);
-
-    return { postId: initData.data?.publish_id, status: 'processing' };
+    const initData = await readSocialJson(initRes);
+    if (initData.error && initData.error.code !== 'ok') {
+      throw new Error(initData.error.message || 'TikTok upload initialization failed');
+    }
+    const operationId = initData.data?.publish_id;
+    if (typeof operationId !== 'string' || !operationId.trim()) {
+      return { postId: null, status: 'unknown', message: 'Upload acknowledgement is missing. Check TikTok before retrying.' };
+    }
+    return {
+      postId: null,
+      operationId,
+      status: 'processing',
+      requiresUserAction: true,
+      message: 'Upload accepted for processing. Finish posting in TikTok after it becomes available in your inbox.',
+    };
   },
 
   /**
@@ -240,7 +287,7 @@ const platformHandlers = {
     return { 
       postId: null, 
       status: 'manual_required',
-      message: 'YouTube video upload requires OAuth consent flow. Content saved for manual upload.',
+      message: 'YouTube upload is manual. Prepare the content and upload it through YouTube; nothing has been posted by this request.',
     };
   },
 
@@ -264,7 +311,7 @@ const platformHandlers = {
         text: content.caption?.substring(0, 280) || content.text,
       }),
     });
-    const data = await res.json();
+    const data = await readSocialJson(res);
     if (data.errors) throw new Error(data.errors[0]?.message || 'Tweet failed');
 
     return { postId: data.data?.id, url: `https://x.com/i/status/${data.data?.id}` };
@@ -290,7 +337,7 @@ const platformHandlers = {
         }),
       }
     );
-    const containerData = await containerRes.json();
+    const containerData = await readSocialJson(containerRes);
     if (containerData.error) throw new Error(containerData.error.message);
 
     const publishRes = await socialFetch(
@@ -304,7 +351,7 @@ const platformHandlers = {
         }),
       }
     );
-    const publishData = await publishRes.json();
+    const publishData = await readSocialJson(publishRes);
     if (publishData.error) throw new Error(publishData.error.message);
 
     return { postId: publishData.id };
@@ -334,7 +381,7 @@ const platformHandlers = {
         },
       }),
     });
-    const data = await res.json();
+    const data = await readSocialJson(res);
     if (data.code) throw new Error(data.message || 'Pin creation failed');
 
     return { postId: data.id, url: `https://pinterest.com/pin/${data.id}` };
@@ -368,7 +415,7 @@ const platformHandlers = {
         visibility: { 'com.linkedin.ugc.MemberNetworkVisibility': 'PUBLIC' },
       }),
     });
-    const data = await res.json();
+    const data = await readSocialJson(res);
     if (data.status >= 400) throw new Error(data.message || 'LinkedIn post failed');
 
     return { postId: data.id };
@@ -383,7 +430,7 @@ async function pollForMediaReady(accountId, containerId, accessToken, maxAttempt
     const res = await socialFetch(
       `https://graph.facebook.com/v21.0/${containerId}?fields=status_code&access_token=${accessToken}`
     );
-    const data = await res.json();
+    const data = await readSocialJson(res);
     
     if (data.status_code === 'FINISHED') return true;
     if (data.status_code === 'ERROR') throw new Error('Media processing failed');
