@@ -75,7 +75,83 @@ function stripeCustomerId(customer) {
   return requireStripeId(customer.id, "cus_");
 }
 
-async function hasActiveReplacementSubscription(customerId, canceledSubscriptionId) {
+async function snapshotBillingCustomer(customerId) {
+  const rows = await db.select({
+    id: users.id,
+    email: users.email,
+    name: users.name,
+    subscriptionStatus: users.subscriptionStatus,
+    rowVersion: sql`${users}.xmin::text`.as("row_version"),
+  }).from(users).where(eq(users.stripeCustomerId, customerId));
+  if (rows.length === 0) return null;
+  const user = rows[0];
+  if (rows.length !== 1 || typeof user.id !== "string" || !user.id ||
+      typeof user.rowVersion !== "string" || !/^\d+$/.test(user.rowVersion) ||
+      !["free", "starter", "pro", "elite"].includes(user.subscriptionStatus)) {
+    throw new Error("Ambiguous Stripe customer account state");
+  }
+  return user;
+}
+
+async function conditionalFreeDowngrade(customerId, user, fields = {}) {
+  const result = await db.update(users).set({
+    subscriptionStatus: "free",
+    ...fields,
+    updatedAt: new Date(),
+  }).where(and(
+    eq(users.id, user.id),
+    eq(users.stripeCustomerId, customerId),
+    eq(sql`${users}.xmin::text`, user.rowVersion),
+  ));
+  const changed = result?.rowCount ?? result?.changes ?? 0;
+  if (changed !== 1) {
+    throw new Error("Stripe customer account changed during downgrade; retry required");
+  }
+}
+
+function invoiceSubscriptionReference(reference, customerId) {
+  if (reference === null) return null;
+  if (typeof reference === "string") return requireStripeId(reference, "sub_");
+  if (!isRecord(reference) || reference.object !== "subscription") {
+    throw new Error("Invalid Stripe invoice subscription reference");
+  }
+  if (Object.hasOwn(reference, "customer") && stripeCustomerId(reference.customer) !== customerId) {
+    throw new Error("Inconsistent Stripe invoice subscription customer");
+  }
+  return requireStripeId(reference.id, "sub_");
+}
+
+function invoiceSubscriptionId(invoice, customerId) {
+  const associations = [];
+  // The client requests the legacy 2024 API, while webhook endpoints can emit
+  // the modern parent shape. Missing fields never establish a standalone bill.
+  if (Object.hasOwn(invoice, "subscription")) {
+    associations.push(invoiceSubscriptionReference(invoice.subscription, customerId));
+  }
+  if (Object.hasOwn(invoice, "parent")) {
+    const parent = invoice.parent;
+    if (parent === null) {
+      associations.push(null);
+    } else if (isRecord(parent) && parent.type === "subscription_details" &&
+        isRecord(parent.subscription_details) && parent.quote_details == null) {
+      const id = invoiceSubscriptionReference(parent.subscription_details.subscription, customerId);
+      if (id === null) throw new Error("Missing Stripe invoice subscription reference");
+      associations.push(id);
+    } else if (isRecord(parent) && parent.type === "quote_details" &&
+        isRecord(parent.quote_details) && parent.subscription_details == null) {
+      requireStripeId(parent.quote_details.quote, "qt_");
+      associations.push(null);
+    } else {
+      throw new Error("Invalid Stripe invoice parent state");
+    }
+  }
+  if (associations.length === 0 || associations.some(id => id !== associations[0])) {
+    throw new Error("Missing or conflicting Stripe invoice subscription association");
+  }
+  return associations[0];
+}
+
+async function hasActiveRecurringSubscription(customerId, canceledSubscriptionId = null) {
   // The elapsed budget prevents starting more pages after expiry. Stripe's
   // per-request timeout is an inactivity timeout, so an in-flight response can
   // exceed this budget; validate elapsed time again before trusting its data.
@@ -281,22 +357,35 @@ router.post(
         case "customer.subscription.created":
         case "customer.subscription.updated": {
           const subscription = event.data.object;
+          const isActive = ["active", "trialing"].includes(subscription.status);
+          if (!isActive) {
+            const customerId = stripeCustomerId(subscription.customer);
+            requireStripeId(subscription.id, "sub_");
+            if (!["canceled", "incomplete", "incomplete_expired", "past_due", "unpaid", "paused"].includes(subscription.status)) {
+              throw new Error("Unknown Stripe subscription status");
+            }
+            const user = await snapshotBillingCustomer(customerId);
+            if (!user) break;
+            // A recurring negative event cannot revoke a current one-time
+            // Starter purchase. Historical purchases are not reconstructed.
+            if (user.subscriptionStatus === "starter" || await hasActiveRecurringSubscription(customerId)) break;
+            await conditionalFreeDowngrade(customerId, user, {
+              subscriptionExpiresAt: subscription.current_period_end
+                ? new Date(subscription.current_period_end * 1000)
+                : null,
+            });
+            logger.info("Subscription status synced", { stripeStatus: subscription.status, canonicalStatus: "free" });
+            break;
+          }
           if (!subscription.customer) {
             logger.warn(`${event.type} missing customer field`);
             break;
           }
-          const isActive = ["active", "trialing"].includes(subscription.status);
-          let canonicalStatus;
-          if (isActive) {
-            const mappedPlan = mapSubscriptionToPlan(subscription);
-            if (!mappedPlan) {
-              logger.error(`${event.type}: unknown price id — refusing to default to pro`);
-              increment("subscription_mapping_unknown", { source: "subscription" });
-              break;
-            }
-            canonicalStatus = mappedPlan;
-          } else {
-            canonicalStatus = "free";
+          const canonicalStatus = mapSubscriptionToPlan(subscription);
+          if (!canonicalStatus) {
+            logger.error(`${event.type}: unknown price id — refusing to default to pro`);
+            increment("subscription_mapping_unknown", { source: "subscription" });
+            break;
           }
           const syncResult = await db
             .update(users)
@@ -321,44 +410,20 @@ router.post(
           const subscription = event.data.object;
           const customerId = stripeCustomerId(subscription.customer);
           const canceledSubscriptionId = requireStripeId(subscription.id, "sub_");
-          // Snapshot the row before the provider lookup. xmin is PostgreSQL's
-          // exact row version, so a concurrent activation cannot be overwritten
-          // after the lookup finishes. No lock is held while contacting Stripe.
-          const userRows = await db.select({
-            id: users.id,
-            email: users.email,
-            name: users.name,
-            rowVersion: sql`${users}.xmin::text`.as("row_version"),
-          })
-            .from(users)
-            .where(eq(users.stripeCustomerId, customerId));
-          if (userRows.length === 0) break;
-          const cancelledUser = userRows[0];
-          if (userRows.length !== 1 || typeof cancelledUser.id !== "string" || !cancelledUser.id ||
-              typeof cancelledUser.rowVersion !== "string" || !/^\d+$/.test(cancelledUser.rowVersion)) {
-            throw new Error("Ambiguous Stripe customer account state");
+          // Snapshot before the provider lookup; xmin guards against a newer
+          // activation without holding a database lock during provider IO.
+          const cancelledUser = await snapshotBillingCustomer(customerId);
+          if (!cancelledUser) break;
+          if (cancelledUser.subscriptionStatus === "starter") {
+            logger.info("Subscription cancellation skipped: current one-time access retained");
+            break;
           }
-          if (await hasActiveReplacementSubscription(customerId, canceledSubscriptionId)) {
+          if (await hasActiveRecurringSubscription(customerId, canceledSubscriptionId)) {
             logger.info("Stale subscription cancellation skipped: replacement remains active");
             break;
           }
           
-          const deleteResult = await db
-            .update(users)
-            .set({
-              subscriptionStatus: "free",
-              subscriptionExpiresAt: new Date(),
-              updatedAt: new Date(),
-            })
-            .where(and(
-              eq(users.id, cancelledUser.id),
-              eq(users.stripeCustomerId, customerId),
-              eq(sql`${users}.xmin::text`, cancelledUser.rowVersion),
-            ));
-          const deleteRows = deleteResult?.rowCount ?? deleteResult?.changes ?? 0;
-          if (deleteRows !== 1) {
-            throw new Error("Stripe customer account changed during cancellation; retry required");
-          }
+          await conditionalFreeDowngrade(customerId, cancelledUser, { subscriptionExpiresAt: new Date() });
           logger.info("Subscription deleted, reverted to free");
           increment("subscription_transition", { plan: "pro_to_free" });
           
@@ -404,23 +469,16 @@ router.post(
 
         case "invoice.payment_failed": {
           const invoice = event.data.object;
-          if (!invoice.customer) {
-            logger.warn("invoice.payment_failed missing customer field");
-            break;
-          }
-          const failedResult = await db
-            .update(users)
-            .set({
-              subscriptionStatus: "free",
-              updatedAt: new Date(),
-            })
-            .where(eq(users.stripeCustomerId, invoice.customer));
-          const failedRows = failedResult?.rowCount ?? failedResult?.changes ?? 0;
-          if (failedRows === 0) {
-            logger.warn("invoice.payment_failed: no user found for stripeCustomerId");
-          } else {
-            logger.info("Invoice payment failed, reverted to free");
-          }
+          const customerId = stripeCustomerId(invoice.customer);
+          requireStripeId(invoice.id, "in_");
+          if (invoiceSubscriptionId(invoice, customerId) === null) break;
+          const user = await snapshotBillingCustomer(customerId);
+          if (!user) break;
+          if (user.subscriptionStatus === "starter" || await hasActiveRecurringSubscription(customerId)) break;
+          // Keep the prior invoice-failure expiry semantics: only the tier and
+          // updatedAt change when no active recurring entitlement remains.
+          await conditionalFreeDowngrade(customerId, user);
+          logger.info("Invoice payment failed, reverted to free");
           break;
         }
 

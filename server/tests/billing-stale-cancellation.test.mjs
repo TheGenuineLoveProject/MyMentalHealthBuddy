@@ -50,6 +50,7 @@ async function fixture({ list = async () => page(), plan = "elite", clock } = {}
         assert.equal(params[0], customer, "lookup must use exact normalized customer");
         const selected = sql.slice(7, sql.indexOf(' from "users"')).split(',').map(column => {
           if (/xmin/.test(column)) return state.user.rowVersion;
+          if (column.trim() === '"subscription_status"') return state.user.subscriptionStatus;
           for (const key of ['email', 'name', 'id']) if (column.trim() === `"${key}"`) return state.user[key];
           throw Error('Unexpected user projection: ' + column);
         });

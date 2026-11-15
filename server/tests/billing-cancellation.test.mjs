@@ -62,7 +62,7 @@ async function fixture() {
         const matched = params[0] === state.user.stripe_customer_id;
         // Drizzle requests rowMode=array and applies the selected column map.
         // An undefined schema column fails during its SQL construction first.
-        return { rows: matched ? [[state.user.id, state.user.email, state.user.name, state.user.row_version]] : [], rowCount: matched ? 1 : 0 };
+        return { rows: matched ? [[state.user.id, state.user.email, state.user.name, state.user.subscription_status, state.user.row_version]] : [], rowCount: matched ? 1 : 0 };
       }
       if (text.startsWith('update "users"')) {
         state.updateAttempts++;
@@ -150,7 +150,7 @@ test("linked customer cancellation downgrades and uses canonical name/email", as
   assert.deepEqual(f.state.emails, [["synthetic@example.invalid", "Cancellation Fixture", 1780000000]]);
   assert.equal(f.state.processed.size, 1);
   const recipientRead = f.state.queries.find(query => query.text.includes('from "users"'));
-  assert.match(recipientRead.text, /select "id", "email", "name", "users"\.xmin::text as "row_version"/);
+  assert.match(recipientRead.text, /select "id", "email", "name", "subscription_status", "users"\.xmin::text as "row_version"/);
 });
 
 test("unmatched customer leaves other users unchanged and sends no cancellation email", async () => {
