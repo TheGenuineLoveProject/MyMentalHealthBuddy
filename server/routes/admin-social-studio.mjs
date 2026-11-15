@@ -73,10 +73,14 @@ function validate(schema, req, res) {
   return parsed.data;
 }
 
-const openai = new OpenAI({
-  apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY || process.env.OPENAI_API_KEY,
-  baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
-});
+let openai;
+function getOpenAIClient() {
+  if (!openai) openai = new OpenAI({
+    apiKey: process.env.AI_INTEGRATIONS_OPENAI_API_KEY || process.env.OPENAI_API_KEY,
+    baseURL: process.env.AI_INTEGRATIONS_OPENAI_BASE_URL,
+  });
+  return openai;
+}
 
 const PLATFORM_SPECS = {
   instagram: { maxChars: 2200, hashtagLimit: 30, bestTimes: ["9am", "12pm", "7pm"], format: "Square/Vertical" },
@@ -104,6 +108,43 @@ const TRAUMA_INFORMED_GUIDELINES = {
 };
 
 const router = express.Router();
+const EDITABLE_DRAFT_STATUSES = new Set([
+  "draft", "review", "approved", "scheduled", "exported", "manual_required", "failed",
+]);
+const DRAFT_CONTENT_FIELDS = new Set([
+  "platform", "hook", "caption", "cta", "hashtags", "disclaimer", "theme",
+]);
+
+function editorialReviewRequired(res, id, status = "unknown", completed = []) {
+  return res.status(409).json({
+    ok: false,
+    code: "PUBLICATION_REVIEW_REQUIRED",
+    message: "Review this draft's publication status before changing it.",
+    data: {
+      draft: { id, status: typeof status === "string" ? status : "unknown" },
+      reviewRequired: true,
+      retryable: false,
+      ...(completed.length ? { completed } : {}),
+    },
+  });
+}
+
+async function editableDraft(id, res) {
+  const [draft] = await db.select().from(postDrafts).where(eq(postDrafts.id, id)).limit(1);
+  if (!draft) {
+    res.status(404).json({ ok: false, message: "Draft not found" });
+    return null;
+  }
+  if (!EDITABLE_DRAFT_STATUSES.has(draft.status)) {
+    editorialReviewRequired(res, id, draft.status);
+    return null;
+  }
+  return draft;
+}
+
+function unchangedEditorialState(draft) {
+  return and(eq(postDrafts.id, draft.id), eq(postDrafts.status, draft.status));
+}
 
 /* =====================================================
  * POST DRAFTS CRUD
@@ -133,7 +174,7 @@ router.get("/drafts/:id", requireAuth, requireAdmin, async (req, res) => {
       .limit(1);
     
     if (!draft) {
-      return badRequest(res, "Draft not found", 404);
+      return res.status(404).json({ ok: false, message: "Draft not found" });
     }
     return success(res, draft);
   } catch (error) {
@@ -161,7 +202,7 @@ router.post("/drafts", requireAuth, requireAdmin, async (req, res) => {
       })
       .returning();
     
-    return success(res, draft, 201);
+    return success(res, draft, null, 201);
   } catch (error) {
     logger.error("Failed to create draft:", error);
     return badRequest(res, "Failed to create draft");
@@ -172,16 +213,23 @@ router.patch("/drafts/:id", requireAuth, requireAdmin, async (req, res) => {
   try {
     const { id } = req.params;
     const updates = req.body;
+    if (!updates || typeof updates !== "object" || Array.isArray(updates) ||
+        Object.keys(updates).length === 0 ||
+        Object.keys(updates).some(key => !DRAFT_CONTENT_FIELDS.has(key)) ||
+        Object.values(updates).some(value => value !== null && typeof value !== "string") ||
+        (updates.platform != null && !PLATFORM_KEYS.includes(updates.platform))) {
+      return badRequest(res, "Only draft content fields may be updated");
+    }
+    const previous = await editableDraft(id, res);
+    if (!previous) return;
     
     const [draft] = await db
       .update(postDrafts)
       .set({ ...updates, updatedAt: new Date() })
-      .where(eq(postDrafts.id, id))
+      .where(unchangedEditorialState(previous))
       .returning();
     
-    if (!draft) {
-      return badRequest(res, "Draft not found", 404);
-    }
+    if (!draft) return editorialReviewRequired(res, id);
     return success(res, draft);
   } catch (error) {
     logger.error("Failed to update draft:", error);
@@ -192,7 +240,11 @@ router.patch("/drafts/:id", requireAuth, requireAdmin, async (req, res) => {
 router.delete("/drafts/:id", requireAuth, requireAdmin, async (req, res) => {
   try {
     const { id } = req.params;
-    await db.delete(postDrafts).where(eq(postDrafts.id, id));
+    const previous = await editableDraft(id, res);
+    if (!previous) return;
+    const [deleted] = await db.delete(postDrafts)
+      .where(unchangedEditorialState(previous)).returning({ id: postDrafts.id });
+    if (!deleted) return editorialReviewRequired(res, id);
     return success(res, { message: "Draft deleted" });
   } catch (error) {
     logger.error("Failed to delete draft:", error);
@@ -200,18 +252,46 @@ router.delete("/drafts/:id", requireAuth, requireAdmin, async (req, res) => {
   }
 });
 
+// Register the literal bulk path before /drafts/:id/approve.
+router.post("/drafts/bulk/approve", requireAuth, requireAdmin, adminBulkLimiter, async (req, res) => {
+  try {
+    const data = validate(zBulkIdsBody, req, res);
+    if (!data) return;
+    const { ids } = data;
+    if (new Set(ids).size !== ids.length) return badRequest(res, "Choose each draft only once");
+    const previous = [];
+    for (const id of ids) {
+      const draft = await editableDraft(id, res);
+      if (!draft) return;
+      previous.push(draft);
+    }
+    const results = [];
+    for (const prior of previous) {
+      const [draft] = await db.update(postDrafts)
+        .set({ status: "approved", updatedAt: new Date() })
+        .where(unchangedEditorialState(prior)).returning();
+      if (!draft) return editorialReviewRequired(res, prior.id, "unknown", results.map(result => result.id));
+      results.push({ id: draft.id, success: true, draft });
+    }
+    return success(res, { processed: results.length, results });
+  } catch (error) {
+    logger.error("Bulk approve failed:", error);
+    return badRequest(res, "Failed to bulk approve");
+  }
+});
+
 router.post("/drafts/:id/approve", requireAuth, requireAdmin, async (req, res) => {
   try {
     const { id } = req.params;
+    const previous = await editableDraft(id, res);
+    if (!previous) return;
     const [draft] = await db
       .update(postDrafts)
       .set({ status: "approved", updatedAt: new Date() })
-      .where(eq(postDrafts.id, id))
+      .where(unchangedEditorialState(previous))
       .returning();
     
-    if (!draft) {
-      return badRequest(res, "Draft not found", 404);
-    }
+    if (!draft) return editorialReviewRequired(res, id);
     return success(res, draft);
   } catch (error) {
     logger.error("Failed to approve draft:", error);
@@ -610,7 +690,7 @@ OUTPUT FORMAT (JSON):
   "contentNotes": "Brief note on trauma-informed considerations"
 }`;
 
-    const response = await openai.chat.completions.create({
+    const response = await getOpenAIClient().chat.completions.create({
       model: "gpt-5.1",
       messages: [
         { role: "system", content: systemPrompt },
@@ -646,7 +726,7 @@ router.post("/generate/repurpose", requireAuth, requireAdmin, adminAiLimiter, as
     for (const platform of targetPlatforms) {
       const spec = PLATFORM_SPECS[platform] || PLATFORM_SPECS.instagram;
       
-      const response = await openai.chat.completions.create({
+      const response = await getOpenAIClient().chat.completions.create({
         model: "gpt-5.1",
         messages: [
           { 
@@ -750,7 +830,7 @@ router.post("/compliance/rewrite", requireAuth, requireAdmin, adminAiLimiter, as
     if (!data) return;
     const { text, issues } = data;
 
-    const response = await openai.chat.completions.create({
+    const response = await getOpenAIClient().chat.completions.create({
       model: "gpt-5.1",
       messages: [
         { 
@@ -817,7 +897,7 @@ REQUIREMENTS:
 - Soothing color palette that evokes safety and warmth
 - Subtle, calming visual elements`;
 
-    const response = await openai.images.generate({
+    const response = await getOpenAIClient().images.generate({
       model: "gpt-image-1",
       prompt: imagePrompt,
       n: 1,
@@ -857,7 +937,7 @@ router.post("/generate/batch", requireAuth, requireAdmin, adminAiLimiter, async 
     
     for (const theme of themes) {
       try {
-        const response = await openai.chat.completions.create({
+        const response = await getOpenAIClient().chat.completions.create({
           model: "gpt-5.1",
           messages: [
             { 
@@ -913,7 +993,7 @@ router.post("/enhance", requireAuth, requireAdmin, adminAiLimiter, async (req, r
       crisis: "Suggest appropriate crisis resources and safety disclaimers to add"
     };
     
-    const response = await openai.chat.completions.create({
+    const response = await getOpenAIClient().chat.completions.create({
       model: "gpt-5.1",
       messages: [
         { 
@@ -950,44 +1030,27 @@ router.get("/platforms/specs", requireAuth, requireAdmin, async (req, res) => {
  * BULK OPERATIONS
  * ===================================================== */
 
-router.post("/drafts/bulk/approve", requireAuth, requireAdmin, adminBulkLimiter, async (req, res) => {
-  try {
-    const data = validate(zBulkIdsBody, req, res);
-    if (!data) return;
-    const { ids } = data;
-
-    const results = [];
-    for (const id of ids) {
-      try {
-        const [draft] = await db
-          .update(postDrafts)
-          .set({ status: "approved", updatedAt: new Date() })
-          .where(eq(postDrafts.id, id))
-          .returning();
-        results.push({ id, success: true, draft });
-      } catch (e) {
-        results.push({ id, success: false, error: e.message });
-      }
-    }
-    
-    return success(res, { processed: results.length, results });
-  } catch (error) {
-    logger.error("Bulk approve failed:", error);
-    return badRequest(res, "Failed to bulk approve");
-  }
-});
-
 router.post("/drafts/bulk/delete", requireAuth, requireAdmin, adminBulkLimiter, async (req, res) => {
   try {
     const data = validate(zBulkIdsBody, req, res);
     if (!data) return;
     const { ids } = data;
-
+    if (new Set(ids).size !== ids.length) return badRequest(res, "Choose each draft only once");
+    const previous = [];
     for (const id of ids) {
-      await db.delete(postDrafts).where(eq(postDrafts.id, id));
+      const draft = await editableDraft(id, res);
+      if (!draft) return;
+      previous.push(draft);
+    }
+    const deletedIds = [];
+    for (const prior of previous) {
+      const [deleted] = await db.delete(postDrafts)
+        .where(unchangedEditorialState(prior)).returning({ id: postDrafts.id });
+      if (!deleted) return editorialReviewRequired(res, prior.id, "unknown", deletedIds);
+      deletedIds.push(deleted.id);
     }
     
-    return success(res, { deleted: ids.length });
+    return success(res, { deleted: deletedIds.length });
   } catch (error) {
     logger.error("Bulk delete failed:", error);
     return badRequest(res, "Failed to bulk delete");
@@ -995,7 +1058,7 @@ router.post("/drafts/bulk/delete", requireAuth, requireAdmin, adminBulkLimiter, 
 });
 
 /* =====================================================
- * BATCH PUBLISHING
+ * MANUAL CONTENT PREPARATION
  * ===================================================== */
 
 router.post("/publish/batch", requireAuth, requireAdmin, adminBulkLimiter, async (req, res) => {
@@ -1003,11 +1066,19 @@ router.post("/publish/batch", requireAuth, requireAdmin, adminBulkLimiter, async
     const data = validate(zPublishBatchBody, req, res);
     if (!data) return;
     const { draftId, platforms } = data;
+    if (new Set(platforms).size !== platforms.length) {
+      return badRequest(res, "Choose each platform only once");
+    }
 
     const [draft] = await db.select().from(postDrafts).where(eq(postDrafts.id, draftId));
     
     if (!draft) {
       return badRequest(res, "Draft not found");
+    }
+
+    if (![draft.hook, draft.caption, draft.hashtags, draft.cta, draft.disclaimer]
+      .some(value => typeof value === "string" && value.trim())) {
+      return badRequest(res, "Draft has no content to prepare");
     }
     
     const results = [];
@@ -1026,42 +1097,58 @@ router.post("/publish/batch", requireAuth, requireAdmin, adminBulkLimiter, async
         }
         
         let hashtags = (draft.hashtags || "").split(/\s+/).slice(0, platformSpec.hashtagLimit).join(" ");
+        const content = {
+          hook: draft.hook,
+          caption,
+          hashtags,
+          cta: draft.cta,
+          disclaimer: draft.disclaimer,
+        };
+        if (!Object.values(content).some(value => typeof value === "string" && value.trim())) {
+          results.push({
+            platform,
+            prepared: false,
+            success: false,
+            status: "failed",
+            error: "No content remains for this platform after formatting",
+          });
+          continue;
+        }
         
         results.push({
           platform,
-          success: true,
-          status: "queued",
-          content: {
-            hook: draft.hook,
-            caption,
-            hashtags,
-            cta: draft.cta,
-            disclaimer: draft.disclaimer,
-          },
-          publishedAt: new Date().toISOString(),
+          prepared: true,
+          success: false,
+          status: "manual_required",
+          content,
         });
-        
-        await new Promise(r => setTimeout(r, 200));
       } catch (e) {
         results.push({ platform, success: false, error: e.message });
       }
     }
-    
-    await db
-      .update(postDrafts)
-      .set({ status: "published" })
-      .where(eq(postDrafts.id, draftId));
+    const prepared = results.filter(result => result.prepared).length;
+    if (prepared === 0) {
+      return res.status(400).json({
+        ok: false,
+        message: "No content could be prepared for the selected platforms",
+        data: { draftId, mode: "manual_preparation", published: false, successful: 0, prepared: 0, results },
+      });
+    }
     
     return success(res, {
       draftId,
+      mode: "manual_preparation",
+      status: "manual_required",
+      published: false,
       totalPlatforms: platforms.length,
-      successful: results.filter(r => r.success).length,
+      prepared,
+      successful: 0,
       results,
-      publishedAt: new Date().toISOString(),
+      preparedAt: new Date().toISOString(),
     });
   } catch (error) {
-    logger.error("Batch publish failed:", error);
-    return badRequest(res, "Failed to batch publish");
+    logger.error("Manual content preparation failed:", error);
+    return badRequest(res, "Failed to prepare content for manual upload");
   }
 });
 
@@ -1069,7 +1156,8 @@ router.get("/publish/platforms", requireAuth, requireAdmin, async (req, res) => 
   const platformList = Object.entries(PLATFORM_SPECS).map(([id, spec]) => ({
     id,
     ...spec,
-    connected: true,
+    mode: "manual_preparation",
+    canPrepare: true,
   }));
   return success(res, platformList);
 });
@@ -1086,5 +1174,34 @@ router.get("/publish/platforms", requireAuth, requireAdmin, async (req, res) => 
 router.get("/", (req, res) => {
   res.json({ ok: true, module: "admin-social-studio", status: "operational", timestamp: new Date().toISOString() });
 });
+
+// This mount intentionally excludes AI, template and calendar-write handlers.
+// Exact method checks also keep Express's implicit HEAD fallback out of scope.
+const MANUAL_SOCIAL_ROUTES = [
+  ["GET", /^\/$/],
+  ["GET", /^\/drafts\/?$/],
+  ["GET", /^\/drafts\/[^/]+\/?$/],
+  ["GET", /^\/analytics\/?$/],
+  ["GET", /^\/calendar\/?$/],
+  ["GET", /^\/publish\/platforms\/?$/],
+  ["POST", /^\/drafts\/?$/],
+  ["PATCH", /^\/drafts\/[^/]+\/?$/],
+  ["DELETE", /^\/drafts\/[^/]+\/?$/],
+  ["POST", /^\/drafts\/[^/]+\/approve\/?$/],
+  ["POST", /^\/drafts\/bulk\/(approve|delete)\/?$/],
+  ["POST", /^\/publish\/batch\/?$/],
+  ["POST", /^\/export\/?$/],
+];
+
+export const manualSocialStudioRouter = express.Router();
+manualSocialStudioRouter.use(requireAuth, requireAdmin);
+manualSocialStudioRouter.use((req, res, next) => {
+  if (!MANUAL_SOCIAL_ROUTES.some(([method, path]) => req.method === method && path.test(req.path))) {
+    return res.status(404).json({ ok: false, message: "Not found" });
+  }
+  return next();
+});
+manualSocialStudioRouter.use(router);
+manualSocialStudioRouter.use((_req, res) => res.status(404).json({ ok: false, message: "Not found" }));
 
 export default router;
