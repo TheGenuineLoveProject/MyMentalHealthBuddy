@@ -53,7 +53,7 @@ jobs:
 
       - run: npm ci
 
-      - name: Verify billing, lead capture, and public metadata offline
+      - name: Verify billing, lead capture, newsletter consent, and public metadata offline
         run: npm run verify:conversion-flows
 
       - name: Verify deployment probes and tracing offline

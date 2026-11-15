@@ -55,7 +55,7 @@ export default function NewsletterSignup({ variant = "footer", source = "newslet
     const utm = getStoredUtmParams();
 
     try {
-      const response = await fetch("/api/leads", {
+      const response = await fetch("/api/newsletter/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -75,13 +75,13 @@ export default function NewsletterSignup({ variant = "footer", source = "newslet
       
       if (response.ok && data?.ok === true && data?.data?.subscribed === true) {
         setStatus("success");
-        setMessage(data.message || "Thank you for subscribing!");
+        setMessage(typeof data.message === "string" ? data.message : "Thank you for subscribing!");
         setEmail("");
         setConsent(false);
-        trackEvent("newsletter_signup_success", "newsletter", { source });
       } else {
         setStatus("error");
-        setMessage(data?.message || "Something went wrong. Please try again.");
+        setMessage(typeof data?.error?.message === "string" ? data.error.message
+          : typeof data?.message === "string" ? data.message : "Something went wrong. Please try again.");
       }
     } catch {
       setStatus("error");

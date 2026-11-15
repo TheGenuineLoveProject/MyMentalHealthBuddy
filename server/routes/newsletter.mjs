@@ -45,72 +45,108 @@ setInterval(() => {
   }
 }, RATE_LIMIT_WINDOW_MS * 5).unref();
 
+const emailSchema = z.string().trim().toLowerCase().max(255, 'Email address is too long')
+  .email('Invalid email address');
+const sourceSchema = z.string().trim().min(1, 'Source is required when supplied')
+  .max(100, 'Source is too long')
+  .regex(/^(?:\/|\/?[A-Za-z0-9][A-Za-z0-9/_-]*)$/, 'Invalid source identifier');
 const subscribeSchema = z.object({
-  email: z.string().email('Invalid email address')
+  email: emailSchema,
+  // The legacy Subscribe action accepts an email alone. An explicit refusal
+  // must never be converted into positive consent.
+  consent: z.literal(true).optional(),
+  source: sourceSchema.optional(),
+  utmSource: z.string().max(255).optional(),
+  utmMedium: z.string().max(255).optional(),
+  utmCampaign: z.string().max(255).optional(),
+  utmContent: z.string().max(255).optional(),
+  utmTerm: z.string().max(255).optional(),
+  utmTimestamp: z.number().nonnegative().optional(),
 });
+const unsubscribeSchema = z.object({ email: emailSchema });
+const THIRTY_DAYS_MS = 30 * 24 * 60 * 60 * 1000;
+
+function freshAttribution(input) {
+  if (!input.utmTimestamp || Date.now() - input.utmTimestamp > THIRTY_DAYS_MS) return {};
+  return Object.fromEntries(
+    ['utmSource', 'utmMedium', 'utmCampaign', 'utmContent', 'utmTerm']
+      .filter(key => input[key] !== undefined)
+      .map(key => [key, input[key]])
+  );
+}
+
+function invalidInput(res, error) {
+  return res.status(400).json({
+    ok: false,
+    error: {
+      code: 'VALIDATION_ERROR',
+      message: error.issues[0]?.message || 'Invalid input',
+    },
+  });
+}
+
+function recordAnalytics(eventName, path) {
+  // Consent persistence is authoritative. Optional telemetry runs only after
+  // commit and can never turn a committed change into a failure response.
+  try {
+    const pending = db.insert(analyticsEvents).values({
+      eventName,
+      eventCategory: 'newsletter',
+      path,
+      meta: {},
+      privacyLevel: 'minimal',
+    });
+    void Promise.resolve(pending).catch(() => {});
+  } catch {
+    // No email, source text, or provider/SQL error details enter telemetry.
+  }
+}
 
 router.post('/subscribe', rateLimit, async (req, res) => {
+  const parsed = subscribeSchema.safeParse(req.body);
+  if (!parsed.success) return invalidInput(res, parsed.error);
+
   try {
-    const { email } = subscribeSchema.parse(req.body);
-    
-    logger.info("[Newsletter] Subscription request", { email: `${email.substring(0, 3)}***@***` });
-
-    const normalizedEmail = email.toLowerCase().trim();
-
-    const existing = await db
-      .select({ id: leads.id })
-      .from(leads)
-      .where(eq(leads.email, normalizedEmail))
-      .limit(1);
-
-    if (existing.length > 0) {
-      return res.json({ 
-        ok: true, 
-        message: 'You are already subscribed. Thank you!' 
+    const { email, source } = parsed.data;
+    const attribution = freshAttribution(parsed.data);
+    await db.transaction(async tx => {
+      // Use the same lead -> subscriber order for subscribe and unsubscribe.
+      // Upsert atomically handles renewed consent and concurrent first signups.
+      await tx.insert(leads).values({
+        email,
+        source: source ?? 'newsletter-subscribe',
+        consent: true,
+        interests: JSON.stringify([]),
+        ...attribution,
+      }).onConflictDoUpdate({
+        target: leads.email,
+        set: {
+          consent: true,
+          ...(source !== undefined ? { source } : {}),
+          ...attribution,
+          updatedAt: new Date(),
+        },
       });
-    }
-
-    await db.insert(leads).values({
-      email: normalizedEmail,
-      source: req.body.source || "newsletter-subscribe",
-      consent: true,
-      interests: JSON.stringify([]),
+      await tx.insert(newsletterSubscribers).values({
+        email,
+        status: 'active',
+        sourcePath: source ?? null,
+      }).onConflictDoUpdate({
+        target: newsletterSubscribers.email,
+        set: { status: 'active', ...(source !== undefined ? { sourcePath: source } : {}) },
+      });
     });
 
-    try {
-      await db.insert(newsletterSubscribers).values({
-        email: normalizedEmail,
-        status: "active",
-        sourcePath: req.body.source || null,
-      });
-    } catch (dupErr) {
-      logger.debug("[Newsletter] Subscriber already exists in dedicated table", { email: `${normalizedEmail.substring(0, 3)}***` });
-    }
-
-    db.insert(analyticsEvents).values({
-      eventName: "newsletter_signup_success",
-      eventCategory: "newsletter",
-      path: req.body.source || "/newsletter",
-      meta: {},
-      privacyLevel: "minimal",
-    }).catch(() => {});
+    logger.info('[Newsletter] Subscription preferences saved');
+    recordAnalytics('newsletter_signup_success', '/newsletter');
 
     res.json({ 
       ok: true, 
+      data: { subscribed: true },
       message: 'Subscription received. Thank you for joining us.' 
     });
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return res.status(400).json({
-        ok: false,
-        error: {
-          code: 'VALIDATION_ERROR',
-          message: error.errors[0]?.message || 'Invalid input'
-        }
-      });
-    }
-    
-    logger.error("[Newsletter] Error", { error: error?.message || error });
+  } catch {
+    logger.error('[Newsletter] Subscription failed');
     res.status(500).json({
       ok: false,
       error: {
@@ -122,58 +158,29 @@ router.post('/subscribe', rateLimit, async (req, res) => {
 });
 
 router.post('/unsubscribe', rateLimit, async (req, res) => {
+  const parsed = unsubscribeSchema.safeParse(req.body);
+  if (!parsed.success) return invalidInput(res, parsed.error);
+
   try {
-    const { email } = subscribeSchema.parse(req.body);
+    const { email } = parsed.data;
+    await db.transaction(async tx => {
+      await tx.delete(leads).where(eq(leads.email, email));
+      // This must run even when there was no lead: older records can exist in
+      // either store independently. A failure rolls back both mutations.
+      await tx.update(newsletterSubscribers)
+        .set({ status: 'unsubscribed' })
+        .where(eq(newsletterSubscribers.email, email));
+    });
 
-    logger.info("[Newsletter] Unsubscribe request", { email: `${email.substring(0, 3)}***@***` });
-
-    const normalizedEmail = email.toLowerCase().trim();
-
-    const existing = await db
-      .select({ id: leads.id })
-      .from(leads)
-      .where(eq(leads.email, normalizedEmail))
-      .limit(1);
-
-    if (existing.length === 0) {
-      return res.json({
-        ok: true,
-        message: 'If this email was subscribed, it has been removed. Thank you.'
-      });
-    }
-
-    await db.delete(leads).where(eq(leads.email, normalizedEmail));
-
-    try {
-      await db.update(newsletterSubscribers)
-        .set({ status: "unsubscribed" })
-        .where(eq(newsletterSubscribers.email, normalizedEmail));
-    } catch {}
-
-    db.insert(analyticsEvents).values({
-      eventName: "newsletter_unsubscribe",
-      eventCategory: "newsletter",
-      path: "/newsletter/unsubscribe",
-      meta: {},
-      privacyLevel: "minimal",
-    }).catch(() => {});
+    logger.info('[Newsletter] Unsubscribe completed');
+    recordAnalytics('newsletter_unsubscribe', '/newsletter/unsubscribe');
 
     res.json({
       ok: true,
-      message: 'You have been unsubscribed. We respect your choice. Take care.'
+      message: 'If this email was subscribed, it has been removed. Thank you.'
     });
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return res.status(400).json({
-        ok: false,
-        error: {
-          code: 'VALIDATION_ERROR',
-          message: error.errors[0]?.message || 'Invalid input'
-        }
-      });
-    }
-
-    logger.error("[Newsletter] Unsubscribe error", { error: error?.message || error });
+  } catch {
+    logger.error('[Newsletter] Unsubscribe failed');
     res.status(500).json({
       ok: false,
       error: {
