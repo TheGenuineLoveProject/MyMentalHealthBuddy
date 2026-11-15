@@ -48,19 +48,28 @@ jobs:
           node-version: 24
           cache: npm
 
+      - name: Test audit report validation
+        run: node --test scripts/security/ci-production-audit-gate.test.mjs
+
       - run: npm ci
 
-      - run: node scripts/security/ci-production-audit-gate.mjs
+      - name: Verify billing, lead capture, newsletter consent, and public metadata offline
+        run: npm run verify:conversion-flows
 
-      - run: npm run typecheck
+      - name: Verify deployment probes and tracing offline
+        run: npm run verify:operations-probes
+
+      - name: Verify OpenAI request deadlines offline
+        run: npm run verify:ai-deadlines
+
+      - name: Verify backup and restore in isolated PostgreSQL
+        run: npm run verify:backup-roundtrip
+
+      - run: node scripts/security/ci-production-audit-gate.mjs
 
       - run: npm run lint
 
       - run: npm run build
-
-      - run: npm run verify:safety-guardrails
-
-      - run: npm run verify:rate-limit
 
       - name: Start isolated server
         run: |
@@ -77,7 +86,11 @@ jobs:
           done
           exit 1
 
-      - run: npm run verify:foundation
+      - name: Run the complete documented test command
+        run: npm test
+
+      - name: Verify deployment health and database readiness
+        run: APP_BASE_URL=http://127.0.0.1:5099 npm run verify:deployment-target-health
 
       - run: npm run verify:clinical-safety-taxonomy
 

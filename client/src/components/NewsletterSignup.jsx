@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useId } from "react";
 import { Mail, Check, AlertCircle } from "lucide-react";
 import { trackEvent } from "../hooks/useAnalytics.mjs";
 
 function getStoredUtmParams() {
   try {
     const stored = localStorage.getItem("glp_utm");
-    return stored ? JSON.parse(stored) : {};
+    const parsed = stored ? JSON.parse(stored) : null;
+    return parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : {};
   } catch {
     return {};
   }
@@ -28,6 +29,7 @@ function storeUtmParams() {
 }
 
 export default function NewsletterSignup({ variant = "footer", source = "newsletter" }) {
+  const emailId = useId();
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState("idle");
@@ -39,6 +41,7 @@ export default function NewsletterSignup({ variant = "footer", source = "newslet
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (status === "loading") return;
     
     if (!email || !consent) {
       setStatus("error");
@@ -52,7 +55,7 @@ export default function NewsletterSignup({ variant = "footer", source = "newslet
     const utm = getStoredUtmParams();
 
     try {
-      const response = await fetch("/api/leads", {
+      const response = await fetch("/api/newsletter/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -70,15 +73,15 @@ export default function NewsletterSignup({ variant = "footer", source = "newslet
 
       const data = await response.json();
       
-      if (response.ok) {
+      if (response.ok && data?.ok === true && data?.data?.subscribed === true) {
         setStatus("success");
-        setMessage(data.message || "Thank you for subscribing!");
+        setMessage(typeof data.message === "string" ? data.message : "Thank you for subscribing!");
         setEmail("");
         setConsent(false);
-        trackEvent("newsletter_signup_success", "newsletter", { source });
       } else {
         setStatus("error");
-        setMessage(data.message || "Something went wrong. Please try again.");
+        setMessage(typeof data?.error?.message === "string" ? data.error.message
+          : typeof data?.message === "string" ? data.message : "Something went wrong. Please try again.");
       }
     } catch {
       setStatus("error");
@@ -88,7 +91,7 @@ export default function NewsletterSignup({ variant = "footer", source = "newslet
 
   if (status === "success") {
     return (
-      <div className={`rounded-xl p-4 bg-[var(--sage-100)] border border-[var(--sage-300)] ${variant === "inline" ? "" : "max-w-md"}`}>
+      <div role="status" className={`rounded-xl p-4 bg-[var(--sage-100)] border border-[var(--sage-300)] ${variant === "inline" ? "" : "max-w-md"}`}>
         <div className="flex items-center gap-3">
           <div className="p-2 rounded-full bg-[var(--sage-200)]">
             <Check className="w-5 h-5 text-[var(--sage-700)]" aria-hidden="true" />
@@ -105,7 +108,7 @@ export default function NewsletterSignup({ variant = "footer", source = "newslet
   return (
     <form onSubmit={handleSubmit} className={variant === "footer" ? "max-w-md" : ""} data-testid="form-newsletter">
       <div className="mb-3">
-        <label htmlFor="newsletter-email" className="block text-sm font-medium text-[var(--text-1)] mb-1">
+        <label htmlFor={emailId} className="block text-sm font-medium text-[var(--text-1)] mb-1">
           Stay Updated
         </label>
         <p className="text-sm text-[var(--text-2)] mb-3">
@@ -121,7 +124,7 @@ export default function NewsletterSignup({ variant = "footer", source = "newslet
         <div className="relative flex-1">
           <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--text-3)]" aria-hidden="true" />
           <input
-            id="newsletter-email"
+            id={emailId}
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
