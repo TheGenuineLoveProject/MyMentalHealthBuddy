@@ -3,7 +3,7 @@ import express from "express";
 import Stripe from "stripe";
 import { db } from "../db/client.mjs";
 import { users, webhookEvents } from "../../shared/schema.mjs";
-import { eq } from "drizzle-orm";
+import { and, eq, sql } from "drizzle-orm";
 import { logger } from "../utils/logger.mjs";
 import { increment } from "../utils/metrics.mjs";
 import { sendUpgradeConfirmation, sendCancellationAcknowledgment } from "../services/email.mjs";
@@ -49,6 +49,97 @@ async function markProcessed(event) {
     logger.error("Failed to mark event processed");
     throw err; // Do not acknowledge an event without durable processing evidence.
   }
+}
+
+const SUBSCRIPTION_LOOKUP_BUDGET_MS = 10000;
+const SUBSCRIPTION_LOOKUP_PAGE_LIMIT = 10;
+
+function isRecord(value) {
+  return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+
+function requireStripeId(value, prefix) {
+  if (typeof value !== "string" || !value.startsWith(prefix) ||
+      value.length <= prefix.length || /\s/.test(value)) {
+    throw new Error("Invalid Stripe subscription identity");
+  }
+  return value;
+}
+
+function stripeCustomerId(customer) {
+  if (typeof customer === "string") return requireStripeId(customer, "cus_");
+  // Both expanded Customer and DeletedCustomer objects retain this identity.
+  if (!isRecord(customer) || customer.object !== "customer") {
+    throw new Error("Invalid Stripe customer state");
+  }
+  return requireStripeId(customer.id, "cus_");
+}
+
+async function hasActiveReplacementSubscription(customerId, canceledSubscriptionId) {
+  // The elapsed budget prevents starting more pages after expiry. Stripe's
+  // per-request timeout is an inactivity timeout, so an in-flight response can
+  // exceed this budget; validate elapsed time again before trusting its data.
+  const deadline = Date.now() + SUBSCRIPTION_LOOKUP_BUDGET_MS;
+  for (const status of ["active", "trialing"]) {
+    const seenIds = new Set();
+    const seenCursors = new Set();
+    let startingAfter;
+    for (let pageIndex = 0; pageIndex < SUBSCRIPTION_LOOKUP_PAGE_LIMIT; pageIndex++) {
+      const remainingMs = deadline - Date.now();
+      if (remainingMs <= 0) throw new Error("Stripe subscription lookup deadline exceeded");
+      const page = await stripe.subscriptions.list({
+        customer: customerId,
+        status,
+        limit: 100,
+        ...(startingAfter ? { starting_after: startingAfter } : {}),
+      }, { timeout: remainingMs, maxNetworkRetries: 0 });
+      if (Date.now() >= deadline) throw new Error("Stripe subscription lookup deadline exceeded");
+      if (!isRecord(page) || !Array.isArray(page.data) || page.data.length > 100 ||
+          typeof page.has_more !== "boolean" || (page.has_more && page.data.length === 0)) {
+        throw new Error("Incomplete Stripe subscription listing");
+      }
+
+      let foundReplacement = false;
+      for (const candidate of page.data) {
+        if (!isRecord(candidate)) throw new Error("Invalid Stripe subscription state");
+        const candidateId = requireStripeId(candidate.id, "sub_");
+        if (seenIds.has(candidateId) || stripeCustomerId(candidate.customer) !== customerId) {
+          throw new Error("Inconsistent Stripe subscription listing");
+        }
+        seenIds.add(candidateId);
+        // The explicitly canceled subscription itself is never replacement
+        // evidence, even if the provider includes it during a status transition.
+        if (candidateId === canceledSubscriptionId && candidate.status === "canceled") continue;
+        if (candidate.status !== status || candidateId === canceledSubscriptionId) {
+          throw new Error("Inconsistent Stripe subscription status");
+        }
+        // Current checkout creates one recurring item. Unknown or incomplete
+        // item sets cannot prove that downgrading this customer is correct.
+        if (!isRecord(candidate.items) || !Array.isArray(candidate.items.data) ||
+            candidate.items.data.length !== 1 || candidate.items.has_more !== false) {
+          throw new Error("Incomplete Stripe subscription pricing");
+        }
+        const plan = mapSubscriptionToPlan(candidate);
+        if (plan !== "pro" && plan !== "elite") {
+          throw new Error("Unknown Stripe recurring subscription plan");
+        }
+        foundReplacement = true;
+      }
+
+      const nextCursor = page.data.at(-1)?.id;
+      if (page.has_more && (nextCursor === startingAfter || seenCursors.has(nextCursor))) {
+        throw new Error("Stripe subscription pagination did not advance");
+      }
+      if (foundReplacement) return true;
+      if (!page.has_more) break;
+      if (pageIndex === SUBSCRIPTION_LOOKUP_PAGE_LIMIT - 1) {
+        throw new Error("Stripe subscription lookup page limit exceeded");
+      }
+      seenCursors.add(nextCursor);
+      startingAfter = nextCursor;
+    }
+  }
+  return false;
 }
 
 
@@ -228,13 +319,29 @@ router.post(
 
         case "customer.subscription.deleted": {
           const subscription = event.data.object;
-          if (!subscription.customer) {
-            logger.warn("customer.subscription.deleted missing customer field");
+          const customerId = stripeCustomerId(subscription.customer);
+          const canceledSubscriptionId = requireStripeId(subscription.id, "sub_");
+          // Snapshot the row before the provider lookup. xmin is PostgreSQL's
+          // exact row version, so a concurrent activation cannot be overwritten
+          // after the lookup finishes. No lock is held while contacting Stripe.
+          const userRows = await db.select({
+            id: users.id,
+            email: users.email,
+            name: users.name,
+            rowVersion: sql`${users}.xmin::text`.as("row_version"),
+          })
+            .from(users)
+            .where(eq(users.stripeCustomerId, customerId));
+          if (userRows.length === 0) break;
+          const cancelledUser = userRows[0];
+          if (userRows.length !== 1 || typeof cancelledUser.id !== "string" || !cancelledUser.id ||
+              typeof cancelledUser.rowVersion !== "string" || !/^\d+$/.test(cancelledUser.rowVersion)) {
+            throw new Error("Ambiguous Stripe customer account state");
+          }
+          if (await hasActiveReplacementSubscription(customerId, canceledSubscriptionId)) {
+            logger.info("Stale subscription cancellation skipped: replacement remains active");
             break;
           }
-          const userRows = await db.select({ email: users.email, name: users.name })
-            .from(users)
-            .where(eq(users.stripeCustomerId, subscription.customer));
           
           const deleteResult = await db
             .update(users)
@@ -243,16 +350,18 @@ router.post(
               subscriptionExpiresAt: new Date(),
               updatedAt: new Date(),
             })
-            .where(eq(users.stripeCustomerId, subscription.customer));
+            .where(and(
+              eq(users.id, cancelledUser.id),
+              eq(users.stripeCustomerId, customerId),
+              eq(sql`${users}.xmin::text`, cancelledUser.rowVersion),
+            ));
           const deleteRows = deleteResult?.rowCount ?? deleteResult?.changes ?? 0;
-          if (deleteRows === 0) {
-            logger.warn("customer.subscription.deleted: no user found for stripeCustomerId");
-          } else {
-            logger.info("Subscription deleted, reverted to free");
-            increment("subscription_transition", { plan: "pro_to_free" });
+          if (deleteRows !== 1) {
+            throw new Error("Stripe customer account changed during cancellation; retry required");
           }
+          logger.info("Subscription deleted, reverted to free");
+          increment("subscription_transition", { plan: "pro_to_free" });
           
-          const cancelledUser = userRows?.[0];
           if (cancelledUser?.email) {
             sendCancellationAcknowledgment(
               cancelledUser.email, 

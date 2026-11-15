@@ -8,6 +8,7 @@ import vm from "node:vm";
 import express from "express";
 import request from "supertest";
 import Stripe from "stripe";
+import { and, sql } from "drizzle-orm";
 
 const signingSecret = "whsec_offline_fixture";
 const sdk = new Stripe("sk_test_offline_fixture");
@@ -76,7 +77,7 @@ async function fixture(session = starterSession()) {
       users: { email: "email", stripeCustomerId: "stripeCustomerId" },
       webhookEvents: { id: "id" },
     },
-    "drizzle-orm": { eq: (column, value) => ({ column, value }) },
+    "drizzle-orm": { and, sql, eq: (column, value) => ({ column, value }) },
     "../utils/logger.mjs": { logger: { info: captureLog, warn: captureLog, error: captureLog } },
     "../utils/metrics.mjs": { increment: noop },
     "../services/email.mjs": {

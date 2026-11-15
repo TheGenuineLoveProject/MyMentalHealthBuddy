@@ -9,7 +9,7 @@ import express from "express";
 import request from "supertest";
 import Stripe from "stripe";
 import { drizzle } from "drizzle-orm/node-postgres";
-import { eq } from "drizzle-orm";
+import { and, eq, sql } from "drizzle-orm";
 import { users, webhookEvents } from "../../shared/schema.mjs";
 
 const signingSecret = "whsec_cancellation_offline_fixture";
@@ -33,11 +33,13 @@ function cancellationEvent(customer = "cus_cancellation_fixture") {
 async function fixture() {
   const state = {
     user: {
+      id: "00000000-0000-4000-8000-000000000001",
       email: "synthetic@example.invalid",
       name: "Cancellation Fixture",
       stripe_customer_id: "cus_cancellation_fixture",
       subscription_status: "pro",
       subscription_expires_at: "2099-01-01T00:00:00.000Z",
+      row_version: "1",
     },
     queries: [],
     updateAttempts: 0,
@@ -60,17 +62,19 @@ async function fixture() {
         const matched = params[0] === state.user.stripe_customer_id;
         // Drizzle requests rowMode=array and applies the selected column map.
         // An undefined schema column fails during its SQL construction first.
-        return { rows: matched ? [[state.user.email, state.user.name]] : [], rowCount: matched ? 1 : 0 };
+        return { rows: matched ? [[state.user.id, state.user.email, state.user.name, state.user.row_version]] : [], rowCount: matched ? 1 : 0 };
       }
       if (text.startsWith('update "users"')) {
         state.updateAttempts++;
         if (state.failUserUpdate) throw new Error("Synthetic user-update failure");
-        const matched = params.at(-1) === state.user.stripe_customer_id;
+        const matched = params.at(-3) === state.user.id &&
+          params.at(-2) === state.user.stripe_customer_id && params.at(-1) === state.user.row_version;
         if (matched) {
           for (const [, column, parameter] of text.matchAll(/"(\w+)" = \$(\d+)/g)) {
             if (column !== "stripe_customer_id") state.user[column] = params[Number(parameter) - 1];
           }
           state.successfulUpdates++;
+          state.user.row_version = String(Number(state.user.row_version) + 1);
         }
         return { rows: [], rowCount: matched ? 1 : 0 };
       }
@@ -85,10 +89,12 @@ async function fixture() {
   const noop = () => {};
   const dependencies = {
     express: { default: express, Router: express.Router },
-    stripe: { default: class { constructor() { return { webhooks: sdk.webhooks }; } } },
+    stripe: { default: class { constructor() {
+      return { webhooks: sdk.webhooks, subscriptions: { list: async () => ({ data: [], has_more: false }) } };
+    } } },
     "../db/client.mjs": { db },
     "../../shared/schema.mjs": { users, webhookEvents },
-    "drizzle-orm": { eq },
+    "drizzle-orm": { and, eq, sql },
     "../utils/logger.mjs": { logger: { info: noop, warn: noop, error: noop } },
     "../utils/metrics.mjs": { increment: noop },
     "../services/email.mjs": {
@@ -144,7 +150,7 @@ test("linked customer cancellation downgrades and uses canonical name/email", as
   assert.deepEqual(f.state.emails, [["synthetic@example.invalid", "Cancellation Fixture", 1780000000]]);
   assert.equal(f.state.processed.size, 1);
   const recipientRead = f.state.queries.find(query => query.text.includes('from "users"'));
-  assert.match(recipientRead.text, /select "email", "name"/);
+  assert.match(recipientRead.text, /select "id", "email", "name", "users"\.xmin::text as "row_version"/);
 });
 
 test("unmatched customer leaves other users unchanged and sends no cancellation email", async () => {
@@ -202,11 +208,11 @@ test("processed cancellation replay does not repeat the downgrade or email", asy
   assert.equal(f.state.processed.size, 1);
 });
 
-test("missing customer cannot downgrade or notify any user", async () => {
+test("missing customer fails closed without downgrading, notifying, or marking", async () => {
   const f = await fixture();
   const result = await f.send(cancellationEvent(null));
-  assert.equal(result.status, 200);
+  assert.equal(result.status, 500);
   assert.equal(f.state.updateAttempts, 0);
   assert.equal(f.state.emails.length, 0);
-  assert.equal(f.state.processed.size, 1);
+  assert.equal(f.state.processed.size, 0);
 });
