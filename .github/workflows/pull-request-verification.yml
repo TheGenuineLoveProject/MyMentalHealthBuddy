@@ -65,6 +65,9 @@ jobs:
       - name: Verify OpenAI request deadlines offline
         run: npm run verify:ai-deadlines
 
+      - name: Verify retired session extension and session boundary contracts offline
+        run: npm run verify:session-boundary
+
       - name: Verify backup and restore in isolated PostgreSQL
         run: npm run verify:backup-roundtrip
 

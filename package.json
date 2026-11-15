@@ -40,6 +40,7 @@
     "verify:biometric-retries": "node scripts/biometrics/verify-biometric-retries.mjs",
     "verify:biometric-full": "npm run verify:biometric-retries && npm run verify:healthkit-full",
     "verify:auth-session-contracts": "node scripts/security/verify-auth-session-contracts.mjs",
+    "verify:session-boundary": "node --test server/tests/session-boundary.test.mjs",
     "verify:rate-limit": "node scripts/security/verify-rate-limit-ip-spoof.mjs",
     "verify:postgres-tls": "node scripts/security/verify-postgres-tls-policy.mjs",
     "verify:security-full": "npm run verify:rate-limit && npm run verify:biometric-full",
