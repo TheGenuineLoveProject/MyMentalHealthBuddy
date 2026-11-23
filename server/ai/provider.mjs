@@ -1,4 +1,5 @@
 // server/ai/provider.mjs
+import { APIConnectionTimeoutError } from "openai";
 import { logAICall } from "./aiTelemetry.mjs";
 import { formatProfileForPrompt } from "./profileStore.mjs";
 import { MODULE_REGISTRY } from "./moduleRouter.mjs";
@@ -14,12 +15,27 @@ const MAX_RETRIES = 2;
  * Core provider call with timeout
  */
 async function callOpenAIWithTimeout(openai, payload) {
-        return Promise.race([
-                openai.chat.completions.create(payload),
-                new Promise((_, reject) =>
-                        setTimeout(() => reject(new Error("AI timeout")), TIMEOUT_MS)
-                )
-        ]);
+        const controller = new AbortController();
+        // Keep the deadline until the SDK has consumed the body, not just the
+        // headers. Await abort settlement before the application retries so a
+        // previous transport cannot overlap the next attempt's cleanup.
+        const deadline = setTimeout(() => controller.abort(), TIMEOUT_MS);
+        try {
+                const response = await openai.chat.completions.create(payload, {
+                        signal: controller.signal,
+                        timeout: TIMEOUT_MS,
+                        maxRetries: 0,
+                });
+                if (controller.signal.aborted) throw new Error("AI timeout");
+                return response;
+        } catch (error) {
+                if (controller.signal.aborted || error instanceof APIConnectionTimeoutError) {
+                        throw new Error("AI timeout");
+                }
+                throw error;
+        } finally {
+                clearTimeout(deadline);
+        }
 }
 
 /**

@@ -104,21 +104,21 @@ export function getOpenAIClient() {
   return openaiClient;
 }
 
-async function withTimeout(promise, timeoutMs) {
-  let timeoutId;
-  const timeoutPromise = new Promise((_, reject) => {
-    timeoutId = setTimeout(() => {
-      reject(new Error(`Request timed out after ${timeoutMs}ms`));
-    }, timeoutMs);
-  });
-
+async function withTimeout(request, timeoutMs) {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    const result = await Promise.race([promise, timeoutPromise]);
-    clearTimeout(timeoutId);
+    // Keep the deadline active through response-body parsing, and wait for the
+    // aborted SDK call to settle before returning or starting another attempt.
+    const result = await request({ signal: controller.signal, timeout: timeoutMs, maxRetries: 0 });
+    if (controller.signal.aborted) throw new Error(`Request timed out after ${timeoutMs}ms`);
     return result;
   } catch (error) {
-    clearTimeout(timeoutId);
+    // Preserve the legacy error text and its existing application retry policy.
+    if (controller.signal.aborted) throw new Error(`Request timed out after ${timeoutMs}ms`);
     throw error;
+  } finally {
+    clearTimeout(timeoutId);
   }
 }
 
@@ -176,14 +176,12 @@ export async function chatCompletion({ messages, model = "gpt-4o-mini", temperat
         await sleep(delay);
       }
 
-      const completionPromise = openaiClient.chat.completions.create({
+      const completion = await withTimeout(options => openaiClient.chat.completions.create({
         model,
         messages,
         temperature,
         max_tokens: maxTokens,
-      });
-
-      const completion = await withTimeout(completionPromise, REQUEST_TIMEOUT);
+      }, options), REQUEST_TIMEOUT);
 
       circuitBreaker.recordSuccess();
 

@@ -36,6 +36,7 @@ export function SEO({
   const fullTitle = title 
     ? `${title} | ${BRAND.name}` 
     : defaultMeta.title;
+  const currentPath = typeof window !== "undefined" ? window.location.pathname : "/";
 
   useEffect(() => {
     document.title = fullTitle;
@@ -67,6 +68,12 @@ export function SEO({
 
     const baseUrl = typeof window !== "undefined" ? window.location.origin : "";
     const imageUrl = image.startsWith("http") ? image : `${baseUrl}${image}`;
+    // Public metadata identifies the published page even when rendered on a
+    // preview host. Explicit absolute canonicals can still identify a publisher.
+    const canonical = new URL(canonicalUrl || route || currentPath, SITE_URL);
+    canonical.search = "";
+    canonical.hash = "";
+    const pageUrl = canonical.href;
 
     setMeta("description", description);
     setMeta("og:title", fullTitle);
@@ -74,18 +81,13 @@ export function SEO({
     setMeta("og:type", type);
     setMeta("og:site_name", BRAND.name);
     setMeta("og:image", imageUrl);
-    setMeta("og:url", canonicalUrl || window.location.href);
+    setMeta("og:url", pageUrl);
     setMeta("twitter:card", "summary_large_image");
     setMeta("twitter:title", fullTitle);
     setMeta("twitter:description", description);
     setMeta("twitter:image", imageUrl);
 
-    if (canonicalUrl) {
-      const fullCanonical = canonicalUrl.startsWith("http") ? canonicalUrl : `${baseUrl}${canonicalUrl}`;
-      setCanonical(fullCanonical);
-    } else {
-      setCanonical(window.location.href.split('?')[0]);
-    }
+    setCanonical(pageUrl);
 
     if (noindex) {
       setMeta("robots", "noindex, nofollow");
@@ -94,7 +96,6 @@ export function SEO({
       if (robotsMeta) robotsMeta.remove();
     }
 
-    const pageUrl = route ? `${SITE_URL}${route}` : (canonicalUrl || window.location.href.split('?')[0]);
     const jsonLd = {
       "@context": "https://schema.org",
       "@type": "WebPage",
@@ -129,7 +130,7 @@ export function SEO({
       const existingJsonLd = document.querySelector('script[type="application/ld+json"][data-seo]');
       if (existingJsonLd) existingJsonLd.remove();
     };
-  }, [fullTitle, description, type, image, noindex, canonicalUrl, route, datePublished, dateModified]);
+  }, [fullTitle, description, type, image, noindex, canonicalUrl, route, currentPath, datePublished, dateModified]);
 
   return null;
 }

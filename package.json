@@ -71,7 +71,12 @@
     "generate:registry-candidates": "node scripts/governance/generate-registry-candidate-inventory.mjs",
     "diagnose:registry-candidates": "node scripts/governance/diagnose-registry-candidate-precision.mjs",
     "filter:registry-candidates": "node scripts/governance/filter-registry-candidates-to-canonical-sources.mjs",
-    "audit:registry-candidate-pipeline": "npm run generate:registry-candidates && npm run diagnose:registry-candidates && npm run filter:registry-candidates"
+    "audit:registry-candidate-pipeline": "npm run generate:registry-candidates && npm run diagnose:registry-candidates && npm run filter:registry-candidates",
+    "verify:conversion-flows": "node --experimental-vm-modules --test server/tests/billing-starter-checkout.test.mjs server/tests/billing-cancellation.test.mjs server/tests/billing-stale-cancellation.test.mjs server/tests/billing-stale-downgrades.test.mjs server/tests/newsletter-consent.test.mjs && vitest run --config tests/unit/leads-vitest.config.mjs && vitest run --config tests/unit/pricing-lead-vitest.config.mjs && vitest run --config tests/unit/seo-vitest.config.mjs && vitest run --config tests/unit/billing-ui-vitest.config.mjs",
+    "verify:operations-probes": "node --test tests/operations/deployment-target-health.test.mjs tests/operations/tracing-runtime.test.mjs tests/operations/backup-restore.test.mjs tests/operations/tooling-compatibility.test.mjs",
+    "verify:backup-roundtrip": "node scripts/db/verify-backup-roundtrip.mjs",
+    "verify:ai-deadlines": "vitest run --config tests/unit/ai-provider-vitest.config.mjs && vitest run --config tests/unit/ai-client-timeout-vitest.config.mjs",
+    "verify:health-admin-access": "node --experimental-vm-modules --test server/tests/health-admin-access.test.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1083.0",
@@ -83,10 +88,10 @@
     "@langchain/openai": "^1.4.5",
     "@neondatabase/serverless": "^1.1.0",
     "@opentelemetry/api": "^1.9.1",
-    "@opentelemetry/auto-instrumentations-node": "0.79.0",
-    "@opentelemetry/exporter-trace-otlp-http": "0.219.0",
+    "@opentelemetry/auto-instrumentations-node": "0.80.0",
+    "@opentelemetry/exporter-trace-otlp-http": "0.222.0",
     "@opentelemetry/resources": "^2.7.0",
-    "@opentelemetry/sdk-node": "0.221.0",
+    "@opentelemetry/sdk-node": "0.222.0",
     "@opentelemetry/semantic-conventions": "^1.40.0",
     "@playwright/test": "^1.59.1",
     "@sentry/node": "^10.53.1",
@@ -101,7 +106,7 @@
     "@uppy/core": "^5.2.0",
     "@uppy/react": "^5.2.0",
     "@vitejs/plugin-react": "^6.0.1",
-    "@vitest/coverage-v8": "^4.1.5",
+    "@vitest/coverage-v8": "^4.1.12",
     "aos": "^2.3.4",
     "argon2": "^0.44.0",
     "autoprefixer": "^10.5.0",
@@ -110,7 +115,7 @@
     "canvas-confetti": "^1.9.4",
     "chart.js": "^4.5.1",
     "clsx": "^2.1.1",
-    "compression": "^1.8.1",
+    "compression": "^1.8.2",
     "connect-pg-simple": "^10.0.0",
     "cookie": "^1.1.1",
     "cookie-parser": "^1.4.7",
@@ -118,7 +123,7 @@
     "cron-parser": "^5.5.0",
     "csrf": "^3.1.0",
     "date-fns": "^4.1.0",
-    "dompurify": "3.4.13",
+    "dompurify": "3.4.17",
     "dotenv": "^17.4.2",
     "drizzle-orm": "^0.45.2",
     "drizzle-zod": "^0.8.3",
@@ -160,11 +165,11 @@
     "tailwind-merge": "^3.5.0",
     "tailwindcss": "^4.2.2",
     "valtio": "^2.3.2",
-    "vite": "8.0.16",
+    "vite": "8.3.6",
     "wouter": "^3.9.0",
     "ws": "^8.20.0",
     "xstate": "^5.32.0",
-    "zod": "^4.3.6",
+    "zod": "^4.6.7",
     "zustand": "^5.0.14"
   },
   "devDependencies": {
@@ -176,8 +181,9 @@
     "@typescript-eslint/eslint-plugin": "^8.60.0",
     "@typescript-eslint/parser": "^8.60.0",
     "drizzle-kit": "0.31.10",
-    "eslint": "^10.4.1",
+    "eslint": "^10.15.0",
     "eslint-plugin-react-hooks": "^7.1.1",
+    "jsdom": "26.1.0",
     "nodemon": "^3.1.14",
     "playwright": "^1.60.0",
     "prettier": "^3.8.3",
@@ -186,7 +192,7 @@
     "supertest": "^7.2.2",
     "typescript": "^6.0.3",
     "vite-bundle-visualizer": "^1.2.1",
-    "vitest": "^4.1.7"
+    "vitest": "^4.1.12"
   },
   "overrides": {
     "form-data": "4.0.6",
@@ -196,8 +202,17 @@
     "uuid": "14.0.0",
     "protobufjs": "8.6.6",
     "shell-quote": "1.10.0",
-    "qs": "6.16.0",
-    "esbuild": "$esbuild"
+    "qs": "6.16.1",
+    "esbuild": "$esbuild",
+    "@tailwindcss/typography": {
+      "postcss-selector-parser": "6.1.5"
+    },
+    "@typescript-eslint/typescript-estree@8.68.0": {
+      "minimatch": "11.0.8"
+    },
+    "nodemon@^3.1.14": {
+      "minimatch": "11.0.8"
+    }
   },
   "x_replit_deploy_marker": {
     "phase": "PHASE116Z24_PACKAGE_METADATA_DEPLOYMENT_PICKUP_MARKER",

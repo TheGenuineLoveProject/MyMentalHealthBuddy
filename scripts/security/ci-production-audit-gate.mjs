@@ -219,13 +219,68 @@ function proveRscGuard() {
 }
 
 function validateAudit(audit) {
+  const isRecord = value =>
+    value !== null &&
+    typeof value === "object" &&
+    !Array.isArray(value);
+
   if (
-    !audit ||
-    typeof audit !== "object" ||
-    !audit.vulnerabilities ||
-    typeof audit.vulnerabilities !== "object"
+    !isRecord(audit) ||
+    audit.auditReportVersion !== 2 ||
+    Object.hasOwn(audit, "error") ||
+    !isRecord(audit.vulnerabilities) ||
+    !isRecord(audit.metadata) ||
+    !isRecord(audit.metadata.vulnerabilities)
   ) {
     deny("AUDIT_SCHEMA_UNEXPECTED");
+  }
+
+  // Validate the report before applying the severity policy. Missing or
+  // malformed findings are not evidence that an audit found no issues.
+  const counts = { info: 0, low: 0, moderate: 0, high: 0, critical: 0 };
+
+  for (const vulnerability of Object.values(audit.vulnerabilities)) {
+    if (
+      !isRecord(vulnerability) ||
+      typeof vulnerability.severity !== "string" ||
+      !Object.hasOwn(counts, vulnerability.severity) ||
+      !Array.isArray(vulnerability.via) ||
+      vulnerability.via.length === 0
+    ) {
+      deny("AUDIT_SCHEMA_UNEXPECTED");
+    }
+
+    for (const via of vulnerability.via) {
+      if (typeof via === "string" && via.length > 0) {
+        if (!Object.hasOwn(audit.vulnerabilities, via)) {
+          deny("AUDIT_SCHEMA_UNEXPECTED");
+        }
+        continue;
+      }
+      if (!isRecord(via) || typeof via.severity !== "string" || !Object.hasOwn(counts, via.severity)) {
+        deny("AUDIT_SCHEMA_UNEXPECTED");
+      }
+    }
+    counts[vulnerability.severity]++;
+  }
+
+  const rank = { info: 0, low: 1, moderate: 2, high: 3, critical: 4 };
+  for (const vulnerability of Object.values(audit.vulnerabilities)) {
+    // npm aggregates each package's own advisories. A referenced dependency
+    // may also have unrelated advisories, so compare direct objects only.
+    if (vulnerability.via.some(via =>
+      typeof via === "object" && rank[via.severity] > rank[vulnerability.severity]
+    )) {
+      deny("AUDIT_SEVERITY_MISMATCH");
+    }
+  }
+
+  const summary = audit.metadata.vulnerabilities;
+  counts.total = Object.keys(audit.vulnerabilities).length;
+  for (const [severity, count] of Object.entries(counts)) {
+    if (!Number.isSafeInteger(summary[severity]) || summary[severity] !== count) {
+      deny("AUDIT_SUMMARY_MISMATCH");
+    }
   }
 }
 
