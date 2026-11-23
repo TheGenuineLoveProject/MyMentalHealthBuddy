@@ -461,7 +461,7 @@
       "verification": {
         "status": "SOURCE_AND_SCOPED_CI_VERIFIED",
         "observedDateUtc": "2026-11-23",
-        "evidenceBasis": "Local original checkout and fresh git ls-remote origin HEAD both resolve main to0de60d08. Repair candidate3fe0d4be has successful37-case scoped GitHub CI.",
+        "evidenceBasis": "Local original checkout and fresh git ls-remote origin HEAD both resolve main to 0de60d08. Repair candidate 3fe0d4be has successful 37-case scoped GitHub CI.",
         "pullRequestUrl": "https://github.com/TheGenuineLoveProject/TheGenuineLoveProject/pull/7",
         "ciUrl": "https://github.com/TheGenuineLoveProject/TheGenuineLoveProject/actions/runs/45234957889",
         "focusedChecksPassed": 37
