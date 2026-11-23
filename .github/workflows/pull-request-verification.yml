@@ -62,6 +62,9 @@ jobs:
       - name: Verify OpenAI request deadlines offline
         run: npm run verify:ai-deadlines
 
+      - name: Verify administrative repair access offline
+        run: npm run verify:health-admin-access
+
       - name: Verify backup and restore in isolated PostgreSQL
         run: npm run verify:backup-roundtrip
 
